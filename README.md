@@ -7,8 +7,6 @@
 - 静态任务：从 agent submission 中收集六视图渲染图，交给多模态 Judge 按 `rubric.json` 评分。
 - 动态任务：读取 agent submission 中的 MP4，使用 FFprobe 获取视频信息、FFmpeg 抽帧，再交给 Judge 按动态 rubric 评分。
 
-`gamecraft-bench` 只曾作为 Harbor 启动设计参考，不参与 BlenderLore 任务、素材或评分。
-
 ## 目录结构
 
 ```text
