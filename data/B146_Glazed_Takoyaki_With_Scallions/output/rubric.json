@@ -1,0 +1,248 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Glazed Takoyaki With Scallions",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1amS5BnEwm",
+    "id": "BV1amS5BnEwm"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 45,
+    "PROC": 20,
+    "SURF": 25,
+    "PIPE": 10
+  },
+  "weighting_note": "The static food asset centers on four independent geometric forms (45 points) and three applied food finishes (25 points). Twenty points assess real retained population and spatial-mask relationships, not scatter-node presence or frozen copies. The remaining ten points cover a saved reproducible scene and its actual render. The 70-point geometry/surface share follows the demonstrated modeling and material scope; no timeline or physical simulation is required.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Rounded Ball",
+      "criterion": "A complete rounded food body provides an exposed, smoothly finished lower surface.",
+      "scoring_rule": {
+        "PASS": "An editable, volumetric ball body exists and is recognizably approximately spherical; its lower region remains exposed, its full circumference is smooth, and it has no unintended holes, spikes, or conspicuous facets.",
+        "PARTIAL": "An editable volumetric food body still reads as a rounded ball and supports the dressed food asset, but at least one PASS condition is unmet, such as mildly stretched proportions, uneven finishing, or too little exposed lower body.",
+        "FAIL": "No editable volumetric food body supports the asset, or its form cannot read as a ball, including a flat disk or an isolated unused construction source."
+      },
+      "evidence_refs": [
+        "image/01_finished_takoyaki.png",
+        "image/02_sauce_silhouette.png"
+      ],
+      "verification": {
+        "method": "Evaluated geometry and neutral-shading inspection",
+        "procedure": "Open submission.blend and identify the rendered food body by spatial role. Inspect its evaluated mesh and orbit it with a neutral material. Check volume, rounded silhouette, exposed lower region, and all-around surface continuity; do not use polygon count or a modifier name as a substitute for the result.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Dripping Sauce Shell",
+      "criterion": "A separate thick sauce cap conforms to the ball and has a smooth irregular dripping boundary.",
+      "scoring_rule": {
+        "PASS": "A separate geometric cap covers the upper body with a substantial visible lower boundary; it closely follows the ball, has visible thickness and a rounded edge, and alternates raised arcs with several uneven downward lobes while leaving exposed body below, without broken edges or visible gaps.",
+        "PARTIAL": "A separate geometric cap covers the upper body with a substantial visible lower boundary, but at least one PASS condition is unmet, including a nearly uniform hem, angular lobes, excessive thickness, local separation, or defective intersections.",
+        "FAIL": "No separate cap geometry covers the upper body with a substantial visible lower boundary; a color-only patch, detached unused shell, or fragment that does not read as a coating fails."
+      },
+      "evidence_refs": [
+        "image/01_finished_takoyaki.png",
+        "image/02_sauce_silhouette.png"
+      ],
+      "verification": {
+        "method": "Evaluated mesh, section inspection, and multi-angle visual review",
+        "procedure": "Inspect the evaluated cap in side and elevated views and use a temporary clipping or section view to examine its thickness and relation to the body. Follow the entire lower boundary to distinguish rounded drip lobes from a uniform hemisphere or accidental intersection.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Raised Mayonnaise Drizzle",
+      "criterion": "Raised mayonnaise geometry follows the sauce in a slender continuous back-and-forth path.",
+      "scoring_rule": {
+        "PASS": "An actual raised strand crosses the sauce and turns back on itself; it has several broad traverses, smooth continuous turns, rounded thickness, tapered free ends, slight natural variation, and close surface contact while leaving visible sauce between runs.",
+        "PARTIAL": "An actual raised strand crosses the sauce and turns back on itself, but at least one PASS condition is unmet, such as blunt ends, uneven contact, angular bends, excessive thickness, insufficient traverses, or weak variation.",
+        "FAIL": "No actual raised strand crosses the sauce and turns back on itself; a painted stripe, isolated source curve, short isolated segment, or detached unrelated tube fails."
+      },
+      "evidence_refs": [
+        "image/01_finished_takoyaki.png",
+        "image/03_drizzle_and_scallion_source.png"
+      ],
+      "verification": {
+        "method": "Evaluated curve or mesh and close visual inspection",
+        "procedure": "Inspect the displayed drizzle from above and from grazing angles. Trace its path through turns and endpoints, examine its section and height above the cap, and look for floating or buried lengths. Judge the evaluated form regardless of curve or mesh implementation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Scallion Garnish and Controls",
+      "criterion": "The visible garnish uses small softened hollow scallion slices with credible thickness and proportion.",
+      "scoring_rule": {
+        "PASS": "At least five visible garnish pieces exist on the dressed ball, and their source geometry is a short, slightly flattened hollow slice with wall thickness, softened edges, and gentle bend or slant; the pieces remain small enough that sauce is broadly visible between them.",
+        "PARTIAL": "Multiple visible small garnish pieces exist on the dressed ball and demonstrate finite wall thickness or a hollow slice shape, but at least one PASS condition is unmet, such as too few pieces, rigid pipe proportions, weak flattening, rough edges, or excessive size.",
+        "FAIL": "The dressed ball lacks multiple visible small garnish pieces that demonstrate finite wall thickness or a hollow slice shape; an unused source alone, flat dots, or solid featureless blocks fail."
+      },
+      "evidence_refs": [
+        "image/01_finished_takoyaki.png",
+        "image/03_drizzle_and_scallion_source.png"
+      ],
+      "verification": {
+        "method": "Instance-source geometry and evaluated-instance inspection",
+        "procedure": "Inspect several rendered garnish instances and temporarily isolate their actual source geometry for a close view. Confirm the open tubular section, wall thickness, short flattened proportions and edge quality; compare instance size with the food body and count the evaluated visible pieces.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 12,
+      "requirement_section": "Scallion Garnish and Controls",
+      "criterion": "A retained quantity or density control changes live garnish population while preserving surface attachment.",
+      "scoring_rule": {
+        "PASS": "The saved scene has a functional garnish quantity or density control that changes the number of evaluated pieces for two nonzero settings without manual placement or a full scene rebuild; at both settings the pieces follow the sauce surface and the ball, cap, and drizzle remain intact.",
+        "PARTIAL": "A retained quantity or density control changes the number of evaluated garnish pieces for two nonzero settings without manual placement or a full scene rebuild, but at least one PASS condition is unmet, including floating pieces or unwanted changes to other food geometry.",
+        "FAIL": "No retained quantity or density control produces different evaluated garnish counts for two nonzero settings without manual placement or a full scene rebuild; a frozen particle result, baked collection, or unused scatter setup fails."
+      },
+      "evidence_refs": [
+        "image/01_finished_takoyaki.png",
+        "image/04_distribution_mask.png"
+      ],
+      "verification": {
+        "method": "Saved-scene functional control probe",
+        "procedure": "Work on a temporary copy of submission.blend. Locate the public quantity or density control, record its default, then evaluate two suitable different nonzero values with the mask held fixed. Count generated pieces from the dependency graph, inspect surface contact and unchanged core geometry, and restore the default. Merely finding scatter nodes is insufficient.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 8,
+      "requirement_section": "Scallion Garnish and Controls",
+      "criterion": "A live spatial mask restricts garnish to upper sauce regions and remains editable.",
+      "scoring_rule": {
+        "PASS": "An editable local mask on the sauce changes where evaluated garnish is allowed; the submitted default limits it to the upper sauce and clears the dripping edge and underside, a local mask edit changes the corresponding distribution, and a fully disabled mask removes all garnish while preserving the other food geometry.",
+        "PARTIAL": "An editable local mask on the sauce measurably changes where evaluated garnish is allowed, but at least one PASS condition is unmet, such as poor default restriction, residual pieces under a fully disabled mask, or unintended changes to core geometry.",
+        "FAIL": "No editable local mask measurably changes where garnish is allowed on the sauce; an unconnected painted group, a visibility toggle, global count alone, or a frozen distribution fails."
+      },
+      "evidence_refs": [
+        "image/04_distribution_mask.png"
+      ],
+      "verification": {
+        "method": "Spatial-field perturbation and dependency-graph evaluation",
+        "procedure": "On a temporary scene copy, hold the random seed and quantity setting fixed. Inspect the default mask and distribution, then disable one occupied local upper patch and enable a different upper patch to verify spatial response. Finally set the mask to disallow the whole sauce, confirm no generated garnish remains and the core food persists, then restore the saved defaults. Adapt the edit to the submitted mask representation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Food Materials",
+      "criterion": "The exposed body has procedural toasted color variation and finer cooked-surface relief.",
+      "scoring_rule": {
+        "PASS": "An actual visible curved body region uses a warm cooked-dough material with editable procedural golden-yellow and toasted orange-brown mottling, finer irregular bump or normal relief, and restrained sheen; the relief stays subtle enough to avoid rocklike craters or a plastic appearance.",
+        "PARTIAL": "An actual visible curved body region uses a warm cooked-dough material and at least one effective procedural color-variation or fine-relief component, but at least one PASS condition is unmet, including weak scale separation, missing relief or mottling, excessive gloss, or exaggerated relief.",
+        "FAIL": "No actual visible curved body region uses a warm cooked-dough material with an effective procedural color-variation or fine-relief component; disconnected shader nodes, an unused material, or a uniform flat color alone fail."
+      },
+      "evidence_refs": [
+        "image/01_finished_takoyaki.png"
+      ],
+      "verification": {
+        "method": "Used-material inspection and controlled shader comparisons",
+        "procedure": "Identify the material actually assigned to the exposed body. Inspect its effective procedural inputs and render a close view under fixed soft illumination. On a temporary copy, neutralize color variation and then relief separately to confirm their visible contribution and the broader-color versus finer-relief scale relationship; restore both.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Food Materials",
+      "criterion": "The sauce reads as a glossy colored translucent coating with subtle surface variation.",
+      "scoring_rule": {
+        "PASS": "An actual cap region uses a reddish-brown to amber sauce material with visible wet highlights and effective partial translucency; thicker areas appear richer in color, subtle surface detail breaks up the finish, and the result remains a colored coating rather than flat paint or clear colorless glass.",
+        "PARTIAL": "An actual cap region uses a reddish-brown to amber material with visible wet highlights or effective partial translucency, but at least one PASS condition is unmet, including flat opacity, weak thickness response, missing detail, excessive roughness, or overly clear glasslike appearance.",
+        "FAIL": "No actual cap region uses a reddish-brown to amber material with either visible wet highlights or effective partial translucency; an absent cap, unused shader, or flat unrelated color fails."
+      },
+      "evidence_refs": [
+        "image/01_finished_takoyaki.png"
+      ],
+      "verification": {
+        "method": "Assigned-shader inspection and controlled lighting views",
+        "procedure": "Inspect the sauce material actually used on the cap and render front-lit and grazing or backlit views of that cap in a temporary copy. Compare its thin edge and thicker lobe regions for transmission and color depth while retaining the body context. Inspect close highlights for restrained surface variation. Accept equivalent shaders without requiring particular node classes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "Food Materials",
+      "criterion": "Mayonnaise and scallions have distinct applied cream and green finishes.",
+      "scoring_rule": {
+        "PASS": "A visible drizzle strand has an opaque pale cream material with soft highlights and multiple visible scallion pieces have a distinct green material; both are applied to the actual toppings and remain distinguishable from the brown sauce and golden body.",
+        "PARTIAL": "Either a visible drizzle strand has an effective pale cream finish or multiple visible scallion pieces have an effective green finish, but at least one PASS condition is unmet, including a missing second finish, incorrect opacity, or poor visual separation.",
+        "FAIL": "Neither a visible drizzle strand with an effective pale cream finish nor multiple visible scallion pieces with an effective green finish exists; unused source materials do not qualify."
+      },
+      "evidence_refs": [
+        "image/01_finished_takoyaki.png"
+      ],
+      "verification": {
+        "method": "Assigned-material and rendered appearance inspection",
+        "procedure": "Inspect the materials on actual visible drizzle and garnish instances, then review them under the submitted lighting and a neutral soft light. Confirm cream opacity, soft sheen, green garnish color, and separation from adjacent sauce and body.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The build script recreates and saves an editable submission scene.",
+      "scoring_rule": {
+        "PASS": "build.py runs from an empty scene without unavailable dependencies and saves a reopenable submission.blend containing the reconstructed food geometry, applied materials, live garnish controls, camera, and Cycles GPU settings.",
+        "PARTIAL": "build.py runs and saves a reopenable submission.blend containing substantive reconstructed food geometry, but at least one PASS condition is unmet, such as missing reconstructed materials, control functionality, camera, or required render settings.",
+        "FAIL": "build.py is absent, cannot complete, or does not save a reopenable submission.blend containing substantive reconstructed food geometry; an unsaved in-memory result alone fails."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Isolated rebuild and saved-artifact reopen",
+        "procedure": "Run build.py in Blender 5.1.2 from an empty scene in a temporary working location with no original solution scene loaded. Confirm that the script writes submission.blend, reopen that saved file in a fresh process, and inspect its geometry, materials, retained scatter controls, camera, and Cycles GPU settings. Assess the saved result rather than only the script process state.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The delivered scene and PNG provide a faithful complete view of the dressed ball.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens as an editable scene and the named PNG is a genuine render of that scene; its elevated three-quarter view includes the entire dressed ball and readable exposed body, sauce edge, drizzle, and garnish, with lighting that shows their different surfaces and no visible construction source.",
+        "PARTIAL": "submission.blend opens as an editable scene and the named PNG is a genuine render of its substantive food geometry, but at least one PASS condition is unmet, including cropped features, unclear surface lighting, a visible construction source, or a missing topping in the presentation.",
+        "FAIL": "The submitted scene cannot be opened as editable food geometry, the named PNG is missing or unreadable, or the PNG is not a render of that scene, including a source still, viewport screenshot, or externally substituted image."
+      },
+      "evidence_refs": [
+        "image/01_finished_takoyaki.png"
+      ],
+      "verification": {
+        "method": "File-open checks and render correspondence review",
+        "procedure": "Open submission.blend and decode B146_Glazed_Takoyaki_With_Scallions.png. Compare the PNG with the saved camera, evaluated geometry, material assignments and a controlled render from the submitted scene. Verify whole-ball framing, visibility of all topping roles, readable surface lighting, and exclusion of a spare construction source. Do not require a submission directory beyond the public filenames.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

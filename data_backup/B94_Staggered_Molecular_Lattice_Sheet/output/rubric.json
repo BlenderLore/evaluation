@@ -1,0 +1,160 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Staggered Molecular Lattice Sheet",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1Z9TF6DEHb",
+    "id": "BV1Z9TF6DEHb"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 65, "PROC": 25, "PIPE": 10},
+  "weighting_note": "This is a geometry and editable repetition task. Geometry receives 65 points because the size hierarchy, planar pattern, separate small-sphere component, layered form, and sphere finish are distinct visible properties. Procedural points assess live changes to evaluated geometry rather than modifier counts. Neutral presentation is supporting evidence; no material or camera-existence points are added. Pipeline verification is limited to 10 points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Molecular Unit",
+      "criterion": "A consistent motif contains one large sphere and two matching smaller spheres on perpendicular sides, with recognizable individual forms.",
+      "scoring_rule": {
+        "PASS": "The lattice uses the specified one-large/two-small L-shaped motif; the two small spheres match in size, are clearly smaller than the large sphere, and the size relationship is consistent across the existing lattice. Contacts do not obscure the individual spherical forms.",
+        "PARTIAL": "Both size classes of spherical forms are present and at least one recognizable large-and-small grouping exists, but one or more PASS conditions are unmet, such as an incomplete motif, unequal small spheres, or inconsistent relative size.",
+        "FAIL": "There is no recognizable large-and-small spherical grouping, or the geometry lacks two distinguishable sphere-size classes."
+      },
+      "evidence_refs": ["image/02_molecular_unit.png", "image/03_planar_lattice.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection and controlled orthographic view",
+        "procedure": "Open submission.blend, isolate a representative main lattice layer, and inspect its evaluated geometry along the layer normal. Identify large and small sphere centers and diameters in multiple interior and boundary motifs. Check the two perpendicular small-sphere offsets, their matching sizes, the repeated size relationship, and whether contacts preserve recognizable sphere forms. Object names, connectivity, and primitive type are not acceptance conditions.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 20,
+      "requirement_section": "Main Lattice",
+      "criterion": "The main layer evaluates to a complete, regularly spaced two-dimensional lattice with small spheres alternating between large spheres along both planar directions.",
+      "scoring_rule": {
+        "PASS": "At least five large-sphere sites are present in each of two perpendicular directions; the footprint is near-square, rows are straight, spacing is consistent along each direction, and the small-sphere pattern continues along both directions without accidental missing, doubled, or compressed sites.",
+        "PARTIAL": "The main layer has recognizable repeated large-sphere sites in at least two rows and two columns, but one or more PASS conditions are unmet. A single row, column, or unordered collection is excluded from PARTIAL.",
+        "FAIL": "No main layer forms a recognizable two-dimensional repetition of at least two rows and two columns."
+      },
+      "evidence_refs": ["image/03_planar_lattice.png", "image/04_component_comparison.png"],
+      "verification": {
+        "method": "Evaluated site layout inspection",
+        "procedure": "Isolate the main layer without modifying its saved parameters. Use a view normal to its plane and inspect evaluated instance or mesh positions to establish the two lattice directions, row and column counts, per-direction pitch consistency, and footprint. Inspect the interior and all boundaries for small-sphere alternation, missing sites, doubled sites, and compressed rows. Score static layout here; live parameter response is checked separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Small-Sphere Field",
+      "criterion": "A distinct regular field of matching small spheres contributes to the assembled sheet and remains isolatable.",
+      "scoring_rule": {
+        "PASS": "The asset contains an isolatable field made only of spheres matching the motif's small-sphere size, with regular spacing, several rows in both directions, and a near-square outline. It is integrated with the final sheet and contributes visible small spheres among or along the edges of the large-sphere layers.",
+        "PARTIAL": "A distinct field of small spheres occupies at least two rows and two columns, but one or more PASS conditions are unmet, including mismatched size, irregular coverage, or placement outside the assembled sheet.",
+        "FAIL": "No distinct two-dimensional small-sphere field exists; a single small sphere, a one-dimensional chain, or only the small spheres already belonging to the main motif does not meet the minimum."
+      },
+      "evidence_refs": ["image/04_component_comparison.png", "image/01_complete_sheet.png"],
+      "verification": {
+        "method": "Component isolation and assembled geometry inspection",
+        "procedure": "In a temporary copy of the submitted scene, isolate the small-sphere field by its geometry or procedural branch. Inspect its evaluated row layout, sphere sizes relative to the main motif, and outline. Restore the assembly and use front and oblique views to confirm that this same field contributes visible small spheres to the assembled sheet. A second copy of the entire mixed-size main layer is not a small-only field.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Staggered Sheet",
+      "criterion": "Parallel lattice layers with depth separation, in-plane offsets, and unequal spans form a compact sheet with a staggered boundary.",
+      "scoring_rule": {
+        "PASS": "At least two parallel large-sphere lattice layers have visible separation along their normal and in-plane offsets that interleave the spheres. At least one layer has a shorter span, producing a stepped boundary. The assembly remains compact, both broad dimensions exceed its thickness, and an oblique view reveals recognizable large spheres and intervening small spheres.",
+        "PARTIAL": "At least two recognizable large-sphere lattice layers are assembled together, but one or more PASS conditions are unmet, such as weak depth separation, flush alignment, equal spans, excessive separation, or a bulky rather than sheet-like envelope.",
+        "FAIL": "Fewer than two recognizable large-sphere lattice layers are assembled together; isolated unrelated arrays or only a single layer do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_sheet.png", "image/05_layer_detail.png"],
+      "verification": {
+        "method": "Evaluated layer geometry and multi-view inspection",
+        "procedure": "Inspect the assembled asset from front, side, and oblique directions. Isolate layers as needed to determine their planes, extents, and relative centers from evaluated geometry. Confirm normal separation, in-plane staggering, and a shorter layer span. Compare the sheet's thickness with its two broad extents and inspect the resulting stepped boundary. Do not infer thickness merely from one sphere's diameter or from perspective projection.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Surface and Presentation",
+      "criterion": "The existing large and small sphere geometry has round silhouettes and smooth shading without conspicuous geometric or normal artifacts.",
+      "scoring_rule": {
+        "PASS": "Large and small spheres across the existing main layers and small-sphere field have round silhouettes and smooth shading, without conspicuous facets, dents, or seams at normal presentation and close inspection distances.",
+        "PARTIAL": "Existing large and small sphere surfaces in the main lattice both demonstrate generally rounded form over a substantive visible area, but one or more PASS conditions are unmet. Local faceting, dents, shading seams, or an absent small-sphere field may prevent PASS without automatically failing the demonstrated finish of the existing core spheres.",
+        "FAIL": "Both size classes of existing core spheres do not demonstrate generally rounded surfaces over a substantive visible area, or severe faceting, collapse, or normal defects dominate those surfaces. Missing surfaces cannot establish the minimum."
+      },
+      "evidence_refs": ["image/02_molecular_unit.png", "image/05_layer_detail.png"],
+      "verification": {
+        "method": "Controlled neutral shading and silhouette inspection",
+        "procedure": "Inspect representative existing large and small spheres from the main lattice and, when present, the separate field using neutral lighting and a close view with several spheres visible. Examine silhouettes and moving highlights for faceting, dents, and shading seams. Inspect evaluated geometry or normals when an artifact is ambiguous. Do not require a particular subdivision level, primitive, vertex count, or smoothing command.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Main Lattice",
+      "criterion": "Live controls in the saved scene change main-lattice counts and spacing independently along both planar directions while preserving the repeating motif.",
+      "scoring_rule": {
+        "PASS": "Changing either planar count adds or removes a complete row or column, and changing either planar spacing updates that direction uniformly. Both directions function independently, the motif is preserved, and the evaluated results restore correctly when the saved values are reinstated.",
+        "PARTIAL": "At least one saved-scene count or spacing control demonstrably updates multiple main-lattice sites coherently, but one or more PASS conditions are unmet. A static collection of manually duplicated spheres with no live evaluated response is excluded from PARTIAL.",
+        "FAIL": "No saved-scene count or spacing control produces a coherent live change to multiple main-lattice sites. Merely having named controls or unused modifiers does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_planar_lattice.png"],
+      "verification": {
+        "method": "Non-destructive functional parameter probes",
+        "procedure": "Open a temporary copy of submission.blend and identify the actual live count and spacing controls for the main lattice. Record baseline evaluated geometry. Change each count by one site and each spacing by a modest visible amount, one control at a time, evaluate the scene, and inspect which rows or columns change. Confirm preserved motif geometry and independence of the two directions. Restore each value and compare with the baseline. Modifier presence or count alone earns no credit.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Small-Sphere Field",
+      "criterion": "The small-sphere field has functional two-axis count and spacing controls that leave the main lattice unchanged.",
+      "scoring_rule": {
+        "PASS": "Both count controls add or remove complete rows or columns of the small-sphere field, both spacing controls update their corresponding direction uniformly, and these changes leave the main-lattice geometry unchanged. Restoring all controls restores the original small-sphere field.",
+        "PARTIAL": "At least one independent saved-scene control coherently changes multiple sites of the small-sphere field while leaving the main lattice unchanged, but one or more PASS conditions are unmet.",
+        "FAIL": "No independent saved-scene control coherently changes multiple small-sphere-field sites while preserving the main lattice, or the small-sphere field is absent."
+      },
+      "evidence_refs": ["image/04_component_comparison.png"],
+      "verification": {
+        "method": "Independent field parameter probes",
+        "procedure": "In a temporary copy of the submitted scene, record evaluated geometry for both the main lattice and small-sphere field. Change each field count by one and each field spacing by a modest visible amount, independently. Check row or column changes and uniform pitch changes on the small field; compare main-lattice positions and shapes with the baseline to confirm isolation. Restore each value and verify the original field returns.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The Blender project, scene-building script, and actual-scene PNG form a reproducible delivery, including a saved and reopened rebuild.",
+      "scoring_rule": {
+        "PASS": "All three named deliverables are present and usable. build.py runs from an empty Blender scene without manual intervention, recreates the complete editable scene, and explicitly saves submission.blend. Reopening that saved file preserves the geometry, live controls, assembly, materials, lighting, camera, and render settings. The delivered PNG is rendered from the actual scene, matches the saved asset, and shows its complete outline and depth with legible spheres.",
+        "PARTIAL": "At least one delivered or script-generated saved .blend reopens and contains a recognizable lattice scene, but one or more PASS conditions are unmet, including an incomplete build, absent render, render mismatch, or unsuitable framing. A script that only creates an unsaved in-memory scene cannot establish this minimum by itself.",
+        "FAIL": "No delivered or script-generated saved .blend can be reopened as a recognizable lattice scene. Images alone or an unsaved in-memory reconstruction do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_sheet.png"],
+      "verification": {
+        "method": "File audit, clean rebuild, saved-file reopen, and controlled render comparison",
+        "procedure": "Audit the three required filenames and open the submitted .blend in Blender 5.1.2. In a fresh temporary directory, execute build.py from an empty scene without manual repairs, verify it writes submission.blend, close the process, and reopen that exact saved file in a new Blender process. Inspect its evaluated asset and live controls, materials, lighting, camera, and Cycles GPU settings. Render the reopened saved scene using its final camera and compare with the delivered PNG for the same modeled content, full framing, and legible layer depth. Report execution limitations explicitly; do not substitute inspection of an unsaved in-memory scene.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

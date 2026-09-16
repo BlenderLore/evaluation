@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Editable Wavy Sheet",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1NvQZBKEWv",
+    "id": "BV1NvQZBKEWv"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 60, "PROC": 30, "PIPE": 10},
+  "weighting_note": "Geometry carries 60 points because the task is a static sheet model: footprint, broad deformation, physical thinness, smoothness, and shell integrity are independent outcomes. Three functional geometric controls carry 30 points. Rebuilding, saving, and delivering an actual-scene render share 10 points. There are no animation, simulation, or decorative material requirements.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Rectangular Footprint",
+      "criterion": "The sheet retains an elongated rectangular footprint with four corners and a length-to-width ratio of 1.5 to 1.9.",
+      "scoring_rule": {
+        "PASS": "An evaluated continuous sheet surface spans a recognizable four-sided footprint; its projection along the average surface normal retains four recognizable corners, opposite side pairs, and a length-to-width ratio from 1.5 to 1.9.",
+        "PARTIAL": "An evaluated continuous sheet surface spans a recognizable four-sided footprint, but one or more PASS conditions are unmet, such as unsuitable proportions or excessive lateral distortion.",
+        "FAIL": "No evaluated continuous sheet surface spans a recognizable four-sided footprint; isolated patches, a line-like strip, or an unrelated solid do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_wavy_sheet.png", "image/02_rectangular_footprint.png"],
+      "verification": {
+        "method": "Evaluated geometry measurement and orthographic inspection",
+        "procedure": "Open the submitted scene, isolate the sheet, and evaluate its geometry. Establish the average surface normal from the undeformed footprint or best-fit plane. Inspect the projected boundary and measure the longer and shorter footprint dimensions. Confirm the four corners and opposite side pairs visually; object names and unapplied scale are irrelevant.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 20,
+      "requirement_section": "Broad Static Undulations",
+      "criterion": "Real surface geometry forms broad irregular peaks and troughs in both planar directions, with related height variation around the perimeter.",
+      "scoring_rule": {
+        "PASS": "The evaluated sheet has several broad irregular raised and lowered regions distributed across both planar directions. Valleys join the raised regions, the perimeter and differently raised corners follow the same deformation, and the wave height remains subordinate to the sheet width.",
+        "PARTIAL": "The evaluated sheet contains at least one clearly raised region and an adjacent lowered region with visible geometric relief, but one or more PASS conditions are unmet, such as only one-directional waves, an excessively regular pattern, overly small-scale noise, or incomplete perimeter variation.",
+        "FAIL": "The evaluated sheet lacks an adjacent raised and lowered region with visible geometric relief. A flat sheet, bump-only shading, or a source image on a plane fails."
+      },
+      "evidence_refs": ["image/01_wavy_sheet.png"],
+      "verification": {
+        "method": "Evaluated mesh profiles and neutral inspection renders",
+        "procedure": "Inspect the evaluated sheet under neutral shading from oblique and low angles. Compare surface cross-sections in the two footprint directions to confirm real height variation, broad feature size, and the distribution of peaks and troughs. Trace the perimeter and compare its corners. Assess form here; reserve tessellation defects for GEO-04 and shell defects for GEO-05.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Thin Closed Edges",
+      "criterion": "The broad sheet has a real underside and a thin rim that follows the bends with approximately uniform local-normal thickness.",
+      "scoring_rule": {
+        "PASS": "A substantive region of the sheet has distinct upper and lower surfaces joined by a visible thin rim. Across the existing paired surfaces, the nominal local-normal thickness is about 1% to 4% of the shorter footprint dimension and remains approximately uniform through the represented peaks, valleys, and corners; the upper wave form is preserved rather than filled into a block. Local holes or missing rim segments are assessed only under GEO-05.",
+        "PARTIAL": "A substantive region of the existing sheet has distinct upper and lower surfaces joined by a visible thin rim, but one or more PASS thickness conditions are unmet, such as thickness drift, an overly thick nominal setting, or a lower surface that fails to follow the upper bends.",
+        "FAIL": "No substantive sheet region has distinct upper and lower surfaces joined by a visible thin rim. A single zero-thickness surface, unrelated slab, or detached lower copy fails."
+      },
+      "evidence_refs": ["image/01_wavy_sheet.png", "image/03_continuous_rim.png"],
+      "verification": {
+        "method": "Evaluated cross-sections and underside inspection",
+        "procedure": "Inspect local cross-sections through a crest, valley, and near a corner. Measure the separation of the upper and lower surfaces along their local normals relative to the shorter footprint dimension, and inspect rim continuity. Judge thickness and sheet-like section here; score connectivity defects only under GEO-05.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Smooth Geometry",
+      "criterion": "The broad existing sheet surface and its perimeter are smoothly resolved while the thin rim remains readable.",
+      "scoring_rule": {
+        "PASS": "A substantive existing upper surface contains a smoothly resolved curved region joining a crest and valley and covers the sheet footprint. Its broad curves, valleys, and perimeter show no visible polygon steps, unintended sharp folds, or shading breaks at the final viewing distance. The thin rim remains visually distinct.",
+        "PARTIAL": "A substantive existing upper surface contains a smoothly resolved curved region joining a crest and valley, but one or more PASS conditions are unmet, including defects elsewhere or incomplete perimeter finish.",
+        "FAIL": "No substantive existing upper surface demonstrates a smoothly resolved curved region joining a crest and valley. Missing geometry, entirely faceted relief, or a flat surface alone cannot meet the minimum."
+      },
+      "evidence_refs": ["image/01_wavy_sheet.png", "image/03_continuous_rim.png"],
+      "verification": {
+        "method": "Neutral shaded render and silhouette inspection",
+        "procedure": "Render the submitted evaluated sheet under a broad neutral light from the intended camera and from a low inspection angle, using the delivery image dimensions. Inspect curved silhouette segments, crest-to-valley shading, and the rim transition. Correlate visible steps with evaluated tessellation and normals without requiring a specific smoothing method or polygon count.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Smooth Geometry",
+      "criterion": "The evaluated sheet is one connected closed shell without holes, detached fragments, duplicate overlapping surfaces, or self-intersections.",
+      "scoring_rule": {
+        "PASS": "The complete evaluated sheet is one connected closed shell with no holes, detached fragments, duplicate overlapping surfaces, or self-intersections, including at the underside and corners.",
+        "PARTIAL": "The main sheet has a connected upper surface spanning the footprint with an attached underside over a substantive region, but one or more PASS conditions are unmet, such as localized open seams, extra fragments, or limited overlapping faces.",
+        "FAIL": "There is no connected main upper surface spanning the footprint with an attached underside over a substantive region. Disconnected patches, a zero-thickness plane, or an unrelated closed solid do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_wavy_sheet.png", "image/03_continuous_rim.png"],
+      "verification": {
+        "method": "Evaluated mesh connectivity and intersection inspection",
+        "procedure": "Convert an inspection copy of the evaluated sheet to mesh and inspect connected components, open and non-manifold edges, coincident duplicate surfaces, and nonadjacent face intersections. Orbit beneath the sheet and inspect its corners to distinguish genuine seams from display artifacts. Do not judge surface resolution or nominal thickness in this row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Procedural Controls",
+      "criterion": "The saved wave-height control changes actual relief, can flatten the sheet, and restores the saved shape while retaining footprint and thickness.",
+      "scoring_rule": {
+        "PASS": "A clearly identified wave-height control reduces the evaluated peak-to-trough distance when reduced, produces a flat sheet at zero while retaining footprint and thickness, and restores the saved wavy shape when restored.",
+        "PARTIAL": "An available geometric control reproducibly reduces actual peak-to-trough distance without manual mesh editing, but one or more PASS conditions are unmet, such as unclear identification, incomplete flattening, or coupled changes to footprint or thickness.",
+        "FAIL": "No available control reproducibly reduces actual peak-to-trough distance without manual mesh editing. An unused control, shading-only change, or permanently baked mesh fails."
+      },
+      "evidence_refs": ["image/01_wavy_sheet.png", "image/02_rectangular_footprint.png"],
+      "verification": {
+        "method": "Reversible parameter probe on an inspection copy",
+        "procedure": "Locate the height control from its label or scene note. Record the saved evaluated geometry and reduce the control, then set it to zero. Compare peak-to-trough distance, footprint, and rim thickness at each state. Restore the original value and compare the recovered geometry with the recorded state. Inspect the driving relationship rather than awarding credit for modifier presence.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Procedural Controls",
+      "criterion": "The saved wave-size control changes the spatial scale of real undulations over the same sheet footprint.",
+      "scoring_rule": {
+        "PASS": "A clearly identified wave-size control reproducibly changes the spatial size and spacing of evaluated hills and valleys while preserving footprint dimensions and nominal thickness. Restoring it recovers the saved broad undulations.",
+        "PARTIAL": "An available geometric control reproducibly changes the spatial size or spacing of hills and valleys without manual mesh editing, but one or more PASS conditions are unmet, such as unclear identification, coupled dimension changes, or incomplete restoration.",
+        "FAIL": "No available control reproducibly changes geometric wave size or spacing without manual mesh editing. A height-only change, uniform object scaling, or a shading-only change fails."
+      },
+      "evidence_refs": ["image/01_wavy_sheet.png"],
+      "verification": {
+        "method": "Reversible spatial-scale probe",
+        "procedure": "On an inspection copy, record the wave-size control, then choose two nearby valid settings that visibly change feature size. Compare evaluated cross-sections and hill-to-hill spacing with the saved state, and measure footprint dimensions and nominal rim thickness. Restore the saved control value and confirm the original broad pattern returns. Permit any reusable geometric field implementation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Procedural Controls",
+      "criterion": "The saved thickness control changes rim depth throughout the sheet without rebuilding the mesh or changing the upper wave pattern.",
+      "scoring_rule": {
+        "PASS": "A clearly identified thickness control changes the upper-to-lower surface separation throughout the sheet while retaining its upper wave pattern and footprint. Reducing and restoring the value works without manual mesh rebuilding and recovers the saved thickness.",
+        "PARTIAL": "An available geometric control reproducibly changes rim depth over a substantive region without manual mesh rebuilding, but one or more PASS conditions are unmet, such as uneven response, unclear identification, altered upper wave pattern, or incomplete restoration.",
+        "FAIL": "No available control reproducibly changes rim depth over a substantive region without manual mesh rebuilding. An unused control, material-only change, uniform object scaling, or detached lower copy fails."
+      },
+      "evidence_refs": ["image/03_continuous_rim.png"],
+      "verification": {
+        "method": "Reversible thickness probe and geometry comparison",
+        "procedure": "On an inspection copy, record the thickness control and evaluated upper surface. Reduce the value to a positive thinner setting and compare cross-sections at a crest, valley, and rim. Confirm that upper-surface positions and footprint remain stable while separation changes. Restore the original setting and compare the recovered shell with the saved state.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "build.py recreates the scene and explicitly saves a reopenable submission.blend with the sheet, controls, and render setup intact.",
+      "scoring_rule": {
+        "PASS": "Both required files are supplied. Running build.py from an empty Blender 5.1.2 scene recreates the complete submission and explicitly writes submission.blend. Reopening that newly saved file retains the sheet, functional controls, and render setup without unavailable external dependencies.",
+        "PARTIAL": "The supplied build.py runs from an empty scene and writes a reopenable submission.blend containing the core wavy sheet, but one or more PASS conditions are unmet, such as missing controls or an incomplete render setup.",
+        "FAIL": "The script is missing, cannot run from an empty scene, fails to write a reopenable submission.blend containing the core wavy sheet, or relies on an unavailable solution file. An unsaved in-memory reconstruction does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean rebuild and saved-file reopen probe",
+        "procedure": "In a clean temporary directory with only the supplied deliverables, run build.py in Blender 5.1.2 from an empty scene. Confirm that the script actually creates submission.blend on disk. Close that process, open the newly written file in a fresh process, and inspect the evaluated sheet, the three functional controls, and the render setup. Compare with the submitted scene without scoring its artistic quality again.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named PNG is an actual-scene Cycles GPU render that clearly presents the complete static sheet and a visible rim.",
+      "scoring_rule": {
+        "PASS": "B113_Editable_Wavy_Sheet.png is supplied as a valid PNG rendered from submission.blend using Cycles GPU. It shows the complete sheet in an oblique view with all corners inside the image, readable broad relief, a continuous visible rim section, and restrained neutral appearance.",
+        "PARTIAL": "A valid PNG rendered from the actual submitted scene shows the recognizable core wavy sheet, but one or more PASS conditions are unmet, such as the filename, framing, rim visibility, neutral presentation, or required renderer configuration.",
+        "FAIL": "No valid PNG rendered from the actual submitted scene shows the recognizable core wavy sheet. A source frame, viewport screenshot, external replacement, or unrelated rendered subject fails."
+      },
+      "evidence_refs": ["image/01_wavy_sheet.png", "image/03_continuous_rim.png"],
+      "verification": {
+        "method": "Image decode, render-setting inspection, and scene correspondence check",
+        "procedure": "Decode the delivered PNG, inspect its filename, and compare its sheet geometry and view with submission.blend. Inspect the saved Cycles GPU configuration and reproduce the image from the saved camera when render infrastructure is available. Check framing, relief and rim readability without rescoring geometry quality. Reject source-image planes or external image substitution as evidence of scene rendering.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

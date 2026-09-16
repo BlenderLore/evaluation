@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Luminous Star Rain",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1Nc7C6VEVr",
+    "id": "BV1Nc7C6VEVr"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 20, "SURF": 25, "PROC": 10, "ANM": 25, "SCN": 10, "PIPE": 10},
+  "weighting_note": "Geometry and material appearance establish the two subjects; actual descent and continued renewal receive 25 points. PROC measures shared geometry and responsive shower controls, not node presence. Volume appearance belongs to SURF. No physical recompute requirement is imposed, so no SIM points are assigned. Scene presentation receives 10 points and delivery receives 10 points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Cloud Form",
+      "criterion": "A connected three-dimensional cloud has a broad lumpy silhouette and coherent depth.",
+      "scoring_rule": {
+        "PASS": "The cloud is one visually connected form with overlapping rounded lobes, a raised uneven top, a gently scalloped lower edge, smaller end lobes, and coherent depth in an oblique view.",
+        "PARTIAL": "A connected, recognizably lobed three-dimensional cloud is present, but one or more PASS conditions are unmet.",
+        "FAIL": "No connected, recognizably lobed three-dimensional cloud is present; isolated balls, a flat image, or a featureless primitive do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_cloud_and_star_rain.png"],
+      "verification": {
+        "method": "Evaluated form inspection",
+        "procedure": "Isolate the submitted cloud in a copy of the scene. Inspect its evaluated shape or density support from the camera and an oblique view, using a temporary neutral display if necessary. Judge connectivity, silhouette, and depth independently of its white shading.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Solid Luminous Stars",
+      "criterion": "The star source used by the shower is a finished solid five-point form.",
+      "scoring_rule": {
+        "PASS": "The source used by the animated stars is closed, has five clear tips alternating with recesses, visible thickness, a slightly raised center, softened edges, and smooth shading that preserves its silhouette.",
+        "PARTIAL": "The animated shower uses recognizable five-point geometry with nonzero thickness, but one or more PASS conditions are unmet.",
+        "FAIL": "The shower lacks recognizable five-point geometry with nonzero thickness; flat sprites, line outlines, unrelated shapes, or an unused source do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_solid_star_detail.png"],
+      "verification": {
+        "method": "Evaluated geometry and neutral shading inspection",
+        "procedure": "Identify the star geometry actually used in the shower. Inspect evaluated front and oblique views with emission temporarily replaced by neutral shading in a scene copy. Check the five tips, closure, side thickness, center relief, edge rounding, and shading continuity.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Cloud Form",
+      "criterion": "The cloud renders as a softly lit white participating volume.",
+      "scoring_rule": {
+        "PASS": "The cloud's actual rendered medium has white volume scattering, soft density transitions, subtle edge irregularity, and gentle internal shading that preserves the lobes, without a hard shell, exposed construction mesh, or coarse voxel blocks.",
+        "PARTIAL": "The cloud uses a participating volume and visibly reads as soft white cloud matter in the final shot, but one or more PASS conditions are unmet.",
+        "FAIL": "The cloud is absent, has no contributing participating volume, or does not visibly read as soft white cloud matter; an opaque surface with image blur does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_cloud_and_star_rain.png"],
+      "verification": {
+        "method": "Material contribution inspection and controlled renders",
+        "procedure": "Inspect the volume material or density field actually contributing to the cloud. Render a close camera view and an oblique view in a scene copy. Temporarily disable the contributing volume to establish that the soft medium is scene data, then assess transitions, edge detail, and internal shading with it restored.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Solid Luminous Stars",
+      "criterion": "The falling stars themselves carry a visible white self-emitting material.",
+      "scoring_rule": {
+        "PASS": "The actual falling five-point stars use white self-emission, remain bright when direct illumination is disabled, and retain recognizable points on the larger stars before final-image glow.",
+        "PARTIAL": "Recognizable falling stars have contributing self-emission, but one or more PASS conditions are unmet.",
+        "FAIL": "Recognizable falling stars are absent or have no contributing self-emission; a bright background, external glow overlay, or an unused emissive material does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_cloud_and_star_rain.png", "image/03_later_shower_state.png"],
+      "verification": {
+        "method": "Material usage check and controlled render",
+        "procedure": "At a populated frame, inspect the material assignments on evaluated star instances. In a copy, disable direct lights and final-image glow while preserving the stars. Render a detail crop to confirm intrinsic brightness, white color, and readable larger-star points.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Reusable Shower",
+      "criterion": "Shared star geometry and editable density, speed, and birth-region relationships drive the shower.",
+      "scoring_rule": {
+        "PASS": "Editing the reusable star shape updates the falling stars together; the cloud and birth region can be edited independently; density and downward-speed changes produce their stated effects; the birth region spans much of the cloud width and centers the shower beneath it.",
+        "PARTIAL": "The visible shower is driven by a reusable star source whose shape changes propagate to its falling stars, but one or more PASS conditions are unmet.",
+        "FAIL": "No reusable star source propagates shape edits to the visible falling stars; a collection of independent copies or an unused prototype does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_solid_star_detail.png", "image/01_cloud_and_star_rain.png"],
+      "verification": {
+        "method": "Non-destructive functional probes",
+        "procedure": "In a scene copy, make a clear local shape change to the star source and reevaluate a populated frame, confirming that shower stars change together. Restore it, then change density and downward speed separately and replay the same interval, comparing population and descent distance. Move the birth region slightly without moving the cloud, then restore it and inspect its alignment and width.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-01",
+      "capability": "ANM",
+      "points": 15,
+      "requirement_section": "Falling Motion",
+      "criterion": "Evaluated stars follow smooth downward paths beneath a stationary cloud.",
+      "scoring_rule": {
+        "PASS": "Across the declared clip, identifiable stars emerge below the stationary cloud and move smoothly downward with modest lateral drift and varied spacing, without rigid group translation, frozen intervals, or visible teleporting.",
+        "PARTIAL": "A group of identifiable stars visibly descends beneath the cloud over successive evaluated frames, but one or more PASS conditions are unmet.",
+        "FAIL": "No group of identifiable stars visibly descends beneath the cloud over successive evaluated frames; static layouts, unrelated movement, and image-only substitutions do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_cloud_and_star_rain.png", "image/03_later_shower_state.png"],
+      "verification": {
+        "method": "Sequential frame evaluation and motion inspection",
+        "procedure": "Evaluate frames 1-240 sequentially at 24 fps and inspect a low-resolution scene render. Follow multiple star identities or trackable silhouettes through early, middle, and late intervals; compare their evaluated positions and the cloud transform. Check downward travel, smooth paths, modest drift, and the absence of long freezes or jumps.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-02",
+      "capability": "ANM",
+      "points": 10,
+      "requirement_section": "Falling Motion",
+      "criterion": "The shower renews continuously with a varied population and reproducible playback.",
+      "scoring_rule": {
+        "PASS": "The shower is established by frame 49 and remains active through frame 240, with several dozen distinct stars at representative middle and late moments, varied sizes and face angles, and new arrivals while older stars fall or exit. There is no synchronized disappearance, and resetting to frame 1 reproduces the same animation. No loop closure is required.",
+        "PARTIAL": "New stars appear at multiple times while older stars remain visibly in flight, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no repeated arrival of new stars while older stars remain in flight; a single burst, static population, or sequential isolated stars do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_cloud_and_star_rain.png", "image/03_later_shower_state.png"],
+      "verification": {
+        "method": "Temporal population review and replay comparison",
+        "procedure": "During sequential evaluation, inspect arrivals beneath the cloud and older stars farther down. Review frames 49, 96, 168, and 240 plus the intervals between them for ongoing population, size and face-angle variation, and coordinated disappearance. Reset and repeat the evaluation, comparing the same populated frames for consistent star states.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "Final Shot",
+      "criterion": "The final portrait shot clearly presents the blue setting, softly lit cloud, and luminous vertical shower.",
+      "scoring_rule": {
+        "PASS": "A fixed portrait camera keeps the whole cloud near the top and provides open descent space below. The background is saturated blue, cloud lobes are softly illuminated, and restrained star glow preserves larger-star silhouettes and cloud shading. No overlays or construction objects appear; natural exits at the bottom are acceptable.",
+        "PARTIAL": "The final camera image contains an identifiable cloud and a visible shower beneath it against a blue background, but one or more PASS conditions are unmet.",
+        "FAIL": "The final camera image does not contain an identifiable cloud and a visible shower beneath it against a blue background."
+      },
+      "evidence_refs": ["image/01_cloud_and_star_rain.png", "image/03_later_shower_state.png"],
+      "verification": {
+        "method": "Final-camera render inspection",
+        "procedure": "Inspect scene-rendered frames near the start and at frames 96, 168, and 240 with final color management and glow enabled. Check fixed portrait framing, full-cloud containment, descent space, blue background, cloud lighting, star legibility, and absence of visible source geometry or interface overlays.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The submitted Blender scene opens as a self-contained editable animation with the declared render setup.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with usable editable scene content, a saved populated-shower frame, an active camera, Cycles GPU rendering, frames 1-240 at 24 fps, and all data needed to evaluate and render without missing external files.",
+        "PARTIAL": "submission.blend opens with usable editable cloud, star, and animation scene content, but one or more PASS conditions are unmet.",
+        "FAIL": "submission.blend is absent, cannot open, or lacks usable editable cloud, star, and animation scene content."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Fresh-open artifact inspection",
+        "procedure": "Open submission.blend in a fresh Blender 5.1.2 process, inspect missing-file reports, render engine and device settings, camera, frame range, frame rate, and saved frame. Evaluate several frames to confirm required data resolves without relying on the author's session.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The build script reproduces the scene and the named MP4 represents the complete submitted animation.",
+      "scoring_rule": {
+        "PASS": "build.py rebuilds the scene, animation, and render setup from an empty scene without external assets, and B53_Luminous_Star_Rain_dynamic.mp4 is a valid portrait render of the submitted scene covering frames 1-240 at 24 fps.",
+        "PARTIAL": "At least one of the following is valid: build.py rebuilds the scene and animation from an empty scene; or the named MP4 is a playable render of the submitted scene. One or more PASS conditions are unmet.",
+        "FAIL": "Neither a working scene-building build.py nor a playable named MP4 rendered from the submitted scene is provided; reference-image or viewport replacements do not meet the video minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Fresh build and video provenance comparison",
+        "procedure": "Run build.py from an empty scene in a separate Blender process and compare its cloud, star, animation, and render setup with submission.blend. Inspect MP4 metadata for 240 frames at 24 fps and portrait dimensions; compare sampled video frames with fresh renders at the corresponding submitted-scene frames.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Wool Felt Mushroom",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1B3KTzSEfn",
+    "id": "BV1B3KTzSEfn"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 30, "SURF": 45, "PROC": 15, "PIPE": 10},
+  "weighting_note": "The cap and stem form receive 30 points. The procedural color pattern and actual fibrous appearance receive 45 points because the felt finish is central to this task. Fifteen points assess the separate geometric relationship between fibers and their editable supporting surfaces. This is a static asset with no physical recomputation requirement, so hair is not classified as SIM. Rebuilding, saving, and authentic render delivery receive 10 points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Cap and Stem Shape",
+      "criterion": "The cap has the broad domed form, rolled lower rim, and inward-turning underside of a compact mushroom.",
+      "scoring_rule": {
+        "PASS": "A substantive volumetric cap exists and has a broad rounded crown, a softly rolled lower rim, and an underside that turns inward. Its profile reads as a mushroom cap from the front and side, rather than a thin disc, isolated sphere, or pointed cone.",
+        "PARTIAL": "A substantive volumetric cap exists, but one or more PASS conditions are unmet, such as an overly spherical profile, a weak rim, or an undeveloped underside.",
+        "FAIL": "No substantive volumetric cap exists; an image, flat surface, or unrelated primitive alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_wool_mushroom.png", "image/02_rounded_shape.png"],
+      "verification": {
+        "method": "Evaluated geometry and controlled view inspection",
+        "procedure": "Open the submitted scene, hide the wool temporarily, and inspect the evaluated cap from front, side, and underside views. Check its actual volume and profile independently of material, lighting, and stem quality. Restore visibility afterward.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Cap and Stem Shape",
+      "criterion": "A short rounded stem supports the cap with compact proportions and a continuous visual junction.",
+      "scoring_rule": {
+        "PASS": "A substantive volumetric stem exists, with a gently narrowed middle and a rounded slightly wider base. It is short and substantially narrower than the cap, centered beneath the overhang, and enters the cap without a visible daylight gap.",
+        "PARTIAL": "A substantive volumetric stem exists, but one or more PASS conditions are unmet, including poor proportions, a missing or misplaced cap, a gap at the junction, or an undeveloped base.",
+        "FAIL": "No substantive volumetric stem exists; a flat image, line, or unrelated detached object does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_wool_mushroom.png", "image/02_rounded_shape.png"],
+      "verification": {
+        "method": "Evaluated geometry and spatial inspection",
+        "procedure": "With the coat hidden, inspect the stem in orthogonal and three-quarter views. Compare its exposed dimensions with the cap and examine the upper intersection and lower profile. Do not use object count or names as evidence of a supporting stem.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Smooth Editable Forms",
+      "criterion": "The existing core forms retain editable geometry and a clean, smooth evaluated finish beneath the coat.",
+      "scoring_rule": {
+        "PASS": "At least one recognizable volumetric cap or stem is present as useful editable geometry, and all such existing core forms have smooth evaluated contours and continuous shading without distracting facets, pinches, cracks, or exposed construction openings.",
+        "PARTIAL": "At least one recognizable volumetric cap or stem is present as useful editable geometry, but one or more PASS conditions are unmet on the existing core forms.",
+        "FAIL": "There is no recognizable volumetric cap or stem available as useful editable geometry; an empty scene, image substitute, or unrelated smooth primitive does not establish the minimum."
+      },
+      "evidence_refs": ["image/02_rounded_shape.png"],
+      "verification": {
+        "method": "Mesh editability and neutral shaded inspection",
+        "procedure": "Hide fibers and inspect editable source geometry and evaluated neutral-shaded views. Orbit around the crown, rim, sides, and base of each existing core form. Assess finish on substantive existing surfaces; missing parts are handled by their shape rows rather than counted again here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Blue and White Surface Pattern",
+      "criterion": "The cap carries a cyan-to-pale-rim gradient and the stem has a distinct warm off-white, soft nonmetallic appearance.",
+      "scoring_rule": {
+        "PASS": "A substantial existing cap region is visibly cyan and an existing stem region is warm off-white. The cap transitions smoothly toward near-white at its lower rim, the stem remains distinct, and the assigned surfaces retain a soft nonmetallic response under neutral illumination.",
+        "PARTIAL": "A substantial existing cap region is visibly cyan or a substantial existing stem region is warm off-white, but one or more PASS conditions are unmet, such as a missing companion surface, absent gradient, harsh banding, or inappropriate reflectivity.",
+        "FAIL": "Neither a substantial cyan cap region nor a substantial warm off-white stem region is present on the actual assigned surfaces. Unused material colors and lighting-only color casts do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_wool_mushroom.png", "image/03_fiber_coverage.png"],
+      "verification": {
+        "method": "Assigned material inspection and controlled render",
+        "procedure": "Inspect the actual assigned materials and compare the mushroom under neutral illumination, hiding fibers temporarily if needed to separate base color from the coat. Confirm a surface-driven vertical transition near the cap rim and a warm stem color. Evaluate palette and reflectivity separately from spot layout and fiber density.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Blue and White Surface Pattern",
+      "criterion": "Separate rounded white spots form a coherent pattern across the curved cap.",
+      "scoring_rule": {
+        "PASS": "The actual cap has more than one recognizable white rounded spot separated by cyan, with several spots distributed over its crown and sides. Their apparent sizes and spacing vary, they follow the surface without conspicuous stretching or seams, and they read as integrated felt coloration.",
+        "PARTIAL": "The actual cap has more than one recognizable white rounded spot separated by cyan, but one or more PASS conditions are unmet, such as restricted coverage, uniform repetition, stretched patches, seams, or a raised sticker-like appearance.",
+        "FAIL": "The actual cap does not have more than one recognizable white rounded spot separated by cyan. A single patch, a fully merged white field, unused texture data, or an image substitute does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_wool_mushroom.png", "image/03_fiber_coverage.png"],
+      "verification": {
+        "method": "Surface coverage inspection",
+        "procedure": "Inspect the cap from the saved camera and orbit through front, side, and top views in the submitted scene. Examine spot boundaries and surface continuity with fibers visible and temporarily hidden. Check the used pattern on curved geometry rather than inferring it from disconnected shader nodes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Blue and White Surface Pattern",
+      "criterion": "The used procedural cap material supports independent edits to spot size, distribution or spacing, and gradient height.",
+      "scoring_rule": {
+        "PASS": "The actual cap has a used procedural pattern with at least one working control, and separate controls for spot size, distribution or spacing, and gradient height all visibly change their intended surface features without changing mushroom geometry or erasing the other pattern components.",
+        "PARTIAL": "The actual cap has a used procedural pattern with at least one working control, but one or more PASS conditions are unmet, including missing controls, coupled changes, or disruption of other pattern components.",
+        "FAIL": "No control in a used procedural cap pattern produces a visible intended change on the actual cap. An unused node graph, static image alone, or disconnected parameter does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_wool_mushroom.png"],
+      "verification": {
+        "method": "Non-destructive material functional probe",
+        "procedure": "On a temporary copy of the submitted scene, trace the used cap material and change each declared pattern control individually by a modest amount. Compare controlled previews before and after each edit, confirm the intended visible feature changes while geometry and other pattern components remain intact, then restore the original settings. Equivalent procedural shader constructions are accepted.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Short Wool Finish",
+      "criterion": "Actual short fibers create a dense wool-like finish on both forms without obscuring the mushroom or its colors.",
+      "scoring_rule": {
+        "PASS": "A substantial cap or stem region has actual visible short fibers, and both the cap and exposed stem are densely coated with fine strands, small bends or curls, and irregular direction. A soft fibrous fringe is visible at close range, the major forms and color regions remain readable, and there are no conspicuous long locks, sparse bristles, bald areas, or thick masking shells.",
+        "PARTIAL": "A substantial cap or stem region has actual visible short fibers, but one or more PASS conditions are unmet, including incomplete coverage, excessive strand length, an overly regular coat, hidden colors, or a weak fringe.",
+        "FAIL": "No substantial cap or stem region has actual visible short fibers. Flat noise, bump alone, isolated incidental strands, or a smooth outer shell does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_wool_mushroom.png", "image/03_fiber_coverage.png"],
+      "verification": {
+        "method": "Fiber geometry inspection and controlled close render",
+        "procedure": "Inspect the strand or curve geometry and make a close controlled render of a cap patch, the cap silhouette, and the stem. Confirm that individual fibers create the visible texture rather than render noise or a flat shader effect. Then inspect the complete asset at its intended framing to assess short dense coverage, preserved shape, and color readability. Fiber editability is assessed separately by PROC-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Editable Fiber Relationships",
+      "criterion": "The fiber coat follows its supporting surfaces and has working length and density controls on both mushroom parts.",
+      "scoring_rule": {
+        "PASS": "A substantial cap or stem fiber population has a working length or density control, and the fiber populations on both cap and stem remain attached during modest supporting-surface edits. Length and density controls work on both parts, changing strand extent and coverage respectively while retaining the underlying forms. The saved scene has the intended short dense coat restored.",
+        "PARTIAL": "A substantial cap or stem fiber population has a working length or density control, but one or more PASS conditions are unmet, such as missing controls on one part, floating roots after surface edits, ineffective density changes, or an unrestored coat.",
+        "FAIL": "No substantial cap or stem fiber population has a working length or density control. An isolated sample strand, a fixed disconnected coat with no effective controls, or shader-only fuzz does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_fiber_coverage.png"],
+      "verification": {
+        "method": "Geometric relationship and parameter probe",
+        "procedure": "On a temporary scene copy, locate the evaluated fibers and their supporting cap and stem surfaces. Make a modest local shape edit on each support and verify that fiber roots follow without a floating coat. Restore the surfaces; adjust length and density separately on each part or through shared controls and compare evaluated extent and coverage. Accept any native implementation that produces these relationships; no timeline simulation or solver-specific settings are required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The submission is an editable saved scene that the supplied script can recreate and save from a new scene.",
+      "scoring_rule": {
+        "PASS": "The delivered submission.blend opens with substantive editable mushroom content, and build.py runs from a new scene, recreates the geometry, materials, fiber relationships, and render setup, then saves submission.blend. Reopening that newly saved result confirms the recreated scene without reliance on a preexisting solution or external assets.",
+        "PARTIAL": "The delivered submission.blend opens with substantive editable mushroom content, but one or more PASS conditions are unmet, including a missing or failing script, incomplete recreation, failure to save, or an unusable newly saved result.",
+        "FAIL": "The delivered submission.blend is missing, unreadable, or lacks substantive editable mushroom content. A script that creates only an unsaved scene does not establish this minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Fresh build, saved-file reopen, and dependency inspection",
+        "procedure": "Open the delivered submission.blend and confirm substantive editable mushroom data. Review build.py for dependencies, then execute it in an isolated working copy using Blender 5.1.2 from a new scene. Locate the submission.blend it saves and reopen that saved file in a separate process. Inspect the saved cap, stem, materials, fibers, their controls, and render setup; do not treat an in-memory rebuild as proof of a saved deliverable.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named PNG is an authentic Cycles GPU render of the submitted scene and clearly presents the complete mushroom.",
+      "scoring_rule": {
+        "PASS": "B142_Wool_Felt_Mushroom.png is a decodable render matching the submitted mushroom scene, rendered with Cycles GPU, and shows the complete primary mushroom with enough clarity to distinguish its spots, pale rim, warm stem, and wool fringe.",
+        "PARTIAL": "B142_Wool_Felt_Mushroom.png is a decodable render matching the submitted mushroom scene, but one or more PASS conditions are unmet, such as engine configuration, cropping, lighting, or insufficient detail.",
+        "FAIL": "The named PNG is absent, undecodable, or not a render of the submitted mushroom scene. Source frames, viewport screenshots, and external image replacements do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_wool_mushroom.png"],
+      "verification": {
+        "method": "Render-file decode, scene comparison, and render provenance check",
+        "procedure": "Decode the named PNG, inspect the saved scene's Cycles GPU configuration and camera, and rerender a controlled comparison from the submitted file when needed. Compare geometry, fiber coat, materials, and composition to establish that the PNG comes from that scene. Judge framing and visibility here; material and modeling defects receive their points in their own rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

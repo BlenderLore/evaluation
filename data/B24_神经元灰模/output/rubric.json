@@ -1,0 +1,176 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "神经元灰模",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1Jx766bEBq",
+    "id": "BV1Jx766bEBq"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "暂定分配。来源是静态灰模造型任务，没有实际材质或功能生成器要求，故 GEO 占90分，按九个独立形状或连接结果各分配10分；灰模圆滑、管径与接合质量均属于 GEO。PIPE 10分检查可编辑结构与可移植重建，不按文件打开或对象数量给分。权重尚未经过样本校准。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 胞体与放射树突",
+      "criterion": "胞体具有饱满、不对称的卵形或水滴形体积，上部偏斜且下部较宽，表面平顺。",
+      "scoring_rule": {
+        "PASS": "存在有体积的胞体，卵形或水滴形、上部偏斜和下部饱满同时可辨，近景没有明显尖刺、破洞或多边形明暗分块。",
+        "PARTIAL": "存在有体积的胞体，但未满足 PASS，例如仍近似规则球体、局部尖瘪或平滑质量不足。",
+        "FAIL": "没有可辨认的三维胞体，或只用平面、线条、图片表示胞体。"
+      },
+      "evidence_refs": ["image/01_complete.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "在提交资产副本中定位胞体并隐藏遮挡它的其他部件，检查求值后的实际三维表面；在中性实体视图下从主视及两个旋转视角观察轮廓和体积，再放大胞体检查缺损与明暗分块。仅凭平滑标志或细分数量不判定完成。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 胞体与放射树突",
+      "criterion": "树突在胞体四周形成疏密和走向有变化的放射轮廓，根部贴合胞体。",
+      "scoring_rule": {
+        "PASS": "存在胞体及树突群；在与参考相近的主视方向，顶部、左右及下侧均有向外树突，长度、间隔和走向有明显变化，根部均无可见悬空间隙。",
+        "PARTIAL": "存在胞体和至少两根附着树突，但未满足 PASS，例如有方向缺失、大部分轮廓机械重复或局部根部悬空。",
+        "FAIL": "缺少胞体，或与胞体相接的树突不足两根，无法形成树突群。"
+      },
+      "evidence_refs": ["image/01_complete.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "使用提交资产的求值几何，将胞体与长轴突的相对方向对齐参考后观察树突伸展方向、疏密与轮廓差异；旋转并放大根部检查实际贴合。统计视觉分支而非对象或样条数，背景线和编辑控制线不计入。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 渐细管体与局部侧枝",
+      "criterion": "一级树突为真实圆管状几何，弯曲平顺且从根部向自由端连续收细。",
+      "scoring_rule": {
+        "PASS": "存在一级树突，且可辨认的一级树突均有近圆截面的三维厚度、流畅弧线和根粗末细的连续变化，没有明显折角或突变台阶。",
+        "PARTIAL": "至少一根一级树突具有实际管状体积，但未满足 PASS，例如部分粗细均匀、局部折角或截面明显扁平。",
+        "FAIL": "没有具有实际管状体积的一级树突，或仅有平面、图片与无厚度线条。"
+      },
+      "evidence_refs": ["image/01_complete.png", "image/02_dendrite_branch.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "逐根检查一级树突求值后的根段、中段与末段截面，结合旋转视图确认圆管体积与渐细趋势；在侧枝接入位置之外观察中心线平顺性。本项只检查一级管体，不重复评价侧枝连接。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 渐细管体与局部侧枝",
+      "criterion": "多根一级树突具有更细、向外收细且与主干视觉连续的侧枝。",
+      "scoring_rule": {
+        "PASS": "至少两根一级树突上有可辨认的管状侧枝；侧枝比所接主干细，向外收细，开叉角度清楚，接合无可见断口或明显错位。",
+        "PARTIAL": "至少有一处实际管状侧枝，但未满足 PASS，例如只完成一处、侧枝过粗、没有收细或接合错位。",
+        "FAIL": "没有实际管状侧枝；交叉控制线、贴图和与主干不形成分叉关系的孤立线段不计入。"
+      },
+      "evidence_refs": ["image/01_complete.png", "image/02_dendrite_branch.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "从提交资产求值几何中定位实际分叉，近景比较侧枝与对应主干的管径、末端收细和开叉方向；从两个视角检查接合。允许独立对象或非焊接表面，只要视觉连续，不检查指定拓扑或建模历史。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05", "capability": "GEO", "points": 10,
+      "requirement_section": "3. 长轴突与三支远端",
+      "criterion": "长轴突从胞体连续伸出，以收窄根部和缓弯细管形成明显长于普通树突的主干。",
+      "scoring_rule": {
+        "PASS": "存在与胞体相接的轴突主干，其伸展范围明显超过普通树突，根部较宽并连续收窄为细管，主干沿平缓弯曲路径延伸且没有可见断裂。",
+        "PARTIAL": "存在实际轴突主干，但未满足 PASS，例如不够长、根部未收窄、出现局部折角或与胞体连接不完整。",
+        "FAIL": "没有可辨认的实际轴突主干，或仅用胶囊串、平面或图片表示轴突。"
+      },
+      "evidence_refs": ["image/01_complete.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "在资产副本中隐藏包覆段，沿胞体到远端分叉追踪轴突求值表面，检查根部收窄与连续弧线。对照树突的实际伸展范围观察长度层级，不用最长对象包围盒代替路径识别。本项检查主干，包覆段排列另行检查。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06", "capability": "GEO", "points": 10,
+      "requirement_section": "3. 长轴突与三支远端",
+      "criterion": "长轴突远端连接三条分离可辨、方向不同的管状分支。",
+      "scoring_rule": {
+        "PASS": "可从实际轴突主干连续追踪到三条远端管状分支；三支弯曲方向不同、自由端彼此分开，分叉处无可见断口或明显错位。",
+        "PARTIAL": "存在轴突主干和至少一条远端管状分支，但未满足 PASS，例如分支数量不为三、轮廓重合或分叉连接有缺陷。",
+        "FAIL": "缺少实际轴突主干或远端分支，或者所有候选均与主干完全分离。"
+      },
+      "evidence_refs": ["image/01_complete.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "在提交资产中沿长轴突向远端检查实际三维分叉，必要时暂时隐藏终末件以露出管体自由端；从主视及斜视判断三支数量、方向和连续性。分支按可追踪几何路径计数，不按对象或样条数推断。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07", "capability": "GEO", "points": 10,
+      "requirement_section": "4. 分段髓鞘造型",
+      "criterion": "轴突具有至少五个尺度相近、粗于细管且双端圆润的胶囊状包覆段。",
+      "scoring_rule": {
+        "PASS": "存在至少五个可辨认的实际包覆段，每段比细轴突粗，具有细长中段和圆润双端，尺度相近且可有轻微弯曲或长度变化。",
+        "PARTIAL": "至少有一个有体积的包覆段，但未满足 PASS，例如不足五段、端部锐利、形状不像细长胶囊或尺度严重失衡。",
+        "FAIL": "没有实际包覆段，或只有细轴突、无体积图形与贴图。"
+      },
+      "evidence_refs": ["image/01_complete.png", "image/03_myelin.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "在求值几何中识别附着于轴突区域的实际包覆体，按分离短节统计数量，并逐段检查中段长径、两端曲面及与细轴突的粗细差异。允许多个短节在同一对象中；对象数量和特定修改器不作为依据。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-08", "capability": "GEO", "points": 10,
+      "requirement_section": "4. 分段髓鞘造型",
+      "criterion": "包覆段沿实际轴突对齐并跟随局部走向，段间留有露出连续细管的间隙，包覆链在远端三叉前结束。",
+      "scoring_rule": {
+        "PASS": "存在轴突和多段包覆；全部包覆段围绕轴突且顺着其局部方向排列，邻段间可见裸露细管，内部轴突连续，包覆链在三叉前结束。",
+        "PARTIAL": "存在轴突和至少两个靠近轴突的包覆段，但未满足 PASS，例如局部偏心、方向不合、间隙闭合、内部有断段或包覆越过三叉。",
+        "FAIL": "缺少实际轴突，或靠近轴突的包覆段不足两个，无法检查分段包覆关系。"
+      },
+      "evidence_refs": ["image/01_complete.png", "image/03_myelin.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "在资产副本中从正面和斜侧面逐段检查包覆中心、长轴和轴突局部路径的关系；检查相邻间隙，再隐藏包覆几何追踪内部细轴突。数量和胶囊外形只在 GEO-07 计分，本项仅评价已有短节与轴突的空间连接关系。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-09", "capability": "GEO", "points": 10,
+      "requirement_section": "5. 三个终末件",
+      "criterion": "三条远端分支各有一个圆润外扩、窄端相接且宽端朝外的短宽终末件。",
+      "scoring_rule": {
+        "PASS": "三个实际终末件分别连接三条分支末端，均呈尺度相近的短宽截锥或小喇叭外轮廓，窄端相接、宽端圆润朝外；彼此分开且无明显间隙或管体贯穿宽端。",
+        "PARTIAL": "至少有一个实际终末件靠近可辨认的远端分支，但未满足 PASS，例如未完成三件、形状过直或过尖、连接错位、朝向错误。",
+        "FAIL": "没有实际终末件，或没有可辨认的远端分支可供连接，或所有候选均与远端分支无关。"
+      },
+      "evidence_refs": ["image/01_complete.png", "image/04_terminal_shape.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "放大提交资产三个远端，逐一检查求值后的终末体外轮廓、窄宽端比例、宽端圆角和分支连接位置；旋转视角排除平面替代、悬空和管体穿出。三件允许属于同一对象，不要求内部空腔或指定建模方法。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 10,
+      "requirement_section": "6. 编辑与重建",
+      "criterion": "关键结构可分别检查和局部编辑，build.py 在可移植环境中从空场景重建提交资产。",
+      "scoring_rule": {
+        "PASS": "在资产副本中可单独隐藏包覆段并检查轴突，也可改变一条树突形状而不影响其他树突；build.py 按注明方式在干净场景使用随附或内置依赖运行，生成并保存与提交资产一致的主要形状和连接关系。",
+        "PARTIAL": "编辑探针和可移植重建两方面至少一方面完整满足，但尚未全部满足 PASS。",
+        "FAIL": "编辑探针与可移植重建两方面均不能完整完成，或只有图片等不可编辑输出。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact_edit_probe_and_clean_rebuild",
+        "procedure": "复制提交目录，在副本中执行隐藏包覆段和单条树突形状编辑探针后撤销。随后使用 Blender 5.1.2 干净进程按 build.py 的运行说明重建，禁用网络并检查依赖闭合、保存结果和主要形状及连接关系是否与 submission.blend 一致；允许无关的数据块顺序差异。此处仅规定将来的检查，不包含可执行评分器。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

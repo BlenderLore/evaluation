@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Double Membrane Porous Model",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1agbXztEtf",
+    "id": "BV1agbXztEtf"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 75, "SCN": 15, "PIPE": 10},
+  "weighting_note": "This is primarily a geometry task. Seventy-five points assess independent shape properties: sheet form, undulation, shell thickness, volumetric pores, geometric irregularity, fused rod surfaces, and spheres. Fifteen points assess the spatial assembly and particle presentation. Ten points assess editable, reproducible delivery. The source bakes its construction stages, so modifier presence and construction history do not receive procedural credit.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Membrane Form",
+      "criterion": "Two separate membrane panels retain broad, elongated rectangular sheet forms and similar footprints.",
+      "scoring_rule": {
+        "PASS": "Both separate panels are present, each is recognizably rectangular and longer than wide, both are broad relative to their thickness, and their footprints are similar.",
+        "PARTIAL": "At least one broad rectangular sheet is recognizable, but one or more PASS conditions are unmet.",
+        "FAIL": "No broad rectangular membrane sheet is recognizable. A narrow rod, sphere, or chunky block does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_double_membrane_assembly.png", "image/04_sandwich_fit.png"],
+      "verification": {
+        "method": "Evaluated geometry and orthographic inspection",
+        "procedure": "Open submission.blend, isolate the membrane candidates, and inspect their evaluated geometry in top and oblique views. Compare the two footprints and their length, width, and sheet character. Do not infer a membrane from an object name or modifier.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Membrane Waves and Thickness",
+      "criterion": "The two membrane surfaces have shallow, flowing undulations with visibly different profiles.",
+      "scoring_rule": {
+        "PASS": "Both membranes have broad shallow rises and depressions with smooth transitions, without sharp crumpled folds, and their wave profiles visibly differ after accounting for their vertical offset.",
+        "PARTIAL": "At least one recognizable membrane has a broad rise and depression in its actual surface geometry, but one or more PASS conditions are unmet.",
+        "FAIL": "Neither existing membrane has a broad geometric rise and depression. Flat sheets with only material shading or fine surface noise do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_membrane_waves.png", "image/04_sandwich_fit.png"],
+      "verification": {
+        "method": "Evaluated surface and profile comparison",
+        "procedure": "Isolate each membrane, view it from the side and obliquely, and inspect the evaluated surface rather than its material. Temporarily align the panel centers in a duplicate scene to compare profiles. Restore the scene after inspection; assess surface shape independently of thickness.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Membrane Waves and Thickness",
+      "criterion": "The membrane panels are thin solid shells with continuous edge sidewalls.",
+      "scoring_rule": {
+        "PASS": "Both membrane panels have two faces joined by continuous perimeter sidewalls, with small reasonably consistent thickness and no open edge gaps or large thickness bulges.",
+        "PARTIAL": "At least one existing membrane has a real two-sided shell and a sidewall along a substantial part of its perimeter, but one or more PASS conditions are unmet.",
+        "FAIL": "No existing membrane has a real two-sided shell joined by a substantial perimeter sidewall. A displaced single surface with nonzero height range does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_double_membrane_assembly.png", "image/04_sandwich_fit.png"],
+      "verification": {
+        "method": "Boundary and cross-section inspection",
+        "procedure": "Inspect the evaluated membranes with clipping or cross-section views at several edge locations. Confirm paired faces and connecting sidewalls, and inspect representative thickness away from corners. Use boundary-edge inspection where useful; do not accept Z extent or a Solidify modifier alone as proof.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Open Porous Core",
+      "criterion": "The core is a substantial three-dimensional rod network with open pores throughout its depth.",
+      "scoring_rule": {
+        "PASS": "A rod network fills a roughly block-shaped volume, with multiple depth layers of openings visible from more than one oblique direction and a substantially visible interior through the gaps.",
+        "PARTIAL": "An identifiable rod network has actual depth and multiple open gaps, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no identifiable rod network with actual depth and multiple open gaps. A flat web, a solid textured block, or isolated scattered rods without a network does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_porous_core_detail.png", "image/01_double_membrane_assembly.png"],
+      "verification": {
+        "method": "Multi-view core inspection",
+        "procedure": "Hide the membranes and particles in a duplicate inspection scene. Orbit the core through front, side, and oblique views and use clipping to inspect its middle. Confirm genuine interior rod layers and open gaps. Judge pore volume here; reserve junction surface fusion for GEO-06.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Open Porous Core",
+      "criterion": "Irregular cell sizes, rod directions, and junction positions break up a regular lattice while retaining the block envelope.",
+      "scoring_rule": {
+        "PASS": "Cell sizes, rod directions, and junction positions vary throughout the recognizable core; the result avoids a uniformly repeated orthogonal lattice and retains a roughly rectangular block envelope.",
+        "PARTIAL": "An identifiable cellular core contains visible geometric irregularity in at least one substantial region, but one or more PASS conditions are unmet.",
+        "FAIL": "No identifiable cellular core has a substantial region of geometric irregularity. Uniform repeated cells, material-only noise, or a few displaced outliers do not meet the minimum."
+      },
+      "evidence_refs": ["image/03_porous_core_detail.png", "image/04_sandwich_fit.png"],
+      "verification": {
+        "method": "Spatial pattern comparison",
+        "procedure": "Inspect the isolated evaluated core from two orthogonal views and an oblique view. Compare cell dimensions, junction spacing, and rod directions across its left, middle, right, and interior regions. Assess geometric variation independently of the number of pores and the surface finish.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Rounded Fused Structure",
+      "criterion": "Existing core rods have rounded cross-sections and smooth, genuinely fused junction surfaces.",
+      "scoring_rule": {
+        "PASS": "The core rods have rounded solid cross-sections and continuous blended junctions throughout the substantive network, with no prominent faceting, voxel steps, surface tears, or shading spikes at normal close inspection.",
+        "PARTIAL": "A substantive existing region contains several solid rods with rounded cross-sections and at least one genuinely fused junction, but one or more PASS conditions are unmet.",
+        "FAIL": "No substantive region contains several rounded solid rods and a genuinely fused junction. Bare edges, wholly faceted struts, or an assembly made entirely of independently intersecting rods do not meet the minimum."
+      },
+      "evidence_refs": ["image/03_porous_core_detail.png"],
+      "verification": {
+        "method": "Close geometry inspection and neutral-light rendering",
+        "procedure": "Inspect evaluated geometry at representative exterior and interior junctions, using cross-sections or mesh connectivity to distinguish fused surfaces from overlapping cylinders. Make controlled neutral-light close views of existing rods and junctions to assess faceting and shading defects. Missing unrelated particles or a membrane do not by themselves fail this surface assessment.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Particle Arrangement",
+      "criterion": "The particles are several small smooth spheres with modest size variation.",
+      "scoring_rule": {
+        "PASS": "Several modeled particles have spherical silhouettes and smooth surfaces, their sizes vary modestly, and their diameters are small relative to the membrane span.",
+        "PARTIAL": "At least one actual particle is recognizably spherical, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no actual recognizably spherical particle. Flat circular image elements do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_double_membrane_assembly.png"],
+      "verification": {
+        "method": "Particle geometry inspection",
+        "procedure": "Isolate the particle geometry and inspect it from two directions with neutral shading. Compare particle diameter to the membrane span, inspect silhouette roundness and surface smoothness, and compare sizes. Do not award this geometry row from spatial placement alone.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "Sandwich Placement",
+      "criterion": "The membranes closely bound the core as a coherent layered sandwich with modest lateral margins.",
+      "scoring_rule": {
+        "PASS": "The lower membrane supports and the upper membrane caps the core, the broad footprints align with modest membrane margins, and the core lies mostly between their facing surfaces without conspicuous continuous separation or long protrusions beyond the outer membrane faces.",
+        "PARTIAL": "Both membranes and a core exist, and the core is positioned between them with overlapping footprints, but one or more PASS conditions are unmet.",
+        "FAIL": "The two membranes and core are not all present, or the core is not between the membranes with overlapping footprints."
+      },
+      "evidence_refs": ["image/04_sandwich_fit.png", "image/01_double_membrane_assembly.png"],
+      "verification": {
+        "method": "Multi-view spatial fit inspection",
+        "procedure": "Inspect the evaluated assembly in front, side, top, and oblique views. Compare the actual facing membrane surfaces with the upper and lower core envelope, looking for sustained gaps and external protrusions. Check lateral containment and margins from the top view; object-center order alone is insufficient.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-02",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "Particle Arrangement",
+      "criterion": "Particle placement and the final view clearly communicate the layered porous assembly.",
+      "scoring_rule": {
+        "PASS": "Multiple particles are visible above and below the membranes, at least one appears among the open pores, and varied positions avoid regular rows. A clear oblique view shows the entire assembly with a margin, neutral gray surfaces, a simple background, readable depth, and a core that remains mostly unobscured by particles.",
+        "PARTIAL": "The submitted scene has a visible porous assembly and at least one particle placed above or below it, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no visible porous assembly accompanied by a particle above or below it. A presentation with no such spatial relationship does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_double_membrane_assembly.png"],
+      "verification": {
+        "method": "Scene placement and rendered composition inspection",
+        "procedure": "Inspect world-space particle positions relative to the membranes and pore volume, then inspect the submitted camera view and actual scene render. Confirm the upper, lower, and internal groups, varied spacing, complete framing, and readable depth. Assess placement and visibility here, leaving spherical shape to GEO-07.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable saved scene, reproducible saving script, and actual scene PNG form a complete portable submission.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the complete editable scene and separately accessible component groups; resources resolve portably. Running build.py from an empty scene recreates the submission and explicitly saves submission.blend, and reopening that saved file confirms the rebuilt result and render setup. The required PNG is present and matches a render from the actual submitted scene.",
+        "PARTIAL": "A readable submission.blend contains an editable three-dimensional double-membrane assembly with a porous core, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no readable submission.blend containing an editable three-dimensional double-membrane assembly with a porous core. Images, scripts, or an unsaved in-memory reconstruction alone do not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Artifact opening, clean rebuild, saved-result inspection, and render comparison",
+        "procedure": "Copy the delivery to an isolated directory. Open submission.blend in Blender 5.1.2 and inspect component editability and resource paths. Preserve that file, then run build.py in a fresh empty Blender process and verify that it writes a new submission.blend. Close the process and reopen the newly saved file to inspect geometry and camera, lighting, and Cycles GPU settings. Render from the submitted scene and compare its content and framing with B107_Double_Membrane_Porous_Model.png, allowing ordinary stochastic render differences. No Blender execution is performed during task authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

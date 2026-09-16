@@ -1,0 +1,174 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "米白棕色猫头资产",
+  "source_video": "https://www.bilibili.com/video/BV15PeQz3ERf",
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 55, "SURF": 35, "PIPE": 10},
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 20,
+      "requirement_section": "1. 圆润且有体积的头部",
+      "criterion": "头部具有横宽的圆角方形正面轮廓及饱满侧面体积。",
+      "scoring_rule": {
+        "PASS": "同时满足：不计耳朵的头部正面宽于高且两颊丰满；底边相对平缓、边角圆润；侧面有饱满厚度和连续弧面。",
+        "PARTIAL": "三组要求中满足两组，仍可辨认为同类圆润头形。",
+        "FAIL": "三组要求中至多满足一组，或只提交贴片、薄板、二维图像。"
+      },
+      "evidence_refs": ["image/02_head_front.png", "image/03_head_side.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_multiview_visual_review",
+        "procedure": "在提交文件副本中识别头部实际求值几何，分别获取正面、侧面和斜侧面中性实体视图。使用宽高测量辅助确认横宽，排除耳朵后由轮廓判断两颊与底边。检查侧视几何厚度及背面，不按对象数、顶点数或文件名计分。逐组记录三项成立与否；VLM与人工复核采用同一观察项。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. 成对短耳与连续表面",
+      "criterion": "头顶具有两只基本对称、圆钝且有厚度的短耳，中央额头低于耳尖。",
+      "scoring_rule": {
+        "PASS": "两只短耳齐全且大小、高度基本对称；均为宽根窄顶的圆钝轮廓并有厚度；中央额头低于两耳。三组要求均满足。",
+        "PARTIAL": "双耳均存在，三组要求中满足两组。",
+        "FAIL": "缺一只或两只耳朵，或三组要求中至多满足一组。"
+      },
+      "evidence_refs": ["image/01_goal.png", "image/04_finished_geometry.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_multiview_visual_review",
+        "procedure": "从求值结果观察双耳，允许镜像、实例、合并网格或其他实现。对比正面轮廓中的双耳位置、宽根圆顶及中央凹口，再以侧面检查厚度。镜像产生的可见第二只耳朵按实际存在处理，不依赖独立对象数量。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. 成对短耳与连续表面",
+      "criterion": "两处耳根与头部自然连续，头耳表面无明显几何或着色缺陷。",
+      "scoring_rule": {
+        "PASS": "正面与斜侧面均满足：两处耳根无明显接缝、空隙或穿插线；头耳整体没有明显棱面、尖刺或局部塌陷。",
+        "PARTIAL": "上述两组质量要求中仅一组满足，且整体头耳仍完整。",
+        "FAIL": "两组要求均不满足，或头耳主体不完整。"
+      },
+      "evidence_refs": ["image/04_finished_geometry.png"],
+      "verification": {
+        "method": "artifact_multiview_visual_review",
+        "procedure": "在文件副本上关闭线框和选择叠加，用相同中性光照查看正面及左右斜侧面。放大两处耳根与轮廓，记录缝隙、穿插线、棱面和尖刺；必要时用局部几何检查区分正常曲率与交叠表面。无需头耳恰好是一个对象，也不以是否添加过重构或细分修改器作为通过条件。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "3. 两只眼睛与居中的小鼻子",
+      "criterion": "两只凸起圆眼和一枚小扁椭圆鼻子具有参考中的位置、比例及贴合关系。",
+      "scoring_rule": {
+        "PASS": "三组要求均满足：两眼位于脸部下半部且大小接近、左右基本对称；鼻子更小、横向扁椭圆、位于两眼之间且接近眼中心连线；三处五官均略凸且贴合脸面。",
+        "PARTIAL": "两眼和鼻子齐全，三组要求中满足两组。",
+        "FAIL": "缺眼睛或鼻子，或三组要求中至多满足一组。"
+      },
+      "evidence_refs": ["image/05_features_front.png", "image/01_goal.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_multiview_visual_review",
+        "procedure": "在正面投影中识别实际可见的两眼和鼻子，比较中心、轮廓、大小及与脸部的相对位置；在斜侧面确认表面凸起和贴合。使用求值网格及实例结果，接受一只眼的镜像或同一网格中的可编辑眼睛组。不要求独立眼对象，也不接受任意小物体数量作为五官存在证据。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "4. 米白底色、柔和棕色花区与深色五官",
+      "criterion": "米白底色与棕色耳尖、面部花区具有正确的空间分布。",
+      "scoring_rule": {
+        "PASS": "三组要求均满足：米白覆盖头耳且额头中部与面部外缘可辨；两只耳朵上部均有棕色；脸部中央至下半部的棕色围绕眼鼻分布而非覆盖整头。",
+        "PARTIAL": "三组分布要求中满足两组。",
+        "FAIL": "三组分布要求中至多满足一组，或仅用均匀单色代替花色。"
+      },
+      "evidence_refs": ["image/01_goal.png"],
+      "verification": {
+        "method": "artifact_material_render_review",
+        "procedure": "从提交文件生成正面及斜侧面材质视图，核对米白与棕色的相对关系及区域分布；若光照遮蔽颜色，在副本中使用中性照明辅助观察。检查实际表面而非材质名称，不要求RGB或十六进制数值与视频相同。逐组记录底色、双耳及面部花区是否成立。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "4. 米白底色、柔和棕色花区与深色五官",
+      "criterion": "耳部和面部花区从棕色平滑过渡到米白，保持柔和涂绘效果。",
+      "scoring_rule": {
+        "PASS": "双耳花色向耳根的过渡柔和；面部花区向外缘的过渡柔和。两组均满足，且无明显硬边分区、棋盘格或分块。",
+        "PARTIAL": "耳部与面部两组中仅一组达到柔和渐变要求；缺失的花区不视为满足。",
+        "FAIL": "两组均未达到要求，或相关花区均不存在。"
+      },
+      "evidence_refs": ["image/01_goal.png"],
+      "verification": {
+        "method": "artifact_material_closeup_review",
+        "procedure": "在与SURF-01一致的光照下查看双耳和面部花区局部，按耳部及面部两组分别判断渐变。区分源截图的渲染噪点与要求中的花色，不奖励复刻噪点。只有实际存在的棕色与米白边界可用于通过判断；不得以整面单色没有边界为通过依据。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "4. 米白底色、柔和棕色花区与深色五官",
+      "criterion": "两眼和鼻子均呈清晰可辨、比棕色花区更深的近黑色。",
+      "scoring_rule": {
+        "PASS": "两只实际眼睛及鼻子三处均呈近黑色，并与周围花色保持可辨对比。",
+        "PARTIAL": "三处中恰有两处满足颜色及对比要求。",
+        "FAIL": "三处中至多一处满足要求。"
+      },
+      "evidence_refs": ["image/01_goal.png"],
+      "verification": {
+        "method": "artifact_material_render_review",
+        "procedure": "定位GEO-04识别出的实际眼鼻区域，在材质视图检查各自可见颜色及与周围的对比。允许眼睛共用材质、镜像或实例，不计算无关深色对象，也不只读取可能未生效的材质常量。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "5. 保留可继续修改的资产",
+      "criterion": "头耳的实际花色使用可局部编辑的网格颜色属性，修改后能影响对应表面。",
+      "scoring_rule": {
+        "PASS": "网格颜色属性存有实际米白棕色花色；在副本中改变一只耳朵局部的颜色数据，只有目标区域颜色随之改变。两组要求均满足。",
+        "PARTIAL": "实际花色存于颜色属性并影响可见表面，但无法完成仅限目标局部的修改；未被使用的空属性不能得部分分。",
+        "FAIL": "不存在实际驱动花色的网格颜色属性，或修改该数据不影响对应表面。"
+      },
+      "evidence_refs": ["image/01_goal.png"],
+      "verification": {
+        "method": "artifact_inspection_and_edit_probe",
+        "procedure": "在副本中读取头耳网格的颜色属性及其到实际表面颜色的依赖关系。记录基准材质视图后，选择一只耳朵上的局部几何，将对应颜色属性改为明显可辨的临时颜色，重新求值并比较局部与其余区域，随后丢弃副本。接受间接节点路径，不限定节点类型、命名或与BSDF的直接连接。该探针是本文第5节明确的编辑行为。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "5. 保留可继续修改的资产",
+      "criterion": "眼睛组与鼻子可分别调整，且保存结果和脚本重建结果均保留此编辑能力。",
+      "scoring_rule": {
+        "PASS": "在保存场景及脚本重建场景中均能分别调整眼睛组和鼻子的大小或位置，头耳不随之移动或损坏；两眼联动对称允许。",
+        "PARTIAL": "保存场景中至少有一组五官可独立调整，但未同时满足两组五官在保存与重建场景中均可独立调整的完整要求。",
+        "FAIL": "保存场景中眼睛组与鼻子均无法独立于头耳调整，或没有可打开的保存场景。"
+      },
+      "evidence_refs": ["image/05_features_front.png"],
+      "verification": {
+        "method": "rebuild_comparison_and_edit_probe",
+        "procedure": "先在副本中分别轻微调整实际眼睛组和鼻子，记录头耳几何与其余五官是否保持原状。使用对象、控制参数或可明确选择的网格组件均可，不强制对象分离。然后在隔离目录、空场景的Blender5.1.2进程执行build.py，仅允许题面给出的输入与交付依赖；对重建结果重复编辑探针，并确认其形状和花色仍对应提交内容。仅有文件或对象名称不构成通过。探针修改不写回提交文件。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

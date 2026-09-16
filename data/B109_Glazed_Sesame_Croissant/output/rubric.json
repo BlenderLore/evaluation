@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Glazed Sesame Croissant",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1QoEpz7EEK",
+    "id": "BV1QoEpz7EEK"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 30, "SURF": 40, "PROC": 20, "PIPE": 10},
+  "weighting_note": "The baked material is the largest component because color, UV direction, roughness, and fine relief are independently demonstrated outcomes. Geometry receives 30 points for body proportion, rolled construction, finish, and sesame form. Procedural placement receives 20 points for evaluated distribution and functioning editable relationships. Delivery and reconstruction receive 10 points. Static seed scattering is procedural geometry, not physical simulation.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "1. Crescent Body",
+      "criterion": "The evaluated body has an inflated, balanced crescent silhouette with a broad center, progressive taper, two rounded tips turning toward the same side, and complete volume.",
+      "scoring_rule": {
+        "PASS": "All criterion features are present: the center is plump, both sides narrow progressively, the rounded tips create an open concave inner edge, the outer edge remains convex, and the underside completes the volume.",
+        "PARTIAL": "An evaluated three-dimensional body has a broad center, two narrowing end regions, and a recognizable open bend, but fails at least one PASS condition. An uneven taper, weak concavity, incomplete underside, or overly pointed tip may qualify.",
+        "FAIL": "No evaluated three-dimensional body simultaneously demonstrates a broad center, two narrowing end regions, and a recognizable open bend. A flat image or an essentially straight cylinder does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_body_shape.png"],
+      "verification": {
+        "method": "Evaluated geometry and neutral-view inspection",
+        "procedure": "Open the submitted blend and isolate the pastry body. Inspect evaluated geometry in top, side, three-quarter, and underside views using a neutral material. Confirm the center-to-tip taper, direction of both tips, open inner concavity, and depth. Judge only the overall body here; rolled-band detail is assessed separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Rolled Layers and Finish",
+      "criterion": "Rounded geometric bands and recessed channels form a rolled-dough structure with a clean, smoothly inflated finish.",
+      "scoring_rule": {
+        "PASS": "The body has distinct overlapping-looking rounded bands across the center and both tapered sides, with smaller bands toward the ends. Channels remain readable in neutral shading. Major surfaces are smooth, and no visible tears, accidental sharp creases, conspicuous faceting, or severe pinching interrupt the rolled structure.",
+        "PARTIAL": "Existing central body geometry and at least one tapered side contain distinct raised bands separated by recessed channels, but at least one PASS condition is unmet. Incomplete band coverage, uneven shoulders, or local finish defects may qualify; absent regions cannot establish the minimum.",
+        "FAIL": "Existing geometry does not demonstrate raised rounded bands and recessed channels on both the central body and at least one tapered side. Material-only stripes, a uniformly smooth bent tube, or a body whose surface breakdown obscures those features fails."
+      },
+      "evidence_refs": ["image/02_body_shape.png", "image/01_croissant_appearance.png"],
+      "verification": {
+        "method": "Neutral-material render and evaluated surface inspection",
+        "procedure": "Temporarily override the crust with a neutral diffuse material and inspect grazing and three-quarter views. Verify that bands change the surface and silhouette independently of shading textures. Examine the existing center, shoulders, channels, and tapered sections for geometric finish defects, without rescoring overall crescent proportions.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 8,
+      "requirement_section": "4. Sesame Geometry",
+      "criterion": "The editable sesame source and its evaluated repetitions retain a small, flattened, elongated seed form with tapered ends and real thickness.",
+      "scoring_rule": {
+        "PASS": "The editable source is a flattened elongated oval or soft teardrop, with a wider middle, gently tapered ends, and visible thickness. Evaluated repetitions retain this form and are small relative to the croissant bands.",
+        "PARTIAL": "An editable three-dimensional source and at least one evaluated repetition have a recognizable flattened, elongated seed shape with thickness, but at least one PASS condition is unmet. Blunt ends, inflated proportions, or excessive relative size may qualify.",
+        "FAIL": "The submission lacks either an editable three-dimensional source or an evaluated repetition with a recognizable flattened, elongated shape and thickness. Flat decals, spheres, or isolated source geometry without repetitions do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_croissant_appearance.png"],
+      "verification": {
+        "method": "Source and instance geometry inspection",
+        "procedure": "Inspect the sesame source in orthographic top and side views, then inspect evaluated seeds on the pastry at close range. Compare seed dimensions with the nearby band width and confirm the source form survives instancing. Seed placement is assessed in PROC-01, not in this row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 8,
+      "requirement_section": "3. Baked Crust Material",
+      "criterion": "The actual crust material produces editable golden-to-amber baked variation with darker toasted areas on an opaque, nonmetallic body.",
+      "scoring_rule": {
+        "PASS": "A functioning editable procedural material gives the center and both tapered sides coherent golden, amber, and darker toasted variation. The visible surface reads as opaque nonmetallic baked dough without flat single-color regions dominating or isolated unrelated patches.",
+        "PARTIAL": "A functioning editable procedural material produces visibly differentiated warm baked colors on the existing center and at least one tapered side, but at least one PASS condition is unmet. Narrow tonal range, uneven coverage, or inappropriate secondary surface response may qualify.",
+        "FAIL": "The existing center and at least one tapered side do not show differentiated warm baked colors from a functioning editable procedural material. A single flat color, an unassigned material, or an external image standing in for the pastry fails."
+      },
+      "evidence_refs": ["image/01_croissant_appearance.png"],
+      "verification": {
+        "method": "Actual material inspection and controlled render",
+        "procedure": "Render the submitted crust under broad neutral light. Trace the material assigned to the visible body and temporarily alter a baked-color control to confirm that it changes that surface; restore it afterward. Evaluate color coverage and opaque nonmetallic appearance without using roughness or relief defects to lower this row again.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 12,
+      "requirement_section": "3. Baked Crust Material",
+      "criterion": "The editable UV layout actually guides irregular elongated texture streaks coherently over the bent body from the inner edge toward the outer edge.",
+      "scoring_rule": {
+        "PASS": "Applied UV mapping guides streaks over the center and both tapered sides along each rounded section from inner to outer edge. Visible upper surfaces lack conspicuous square patches, abrupt direction changes, or stretched smears, and editing the UV orientation changes the applied texture direction.",
+        "PARTIAL": "An editable UV layout actually drives visibly elongated directional streaks on the existing center and at least one tapered side, and a UV edit changes their direction, but at least one PASS condition is unmet. Local seam jumps, wrong direction on one side, or stretching may qualify.",
+        "FAIL": "The existing center and at least one tapered side do not have UV-driven elongated streaks, or a UV orientation edit has no effect on the applied texture. An unused UV layer, directionless noise, or purely painted replacement imagery fails."
+      },
+      "evidence_refs": ["image/01_croissant_appearance.png"],
+      "verification": {
+        "method": "UV functional probe and surface render inspection",
+        "procedure": "Inspect the visible body UVs and the assigned material's coordinate dependency. On a temporary copy, rotate a representative UV region and compare a controlled render before and after to verify the applied streak direction changes. Restore the UVs, then inspect central and tapered upper regions for coherent inner-to-outer flow and mapping artifacts.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 6,
+      "requirement_section": "3. Baked Crust Material",
+      "criterion": "Editable spatial roughness variation produces a lightly glazed crust with broken fine highlights instead of a uniform plastic sheen.",
+      "scoring_rule": {
+        "PASS": "The existing center and both tapered sides show lightly glazed, readable highlights broken by functioning fine spatial roughness variation. Broad lighting preserves baked midtones, and editing the roughness variation changes highlight breakup without relying on color changes.",
+        "PARTIAL": "Functioning editable roughness variation causes visible highlight breakup on the existing center and at least one tapered side, but at least one PASS condition is unmet. Excessive gloss, weak variation, or inconsistent coverage may qualify.",
+        "FAIL": "No functioning editable roughness variation visibly breaks highlights on the existing center and at least one tapered side. A uniform roughness value or color-only streaks do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_croissant_appearance.png"],
+      "verification": {
+        "method": "Controlled specular comparison and material probe",
+        "procedure": "Use a broad neutral light that produces a visible highlight on the upper pastry. Hold base color and relief fixed while comparing the submitted roughness variation against a temporary uniform roughness override. Confirm the actual material produces the requested breakup, then restore it and inspect its coverage and strength.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 9,
+      "requirement_section": "3. Baked Crust Material",
+      "criterion": "Editable fine irregular relief gives the crust tactile baked detail at a smaller scale than the geometric bands without destroying the inflated form.",
+      "scoring_rule": {
+        "PASS": "Fine irregular relief is applied over the center and both tapered sides, remains smaller than the modeled bands, catches grazing light, and preserves their smoothly inflated volume. An editable relief control changes the detail in the actual material.",
+        "PARTIAL": "Functioning editable relief visibly affects the existing center and at least one tapered side at a scale smaller than the modeled bands, but at least one PASS condition is unmet. Excessive strength, patchy coverage, or locally noisy detail may qualify.",
+        "FAIL": "The existing center and at least one tapered side do not demonstrate functioning editable relief smaller than the modeled bands. Color-only detail, an unused relief branch, or exclusively band-scale deformation does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_croissant_appearance.png"],
+      "verification": {
+        "method": "Grazing-light comparison and relief probe",
+        "procedure": "On a temporary material copy, hold color and roughness fixed while comparing the submitted relief against disabled relief under grazing light. Confirm a visible fine-scale response on existing central and tapered surfaces, inspect its relation to the band scale, and restore the original material. Do not count modeled band structure as material relief.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-05",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "4. Sesame Geometry",
+      "criterion": "The evaluated sesame population uses a pale ivory, nonmetallic surface that remains distinct from the glazed crust without strong self-emission.",
+      "scoring_rule": {
+        "PASS": "Visible repeated seeds consistently use a pale ivory material with a nonmetallic surface and no strong self-emission, producing a readable contrast against the baked crust.",
+        "PARTIAL": "The existing repeated seeds visibly use a pale material distinguishable from the crust, but at least one PASS condition is unmet. Inconsistent assignment, an overly metallic response, excessive emission, or a less suitable pale tint may qualify.",
+        "FAIL": "No existing repeated seeds visibly use a pale material distinguishable from the crust. An unused source material, absent repeated seed surfaces, or seed surfaces that blend into the brown crust does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_croissant_appearance.png"],
+      "verification": {
+        "method": "Actual seed material and controlled render inspection",
+        "procedure": "Inspect the materials used by evaluated repeated seeds and render them under broad neutral light with the submitted crust. Confirm the pale contrasting appearance is supplied by assigned seed materials, and inspect their metallic and emission behavior. Assess existing seed surfaces without rescoring their shape or placement.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "5. Surface Scatter and Controls",
+      "criterion": "The evaluated scatter forms a sparse irregular population attached to the upper central crust, fading toward tips and sides with a bare underside.",
+      "scoring_rule": {
+        "PASS": "Procedurally repeated seeds form a sparse irregular upper-central population with clear gaps, reduced density at tips and side edges, a bare underside, varied in-plane angles, and convincing surface contact. There is no visible grid, widespread collision, floating cluster, or deep burial.",
+        "PARTIAL": "A procedural population places separated seeds in irregular positions on the upper central crust, with a majority visibly touching the surface, but at least one PASS condition is unmet. Poor density falloff, isolated contact errors, excessive crowding, or unwanted underside seeds may qualify.",
+        "FAIL": "No procedural population has separated seeds in irregular positions on the upper central crust with a majority visibly touching it. A manually placed set, a regular grid, or predominantly detached or buried seeds does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_croissant_appearance.png", "image/03_density_region.png"],
+      "verification": {
+        "method": "Evaluated instance and contact inspection",
+        "procedure": "Inspect the evaluated scatter in top, side, underside, and close three-quarter views. Confirm it is produced by the saved procedural setup, then examine population density, exposed crust, angle variation, and contact. Do not use source-seed shape defects to reduce this placement row; those belong to GEO-03.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "5. Surface Scatter and Controls",
+      "criterion": "The saved scatter preserves working density, amount, random arrangement, and source-shape relationships with reproducible evaluation.",
+      "scoring_rule": {
+        "PASS": "An editable density mask changes eligible regions; the amount control changes their population; the random control rearranges seeds while preserving region restrictions and contact; the same settings reproduce the same distribution; and editing the source shape propagates to repetitions.",
+        "PARTIAL": "A saved procedural scatter has a functioning density mask plus at least one functioning amount, random arrangement, or source-shape relationship, but fails at least one PASS condition. Controls with incomplete coverage, unstable repeatability, or one ineffective relationship may qualify.",
+        "FAIL": "The saved scatter lacks either a functioning editable density mask or all of the amount, random arrangement, and source-shape relationships. Static realized geometry or labeled controls without an evaluated effect does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_density_region.png"],
+      "verification": {
+        "method": "Independent functional probes on a temporary copy",
+        "procedure": "Record the initial evaluated distribution. Suppress a local area through the density field, change the overall amount, change and restore the random setting, and make a small source-shape edit in separate probes. Reevaluate each time to verify its specific effect, surface contact, and restoration of the same initial distribution. Restore all controls after inspection.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The blend, reconstruction script, and named final PNG are complete, self-contained, and mutually consistent; the script recreates and saves an inspectable scene.",
+      "scoring_rule": {
+        "PASS": "All three named deliverables exist. The blend opens with editable geometry, UVs, material, source, scatter controls, and a usable Cycles GPU render setup. In a clean Blender 5.1.2 run, build.py recreates the scene without private dependencies and saves submission.blend; reopening that saved result preserves the required scene and control behavior. The named PNG is a complete three-quarter render of the actual submitted scene with readable pastry detail.",
+        "PARTIAL": "submission.blend opens as an editable three-dimensional pastry scene, and either build.py independently recreates and saves an openable submission.blend or the named PNG is verified as a render of the submitted scene, but at least one PASS condition is unmet. Missing remaining delivery components, reconstruction mismatch, or inadequate final framing may qualify.",
+        "FAIL": "The submitted blend does not open as an editable three-dimensional pastry scene, or neither a script-generated saved blend nor a verified named scene render is available. A reference-image replacement or a script that only builds an unsaved in-memory scene cannot establish the corresponding minimum."
+      },
+      "evidence_refs": ["image/01_croissant_appearance.png"],
+      "verification": {
+        "method": "Clean reconstruction, saved-file reopen, and render provenance check",
+        "procedure": "Check all named files. In a separate clean working directory, run build.py with Blender 5.1.2 from an empty scene, confirm that it writes submission.blend, then reopen that saved file and inspect geometry, materials, UVs, source and functional scatter behavior. Compare it with the delivered blend. Render the delivered scene using its saved camera and compare the result with the named PNG to confirm image provenance and complete framing. This is a future verification specification, not a claim that runtime compatibility was tested during authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

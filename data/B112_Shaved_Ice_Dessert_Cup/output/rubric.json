@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Shaved Ice Dessert Cup",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1PTbJzHEYe",
+    "id": "BV1PTbJzHEYe"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 40, "SURF": 50, "SCN": 5, "PIPE": 5},
+  "weighting_note": "The source combines vessel and spoon modeling with a material study. Geometry receives 40 points across profile, shell quality, ice volume, and spoon form; surfaces receive 50 across three independent ice properties and the two contrasting manufactured materials. Assembly and reproducible delivery receive 5 points each. Procedural shader relief is SURF, and smooth mesh finish is GEO; no points are awarded for modifier or node counts.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "Cup Geometry",
+      "criterion": "The cup has a broad hemispherical bowl, short central neck, and low flared circular foot.",
+      "scoring_rule": {
+        "PASS": "A recognizable broad, upward-facing bowl and a distinct supporting structure beneath it are present. The bowl is approximately hemispherical, narrows into a short centered neck, and joins a low circular foot that is wider than the neck and narrower than the bowl. The assembled silhouette is stable and agrees with the reference proportions.",
+        "PARTIAL": "A recognizable broad, upward-facing bowl and a distinct supporting structure beneath it are present, but one or more PASS conditions are unmet.",
+        "FAIL": "A recognizable broad, upward-facing bowl with a distinct supporting structure beneath it is absent. An isolated bowl, an unrelated pedestal, or only a flat disc does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_dessert_cup.png"],
+      "verification": {
+        "method": "Evaluated geometry and orthographic inspection",
+        "procedure": "Open submission.blend, hide the ice and spoon, and inspect the evaluated cup from front and side views. Compare the bowl curvature, centered neck, and foot widths and heights. Inspect actual connected or visibly joined surfaces rather than object labels or primitive counts.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 8,
+      "requirement_section": "Cup Geometry",
+      "criterion": "The vessel has an inspectable thick-walled cavity and a smooth, intact finished shell.",
+      "scoring_rule": {
+        "PASS": "An actual bowl shell has a visible inner cavity, finite wall thickness along at least half its rim, and continuous exterior geometry over at least half the bowl. In addition, the full rim is continuous and thick, the lower shell is closed, the bowl, neck, and foot meet without unintended gaps, and all cup surfaces have smooth curvature without unintended holes, faceting, or sharp shading bands.",
+        "PARTIAL": "An actual bowl shell has a visible inner cavity, finite wall thickness along at least half its rim, and continuous exterior geometry over at least half the bowl, but one or more PASS conditions are unmet. A missing neck or foot prevents PASS without erasing demonstrated bowl-shell quality.",
+        "FAIL": "The existing bowl does not have all three minimum properties: a visible inner cavity, finite wall thickness along at least half the rim, and continuous exterior geometry over at least half the bowl. A solid ball, flat facade, or empty material assignment does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_dessert_cup.png"],
+      "verification": {
+        "method": "Isolated shell inspection and neutral shaded views",
+        "procedure": "Hide the ice and spoon. Inspect the cup from above and below, and use a temporary section view to check rim thickness and lower closure. Inspect neutral shaded views of existing bowl, neck, and foot surfaces for unintended cracks, faceting, and normal discontinuities. Evaluate shell quality separately from the proportions scored by GEO-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Ice Geometry",
+      "criterion": "The ice is an independently editable closed dome whose scale fits the cup opening.",
+      "scoring_rule": {
+        "PASS": "A three-dimensional rounded ice mound with a dome-like upper volume and width close to the cup opening is present. It is independently editable, broadly hemispherical, closed on its underside, and shaped to extend slightly into the cup while rising clearly above the rim. Its broad dome remains intact after relief is evaluated, without a large overhang.",
+        "PARTIAL": "A three-dimensional rounded ice mound with a dome-like upper volume and width close to the cup opening is present, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no three-dimensional rounded ice mound with a dome-like upper volume and width close to the cup opening. A flat image, unrelated form, or mound grossly mismatched to the vessel does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_dessert_cup.png", "image/02_ice_crystals.png"],
+      "verification": {
+        "method": "Evaluated volume and underside inspection",
+        "procedure": "Inspect the ice from front, side, and below, temporarily hiding the cup. Check that the underside is closed and that the part is independently editable. Restore the cup and compare opening width with mound width. Inspect the final evaluated broad silhouette; leave small crystal detail to SURF-02 and assembly placement to SCN-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Spoon Geometry",
+      "criterion": "The spoon has a shallow concave bowl and a long, narrower, smoothly finished handle.",
+      "scoring_rule": {
+        "PASS": "An identifiable widened spoon bowl is joined to an elongated narrower handle. The bowl is shallow and concave with a thickened rounded rim, the handle is much longer than the bowl with a rounded tip, and the entire spoon has real thickness, a continuous bowl-to-handle transition, and smooth finished edges.",
+        "PARTIAL": "An identifiable widened spoon bowl is joined to an elongated narrower handle, but one or more PASS conditions are unmet.",
+        "FAIL": "An identifiable widened spoon bowl joined to an elongated narrower handle is absent. A rod alone, a disconnected bowl and handle, or a flat image does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_spoon_form.png", "image/01_dessert_cup.png"],
+      "verification": {
+        "method": "Isolated evaluated spoon inspection",
+        "procedure": "Temporarily isolate the spoon in submission.blend. Inspect upper, lower, and edge views with a neutral material override to reveal bowl concavity, rim thickness, handle proportions, transition continuity, rounded tip, and finished shading independently of transparency.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Ice Material",
+      "criterion": "The ice has a continuous height-based white-to-pink/red color progression.",
+      "scoring_rule": {
+        "PASS": "The actual ice surface has a visibly lighter lower region and a pink-red upper region. Its lower region is almost white, its middle is pale pink, and its crest is more saturated pink-red, with a continuous height-based transition and no hard dividing line. The assigned material retains this progression around the mound and under the final lighting.",
+        "PARTIAL": "The actual ice surface has a visibly lighter lower region and a pink-red upper region, but one or more PASS conditions are unmet.",
+        "FAIL": "The actual ice surface does not show both a visibly lighter lower region and a pink-red upper region. Uniform pink, an inverted gradient, absent ice, and color visible only in an unused material do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_dessert_cup.png", "image/02_ice_crystals.png"],
+      "verification": {
+        "method": "Assigned material inspection and controlled color views",
+        "procedure": "Inspect the material actually assigned to the ice and render neutral-lit front and reverse views. Compare colors at lower, middle, and crest regions, checking vertical consistency and a continuous transition. Confirm the same progression remains visible in the submitted camera render; do not require a particular node chain or color-stop value.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Ice Material",
+      "criterion": "Editable procedural ice relief combines broad irregular clumps with finer crystalline detail on the rendered surface.",
+      "scoring_rule": {
+        "PASS": "Dense irregular relief visibly breaks up highlights over most of the existing ice surface. Both broad uneven clumps and a distinctly finer layer are readable, with small silhouette irregularities in the rendered surface and no destruction of the broad mound. The procedural material remains editable, and either scale can be varied while the other remains present.",
+        "PARTIAL": "Dense irregular relief visibly breaks up highlights over most of the existing ice surface, but one or more PASS conditions are unmet, including missing separation of scales, silhouette response, or independent editability.",
+        "FAIL": "Dense irregular relief does not visibly break up highlights over most of the existing ice surface. A smooth dome, color noise alone, isolated decorative spikes, absent ice, or unused procedural nodes does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_ice_crystals.png"],
+      "verification": {
+        "method": "Close render, silhouette inspection, and reversible material probes",
+        "procedure": "Render the actual ice close-up with grazing light, then inspect both its surface and silhouette. Trace the active material paths that produce broad and fine relief. In a temporary copy, reduce broad relief and then restore it; repeat for fine relief. Confirm each changes its associated scale while the other remains present. Restore the submitted values and avoid awarding unused node structures.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Ice Material",
+      "criterion": "The ice has wet highlights and restrained translucency with the body of packed shaved ice.",
+      "scoring_rule": {
+        "PASS": "The existing ice exhibits both nonmetallic highlights and observable translucency or soft internal light spreading over a substantial visible region. It has small wet highlights and soft light spread in pale regions while retaining an opaque-looking packed body rather than becoming fully clear glass. Its color gradient and relief remain readable in the final lighting.",
+        "PARTIAL": "The existing ice exhibits both nonmetallic highlights and observable translucency or soft internal light spreading over a substantial visible region, but one or more PASS conditions are unmet.",
+        "FAIL": "The existing ice does not exhibit both nonmetallic highlights and observable translucency or soft internal light spreading over a substantial visible region. Entirely matte opaque ice, metallic ice, absent ice, or an unused translucent shader does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_dessert_cup.png", "image/02_ice_crystals.png"],
+      "verification": {
+        "method": "Controlled optical-response renders",
+        "procedure": "Inspect the assigned ice material in front-lit and side/back-lit test renders, using the same geometry and colors. Observe small specular highlights and light spread through pale regions while checking that the mound retains packed volume. Confirm the optical response in the submitted render. Judge this response separately from color placement and relief frequency.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Cup and Spoon Materials",
+      "criterion": "The cup has a consistent polished silver-gray metal response with readable curved reflections.",
+      "scoring_rule": {
+        "PASS": "Most of the existing bowl exterior has an opaque silver-gray metallic response with visible reflections. This response is consistent across the complete bowl, neck, and foot, and broad highlights describe curvature with sufficient roughness to retain form. The cup remains clearly readable in the final render.",
+        "PARTIAL": "Most of the existing bowl exterior has an opaque silver-gray metallic response with visible reflections, but one or more PASS conditions are unmet. An absent neck or foot prevents PASS without erasing the demonstrated material response on the bowl.",
+        "FAIL": "Most of the existing bowl exterior does not have an opaque silver-gray metallic response with visible reflections. A missing bowl, matte gray diffuse surface, transparent vessel, or unused metal material does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_dessert_cup.png"],
+      "verification": {
+        "method": "Assigned metal material and reflection inspection",
+        "procedure": "Render the existing cup under a neutral studio lighting arrangement with broad reflection sources. Inspect reflections on the bowl, and on the neck and foot when present. Confirm opaque metallic response and consistent assignment on the complete asset. Inspect final-image readability without requiring the source's numeric metallic or roughness values.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-05",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "Cup and Spoon Materials",
+      "criterion": "The spoon is visibly blue and transparent, with highlights and readable edges.",
+      "scoring_rule": {
+        "PASS": "At least half of the existing exposed spoon handle is recognizably blue and transparent, with ice or background visible through it. The bowl and handle share a consistent transparent blue response with smooth highlights and visible edge definition, and the exposed spoon remains easy to distinguish in the finished scene.",
+        "PARTIAL": "At least half of the existing exposed spoon handle is recognizably blue and transparent, with ice or background visible through it, but one or more PASS conditions are unmet.",
+        "FAIL": "At least half of the existing exposed spoon handle is not both recognizably blue and transparent with ice or background visible through it. A missing spoon, opaque blue handle, completely invisible material, or unused transparent shader does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_dessert_cup.png"],
+      "verification": {
+        "method": "Transparency inspection on assigned surfaces",
+        "procedure": "Inspect the submitted render and a temporary isolated-spoon render with a contrasting background placed behind it. Verify that background or ice can be seen through the blue handle, that the bowl has the same assigned response, and that edges and highlights remain readable. Accept equivalent physically meaningful material implementations.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "Assembly and Presentation",
+      "criterion": "The cup supports the ice, the spoon is inserted diagonally, and the camera clearly presents the complete assembly.",
+      "scoring_rule": {
+        "PASS": "The actual cup and ice are both present, with the ice seated within the opening without a floating gap. The ice is centered, the spoon bowl enters one side near the rim, and its handle extends diagonally upward and outward without accidentally crossing the cup wall. A clear three-quarter saved camera view shows the crest, rim, full foot, and exposed handle unclipped against a restrained background, with lighting that reveals all three material responses.",
+        "PARTIAL": "The actual cup and ice are both present, with the ice seated within the opening without a floating gap, but one or more PASS conditions are unmet.",
+        "FAIL": "The actual cup and ice are not both present and seated together at the opening without a floating gap. An assembly that has no supported cup-and-ice relationship does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_dessert_cup.png"],
+      "verification": {
+        "method": "World-space assembly and saved-camera inspection",
+        "procedure": "Inspect front, side, and saved-camera views of the submitted scene. Check cup/ice seating, spoon insertion, and clearance from the cup wall in three dimensions. Render the saved camera and verify full framing, background restraint, and visibility of the ice, metal, and blue spoon. Do not award points merely because a camera or light exists.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The saved scene, rebuilding script, and named actual-scene PNG form a reproducible delivery.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with editable cup and ice geometry, and build.py runs from an empty scene and saves a submission.blend that reopens with those parts. In addition, the original and rebuilt saved results contain the complete editable cup, ice, spoon, materials, placement, lighting, camera, and Cycles GPU settings. B112_Shaved_Ice_Dessert_Cup.png is at least 1024 pixels on its shorter edge and is an actual render of the submitted scene from its saved camera, matching its assembly and appearance without external replacement assets.",
+        "PARTIAL": "submission.blend opens with editable cup and ice geometry, and build.py runs from an empty scene and saves a submission.blend that reopens with those parts, but one or more PASS conditions are unmet.",
+        "FAIL": "submission.blend does not open with editable cup and ice geometry, or build.py does not run from an empty scene and save a submission.blend that reopens with those parts. A missing script, an unsaved in-memory reconstruction, or a render-only submission does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean rebuild, saved-file reopening, and render provenance comparison",
+        "procedure": "In a separate temporary directory, open the submitted blend and inspect its saved state. Run build.py in Blender 5.1.2 from an empty scene, then close and reopen the submission.blend produced by the script. Compare modeled parts, assigned materials, assembly, lighting, saved camera, and Cycles GPU settings against the original submission. Decode the named PNG and check its dimensions; render the original saved camera and compare content to confirm that the submitted PNG depicts the actual scene. Inspect script and asset references for external replacement images. This is a specified future check, not a claim of tested runtime compatibility.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

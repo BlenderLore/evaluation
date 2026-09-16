@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Hydrothermal Reactor Vessel",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1zP9mBeEGJ",
+    "id": "BV1zP9mBeEGJ"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "This is a native-geometry modeling task. Ninety points assess eight independent geometric outcomes: body proportions, rings, shoulder, lid, post and flange, handle, actual bore, and geometric finish. The bore receives the largest single share because its hidden passage must be inspected. Modifier presence and topology counts do not earn procedural credit. Neutral presentation supports inspection without adding a separate material or scene-design task; ten points cover editable delivery, a saved rebuild, and the actual-scene image.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "1. Ribbed Vessel Body",
+      "criterion": "The lower vessel is a straight upright circular barrel with a closed base and a clearly elongated exposed profile.",
+      "scoring_rule": {
+        "PASS": "A recognizable barrel has a circular cross-section, consistent main diameter, closed bottom, and an exposed lower portion clearly taller than its diameter.",
+        "PARTIAL": "A recognizable upright three-dimensional barrel is present, but at least one PASS condition is unmet, such as squat proportions, uneven diameter, or an open bottom.",
+        "FAIL": "No recognizable upright three-dimensional barrel is present; a flat silhouette or unrelated block does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_vessel.png", "image/02_barrel_rings.png"],
+      "verification": {
+        "method": "Evaluated geometry and orthographic inspection",
+        "procedure": "Open submission.blend and inspect the evaluated lower barrel from front, side, top, and below. Compare the exposed height to the main diameter, inspect circular cross-sections away from the rings, and confirm the base is closed. Exclude the upper housing and the raised rings from the main-diameter comparison.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "1. Ribbed Vessel Body",
+      "criterion": "Three shallow raised rings encircle the barrel with even spacing and visible wall between them.",
+      "scoring_rule": {
+        "PASS": "Exactly three narrow raised rings each wrap continuously around the lower barrel, project slightly beyond the wall, have approximately even spacing, and remain separated with a visible margin above the base.",
+        "PARTIAL": "At least two distinct raised annular features extend around most of a real barrel circumference, but one or more PASS conditions are unmet, including ring count, continuity, spacing, width, or projection.",
+        "FAIL": "Fewer than two distinct raised annular features extend around most of a real barrel circumference; painted lines, isolated front strips, and a missing barrel do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_barrel_rings.png", "image/01_complete_vessel.png"],
+      "verification": {
+        "method": "Circumferential geometry inspection",
+        "procedure": "Orbit the evaluated barrel through a full turn and examine a vertical profile section. Count the raised bands, trace each around the circumference, compare the gaps between them, and check their projection relative to the barrel radius. Inspect geometry rather than relying on image shading or mesh edge counts.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Upper Housing and Hexagonal Lid",
+      "criterion": "A wider, shorter upper housing creates a clear concentric shoulder above the narrow barrel.",
+      "scoring_rule": {
+        "PASS": "A circular upper housing is visibly wider and shorter than the exposed lower barrel, shares its vertical centerline, and meets it through a clear continuous shoulder without a floating gap.",
+        "PARTIAL": "A distinct widened upper housing is attached above a recognizable lower barrel, but one or more PASS conditions are unmet, such as excessive height, offset centering, or an irregular shoulder.",
+        "FAIL": "There is no distinct widened upper housing attached above a recognizable lower barrel."
+      },
+      "evidence_refs": ["image/01_complete_vessel.png", "image/04_handle_connection.png"],
+      "verification": {
+        "method": "Profile and alignment inspection",
+        "procedure": "Inspect evaluated front and side silhouettes and a top view. Compare housing width and height with the exposed barrel, check that their centers align, and examine the entire lower housing edge for a continuous shoulder and connected appearance.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "2. Upper Housing and Hexagonal Lid",
+      "criterion": "A thin softened hexagonal lid is centered and seated on the upper housing.",
+      "scoring_rule": {
+        "PASS": "The lid has six recognizable sides with softened corners, is much thinner than the upper housing, covers its opening, shares its centerline, and has a readable seated seam without a floating gap.",
+        "PARTIAL": "A separate-looking thin closure with a recognizable polygonal outline is positioned above a real upper housing, but one or more PASS conditions are unmet, such as an incorrect side count, excessive rounding, offset placement, or an unseated seam.",
+        "FAIL": "No separate-looking thin polygonal closure is positioned above a real upper housing; a circular disk with no recognizable polygonal outline does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_lid_and_post.png", "image/04_handle_connection.png"],
+      "verification": {
+        "method": "Top and oblique evaluated silhouette inspection",
+        "procedure": "Inspect the lid from above and at a low oblique angle. Trace its evaluated outline to identify six sides rather than counting source vertices, compare thickness with the housing, and inspect the seating seam and coverage around the full perimeter.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Center Post and Transverse Handle",
+      "criterion": "A centered narrow post rises above the lid and terminates in a small circular flange.",
+      "scoring_rule": {
+        "PASS": "A narrow cylindrical post rises from the lid center and has a thin circular top flange that is wider than the post and much smaller than the lid; both features are distinct and aligned.",
+        "PARTIAL": "A recognizable upright cylindrical post rises from a real lid, but one or more PASS conditions are unmet, including a missing or poorly proportioned flange, an offset post, or an overly thick post.",
+        "FAIL": "No recognizable upright cylindrical post rises from a real lid."
+      },
+      "evidence_refs": ["image/03_lid_and_post.png", "image/04_handle_connection.png"],
+      "verification": {
+        "method": "Upper assembly profile inspection",
+        "procedure": "Inspect the evaluated upper assembly from front, side, and above. Locate the post axis relative to the lid center and compare the post, flange, and lid diameters. Confirm the flange is a distinct thin geometric rim at the post top.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Center Post and Transverse Handle",
+      "criterion": "A slender straight cylindrical handle crosses the post horizontally with readable, balanced extensions.",
+      "scoring_rule": {
+        "PASS": "A straight round handle with closed ends crosses the post below the flange, is thinner than the post, extends well beyond both sides with approximately balanced lengths, and has a readable gap above the lid.",
+        "PARTIAL": "A recognizable straight round handle crosses the upper post and projects from both sides, but one or more PASS conditions are unmet, such as tilt, unequal extensions, excess thickness, open ends, or insufficient lid clearance.",
+        "FAIL": "No recognizable straight round handle crosses an upper post and projects from both sides; a rod entirely in front of or beside the post does not meet the minimum."
+      },
+      "evidence_refs": ["image/04_handle_connection.png", "image/01_complete_vessel.png"],
+      "verification": {
+        "method": "Multi-view handle geometry inspection",
+        "procedure": "Inspect front, top, and side views of the evaluated handle and post. Compare their axes, diameters, exposed lengths, and separation from the lid, and inspect both handle end faces. This row assesses the rod and its placement; inspect whether the post has an actual hole only under GEO-07.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 14,
+      "requirement_section": "4. Through-Hole and Editable Parts",
+      "criterion": "A genuine fitted circular through-bore passes through the center post along the handle axis.",
+      "scoring_rule": {
+        "PASS": "Hiding the handle reveals opposite circular openings joined by an uninterrupted empty passage through the post. The bore aligns with and closely fits the handle, remains below the flange, and has no solid plug or broad surrounding gap when assembled.",
+        "PARTIAL": "The post contains an actual continuous passage between opposite sides in the handle region, but one or more PASS conditions are unmet, such as a noncircular bore, poor alignment, excessive clearance, or damage to the flange.",
+        "FAIL": "There is no actual continuous passage through opposite post sides in the handle region; a blind recess, a rod intersecting a solid post, a texture, or a Boolean modifier that produces no passage does not meet the minimum."
+      },
+      "evidence_refs": ["image/04_handle_connection.png", "image/05_open_bore.png"],
+      "verification": {
+        "method": "Handle-isolation and evaluated bore probe",
+        "procedure": "On a temporary copy of the submitted scene, hide or isolate the visible handle without disabling the post's evaluated hole. Inspect both mouths along the handle axis and a section through the post. Confirm the central passage is empty continuously between opposite mouths, then restore the handle and compare the fit and alignment. Use evaluated geometry or ray/section probes if visibility is ambiguous; modifier existence is insufficient.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-08",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "5. Geometric Finish and Presentation",
+      "criterion": "Substantive modeled surfaces show smooth circular forms and restrained edge rounding without losing the intended profiles.",
+      "scoring_rule": {
+        "PASS": "The barrel and at least one upper assembly component demonstrate smooth circular surfaces and modeled soft edge transitions; all existing vessel components maintain their intended profiles without conspicuous facets, pinches, unintended holes, dark shading creases, or duplicate surface flicker.",
+        "PARTIAL": "An actual barrel and at least one upper assembly component show some effective circular smoothing and edge rounding, but one or more PASS conditions are unmet on the existing geometry. Missing minor parts alone do not force FAIL, and their absent surfaces cannot demonstrate finish.",
+        "FAIL": "The minimum existing core surfaces are absent, or the actual barrel and an upper assembly component do not demonstrate both effective circular smoothing and some modeled edge rounding."
+      },
+      "evidence_refs": ["image/01_complete_vessel.png", "image/04_handle_connection.png"],
+      "verification": {
+        "method": "Controlled neutral-shaded inspection",
+        "procedure": "Inspect existing evaluated parts at full-object and close-up scales using neutral shading and a light direction that exposes edge transitions. Orbit to distinguish material effects from geometric facets or pinches. Judge finish on substantive existing surfaces, with missing forms assessed in their dedicated geometry rows; do not substitute smooth-shading flags or modifier counts for the visible result.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, script that rebuilds and saves it, and actual-scene PNG form a usable reproducible submission.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with an editable vessel, independently editable body, lid, and handle, and a saved Cycles GPU render setup. Running build.py from an empty scene recreates the vessel and writes submission.blend; reopening that written file confirms the recreated geometry, actual bore, editable parts, and render setup. The correctly named PNG is rendered from the submitted scene and shows the complete vessel in the required clear three-quarter presentation.",
+        "PARTIAL": "submission.blend opens and contains a substantive editable vessel model, but one or more PASS conditions are unmet, including a missing or unsuccessful rebuild, failure to save the rebuilt file, inseparable parts, missing render setup, or an absent or unsuitable PNG.",
+        "FAIL": "submission.blend is missing, cannot be opened, or does not contain a substantive editable vessel model; image-only substitutes do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_vessel.png"],
+      "verification": {
+        "method": "Saved-file rebuild and render provenance inspection",
+        "procedure": "Open the supplied submission.blend and inspect its editable geometry, body/lid/handle separation, and render configuration. Run build.py in an isolated submission copy with an empty Blender 5.1.2 scene, then close the process and reopen the submission.blend actually written by the script. Inspect that saved result for the vessel, bore, editable parts, camera, and Cycles GPU setup. Confirm the named PNG decodes and matches a controlled render of the submitted scene, including the complete-vessel framing and neutral presentation. Do not count an unsaved in-memory reconstruction as a successful rebuild.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

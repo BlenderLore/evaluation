@@ -1,0 +1,121 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Stylized Nucleated Cell",
+  "source_video": {"url": "https://www.youtube.com/watch?v=3SnPPKyhCwY", "id": "3SnPPKyhCwY"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 30, "PROC": 15, "SURF": 40, "SCN": 10, "PIPE": 5},
+  "weighting_note": "Geometry and shared procedural relief establish the nested organic cell. Surface appearance receives the largest share because readable transmission, the blue nucleus, and the procedural World are central outcomes. Scene presentation has a separate, limited allocation; reproducible delivery receives five points. Shape, editability, materials, and lighting are inspected separately to avoid awarding the same visual property twice.",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 15,
+      "requirement_section": "Cell Geometry",
+      "criterion": "The nucleus has a rounded overall volume with soft, irregular geometric relief distributed over its surface.",
+      "scoring_rule": {
+        "PASS": "A single compact, approximately spherical nucleus has soft bumps and shallow depressions over its whole surface, with an irregular silhouette and no spikes, deep tears, flat regions, or regular repeating relief.",
+        "PARTIAL": "A compact rounded nucleus has visible geometric organic relief over at least part of its surface, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no compact rounded nucleus with visible geometric organic relief; an undeformed sphere, shading-only relief, or a predominantly spiky or torn form fails this minimum."
+      },
+      "evidence_refs": ["image/02_organic_relief.png"],
+      "verification": {"method": "evaluated_geometry_and_manual_inspection", "procedure": "Isolate the nucleus in the submitted scene, temporarily use a neutral material in a copy, and inspect the evaluated geometry and silhouette from front, side, and rear views. Separate the distribution and softness of relief from surface tessellation quality, which is scored under GEO-03.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "Nested Proportions",
+      "criterion": "A separate membrane encloses the nucleus concentrically at the required relative size with clear separation.",
+      "scoring_rule": {
+        "PASS": "The complete nucleus lies inside a separate membrane, their centers coincide, their diameter ratio is between 1.6 and 1.9 along each principal axis, and a positive gap separates them everywhere.",
+        "PARTIAL": "The complete nucleus lies inside a separate larger membrane, but at least one PASS condition is unmet, including off-center placement, contact, or an incorrect diameter ratio.",
+        "FAIL": "There is no separate larger membrane containing the complete nucleus, or part of the nucleus passes outside its enclosing surface."
+      },
+      "evidence_refs": ["image/01_finished_cell.png", "image/03_microscope_background.png"],
+      "verification": {"method": "evaluated_geometry_measurement", "procedure": "Inspect both evaluated surfaces in a temporary wireframe or section view. Measure their centers and principal-axis extents in the same coordinate basis, calculate the membrane-to-nucleus ratios, and check enclosure and clearance using mesh intersection and nearest-surface inspection. Do not use object scale fields as a substitute for evaluated dimensions.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 5,
+      "requirement_section": "Cell Geometry",
+      "criterion": "Both cell surfaces have intact closed geometry and smooth evaluated shading.",
+      "scoring_rule": {
+        "PASS": "Both surfaces are present and closed, have consistent outward normals, and show smooth relief and silhouettes without visible faceting, holes, or self-intersections at close inspection.",
+        "PARTIAL": "Both surfaces are present as substantially complete continuous bodies, but one or more PASS conditions are unmet.",
+        "FAIL": "Either surface is absent, or either is too fragmented or incomplete to form a substantially continuous body."
+      },
+      "evidence_refs": ["image/02_organic_relief.png", "image/01_finished_cell.png"],
+      "verification": {"method": "mesh_integrity_and_neutral_shading_inspection", "procedure": "Inspect evaluated mesh boundaries, face orientation, and self-intersections for each surface. Inspect a close neutral-shaded view for tessellation and shading defects. Score inter-surface clearance only under GEO-02 and the intended bump shapes only under GEO-01.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PROC-01", "capability": "PROC", "points": 15,
+      "requirement_section": "Shared Procedural Relief",
+      "criterion": "A shared editable procedural pattern drives corresponding geometric relief on both nested surfaces.",
+      "scoring_rule": {
+        "PASS": "The saved surfaces show corresponding relief at matching angular positions. Changing the shared pattern scale changes the evaluated bump size or spacing on both surfaces, preserves their correspondence and nested relationship, and restoring it recovers the saved geometry.",
+        "PARTIAL": "An editable shared procedural pattern visibly changes the evaluated relief on both surfaces, but one or more PASS conditions are unmet.",
+        "FAIL": "No editable shared procedural pattern visibly changes the evaluated relief on both surfaces; baked-only geometry, separate unrelated controls, unused procedural data, and shading-only effects fail this minimum."
+      },
+      "evidence_refs": ["image/02_organic_relief.png", "image/01_finished_cell.png"],
+      "verification": {"method": "functional_parameter_probe", "procedure": "In a temporary copy, identify the shared procedural pattern actually feeding both evaluated surfaces. Record its scale, change it enough to visibly alter bump spacing, and compare normalized surface views before and after. Check that both surfaces respond together and retain their nested correspondence, then restore the original value and compare the evaluated shapes. Accept equivalent procedural implementations.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 20,
+      "requirement_section": "Surface Appearance",
+      "criterion": "The membrane is visibly glassy and nearly colorless while transmitting a readable nucleus.",
+      "scoring_rule": {
+        "PASS": "The membrane uses an applied, distinct, nearly colorless material that shows irregular refraction and soft reflective highlights while keeping the nucleus color and rounded contour readily visible. The shell remains visible without frosted opacity, strong tint, or dark refraction failures obscuring the nucleus.",
+        "PARTIAL": "A continuous visible membrane transmits a discernible nucleus through its front surface, but one or more PASS conditions are unmet.",
+        "FAIL": "The membrane or nucleus is absent, the membrane is completely invisible, or the nucleus cannot be discerned through the membrane's front surface."
+      },
+      "evidence_refs": ["image/01_finished_cell.png", "image/03_microscope_background.png"],
+      "verification": {"method": "applied_material_inspection_and_controlled_render", "procedure": "Confirm the material is applied to the actual membrane. Inspect the saved-camera render and a modestly rotated view in a copy to assess transmission, tint, refraction, and visible shell reflections. If the authored illumination obscures material behavior, use temporary broad neutral lighting to isolate the shader; score the original lighting balance only under SCN-01.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 10,
+      "requirement_section": "Surface Appearance",
+      "criterion": "The nucleus has its own opaque deep-blue material with gentle gloss and readable relief shading.",
+      "scoring_rule": {
+        "PASS": "The actual nucleus uses a material distinct from the membrane, is opaque and saturated deep blue, and shows gentle gloss and local shading that reveal its relief.",
+        "PARTIAL": "The actual nucleus has a visibly blue applied material, but one or more PASS conditions are unmet.",
+        "FAIL": "The nucleus is absent or does not have a visibly blue applied material."
+      },
+      "evidence_refs": ["image/01_finished_cell.png"],
+      "verification": {"method": "applied_material_and_neutral_render_inspection", "procedure": "Inspect the material actually assigned to the nucleus and render it isolated under broad neutral lighting in a temporary copy. Judge blue color, opacity, and gentle gloss independently of the membrane's transmission and final light exposure.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-03", "capability": "SURF", "points": 10,
+      "requirement_section": "World Background",
+      "criterion": "An editable procedural World shader produces soft irregular red blotches on a bright field.",
+      "scoring_rule": {
+        "PASS": "The active World produces irregular dark-red patches of varied size with softened edges on a bright white or very light gray field. Its editable procedural scale changes the blotch spacing or size, and restoring the scale recovers the saved pattern.",
+        "PARTIAL": "The active World produces a nonuniform red-and-light procedural pattern that visibly responds to a scale change, but one or more PASS conditions are unmet.",
+        "FAIL": "The active World lacks a nonuniform red-and-light procedural pattern with a working scale control; a flat color, unrelated palette, static image, or unused shader fails this minimum."
+      },
+      "evidence_refs": ["image/03_microscope_background.png"],
+      "verification": {"method": "world_shader_inspection_and_functional_probe", "procedure": "Inspect the active World shader and its rendered background with the cell temporarily hidden. Record the procedural scale, change it enough to alter the patch spacing or size, render a comparison, then restore it. Judge the shader's appearance and editability here; assess scene framing and environment coverage only under SCN-01.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-01", "capability": "SCN", "points": 10,
+      "requirement_section": "Lighting And Presentation",
+      "criterion": "Balanced surrounding illumination and camera framing present the complete cell clearly within an uninterrupted microscope-like environment.",
+      "scoring_rule": {
+        "PASS": "Broad soft illumination from above, below, and opposing sides reveals the membrane and nucleus without large dark or washed-out regions. The full cell is framed prominently with breathing room and visible background, without a floor, horizon, image boundary, overlays, visible light shapes, labels, or unrelated objects.",
+        "PARTIAL": "The saved-camera render presents a recognizable nested cell and surrounding background, but one or more PASS conditions are unmet.",
+        "FAIL": "The saved-camera render does not present a recognizable nested cell with surrounding background, including severe cropping, darkness, or exposure that prevents that presentation."
+      },
+      "evidence_refs": ["image/01_finished_cell.png", "image/03_microscope_background.png"],
+      "verification": {"method": "saved_camera_render_and_light_contribution_inspection", "procedure": "Render the saved camera and inspect framing, exposure balance, background coverage, and distractions. In a temporary copy, inspect or isolate the actual light contributions to verify soft illumination reaches the cell from the required surrounding directions. Do not award points merely for light or camera existence; separate shader defects already scored under SURF from lighting and composition.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, reconstruction script, and named scene-rendered PNG form a reproducible delivery.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens in Blender 5.1.2 with the required editable scene and Cycles GPU render configuration; build.py recreates and saves that scene from empty without manual work or external dependencies; B60_Stylized_Nucleated_Cell.png is a saved-camera render of that submitted scene.",
+        "PARTIAL": "submission.blend opens with a usable editable cell scene, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no submission.blend that opens with a usable editable cell scene."
+      },
+      "evidence_refs": [],
+      "verification": {"method": "artifact_open_rebuild_and_render_comparison", "procedure": "Open submission.blend in Blender 5.1.2 and inspect scene editability and saved render configuration. Run build.py in a clean temporary location from an empty Blender scene, verify that it saves the scene without missing dependencies, and compare a saved-camera render against the named delivered PNG to establish scene provenance. This row scores delivery and reproducibility, not visual quality already scored above.", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

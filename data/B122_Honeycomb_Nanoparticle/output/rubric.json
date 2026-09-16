@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Honeycomb Nanoparticle",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1B6DfBoEXV",
+    "id": "BV1B6DfBoEXV"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "This is a direct geometry task. Ninety points assess the independent properties of the spherical envelope, cell layout, open passages, connected web, inward depth, solid-surface integrity, and normal finish. Gray-model shading belongs to GEO. No procedural generator or material design is required. The remaining ten points assess reproducible saved-scene and actual-scene image delivery.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Spherical Envelope",
+      "criterion": "The porous body has a complete spherical outer envelope in three dimensions.",
+      "scoring_rule": {
+        "PASS": "An existing volumetric shell includes front, rear, and surrounding sides; its outer pore rims trace an approximately circular silhouette from three mutually perpendicular directions, with no flattened side, missing cap, or elongated axis.",
+        "PARTIAL": "An existing volumetric shell includes front, rear, and surrounding sides, but one or more PASS conditions are not met, such as uneven roundness, an elongated axis, or a localized missing cap.",
+        "FAIL": "No volumetric shell with front, rear, and surrounding sides exists; a flat patch, isolated cell, open hemisphere, or absent body does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_completed_sphere.png"],
+      "verification": {
+        "method": "Evaluated geometry and orthogonal-view inspection",
+        "procedure": "Open submission.blend and inspect the evaluated subject from three mutually perpendicular orthographic directions. Temporarily isolate the subject and rotate it to confirm rear coverage. Compare the outer-rim envelope, rather than inward-wall vertices, to a circular silhouette and record any flattened region, missing cap, or axis elongation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "2. Honeycomb Layout",
+      "criterion": "Dense polygonal cells follow the whole spherical shell with appropriate hexagonal and pentagonal character.",
+      "scoring_rule": {
+        "PASS": "An existing repeated pattern covers a substantial curved shell region and continues over the full sphere. Six-sided openings dominate, occasional five-sided openings accommodate curvature, many dozens are visible straight on, and approximately ten to fourteen front-surface openings span a central diameter. Cell size is reasonably even and corners remain distinct, without large unperforated patches.",
+        "PARTIAL": "An existing repeated polygonal cell pattern covers a substantial curved shell region, but one or more PASS conditions are not met, including density, whole-sphere coverage, cell character, size consistency, or corner definition.",
+        "FAIL": "No repeated polygonal cell pattern covers a substantial curved shell region; a plain sphere, scattered unrelated holes, an isolated cell, or a flat honeycomb sheet does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_completed_sphere.png", "image/02_open_web.png"],
+      "verification": {
+        "method": "Surface-layout inspection and visual counting",
+        "procedure": "Inspect the evaluated outer mouths in a neutral straight-on view and in rotated front, rear, and side views. Distinguish near-side mouths from the rear shell seen through them. Count mouths intersecting a representative central diameter, inspect their polygonal character, and compare spacing and coverage around the body. Do not substitute vertex or face counts for pore appearance.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "3. Openings and Shared Web",
+      "criterion": "The repeated pores provide real geometric passages into the cavity.",
+      "scoring_rule": {
+        "PASS": "An existing group of neighboring pores opens through the front portion of the shell into a cavity, and this through-opening behavior holds across the full patterned shell. No pore is capped or represented only by an image, surface color, transparency, or a shallow indentation.",
+        "PARTIAL": "An existing group of neighboring pores opens through the front portion of the shell into a cavity, but one or more PASS conditions are not met elsewhere, such as some blocked pores or incomplete passage coverage.",
+        "FAIL": "No existing group of neighboring pores opens through the front portion of the shell into a cavity. Painted marks, transparency-only holes, shallow dimples, or isolated accidental gaps do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_open_web.png", "image/03_pore_depth.png"],
+      "verification": {
+        "method": "Opaque geometry inspection and passage probing",
+        "procedure": "Inspect the evaluated shell with an opaque neutral material override. Use a temporary section view or rays along representative pore axes in front, rear, and side regions to confirm an empty path from each sampled outer mouth into the cavity. Allow rays to encounter the rear shell after entering the cavity. Check suspect openings for hidden caps or image-based substitutes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "3. Openings and Shared Web",
+      "criterion": "Neighboring cells share a narrow continuous web that forms one connected body.",
+      "scoring_rule": {
+        "PASS": "An existing connected cell patch contains neighboring pores and shared material junctions, and the same solid web continues as one connected body around the sphere. Strips meet without gaps, remain comparatively even in width, and are much narrower than their openings; no isolated rings or floating fragments form part of the particle.",
+        "PARTIAL": "An existing connected cell patch contains neighboring pores and shared material junctions, but one or more PASS conditions are not met, such as disconnected shell regions, broken junctions, overly wide strips, or uneven web width.",
+        "FAIL": "No connected cell patch with neighboring pores and shared material junctions exists. Separate rings, scattered bars, isolated cells, or a plain solid surface do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_open_web.png", "image/03_pore_depth.png"],
+      "verification": {
+        "method": "Evaluated connectivity and junction inspection",
+        "procedure": "Inspect the actual evaluated material network and connected components, accounting for equivalent valid joined or fused geometry. Trace neighboring cell boundaries through junctions around front, side, and rear regions. Compare strip width to the adjoining opening width and inspect any disconnected rings, gaps, or fragments. Object names and object count are not acceptance proxies.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "4. Inward Pore Walls",
+      "criterion": "Deep inward pore walls leave a substantial central cavity and maintain open tunnels.",
+      "scoring_rule": {
+        "PASS": "An existing curved region of neighboring pores has distinct inward wall faces and open inner mouths. This construction continues around the shell, with typical radial wall depth roughly one quarter to two fifths of the outer radius, reasonably consistent depth, naturally narrowing inner mouths, and a substantial empty central cavity. Walls do not cross the center, intersect unrelated walls, or form plugs.",
+        "PARTIAL": "An existing curved region of neighboring pores has distinct inward wall faces and open inner mouths, but one or more PASS conditions are not met, including typical depth, depth consistency, direction, narrowing, cavity size, or local wall collisions.",
+        "FAIL": "No curved region of neighboring pores has distinct inward wall faces and open inner mouths. A thin sheet, outward-only raised lattice, shallow surface marks, or a plugged solid interior does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_completed_sphere.png", "image/03_pore_depth.png"],
+      "verification": {
+        "method": "Radial section measurement and cavity inspection",
+        "procedure": "Estimate the center and outer radius from the outer-rim envelope. In temporary sections through several well-formed front, side, and rear pores, measure radial distance from outer to inner mouth and normalize it by the outer radius. Inspect the central cavity and compare neighboring tunnel directions, narrowing, and depth. Examine wall intersections separately from the normal-shading check.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "5. Geometry Finish",
+      "criterion": "The existing web and pore walls form clean solid surfaces without unintended seams or duplicate faces.",
+      "scoring_rule": {
+        "PASS": "An existing curved cell patch includes shared web, deep wall faces, inner rims, and junctions. These surfaces are closed around the solid material and clean throughout the completed shell, with no unintended open seams, overlapping duplicate faces, or inverted patches. Collisions caused by pore-wall direction or depth are assessed only in GEO-05.",
+        "PARTIAL": "An existing curved cell patch includes shared web, deep wall faces, inner rims, and junctions, but one or more PASS conditions are not met. Assess the integrity of these existing surfaces even if a separate portion of the sphere is missing.",
+        "FAIL": "No existing curved cell patch includes shared web, deep wall faces, inner rims, and junctions. Empty geometry, isolated flat strips, or surfaces too incomplete to establish a solid pore region do not meet the minimum."
+      },
+      "evidence_refs": ["image/03_pore_depth.png"],
+      "verification": {
+        "method": "Surface-integrity analysis with local visual confirmation",
+        "procedure": "Inspect the evaluated solid web and wall surfaces for unintended boundary edges, duplicate coincident faces, and inconsistent orientation. Confirm flagged locations visually and distinguish a designed pore passage from an open seam in the material surrounding it. Assess collisions caused by pore-wall direction or depth only in GEO-05; do not reduce this row for those same collisions. Inspect at least one substantive existing curved cell patch before considering any finish credit; do not use the mere absence of surfaces as evidence of cleanliness.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "5. Geometry Finish",
+      "criterion": "Geometry normals preserve a rounded envelope and crisp readable pore boundaries.",
+      "scoring_rule": {
+        "PASS": "An existing curved region includes neighboring pore rims and inward wall faces. Its outer envelope shades continuously and this finish holds across the completed particle, while polygonal corners and intentional planar walls remain distinct, without distracting normal discontinuities, black shading wedges, or excessive smoothing that erases the pattern.",
+        "PARTIAL": "An existing curved region includes neighboring pore rims and inward wall faces, but one or more PASS conditions are not met. Local normal artifacts or overly softened corners may remain on otherwise substantive existing geometry.",
+        "FAIL": "No existing curved region includes neighboring pore rims and inward wall faces. Empty or flat geometry, isolated source shapes, or the absence of required surfaces cannot establish the normal-finish minimum."
+      },
+      "evidence_refs": ["image/01_completed_sphere.png", "image/03_pore_depth.png"],
+      "verification": {
+        "method": "Controlled neutral-render and normal inspection",
+        "procedure": "Temporarily inspect the subject under a neutral opaque material and simple directional illumination, rotating the view to assess the outer web, rims, and inward walls. Look for shading discontinuities and black wedges while confirming preserved polygon corners. Compare with face orientation where needed. Do not require a particular smoothing modifier, angle, node name, or percentage of smooth flags.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The submission includes an editable saved scene and a script that recreates and saves it from a clean start.",
+      "scoring_rule": {
+        "PASS": "A usable submission.blend contains editable three-dimensional particle geometry, and build.py runs from a clean Blender 5.1.2 start to recreate the complete scene and save submission.blend. The saved rebuilt file reopens with the intended geometry, camera, and render settings, without depending on an existing finished scene or unavailable assets.",
+        "PARTIAL": "A usable submission.blend contains editable three-dimensional particle geometry, but one or more PASS conditions are not met, including a missing or incomplete build.py, an unsaved rebuilt scene, or an incomplete saved reconstruction.",
+        "FAIL": "No usable submission.blend containing editable three-dimensional particle geometry is delivered. An image-only result or an unsaved in-memory reconstruction does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Saved-artifact inspection and clean reconstruction probe",
+        "procedure": "Open the delivered submission.blend and confirm editable particle geometry. In a separate clean Blender 5.1.2 process, run build.py with access only to its declared available resources. Locate the submission.blend that the script saves, reopen that saved file, and compare its evaluated geometry and intended camera/render configuration with the delivered scene. Do not accept an in-memory reconstruction without a saved file or impose a particular output directory.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named PNG is a usable render of the actual submitted particle scene.",
+      "scoring_rule": {
+        "PASS": "A decodable PNG showing a recognizable three-dimensional honeycomb particle is delivered as B122_Honeycomb_Nanoparticle.png. It is at least 1024 pixels on the shorter side, matches a render from submission.blend, and presents the entire particle with its openings and wall depth readable under the saved Cycles GPU render configuration.",
+        "PARTIAL": "A decodable PNG rendered from the submitted scene shows a recognizable three-dimensional honeycomb particle, but one or more PASS conditions are not met, including filename, resolution, framing, readability, or saved render configuration.",
+        "FAIL": "No decodable PNG rendered from the submitted scene shows a recognizable three-dimensional honeycomb particle. A source reference image, viewport screenshot, external replacement, blank image, or unrelated scene render does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_completed_sphere.png"],
+      "verification": {
+        "method": "Image decoding, scene correspondence, and render-setting inspection",
+        "procedure": "Decode the delivered PNG and check its filename and pixel dimensions. Inspect the saved camera and Cycles GPU render configuration, then produce a controlled render from submission.blend and compare object geometry, pore layout, camera framing, and lighting to establish that the submitted PNG depicts that scene. Check whole-object framing and readable depth against the public Presentation section. Do not impose any delivery directory beyond the public filenames.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

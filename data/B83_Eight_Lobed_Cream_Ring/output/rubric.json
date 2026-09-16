@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Eight-Lobed Cream Ring",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1mhrbYzEws",
+    "id": "BV1mhrbYzEws"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 55, "PROC": 20, "SCN": 15, "PIPE": 10},
+  "weighting_note": "Cream profile, eightfold cross-section, spiral shape and evaluated finish carry most geometry points. The plain support receives only five points as an authored starting-geometry convention. Scene-assembly points assess the saved circular arrangement and support contact; procedural points assess shared shape propagation and editable layout through functional changes. Rendering and saved-scene reconstruction share ten pipeline points; decorative cake features and material complexity are not scored.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Cream Form",
+      "criterion": "The cream has a full rounded lower body, tucked foot and compact tapered peak with a low, volumetric silhouette.",
+      "scoring_rule": {
+        "PASS": "A representative existing cream has a broad rounded lower body, a slight inward return at the foot, and a continuous taper to a compact central peak. Its height is less than its widest diameter and the body retains substantial volume.",
+        "PARTIAL": "An existing cream has a recognizable volumetric lower body and narrows to a distinct top, but one or more PASS conditions are unmet, such as a straight-sided body, blunt top, weak foot transition or unsuitable proportions.",
+        "FAIL": "No existing cream has both a recognizable volumetric lower body and a distinct narrowing top; a flat star, sphere, cylinder or unrelated object alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_rounded_profile.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_controlled_views",
+        "procedure": "Open the saved submission and isolate a representative existing cream without altering its geometry. Inspect front and side orthographic silhouettes and a neutral shaded view of the evaluated surface. Compare its height and maximum diameter, and inspect the foot-to-body and body-to-peak transitions. This row assesses the profile independently of lobe count and twist.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Cream Form",
+      "criterion": "Eight full lobes and intervening grooves remain distinct around the substantial cream body.",
+      "scoring_rule": {
+        "PASS": "An existing cream has exactly eight evenly distributed, rounded lobes separated by eight readable grooves through its lower and middle body. The lobes merge naturally near the peak without thin spikes or disconnected petals.",
+        "PARTIAL": "An existing cream has a coherent body with at least four distinct rounded lobes and intervening grooves through a substantial portion of its height, but one or more PASS conditions are unmet, including incorrect count, uneven lobes or grooves that disappear prematurely.",
+        "FAIL": "No existing cream has a coherent body with at least four distinct rounded lobes and intervening grooves through a substantial portion of its height. A smooth blob or a set of disconnected petals fails."
+      },
+      "evidence_refs": ["image/03_spiral_lobes.png", "image/01_cream_ring.png"],
+      "verification": {
+        "method": "evaluated_cross_sections_and_visual_inspection",
+        "procedure": "Inspect top and oblique views of an existing cream. Take temporary horizontal cross-sections of its evaluated geometry at lower and middle body heights, away from the foot closure and peak, and count radial maxima and intervening minima. Confirm that the cross-section corresponds to visible rounded lobes rather than tiny tessellation fluctuations. Assess count and lobe fullness here, reserving progressive rotation for GEO-03.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Spiral Ridges and Finish",
+      "criterion": "The cream's ridges form a continuous, consistently directed spiral toward the peak.",
+      "scoring_rule": {
+        "PASS": "Readable ridges on an existing cream rotate gradually in one direction from the lower body through the middle toward the peak, with a stable foot and no abrupt twist transition. The result reads as piped spiral cream.",
+        "PARTIAL": "At least three readable ridges on an existing cream show a coherent twist across a substantial part of the body, but one or more PASS conditions are unmet, such as uneven progression, a local kink or an insufficiently integrated peak.",
+        "FAIL": "No existing cream has at least three readable ridges with coherent twist across a substantial part of its body. Purely straight grooves, random waviness or rotation confined to the tiny tip fails."
+      },
+      "evidence_refs": ["image/03_spiral_lobes.png", "image/01_cream_ring.png"],
+      "verification": {
+        "method": "ridge_tracking_on_evaluated_geometry",
+        "procedure": "Use neutral top and oblique views of the saved cream to follow several existing ridges from lower body to peak. Compare their angular positions at multiple heights on temporary evaluated cross-sections. Confirm a coherent direction of progression and inspect for discontinuities. Judge twist on the existing ridges without re-scoring their exact count.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Spiral Ridges and Finish",
+      "criterion": "Existing cream surfaces are smoothly evaluated, closed and free of geometric or normal defects that damage the form.",
+      "scoring_rule": {
+        "PASS": "The existing cream body, foot and tip are closed and smooth at the intended render scale, with readable grooves and no visible faceting, accidental holes, self-intersections, collapsed folds or shading seams.",
+        "PARTIAL": "At least one existing cream has a substantial continuous body with readable grooves and usable smooth shading over most of its visible surface, but one or more PASS conditions are unmet. Local defects or an incomplete foot or tip may remain; absent surfaces cannot demonstrate closure.",
+        "FAIL": "There is no substantial existing cream body with readable grooves and usable smooth shading over most of its visible surface, or widespread geometric defects prevent the body from reading as a coherent cream form."
+      },
+      "evidence_refs": ["image/02_rounded_profile.png", "image/01_cream_ring.png"],
+      "verification": {
+        "method": "evaluated_mesh_integrity_and_neutral_render",
+        "procedure": "Inspect a temporary evaluated mesh of the existing cream for boundary regions, self-intersections and folded geometry, including the underside and peak. Render or inspect it with a neutral material and grazing light at the submitted image scale. Separate actual surface or normal defects from intentional grooves; an incorrect lobe count alone does not reduce this row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Starting Scene",
+      "criterion": "A plain round support provides a broad level top and a softly finished outer rim.",
+      "scoring_rule": {
+        "PASS": "A solid cylindrical support has a broad level top suitable for the cream ring, a circular outline and a gently softened outer rim, without distracting visible geometry defects.",
+        "PARTIAL": "A recognizable solid round support with a usable top exists, but one or more PASS conditions are unmet, such as a sharp rim, uneven top or coarse circular silhouette.",
+        "FAIL": "No recognizable solid round support with a usable top exists; an empty scene, unrelated support or isolated flat outline fails."
+      },
+      "evidence_refs": ["image/01_cream_ring.png"],
+      "verification": {
+        "method": "support_geometry_inspection",
+        "procedure": "Inspect the saved support in top and side views and sample its evaluated top surface for levelness. Confirm solid cylindrical form and a softened rim. The plain support is the public authored simplification; do not require bows, fruit, beads or other decoration from the reference.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 15,
+      "requirement_section": "Circular Repetition",
+      "criterion": "Ten matching cream forms evaluate to a centered, evenly spaced complete ring with usable support contact.",
+      "scoring_rule": {
+        "PASS": "The evaluated scene contains exactly ten equal-scale cream copies on one complete circle centered on the support, with uniform angular spacing, common radius and height, upright axes and consistent radial orientation. The central opening is clear, all feet meet the top within its footprint, and individual creams remain readable without substantial overlap or a closure gap.",
+        "PARTIAL": "At least six readable cream copies form an identifiable ring around a common center, with a central opening and most copies positioned over the support, but one or more PASS conditions are unmet. Examples include incorrect count, inconsistent spacing, contact defects or a local overlap.",
+        "FAIL": "Fewer than six readable cream copies form an identifiable ring, there is no central opening, or most copies are not positioned over the support. A line, pile or unrelated scatter fails."
+      },
+      "evidence_refs": ["image/01_cream_ring.png"],
+      "verification": {
+        "method": "evaluated_instance_layout_measurement",
+        "procedure": "Inspect the evaluated result, resolving generated instances or repeated mesh regions as necessary. Count the cream forms; compare their centers in support coordinates, angular gaps including the final-to-first gap, radii, scale and upright axes. Use top and side views to inspect the central opening, footprints, contact and local overlap. Measure the saved layout only; the ability to generate or edit it is assessed separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Pattern",
+      "criterion": "The repeated forms remain linked to a shared editable cream source.",
+      "scoring_rule": {
+        "PASS": "A saved geometric relationship generates or updates the full delivered ring from one editable cream source. A small source shape edit propagates to every repeated cream without editing individual copies and without changing the circular placement.",
+        "PARTIAL": "A source shape edit propagates through a saved relationship to at least two readable cream forms, but one or more PASS conditions are unmet, such as some independent copies remaining or a placement disturbance.",
+        "FAIL": "No source shape edit propagates through a saved relationship to at least two readable cream forms. Independent duplicates or a baked ring with no usable shared source fail."
+      },
+      "evidence_refs": ["image/01_cream_ring.png"],
+      "verification": {
+        "method": "non_destructive_source_edit_probe",
+        "procedure": "Work in a temporary copy of the opened submission. Identify the saved cream source and its geometric relationship to the repeats. Slightly increase the source body's height while preserving its foot, then evaluate the scene. Verify corresponding shape change in every cream while their circle placement remains stable. Restore the original state. A modifier's presence, data-block name or code text alone is insufficient.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Pattern",
+      "criterion": "Saved geometric controls support coordinated radius and closed-ring layout changes.",
+      "scoring_rule": {
+        "PASS": "Using the saved setup, a modest ring-radius change moves all repeated forms together while preserving the common center and equal angular spacing. Coordinated changes to count and angular spacing also produce another complete evenly spaced ring without positioning copies individually.",
+        "PARTIAL": "The saved setup successfully supports at least one of the two functional layout changes described in PASS for all its repeated forms, but not every PASS condition is met.",
+        "FAIL": "Neither functional layout change works for all repeated forms through the saved setup. Rebuilding the pattern manually or positioning copies individually does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_cream_ring.png"],
+      "verification": {
+        "method": "non_destructive_pattern_control_probe",
+        "procedure": "In a temporary copy, increase the ring radius modestly using the saved geometric control and compare all evaluated centers before and after. Restore, then set the count to eight and coordinate its angular spacing to one eighth of a full turn; automatic coupling is not required. Confirm the eight-copy circle closes evenly and no individual copy needs manual placement. Restore the delivered ten-copy state. Probe values are verification interventions, not required default scene dimensions.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, reproducible saving script and matching rendered PNG form a complete usable delivery.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the required editable scene; build.py recreates the complete scene from a clean Blender 5.1.2 start and explicitly saves submission.blend; reopening that newly saved file confirms the rebuilt scene and working controls. B83_Eight_Lobed_Cream_Ring.png is a valid Cycles GPU render of the submitted scene with the required elevated complete-ring composition and readable cream forms.",
+        "PARTIAL": "submission.blend opens with a recognizable cream ring and at least one of the two accompanying deliverables is usable: build.py recreates and saves an equivalent scene that reopens, or the named PNG is a valid matching scene render. One or more PASS conditions remain unmet.",
+        "FAIL": "submission.blend cannot be opened with a recognizable cream ring, or neither accompanying deliverable is usable as defined in PARTIAL. An unsaved in-memory reconstruction does not establish a usable build.py result."
+      },
+      "evidence_refs": ["image/01_cream_ring.png"],
+      "verification": {
+        "method": "clean_build_saved_file_reopen_and_render_provenance",
+        "procedure": "Open the submitted blend and inspect its saved camera and Cycles GPU configuration. In an isolated output directory, run build.py from a clean Blender 5.1.2 session. Close that session, reopen the script-created submission.blend in a new session, and compare the cream geometry, pattern controls, support and camera with the delivery. Exercise the controls on this reopened file. Decode the named PNG and compare it with a controlled render from the submitted scene, checking complete framing and legible cream detail. Do not accept source stills, viewport screenshots or external replacements as the PNG.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

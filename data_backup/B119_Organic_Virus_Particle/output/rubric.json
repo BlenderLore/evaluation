@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Organic Virus Particle",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1Xj9VB4EGq",
+    "id": "BV1Xj9VB4EGq"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 70, "SURF": 20, "PIPE": 10},
+  "weighting_note": "The source is primarily a geometry task, so geometry receives 70 points divided among six independent outcomes: body volume, spatial distribution, stalk profile, terminal caps, connected closure, and smooth form. Surface relief and its functional editability receive 20 points. Ten points cover usable saved-scene and reproduction deliverables. Subdivision and smooth shading are evaluated as geometry outcomes, not awarded procedural points for modifier presence.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Spherical Body",
+      "criterion": "A compact rounded central body remains legible as a three-dimensional volume beneath the stalk field.",
+      "scoring_rule": {
+        "PASS": "A recognizable three-dimensional central body exists with exposed surface between stalk roots; it is compact and rounded, has broadly similar principal dimensions, and remains a continuous readable volume beneath the protrusions.",
+        "PARTIAL": "A recognizable three-dimensional central body with exposed surface between stalk roots exists, but it fails one or more PASS conditions, such as excessive elongation, uneven bulging, or a poorly resolved spherical silhouette.",
+        "FAIL": "No recognizable three-dimensional central body with exposed surface between stalk roots exists; a flat disc, hollow ring, or unconnected collection of lobes does not meet this minimum."
+      },
+      "evidence_refs": ["image/01_completed_particle.png", "image/02_smooth_particle.png"],
+      "verification": {
+        "method": "Evaluated geometry and multi-view inspection",
+        "procedure": "Open the submitted scene, temporarily disable only the fine relief, and inspect the particle from three orthogonal views and an oblique view. Distinguish the body envelope from its protrusions, compare its principal extents, and confirm that body surfaces remain visible between roots. Restore the saved relief state afterward.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "2. Radial Stalk Field",
+      "criterion": "The stalk field has broad three-dimensional coverage, outward orientation, and readable spacing.",
+      "scoring_rule": {
+        "PASS": "A central body carries multiple stalks in substantially different outward directions; the field covers front, back, upper, lower, and lateral regions with broadly even spacing and visible gaps, without a bare hemisphere or confinement to one band.",
+        "PARTIAL": "A central body carries multiple stalks in substantially different outward directions, but one or more PASS conditions are unmet, including uneven coverage, locally crowded or intersecting neighbors, or a missing directional region.",
+        "FAIL": "There is no central body carrying multiple stalks in substantially different outward directions; isolated detached spikes or a set extending in essentially one direction do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_completed_particle.png", "image/02_smooth_particle.png"],
+      "verification": {
+        "method": "Full-orbit evaluated-geometry inspection",
+        "procedure": "Inspect the evaluated particle through a complete orbit, including its rear and both poles. Compare stalk directions with radial directions from the body's center, identify large empty regions, and inspect neighbor gaps from more than the delivery camera. Assess spatial distribution here; inspect individual stalk shapes separately in GEO-03.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "2. Radial Stalk Field",
+      "criterion": "Repeated stalks have substantial shafts, narrower middles, and gently widening roots at a consistent scale.",
+      "scoring_rule": {
+        "PASS": "Multiple body-mounted stalks with distinguishable root and shaft regions exist; their shafts have substantial length relative to width, their middles are narrower than their gently widening roots, and their lengths and thicknesses form a consistent family subordinate to the body.",
+        "PARTIAL": "Multiple body-mounted stalks with distinguishable root and shaft regions exist, but one or more PASS conditions are unmet, such as stubby shafts, abrupt root profiles, or conspicuously inconsistent stalk proportions.",
+        "FAIL": "Multiple body-mounted stalks with distinguishable root and shaft regions are absent; surface bumps, caps placed directly on the body, or one isolated example are below the minimum."
+      },
+      "evidence_refs": ["image/02_smooth_particle.png", "image/03_tip_detail.png"],
+      "verification": {
+        "method": "Relief-disabled profile inspection",
+        "procedure": "Disable fine relief in a temporary inspection state. Inspect several stalks in side profile from different body regions, comparing shaft length, middle width, root widening, and their scale relative to the body. Use cross-sections when overlap prevents a clear profile. Do not award this row for caps alone or assess coverage already scored by GEO-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "3. Rounded Flared Tips",
+      "criterion": "Repeated stalk ends form thick rounded caps that flare beyond their shafts.",
+      "scoring_rule": {
+        "PASS": "Multiple stalks terminate in expanded three-dimensional cap volumes wider than their adjacent shafts; the caps throughout the particle have substantial thickness, rounded shoulders, and closed softly flattened or gently domed ends with rounded square-to-circular outlines, remaining distinct from neighbors.",
+        "PARTIAL": "Multiple stalks terminate in expanded three-dimensional cap volumes wider than their adjacent shafts, but one or more PASS conditions are unmet, such as uneven cap development, sharp shoulders, thin but volumetric caps, or some missing or malformed ends.",
+        "FAIL": "Multiple stalks with expanded three-dimensional terminal cap volumes wider than their adjacent shafts do not exist; bare rods, needle tips, open tubes, thin terminal sheets only, or one isolated cap are below the minimum."
+      },
+      "evidence_refs": ["image/03_tip_detail.png", "image/02_smooth_particle.png"],
+      "verification": {
+        "method": "Evaluated cap profile and end-surface inspection",
+        "procedure": "With relief disabled, inspect stalk tips from side and end views around the particle. Compare each sampled cap width with its nearby shaft, inspect cap thickness and shoulder curvature, and confirm the presence of real closed end surfaces. Inspect the remaining field for missing cap development; do not substitute edge counts or object names for these visible profiles.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "4. Connected Surface and Smooth Form",
+      "criterion": "Body, stalks, and caps form one closed connected surface with clean attachments.",
+      "scoring_rule": {
+        "PASS": "A body with multiple complete stalk-to-cap structures exists and includes genuine surface connections from the body through the roots to those caps; the complete particle is one closed connected boundary without open seams, floating attachments, overlapping internal shells, foldovers, or self-intersections.",
+        "PARTIAL": "A body with multiple complete stalk-to-cap structures and genuine surface connections from the body through their roots to caps exists, but one or more PASS conditions are unmet, such as localized openings, a detached additional stalk, or limited overlapping or intersecting surfaces.",
+        "FAIL": "A body with multiple complete stalk-to-cap structures genuinely connected through their surface is absent; a body overlapped by entirely disconnected stalks does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_smooth_particle.png", "image/03_tip_detail.png"],
+      "verification": {
+        "method": "Evaluated topology and cross-section inspection",
+        "procedure": "Inspect a temporary evaluated mesh with fine relief disabled. Identify connected components and boundary or non-manifold edges, then inspect root and cap junctions using cross-sections or clipping views for internal overlapping shells and intersections. Permit any construction method producing the required connected evaluated surface.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "4. Connected Surface and Smooth Form",
+      "criterion": "The inspectable underlying form has smooth contours and continuous shading across curved regions.",
+      "scoring_rule": {
+        "PASS": "An inspectable body and multiple stalks with identifiable curved root, shaft, and cap regions exist; with fine relief disabled, those regions have smooth silhouettes and continuous shading throughout the complete particle, preserving rounded roots and cap shoulders without visible coarse facets, pinched creases, or collapsed shafts.",
+        "PARTIAL": "An inspectable body and multiple stalks with identifiable curved root, shaft, and cap regions exist, but one or more PASS conditions are unmet, such as visible faceting or pinching on substantive existing surfaces, or missing additional regions that prevent assessment of the complete particle.",
+        "FAIL": "An inspectable body and multiple stalks with identifiable curved root, shaft, and cap regions are absent. Surfaces collapsed beyond recognition and an isolated smooth primitive are below the minimum."
+      },
+      "evidence_refs": ["image/02_smooth_particle.png"],
+      "verification": {
+        "method": "Controlled neutral-shading inspection",
+        "procedure": "Temporarily disable the fine relief and inspect the saved geometry with neutral lighting from several directions. Check body silhouettes, root blends, shaft curvature, and cap shoulders at useful close-view scale. Distinguish coarse faceting and shading discontinuities from the intended relief and from attachment topology assessed in GEO-05.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "5. Editable Organic Microrelief",
+      "criterion": "Fine irregular geometric relief covers the particle without destroying its larger forms.",
+      "scoring_rule": {
+        "PASS": "Visible fine geometric relief exists on both the body and multiple complete stalk-to-cap surfaces; the active saved state covers body, roots, shafts, and caps with dense soft irregular bumps and shallow depressions, introduces small close-view silhouette variations, and preserves the main body, gaps, and cap profiles without a regular tiled pattern or large spikes.",
+        "PARTIAL": "Visible fine geometric relief exists on both the body and multiple complete stalk-to-cap surfaces, but one or more PASS conditions are unmet, such as patchy coverage, an overly strong or regular pattern, or local loss of the intended larger profiles.",
+        "FAIL": "Visible fine geometric relief on both the body and multiple complete stalk-to-cap surfaces is absent. A smooth particle, color or shading-only texture, an isolated textured sample, or coarse deformation that leaves no readable fine-relief region is below the minimum."
+      },
+      "evidence_refs": ["image/01_completed_particle.png"],
+      "verification": {
+        "method": "Evaluated geometry comparison and controlled close views",
+        "procedure": "Compare the saved active-relief state with a temporary zero-amplitude state using evaluated geometry and close views of the body, roots, shafts, and caps. Confirm geometric changes and small silhouette variations, then inspect the active state at whole-particle scale for preserved gaps and cap profiles. Restore the saved controls after inspection.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "5. Editable Organic Microrelief",
+      "criterion": "Relief amplitude and feature scale remain functional controls on the saved particle.",
+      "scoring_rule": {
+        "PASS": "The saved particle contains a body and multiple complete stalk-to-cap surfaces with a functional control that changes their relief geometry while retaining the underlying particle; amplitude can be set to zero to reveal that same smooth particle and raised to increase unevenness, feature scale changes the fine feature size or density without changing stalk arrangement, and the saved default has subtle active relief.",
+        "PARTIAL": "The saved particle contains a body and multiple complete stalk-to-cap surfaces with at least one functional control that changes their relief geometry while retaining the underlying particle, but one or more PASS conditions are unmet, such as a missing feature-scale control, an incomplete zero-amplitude state, or a default saved without active relief.",
+        "FAIL": "There is no saved body with multiple complete stalk-to-cap surfaces and at least one functional control changing their relief geometry while retaining the underlying particle. Baked detail alone, unused controls, whole-object scaling, or controls operating only on a disconnected sample are below the minimum."
+      },
+      "evidence_refs": ["image/01_completed_particle.png", "image/02_smooth_particle.png"],
+      "verification": {
+        "method": "Reversible functional parameter probes",
+        "procedure": "Locate the controls that actually drive relief in the saved scene, without requiring any particular node or modifier name. Record their defaults. Probe zero and increased amplitude, then smaller and larger feature scales at nonzero amplitude. Compare evaluated surfaces and stalk arrangement after each change, and restore the defaults. This row scores functional editability, separately from saved-state visual quality in SURF-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The saved scene and named PNG provide a usable, scene-derived view of the particle.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with a body and multiple complete stalk-to-cap structures, and B119_Organic_Virus_Particle.png is a decodable render from that same saved scene; the image frames the complete particle with tip margins, reveals form and active relief using neutral clay-like shading, and the saved scene is configured for Cycles GPU rendering with its necessary camera and lighting.",
+        "PARTIAL": "submission.blend opens with a body and multiple complete stalk-to-cap structures and the named PNG is a decodable render from that same saved scene, but one or more PASS conditions are unmet, such as clipped tips, weak lighting, poor relief visibility, or incomplete render configuration.",
+        "FAIL": "Either submission.blend cannot open with a body and multiple complete stalk-to-cap structures, or the named PNG is missing, undecodable, or not rendered from the same submitted scene. A source image or viewport screenshot does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_completed_particle.png"],
+      "verification": {
+        "method": "File opening, render configuration audit, and scene/image correspondence",
+        "procedure": "Open submission.blend and inspect the active camera, surface, lighting, relief state, and Cycles device configuration. Decode the named PNG, compare its geometry and framing with the saved scene, and produce a controlled test render if correspondence is uncertain. Confirm full tip margins and readable form. Inspect submitted files wherever delivered; impose no additional directory convention.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "build.py recreates the complete editable scene and saves a usable submission.blend.",
+      "scoring_rule": {
+        "PASS": "build.py runs in a clean Blender 5.1.2 session and saves a reopenable submission.blend containing a body with multiple complete stalk-to-cap structures; the reopened saved result reproduces the submitted geometry, functional relief controls and active default, material, camera, lighting, and render settings without missing external dependencies.",
+        "PARTIAL": "build.py runs in a clean Blender 5.1.2 session and saves a reopenable submission.blend containing a body with multiple complete stalk-to-cap structures, but one or more PASS conditions are unmet, such as missing relief editability or incomplete material, camera, lighting, or render settings.",
+        "FAIL": "build.py is absent, fails to complete, or does not save a reopenable submission.blend containing a body with multiple complete stalk-to-cap structures. An unsaved in-memory scene does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean-session rebuild and saved-result reopening",
+        "procedure": "In a separate test workspace, run the supplied build.py in a clean Blender 5.1.2 session using any invocation or output-path options documented by the script. Locate the submission.blend it actually saves without imposing an unstated save directory, close the session, and reopen that saved file. Compare its evaluated particle, functional relief, material, camera, lighting, and render settings with the submitted scene. Do not accept success based solely on in-memory objects or a save call in the code.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

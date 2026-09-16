@@ -1,0 +1,121 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "骨骼控制的贝塞尔软管",
+  "source_video": {"url": "https://www.youtube.com/watch?v=Cm48lbk5Opw", "id": "Cm48lbk5Opw"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 35, "RIG": 55, "PIPE": 10},
+  "weighting_note": "暂定内容权重：GEO35 覆盖默认形状、截面封口和求值形变质量；RIG55 分为实时曲线绑定、FK、IK、锚定与恢复，主项稍高于一般混合任务是因为两类骨骼控制就是该资产的主体。PIPE10 仅检查可迁移重建与保存后功能。视频仅展示工作台着色，不据此增设 SURF、SCN 或 ANM。权重尚未经试评校准。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 细长圆管与默认形态",
+      "criterion": "默认管身是一条连续、不分叉的细圆管，中心线平直沿 +X，管径与长度之比 d/L 为 0.018 至 0.022，整体尺度自由。",
+      "scoring_rule": {
+        "PASS": "连续且不分叉、平直沿 +X、径长比在范围内三个条件全部满足。",
+        "PARTIAL": "存在可辨认的细管且恰有两个条件满足。",
+        "FAIL": "缺少实际管身，或三个条件中满足少于两个。"
+      },
+      "evidence_refs": ["image/02_round_cable.png"],
+      "verification": {"method": "evaluated_geometry_and_visual", "procedure": "打开交付默认状态，识别实际求值管身及其中心线，在世界空间测量中心线长度、方向和多处管径，计算 d/L。从正面与侧面交叉检查连续性、分叉及平直性；不依靠对象名、Curve 类型或包围盒长宽比单独判定。未提供可辨默认状态时按实际保存状态检查，恢复能力另由 RIG-05 检查。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 细长圆管与默认形态",
+      "criterion": "默认管身保持一致的近圆截面，截面最大最小直径比不超过 1.1，两端均与管身连续封闭。",
+      "scoring_rule": {
+        "PASS": "存在完整管身，截面圆度与沿长度一致性、根部封闭、末端封闭三个条件全部满足。",
+        "PARTIAL": "存在实际管身，且三个条件中恰有一个或两个满足。",
+        "FAIL": "无实际管身，或三个条件均不满足。"
+      },
+      "evidence_refs": ["image/02_round_cable.png"],
+      "verification": {"method": "evaluated_geometry_and_visual", "procedure": "在默认中心线的多个位置取垂直截面，测最大最小直径比并比较粗细，查看两端近景及求值表面连通/边界。允许等价的曲线截面与封口实现，不以 bevel_depth、Fill Caps 开关或单一网格是否流形代替成品检查。径长比只在 GEO-01 计分。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 15,
+      "requirement_section": "5. 弯曲后的管身质量",
+      "criterion": "组合 FK 和两个 IK 公开姿态中，实际已弯曲管身连续平滑，无撕裂、尖刺、硬折角或塌缩，局部管径相对默认变化不超过 20%，端部保持封闭。",
+      "scoring_rule": {
+        "PASS": "三个姿态均实际发生所要求的形变，并全部满足连续平滑、管径范围和封口要求。",
+        "PARTIAL": "三个姿态中恰有一个或两个实际发生形变且满足全部管身质量要求。",
+        "FAIL": "三个姿态均不满足，包括管身缺失或三次操作均无实际形变的情况。"
+      },
+      "evidence_refs": ["image/01_ik_bend.png", "image/03_fk_pose.png", "image/04_ik_lift.png"],
+      "verification": {"method": "functional_probe_and_evaluated_visual", "procedure": "在临时副本中执行题面组合 FK 和两个 IK 偏移，逐次刷新依赖图。隐藏骨骼与选择覆盖，以全管和关节近景查看求值管身，并在弯曲区域取垂直截面测管径变化和端部闭合。对照默认确认确已弯曲，静止管身不得因没有破损获得本项；此处只计形变几何质量，不重复计控制到位误差。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "RIG-01", "capability": "RIG", "points": 10,
+      "requirement_section": "2. 可编辑的曲线与骨骼接口",
+      "criterion": "参与可见管身生成的实际贝塞尔曲线与可摆姿骨骼链保持实时连接，并具备可辨的分段控制、独立末端目标及可执行的 IK/FK 操作说明。",
+      "scoring_rule": {
+        "PASS": "实时贝塞尔生成关系、骨骼分段驱动关系、可辨且可独立操作的目标及 IK/FK 说明三个条件全部满足。",
+        "PARTIAL": "有真实参与管身变形的骨骼控制，且三个条件恰有两个满足。",
+        "FAIL": "三个条件满足少于两个，或只有静态模型、预制姿态切换、装饰骨骼。"
+      },
+      "evidence_refs": ["image/01_ik_bend.png", "image/03_fk_pose.png"],
+      "verification": {"method": "artifact_structure_and_live_probe", "procedure": "依据文件内说明定位真实曲线、骨骼链与目标；在副本中轻微调整曲线控制点，确认可见管身更新，再恢复。检查分段骨骼确实进入曲线求值依赖，按说明切换 FK/IK 并单独移动目标。允许 Hook 或等价实时曲线绑定，名称、骨骼数、点数、约束类型和堆栈顺序不作匹配。完整运动性能由后续行为项评估。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "RIG-02", "capability": "RIG", "points": 15,
+      "requirement_section": "3. 分段骨骼调姿",
+      "criterion": "FK 下各段骨骼的 30 度独立旋转驱动对应末端及后续锚点，保留关节根部一侧锚点；两个内部关节的反向旋转能够产生多段组合弯曲。",
+      "scoring_rule": {
+        "PASS": "所有参与变形的链段均通过独立旋转检查，且公开的组合摆姿也成功。",
+        "PARTIAL": "未达到 PASS，存在两个不同内部关节，且至少一半链段通过独立旋转检查或公开组合摆姿成功。",
+        "FAIL": "既不满足 PASS，也不满足 PARTIAL，包括没有两个不同内部关节，或少于一半链段通过且组合摆姿失败。"
+      },
+      "evidence_refs": ["image/03_fk_pose.png"],
+      "verification": {"method": "functional_probe_and_evaluated_geometry", "procedure": "临时按说明停用 IK，每次从默认状态逐一将各实际变形链段绕全局 Y 转动30度，比较骨骼关节、对应曲线锚点与求值管身的前后位置，检查根部一侧锚点不被错误带走。随后定位最接近 L/3、2L/3 的两个不同内部关节，依次施加 +45、-60 度的组合旋转，确认可见多段反向弯曲。只评驱动范围与组合能力；锚点贴合误差由 RIG-04、曲面质量由 GEO-03 负责。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "RIG-03", "capability": "RIG", "points": 15,
+      "requirement_section": "4. 末端 IK 拖动与根部锚定",
+      "criterion": "两个公开 IK 偏移都使实际软管末端跟随独立目标，误差不超过 0.01L，并使沿长度分布的多个关节共同重新定向。",
+      "scoring_rule": {
+        "PASS": "两个偏移均满足实际末端到位、多关节共同响应和管身弯曲三个条件。",
+        "PARTIAL": "恰有一个偏移满足三个条件。",
+        "FAIL": "两个偏移均不满足，包括只移动目标、只平移整件资产或只有末段响应。"
+      },
+      "evidence_refs": ["image/01_ik_bend.png", "image/04_ik_lift.png"],
+      "verification": {"method": "functional_probe_and_world_space_measurement", "procedure": "启用 IK，每次从默认独立开始，对目标施加 (-0.15L,0,0.20L)、(-0.30L,0.15L,-0.20L) 的世界空间平移。刷新依赖图，测实际管身末端中心与目标锚点的距离，观察整条链的关节方向与实际管身形变。单有 IK 约束或目标坐标正确不计通过；不要求具体求解器、迭代次数或父子名称。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "RIG-04", "capability": "RIG", "points": 10,
+      "requirement_section": "4. 末端 IK 拖动与根部锚定",
+      "criterion": "FK 与 IK 摆姿中，实际软管根部漂移不超过 0.005L，曲线锚点与对应实际骨骼关节距离不超过 0.01L。",
+      "scoring_rule": {
+        "PASS": "所有独立 FK、组合 FK 和两个 IK 公开姿态均实际响应，且根部与所有对应锚点满足距离要求。",
+        "PARTIAL": "未达到 PASS，但至少一个实际响应的 FK 姿态和至少一个实际响应的 IK 姿态均满足根部与锚点要求。",
+        "FAIL": "既不满足 PASS，也不满足 PARTIAL，包括没有实际随骨骼变形的管身。"
+      },
+      "evidence_refs": ["image/01_ik_bend.png", "image/03_fk_pose.png", "image/04_ik_lift.png"],
+      "verification": {"method": "evaluated_attachment_measurement", "procedure": "复用公开行为试验，在世界空间比较软管根部与默认根部位置，并比较求值曲线驱动锚点与其实际骨骼关节位置。应使用参与可见管身的锚点而非任意辅助标记；可通过控制扰动确认对应关系。此项只计锚定和贴合，不按 FK/IK 到位数量重复奖励。无响应的静态模型不因根部未动获得分数。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "RIG-05", "capability": "RIG", "points": 5,
+      "requirement_section": "6. 恢复与交付",
+      "criterion": "任一公开摆姿后可按说明恢复同一平直默认位置和形态，并启用可继续操作的 IK，无需重跑脚本。",
+      "scoring_rule": {
+        "PASS": "组合 FK 与两个 IK 姿态均能恢复默认，且恢复后再次操作 FK/IK 仍有效。",
+        "PARTIAL": "未达到 PASS，但至少一个上述姿态能恢复默认并在恢复后继续有效调姿。",
+        "FAIL": "没有任何姿态能够恢复后继续调姿，或恢复必须重建整个资产。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "manual_reset_and_functional_probe", "procedure": "先记录默认管身位置和形态，在副本中完成三个指定姿态后分别按内置说明恢复，与初始记录对照。再次进行一次 FK 旋转和一次 IK 偏移，确认曲线与骨骼仍实时响应。无需内部变换全为零、无需删除 Action，也不要求专门的恢复按钮。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 10,
+      "requirement_section": "6. 恢复与交付",
+      "criterion": "build.py 在无网络的独立目录从空场景构建完整资产，资源闭合；保存并重新打开后，曲线与 FK/IK 控制仍可使用。",
+      "scoring_rule": {
+        "PASS": "独立构建并保存、保存后重新打开并保留两类控制两个条件均满足，且全过程不依赖未交付路径或网络。",
+        "PARTIAL": "提交资产可检查，两个条件恰有一个满足，且满足的过程不存在缺失依赖。",
+        "FAIL": "两个条件均不满足，或无法获得可检查的提交资产。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "isolated_rebuild_and_reopen", "procedure": "在独立临时目录禁用网络，按 build.py 头部说明使用 Blender5.1.2 从空场景运行，确认脚本未读取原 submission.blend 或本机未交付资源，生成保存文件。重新打开生成文件和提交文件，检查真实曲线及骨骼，并分别进行一次 FK 和 IK 冒烟检查；只检查文件可打开不获得本项独立分数。此为后续验收规程，本轮不执行构建器或评分器。", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

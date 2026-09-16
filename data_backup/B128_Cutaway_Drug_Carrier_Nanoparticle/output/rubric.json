@@ -1,0 +1,136 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Cutaway Drug Carrier Nanoparticle",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1v2DfBXEZW",
+    "id": "BV1v2DfBXEZW"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "This source is a geometry-only modeling exercise. Ninety points are distributed across shell shape, octant coverage, hollow wall construction, rounded rim geometry, cargo shape, internal arrangement, containment, and geometric finish. The ten pipeline points cover editable saved content, reproducible scene creation, and a render from that saved scene. Modifier names, settings, and object counts do not earn credit.",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "Spherical Shell and Octant Window",
+      "criterion": "The main body has a spherical exterior with consistent proportions in three dimensions.",
+      "scoring_rule": {
+        "PASS": "A substantial curved shell body recognizable as near-spherical exists, and its retained exterior follows one approximately spherical envelope with evenly rounded silhouettes in orthogonal and oblique views; individual cargo particles, when present, are visibly smaller.",
+        "PARTIAL": "A substantial curved shell body recognizable as near-spherical exists, but at least one PASS condition is unmet, such as moderate elongation, uneven curvature, or an undersized main body.",
+        "FAIL": "No substantial curved shell body recognizable as near-spherical exists. A missing body or a form distorted beyond recognition as a near-sphere is below this minimum."
+      },
+      "evidence_refs": ["image/01_cutaway_nanoparticle.png"],
+      "verification": {"method": "Evaluated geometry and multi-view inspection", "procedure": "Isolate the main shell in a copy of submission.blend. Inspect the evaluated exterior in three orthogonal views and an oblique view; compare retained surface distances to an approximate sphere fitted to the exterior. Judge exterior proportions separately from opening coverage, wall construction, and surface shading.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 15,
+      "requirement_section": "Spherical Shell and Octant Window",
+      "criterion": "One octant window exposes the cavity while the other seven octants, including the back, remain present.",
+      "scoring_rule": {
+        "PASS": "A recognizable spherical body retaining most of its exterior and having a localized opening exists; the exterior is absent in approximately one octant defined by three mutually perpendicular center planes and retained in the other seven, producing a rounded triangular window and an intact opposite back.",
+        "PARTIAL": "A recognizable spherical body retaining most of its exterior and having a localized opening exists, but any PASS condition is unmet, including inaccurate octant extent, skewed boundary directions, or an extra rear opening.",
+        "FAIL": "No recognizable spherical body retaining most of its exterior and having a localized opening exists; a closed sphere, hemisphere, open bowl, or broadly missing shell does not meet this minimum."
+      },
+      "evidence_refs": ["image/01_cutaway_nanoparticle.png", "image/02_hollow_shell.png"],
+      "verification": {"method": "Evaluated shell coverage and spatial inspection", "procedure": "Hide cargo in an inspection copy. Infer the shell center and window orientation from geometry, allowing arbitrary scene rotation. Inspect exterior coverage in the eight octants defined by the opening planes and confirm the rear stays closed. Inspect the view into the window for the three-sided outline. Do not demand scene-axis alignment or filled cut planes extending to the center.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 15,
+      "requirement_section": "Hollow Wall and Rounded Rim",
+      "criterion": "A continuous thick wall surrounds an open curved cavity and joins inner and outer surfaces around the opening.",
+      "scoring_rule": {
+        "PASS": "An exterior, an inner curved cavity surface, and a substantial connecting rim segment all exist; the full wall has clear approximately uniform thickness away from transitions, three connected rim bands, an open cargo-sized cavity, and a closed wall volume without cracks, overlapping layers, or internal partitions.",
+        "PARTIAL": "An exterior, an inner curved cavity surface, and a substantial connecting rim segment all exist, but any PASS condition is unmet, such as incomplete rim closure, irregular thickness, local intersections, or a partially obstructed cavity.",
+        "FAIL": "The exterior, inner curved cavity surface, and a substantial connecting rim segment do not all exist, or the result is a single sheet, two unconnected skins, or a solid body without an open cavity."
+      },
+      "evidence_refs": ["image/02_hollow_shell.png"],
+      "verification": {"method": "Evaluated cross-sections and mesh inspection", "procedure": "Inspect several temporary radial cross-sections through the retained shell and each rim band. Confirm inner and outer layers are joined into a closed wall volume, with approximately consistent radial separation and space in the cavity. Check evaluated boundaries and intersections geometrically; equivalent boolean, solidify, direct-mesh, or procedural implementations are allowed. The bands close only the wall thickness and must not be required to fill the cavity to its center.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 10,
+      "requirement_section": "Hollow Wall and Rounded Rim",
+      "criterion": "The rim edges and corner transitions have deliberate geometric rounding without losing the opening's shape.",
+      "scoring_rule": {
+        "PASS": "A substantial rim edge with actual rounded geometry exists, and rounding continues along the inner and outer rim edges and all three corner transitions while preserving the three-sided window and visible wall thickness.",
+        "PARTIAL": "A substantial rim edge with actual rounded geometry exists, but any PASS condition is unmet, including abrupt unrounded segments, uneven transition widths, overly swollen corners, or local loss of the window shape.",
+        "FAIL": "No substantial rim edge has actual rounded geometry; a sharp edge with only smooth shading or an indistinct depression does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_hollow_shell.png", "image/03_cargo_detail.png"],
+      "verification": {"method": "Rim geometry and silhouette inspection", "procedure": "Inspect the evaluated rim at close range with neutral shading, then inspect cross-sectional profiles at the inner edge, outer edge, and corners. Confirm curvature is geometric rather than only a normals effect. Assess rim rounding here; reserve faceting and shading discontinuities for GEO-08.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-05", "capability": "GEO", "points": 10,
+      "requirement_section": "Spherical Cargo",
+      "criterion": "The cargo is a populated group of distinct, similarly sized spherical bodies small enough for the cavity.",
+      "scoring_rule": {
+        "PASS": "A recognizable group of multiple distinct roughly spherical cargo bodies exists; the group is populated enough to read as a cargo cluster, and its bodies have near-spherical proportions, comparable sizes, and diameters visibly smaller than the cavity.",
+        "PARTIAL": "A recognizable group of multiple distinct roughly spherical cargo bodies exists, but any PASS condition is unmet, such as sparse population, some elongated bodies, strongly inconsistent sizes, or particles too large for the intended cavity.",
+        "FAIL": "No recognizable group of multiple distinct roughly spherical cargo bodies exists; an absent cluster, a single token object, flat discs, or one fused mass does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_cutaway_nanoparticle.png", "image/03_cargo_detail.png"],
+      "verification": {"method": "Evaluated cargo shape inspection", "procedure": "Inspect the cargo with the shell temporarily hidden and rotate through multiple views. Compare individual body dimensions and silhouettes, and compare body size to the cavity. Judge shape and populated character without requiring an exact count, particular object names, or independent mesh datablocks.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-06", "capability": "GEO", "points": 10,
+      "requirement_section": "Cluster Arrangement and Containment",
+      "criterion": "The cargo forms a compact irregular cluster with visible vertical spread and genuine depth layers.",
+      "scoring_rule": {
+        "PASS": "An identifiable multi-particle cluster associated with the shell or its cavity exists with distinct centers; it has at least two depth layers, staggered centers, visible cargo in the upper, middle, and lower cavity regions, and partial occlusions that preserve separate spherical identities.",
+        "PARTIAL": "An identifiable multi-particle cluster associated with the shell or its cavity exists with distinct centers, but any PASS condition is unmet, such as a mostly planar arrangement, excessive regularity, missing vertical coverage, or crowding that obscures some particle identities.",
+        "FAIL": "No identifiable multi-particle cluster associated with the shell or its cavity exists with distinct centers."
+      },
+      "evidence_refs": ["image/03_cargo_detail.png"],
+      "verification": {"method": "Cargo-center layout and multi-view inspection", "procedure": "Inspect the evaluated cargo centers relative to the opening-view direction and cavity. Compare front and side views to distinguish real depth from apparent image overlap. Check vertical coverage and compactness, then inspect partial occlusion in an oblique view. Do not score shell penetration here; inspect that separately in GEO-07.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-07", "capability": "GEO", "points": 10,
+      "requirement_section": "Cluster Arrangement and Containment",
+      "criterion": "Cargo fits within the hollow interior without penetrating the wall or blocking the defining rim bands.",
+      "scoring_rule": {
+        "PASS": "A hollow shell and a cargo group substantially occupying its cavity both exist; all cargo bodies fit inside the inner spherical envelope without entering shell material, deep cargo intersections do not destroy their separate forms, and the three rim bands remain readable with several particles visible through the opening.",
+        "PARTIAL": "A hollow shell and a cargo group substantially occupying its cavity both exist, but any PASS condition is unmet, such as local wall penetration, an escaping particle, deep particle overlap, or obstruction of a rim band.",
+        "FAIL": "A hollow shell and a cargo group substantially occupying its cavity do not both exist."
+      },
+      "evidence_refs": ["image/01_cutaway_nanoparticle.png", "image/03_cargo_detail.png"],
+      "verification": {"method": "Evaluated surface containment and intersection checks", "procedure": "Inspect cargo surfaces, not just centers, against the inner spherical envelope and shell volume using orthogonal views and temporary cross-sections. Check suspect intersections on evaluated geometry. Review the oblique opening view for particle visibility and rim obstruction. Touching cargo surfaces are permitted; inspect geometric placement independently of camera framing or lighting.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-08", "capability": "GEO", "points": 10,
+      "requirement_section": "Surface Finish",
+      "criterion": "Existing core curved surfaces have clean silhouettes and consistent smooth shading.",
+      "scoring_rule": {
+        "PASS": "At least one substantial curved shell surface or a recognizable group of rounded cargo bodies exists with an assessable curved form; the shell exterior, curved cavity, rim transitions, and cargo group are all present and have clean curved silhouettes and consistent shading without conspicuous faceting, spikes, pinching, inverted patches, or seams, and the geometric rim transitions stay legible.",
+        "PARTIAL": "At least one substantial curved shell surface or a recognizable group of rounded cargo bodies exists with an assessable curved form, but any PASS condition is unmet. This includes defects on existing surfaces or missing components that prevent assessment of the full set; substantive existing surfaces still establish the minimum.",
+        "FAIL": "No substantial curved shell surface or recognizable group of rounded cargo bodies exists with an assessable curved form; absent geometry, flat placeholders, or completely damaged forms do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_cutaway_nanoparticle.png", "image/02_hollow_shell.png", "image/03_cargo_detail.png"],
+      "verification": {"method": "Neutral-shaded geometry and normals inspection", "procedure": "Inspect existing core surfaces with neutral shading from front, side, and oblique angles, including silhouettes and grazing highlights. Check suspected inverted or discontinuous normals against evaluated geometry. Score finish only on substantive existing shell or cargo surfaces; do not treat an empty scene or absent surfaces as defect-free. Do not duplicate deductions for wrong octant extent or missing wall thickness.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The build script recreates an editable scene and saves a usable submission.blend.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with a modeled shell and cargo, and build.py runs from an empty scene, recreates the scene, and saves submission.blend; reopening that saved result preserves editable shell geometry, individually adjustable cargo placement, and render configuration without missing dependencies.",
+        "PARTIAL": "submission.blend opens with a modeled shell and cargo, but any PASS condition is unmet, including an absent or failing build.py, failure to save or reopen the rebuilt result, lost editability, or incomplete render configuration.",
+        "FAIL": "submission.blend is absent, cannot be opened, or does not contain both a modeled shell and cargo."
+      },
+      "evidence_refs": [],
+      "verification": {"method": "Saved-file inspection and isolated rebuild probe", "procedure": "Open the delivered submission.blend. Run build.py with Blender 5.1.2 in a temporary working location from an empty scene, then explicitly reopen the submission.blend file the script saved. Inspect modeled content, particle placement editability, dependencies, and retained camera/material/render configuration in that reopened file. An unsaved in-memory scene is not sufficient. Do not impose a submission-directory layout beyond the listed deliverables.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-02", "capability": "PIPE", "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The required PNG is a readable scene-derived rendering of the submitted model.",
+      "scoring_rule": {
+        "PASS": "B128_Cutaway_Drug_Carrier_Nanoparticle.png is a decodable rendering derived from the submitted scene; it shows the full shell silhouette, three rim bands, and cargo depth arrangement in an oblique opening view with readable lighting and background, and the saved scene uses Cycles with GPU rendering configured.",
+        "PARTIAL": "The required PNG is decodable and demonstrably derived from the submitted scene, but any PASS condition is unmet, including poor framing, unclear lighting, an obscured cavity, or a different saved render configuration.",
+        "FAIL": "The required PNG is absent or undecodable, or it is a reference image, viewport screenshot, unrelated image, or external replacement rather than a rendering of the submitted scene."
+      },
+      "evidence_refs": ["image/01_cutaway_nanoparticle.png"],
+      "verification": {"method": "Image decoding and saved-scene render comparison", "procedure": "Decode the required PNG, inspect the saved render engine/device and camera, and render a controlled comparison from the reopened submitted scene. Confirm scene-derived content and assess framing/readability, allowing normal sampling differences. Check geometry-specific defects only in their GEO rows; this row concerns the delivered image and its provenance.", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Seated Cat-Eared Girl",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1yzjv6nE1a",
+    "id": "BV1yzjv6nE1a"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 70,
+    "SURF": 20,
+    "PIPE": 10
+  },
+  "weighting_note": "Geometry receives 70 points because construction of the complete character is the main source scope. Those points are divided among independent head, face, hair, ear, seated-body, bow, local-editability, and finish outcomes. Surface points distinguish base material assignment from functional editable mesh-color painting. Delivery and saved-file reproducibility receive 10 points. Static modifiers and a visible timeline do not create procedural or animation scope.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Head and Facial Features",
+      "criterion": "A shaped, oversized head with full cheeks and a broad rounded lower face.",
+      "scoring_rule": {
+        "PASS": "The head has a rounded crown, full cheeks, a softly flattened broad lower face, and substantial depth without a pointed chin; its head-and-hair silhouette is wider than the seated body.",
+        "PARTIAL": "A volumetric rounded head with an identifiable front face exists above a smaller body or its intended attachment area. This minimum is met, but one or more PASS conditions are not met.",
+        "FAIL": "The following minimum is not met: A volumetric rounded head with an identifiable front face exists above a smaller body or its intended attachment area."
+      },
+      "evidence_refs": [
+        "image/01_character_overview.png",
+        "image/02_head_form.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "Open the saved asset and inspect front, side, and three-quarter solid views. Isolate the head if needed to compare the cheek, crown, lower-face, and depth silhouette with the head reference. Judge the large-head relationship only against any actual submitted body geometry.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Head and Facial Features",
+      "criterion": "Balanced shallow oval eyes and rounded human ears seated against the head.",
+      "scoring_rule": {
+        "PASS": "Both eyes are small vertical ovals of matching size and height with balanced spacing and facial contact; a rounded human ear is attached on each side and partly framed by the hair.",
+        "PARTIAL": "Two separate, visibly raised eye forms occupy the front of an actual head. This minimum is met, but one or more PASS conditions are not met.",
+        "FAIL": "The following minimum is not met: Two separate, visibly raised eye forms occupy the front of an actual head."
+      },
+      "evidence_refs": [
+        "image/01_character_overview.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "Inspect the face frontally and from both oblique sides using evaluated geometry. Confirm that the eyes have shallow volume and are attached to the face, then inspect the side-ear attachments. Color is evaluated separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Hair and Ear Silhouette",
+      "criterion": "A layered bob with a rounded rear mass, broad bangs, and tapering side locks.",
+      "scoring_rule": {
+        "PASS": "A rounded crown-and-back mass covers the scalp; layered bangs and long locks frame both cheeks with broad rounded volume and tapered ends. The locks remain visually distinct through intentional overlap, and the eyes and lower face remain exposed.",
+        "PARTIAL": "Volumetric hair covers the crown and includes at least one distinct front or side lock framing the face. This minimum is met, but one or more PASS conditions are not met.",
+        "FAIL": "The following minimum is not met: Volumetric hair covers the crown and includes at least one distinct front or side lock framing the face."
+      },
+      "evidence_refs": [
+        "image/01_character_overview.png",
+        "image/03_editable_hair.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "Inspect front, side, and rear evaluated geometry. Confirm actual crown and rear coverage, distinguish the bangs and side locks, and compare their width, flow, and taper with the references. Check that facial visibility results from the modeled arrangement.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Hair and Ear Silhouette",
+      "criterion": "Two integrated triangular cat ears with modeled inner recesses.",
+      "scoring_rule": {
+        "PASS": "Both top ears have soft triangular outlines, substantial outer rims, and modeled recessed inner areas; they balance across the head, join the hair at their bases, and have exposed tips.",
+        "PARTIAL": "Two volumetric ear forms rise above the hair and are recognizable as a paired top-ear feature. This minimum is met, but one or more PASS conditions are not met.",
+        "FAIL": "The following minimum is not met: Two volumetric ear forms rise above the hair and are recognizable as a paired top-ear feature."
+      },
+      "evidence_refs": [
+        "image/01_character_overview.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "Inspect both ears in neutral solid shading from the front and oblique angles. Use the evaluated surface to distinguish a genuine rim and recessed inner region from color alone; check each ear root against the surrounding hair.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Seated Body and Bow",
+      "criterion": "A tiny attached torso, paired front arms and hands, and outward rounded feet create a compact seated pose.",
+      "scoring_rule": {
+        "PASS": "A small rounded torso supports the head; two short front arms descend close together into rounded hands, and two broad feet project forward and outward. The body is balanced, attached without visible breaks, and gathers the hands and feet along a common supporting level.",
+        "PARTIAL": "An attached torso and at least two rounded limb forms beneath the head establish a recognizable compact seated body. This minimum is met, but one or more PASS conditions are not met.",
+        "FAIL": "The following minimum is not met: An attached torso and at least two rounded limb forms beneath the head establish a recognizable compact seated body."
+      },
+      "evidence_refs": [
+        "image/01_character_overview.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "Inspect the saved geometry from front and side views, temporarily hiding the bow only if necessary. Identify the torso, both arms and hands, and both feet. Compare the side projection and lower contact arrangement with the overview; verify attachments and common supporting level without requiring a particular world-unit scale.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Seated Body and Bow",
+      "criterion": "A proportionate three-dimensional neck bow with knot, loops, and shaped tails.",
+      "scoring_rule": {
+        "PASS": "The centered bow has a rounded knot, two broad pinched loops, and two short downward tails with shaped ends. It fits the upper torso, remains separate in silhouette from the hands, and does not obscure the face.",
+        "PARTIAL": "A three-dimensional bow beneath the face contains a center knot and a loop on each side. This minimum is met, but one or more PASS conditions are not met.",
+        "FAIL": "The following minimum is not met: A three-dimensional bow beneath the face contains a center knot and a loop on each side."
+      },
+      "evidence_refs": [
+        "image/01_character_overview.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "Inspect front and oblique evaluated geometry beneath the face. Confirm the knot, loop pinching, and tail shapes, then assess the bow at its actual final size against the torso and hands.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Editable Geometry and Finish",
+      "criterion": "Character parts support local shape editing, including compact editable controls for the long side locks.",
+      "scoring_rule": {
+        "PASS": "The head, locks, ears, eyes, body parts, and bow can be shaped independently; each long side lock has an editable path or equivalent compact shape controls that alter its curvature without changing the head or adjacent locks.",
+        "PARTIAL": "An actual head and at least one modeled hair lock have independently editable geometry. This minimum is met, but one or more PASS conditions are not met.",
+        "FAIL": "The following minimum is not met: An actual head and at least one modeled hair lock have independently editable geometry."
+      },
+      "evidence_refs": [
+        "image/03_editable_hair.png"
+      ],
+      "verification": {
+        "method": "editable_data_inspection_and_local_shape_probe",
+        "procedure": "In a disposable copy, identify the local editable data of the major parts. Move a control point or equivalent shape control of each long side lock and update the evaluated scene. Confirm a local change in curvature and unchanged head and adjacent locks, then discard the probe. Mere object names or the presence of a modifier do not establish the result.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-08",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Editable Geometry and Finish",
+      "criterion": "Smooth rounded core surfaces and clean three-dimensional joins.",
+      "scoring_rule": {
+        "PASS": "All submitted major surfaces have smooth rounded silhouettes and clean shading from front, side, and three-quarter views, with no visible cracks, detached parts, accidental spikes, large self-intersections, or shading bands; the complete character remains coherent in depth.",
+        "PARTIAL": "The actual head and a substantial hair mass are both present and display predominantly smooth, usable surface regions. This minimum is met, but one or more PASS conditions are not met.",
+        "FAIL": "The following minimum is not met: The actual head and a substantial hair mass are both present and display predominantly smooth, usable surface regions."
+      },
+      "evidence_refs": [
+        "image/01_character_overview.png",
+        "image/02_head_form.png",
+        "image/03_editable_hair.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "Orbit the actual asset in neutral solid shading and inspect a controlled neutral-material render. Evaluate existing head and hair surfaces for the minimum, then check all present surfaces and joins. Missing minor accessories alone cannot force FAIL here; their completion is assessed in their own rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Color and Surface",
+      "criterion": "Correctly assigned brown, peach, and near-black surface groups with a soft matte response.",
+      "scoring_rule": {
+        "PASS": "Hair and outer cat ears are coordinated brown; face, human ears, torso, hands, and feet are warm peach; eyes and bow loops and tails are near-black, with a compatible knot color. These existing surfaces render opaque and mostly matte with restrained readable highlights and no incorrect color leakage between groups.",
+        "PARTIAL": "Actual head or skin geometry and a substantial hair region carry visibly distinct, assigned peach and brown materials or material colors. This minimum is met, but one or more PASS conditions are not met.",
+        "FAIL": "The following minimum is not met: Actual head or skin geometry and a substantial hair region carry visibly distinct, assigned peach and brown materials or material colors."
+      },
+      "evidence_refs": [
+        "image/01_character_overview.png"
+      ],
+      "verification": {
+        "method": "material_assignment_inspection_and_controlled_render",
+        "procedure": "Inspect actual surface assignments and render the asset under broad neutral lighting. Compare the base palette and opaque, restrained response with the overview. Require the listed regions for PASS, but evaluate meaningful existing head and hair surfaces for the minimum so missing accessories alone do not force FAIL. Soft local accents are assessed separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Color and Surface",
+      "criterion": "Rendered editable mesh colors provide blended cheek, inner-ear, hand, and foot accents.",
+      "scoring_rule": {
+        "PASS": "Editable mesh color attributes drive the rendered skin colors and soft warm accents on both cheeks, the cat-ear recesses, hands, and feet. The accents blend gently with the base color and remain editable independently of the hair and eyes.",
+        "PARTIAL": "A mesh color attribute on actual skin geometry stores local color variation and visibly influences its rendered material. This minimum is met, but one or more PASS conditions are not met.",
+        "FAIL": "The following minimum is not met: A mesh color attribute on actual skin geometry stores local color variation and visibly influences its rendered material."
+      },
+      "evidence_refs": [
+        "image/01_character_overview.png"
+      ],
+      "verification": {
+        "method": "mesh_color_data_inspection_local_color_probe_and_render",
+        "procedure": "Trace the actual skin material to its stored mesh color data. Inspect the final rendered cheeks, ear recesses, hands, and feet for gentle transitions. In a disposable copy change a small cheek color region to an obvious test color, render a close-up, and confirm a localized visible change while hair and eyes remain unchanged. Discard the probe; an unused color attribute or a disconnected material does not meet the minimum.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The delivered script recreates and saves a reopenable scene, and the PNG comes from that scene.",
+      "scoring_rule": {
+        "PASS": "All three required files are present; build.py runs from an empty Blender 5.1.2 scene with the empty input directory, recreates the editable character and its rendered local colors, and saves submission.blend. Reopening that saved result preserves the geometry, color controls, camera, lighting, and Cycles GPU setup. The named PNG is an actual render of that scene with the complete figure clearly framed.",
+        "PARTIAL": "A readable submission.blend containing the modeled character and a build.py file intended to recreate it are both delivered. This minimum is met, but one or more PASS conditions are not met.",
+        "FAIL": "The following minimum is not met: A readable submission.blend containing the modeled character and a build.py file intended to recreate it are both delivered."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "isolated_rebuild_saved_file_reopen_and_render_comparison",
+        "procedure": "In an isolated output directory run build.py with Blender 5.1.2 from an empty scene and verify that it writes submission.blend. Close that process, open the saved file in a fresh Blender process, inspect geometry and working color attributes, and render from the saved camera. Compare this result with B105_Seated_Cat_Eared_Girl.png and confirm that the complete figure is visible. Do not credit an unsaved in-memory rebuild or a source-image substitute.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

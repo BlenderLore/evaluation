@@ -1,0 +1,225 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Mandarin with Textured Leaves",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV14tFrzLELu",
+    "id": "BV14tFrzLELu"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 45,
+    "SURF": 50,
+    "PIPE": 5
+  },
+  "weighting_note": "Geometry receives 45 points for fruit form, stem attachment, two curved leaves, and finish. Surface work receives 50 points because the demonstrated skill combines image alignment, foliage response, and procedural citrus peel at two relief scales. PIPE receives 5 points for the complete saved and reproducible deliverable. Native geometry construction is not scored as PROC, and incidental presentation does not receive a separate SCN allocation.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Fruit Body and Stem",
+      "criterion": "The fruit has a full rounded body, gentle vertical flattening, and a shallow top recess.",
+      "scoring_rule": {
+        "PASS": "A continuous full fruit volume is round across its width, visibly but gently flattened vertically, and has rounded shoulders surrounding a shallow top recess.",
+        "PARTIAL": "A continuous rounded fruit volume is present and recognizable as the main body. Not all PASS conditions are met.",
+        "FAIL": "No recognizable continuous rounded fruit volume exists, or the body is only a flat or open surface."
+      },
+      "evidence_refs": [
+        "image/01_mandarin_result.png",
+        "image/02_stem_attachment.png"
+      ],
+      "verification": {
+        "method": "Evaluated geometry inspection and neutral shaded views",
+        "procedure": "In a reopened copy of submission.blend, isolate the fruit's evaluated geometry. Inspect front, side, and elevated views with neutral shading. Confirm a full volume, compare vertical and horizontal proportions, and inspect the top recess separately from any material relief. Do not use vertex count or primitive type as evidence of the required form.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Fruit Body and Stem",
+      "criterion": "A short slender stem bends, tapers, and joins the recessed fruit top.",
+      "scoring_rule": {
+        "PASS": "The stem is short and slender relative to the fruit, bends visibly along its length, tapers toward its upper end, and meets the top recess without a visible gap.",
+        "PARTIAL": "A recognizable slender three-dimensional stem exists above the fruit. Not all PASS conditions are met.",
+        "FAIL": "No recognizable slender three-dimensional stem exists above the fruit, or no fruit body exists to establish its attachment and scale."
+      },
+      "evidence_refs": [
+        "image/02_stem_attachment.png"
+      ],
+      "verification": {
+        "method": "Evaluated geometry and attachment inspection",
+        "procedure": "Inspect the stem from two side directions and from above in a reopened artifact. Trace its centerline and width toward the tip, then inspect the stem-to-fruit junction with clipping or a close view. Judge relative scale and contact from the actual surfaces, independently of leaf placement.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Curved Leaf Pair",
+      "criterion": "Two shaped leaves have pointed blades, petioles, thin edges, distinct bends, and coherent placement.",
+      "scoring_rule": {
+        "PASS": "Two leaves have elongated middle-wide blades, pointed tips, narrow petioles, shallow central folds, broad bends, and thin visible edge thickness. They extend on different sides in distinct orientations, one drooping and one arching with a curled tip. Their petioles meet the stem, both blades remain readable, and there are no unintended blade intersections.",
+        "PARTIAL": "At least one leaf has a recognizable elongated three-dimensional blade, a pointed tip, a narrow base or petiole, and a visible bend above the fruit. Not all PASS conditions are met.",
+        "FAIL": "No leaf meets that minimum, or the only foliage consists of flat image rectangles or unshaped flat blades."
+      },
+      "evidence_refs": [
+        "image/03_curved_leaf_form.png",
+        "image/01_mandarin_result.png"
+      ],
+      "verification": {
+        "method": "Evaluated geometry inspection from multiple directions",
+        "procedure": "Inspect evaluated leaves in top, side, and three-quarter views. Confirm blade outline, petiole transition, fold, longitudinal curvature, and edge thickness on each leaf. Restore the full scene and inspect attachment, relative directions, droop versus arch, and unintended intersections. Credit actual visible form without requiring a modifier stack or separate object count.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Geometry Finish",
+      "criterion": "Existing core geometry has coherent smooth shading and clean surfaces at close range.",
+      "scoring_rule": {
+        "PASS": "The fruit, stem, and both leaves have smooth silhouettes and coherent shading, clean stem-base transitions, and thin consistent leaf edges, with no open holes, doubled surfaces, prominent facets, or unintended shading creases.",
+        "PARTIAL": "The fruit and at least one stem or leaf are present as substantial core surfaces and demonstrate generally smooth shading over their broad visible regions. Not all PASS conditions are met.",
+        "FAIL": "The fruit and at least one stem or leaf are not both present as substantial core surfaces, or their broad visible regions do not demonstrate generally smooth shading."
+      },
+      "evidence_refs": [
+        "image/01_mandarin_result.png"
+      ],
+      "verification": {
+        "method": "Neutral shaded close-up inspection",
+        "procedure": "Temporarily replace materials in an inspection copy with a neutral shader and view the fruit, stem junction, and existing leaf edges at close range. Separate unwanted faceting, doubled faces, holes, and normal discontinuities from intended shape and material relief. A missing minor part blocks PASS but does not alone force FAIL when the stated existing-core minimum is met.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Leaf and Stem Surfaces",
+      "criterion": "Both leaves visibly use the supplied image with aligned central veins and clean UV coverage.",
+      "scoring_rule": {
+        "PASS": "The supplied leaf image actually colors both blades. Each central vein runs from petiole toward tip, branching veins remain recognizable, and the mapping has no conspicuous stretching, unintended seams, or white background patches. Both blades retain green tonal variation.",
+        "PARTIAL": "At least one existing blade visibly uses the supplied leaf image and has a recognizable central vein and branching vein detail. Not all PASS conditions are met.",
+        "FAIL": "No existing blade meets the stated image-use and recognizable-vein minimum, including when the image is merely loaded but unused."
+      },
+      "evidence_refs": [
+        "image/04_leaf_texture_alignment.png",
+        "image/01_mandarin_result.png"
+      ],
+      "verification": {
+        "method": "Image provenance, active material tracing, UV inspection, and controlled color render",
+        "procedure": "Trace the active leaf material's color dependency to the supplied image and confirm that it is used on evaluated blade surfaces. Inspect UV coordinates against the image and render a diffuse color inspection view. Check both central veins and blade coverage. Require correspondence to leaf_texture.jpg while allowing material color correction and packed copies; unused images or materials do not count.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Leaf and Stem Surfaces",
+      "criterion": "Leaf blades have a restrained waxy response with roughness variation and fine relief.",
+      "scoring_rule": {
+        "PASS": "Both existing blades are nonmetallic and show restrained waxy highlights, spatial roughness variation, and fine relief, with the photographed vein pattern remaining legible and dominant.",
+        "PARTIAL": "At least one existing blade has a nonmetallic surface with spatial roughness variation or fine relief that visibly affects its light response. Not all PASS conditions are met.",
+        "FAIL": "No existing blade demonstrates the stated nonmetallic response and at least one visible surface-variation behavior; absent blades cannot establish this minimum."
+      },
+      "evidence_refs": [
+        "image/01_mandarin_result.png"
+      ],
+      "verification": {
+        "method": "Controlled lighting comparison and active material inspection",
+        "procedure": "Use a broad directional light in an inspection copy and render close views of both leaf blades. Examine highlights for spatial roughness variation and small-scale relief. Trace only connected material paths in actual use, and temporarily neutralize roughness variation and relief separately to confirm their effects. Judge surface response independently from the UV alignment assessed elsewhere.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "Leaf and Stem Surfaces",
+      "criterion": "The stem is dark green with subtle roughness and surface variation.",
+      "scoring_rule": {
+        "PASS": "The existing stem is dark green, visibly darker than broad leaf highlights, and has subtle nonuniform roughness and surface detail while retaining its clear form.",
+        "PARTIAL": "An existing stem has an applied green surface whose color is visible in a controlled render. Not all PASS conditions are met.",
+        "FAIL": "No existing stem has an applied green surface visible in a controlled render."
+      },
+      "evidence_refs": [
+        "image/01_mandarin_result.png"
+      ],
+      "verification": {
+        "method": "Active surface inspection and close render",
+        "procedure": "Inspect the stem's assigned active material and render a close view with the leaf pair under common lighting. Confirm green color, its relationship to leaf highlights, and subtle nonuniform light response. Material nodes disconnected from the stem's rendered surface do not establish variation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Procedural Orange Peel",
+      "criterion": "Procedural orange color variation covers the fruit without mapping seams or obvious tiling.",
+      "scoring_rule": {
+        "PASS": "The full fruit body has a procedurally generated warm orange base with irregular lighter and darker patches, no visible mapping seams or obvious tiling, and editable color variation. No external peel image contributes to the peel appearance.",
+        "PARTIAL": "An existing fruit body has procedurally generated warm orange color variation visibly affecting a substantial part of its surface, without relying on an external peel image. Not all PASS conditions are met.",
+        "FAIL": "No existing fruit body demonstrates the stated procedural warm-orange variation minimum, or its peel appearance relies on an external peel image."
+      },
+      "evidence_refs": [
+        "image/01_mandarin_result.png"
+      ],
+      "verification": {
+        "method": "Active color dependency inspection and controlled diffuse views",
+        "procedure": "Trace the active fruit material's color inputs to confirm procedural generation. Render diffuse color views from several directions to separate color variation from lighting, checking front, back, and pole regions for seams and tiling. Temporarily adjust the material's color-variation setting in an inspection copy and confirm that the fruit color distribution changes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-05",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Procedural Orange Peel",
+      "criterion": "Fine pores and broader relief produce an editable layered citrus-peel response.",
+      "scoring_rule": {
+        "PASS": "The existing fruit surface visibly combines dense fine pores and broader gentler relief under directional light, with soft glossy highlights and a rounded, unspiked silhouette. Fine-detail size, fine-detail strength, and broader-relief strength are independently editable. Changing either strength changes that layer while retaining the other layer and the overall fruit shape.",
+        "PARTIAL": "The existing fruit surface has at least one procedural relief scale that visibly changes the rendered light response while retaining a rounded silhouette, and its relief amount is editable. Not all PASS conditions are met.",
+        "FAIL": "No existing fruit surface demonstrates the stated visible procedural relief, rounded-silhouette, and editability minimum; a disconnected relief graph or color-only texture does not qualify."
+      },
+      "evidence_refs": [
+        "image/01_mandarin_result.png"
+      ],
+      "verification": {
+        "method": "Controlled grazing-light renders and material function probes",
+        "procedure": "Render a peel close-up and the whole fruit under broad directional light. In an inspection copy, vary fine-detail size, then reduce and restore each relief strength separately while holding color, lighting, and geometry constant. Compare renders for dense pores and broader relief, confirm independent effects, and inspect the silhouette for spikes or excessive displacement. Bump and displacement are equally eligible when the required visible effects are achieved.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The delivered script recreates and saves a portable scene whose actual render matches the submitted PNG.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with working assets, build.py independently recreates and saves it from an empty Blender file using relative input paths, and the relocated rebuilt file reopens with the complete scene and working texture. The required PNG is a Cycles GPU render of that saved scene, with the whole asset framed clearly and matching geometry and materials.",
+        "PARTIAL": "submission.blend opens with an inspectable modeled fruit, and both build.py and the required PNG are supplied, but at least one recreation, save, dependency, portability, render-origin, or framing condition is not met. Not all PASS conditions are met.",
+        "FAIL": "submission.blend cannot be opened with an inspectable modeled fruit, build.py is missing, or the required PNG is missing."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Future clean rebuild, saved-file reopening, relocation, and render comparison",
+        "procedure": "Copy the package to a different directory. Open the submitted blend and inspect its image dependencies. From an empty Blender 5.1.2 file and a working directory unrelated to the package, run build.py and confirm that it writes submission.blend. Close that process, then reopen the newly saved file in another Blender process and verify geometry, active materials, UVs, and image availability. Render the saved file's camera using its Cycles GPU configuration and compare the image with the required PNG, checking full framing and matching scene content. This procedure is specified only and has not been run during authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

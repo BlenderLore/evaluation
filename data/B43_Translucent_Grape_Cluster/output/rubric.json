@@ -1,0 +1,205 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Translucent Grape Cluster",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1j4tw66ExR",
+    "id": "BV1j4tw66ExR"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 40,
+    "PROC": 10,
+    "SURF": 35,
+    "SCN": 5,
+    "PIPE": 10
+  },
+  "weighting_note": "Final geometry receives 40 and surface appearance 35, reflecting the static source outcome. Editable stem generation receives 10, presentation 5, and delivery 10. The source freezes its packing and removes the simulation world, so no retained simulation or SIM points are required.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 20,
+      "requirement_section": "Grape Geometry and Arrangement",
+      "criterion": "A dense static three-dimensional bunch has a broad upper body and tapered lower tip.",
+      "scoring_rule": {
+        "PASS": "The bunch is densely packed, broad above and tapered below, with irregular depth staggering in front, side, and oblique views; its final layout is fixed across the presentation timeline.",
+        "PARTIAL": "Multiple grapes form one recognizable bunch. Not all PASS conditions are met.",
+        "FAIL": "No recognizable bunch of multiple grapes is present."
+      },
+      "evidence_refs": [
+        "image/01_grape_cluster.png",
+        "image/02_physical_packing.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled evaluation",
+        "procedure": "Inspect evaluated fruit geometry from front, side, and oblique orthographic views; assess the cluster envelope and depth distribution and compare layout across timeline frames.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Grape Geometry and Arrangement",
+      "criterion": "Separate rounded fruits retain smooth, slightly elongated forms and plausible contacts.",
+      "scoring_rule": {
+        "PASS": "All visible grapes are individually editable, smooth and slightly elongated; close contacts preserve silhouettes without deep intersections, large holes, or isolated outliers.",
+        "PARTIAL": "Multiple individually editable rounded fruits are present. Not all PASS conditions are met.",
+        "FAIL": "Multiple individually editable rounded fruits are absent."
+      },
+      "evidence_refs": [
+        "image/01_grape_cluster.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled evaluation",
+        "procedure": "Isolate the grape geometry and inspect flat neutral material renders and evaluated surfaces around contacts; test independent fruit selection and editing.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Branching Stem and Editable Structure",
+      "criterion": "A rounded, tapered branching stem joins the upper bunch.",
+      "scoring_rule": {
+        "PASS": "The stem rises above the fruit, bends gently, narrows from trunk to branches, and has continuous rounded junctions entering the upper bunch.",
+        "PARTIAL": "A connected stem with at least one branch reaches the bunch. Not all PASS conditions are met.",
+        "FAIL": "No connected stem with a branch reaches the bunch."
+      },
+      "evidence_refs": [
+        "image/03_stem_structure.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled evaluation",
+        "procedure": "Inspect the evaluated stem in isolation and in the presentation arrangement from multiple directions; trace branch junctions and connections.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Branching Stem and Editable Structure",
+      "criterion": "Editable path and local radius changes regenerate the connected stem.",
+      "scoring_rule": {
+        "PASS": "Both a path-point edit and a local radius edit predictably change the corresponding evaluated stem region while retaining connected branches.",
+        "PARTIAL": "An editable path or local thickness parameter produces a real stem geometry change. Not all PASS conditions are met.",
+        "FAIL": "Neither a path edit nor a local thickness edit produces a real stem geometry change."
+      },
+      "evidence_refs": [
+        "image/03_stem_structure.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled evaluation",
+        "procedure": "On a temporary copy, move a mid-stem path point and alter one branch radius; compare evaluated meshes before and after, then restore values.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Fruit and Stem Materials",
+      "criterion": "Grape skin combines broad red-purple variation with fine pale speckles.",
+      "scoring_rule": {
+        "PASS": "Visible grapes have broad red-purple variation plus clearly finer scattered pale speckles, covering surfaces without conspicuous stretching, seams, or uniform spot repetition.",
+        "PARTIAL": "An applied grape material shows red-purple color and spatial variation. Not all PASS conditions are met.",
+        "FAIL": "No applied grape material combines red-purple color with spatial variation."
+      },
+      "evidence_refs": [
+        "image/01_grape_cluster.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled evaluation",
+        "procedure": "Render front and reverse grape surfaces under neutral lighting and inspect material coordinate coverage; distinguish broad variation from fine speckles.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Fruit and Stem Materials",
+      "criterion": "Fruit skin has gentle relief, varying highlights, and soft internal light response.",
+      "scoring_rule": {
+        "PASS": "Grapes combine restrained relief and roughness variation with soft light spread beneath the skin and at thin edges, while retaining solid bodies rather than hollow clear-glass appearance.",
+        "PARTIAL": "An applied fruit material shows at least one of surface relief, roughness variation, or soft internal light spread. Not all PASS conditions are met.",
+        "FAIL": "The fruit is absent or its applied material shows none of surface relief, roughness variation, and soft internal light spread."
+      },
+      "evidence_refs": [
+        "image/01_grape_cluster.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled evaluation",
+        "procedure": "Use controlled front, grazing, and rear illumination on a temporary copy; inspect relief, highlight variation, and light spread on the actual applied fruit materials.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "Fruit and Stem Materials",
+      "criterion": "The stem has a distinct varied yellow-green organic finish.",
+      "scoring_rule": {
+        "PASS": "The stem has yellow-green to muted brown variation, subtle relief, and a distinct highlight response across its visible surface.",
+        "PARTIAL": "The present stem has an applied material visually distinct from the fruit. Not all PASS conditions are met.",
+        "FAIL": "The stem is absent or has no applied material visually distinct from the fruit."
+      },
+      "evidence_refs": [
+        "image/01_grape_cluster.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled evaluation",
+        "procedure": "Inspect the applied stem material in close-up under neutral and grazing illumination; compare it with the fruit.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "Studio Presentation",
+      "criterion": "A lavender studio composition clearly exposes the whole asset and its surface response.",
+      "scoring_rule": {
+        "PASS": "The entire bunch and stem fit with clear surrounding space against a pale lavender backdrop with a smooth floor-to-wall transition; lighting reveals rounded forms, speckles, and translucent response without preparation geometry.",
+        "PARTIAL": "A rendered presentation shows the bunch and its stem. Not all PASS conditions are met.",
+        "FAIL": "No rendered presentation shows both the bunch and its stem."
+      },
+      "evidence_refs": [
+        "image/01_grape_cluster.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled evaluation",
+        "procedure": "Render the submitted presentation camera and inspect framing, backdrop continuity, light response, and absence of the preparation container.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable project, reproducible build script, and authentic PNG are delivered.",
+      "scoring_rule": {
+        "PASS": "All three named files exist; the blend retains the requested editable asset and procedural stem, build.py rebuilds them from the stated start, and the PNG is rendered from that scene using Blender 5.1.2 with Cycles GPU settings.",
+        "PARTIAL": "A readable submission.blend contains the recognizable grape asset. Not all PASS conditions are met.",
+        "FAIL": "submission.blend is absent, unreadable, or lacks a recognizable grape asset."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact inspection and controlled evaluation",
+        "procedure": "Open the blend, inspect the assets and render settings, run build.py in a clean Blender 5.1.2 process, and compare its generated scene and a controlled render with the submitted blend and PNG. This procedure is specified for future verification, not executed during authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

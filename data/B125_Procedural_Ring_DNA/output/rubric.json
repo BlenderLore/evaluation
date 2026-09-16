@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Ring DNA",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1YQDfBJEXq",
+    "id": "BV1YQDfBJEXq"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 55, "PROC": 35, "PIPE": 10},
+  "weighting_note": "Geometry receives 55 points across overall ring form, spatial twist, rod coverage, bead relationships, and round-surface finish. Procedural behavior receives 35 points for live attachment, closed-ring controls, and independent thickness changes. Delivery receives 10 points. The source teaches native geometry without a material or animation outcome, so neither incidental shading nor camera existence receives a separate capability allocation.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Closed Double Helix",
+      "criterion": "The default geometry forms a complete circular ring with an open center and clean closure of both backbones.",
+      "scoring_rule": {
+        "PASS": "At least three quarters of a recognizable two-backbone ring is present, and the complete result has both backbones closed, a clearly open center, an outer-diameter to maximum-backbone-separation ratio approximately between 8 and 14, and a join with regular spacing and no gap, duplicate overlap, kink, or extra bead cluster.",
+        "PARTIAL": "At least three quarters of a recognizable two-backbone ring is present, but one or more PASS conditions are unmet.",
+        "FAIL": "Less than three quarters of a recognizable two-backbone ring is present, including an empty result, an isolated straight helix, or a single circular strand."
+      },
+      "evidence_refs": ["image/01_ring_overview.png", "image/03_oblique_ring.png"],
+      "verification": {
+        "method": "Evaluated geometry measurement and multi-angle inspection",
+        "procedure": "Inspect the default saved result in a face-on view and orbit around it. Identify the two backbone centerlines and follow each through its join. Measure the outer ring diameter and maximum centerline separation in the ring's principal plane and cross-section. Examine the closure locally for discontinuity or duplicated sections. Assess closure here; assess helical turn count and depth in GEO-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Closed Double Helix",
+      "criterion": "The two backbones form a spatial double helix with eight evenly progressing turns around the ring.",
+      "scoring_rule": {
+        "PASS": "A curved section containing at least one complete spatial helical turn of two distinct backbones exists, and the default full ring contains eight complete local-centerline turns, approximately opposite backbone positions, consistent handedness, and evenly progressing twist with real front-to-back depth at projected crossings.",
+        "PARTIAL": "A curved section containing at least one complete spatial helical turn of two distinct backbones exists, but one or more PASS conditions are unmet.",
+        "FAIL": "No curved section contains one complete spatial helical turn of two distinct backbones; this includes flat overlapping sinusoidal rails or an ordinary untwisted circular ladder."
+      },
+      "evidence_refs": ["image/01_ring_overview.png", "image/03_oblique_ring.png"],
+      "verification": {
+        "method": "Centerline tracing and orbit inspection",
+        "procedure": "In a temporary inspection copy, trace the pair direction relative to the circular centerline through one complete traversal, counting full rotations rather than front-view lens shapes. Compare local turn spacing and inspect apparent crossings from an oblique angle to verify that the backbones remain spatially distinct. Do not penalize a closure defect again here unless it independently changes the twist geometry.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Beads and Rods",
+      "criterion": "Round backbone rods and transverse rungs create a complete, open, regularly repeated lattice.",
+      "scoring_rule": {
+        "PASS": "At least one curved section contains three successive transverse rungs and connecting rods on both backbones, and round rods cover both complete backbones and regularly pair corresponding joints around the ring, with several separated rungs in every full turn, no unsupported or missing rod sections, and no filled sheet between the rungs.",
+        "PARTIAL": "At least one curved section contains three successive transverse rungs and connecting rods on both backbones, but one or more PASS conditions are unmet.",
+        "FAIL": "No curved section contains three successive transverse rungs and connecting rods on both backbones, including bead-only chains, rails without rungs, or a filled ribbon without a readable rod lattice."
+      },
+      "evidence_refs": ["image/01_ring_overview.png", "image/02_joint_detail.png"],
+      "verification": {
+        "method": "Evaluated rod-network inspection",
+        "procedure": "Follow the rod network around the saved ring from multiple views. Verify both longitudinal connections and transverse pair connections on an entire turn and then around the remaining circumference. Check that each rung has a round three-dimensional profile and the spaces between rungs remain open. Assess rod coverage here, reserving joint contact and bead sizing for GEO-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Beads and Rods",
+      "criterion": "Spherical joints, rod thickness, and bead-to-rod contact give the lattice readable and consistent proportions.",
+      "scoring_rule": {
+        "PASS": "At least one curved section contains three successive paired spherical joints with connecting rods, and joints occupy the repeated backbone and rung connection sites across the ring, have consistent size, are approximately 2 to 3.5 times rod diameter, enclose their rod ends without air gaps, and remain individually separated along the backbones by visible rod spans without unrelated floating beads.",
+        "PARTIAL": "At least one curved section contains three successive paired spherical joints with connecting rods, but one or more PASS conditions are unmet.",
+        "FAIL": "No curved section contains three successive paired spherical joints with connecting rods, or the putative joints are not recognizable as spherical beads."
+      },
+      "evidence_refs": ["image/02_joint_detail.png"],
+      "verification": {
+        "method": "Local geometry measurement and joint inspection",
+        "procedure": "Inspect populated sections at the top, side, and closure of the ring. Measure representative bead and rod diameters, compare sizes around the structure, and inspect rod ends within the joint spheres. Confirm visible rod spans separate neighboring beads. A missing rod is evaluated in GEO-03; this row checks actual joints and contacts where the components exist, as well as missing bead coverage.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Geometry Finish and Presentation",
+      "criterion": "The populated bead and rod surfaces have rounded silhouettes and clean smooth shading.",
+      "scoring_rule": {
+        "PASS": "A populated curved section with at least three successive paired bead joints and connecting rods exists, and its beads and rods, as well as the remaining visible bead and rod surfaces, have round silhouettes and smooth shading without obvious low-sided outlines, broken normals, or shading seams; spherical joints remain visually distinct from cylindrical rods.",
+        "PARTIAL": "A populated curved section with at least three successive paired bead joints and connecting rods exists and demonstrates rounded solid surfaces on both component types, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no populated curved section with at least three successive paired bead joints and connecting rods demonstrating rounded solid surfaces on both component types, including flat disks or line-only output."
+      },
+      "evidence_refs": ["image/02_joint_detail.png", "image/03_oblique_ring.png"],
+      "verification": {
+        "method": "Neutral close-view surface inspection",
+        "procedure": "Inspect the evaluated geometry of an existing curved section close enough to see bead silhouettes and rod cross-sections, using neutral solid shading or a controlled neutral render. Orbit and inspect both component types for faceting, normal discontinuities, and unwanted flattening. Do not fail this finish row solely for a missing minor component already assessed in the coverage rows; absent surfaces cannot supply the stated minimum.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Live Geometric Controls",
+      "criterion": "Beads and rods remain linked to a shared live double-helix construction when backbone separation changes.",
+      "scoring_rule": {
+        "PASS": "A live populated curved section with at least three successive paired bead joints and connecting rods responds to a backbone-separation control, and changing that control by approximately 20% updates both backbones, bead centers, and rod endpoints coherently throughout the complete ring without manual repositioning or rerunning build.py, while preserving attachment and readable rungs.",
+        "PARTIAL": "A live populated curved section with at least three successive paired bead joints and connecting rods responds to a backbone-separation control, but one or more PASS conditions are unmet.",
+        "FAIL": "No live populated curved section with at least three successive paired bead joints and connecting rods responds to a backbone-separation control, including a baked display mesh or a control that affects only an unused source."
+      },
+      "evidence_refs": ["image/02_joint_detail.png", "image/01_ring_overview.png"],
+      "verification": {
+        "method": "Saved-scene functional probe",
+        "procedure": "Open a temporary copy of submission.blend, identify the separation control, record the default state, increase separation by approximately 20%, and reevaluate the scene without executing build.py. Track bead centers and rod endpoints in populated sections around the circumference, confirming that they follow the same changed structure. Restore the default. Judge changed relationships here, without repeating baseline static geometry deductions.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Live Geometric Controls",
+      "criterion": "Ring-size and whole-turn controls produce coherent closed alternatives from the saved construction.",
+      "scoring_rule": {
+        "PASS": "At least one ring-size or whole-turn control visibly changes a populated ring derived from the saved construction, and both controls are identifiable and functional: an approximately 20% ring-size change preserves bead and rod radii, and that change and turn counts of six and ten produce closed two-backbone rings with attached beads and rods and readable repeated rungs without rebuilding by hand or rerunning build.py; the saved default has eight turns.",
+        "PARTIAL": "At least one ring-size or whole-turn control visibly changes a populated ring derived from the saved construction, but one or more PASS conditions are unmet.",
+        "FAIL": "Neither ring-size nor whole-turn control visibly changes a populated ring derived from the saved construction; editing only a label, unused source, or baked-object transform without changing the intended generated property does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_ring_overview.png", "image/03_oblique_ring.png"],
+      "verification": {
+        "method": "Parameter-change and closure probe",
+        "procedure": "In a temporary saved-scene copy, test the ring-size control at approximately 20% above its baseline and inspect the evaluated closure. Restore the baseline, then set six and ten whole turns in succession and trace both backbone joins and rung attachment. A global object scale alone does not establish a ring-size generator control. Check that the original saved state remains eight turns. Do not require particular modifier or node types.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Live Geometric Controls",
+      "criterion": "Bead and rod radii are independently editable throughout the live structure.",
+      "scoring_rule": {
+        "PASS": "At least one radius control changes its intended component on a populated curved section with at least three successive paired joints and connecting rods, and independent approximately 20% changes to bead radius and rod radius each update the intended component throughout the ring while leaving the other radius and the joint-center arrangement unchanged, preserving bead-to-rod contact without manual rebuilding.",
+        "PARTIAL": "At least one radius control changes its intended component on a populated curved section with at least three successive paired joints and connecting rods, but one or more PASS conditions are unmet.",
+        "FAIL": "Neither radius control changes its intended component on a populated curved section with at least three successive paired joints and connecting rods; an unused source sphere or profile alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_joint_detail.png"],
+      "verification": {
+        "method": "Independent radius perturbation and dimension comparison",
+        "procedure": "Record representative joint centers, bead diameters, and rod diameters in a temporary copy of the saved scene. Increase bead radius by approximately 20%, reevaluate, and verify the intended global change with rod diameters and centers unchanged. Restore it and repeat for rod radius, with bead diameters and centers unchanged. Inspect contact after each change and restore the default. The test measures functional independence rather than the presence of two named settings.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The saved scene and required PNG form a self-contained, inspectable delivery of the actual ring.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens and contains a nonempty recognizable ring, and both submission.blend and B125_Procedural_Ring_DNA.png are supplied; the scene has no unavailable required dependencies, is render-ready for Cycles GPU, and the PNG is rendered from that scene with the complete ring, open center, and twisting rungs legible under the presentation requirements.",
+        "PARTIAL": "submission.blend opens and contains a nonempty recognizable ring, but one or more PASS conditions are unmet.",
+        "FAIL": "submission.blend is absent, cannot be opened, or contains no nonempty recognizable ring, even if an image is supplied."
+      },
+      "evidence_refs": ["image/01_ring_overview.png"],
+      "verification": {
+        "method": "File opening, dependency audit, and render correspondence inspection",
+        "procedure": "Open the delivered submission.blend in Blender 5.1.2, inspect dependency paths and render settings, and compare the actual scene and camera view with the required PNG. Verify the PNG decodes and depicts the submitted geometry rather than a source screenshot. Check whole-ring framing, clear rungs, and neutral inspectability against Geometry Finish and Presentation. A future controlled rerender may resolve image-to-scene ambiguity. No specific output directory is required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "build.py recreates the native scene and saves a usable submission.blend.",
+      "scoring_rule": {
+        "PASS": "build.py executes from an empty Blender scene and writes a submission.blend that reopens with a nonempty recognizable ring, and that saved result recreates the default eight-turn construction, live controls, and render setup without unavailable assets or manual steps.",
+        "PARTIAL": "build.py executes from an empty Blender scene and writes a submission.blend that reopens with a nonempty recognizable ring, but one or more PASS conditions are unmet.",
+        "FAIL": "build.py is missing, cannot recreate a recognizable ring from an empty scene, fails to save submission.blend, or the saved file cannot reopen with that ring; an unsaved in-memory result does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean reconstruction followed by saved-file inspection",
+        "procedure": "In a separate temporary location, run build.py in Blender 5.1.2 from an empty scene without the author's existing scene data. Confirm that it writes submission.blend, close the process, and reopen that written file in a fresh Blender process. Inspect its actual saved ring, default turn count, live controls, and render setup and compare them with the delivered scene. Do not infer success from an in-memory result or console output alone.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

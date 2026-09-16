@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Image Bead Mosaic",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1VJjd6RER4",
+    "id": "BV1VJjd6RER4"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 15, "PROC": 50, "SURF": 25, "PIPE": 10},
+  "weighting_note": "The main skill is a reusable image-driven geometric generator, so 50 points assess replication, mask occupancy, aspect adaptation, and linked size/detail behavior. Real hollow geometry receives 15 points; image-based coloration and readable bead surfaces receive 25. Delivery and reproducibility receive 10. Node names, exact graph layouts, incidental object counts, and unsupported animation receive no points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Bead Geometry",
+      "criterion": "The prototype and generated beads have real cylindrical walls, two annular ends, and an unobstructed through-hole.",
+      "scoring_rule": {
+        "PASS": "The prototype and representative generated beads are short cylindrical tubes with a through-hole, continuous outer and inner walls, continuous upper and lower annular rims, and positive reasonably uniform thickness. The solid wall is closed and free of missing strips, self-intersections, inverted surfaces, and hole-closing caps.",
+        "PARTIAL": "A real three-dimensional tube with a through-hole is used for visible beads, but one or more PASS conditions fail, such as uneven thickness, a broken rim, or defective surface continuity.",
+        "FAIL": "No visible generated bead uses a real three-dimensional tube with a through-hole. Solid cylinders, image cards, discs, or a disconnected unused hollow prototype do not meet the minimum."
+      },
+      "evidence_refs": ["image/03_hollow_bead.png", "image/04_colored_bead_depth.png"],
+      "verification": {
+        "method": "Evaluated geometry and sectional inspection",
+        "procedure": "Inspect the prototype and several actual mosaic beads from the top, bottom, side, and a temporary clipping section. Confirm an open axial passage, connected solid wall, two annular ends, and consistent thickness. Inspect evaluated face orientation and intersections; do not infer hollowness from dark pixels alone.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Image-Driven Mosaic",
+      "criterion": "A live generator replicates the editable prototype on a regular planar lattice with coherent bead orientation and spacing.",
+      "scoring_rule": {
+        "PASS": "The delivered mosaic is generated from the editable prototype, with one bead per retained lattice location, orthogonal regular rows and columns, approximately equal spacing along both axes, and parallel hole axes normal to the lattice plane. Walls do not intersect and gaps are small and regular. A small prototype edit updates the visible generated beads.",
+        "PARTIAL": "A functioning procedural replication of the prototype produces multiple visible beads and responds to a prototype edit, but one or more PASS conditions fail, including uneven placement, inconsistent orientation, duplicate positions, overlap, or irregular gaps.",
+        "FAIL": "The visible mosaic lacks functioning procedural prototype replication or does not respond to an edit of its prototype. A baked mosaic or manually placed objects alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_masked_mosaic.png", "image/04_colored_bead_depth.png"],
+      "verification": {
+        "method": "Generator dependency probe and evaluated placement inspection",
+        "procedure": "In a disposable copy, bypass the mask and inspect bead-center positions and axes over several rows and columns. Check uniform planar placement, no duplicate centers, and consistent pitch. Make a small reversible change to prototype height and verify that beads throughout the mosaic update; restore it afterward. Assess lattice behavior independently of the prototype's wall-topology score.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Silhouette Selection",
+      "criterion": "A shared-coordinate mask controls real bead occupancy and preserves the full subject silhouette and internal cutout.",
+      "scoring_rule": {
+        "PASS": "The delivered mask keeps the subject silhouette and internal cutout aligned with the color artwork and removes background beads. Mask-image, cutoff, and bypass controls function. Bypass and an all-white mask reveal the complete lattice, an all-black mask removes every bead, and an intermediate mask edit updates the corresponding occupancy without manual geometry edits.",
+        "PARTIAL": "Changing the mask meaningfully changes actual bead occupancy and the delivered state retains a visible part of the subject while removing some background, but one or more PASS conditions fail, such as shifted edges, lost silhouette parts, background leakage, or incomplete control behavior.",
+        "FAIL": "There is no functional mask dependency affecting actual bead occupancy, or the delivered state fails to retain a visible subject while removing some background. An unchanged full rectangle, an empty result, transparent image-card masking, or manually deleted beads alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_masked_mosaic.png", "image/02_artwork_and_mask.png"],
+      "verification": {
+        "method": "Mask replacement probes and normalized silhouette comparison",
+        "procedure": "Compare evaluated occupied sample positions with the supplied mask using the same normalized coordinates as the color image. Inspect the head, scarf tails, paws, orb, and internal gap. In a disposable copy, use temporary all-black and all-white masks, then change a small mask region and vary the cutoff. Confirm geometry is removed or restored in the corresponding locations. Restore the supplied mask and final cutoff.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Proportions and Detail Control",
+      "criterion": "Image dimensions drive both lattice aspect and sampling proportions when image pairs are replaced.",
+      "scoring_rule": {
+        "PASS": "With the supplied pair and with a replacement matching pair of a different aspect ratio, the full lattice's physical width-to-height ratio follows image dimensions, sampling proportions adjust correspondingly apart from integer rounding, and bead cross-sections remain circular. The replacement uses exposed image inputs without editing generator internals.",
+        "PARTIAL": "Replacing a matching image pair automatically changes at least one of the physical lattice aspect or row-to-column sampling proportion, but one or more PASS conditions fail, such as distortion, unequal pitch, or partial dependence on old dimensions.",
+        "FAIL": "Neither physical lattice aspect nor sampling proportions update from replacement image dimensions. A correct portrait ratio that is only hard-coded for the supplied images does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_artwork_and_mask.png", "image/01_masked_mosaic.png"],
+      "verification": {
+        "method": "Image-dimension replacement probe",
+        "procedure": "Bypass the mask and compare lattice span and row/column counts with the supplied 240x430 image dimensions. In a disposable copy, replace both image inputs with simple temporary color and white-mask images of a clearly different matching aspect ratio, such as 2:1. Reevaluate without editing internals, compare lattice aspect and pitch, and inspect bead cross-sections for stretch. Restore the supplied pair.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-04",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Proportions and Detail Control",
+      "criterion": "One linked control scales mosaic size and sampling counts together while preserving bead dimensions and spacing.",
+      "scoring_rule": {
+        "PASS": "A single editable size/detail control supports two settings separated by a factor of two. The larger setting approximately doubles full-lattice width and height and doubles samples along each axis apart from integer rounding. Bead dimensions and spacing remain visually consistent, the larger mosaic resolves more image detail, and the linkage functions with masking both enabled and bypassed.",
+        "PARTIAL": "One editable control changes both physical mosaic size and sampling counts in the same increasing direction, but one or more PASS conditions fail, such as an incomplete adjustment range, mismatched scaling, unstable pitch, changing bead dimensions, or failure in one mask state.",
+        "FAIL": "There is no single functioning control that changes both physical mosaic size and sampling counts in the same increasing direction. A scale-only transform, a count-only control, or manual edits to separate settings do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_masked_mosaic.png", "image/04_colored_bead_depth.png"],
+      "verification": {
+        "method": "Two-setting functional probe with evaluated measurements",
+        "procedure": "Identify the public size/detail control and record a supported setting and another twice as large. With the mask bypassed, compare full-lattice width, height, rows, columns, pitch, and bead dimensions at both settings; allow the declared integer rounding. Repeat the change with the supplied mask enabled and inspect the increased image detail and preserved shape. Restore the delivered setting. This row assesses coupled scale/detail behavior; image-aspect replacement is assessed separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Image-Driven Mosaic",
+      "criterion": "Each bead receives a coherent sampled image color and the mosaic retains the recognizable artwork arrangement.",
+      "scoring_rule": {
+        "PASS": "Actual bead materials use colors sampled from the supplied image at their corresponding normalized locations. Each bead has one image-derived surface color apart from lighting variation. The face, blue headscarf, pale earring, paws, and multicolored orb remain recognizable, correctly oriented, and spatially aligned. Replacing the color image updates colors without manual recoloring or rebuilding.",
+        "PARTIAL": "Actual visible bead colors respond to the color-image input and reconstruct a recognizable part of the artwork, but one or more PASS conditions fail, such as insufficient detail, shifted or mirrored mapping, inconsistent per-bead color, or lost major color regions.",
+        "FAIL": "Visible bead materials do not functionally sample the color-image input or do not reconstruct any recognizable part of the supplied artwork. Uniform unrelated colors, hand-painted static colors without image dependency, or a separate image overlay do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_masked_mosaic.png", "image/02_artwork_and_mask.png", "image/04_colored_bead_depth.png"],
+      "verification": {
+        "method": "Material sampling inspection and color-input probe",
+        "procedure": "Inspect actual bead materials and their sampled values at locations in the face, cloth, earring, and orb; compare them with the corresponding supplied-image regions under a neutral inspection render. Inspect several individual beads for one image-derived color across each bead. Temporarily use a simple constant-color image, then restore the supplied artwork, and confirm a corresponding material response without changing geometry or manually recoloring beads.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Materials and Presentation",
+      "criterion": "Actual bead surfaces read as opaque nonmetallic plastic and retain visible surface depth without losing image color.",
+      "scoring_rule": {
+        "PASS": "Visible bead surfaces are opaque and nonmetallic with matte to soft reflections. Upper rims, inner walls, and outside walls remain visually distinct, and material response preserves readable sampled colors without emission, transparency, or extreme reflections washing out the surface.",
+        "PARTIAL": "Existing bead geometry has an opaque material with readable surface shading, but one or more PASS conditions fail, such as metallic-looking reflections, flattened inner-wall contrast, excessive glare, or inconsistent plastic appearance.",
+        "FAIL": "No existing visible bead geometry has both opaque surfaces and readable surface shading. A flat image card, wholly transparent beads, entirely washed-out surfaces, or missing beads do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_masked_mosaic.png", "image/04_colored_bead_depth.png"],
+      "verification": {
+        "method": "Controlled material render and actual material inspection",
+        "procedure": "Inspect the materials actually assigned to mosaic beads and render representative beads under simple neutral illumination in a disposable copy. Compare rim, inner-wall, and outer-wall response and opacity. Judge surface behavior independently of color-coordinate accuracy and geometric wall defects, which have their own rows; absent bead geometry cannot receive finish credit.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The submitted project and build script preserve a self-contained, reproducible editable scene.",
+      "scoring_rule": {
+        "PASS": "submission.blend reopens with its editable prototype, live generator, material, controls, and both image dependencies intact. build.py reconstructs the same scene from a clean Blender scene using only supplied inputs, saves submission.blend, and configures or performs the final Cycles GPU render in Blender 5.1.2.",
+        "PARTIAL": "At least one of submission.blend or build.py successfully opens or builds a substantive editable bead-mosaic scene with its image dependencies, but one or more PASS conditions fail, such as a missing counterpart, incomplete reconstruction, or an incorrect render configuration.",
+        "FAIL": "Neither submission.blend nor build.py successfully provides a substantive editable bead-mosaic scene with its image dependencies. Files that only display an external image or contain an empty scene do not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean-session dependency and reconstruction check",
+        "procedure": "In the future submission environment, reopen submission.blend in Blender 5.1.2 with unrelated search paths unavailable. Resolve both supplied images and inspect the editable scene dependencies. Run build.py in an isolated clean scene with only the supplied inputs accessible, then compare its scene and controls with the submission and inspect Cycles GPU configuration. Do not award generator-function or geometry points through this packaging check.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named PNG is a valid final scene render showing the complete masked mosaic.",
+      "scoring_rule": {
+        "PASS": "B101_Procedural_Image_Bead_Mosaic.png is a decodable finished PNG rendered from the actual submitted scene. It shows the entire masked mosaic clearly against an uncluttered neutral background, with the silhouette inside the camera frame and the bead surface readable.",
+        "PARTIAL": "A decodable PNG made from the actual submitted scene shows a substantive part of the masked mosaic, but one or more PASS conditions fail, such as an incorrect filename, clipped silhouette, distracting background, or insufficiently clear framing.",
+        "FAIL": "No decodable PNG from the actual submitted scene shows a substantive part of the masked mosaic. A source image, viewport screenshot, externally assembled replacement, blank image, or unrelated render does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_masked_mosaic.png"],
+      "verification": {
+        "method": "Image decoding, camera inspection, and scene-render comparison",
+        "procedure": "Decode the submitted PNG and compare it with a fresh render from the saved camera and scene settings. Confirm the named file, complete masked subject, readable bead surface, and neutral uncluttered presentation. Inspect for viewport UI or source-image substitution. This row assesses the delivered render's authenticity and presentation, not the independently scored generator, geometry, or material accuracy.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

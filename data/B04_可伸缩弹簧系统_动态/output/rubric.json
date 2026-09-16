@@ -1,0 +1,121 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "可伸缩弹簧系统",
+  "source_video": {"url": "https://www.youtube.com/watch?v=H96jrG-ZAJE", "id": "H96jrG-ZAJE"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 30, "RIG": 35, "SIM": 30, "PIPE": 5},
+  "weighting_note": "暂定内容权重，未经实测校准。几何30分检查装配、连续线圈和接头；RIG35分分别检查位移到长度的实时映射、端点附着以及变形保持；SIM30分检查真实重力回弹与刚度/阻尼功能。PIPE5分仅检查可复建和可重放。外观材质、场景灯光及修改器数量不是独立目标。RIG中的长度误差与端点定位误差分别记录，SIM不重复扣除线圈几何跟随缺陷。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 装置布局",
+      "criterion": "上下块体形成薄块在上、立方重块在下的对中装置，初始比例与间隙符合公开范围。",
+      "scoring_rule": {
+        "PASS": "两块存在且方向正确；下块三个边长、上块平面边长与厚度、水平中心偏移、初始净间距五组量均在公开范围内。",
+        "PARTIAL": "两块存在、薄块在上且重块在下，五组量中至少一组但不足五组符合公开范围。",
+        "FAIL": "缺少任一块体、上下角色颠倒，或五组量全部不符合公开范围。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/02_initial.png"],
+      "verification": {"method": "evaluated_geometry_and_visual_review", "procedure": "恢复第1帧，依交付说明识别两块主要实体并排除连接段测量其定向包围盒。以下块宽度W归一化，记录三个边长、上块平面边长/厚度、水平中心差及相向表面净距；用正面和侧面检查块体的角色与布局，不按对象名称或数量判断。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 连续线圈与连接段",
+      "criterion": "初始弹簧为连续四圈圆线螺旋，尺寸合适、间距均匀且轮廓平滑。",
+      "scoring_rule": {
+        "PASS": "可沿实体连续追踪完整四圈；外径和线径均在公开范围内；各圈间距均匀，前侧视图未见明显破面、尖刺、自相交或棱角。",
+        "PARTIAL": "存在可连续追踪的螺旋弹簧，但圈数、尺寸范围或上述几何质量至少一项不满足。",
+        "FAIL": "缺少弹簧主体，或主体为不相连圆环、非螺旋形状，无法沿线材连续追踪。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/02_initial.png"],
+      "verification": {"method": "evaluated_geometry_and_visual_review", "procedure": "在第1帧检查最终求值几何，沿线材中心路径统计绕竖直轴的总角度并确认四圈，测量外径和代表截面线径。前、侧、三分之四视图检查连续性、各圈间距和可见缺陷；几何分段但无缝的等价实现可接受，不能以一个Screw修改器或32顶点替代此检查。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 连续线圈与连接段",
+      "criterion": "上下连接段构成方向相反的圆滑转接，线圈端部有略扩大的自然过渡，并接入块体。",
+      "scoring_rule": {
+        "PASS": "两条连接段均存在，各自由对应线圈端部弯向块体中心附近并进入块体；粗细与线材相近、接入线圈端略扩、弯角平顺，初始状态无悬空缝隙和外露管口。",
+        "PARTIAL": "至少一条连接段形成从线圈到块体的实际转接，但另一条缺失，或任一连接段的形态、过渡、初始接合质量不满足PASS。",
+        "FAIL": "上下均没有形成从线圈到块体的连接段，或缺少线圈/块体而无法构成任何实际转接。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/02_initial.png", "image/03_extended.png"],
+      "verification": {"method": "artifact_visual_review", "procedure": "只在第1帧分别放大两处转接，绕接头观察其弯曲、粗细、扩口和块体内的终止关系。允许合理插入和分体网格；不检查曾用多少控制点、是否应用细分或是否执行合并。运行中的端点附着只在RIG-02计分。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "RIG-01", "capability": "RIG", "points": 15,
+      "requirement_section": "3. 由位移驱动的伸缩关系",
+      "criterion": "下块实际竖直位移实时决定线圈轴向长度，存在可编辑的有效依赖关系。",
+      "scoring_rule": {
+        "PASS": "可编辑依赖实际连接下块状态与线圈长度；暂停物理后向下移动0.5W、1.0W及恢复初始位置三次检查均实时更新，长度变化误差均不超过0.02W。",
+        "PARTIAL": "存在可编辑依赖，三次检查中至少一次下块位移能实时改变线圈长度，但不满足PASS的全部误差及恢复条件。",
+        "FAIL": "缺少有效实时依赖、线圈或下块；仅使用预录长度关键帧/烘焙形状且无法响应检查；或移动下块完全不能改变线圈长度。"
+      },
+      "evidence_refs": ["image/02_initial.png", "image/03_extended.png"],
+      "verification": {"method": "functional_dependency_probe", "procedure": "在副本中按说明暂停物理求解，保留线圈依赖；以初始下块几何位置为参考，分别独立施加向下0.5W和1.0W位移，再恢复。每次更新求值结果，测两线圈端中心的轴向距离变化，与施加位移比较；检查依赖源确为下块而非时间。只判定总长度映射，端点实际落点留给RIG-02。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "RIG-02", "capability": "RIG", "points": 10,
+      "requirement_section": "3. 由位移驱动的伸缩关系",
+      "criterion": "上下线圈端点在位移检查和默认模拟中始终跟随对应连接段，连接段跟随块体。",
+      "scoring_rule": {
+        "PASS": "在两次下移检查、恢复状态及默认1–250帧连续模拟中，两端与各自连接位置的偏差均不超过0.02W，连接段保持相对块体的固定关系，无一帧延迟。",
+        "PARTIAL": "完整线圈、两连接段和两块体齐全；至少一个非初始被测状态的一处端点满足0.02W，但未满足PASS的全部状态和固定跟随条件。",
+        "FAIL": "任一端所需线圈/连接段/块体缺失，或所有非初始被测状态的两处端点均不满足0.02W。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/03_extended.png"],
+      "verification": {"method": "evaluated_endpoint_tracking", "procedure": "在初始接头中识别线圈端中心及其对应连接位置，记录连接段相对块体变换。复用RIG-01的位移状态，再重置并按顺序求值1–250帧；逐帧比较两端位置，重点放大下落与回弹反向附近检查延迟。几何初始造型只在GEO-03判定；本项记录动态附着，不重复按长度总量扣分。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "RIG-03", "capability": "RIG", "points": 10,
+      "requirement_section": "3. 由位移驱动的伸缩关系",
+      "criterion": "伸缩通过圈间距变化实现，四圈结构、外径和线材粗细在运动中保持稳定。",
+      "scoring_rule": {
+        "PASS": "两次下移检查及默认模拟最短、最长和反向状态均保持四圈；外径变化不超过5%，线径变化不超过10%；伸长时圈间距增大，未见整体缩放、倒转、断裂或明显自相交。",
+        "PARTIAL": "存在连续螺旋且确有伸缩，但至少一个被测状态不满足圈数、直径变化或形变质量条件。",
+        "FAIL": "缺少可伸缩的连续螺旋，或各被测状态均为静态不变，无法观察任何实际形变。"
+      },
+      "evidence_refs": ["image/02_initial.png", "image/03_extended.png"],
+      "verification": {"method": "evaluated_deformation_comparison", "procedure": "相对第1帧记录线圈外径、线径代表截面和中心路径圈数，比较向下0.5W、1.0W及基准模拟极值/反向状态的求值几何；以前、侧视图检查节距变化与折叠穿插。只评形变中的保持，不重复扣除初始尺寸超范围问题。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SIM-01", "capability": "SIM", "points": 15,
+      "requirement_section": "4. 重力与回弹",
+      "criterion": "真实重力与弹簧模拟使固定上块下的重块稳定下落并多次回弹。",
+      "scoring_rule": {
+        "PASS": "实际物理求解从第1帧静止释放，至250帧至少两次向上回弹，首次最大下落量至少0.2W；上块漂移不超过0.01W，下块水平漂移不超过0.05W、转角不超过3度，且无发散或卡死。",
+        "PARTIAL": "确有重力和弹簧作用的物理求解，下块至少完成一次下落及向上回弹，但回弹次数、位移幅度或稳定性至少一项不满足PASS。",
+        "FAIL": "没有真实物理响应、以手工关键帧冒充模拟，或下块未完成任何一次下落及向上回弹。"
+      },
+      "evidence_refs": ["image/02_initial.png", "image/03_extended.png"],
+      "verification": {"method": "sequential_simulation_probe", "procedure": "在副本清除或重置缓存，核实运动由物理求解而非块体关键帧产生，按24fps顺序求值1–250帧；记录两块世界空间轨迹及重块姿态，统计竖直位移极值和由下降转为上升的次数。需要时在副本暂时停用弹簧作用确认重力自由落体响应后恢复。此项仅检查块体物理运动；线圈延迟和接头脱离归RIG-02。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SIM-02", "capability": "SIM", "points": 15,
+      "requirement_section": "5. 刚度与阻尼可调",
+      "criterion": "刚度和阻尼均为真实可编辑参数，并以不同运动结果证明其作用。",
+      "scoring_rule": {
+        "PASS": "基准值和两对有效比较值可识别且每对高值至少为低值两倍；分别重新模拟时，较高刚度缩短主要周期或减小首轮下落量，较高阻尼加快振幅衰减；恢复基准值后能恢复默认运动。",
+        "PARTIAL": "至少一个参数经重新模拟表现出公开要求的物理作用，但另一个无效，或比较值/恢复基准条件不满足PASS。",
+        "FAIL": "刚度与阻尼均无可验证的参数响应，参数仅为无效文字/未连接控件，或没有可重新计算的模拟。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "controlled_simulation_comparison", "procedure": "按文件内说明找到基准及刚度、阻尼比较值，每次仅改变一个参数并清除缓存、从相同初始状态顺序计算1–250帧。由重块Z轨迹比较首轮最大下落量/主要极值间周期，及后续极值围绕平衡位置的振幅包络；确认相应方向的变化可重复且超过数值噪声。最后恢复基准重复计算。不能仅因存在Generic Spring约束或有两个字段就得分。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "6. 交付与重放",
+      "criterion": "交付能从空场景复建，且依赖完整、模拟可重置重放。",
+      "scoring_rule": {
+        "PASS": "submission.blend与build.py齐全；脚本按说明从空场景生成完整装置，无缺失外部依赖；文件以第1帧保存，内含必要参数/重置/暂停求解说明；重新打开和重置后能复现默认回弹。",
+        "PARTIAL": "从空场景复建及可移植重放两组能力中仅一组完整成立，或两组均可执行但保存帧/必要说明不完整。",
+        "FAIL": "从空场景复建和可移植重放两组能力均不成立。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "rebuild_and_replay_review", "procedure": "在独立目录按脚本说明以Blender5.1.2空场景运行build.py，检查生成资产和依赖路径；重新打开交付并按说明重置、连续播放，比较两次轨迹与端点关系是否一致。打开文件本身只作前置条件，分数来自复建、依赖闭合和重放；无自动运行记录时不得声称该项已验证。", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

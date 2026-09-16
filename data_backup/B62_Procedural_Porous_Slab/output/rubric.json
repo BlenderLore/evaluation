@@ -1,0 +1,133 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Porous Slab",
+  "source_video": {"url": "https://www.bilibili.com/video/BV1jzui6REbG", "id": "BV1jzui6REbG"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 60, "PROC": 30, "PIPE": 10},
+  "weighting_note": "The task is primarily geometric. Sixty points distinguish envelope, pore distribution, true depth, body continuity, and finished contours. Thirty points assess independent, functioning geometric relationships for pore scale, domain extent, and surface fidelity. Ten points cover reproducible delivery and a truthful scene render. Material color and incidental camera or modifier presence do not receive separate credit.",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "Rectangular Envelope",
+      "criterion": "The evaluated asset has the broad rectangular footprint and shallow, finite thickness of the specified slab.",
+      "scoring_rule": {
+        "PASS": "The evaluated solid has a recognizable rectangular envelope with four discernible outer sides and overall length:width:thickness approximately 11:6:0.5; local pores may interrupt its boundary.",
+        "PARTIAL": "A recognizable broad rectangular solid with visible shallow thickness is present, but one or more PASS conditions are not met.",
+        "FAIL": "There is no recognizable broad rectangular solid with shallow finite thickness, including an absent asset, a flat plane, a rod, or a roughly cubic body."
+      },
+      "evidence_refs": ["image/01_slab_overview.png"],
+      "verification": {"method": "evaluated_geometry_and_orthographic_inspection", "procedure": "Evaluate the submitted asset and inspect its extent in its local principal directions. Compare a top view and two side views with the public proportions and rectangular-envelope description; disregard isolated tiny specks when judging the main body.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 15,
+      "requirement_section": "Irregular Pore Geometry",
+      "criterion": "Dense geometric cavities and openings have varied, organic outlines across the broad faces.",
+      "scoring_rule": {
+        "PASS": "The center and perimeter contain dense geometric cavities and openings with varied sizes and orientations, lobed or branching contours, and no obvious regular grid or large uninterrupted solid patches.",
+        "PARTIAL": "Numerous irregular geometric cavities or openings cover most of a broad face, but one or more PASS conditions are not met.",
+        "FAIL": "Most of the broad face lacks irregular geometric cavities or openings, or the apparent pores are only image, bump, or transparency effects. A regular array with no meaningful irregularity also fails."
+      },
+      "evidence_refs": ["image/01_slab_overview.png", "image/02_surface_detail.png"],
+      "verification": {"method": "evaluated_mesh_and_surface_inspection", "procedure": "Inspect the evaluated mesh under neutral shading from above and below. Compare central and peripheral regions for actual cavity geometry, density, shape variation, and repeated patterns. Judge through-depth behavior separately under GEO-03.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 15,
+      "requirement_section": "Irregular Pore Geometry",
+      "criterion": "The pore system includes real passages and irregular walls through the slab thickness.",
+      "scoring_rule": {
+        "PASS": "Many openings pass through the slab and expose finite-thickness rims and internal walls. Profiles change through the depth, with irregular passages and recesses distributed through the body rather than a uniform extrusion of a flat pattern.",
+        "PARTIAL": "Several genuine through-passages with finite-thickness walls are present, but one or more PASS conditions are not met.",
+        "FAIL": "Several genuine through-passages with finite-thickness walls cannot be identified; an unperforated solid, exclusively blind pits, a flat mask, or a zero-thickness cutout fails."
+      },
+      "evidence_refs": ["image/02_surface_detail.png", "image/03_pore_depth.png"],
+      "verification": {"method": "evaluated_geometry_depth_inspection", "procedure": "Orbit the evaluated slab and inspect representative central and edge pores from opposite directions. On a temporary copy, use clipping or cross-sectional inspection to trace openings through the thickness and examine changing wall profiles. Do not infer depth from the submitted PNG alone.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 10,
+      "requirement_section": "Connected Body and Finish",
+      "criterion": "The porous geometry retains a substantial interconnected slab body.",
+      "scoring_rule": {
+        "PASS": "A dominant interconnected body provides solid paths along the length and across the width, with substantial webs between neighboring cavities. Detached specks are minor and no broad accidental tear destroys the slab footprint.",
+        "PARTIAL": "A recognizable connected web joins neighboring cavities, the result is not principally disconnected flakes or isolated pieces, and one or more PASS conditions are not met.",
+        "FAIL": "No recognizable connected web joins neighboring cavities, or the result consists principally of disconnected flakes, isolated particles, or unrelated pieces. An absent or unperforated body also fails."
+      },
+      "evidence_refs": ["image/01_slab_overview.png", "image/03_pore_depth.png"],
+      "verification": {"method": "connected_component_and_visual_inspection", "procedure": "Inspect connectivity of the evaluated solid and visually trace connected webs in both broad directions. Distinguish small incidental islands from the dominant body and check that broad tears do not divide the intended slab into separate fragments.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-05", "capability": "GEO", "points": 10,
+      "requirement_section": "Connected Body and Finish",
+      "criterion": "Pore rims, internal walls, and connecting webs have resolved contours and continuous shading.",
+      "scoring_rule": {
+        "PASS": "The pore geometry has smooth, continuous contours and shading across rims, walls, and webs, without conspicuous voxel steps, broad faceting, seams, or spikes; small openings and narrow connections remain resolved.",
+        "PARTIAL": "A substantial region of actual pore geometry has rounded contours and continuous shading, but one or more PASS conditions are not met.",
+        "FAIL": "No substantial region of actual pore geometry has both rounded contours and continuous shading. Missing pore geometry, a plain smooth slab, or uniformly crude stepped geometry cannot earn finish credit."
+      },
+      "evidence_refs": ["image/02_surface_detail.png", "image/03_pore_depth.png"],
+      "verification": {"method": "neutral_shading_close_inspection", "procedure": "Inspect central and edge pore details at close range under neutral diffuse lighting, then inspect the same evaluated mesh silhouette and normals. Separate genuine geometric smoothing from image blur and check that smoothing has not filled small holes or severed narrow webs.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PROC-01", "capability": "PROC", "points": 15,
+      "requirement_section": "Live Procedural Controls",
+      "criterion": "A live pore-scale relationship regenerates the evaluated three-dimensional pore field at fixed slab bounds.",
+      "scoring_rule": {
+        "PASS": "A discoverable pore-scale setting regenerates visibly coarser and finer pore geometry over a useful nearby range while the slab bounds stay fixed; both variations retain a porous slab and restoring the setting restores the saved result.",
+        "PARTIAL": "An editable setting changes actual evaluated pore geometry procedurally, but one or more PASS conditions are not met.",
+        "FAIL": "No editable setting procedurally changes actual pore geometry. A modifier, node graph, unused parameter, material-only change, or scaling of a baked mesh alone fails."
+      },
+      "evidence_refs": ["image/02_surface_detail.png", "image/03_pore_depth.png"],
+      "verification": {"method": "non_destructive_functional_probe", "procedure": "On a duplicate scene, locate the documented pore-scale setting, record the saved evaluated mesh and bounds, and vary the setting to coarser and finer nearby states. Re-evaluate and inspect cavity scale and topology at fixed bounds. Restore the original value and compare the resulting geometry with the saved state.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PROC-02", "capability": "PROC", "points": 10,
+      "requirement_section": "Live Procedural Controls",
+      "criterion": "Editable domain dimensions regenerate the field within a changed box rather than stretching completed holes.",
+      "scoring_rule": {
+        "PASS": "Length, width, and thickness are independently editable and affect the evaluated domain. Enlarging a dimension at fixed pore scale generates additional field structure in the added region without merely stretching existing holes; the saved state is recoverable.",
+        "PARTIAL": "At least one editable domain dimension procedurally changes the extent of the generated field geometry, but one or more PASS conditions are not met.",
+        "FAIL": "No editable domain dimension changes the extent of generated field geometry. Object transforms, deformation of a baked slab, or unrelated unused bounds do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_slab_overview.png"],
+      "verification": {"method": "non_destructive_domain_probe", "procedure": "In a duplicate scene, hold the pore-scale setting fixed and enlarge each domain dimension separately by a visible amount. Evaluate the results, compare pore size in the retained region, and inspect added structure in the newly occupied region. Restore the saved dimensions after each probe.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PROC-03", "capability": "PROC", "points": 5,
+      "requirement_section": "Live Procedural Controls",
+      "criterion": "A live fidelity setting trades preview cost for pore-boundary detail while retaining the same broad field pattern.",
+      "scoring_rule": {
+        "PASS": "Discoverable preview and final settings produce a lower-cost and a finer evaluated result. The finer result resolves pore boundaries and small connections more clearly while retaining the broad pattern and envelope, and the saved scene uses the finer setting.",
+        "PARTIAL": "An editable fidelity setting produces a real change in the evaluated geometric detail of the same field, but one or more PASS conditions are not met.",
+        "FAIL": "No editable fidelity setting changes the evaluated geometric detail of the field. An unused resolution value, a material-only setting, or replacement by an unrelated shape fails."
+      },
+      "evidence_refs": ["image/02_surface_detail.png", "image/03_pore_depth.png"],
+      "verification": {"method": "preview_final_geometry_comparison", "procedure": "Evaluate the documented preview and final fidelity settings in a duplicate scene. Compare geometric sampling or mesh complexity as evidence of cost, and inspect matching pore regions for refined boundaries and retained broad pattern. Confirm that the submitted file stores the finer state.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The saved scene and reconstruction script provide a usable, self-contained procedural asset.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the complete scene and live relationships, and build.py reconstructs them from a clean Blender 5.1.2 file and saves submission.blend without missing external dependencies.",
+        "PARTIAL": "Both an openable submission.blend containing the slab and a readable build.py with substantive scene-construction code are present, no FAIL exclusion applies, and one or more PASS conditions are not met.",
+        "FAIL": "Either the openable slab scene or a readable build.py with substantive scene-construction code is missing. Empty placeholders and scripts that only load an unavailable external solution fail."
+      },
+      "evidence_refs": [],
+      "verification": {"method": "future_open_and_rebuild_check", "procedure": "Open submission.blend in Blender 5.1.2 and inspect for missing dependencies. In an isolated temporary directory, execute build.py from a clean Blender file, open its saved scene, and compare the presence and functioning of the required geometry and live controls with the submission.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-02", "capability": "PIPE", "points": 5,
+      "requirement_section": "Final Presentation",
+      "criterion": "The named PNG is a legible render of the actual submitted porous slab scene.",
+      "scoring_rule": {
+        "PASS": "B62_Procedural_Porous_Slab.png is rendered from the submitted scene, shows the complete slab obliquely with a broad face and porous side, and makes the pores and depth legible with a neutral opaque appearance and quiet background; the scene is configured for Cycles GPU rendering.",
+        "PARTIAL": "The named PNG is a render of the actual submitted scene in which the slab is identifiable, but one or more PASS conditions are not met.",
+        "FAIL": "The named PNG is missing or undecodable, the slab is not identifiable, or the image is a source frame, viewport screenshot, external substitute, or render of an unrelated scene."
+      },
+      "evidence_refs": ["image/01_slab_overview.png"],
+      "verification": {"method": "render_provenance_and_visual_inspection", "procedure": "Decode the named PNG, inspect framing and depth readability, and compare it with the submitted camera, geometry, and materials. Verify Cycles GPU configuration in the scene and produce a controlled comparison render from that scene to establish provenance; inspect the actual image rather than inferring success from settings alone.", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

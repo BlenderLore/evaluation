@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Flexible Multilayer Wave Structure",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1mX8Rz8E92",
+    "id": "BV1mX8Rz8E92"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 60, "PROC": 30, "PIPE": 10},
+  "weighting_note": "The source teaches a static geometric assembly and a live bead generator. Geometry receives 60 points across film shape, solid thickness, layer arrangement, bead distribution, and geometric finish. Procedural behavior receives 30 points for carrier response, global bead sizing, and independent film thickness. Delivery receives 10 points. No material style, physical simulation, animation, or incidental camera and light setup is scored separately.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Two Solid Wave Films",
+      "criterion": "Two connected ribbon films have broad rectangular proportions and recognizable continuous crest-to-valley profiles.",
+      "scoring_rule": {
+        "PASS": "At least one existing film is a connected ribbon with an identifiable crest and valley, and both required films meet that condition. Both have broad ends, approximately parallel long edges, a broadly straight width direction, and smoothly changing bends that retain the elongated sheet character.",
+        "PARTIAL": "At least one existing film is a connected ribbon with an identifiable crest and valley, but one or more PASS conditions are unmet. Examples include a missing second film, excessive twist, distorted ends, or an incomplete wave profile on the second film.",
+        "FAIL": "No existing film is a connected ribbon with an identifiable crest and valley. Flat planes, disconnected fragments, curves without a ribbon surface, and only bead geometry do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_structure.png", "image/02_film_profiles.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection and orthographic views",
+        "procedure": "Open the submitted scene and isolate each continuous film. Inspect evaluated surfaces from along the width and above the band. Trace each long boundary and a longitudinal section to confirm connected sheet coverage, a crest and valley, broad ends, and a broadly untwisted width direction. Judge film shape here; inspect thickness, layer relationships, and fine shading in their dedicated checks.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Two Solid Wave Films",
+      "criterion": "The films have real thin solid thickness, intact broad faces, and continuous perimeter sidewalls.",
+      "scoring_rule": {
+        "PASS": "At least one existing curved film has actual separated broad faces joined by sidewall geometry over a crest-to-valley region, and both required films meet that minimum across their full bands. Their sidewalls close the perimeters, their faces remain intact through the bends, and thickness stays small relative to ribbon width.",
+        "PARTIAL": "At least one existing curved film has actual separated broad faces joined by sidewall geometry over a crest-to-valley region, but one or more PASS conditions are unmet. Examples include incomplete perimeter closure, local thickness collapse, excessive thickness, or a second film without solid thickness.",
+        "FAIL": "No existing curved film has actual separated broad faces joined by sidewall geometry over a crest-to-valley region. Zero-thickness surfaces, shaded outlines, and isolated solid blocks do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_film_profiles.png"],
+      "verification": {
+        "method": "Evaluated cross-section and perimeter inspection",
+        "procedure": "Inspect the evaluated geometry of each film in isolation. Examine both long edges, both ends, and cross-sections through a crest and a valley. Confirm separate broad faces joined by actual sidewalls and compare thickness visually with local ribbon width. Do not infer thickness from a modifier name, material edge, or screen-space outline.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Three-Layer Arrangement",
+      "criterion": "The two films and lower bead layer share a coherent wave assembly and separate into three ordered fanned tips.",
+      "scoring_rule": {
+        "PASS": "At least one curved film and one two-dimensional bead band share a longitudinal span, and the complete assembly contains exactly two film layers above one bead layer. The three have comparable widths and overlapping spans, follow related bends without crossings or penetrating surfaces, and remain distinct through the shared region. One end fans into a rising top film, a more nearly level middle film, and a lower bead tip. The carrier adds no visible fourth sheet.",
+        "PARTIAL": "At least one curved film and one two-dimensional bead band share a longitudinal span, but one or more PASS conditions are unmet. Examples include a missing film, a visible extra carrier sheet, layer crossings, large unexplained offsets, or tips that do not clearly fan apart.",
+        "FAIL": "The scene lacks the minimum combination of one curved film and one two-dimensional bead band sharing a longitudinal span. Unrelated scattered components, a film-only stack, and a bead-only surface do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_structure.png", "image/02_film_profiles.png"],
+      "verification": {
+        "method": "Whole-assembly geometry and spatial inspection",
+        "procedure": "Inspect the evaluated assembly from the side, above, and at an oblique angle. Identify continuous films and the bead band by their geometry, then compare their spans, widths, ordering, shared bends, and free ends. Inspect potential intersections in isolation. Confirm that the carrier is used for generation without adding an extra visible sheet. Do not count source primitives, hidden control surfaces, or object names as visible structural layers.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Spherical Bead Layer",
+      "criterion": "A dense regular two-dimensional sphere array covers a curved ribbon and preserves its outline and lower tip.",
+      "scoring_rule": {
+        "PASS": "An existing two-dimensional patch of individually recognizable spheres follows both a crest and a valley, and the populated bead band extends across the full intended ribbon width and length. Equal-sized spheres form coherent, compact rows and columns with regular spacing, no missing rows or isolated clusters, and no severe interpenetration or fused masses. The outer rows preserve the ribbon outline and lower tip.",
+        "PARTIAL": "An existing two-dimensional patch of individually recognizable spheres follows both a crest and a valley, but one or more PASS conditions are unmet. Examples include incomplete coverage, irregular spacing, inconsistent bead sizes, missing rows, or local overlaps while the curved populated patch remains identifiable.",
+        "FAIL": "No existing two-dimensional patch of individually recognizable spheres follows both a crest and a valley. An unused sphere source, isolated beads, a single line of spheres, a flat array, a texture-only imitation, or a fused surface without distinguishable beads does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_structure.png", "image/03_bead_rows.png"],
+      "verification": {
+        "method": "Evaluated instance or mesh inspection and bead-center sampling",
+        "procedure": "Isolate the populated bead layer. Inspect evaluated instances or connected sphere components and sample their centers along longitudinal and transverse rows, including a crest, valley, both side edges, and the lower tip. Confirm two-dimensional curved coverage, comparable diameters, coherent row order, compact spacing, and distinguishable spheres. Inspect actual 3D separation for apparent image overlaps. Do not require a particular sphere primitive, vertex count, or world-unit radius.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Geometry Finish",
+      "criterion": "Existing curved film and bead surfaces have smooth, coherent geometric shading and readable silhouettes.",
+      "scoring_rule": {
+        "PASS": "At least one film contains an inspectable crest-to-valley surface region or a two-dimensional bead patch follows a crest and valley. Both required films and the curved bead band are present and demonstrate the finish: film broad faces and curved silhouettes are smooth without conspicuous pinching, unwanted creases, or shading discontinuities; thin film edges remain readable; beads have round silhouettes and smooth shading without obvious facets, inverted shading, or seams.",
+        "PARTIAL": "At least one film contains an inspectable crest-to-valley surface region or a two-dimensional bead patch follows a crest and valley, but one or more PASS conditions are unmet. Assess the substantive existing surfaces; a missing minor component alone does not erase finish demonstrated on them. Examples include visible faceting, local pinching, shading seams, or an incomplete set of finished layers.",
+        "FAIL": "Neither an inspectable film crest-to-valley region nor a two-dimensional bead patch following a crest and valley exists. Empty surfaces, flat substitutes, isolated source spheres, and outline-only geometry cannot establish geometric finish."
+      },
+      "evidence_refs": ["image/01_complete_structure.png", "image/02_film_profiles.png"],
+      "verification": {
+        "method": "Neutral-shaded silhouette and normal inspection",
+        "procedure": "In a temporary inspection copy, use neutral opaque shading and suitable directional light without altering topology or normals. Inspect existing film bends, broad faces, sidewall junctions, and bead silhouettes at close range from several angles. Look for faceting, unwanted creases, pinching, and inconsistent normals. Score only geometric finish here; bead spacing, layer intersections, and missing thickness are assessed in their dedicated rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Editable Dependencies",
+      "criterion": "Local edits to the bead carrier automatically update corresponding rows in the populated curved bead band.",
+      "scoring_rule": {
+        "PASS": "An existing two-dimensional bead patch follows a crest and valley, and a live carrier edit moves corresponding beads automatically. This dependency operates throughout the populated band: a local crest or valley edit moves the intended rows in order, preserves bead size, leaves unrelated carrier regions and both films unchanged, and returns to the original result when the edit is restored.",
+        "PARTIAL": "An existing two-dimensional bead patch follows a crest and valley, and a live carrier edit moves corresponding beads automatically, but one or more PASS conditions are unmet. Examples include incomplete dependent coverage, unintended row motion, changed bead size, coupling to a film, or failure to restore the original arrangement.",
+        "FAIL": "The minimum curved populated patch and effective live carrier response are not both present. An unused generator, a flat populated surface, baked beads requiring manual placement, or code that only rebuilds the entire scene on demand does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_structure.png", "image/03_bead_rows.png"],
+      "verification": {
+        "method": "Non-destructive carrier deformation probe",
+        "procedure": "In a duplicate of the submitted scene, identify the carrier or equivalent live surface representation used by the actual curved bead band. Record evaluated bead centers, diameters, and film geometry. Make a modest local edit to a crest region, reevaluate, and compare the corresponding bead rows and unaffected regions. Restore it and repeat at a valley. Confirm automatic row movement, preserved ordering and bead size, independence from both films, and reversible results. No particular node layout or carrier vertex count is required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Dependencies",
+      "criterion": "One live bead-size setting changes sphere size throughout the populated band while preserving their centers and carrier shape.",
+      "scoring_rule": {
+        "PASS": "An existing two-dimensional bead patch follows a crest and valley, and one bead-specific size setting changes sphere diameters in that populated patch without scaling the whole assembly. The setting updates the entire populated band consistently while keeping sphere centers, carrier shape, and film geometry unchanged, and restoring the setting restores the original bead sizes.",
+        "PARTIAL": "An existing two-dimensional bead patch follows a crest and valley, and one bead-specific size setting changes sphere diameters in that populated patch without scaling the whole assembly, but one or more PASS conditions are unmet. Examples include only partial propagation, inconsistent size changes, moved centers, altered carrier geometry, or failure to restore the original sizes.",
+        "FAIL": "The minimum curved populated patch and effective shared size setting are not both present. An unused source control, independent manual scaling of individual beads, a flat band, or whole-object scaling that merely changes the entire assembly does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_bead_rows.png"],
+      "verification": {
+        "method": "Non-destructive shared-size control probe",
+        "procedure": "In a duplicate scene, locate the live setting that controls bead size on the actual populated band. Record sample diameters and centers across both dimensions, including crest and valley regions. Change the setting by a modest relative amount and reevaluate. Compare all populated regions for consistent diameter response and unchanged centers, carrier, and films. Restore the setting and confirm recovery. Accept equivalent implementations without requiring a specific primitive or parameter name.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 5,
+      "requirement_section": "Editable Dependencies",
+      "criterion": "The two films retain independent live thickness adjustment that preserves their wave profiles.",
+      "scoring_rule": {
+        "PASS": "At least one existing curved film has a live setting that changes its actual thickness over a crest-to-valley region. Each of the two films has this capability independently: changing its setting adjusts the solid thickness while preserving its driving wave profile and leaving the other film and bead band unchanged; restoring the setting restores the original film.",
+        "PARTIAL": "At least one existing curved film has a live setting that changes its actual thickness over a crest-to-valley region, but one or more PASS conditions are unmet. Examples include only one working film control, unintended layer coupling, shape distortion, or an irreversible result.",
+        "FAIL": "No existing curved film has a live setting that changes its actual thickness over a crest-to-valley region. An unused control, a zero-thickness surface, or simple scaling that changes the whole wave form does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_film_profiles.png"],
+      "verification": {
+        "method": "Independent thickness response probe",
+        "procedure": "In a duplicate scene, record each film's driving profile, evaluated cross-sections, and the other layer geometries. Change the first film's live thickness setting by a modest relative amount and inspect changes through a crest and valley. Confirm actual thickness response, stable driving profile, and unchanged other layers, then restore it. Repeat for the second film. Accept equivalent live mechanisms and do not award points solely for a modifier's existence or ordering.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The native scene opens, and build.py recreates and saves the submitted scene with its editable dependencies.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens and contains at least one recognizable modeled task layer. build.py runs in Blender 5.1.2 from an empty scene, recreates the submitted scene with its geometry, live dependencies, materials, camera, lighting, and render settings, and saves submission.blend. Reopening the script-saved file confirms the recreated scene and retained dependencies.",
+        "PARTIAL": "submission.blend opens and contains at least one recognizable modeled task layer, but one or more PASS conditions are unmet. Examples include a missing or failing script, an in-memory rebuild that does not save submission.blend, or a saved rebuild that omits part of the submitted scene or its live dependencies.",
+        "FAIL": "submission.blend is absent, cannot be opened, or contains no recognizable modeled task layer. An empty scene, rendered image alone, or unused procedural source does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Native artifact inspection and clean rebuild with saved-file reload",
+        "procedure": "Open the submitted submission.blend in Blender 5.1.2 and establish the minimum existing modeled layer. Inspect build.py, then execute it from an empty scene in a temporary workspace using any declared destination option. Locate the script-produced submission.blend at the destination the script uses, reopen that saved file, and compare its modeled geometry, live controls, materials, camera, lighting, and render settings with the submitted scene. Confirm Cycles GPU configuration. Do not require any particular output directory or absolute path. An unsaved in-memory reconstruction cannot satisfy PASS.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named PNG is an actual scene render that exposes the complete structure for inspection.",
+      "scoring_rule": {
+        "PASS": "A decodable PNG rendered from the submitted scene shows at least one recognizable modeled task layer. It is named B120_Flexible_Multilayer_Wave_Structure.png and frames the complete required structure from an oblique angle, with both films, bead rows, shared bends, and all three diverging tips readable against a clear background. The image matches the submitted scene.",
+        "PARTIAL": "A decodable PNG rendered from the submitted scene shows at least one recognizable modeled task layer, but one or more PASS conditions are unmet. Examples include an incorrect filename, cropped tips, obscured bead rows, poor separation from the background, or an incomplete structure in the render.",
+        "FAIL": "No decodable PNG rendered from the submitted scene shows a recognizable modeled task layer. A source-video image, viewport screenshot, external illustration, unrelated image, or empty render does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_structure.png"],
+      "verification": {
+        "method": "PNG decoding, visual inspection, and scene-render comparison",
+        "procedure": "Decode the submitted PNG and inspect its filename and visible model. Compare its layer shapes, bead layout, material assignments, camera, and lighting with the saved scene and, when needed, a controlled render of that scene. Confirm that it is a genuine scene render and that the complete structure is framed with the required details readable. Inspect the supplied delivery locations without imposing an unrequested output directory or image resolution.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

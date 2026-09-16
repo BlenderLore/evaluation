@@ -1,0 +1,176 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Wind-Driven Yellow Flag",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1WN7C66EH9",
+    "id": "BV1WN7C66EH9"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 25, "SURF": 15, "SIM": 25, "ANM": 15, "SCN": 10, "PIPE": 10},
+  "weighting_note": "Physical response and visible time evolution receive 40 points because wind-driven cloth is the central result. Geometry receives 25 points for the sheet, pole, and evaluated finish. Materials receive 15 points, presentation receives 10 points, and reproducible saved delivery receives 10 points. No points are assigned to incidental modifier counts or exact construction settings.",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "Flag and Pole",
+      "criterion": "The editable cloth has an approximately two-to-one rectangular rest shape and distributed geometry capable of spatial bending.",
+      "scoring_rule": {
+        "PASS": "An editable, thin, connected sheet has an upright rectangular rest shape approximately twice as wide as tall, an uninterrupted outer boundary, and distributed surface geometry supporting folds across its area.",
+        "PARTIAL": "An editable connected sheet with a recognizable rectangular rest shape and interior deformation geometry exists, but at least one PASS condition is not met.",
+        "FAIL": "No editable connected flag sheet exists, its rest shape is not recognizably rectangular, or it lacks interior geometry capable of spatial bending. A displayed image or a single rigid face is below the minimum."
+      },
+      "evidence_refs": ["image/02_flag_mesh.png"],
+      "verification": {
+        "method": "Rest-state geometry and evaluated-surface inspection",
+        "procedure": "Open a disposable copy of submission.blend. Inspect the flag's editable rest mesh with simulation temporarily disabled, compare its broad proportions to the reference, and inspect interior connectivity. Re-enable evaluation and confirm that the same surface supports bends through its interior. Do not require a particular vertex count or modifier stack.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "Flag and Pole",
+      "criterion": "A separate slender cylindrical pole has a wider rounded top cap and the required proportions relative to the flag.",
+      "scoring_rule": {
+        "PASS": "A separate rigid pole has a slender cylindrical shaft, a wider rounded cap, a top slightly above the flag, and a shaft extending substantially below it. The flag sits near the pole's upper end.",
+        "PARTIAL": "A separate pole with a recognizable elongated round shaft exists next to the flag, but at least one PASS condition is not met, such as a missing cap or weak relative proportions.",
+        "FAIL": "A separate elongated round shaft does not exist next to the flag. An image of a pole, a broad block, or a detached remote object is below the minimum."
+      },
+      "evidence_refs": ["image/01_flag_reference.jpg", "image/03_pole_shape.png"],
+      "verification": {
+        "method": "Geometry and spatial comparison",
+        "procedure": "Inspect the submitted pole in front and oblique views using neutral solid shading. Confirm its three-dimensional cylindrical shaft and cap, separation from the cloth, and placement relative to the flag's rest height. Evaluate visible proportions rather than tutorial dimensions or object names.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 5,
+      "requirement_section": "Flag and Pole",
+      "criterion": "Existing cloth and pole surfaces have smooth evaluated silhouettes and clean geometric finish.",
+      "scoring_rule": {
+        "PASS": "Both the cloth and pole are present. Evaluated cloth folds and edges read as a continuous thin surface without holes, tears, large planar facets, or unintended thick edges; the pole shaft and cap have round silhouettes and smooth transitions.",
+        "PARTIAL": "At least one substantive core surface, either a connected cloth sheet with a visible curved fold or an elongated round pole shaft, demonstrates a continuous surface with some smooth curvature, but at least one PASS condition is not met. A missing secondary part can prevent PASS without negating finish demonstrated by an existing core surface.",
+        "FAIL": "Neither a substantive cloth surface nor a substantive pole shaft demonstrates continuous curved geometry. Missing surfaces, entirely rigid planar substitutes, or pervasive holes and faceting that prevent any smooth core result are below the minimum."
+      },
+      "evidence_refs": ["image/01_flag_reference.jpg", "image/03_pole_shape.png"],
+      "verification": {
+        "method": "Evaluated geometry with neutral shading",
+        "procedure": "Inspect existing cloth and pole geometry close up with neutral shading at representative deformed poses, including frames 25, 60, and 120 after sequential evaluation. Check silhouettes and normals independently of materials. Assess spatial finish here; assess changes and temporal instability only in ANM-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 10,
+      "requirement_section": "Surface Appearance",
+      "criterion": "The used flag material reads as bright yellow matte cloth across its changing folds.",
+      "scoring_rule": {
+        "PASS": "The existing flag is visibly bright yellow and nonmetallic with a matte fabric appearance, broad soft shading through folds, readable yellow in lit and shaded areas, and a continuous appearance as it bends.",
+        "PARTIAL": "A substantive existing cloth surface uses a visibly yellow, nonmetallic material over most of its area, but at least one PASS condition is not met, including excessive gloss, weak fold shading, or appearance discontinuity.",
+        "FAIL": "There is no substantive cloth surface with a predominantly yellow nonmetallic appearance. A missing flag, an unused material, or a predominantly metallic or non-yellow flag is below the minimum."
+      },
+      "evidence_refs": ["image/01_flag_reference.jpg"],
+      "verification": {
+        "method": "Used-material inspection and controlled renders",
+        "procedure": "Inspect material assignments on the submitted cloth and render representative poses with the submitted lighting. If lighting masks the material, use a disposable neutral-light test to distinguish material response from scene exposure. Compare matte yellow color and broad fold shading across poses; no emblem, image texture, or specific shader-node recipe is required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 5,
+      "requirement_section": "Surface Appearance",
+      "criterion": "The used pole material reads as neutral gray metal with shape-revealing reflections.",
+      "scoring_rule": {
+        "PASS": "The pole shaft and cap use a neutral gray metallic appearance with visible longitudinal shaft highlights and cap reflections, preserving a darker gray body and remaining distinct from the cloth.",
+        "PARTIAL": "A substantive existing pole shaft has a visibly gray material with a metallic reflection response, but at least one PASS condition is not met. A missing cap prevents PASS while allowing the shaft's material to demonstrate the minimum.",
+        "FAIL": "No substantive pole shaft demonstrates both a gray body and metallic reflection response. A missing pole, an unused material, or a plainly matte nonmetal surface is below the minimum."
+      },
+      "evidence_refs": ["image/01_flag_reference.jpg"],
+      "verification": {
+        "method": "Used-material inspection and reflection test",
+        "procedure": "Inspect assignments and render the pole in the submitted scene. On a disposable copy, add a broad neutral reflection source if needed to inspect the actual material response. Check the shaft's longitudinal reflection and darker body separately from geometry and final exposure.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SIM-01", "capability": "SIM", "points": 15,
+      "requirement_section": "Physical Cloth",
+      "criterion": "Editable wind and gravity drive a cloth simulation whose free-surface response changes under a cache-cleared wind-off recomputation.",
+      "scoring_rule": {
+        "PASS": "The physical cloth can be recomputed with editable wind strength and direction. Clearing caches and disabling wind while leaving gravity and other settings unchanged visibly changes the free-cloth trajectory or settled shape; restoring wind and recomputing recovers the submitted behavior. The wind-off run shows gravity-driven droop or reduced billowing.",
+        "PARTIAL": "A physical cloth solver successfully recomputes and the wind-off probe produces a visible change in free-cloth deformation, but at least one PASS condition is not met, such as unavailable direction control or a restoration result that differs from the submitted behavior.",
+        "FAIL": "The cloth cannot be physically recomputed, disabling wind does not visibly affect recomputed free-cloth behavior, or motion consists only of stored deformation or keyed poses without a responsive physical solve. A solver or force-field object existing without this functional result is below the minimum."
+      },
+      "evidence_refs": ["image/02_flag_mesh.png", "image/04_motion_early.png", "image/05_motion_later.png"],
+      "verification": {
+        "method": "Cache-cleared physical response probe",
+        "procedure": "On disposable copies of the reopened saved scene, follow the public cache-reset procedure and sequentially compute frames 1-120 for the submitted settings, wind strength zero, and restored submitted settings. Leave gravity and all non-wind settings fixed. Compare evaluated free-surface positions and rendered silhouettes at corresponding frames, and inspect the wind controls. Confirm an observable wind-off response and recovery, not merely different cached data. Attachment drift is assessed in SIM-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SIM-02", "capability": "SIM", "points": 10,
+      "requirement_section": "Physical Cloth",
+      "criterion": "The pole-side edge remains constrained while the remainder of the physically simulated cloth deforms freely.",
+      "scoring_rule": {
+        "PASS": "The pole remains stationary, and the complete pole-side edge stays alongside it with drift below 1% of undeformed flag width through the baseline, wind-off, and restored recomputations. Constraint influence is confined to the attachment region and leaves the free cloth deformable.",
+        "PARTIAL": "A physical recomputation demonstrates an identifiable constrained pole-side edge and freely deforming cloth beyond it, but at least one PASS condition is not met, such as local attachment slip, excessive constraint spread, or drift above the public tolerance.",
+        "FAIL": "No physical recomputation demonstrates a constrained pole-side edge together with a freely deforming remainder. A wholly rigid flag, wholly detached falling cloth, or unsupported stored deformation is below the minimum."
+      },
+      "evidence_refs": ["image/02_flag_mesh.png", "image/03_pole_shape.png", "image/04_motion_early.png"],
+      "verification": {
+        "method": "Constraint behavior and evaluated-position measurement",
+        "procedure": "Use the three sequential physical runs from the public probe. Track the attachment edge relative to the pole over frames 1-120 and normalize its maximum drift by rest flag width. Inspect deformation away from the edge and the actual constraint influence. Check that the shaft transform remains fixed. Do not award constraint credit solely for a group name, weight count, or a motionless baked edge.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-01", "capability": "ANM", "points": 15,
+      "requirement_section": "Animation",
+      "criterion": "The declared clip shows wind startup and sustained, coherent changes in the free edge and internal folds.",
+      "scoring_rule": {
+        "PASS": "Frames 1-120 at 24 fps show a near-rectangular upright starting flag, visible billowing by frame 25, and continuing changes of the free edge and internal folds through frame 120. The flag extends generally away from the pole, with no temporal jumps, explosive stretching, or persistent visible self-intersection. Replay from the start reproduces the intended motion, and reopening supports playback or recomputation.",
+        "PARTIAL": "The submitted scene contains visible time evolution with changing deformation inside the cloth and at its free edge across at least two distinct poses, but at least one PASS condition is not met, including incorrect timing, a frozen later interval, unstable motion, or replay differences.",
+        "FAIL": "There is no visible time evolution of cloth shape, only one static pose, or only rigid whole-object motion. A video without corresponding animated geometry in the submitted scene is below the minimum."
+      },
+      "evidence_refs": ["image/04_motion_early.png", "image/05_motion_later.png"],
+      "verification": {
+        "method": "Sequential timeline evaluation and animation review",
+        "procedure": "Inspect scene range and fps, sequentially evaluate and play the submitted clip, and compare cloth silhouettes and internal folds at frames 1, 25, 60, 90, and 120 while also reviewing intervening motion. Reset and replay, then reopen and repeat using the provided procedure. Compare the MP4 with scene poses. This row evaluates visible time evolution; functional wind response and attachment tolerance are assessed separately in SIM-01 and SIM-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01", "capability": "SCN", "points": 10,
+      "requirement_section": "Presentation",
+      "criterion": "A fixed portrait composition presents the entire moving flag with useful lighting and sufficient clearance.",
+      "scoring_rule": {
+        "PASS": "A fixed portrait camera keeps the complete flag, cap, and most of the pole shaft visible throughout the clip, with space around the moving free edge. The flag remains the focal point; lighting reveals folds and metal reflections, silhouettes are readable, and exposure is stable.",
+        "PARTIAL": "A rendered camera view presents a substantive flag and pole together with a readable cloth silhouette, but at least one PASS condition is not met, such as clipping during motion, weak clearance, nonportrait framing, distracting background, or unstable exposure.",
+        "FAIL": "No rendered camera view presents both a substantive flag and pole with a readable cloth silhouette. A camera's existence without a usable composition, a missing core subject, or an obscured flag is below the minimum."
+      },
+      "evidence_refs": ["image/01_flag_reference.jpg"],
+      "verification": {
+        "method": "Camera-space animation and rendered-frame inspection",
+        "procedure": "Inspect the active camera and render settings and review the complete video plus matching controlled scene renders at several poses. Check composition over the flag's full motion envelope and inspect exposure and silhouette continuity. Background style and specific focal length are unrestricted; judge their effect on subject readability.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable saved scene, reconstructing script, and scene-rendered MP4 form a complete reproducible delivery.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the editable scene and needed dependencies. Running build.py in an empty Blender 5.1.2 session recreates and explicitly saves submission.blend; reopening that saved result retains the scene, controls, and animation or working recomputation. The correctly named portrait MP4 is rendered from the submitted scene and contains frames 1-120 at 24 fps. The scene is configured for Cycles GPU rendering.",
+        "PARTIAL": "submission.blend opens with substantive editable flag and pole geometry, and at least one supporting deliverable is useful: build.py recreates substantive scene content or the MP4 shows corresponding rendered scene animation. At least one PASS condition is not met.",
+        "FAIL": "submission.blend does not open with substantive editable flag and pole geometry, or neither supporting deliverable meets the stated minimum. An isolated render, unrelated script, or only an unsaved in-memory result is below the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean rebuild, saved-file reopening, dependency audit, and video metadata check",
+        "procedure": "In an isolated output directory run build.py with Blender 5.1.2 from factory-empty state. Confirm that it writes submission.blend, close the process, and open the saved result in a fresh process. Verify editable geometry, used assets, wind controls, timeline, and replay or recomputation there. Inspect the delivered MP4's portrait dimensions, 24 fps, 120 displayed frames, and correspondence with renders from the reopened scene. Inspect Cycles GPU configuration without treating filenames or an in-memory build alone as evidence of success.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "View-Responsive Gold Foil Card",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1KVAQzjE1G",
+    "id": "BV1KVAQzjE1G"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"SURF": 85, "SCN": 10, "PIPE": 5},
+  "weighting_note": "This is primarily a material task. Surface points separately assess color mapping, image registration, outline extraction, angular response, fine spatial variation, coexistence of print and foil, emission appearance, and editable controls. The primitive card does not justify geometry points. Image-space glare and whole-card presentation receive scene points; deliverable integrity receives five pipeline points.",
+  "rubric": [
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Artwork Mapping",
+      "criterion": "The supplied colored illustration appears once, complete, upright, and proportionally mapped over the card face.",
+      "scoring_rule": {
+        "PASS": "The complete supplied color image covers the portrait face once with its original proportions, retaining its surrounding border and the principal top and bottom features without mirroring, tiling, or visible stretching.",
+        "PARTIAL": "The supplied colored illustration is recognizable on a substantial part of the card, but one or more PASS conditions are unmet.",
+        "FAIL": "No substantial card area displays the supplied colored illustration, or its distortion or cropping prevents recognition of the main figure."
+      },
+      "evidence_refs": ["image/02_color_mapping.png"],
+      "verification": {
+        "method": "Material use inspection and front-view comparison",
+        "procedure": "Inspect the material actually assigned to the visible card and confirm use of the supplied color image. Temporarily suppress the foil through its controls, render the card frontally, and compare border coverage, orientation, and figure proportions with card_color.png. Restore the submitted controls afterward.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Artwork Mapping",
+      "criterion": "The two supplied images share the card composition without avoidable mapping misregistration.",
+      "scoring_rule": {
+        "PASS": "Color and line layers have the same upright orientation and overall composition; the flowered head, shoulder, hair, dress, and lower border correspond as closely as the supplied drawings allow, without an added offset, rotation, or scale mismatch that visibly doubles principal silhouettes.",
+        "PARTIAL": "Both supplied images are mapped upright and their main figure regions broadly correspond, but one or more PASS conditions are unmet.",
+        "FAIL": "Either supplied image is absent from the active material, or their principal figure regions do not broadly correspond on the card."
+      },
+      "evidence_refs": ["image/01_final_detail.png", "image/02_color_mapping.png"],
+      "verification": {
+        "method": "Paired layer renders and mapping inspection",
+        "procedure": "Render isolated color and line layers from the same frontal camera in a temporary copy of the scene and compare their normalized card-space placement. Use the supplied image pair as the baseline for unavoidable drawing differences. Inspect whether any additional mismatch is introduced by the submitted image mappings; do not penalize native differences between the supplied drawings.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Gold Outline Layer",
+      "criterion": "The line image selects recognizable fine contours while its paper background remains inactive.",
+      "scoring_rule": {
+        "PASS": "The isolated outline layer follows dark contours from the supplied line image, retains recognizable internal hair, fabric, and foliage detail, and leaves the white background inactive rather than turning broad regions into solid luminous shapes.",
+        "PARTIAL": "The isolated layer uses the supplied line image and visibly selects recognizable internal contours in at least one of the hair, fabric, or foliage regions while most paper background remains inactive, but one or more PASS conditions are unmet.",
+        "FAIL": "No image-derived internal contour region is recognizable, the line image is not used to select outlines, or most paper background is active."
+      },
+      "evidence_refs": ["image/03_gold_lines.png"],
+      "verification": {
+        "method": "Isolated mask inspection",
+        "procedure": "Temporarily inspect the outline-selection signal as a neutral black-and-white surface at a close scale, with angle gating and glare bypassed. Compare active areas against the dark lines and white fields in card_line_art.png, checking hair, cloth folds, and foliage separately. This check concerns contour extraction, not gold hue or angular behavior.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "View-Responsive Foil",
+      "criterion": "Gold visibility changes with viewing direction and transitions smoothly across the public three-angle inspection.",
+      "scoring_rule": {
+        "PASS": "With lighting and camera distance fixed, the near-front and opposite 25-degree card turns include a print-dominant view and a visibly localized gold view. During gradual intervening turns, gold activation moves or fades smoothly in response to the viewing relationship, without relying on time playback or becoming a full-card brightness switch.",
+        "PARTIAL": "Changing the card's viewing angle within the stated sweep causes a visible, repeatable change in the activation of image-derived gold contours independently of timeline playback, but one or more PASS conditions are unmet.",
+        "FAIL": "No repeatable change in gold-contour activation occurs within the stated sweep, or the apparent change depends only on playback, changed lights, or changed exposure."
+      },
+      "evidence_refs": ["image/01_final_detail.png", "image/04_localized_highlight.png"],
+      "verification": {
+        "method": "Controlled angular response probe",
+        "procedure": "Hold the timeline, lights, exposure, and camera distance fixed. Render the card near frontally and after local vertical-axis turns of minus and plus 25 degrees, then inspect several intermediate orientations. Track gold activation on the same mapped contour regions rather than geometric foreshortening. Confirm that a material dependency on viewing direction explains the observed change and restore the saved orientation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-05",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "View-Responsive Foil",
+      "criterion": "Fine procedural surface variation gives the foil a subtle spatially irregular response without changing the card silhouette or displacing the printed image.",
+      "scoring_rule": {
+        "PASS": "A fine procedural surface variation visibly breaks the foil response into subtle irregular regions, while the card remains flat in silhouette and the artwork stays fixed and readable without broad mottled blocks.",
+        "PARTIAL": "A procedural spatial variation visibly affects the foil response on a substantial part of the card while its printed image remains recognizable, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no effective procedural spatial variation in the foil response, or its effect makes the printed illustration unrecognizable."
+      },
+      "evidence_refs": ["image/01_final_detail.png", "image/04_localized_highlight.png"],
+      "verification": {
+        "method": "Material dependency inspection and controlled close renders",
+        "procedure": "Inspect the actual material for the spatial variation that influences foil response. At a fixed angle, compare close renders with that contribution active and temporarily neutralized; confirm a change in fine irregularity rather than a change only in overall brightness. Inspect the card silhouette and stable artwork position, then restore the original settings.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-06",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "View-Responsive Foil",
+      "criterion": "The combined material preserves readable printed artwork beside localized active gold regions.",
+      "scoring_rule": {
+        "PASS": "A useful demonstration view simultaneously contains clearly active gold contours and quieter regions with readable colored artwork. The foil occupies selected regions rather than replacing the whole card with a dark line-only field or a uniform luminous coating.",
+        "PARTIAL": "At one inspection view, image-derived gold contours and a recognizable substantial region of colored artwork are both visible on the same card, but one or more PASS conditions are unmet.",
+        "FAIL": "No inspection view shows both image-derived gold contours and a recognizable substantial region of colored artwork together."
+      },
+      "evidence_refs": ["image/01_final_detail.png", "image/04_localized_highlight.png"],
+      "verification": {
+        "method": "Combined surface render inspection",
+        "procedure": "Inspect the submitted demonstration view and the controlled angle renders with image-space glare disabled. Compare active and quiet card regions to establish coexistence of print and foil. Score this spatial combination independently from whether the angle change is smooth and independently from the fine procedural variation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-07",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Gold Outline Layer",
+      "criterion": "Active outlines have a luminous warm-gold surface appearance with readable line cores.",
+      "scoring_rule": {
+        "PASS": "The active image-derived contours use warm-gold self-emission, appear bright against their local surroundings, and retain distinguishable line cores and fine details in close inspection before glare.",
+        "PARTIAL": "Recognizable image-derived contours use a visibly warm-gold self-emitting surface, but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable image-derived contour region has both warm-gold coloration and an effective self-emitting surface contribution."
+      },
+      "evidence_refs": ["image/03_gold_lines.png", "image/01_final_detail.png"],
+      "verification": {
+        "method": "Surface emission inspection and uncomposited render",
+        "procedure": "Inspect the emission contribution of the material actually assigned to the card, and render a close view with glare bypassed. Confirm the gold hue, relative brightness, and readable line cores. Distinguish clipping inherent to the surface output from blur introduced later by compositing.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-08",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Editable Surface Controls",
+      "criterion": "Labeled material controls provide meaningful, independent adjustments to the requested foil and outline properties.",
+      "scoring_rule": {
+        "PASS": "Clearly labeled controls work for pattern density, response strength, response width, outline selection, and gold color and intensity. Each produces the stated material change, preserves the two image mappings, and remains usable after reopening the file.",
+        "PARTIAL": "Working, identifiable controls provide at least three of the six requested adjustments without displacing the artwork, but one or more PASS conditions are unmet.",
+        "FAIL": "Fewer than three of the six requested adjustments can be made through working, identifiable controls without displacing the artwork."
+      },
+      "evidence_refs": ["image/01_final_detail.png", "image/03_gold_lines.png", "image/04_localized_highlight.png"],
+      "verification": {
+        "method": "Functional material-control probes",
+        "procedure": "After reopening the submission, locate the labeled controls and change one requested property at a time in a temporary copy. Use paired renders to verify changes to variation scale, response amount, response spread, retained lines, gold hue, and gold brightness respectively. Confirm stable image mappings and restore defaults after each probe; node names or node counts alone are not evidence of working controls.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "Presentation",
+      "criterion": "A whole-card composition uses restrained image-space glare to support the foil effect without obscuring the artwork.",
+      "scoring_rule": {
+        "PASS": "The complete card has clear edge space against an unobtrusive background at a view showing print and localized gold. Effective image-space glare surrounds bright lines while preserving their cores, adjacent artwork, and quiet regions, without a broad yellow veil.",
+        "PARTIAL": "The camera shows a recognizable substantial card area with active gold contours, and a functional image-space glare stage produces localized glow around those contours, but one or more PASS conditions are unmet.",
+        "FAIL": "The camera does not show a recognizable substantial card area with active gold contours, or no functional image-space glare produces localized glow around them."
+      },
+      "evidence_refs": ["image/01_final_detail.png", "image/03_gold_lines.png", "image/04_localized_highlight.png"],
+      "verification": {
+        "method": "Camera composition inspection and compositor comparison",
+        "procedure": "Render the saved demonstration camera with the final compositor, then compare a temporary render with only the glare contribution bypassed. Confirm that glow is image-space processing of scene-rendered bright lines, inspect line and background readability, and check that the complete card has clear space at every edge. Do not award this row merely for a camera, light, or glare node existing.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, reproducible build script, packed image dependencies, and scene-rendered PNG are delivered consistently.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with both supplied images packed and all required scene components available; build.py rebuilds and saves the scene from the supplied inputs with portable path handling; the correctly named PNG is rendered from that scene with the declared Blender 5.1.2 and Cycles GPU setup.",
+        "PARTIAL": "submission.blend opens and displays the card with both supplied images resolvable, but one or more PASS conditions are unmet.",
+        "FAIL": "submission.blend is absent or cannot open as a usable card scene, or either required supplied image cannot be resolved."
+      },
+      "evidence_refs": ["image/01_final_detail.png", "image/02_color_mapping.png"],
+      "verification": {
+        "method": "Dependency, rebuild, and render provenance checks",
+        "procedure": "In the future submission environment, open submission.blend and inspect packed image data and active render settings. Run build.py in a clean temporary location with only the supplied input files available, then reopen its output. Compare a new render of the rebuilt scene with B73_View_Responsive_Gold_Foil_Card.png to establish scene provenance and consistency. This authoring package does not implement or run these checks.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Three-Strand Cable",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=V-oUcWd3mMU",
+    "id": "V-oUcWd3mMU"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 60,
+    "PROC": 30,
+    "PIPE": 10
+  },
+  "weighting_note": "GEO 60 covers independent final form, scale, rounding, join continuity, and planar path outcomes. PROC 30 tests retained profile, twist/repetition, and curve relationships. PIPE 10 covers reproducible delivery. The source contains no substantive material design, rig, physical simulation, or timeline animation.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Cable Form and Scale",
+      "criterion": "Three equal strands form a closely packed regular twisted bundle.",
+      "scoring_rule": {
+        "PASS": "Exactly three equally thick strands wind around a common centerline at a steady pitch, remaining closely bundled with narrow grooves and without large gaps or deep crossings.",
+        "PARTIAL": "A recognizable twisted cable contains three distinguishable strands. Not all PASS conditions are met.",
+        "FAIL": "No recognizable twisted cable with three distinguishable strands is present."
+      },
+      "evidence_refs": [
+        "image/01_cable_overview.png",
+        "image/02_rounded_strands.png"
+      ],
+      "verification": {
+        "method": "evaluated geometry inspection and functional probe",
+        "procedure": "Inspect neutral evaluated renders and cross-sections along the cable, including both bends; trace each strand and compare its thickness and relationship to its neighbors.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Cable Form and Scale",
+      "criterion": "The unbent cable has the required total length and repeated winding scale.",
+      "scoring_rule": {
+        "PASS": "The unbent cable is 155-165 m long, has approximately one complete turn per 20 m section, and eight repeated full-turn sections with the reference long slender proportions.",
+        "PARTIAL": "The unbent cable is long and contains multiple complete twist revolutions. Not all PASS conditions are met.",
+        "FAIL": "The unbent cable is absent, is not long, or lacks multiple complete twist revolutions."
+      },
+      "evidence_refs": [
+        "image/01_cable_overview.png"
+      ],
+      "verification": {
+        "method": "evaluated geometry inspection and functional probe",
+        "procedure": "Disable path deformation on a temporary copy, measure axial extent and strand-center winding along the evaluated geometry, and restore the submitted state.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Rounded Strands and Continuous Joins",
+      "criterion": "The cords have smooth round cross-sections and stable thickness through bends.",
+      "scoring_rule": {
+        "PASS": "Each cord has a round cross-section and smooth silhouette throughout, without low-sided faceting, pinches, abrupt thickness changes, or shading discontinuities.",
+        "PARTIAL": "The present strands have rounded rather than angular-prism surfaces. Not all PASS conditions are met.",
+        "FAIL": "The strands are absent or retain angular-prism rather than rounded surfaces."
+      },
+      "evidence_refs": [
+        "image/02_rounded_strands.png"
+      ],
+      "verification": {
+        "method": "evaluated geometry inspection and functional probe",
+        "procedure": "Inspect isolated neutral-material renders and evaluated cross-sections at straight and bent regions under grazing illumination.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Rounded Strands and Continuous Joins",
+      "criterion": "Repeated sections join into continuous strands without geometric or phase discontinuities.",
+      "scoring_rule": {
+        "PASS": "All internal strand joins are continuous, without gaps, steps, exposed internal caps, doubled seam rims, or twist-phase jumps; only the outer ends may be open.",
+        "PARTIAL": "Repeated cable sections meet closely enough to form one visible cable. Not all PASS conditions are met.",
+        "FAIL": "Repeated sections do not meet closely enough to form one visible cable, or repeated sections are absent."
+      },
+      "evidence_refs": [
+        "image/01_cable_overview.png",
+        "image/02_rounded_strands.png"
+      ],
+      "verification": {
+        "method": "evaluated geometry inspection and functional probe",
+        "procedure": "Inspect evaluated topology and close neutral renders at every section boundary with path deformation disabled, then confirm joins remain intact with the path enabled.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Live Cable Generator",
+      "criterion": "A single retained open-tube source drives all three generated cords.",
+      "scoring_rule": {
+        "PASS": "The retained single tube source non-destructively drives strand extension and three-strand placement; changing its profile size updates all generated cords consistently and leaves real evaluated geometry.",
+        "PARTIAL": "An editable open tube source produces a visible change in generated cable geometry. Not all PASS conditions are met.",
+        "FAIL": "No editable open tube source produces a visible change in generated cable geometry."
+      },
+      "evidence_refs": [
+        "image/02_rounded_strands.png"
+      ],
+      "verification": {
+        "method": "evaluated geometry inspection and functional probe",
+        "procedure": "Inspect the source-to-result dependency, temporarily adjust source profile size, and compare evaluated cord cross-sections along all three strands before restoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Live Cable Generator",
+      "criterion": "Twist and repetition controls change winding and length independently.",
+      "scoring_rule": {
+        "PASS": "Twist changes visibly alter winding; changing repetition from eight to four approximately halves unbent length while preserving local twist pitch and cord thickness, with nonempty evaluated geometry.",
+        "PARTIAL": "At least one exposed twist or repetition control effectively changes evaluated cable geometry. Not all PASS conditions are met.",
+        "FAIL": "Neither an exposed twist control nor a repetition control effectively changes evaluated cable geometry."
+      },
+      "evidence_refs": [
+        "image/01_cable_overview.png"
+      ],
+      "verification": {
+        "method": "evaluated geometry inspection and functional probe",
+        "procedure": "On a copy with path bending disabled, vary twist, restore it, then change repetition from eight to four. Compare winding, axial extent, cord cross-sections, and evaluated geometry before restoring all controls.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Editable Planar Path",
+      "criterion": "The final cable follows a smooth planar S while retaining all three strands.",
+      "scoring_rule": {
+        "PASS": "The centerline forms a shallow planar S with opposite bend directions, smooth transitions, and no self-crossing or sharp kink; all three bundled strands follow the path.",
+        "PARTIAL": "The cable has a curved centerline with two distinguishable bends. Not all PASS conditions are met.",
+        "FAIL": "The cable lacks a curved centerline with two distinguishable bends."
+      },
+      "evidence_refs": [
+        "image/03_planar_path.png"
+      ],
+      "verification": {
+        "method": "evaluated geometry inspection and functional probe",
+        "procedure": "Inspect overhead and side evaluated views, trace centerline curvature through both bends, and inspect the bundle at the strongest curvature.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Planar Path",
+      "criterion": "The path remains live and can be disabled to reveal the straight twisted generator output.",
+      "scoring_rule": {
+        "PASS": "Moving a middle control point within the plane updates the cable path; disabling path deformation reveals the full straight twisted cable, and restoring it returns the S-shaped result.",
+        "PARTIAL": "An editable curve control changes the cable path. Not all PASS conditions are met.",
+        "FAIL": "No editable curve control changes the cable path."
+      },
+      "evidence_refs": [
+        "image/03_planar_path.png"
+      ],
+      "verification": {
+        "method": "evaluated geometry inspection and functional probe",
+        "procedure": "On a temporary copy, move a middle curve control point in-plane, compare evaluated cable centerlines, then disable and restore path deformation and verify that the generated twist persists.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "An editable project, reproducible build, and authentic complete-cable PNG are delivered.",
+      "scoring_rule": {
+        "PASS": "All three named files exist; the blend retains the requested live generator and path, build.py rebuilds them from the stated start, and the actual-scene PNG clearly shows the complete cable, both bends, and separate strands with neutral material and lighting using Blender 5.1.2 and Cycles GPU settings.",
+        "PARTIAL": "A readable submission.blend contains the recognizable cable asset. Not all PASS conditions are met.",
+        "FAIL": "submission.blend is absent, unreadable, or lacks a recognizable cable asset."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "evaluated geometry inspection and functional probe",
+        "procedure": "Open the blend and inspect live assets/settings; run build.py in a clean Blender 5.1.2 process and compare the rebuilt scene and controlled render with the delivered blend and PNG. This future procedure was not executed during authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

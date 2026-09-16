@@ -1,0 +1,136 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "链条重球碰撞动画",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=eMStCR7-7qg",
+    "id": "eMStCR7-7qg"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 40, "SIM": 50, "PIPE": 10},
+  "weighting_note": "暂定内容权重，尚未经真实提交校准。GEO 40 分独立衡量闭合链环、初始穿套、端部实体装配与三维块堆；SIM 50 分分别衡量重力摆动、接触承重、接触前稳定、冲击破坏和散块接触；PIPE 10 分衡量缓存、重算与脚本重建。灰模不设 SURF，所有动态均来自模拟，不重复归入 ANM；不以数组、对象数或刚体设置存在代替结果。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 链环与承重装配",
+      "criterion": "存在一致的闭合椭圆实体链环，具有公开比例、贯通孔洞、圆润环管与平滑无破损外形。",
+      "scoring_rule": {
+        "PASS": "链环存在且全体外宽与长宽比符合公开范围；孔洞贯通、环管闭合且圆润，近看无裂口、尖刺、明显扁塌或粗糙阴影断裂。",
+        "PARTIAL": "有可辨认的闭合椭圆实体链环及贯通孔洞，但比例或表面质量至少一项不达标；不满足 PASS，且多数链环仍保持完整环形。",
+        "FAIL": "不存在链环，或多数链环无贯通孔洞、断开、退化成平面，或无法辨认为椭圆实体环。"
+      },
+      "evidence_refs": ["image/02_link_pair.png"],
+      "verification": {"method": "evaluated_geometry_and_visual", "procedure": "在第 1 帧辨认环体几何，提取求值网格并在各环自身平面量取外长外宽，以 B=1 m 验证公开范围；使用正面与斜侧近景观察孔洞、环管截面和表面。端环埋入球或锚块的区域不作为裂口。按几何角色识别，不检查拓扑计数或名称；缺少环体不能凭无缺陷获分。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 链环与承重装配",
+      "criterion": "第 1 帧至少 10 节链环形成连续、交替朝向、真实穿套且无明显实体相交的链条。",
+      "scoring_rule": {
+        "PASS": "至少 10 节环构成连续穿套路径，各相邻环交替接近垂直，环管穿过孔洞而不明显穿插实体，并保留转动空间。",
+        "PARTIAL": "不满足 PASS，但至少 5 节相邻环构成真实穿套路径；不足 10 节，或完整链条有少量方向、间隙或连接缺陷。",
+        "FAIL": "没有至少 5 节环构成的真实穿套路径，或整体主要依靠端对端接触、实体重叠或平面轮廓假装连接。"
+      },
+      "evidence_refs": ["image/02_link_pair.png", "image/03_assembly.png"],
+      "verification": {"method": "evaluated_geometry_and_visual", "procedure": "仅检查第 1 帧的求值几何，沿锚块至重球逐对检查环面朝向与穿孔关系；绕每处连接观察，必要时剖切或隔离相邻环确认闭合曲线确实套接而非网格交叉。统计实际环体而非对象数；此项不评价运行中的脱环，避免与 SIM-02 重复。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 链环与承重装配",
+      "criterion": "上端方形锚块与下端平滑球形重物的比例、位置及端环嵌入关系清楚可信。",
+      "scoring_rule": {
+        "PASS": "锚块、重球和两端环均存在，尺寸在公开范围内；两端环分别进入对应实体，没有悬空间隙；球面平滑，锚块外形方正。",
+        "PARTIAL": "不满足 PASS，但锚块和重球都存在且位于正确链端；至少一个尺寸、端环嵌入或球面质量不达标。",
+        "FAIL": "锚块或重球缺失，或两者未位于对应链端，不能辨认完整的悬挂装配。"
+      },
+      "evidence_refs": ["image/03_assembly.png"],
+      "verification": {"method": "evaluated_geometry_and_visual", "procedure": "第 1 帧量取锚块边长与球体直径，对照 B；观察两端局部剖面与整体侧视，确认端环进入实体且没有断开的空间。只检查实体形态及初始装配关系，运行时锚块稳定和球连接归 SIM-01。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 完整方块堆与碰撞地面",
+      "criterion": "初始目标是由同尺寸独立实心立方体填满的规则三维近立方体块堆。",
+      "scoring_rule": {
+        "PASS": "三个方向均为 5 至 7 个边长 B 的同尺寸立方体，内部填满，细缝不超过 0.03B，无初始实体穿插，底层落在地面上。",
+        "PARTIAL": "不满足 PASS，但由可分辨的立方体组成三维堆体；单元范围、尺寸一致性、内部填充、细缝或底层位置至少一项不达标。",
+        "FAIL": "目标缺失，或是单一未分块实体、一片墙、非立方体堆体，无法形成多单元的三维目标。"
+      },
+      "evidence_refs": ["image/04_initial.png", "image/05_contact.png"],
+      "verification": {"method": "evaluated_geometry_and_visual", "procedure": "在第 1 帧检查各单元求值几何与空间中心，按三轴聚类验证排列及公开尺寸缝隙；剖开或隐藏外层检查内部填充。独立单元不限定数据块或对象组织方法，但必须保留可独立参与物理的实体。此处不以刚体数量推断几何。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SIM-01", "capability": "SIM", "points": 10,
+      "requirement_section": "3. 起始状态与重力摆动",
+      "criterion": "按公开初始条件释放后产生重力摆动，锚块稳定、重球连在链端且摆弧离地，并在公开时间窗到达堆体。",
+      "scoring_rule": {
+        "PASS": "第 1 帧静止、链条下倾 20 至 30 度且球与堆体分离；重算后由重力摆动，第 25 至 60 帧首次球堆接触；全程锚块漂移及转角在容差内，球连接牢固且始终离地，链条逐环改变方向。",
+        "PARTIAL": "不满足 PASS，但可重算出明显重力摆动且锚块仍承托重球；初始角度、接触时间、锚块容差、局部转动或球的地面间隙至少一项失败。",
+        "FAIL": "没有可重算的重力摆动，或主要运动由预制动画代替，或锚块整体下落、重球脱离链端，不能形成悬挂摆动。"
+      },
+      "evidence_refs": ["image/03_assembly.png", "image/04_initial.png", "image/05_contact.png"],
+      "verification": {"method": "simulation_replay_and_motion_trace", "procedure": "清除副本缓存，从第 1 帧顺序计算至 250，记录锚块、链环和球的求值变换、球底高度及首次球堆接触帧；核对 24 fps 和公开初始角度。确认物理对象不存在替代运动的变换或顶点动画，观察链条各段夹角变化。若重力来源有疑义，在副本关闭重力并清缓存，静止释放不应仍出现同样下摆轨迹。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SIM-02", "capability": "SIM", "points": 10,
+      "requirement_section": "4. 链环接触与动力学",
+      "criterion": "正常模拟靠真实链环接触承重并保持稳定；移除中间环后下游失去支撑。",
+      "scoring_rule": {
+        "PASS": "正常完整回放持续保持穿套且无明显脱环、穿透、炸开或持续抖动；移除中部一环并清缓存重算时，缺口下方链条和球在前 60 帧可见地下落，未被隐藏连接继续承重。",
+        "PARTIAL": "不满足 PASS，但已证明链环接触参与承重且移除环会使下游失去支撑；正常运行出现局部不稳定、短时穿透或某处脱环。",
+        "FAIL": "无法证明真实接触承重，或移除环后下游仍被不可见连接吊住，或链条整体由运动预制、刚性单块或可拉伸带状物替代。"
+      },
+      "evidence_refs": ["image/02_link_pair.png", "image/01_aftermath.png"],
+      "verification": {"method": "simulation_contact_and_counterfactual_probe", "procedure": "观察正常副本逐帧求值链环在前 10 帧、撞击阶段和其后至 250 帧的空间关系及运动；另建副本，删除中部一环的几何与物理作用，失效关联缓存，从第 1 帧顺序重算 60 帧。确认下游确实失去锚块支撑；隐藏几何并保留碰撞不等于删除。检查接触表示保留孔洞，设置存在只作辅助证据。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SIM-03", "capability": "SIM", "points": 10,
+      "requirement_section": "5. 撞击与散块行为",
+      "criterion": "方块堆在任何真实接触发生前保持静止完整，破坏由重球的实际接触触发。",
+      "scoring_rule": {
+        "PASS": "接触前所有方块的位移和转角在公开容差内；之后主破坏随重球到达发生，动力学响应来自实际碰撞，没有定时预制散开。",
+        "PARTIAL": "不满足 PASS，但方块堆在接触前仍保持完整，且重球真实碰撞触发后续运动；有小幅提前沉降或抖动超过公开容差。",
+        "FAIL": "堆体在接触前已经散开，或与重球无实际接触仍按预定时间破坏，或目标没有可响应接触的物理行为。"
+      },
+      "evidence_refs": ["image/04_initial.png", "image/05_contact.png"],
+      "verification": {"method": "simulation_event_trace_and_causal_probe", "procedure": "从第 1 帧逐帧重算至首次任何链球组件与堆体接触，记录单元中心位移和方向差，阈值为 0.02B 与 2 度；观察球到达时受击区域开始变化。另在副本移开整套悬挂装配，使其摆动路径不触及堆体，清缓存后重算至原主要破坏时刻，堆体应保持完整，排除定时动画。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SIM-04", "capability": "SIM", "points": 10,
+      "requirement_section": "5. 撞击与散块行为",
+      "criterion": "重球撞开堆体并把足够多的方块独立移出原位，形成明显局部缺口和散落区域。",
+      "scoring_rule": {
+        "PASS": "实际重球碰撞后，第 80 至 160 帧内至少一帧有不少于 25% 单元中心位移超过 0.5B，受击堆面明显打开且方块向外散落。",
+        "PARTIAL": "不满足 PASS，但真实碰撞使若干单元独立移位并留下局部损伤；破坏规模未达到公开比例，或仅在指定时间窗外出现充分破坏。",
+        "FAIL": "重球未造成独立单元破坏，或堆体只整体滑动、保持完整，或所谓散落完全来自与撞击无关的预制动画。"
+      },
+      "evidence_refs": ["image/01_aftermath.png", "image/05_contact.png"],
+      "verification": {"method": "evaluated_displacement_and_visual", "procedure": "使用正常重算轨迹，统计各初始方块中心至第 80 至 160 帧中心的位移，按实际单元数计算超过 0.5B 的比例；查看达到最大合格比例时的斜前与侧视，确认受击面形成缺口且不是整个堆体刚性平移。初始缺少单元不能算已被撞散。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SIM-05", "capability": "SIM", "points": 10,
+      "requirement_section": "5. 撞击与散块行为",
+      "criterion": "散块保持刚性形状、独立翻滚，并与静止地面产生可信碰撞而非穿地或异常持续运动。",
+      "scoring_rule": {
+        "PASS": "撞击后至少 10% 单元相对初始转过 15 度以上且有独立翻滚；单元形状尺寸保持，地面覆盖范围内碰撞、滑动或堆积正常，无明显穿地、无接触骤然加速或持续抖动。",
+        "PARTIAL": "不满足 PASS，但散块存在可辨认的独立转动且至少部分被地面阻挡；旋转比例不足，或少量接触、稳定性、刚性保持缺陷可见。",
+        "FAIL": "不存在受击后的独立散块运动，或散块普遍无视地面穿过、严重变形、整体同步旋转，或严重不稳定而无法辨认合理碰撞。"
+      },
+      "evidence_refs": ["image/01_aftermath.png"],
+      "verification": {"method": "rigid_motion_and_ground_contact_trace", "procedure": "在正常回放的撞击后至 250 帧记录各单元方向变化，统计最大角差超过 15 度的比例；抽查受击区、外散区和接地块的求值几何尺寸及轨迹。将各块位置与真实地面范围比较，只将覆盖范围内穿地视为失败；越过有限地面边缘后的坠落允许。观察接触法向变化、翻滚、滑动及后段稳定性，不以单独截图或刚体标志判定。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 10,
+      "requirement_section": "6. 交付与重复播放",
+      "criterion": "交付包含完整可移植缓存、可从初始状态重算的物理设置，以及能够重建和保存相同行为场景的 build.py。",
+      "scoring_rule": {
+        "PASS": "以下三条均成功：换目录后整段缓存可播放；清缓存从第 1 帧重算得到同样的运动阶段；build.py 在空场景重建并保存场景且能生成整段缓存。文件内说明足以定位资源和恢复初始状态，无绝对路径或联网依赖。",
+        "PARTIAL": "不满足 PASS，但三条复现路径中至少一条成功；其余因缓存遗漏、构建或重算入口缺失、资源路径或说明不全而不能完成。",
+        "FAIL": "三条复现路径均失败，无法从交付物获得完整可播放、可重算或可重新构建的模拟。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "portable_replay_and_rebuild", "procedure": "将交付包复制到独立目录，按文件内说明加载第 1 至 250 帧缓存；在副本清缓存顺序重算；另用 Blender 5.1.2 空场景运行 build.py 的记录入口并生成缓存。核对三条路径均出现释放、重球接触、破坏与散落阶段，允许小的数值轨迹差异；检查缓存路径与必要依赖闭合。这里只评价复现路径，具体运动质量已由 SIM 行评价。", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

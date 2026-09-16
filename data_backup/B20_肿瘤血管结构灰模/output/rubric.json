@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "肿瘤血管结构灰模",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1ynjw6sEnx",
+    "id": "BV1ynjw6sEnx"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "暂定权重，未经运行或样本校准。本任务是窄范围静态灰模：弧形、剖口、壁厚、结节、细管及其空间联系均为真实几何，九项GEO合计90分；可编辑组织与可重建交付合计PIPE10分。不因置换、弯曲或细分修改器的存在给PROC分，也不把灰模平滑或几何起伏计作SURF。",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. 弯曲主血管与纵向剖口",
+      "criterion": "粗主血管具有细长、舒展且连续的弧形主体，与结节和细血管具有清楚的尺度层级。",
+      "scoring_rule": {
+        "PASS": "粗主血管可辨，呈连续舒展弧线，长度明显超过单个结节，管径明显大于细血管。",
+        "PARTIAL": "存在可辨的粗长管体，但弯曲近乎消失、弧线明显折段或主次尺度层级有一项不足。",
+        "FAIL": "不存在可辨的粗长主血管，或主体不能形成连续管状结构。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/02_cutaway.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_multiview",
+        "procedure": "在副本中隔离主血管，检查依赖图求值后的可见表面；从正交侧视与两个斜视观察长度方向的中心走势和粗细。对比结节与细管的实际尺寸，不按对象命名、包围盒长宽比或弯曲修改器存在判定。此项只评整体主形，不评管腔或壁厚。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. 弯曲主血管与纵向剖口",
+      "criterion": "完整周向管段过渡到真实纵向剖口，剖口露出连续凹形管腔且管轴端口通畅。",
+      "scoring_rule": {
+        "PASS": "完整周向段、纵剖段及交界弧边均可辨；剖开区域露出真实管腔，管轴端口没有封堵。",
+        "PARTIAL": "存在真实敞开的凹形管腔，但缺少完整周向段、交界关系不清楚或一个管轴端口被封堵。",
+        "FAIL": "没有真实纵向敞开的管腔，或仅以实心凹槽、颜色、贴图表现内部。"
+      },
+      "evidence_refs": ["image/02_cutaway.png"],
+      "verification": {
+        "method": "evaluated_cross_section_and_multiview",
+        "procedure": "对求值后的主血管做临时剖面检查，在完整段、交界和纵剖段各取横截面，确认环形管段与敞开凹形段的连续过渡；从剖口向内和沿轴端观察真实空腔。忽略材质颜色与阴影，不以边界边数量替代管腔检查。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "2. 双层管壁与边缘",
+      "criterion": "两层有厚度的管壁沿同一弧线嵌套，间距连续，剖口边缘能辨认两层及细窄圆角。",
+      "scoring_rule": {
+        "PASS": "两层均有内外表面和连接侧壁，连续嵌套；可辨间距窄于管腔，没有大面积重合或穿出，边缘有受控圆角。",
+        "PARTIAL": "两层嵌套结构可辨，但其中一层近似零厚度、间距局部中断、局部穿出或圆角处理缺失。",
+        "FAIL": "没有可辨的两层嵌套管壁，或两层大面积重合、交叉而失去层次。"
+      },
+      "evidence_refs": ["image/02_cutaway.png", "image/05_detail.png"],
+      "verification": {
+        "method": "evaluated_geometry_cross_sections",
+        "procedure": "分别隔离两层，在求值几何的多个轴向位置检查内外表面、壁厚和连接侧壁；再同时显示，沿剖口两条长边及交界弧边比较层间间距、穿插和圆角轮廓。单层厚壁的内外表面不等于双层结构；不以两个对象或Solidify修改器数量代替验证。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "3. 三维结节团块",
+      "criterion": "大量可辨单元组成紧凑、不规则且具有前后纵深的团块，外围尺寸与位置有变化。",
+      "scoring_rule": {
+        "PASS": "团块为密集多单元堆叠，前后层次与侧面厚度明确，外围参差并具有大小变化。",
+        "PARTIAL": "可辨多单元团块，但明显偏单层、过于稀疏、轮廓规则或尺寸缺少变化。",
+        "FAIL": "没有可辨的多单元团块，或仅有一个整体球体或互不成团的零散单元。"
+      },
+      "evidence_refs": ["image/03_cluster.png", "image/04_paths.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_multiview",
+        "procedure": "隐藏管体，从前、侧和两个斜角检查求值后的单元分布、遮挡、外轮廓和整体厚度；必要时临时移动一个前方单元，确认后方单元实际存在。按可辨几何单元而非对象总数识别，单纯非零包围盒厚度不足以证明三维堆叠。此项不重复评价单元表面结节。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. 三维结节团块",
+      "criterion": "团块单元在近球形体量上具有宽缓且不规则的真实结节起伏。",
+      "scoring_rule": {
+        "PASS": "团块中大多数可见单元均呈近球形结节体，宽缓起伏可在表面和轮廓辨认，形态不被长刺主导。",
+        "PARTIAL": "存在结节单元，但只有少量单元完成起伏，或多数起伏过小、过于规则或过强而削弱近球形体量。",
+        "FAIL": "无可辨结节单元，或单元均为规则光滑球、仅有材质凹凸，或整体由长刺形态主导。"
+      },
+      "evidence_refs": ["image/03_cluster.png", "image/05_detail.png"],
+      "verification": {
+        "method": "evaluated_surface_and_silhouette",
+        "procedure": "从团块中心、外围及后方选取代表单元，在中性实体着色下检查求值网格和不同方向轮廓；确认存在比细管粗糙度更宽缓的几何起伏。可辅以局部半径变化测量，但不得把整体椭球拉伸或材质法线变化当作结节。不存在团块单元时不得获得此项。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "4. 细血管的路径与空间联系",
+      "criterion": "至少三条有体积的细管路径覆盖上部回弯、横跨长弧和下部折回三种走向。",
+      "scoring_rule": {
+        "PASS": "至少三条路径可分别追踪，管体明显细于主血管且截面大体圆润，三种走向均可辨。",
+        "PARTIAL": "存在有体积的细管，但只有一至两条可追踪路径、缺少一种或多种走向，或截面普遍扁平。",
+        "FAIL": "没有可追踪的有体积细管路径，或仅有线条、贴图片段或散点。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/04_paths.png"],
+      "verification": {
+        "method": "evaluated_path_tracing_and_sections",
+        "procedure": "隔离细管求值几何，按连续路径逐条追踪并记录三类走势；在转弯与较直管段检查局部横截面，确认真实体积和圆润轮廓。曲线、网格及组合管段均可，不以三个对象或三条样条直接判定三种走向。此项只评价路径形态，不评价相对团块的深度。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "4. 细血管的路径与空间联系",
+      "criterion": "团块位于主血管剖口一侧，细管从主血管附近延向团块并在不同深度穿绕结节。",
+      "scoring_rule": {
+        "PASS": "团块邻近剖口一侧，至少一条细管由主血管附近延入团块范围；其余路径形成可追踪的不同深度穿绕，没有主要路径大段远离团块。",
+        "PARTIAL": "三类主体齐全且形成邻近组合，但细管集中在单一前置平面、与主血管附近缺少可见联系，或有主要路径大段脱离团块。",
+        "FAIL": "缺少主血管、团块或细管中的任何一类，或三类结构彼此分离而未组成同一空间结构。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/04_paths.png", "image/05_detail.png"],
+      "verification": {
+        "method": "evaluated_spatial_relationships_and_orbit",
+        "procedure": "在求值几何上围绕团块观察前后、侧面与俯视，检查细管中心走势相对结节表面的深度和邻近关系；遮挡不清处临时隐藏遮挡单元核实。不能仅凭包围盒相交判定穿绕，也不要求布尔合并、顶点焊接或流体连通。此项评价几何装配，不评价相机布光。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-08",
+      "capability": "GEO",
+      "points": 8,
+      "requirement_section": "5. 几何细节与完整性",
+      "criterion": "细血管具有连续、细密的真实几何起伏，同时保留清晰的管状主路径。",
+      "scoring_rule": {
+        "PASS": "各主要细管在正常近景下均有连续细密起伏，起伏尺度小于结节表面起伏，管状路径仍清楚。",
+        "PARTIAL": "至少一条主要细管具有真实起伏，但其他主要管段过于光滑，或起伏尺度明显不统一、局部破坏管形。",
+        "FAIL": "不存在具有真实细密起伏的细管，或仅靠材质、法线贴图、散点表现粗糙，或起伏普遍摧毁管形。"
+      },
+      "evidence_refs": ["image/04_paths.png", "image/05_detail.png"],
+      "verification": {
+        "method": "evaluated_surface_closeup",
+        "procedure": "对每条主要细管取较直段与弯曲段，在中性实体着色下查看求值表面与轮廓；隐藏材质贴图影响，区分几何起伏与平滑着色假象。对照结节起伏尺度判断细密程度。此项已评价因粗糙度过强导致的管形破坏，不在GEO-09重复扣除同一缺陷。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-09",
+      "capability": "GEO",
+      "points": 6,
+      "requirement_section": "5. 几何细节与完整性",
+      "criterion": "组合灰模在整体及正常近景中保持几何完整与稳定着色，没有额外破洞、闪烁或破损阴影。",
+      "scoring_rule": {
+        "PASS": "三类主体均存在，剖口、端口和结节间隙以外没有可见意外孔洞、重叠闪烁或明显破损阴影，曲面完整。",
+        "PARTIAL": "三类主体均存在，缺陷局限于个别部位且各类主要轮廓仍完整；或缺少一类主体而其余两类几何完整。",
+        "FAIL": "破损使任一现有主体的主要轮廓无法辨认、少于两类主体可检查，或缺少一类主体且其余类别也有明显完整性缺陷。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/02_cutaway.png", "image/05_detail.png"],
+      "verification": {
+        "method": "evaluated_geometry_integrity_and_multiview",
+        "procedure": "以主体占视图大部分的整体视图及局部近景绕视，检查可见表面连续性、法线方向与重叠面；必要时在求值副本网格定位缺陷。设计开口、独立管段、局部结节交叠不算缺陷。已在GEO-01至GEO-08评价的弧形、壁厚、起伏和局部管形问题不在本项重复计分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "6. 独立编辑与重建",
+      "criterion": "主血管两层、结节单元和细管路径可分别隔离编辑，局部修改不会意外改变其他类别。",
+      "scoring_rule": {
+        "PASS": "三类主体齐全，主血管两层可分别隔离；移动外围单元及调整单条细管局部路径两项编辑均不会意外影响其他类别。",
+        "PARTIAL": "三类主体齐全且至少一项局部编辑可独立完成，但双层隔离或另一项局部编辑受限。",
+        "FAIL": "三类主体不齐全、全部不可区分，或两项局部编辑均无法独立完成。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "non_destructive_edit_probes",
+        "procedure": "在提交文件副本中实际隔离主血管两层、移动一个外围结节，再恢复并调整一条细管的局部路径，比较其他类别的求值几何是否意外改变；最后丢弃副本。对象分离、几何分组及参数方式均可，不以修改器或对象数量替代编辑探针。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "6. 独立编辑与重建",
+      "criterion": "build.py 在 Blender 5.1.2 的另一空场景中稳定重建并保存可移植的 submission.blend。",
+      "scoring_rule": {
+        "PASS": "脚本无需本机路径或外部插件即可从空场景重建三类主体及其主要细节布局并保存文件；重复运行的主要形体与布局一致。",
+        "PARTIAL": "脚本可生成三类主体并保存，但重建细节或布局与提交文件有明显差异，或依赖一处可修正的路径设置、随机结果不稳定。",
+        "FAIL": "缺少可执行的重建脚本、无法生成三类主体或无法保存结果，或依赖未提供的关键资源及外部插件。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "isolated_rebuild_and_dependency_audit",
+        "procedure": "将提交内容放入新的临时目录，在 Blender 5.1.2 空场景执行脚本并检查保存结果；比较提交文件与重建结果的三类求值形体、几何细节和空间布局。重复一次确认随机稳定性，检查资源引用和绝对路径；文件能打开仅作为检查前提，不单独给分。此程序目前只被规定，尚未实现或执行。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

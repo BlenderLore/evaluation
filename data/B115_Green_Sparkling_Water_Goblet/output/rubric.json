@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Green Sparkling Water Goblet",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV17sAte3Ex2",
+    "id": "BV17sAte3Ex2"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 50, "PROC": 15, "SURF": 30, "PIPE": 5},
+  "weighting_note": "Geometry receives 50 points for the constructed hollow vessel, fitted liquid, and actual three-dimensional bubble field. Functional bubble controls receive 15 points, and transparent drink materials receive 30. Reproducible saved scene and render delivery receive 5 points. The source chooses a paused particle state, so no animation or simulation points are assigned. Ice is optional and receives no points. Static spatial distribution and functional generation are assessed separately.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. Stemmed Glass Profile",
+      "criterion": "The vessel has the centered cylindrical cup, short narrow stem, and broad circular foot of the reference silhouette.",
+      "scoring_rule": {
+        "PASS": "An upright approximately cylindrical cup body is taller than wide and dominates the silhouette; a short narrow centered stem and low circular foot are both present; the foot is close to the body width; the three parts share a vertical axis and form connected transitions.",
+        "PARTIAL": "An upright cup body and at least one recognizable centered stem or broad foot are present, but at least one PASS condition is unmet.",
+        "FAIL": "The minimum of an upright cup body plus at least one recognizable centered stem or broad foot is not met. A plain unsupported cylinder or unrelated vessel is insufficient."
+      },
+      "evidence_refs": ["image/01_finished_goblet.png", "image/02_fitted_liquid.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_orthographic_inspection",
+        "procedure": "Inspect the submitted vessel in front and side orthographic views with materials overridden. Compare body height and width, stem and foot proportions, center axes, and physical junctions on evaluated geometry. Judge the silhouette independently of missing liquid or surface materials.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "2. Hollow Vessel and Fitted Liquid",
+      "criterion": "The vessel is a smooth coherent hollow shell with an open mouth, finite walls, and a closed inner bottom.",
+      "scoring_rule": {
+        "PASS": "The body has an open mouth, rounded rim, finite wall thickness, distinguishable inner and outer walls, and a closed inner bottom above the stem. Inner and outer surfaces form a coherent shell. The body, stem, and foot have smooth correctly oriented surfaces without visible faceting, pinched rims, tears, or overlapping layers.",
+        "PARTIAL": "The existing main cup body has an open cavity, distinguishable inner and outer wall surfaces, and a closed inner bottom, with predominantly smooth wall surfaces, but at least one PASS condition is unmet. Missing minor vessel parts cannot establish finish quality and prevent PASS without automatically invalidating the existing body surfaces.",
+        "FAIL": "The existing main cup body does not meet all minimum conditions of an open cavity, distinguishable inner and outer walls, a closed inner bottom, and predominantly smooth wall surfaces. An opaque solid cylinder, single open sheet, or severely broken shell is insufficient."
+      },
+      "evidence_refs": ["image/01_finished_goblet.png", "image/02_fitted_liquid.png"],
+      "verification": {
+        "method": "cross_section_normals_and_controlled_render",
+        "procedure": "Temporarily hide the liquid and bubbles. Inspect a nondestructive cross-section of the evaluated vessel to trace inner wall, rim, outer wall, and bottom. Inspect face orientation and a neutral close-up render of the existing surfaces for shading discontinuities and overlapping layers. Inspect stem and foot finish only where those parts exist.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Hollow Vessel and Fitted Liquid",
+      "criterion": "A distinct closed liquid volume follows the cup cavity and has a level surface below the rim.",
+      "scoring_rule": {
+        "PASS": "A separate closed liquid volume has a level top below the rim with a visible clear band above it. Its sides and bottom follow the inner cup, and it remains inside the cavity without extending into the stem or protruding outside the vessel.",
+        "PARTIAL": "A distinct three-dimensional liquid body occupies the cup cavity and has an identifiable top surface, but at least one PASS condition is unmet.",
+        "FAIL": "There is no distinct three-dimensional liquid body occupying the cup cavity with an identifiable top surface. A material applied only to the glass or a flat liquid disk is insufficient."
+      },
+      "evidence_refs": ["image/02_fitted_liquid.png", "image/04_green_liquid.png"],
+      "verification": {
+        "method": "evaluated_volume_and_spatial_inspection",
+        "procedure": "Identify the actual liquid geometry by temporarily isolating render-visible components. Inspect its evaluated surface closure and compare its side, bottom, and top against a sectioned cup cavity. Confirm that the top is level and below the rim and that no liquid extends into the stem or beyond the cup exterior.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Editable Bubble Distribution",
+      "criterion": "The evaluated distribution occupies the liquid interior as a dense, readable three-dimensional bubble field.",
+      "scoring_rule": {
+        "PASS": "Many small round bubbles occupy different heights and depths throughout the liquid interior. The field is irregular and dense while retaining readable space between bubbles; it is neither a sheet, a regular grid, nor a surface-only layer. Bubble geometry remains inside the liquid boundary.",
+        "PARTIAL": "Several separated round bubbles occupy at least two heights and two interior depths in the liquid, but at least one PASS condition is unmet.",
+        "FAIL": "The minimum of several separated round bubbles at two heights and two interior depths in the liquid is not met. A flat image, single layer, surface-only decoration, or absent bubble field is insufficient."
+      },
+      "evidence_refs": ["image/03_bubble_distribution.png", "image/01_finished_goblet.png"],
+      "verification": {
+        "method": "evaluated_instances_and_depth_inspection",
+        "procedure": "Inspect evaluated bubble geometry or instances with a temporary opaque material and the vessel hidden. View from front, side, and above to distinguish a volumetric field from a sheet or surface layer. Compare bubble extents with the liquid boundary and then confirm visual density in the saved camera view. Assess the spatial field separately from the control behavior in PROC-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "3. Editable Bubble Distribution",
+      "criterion": "The bubble distribution exposes functional amount, typical-size, and size-variation controls.",
+      "scoring_rule": {
+        "PASS": "An editable reusable procedural distribution produces a volumetric bubble field and has independently functional controls for amount, typical size, and size variation. Each produces its stated evaluated effect, variation produces visibly different bubble sizes, and ordinary edits preserve the interior distribution without individual repositioning. The saved scene opens on the finished static field.",
+        "PARTIAL": "An editable procedural distribution produces a volumetric bubble field and at least one of amount, typical size, or size variation has a working global control, but at least one PASS condition is unmet.",
+        "FAIL": "There is no editable procedural volumetric distribution with at least one working global amount, typical-size, or size-variation control. A frozen collection of manually placed bubbles alone is insufficient."
+      },
+      "evidence_refs": ["image/03_bubble_distribution.png", "image/01_finished_goblet.png"],
+      "verification": {
+        "method": "nondestructive_functional_parameter_probe",
+        "procedure": "In a temporary copy of the submitted scene, identify the controls from their actual connections or code and change each independently within an ordinary useful range. Compare evaluated bubble counts for amount, radius distributions for typical size and variation, and boundary containment after edits. Restore values and reopen the original to verify that its initial saved state displays the finished field. Do not award credit solely for named properties or disconnected nodes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. Transparent Materials",
+      "criterion": "The vessel material produces clear polished glass while preserving visibility of the contents.",
+      "scoring_rule": {
+        "PASS": "The actual cup surfaces transmit and refract light and have polished controlled highlights. The rim, wall, stem, and foot read as glass; the liquid and bubbles remain visible through the body without broad opaque or mirror-like blockage.",
+        "PARTIAL": "The existing main cup body visibly transmits the liquid or bubbles and shows a reflective or refractive glass response, but at least one PASS condition is unmet. Missing secondary vessel parts prevent PASS but do not erase demonstrated transmission on the main body.",
+        "FAIL": "The existing main cup body does not both visibly transmit the liquid or bubbles and show a reflective or refractive glass response. Missing surfaces, opacity, or a purely invisible transparency material cannot establish this minimum."
+      },
+      "evidence_refs": ["image/01_finished_goblet.png", "image/04_green_liquid.png"],
+      "verification": {
+        "method": "actual_material_use_and_controlled_render",
+        "procedure": "Trace the materials used by evaluated cup surfaces, then inspect a camera render and a close view under broad neutral lighting with a contrasting background behind the cup. Confirm transmitted contents, refraction, and highlight response rather than inferring glass from node presence. Geometry defects are assessed under GEO-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "4. Transparent Materials",
+      "criterion": "The transmissive liquid has an editable height-based fade from lime green below to nearly clear above.",
+      "scoring_rule": {
+        "PASS": "The actual liquid transmits and refracts light, with bright lime green concentrated near its bottom and a fade to a very pale upper region. The color is tied to liquid height rather than camera projection. Editable colors and transition height or range change the corresponding evaluated appearance while the liquid remains in place.",
+        "PARTIAL": "An existing liquid volume transmits light and visibly has more green coloration below than above, but at least one PASS condition is unmet.",
+        "FAIL": "An existing liquid volume does not both transmit light and show a visibly stronger green lower region than upper region. Missing liquid, uniform coloration, an opaque green body, or a camera overlay is insufficient."
+      },
+      "evidence_refs": ["image/04_green_liquid.png", "image/01_finished_goblet.png"],
+      "verification": {
+        "method": "material_coordinate_probe_and_controlled_render",
+        "procedure": "Inspect actual material use on the liquid and render it through the glass. Compare lower and upper regions while orbiting the inspection camera to confirm a stable height-based appearance. In a temporary copy, change a color and the transition height or range independently; confirm the visible changes on the same stationary volume. Restore original values. Do not require specific node types or numerical shader values.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "4. Transparent Materials",
+      "criterion": "The bubble surfaces read as clear glossy inclusions within the liquid.",
+      "scoring_rule": {
+        "PASS": "The actual bubbles are clear and glossy, with small reflective or refractive rims visible within the drink. They do not read as opaque beads, flat dots, or emissive particles.",
+        "PARTIAL": "A visible subset of actual bubbles has a transparent glossy surface response and can be distinguished from the liquid, but at least one PASS condition is unmet.",
+        "FAIL": "No visible subset of actual bubbles both has a transparent glossy response and is distinguishable from the liquid. Missing bubbles, wholly opaque beads, flat dots, or wholly emissive particles are insufficient."
+      },
+      "evidence_refs": ["image/01_finished_goblet.png"],
+      "verification": {
+        "method": "material_assignment_and_close_render",
+        "procedure": "Inspect materials actually used by bubble instances, then render a close view through the glass and liquid. Confirm a clear interior and controlled rim response on multiple bubbles. A transparent material on an unused source object does not establish the result.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, recreating-and-saving script, and actual-scene PNG are delivered consistently.",
+      "scoring_rule": {
+        "PASS": "All three named deliverables are present. submission.blend opens on the finished editable glass, liquid, and bubble field. In a new Blender file, build.py recreates the required scene and explicitly saves submission.blend; reopening that saved result retains working controls and matching appearance. The named PNG is rendered from that saved scene with the whole glass and readable required contents, using the public presentation requirements.",
+        "PARTIAL": "submission.blend is editable, and build.py recreates and explicitly saves an openable scene containing an identifiable vessel and liquid. Any supplied PNG is demonstrably an actual-scene render. This minimum is met, but at least one PASS condition is unmet.",
+        "FAIL": "The minimum of an editable submission.blend and a build.py that recreates and explicitly saves an openable scene containing an identifiable vessel and liquid is not met, or a supplied PNG is a source image, viewport screenshot, or external replacement. An unsaved in-memory rebuild is insufficient."
+      },
+      "evidence_refs": ["image/01_finished_goblet.png", "image/04_green_liquid.png"],
+      "verification": {
+        "method": "fresh_scene_rebuild_saved_file_and_render_comparison",
+        "procedure": "Open the delivered blend and inspect native editability. Copy build.py into an empty temporary directory and run it from a new Blender 5.1.2 file without access to a prior solution. Confirm that it writes submission.blend beside the script as publicly required, close Blender, and reopen that exact saved result. Inspect required geometry, materials, and controls there; an in-memory scene is not enough. Render its saved camera and compare the result with B115_Green_Sparkling_Water_Goblet.png, checking actual scene correspondence, the full glass view, readable contents, and absence of visible helpers.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Dewy Tomato",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1LpGc68E4c",
+    "id": "BV1LpGc68E4c"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 45, "SURF": 45, "PIPE": 10},
+  "weighting_note": "The source develops the fruit, calyx, fuzz and dew geometry alongside three distinct material treatments. Geometry and shading therefore receive equal substantial weight. Procedural shading remains SURF; this static result does not require a reusable geometry generator. Pipeline scoring covers reproducibility and the authentic render only.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. Fruit Shape",
+      "criterion": "The editable fruit has a plump, slightly flattened form, soft lobed shoulders, a shallow stem depression and a smoothly rounded lower pole.",
+      "scoring_rule": {
+        "PASS": "An editable fruit body is independently editable from the calyx and satisfies all stated shape and smoothness requirements.",
+        "PARTIAL": "An independently editable rounded fruit body is present and visibly has either shoulder lobes or a stem depression, but fails one or more PASS conditions.",
+        "FAIL": "There is no independently editable rounded fruit body, or neither shoulder lobes nor a stem depression is visible."
+      },
+      "evidence_refs": ["image/01_dewy_tomato.png", "image/02_calyx_structure.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect the submitted geometry in neutral solid shading from top, side and three-quarter views. Confirm the independent fruit geometry, depression and lobes, then examine its evaluated silhouette for facets, spikes and pinching without letting material color substitute for shape.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "2. Stem and Calyx",
+      "criterion": "A seated short stem and five thin tapered sepals form an irregular calyx with coherent roots and distinct bent tips.",
+      "scoring_rule": {
+        "PASS": "The stem and all five sepals are present, seated coherently at the fruit top, and satisfy all stated thickness, taper, edge, variation and intersection requirements.",
+        "PARTIAL": "A stem with at least three distinct tapered sepals forms a recognizable calyx at the fruit top, but fails one or more PASS conditions.",
+        "FAIL": "A stem is absent, fewer than three distinct tapered sepals are present, or the assembly does not form a recognizable calyx at the fruit top."
+      },
+      "evidence_refs": ["image/01_dewy_tomato.png", "image/02_calyx_structure.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect the calyx from above, side and underside in neutral shading. Trace the five leaf-like forms from their roots to tips, compare their bends and dimensions, inspect their thickness and rounded edges, and check their connection to the stem and fruit.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "3. Fuzz and Dew Geometry",
+      "criterion": "Short fine hairs cover the stem and calyx without obscuring their shape or giving the fruit a furry silhouette.",
+      "scoring_rule": {
+        "PASS": "Evaluated strand geometry covers the stem and sepals with fine short fuzz while the underlying forms remain legible and the fruit stays visually smooth.",
+        "PARTIAL": "Evaluated strand geometry creates visible fine fuzz on at least part of the stem or calyx, but fails one or more PASS conditions.",
+        "FAIL": "No evaluated strand geometry creates visible fine fuzz on the stem or calyx; a color or bump pattern alone does not meet this minimum."
+      },
+      "evidence_refs": ["image/04_calyx_fuzz.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_closeup_render",
+        "procedure": "Inspect the evaluated strands and a close render of the calyx edge, then view the whole fruit silhouette. Confirm the hairs have physical extent, follow the stem and leaves, remain short relative to their host forms and leave the fruit surface visually smooth.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Fuzz and Dew Geometry",
+      "criterion": "Small dew beads vary in size and spacing, contact the fruit surface, leave bare skin visible and remain static.",
+      "scoring_rule": {
+        "PASS": "Many rounded beads cover the exposed fruit with varied sizes and spacing, contact the skin without a merged covering or large stray source sphere, and remain fixed on timeline changes.",
+        "PARTIAL": "Several small rounded beads visibly contact the fruit and leave some bare skin visible, but fail one or more PASS conditions.",
+        "FAIL": "Several small contacting beads are not present, or no bare skin remains visible between the bead geometry."
+      },
+      "evidence_refs": ["image/01_dewy_tomato.png", "image/03_dew_distribution.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_static_state_probe",
+        "procedure": "Orbit the evaluated fruit in neutral shading to inspect bead contact, scale variation and gaps. Compare the bead geometry and transforms at the saved frame and at a later frame, restoring the saved frame afterward; they must not drift or require a chosen simulation moment. Inspect all render-visible objects for a stray source sphere.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "4. Procedural Fruit Skin",
+      "criterion": "The assigned procedural skin produces an editable red-to-orange height transition with broader warm mottling and finer speckles that follow the fruit.",
+      "scoring_rule": {
+        "PASS": "The assigned procedural material produces rich red shoulders, a smooth warmer lower region, broader warm variation and finer speckles; the transition height, mottling scale and intensity can each be changed effectively, and the texture follows whole-object translation and rotation.",
+        "PARTIAL": "The fruit uses an assigned editable procedural color material and visibly shows ripe red skin with either a height transition or warm mottling, but fails one or more PASS conditions.",
+        "FAIL": "The fruit has no assigned editable procedural color material, or it does not visibly show ripe red skin with either a height transition or warm mottling."
+      },
+      "evidence_refs": ["image/01_dewy_tomato.png"],
+      "verification": {
+        "method": "material_usage_and_controlled_shader_probe",
+        "procedure": "Inspect the material actually assigned to the fruit and render it under fixed neutral lighting. In a temporary copy, shift its transition height and change mottling scale and intensity separately, rendering the changes. Translate and rotate the complete tomato to confirm the texture remains attached. Restore all temporary changes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. Procedural Fruit Skin",
+      "criterion": "Glossy soft highlights reveal restrained adjustable skin microtexture without changing the silhouette or overwhelming the fruit finish.",
+      "scoring_rule": {
+        "PASS": "The assigned skin material has glossy soft highlights and subtle procedural highlight breakup; the microtexture strength can change independently of color, and the fruit remains smooth in silhouette rather than stone-like.",
+        "PARTIAL": "The assigned fruit material visibly has both a glossy highlight and procedural microtexture affecting its surface response, but fails one or more PASS conditions.",
+        "FAIL": "The fruit material lacks either a visible glossy highlight or effective procedural microtexture affecting its surface response."
+      },
+      "evidence_refs": ["image/01_dewy_tomato.png"],
+      "verification": {
+        "method": "controlled_highlight_render_and_shader_probe",
+        "procedure": "Use a broad light to inspect a close render of a fruit shoulder. Temporarily lower and increase the microtexture strength while holding color controls fixed, then confirm that highlight detail changes without changing the fruit silhouette. Restore the submitted material state.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "5. Calyx and Dew Shading",
+      "criterion": "The stem and calyx use an independently editable varied green procedural material with a rougher response than the fruit, and the hairs match the botanical colors.",
+      "scoring_rule": {
+        "PASS": "The stem and calyx show procedural variation between dark and yellow-green tones, a rougher response than the fruit, independently editable color variation, and harmonizing hair colors.",
+        "PARTIAL": "The actual stem and calyx use an independently editable procedural material with visible green variation, but fail one or more PASS conditions.",
+        "FAIL": "The stem or calyx is missing, or they do not use an independently editable procedural material with visible green variation."
+      },
+      "evidence_refs": ["image/01_dewy_tomato.png", "image/04_calyx_fuzz.png"],
+      "verification": {
+        "method": "material_usage_and_independence_probe",
+        "procedure": "Inspect the materials assigned to stem, sepals and hairs and render them beside the fruit under the same light. Temporarily change the calyx color variation and verify the fruit color stays unchanged. Compare highlight softness and hair colors before restoring the material.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "5. Calyx and Dew Shading",
+      "criterion": "The beads use an assigned clear water-like material with reflections and visible skin transmission or refraction.",
+      "scoring_rule": {
+        "PASS": "The dew consistently reads as clear liquid, with bright reflections and visible transmission or refraction of the underlying skin, without opaque white, red or metallic bead appearance.",
+        "PARTIAL": "Existing dew beads show both a reflected highlight and visible transmission or refraction through their assigned material, but fail one or more PASS conditions.",
+        "FAIL": "Dew bead geometry is absent, or its assigned material does not show both a reflected highlight and visible transmission or refraction."
+      },
+      "evidence_refs": ["image/01_dewy_tomato.png"],
+      "verification": {
+        "method": "material_usage_and_controlled_render",
+        "procedure": "Inspect the material assigned to the actual beads and render several larger front and shoulder beads with a bright reflection source. Look for the red skin through the beads and for lens-like or transmitting liquid behavior, distinguishing it from opaque colored spheres.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable Blender scene and reproducible build script are self-contained and target the requested Blender and render configuration.",
+      "scoring_rule": {
+        "PASS": "Both submission.blend and build.py are supplied; the scene opens with editable geometry and assigned materials, uses Cycles GPU configuration, and the script rebuilds the corresponding scene from empty in Blender 5.1.2 without missing external dependencies.",
+        "PARTIAL": "At least one of submission.blend or build.py successfully provides an editable scene in Blender 5.1.2, but one or more PASS conditions are not met.",
+        "FAIL": "Neither submission.blend nor build.py successfully provides an editable scene in Blender 5.1.2."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "future_open_and_rebuild_check",
+        "procedure": "In a future Blender 5.1.2 validation environment, open the blend and inspect its editable scene and render settings. Review then run build.py in an isolated empty scene, check dependency resolution, and compare its generated scene with the submitted asset. This procedure has not been executed during task authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named PNG is an authentic scene render with the requested resolution and complete inspectable framing.",
+      "scoring_rule": {
+        "PASS": "B57_Procedural_Dewy_Tomato.png is a render of the submitted scene, has at least 1024 pixels on its longer edge, and shows the complete tomato, stem and calyx from a close elevated three-quarter view with a small margin and inspectable lighting.",
+        "PARTIAL": "A PNG authentically rendered from the submitted scene shows the tomato, but one or more PASS conditions are not met.",
+        "FAIL": "No PNG authentically rendered from the submitted scene shows the tomato; source images, viewport screenshots and externally composed replacements do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_dewy_tomato.png"],
+      "verification": {
+        "method": "image_decode_and_render_correspondence",
+        "procedure": "Decode the delivered PNG to check its dimensions and framing, then compare it with a controlled render from the submitted scene camera. Confirm correspondence of geometry, materials, lighting and background and reject UI screenshots or substituted reference imagery.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Strawberry Pudding Keycap",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1jGbfznEyV",
+    "id": "BV1jGbfznEyV"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 50,
+    "SURF": 40,
+    "PIPE": 10
+  },
+  "weighting_note": "Geometry 50 points covers five separate modeled outcomes, materials 40 covers three distinct finishes, and delivery is capped at 10. No modifier-presence or incidental scene-object points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Fluted Pudding Body",
+      "criterion": "Closed fluted pudding with a smaller top and flared base",
+      "scoring_rule": {
+        "PASS": "The body is short, regularly lobed in plan, gently flared toward its base, closed above and below, and has a smaller nearly level top platform.",
+        "PARTIAL": "A recognizable pudding body with vertical lobes exists but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable pudding body with vertical lobes exists."
+      },
+      "evidence_refs": [
+        "image/02_pudding_geometry.png"
+      ],
+      "verification": {
+        "method": "artifact_inspection_and_functional_probe",
+        "procedure": "Inspect evaluated top, front, side and underside views. Confirm actual lobe geometry, closure, side flare and top platform.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Cream and Strawberry",
+      "criterion": "Rounded cream ring with a supporting central depression",
+      "scoring_rule": {
+        "PASS": "The flattened rounded cream ring sits on the top platform, has a raised outer rim and shallow central depression, and supports the strawberry without a floating gap.",
+        "PARTIAL": "A cream form sits on the pudding top but one or more PASS conditions are unmet.",
+        "FAIL": "No cream form sits on the pudding top."
+      },
+      "evidence_refs": [
+        "image/02_pudding_geometry.png"
+      ],
+      "verification": {
+        "method": "artifact_inspection_and_functional_probe",
+        "procedure": "Inspect elevated and side close-ups and a section through the cream centre. Confirm rim, depression and contact.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Cream and Strawberry",
+      "criterion": "Upright seeded strawberry with recessed skin detail",
+      "scoring_rule": {
+        "PASS": "The compact fruit narrows toward its upper tip, carries many small geometric seed recesses containing seeds, and sits upright within the cream depression without broad interpenetration.",
+        "PARTIAL": "A rounded strawberry-like fruit is attached above the cream but one or more PASS conditions are unmet.",
+        "FAIL": "No rounded strawberry-like fruit is attached above the cream."
+      },
+      "evidence_refs": [
+        "image/02_pudding_geometry.png",
+        "image/03_strawberry_detail.png"
+      ],
+      "verification": {
+        "method": "artifact_inspection_and_functional_probe",
+        "procedure": "Inspect fruit geometry in a neutral close-up, including several seed recesses, then inspect its placement and cream contact.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Keycap Support and Surface Form",
+      "criterion": "Simple flared keycap supports the centred decoration",
+      "scoring_rule": {
+        "PASS": "The support has a square footprint, rounded corners, smaller top and flared sides, remains editable and visible, and carries the centred pudding as a mounted decoration.",
+        "PARTIAL": "A distinct keycap-like support exists beneath the pudding but one or more PASS conditions are unmet.",
+        "FAIL": "No distinct keycap-like support exists beneath the pudding."
+      },
+      "evidence_refs": [
+        "image/01_pudding_finish.png"
+      ],
+      "verification": {
+        "method": "artifact_inspection_and_functional_probe",
+        "procedure": "Inspect support geometry from top and side and the final composition; verify centred contact with the pudding.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Keycap Support and Surface Form",
+      "criterion": "Smooth intact modeled surfaces",
+      "scoring_rule": {
+        "PASS": "The pudding, cream and strawberry have smooth silhouettes and coherent normals without accidental holes or faceting, while lobe and seed-recess detail remains defined.",
+        "PARTIAL": "The pudding, cream and strawberry all exist as inspectable surfaces but one or more PASS conditions are unmet.",
+        "FAIL": "The pudding, cream or strawberry is missing or has no inspectable surface."
+      },
+      "evidence_refs": [
+        "image/02_pudding_geometry.png",
+        "image/03_strawberry_detail.png"
+      ],
+      "verification": {
+        "method": "artifact_inspection_and_functional_probe",
+        "procedure": "Inspect a neutral material override from oblique views and close-ups; assess only surface quality, not component shape or placement.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Pudding and Cream Finish",
+      "criterion": "Editable glossy caramel-to-yellow pudding gradient",
+      "scoring_rule": {
+        "PASS": "A procedural vertical transition places reddish caramel brown on top and warm yellow below with a soft blend; the actual pudding surface shows concentrated glossy highlights and the transition remains editable.",
+        "PARTIAL": "The pudding visibly uses a procedural warm-color variation but one or more PASS conditions are unmet.",
+        "FAIL": "The pudding is absent or has no visible procedural warm-color variation."
+      },
+      "evidence_refs": [
+        "image/01_pudding_finish.png"
+      ],
+      "verification": {
+        "method": "artifact_inspection_and_functional_probe",
+        "procedure": "Inspect material use, then vary the transition height in a disposable copy and confirm the render changes. Inspect fixed-light highlights and restore the saved material.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Pudding and Cream Finish",
+      "criterion": "Off-white cream with subtle procedural variation",
+      "scoring_rule": {
+        "PASS": "The cream has subtle fine procedural off-white color variation and softer reflections than the pudding, with its rounded ring form visible.",
+        "PARTIAL": "Existing cream visibly uses an off-white material but one or more PASS conditions are unmet.",
+        "FAIL": "Cream is missing or does not visibly use an off-white material."
+      },
+      "evidence_refs": [
+        "image/01_pudding_finish.png"
+      ],
+      "verification": {
+        "method": "artifact_inspection_and_functional_probe",
+        "procedure": "Inspect assigned cream shading and compare fixed-light renders with its color variation enabled and neutralized; confirm the surface contribution and restore it.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Strawberry Finish",
+      "criterion": "Red fruit and pale seeds with editable fine skin relief",
+      "scoring_rule": {
+        "PASS": "The skin is richly red with distinguishable pale seeds, editable fine procedural bump used by the surface, readable seed recesses and reflections softer than the pudding glaze.",
+        "PARTIAL": "Existing fruit visibly has red skin and pale seeds but one or more PASS conditions are unmet.",
+        "FAIL": "Fruit is missing or does not visibly have red skin and pale seeds."
+      },
+      "evidence_refs": [
+        "image/01_pudding_finish.png",
+        "image/03_strawberry_detail.png"
+      ],
+      "verification": {
+        "method": "artifact_inspection_and_functional_probe",
+        "procedure": "Inspect material assignments and a close-up under oblique lighting. Temporarily disable skin bump and confirm its fine contribution, then restore. Compare fruit and pudding highlight softness.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "Editable project, reproducible build and actual scene render",
+      "scoring_rule": {
+        "PASS": "The named project and script are supplied, build.py reproduces the scene from empty in Blender 5.1.2 without external assets, and the named PNG is a Cycles GPU render showing the full decorated keycap and required details.",
+        "PARTIAL": "submission.blend opens with an editable pudding and topping but one or more PASS conditions are unmet.",
+        "FAIL": "submission.blend is absent, cannot open, or lacks an editable pudding and topping."
+      },
+      "evidence_refs": [
+        "image/01_pudding_finish.png"
+      ],
+      "verification": {
+        "method": "artifact_inspection_and_functional_probe",
+        "procedure": "Open the project, rebuild in an isolated Blender 5.1.2 scene, compare geometry/materials, inspect Cycles GPU settings and reproduce the camera render for comparison with the named PNG.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Parallax Holographic Trading Card",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1M95H62E4P",
+    "id": "BV1M95H62E4P"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 10, "SURF": 75, "SCN": 5, "PIPE": 10},
+  "weighting_note": "This is a material study on simple card geometry. SURF receives 75 points across independent layer compositing, view-dependent coordinates, foil color, fine texture, luminous contours, generated points and border response. Geometry, rendered star-ray treatment and reproducibility are assessed separately. Printed background grain and small lettering are judged only at the detail supported by the supplied low-resolution images.",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "Card Surface",
+      "criterion": "A clean portrait card surface has rounded corners and a continuous border region.",
+      "scoring_rule": {
+        "PASS": "The visible card is approximately 3:4, flat and undistorted, with gently rounded corners, a narrow continuous border, clean shading and no intersecting or flickering face layers; the central region accommodates the artwork.",
+        "PARTIAL": "A recognizable renderable portrait card with a central image area and surrounding border exists, but one or more PASS conditions are not met.",
+        "FAIL": "There is no renderable portrait card with both a central image area and a surrounding border region."
+      },
+      "evidence_refs": ["image/01_card_appearance.png"],
+      "verification": {"method": "Evaluated geometry and controlled views", "procedure": "Inspect the evaluated mesh and a neutral surface render. Measure the outer aspect ratio, inspect the corner profile and border continuity, then orbit the card to check shading, overlaps and flicker. Do not require thickness or a particular topology. Texture-coordinate mapping is assessed by SURF-01.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 15,
+      "requirement_section": "Layered Artwork",
+      "criterion": "The supplied background, subject and lettering form an independently editable, undistorted and properly masked composition.",
+      "scoring_rule": {
+        "PASS": "All three supplied artwork sources are actually used as separate editable layers with stable, undistorted coordinates; the background fills the image area, the subject is central, and the title and lower text strips are visible. Mattes are removed without obvious halos, duplicate silhouettes or loss of dark internal subject details.",
+        "PARTIAL": "All three supplied artwork sources are separately used and the subject and lettering are visibly composited over the background, but one or more PASS conditions are not met.",
+        "FAIL": "Any of the three supplied artwork layers is absent, replaced, inseparable from a single flat composite, or not visibly composited over the background."
+      },
+      "evidence_refs": ["image/02_separate_layers.png"],
+      "verification": {"method": "Material isolation and front-view render", "procedure": "Inspect actual image use in the card material and independently disable each artwork layer. Compare the front render with the supplied images, including the 53 x 70 background. Inspect coordinate mapping for unwanted stretch or mirroring, and inspect matte removal around the ring and dark internal details. Assess registration and visibility at supplied resolution; do not demand sharper text or printed grain.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 20,
+      "requirement_section": "View-Dependent Parallax",
+      "criterion": "Material-driven parallax gives the subject and background distinct, controllable apparent depths while retaining card coverage.",
+      "scoring_rule": {
+        "PASS": "Camera movement through the stated yaw and pitch range produces continuous relative subject/background displacement, with the subject appearing forward and lettering more stable. Depth and scale controls are reusable and independent; setting one depth to zero removes its extra displacement. The fixed card geometry and composition remain coherent without background gaps or abrupt image changes.",
+        "PARTIAL": "With fixed card geometry, viewing direction drives genuine material-based relative movement of the separately supplied subject and background, but one or more PASS conditions are not met.",
+        "FAIL": "There is no material-driven relative subject/background movement, or the apparent effect is only whole-card rotation, substituted frames, timeline motion, or physical separation of image planes."
+      },
+      "evidence_refs": ["image/01_card_appearance.png", "image/02_separate_layers.png"],
+      "verification": {"method": "View sweep and material-control probes", "procedure": "Hold the card, lights and focal length fixed. Render front, yaw -20/+20 degrees and pitch -12/+12 degrees relative to its normal, then inspect intermediate views for continuity. Track recognizable subject and background features relative to the lettering. Change each depth independently and set it to zero; change layer scale. Inspect evaluated geometry to confirm apparent image depth is material-driven, and restore submitted values afterward.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-03", "capability": "SURF", "points": 10,
+      "requirement_section": "Holographic Foil",
+      "criterion": "A view-responsive diagonal rainbow band is masked to the subject and preserves the original artwork outside the band.",
+      "scoring_rule": {
+        "PASS": "A soft-edged diagonal band changes position or color with viewing direction, includes recognizable blue, violet and yellow, remains confined to the subject contribution, and preserves its original color outside the band. Independent direction or position and width controls visibly affect the band.",
+        "PARTIAL": "A distinct diagonal multicolor foil band is visible on the subject in at least one view and responds to viewing direction, but one or more PASS conditions are not met.",
+        "FAIL": "There is no distinct view-responsive diagonal multicolor foil band on the subject."
+      },
+      "evidence_refs": ["image/03_foil_and_glow.png"],
+      "verification": {"method": "Controlled angle renders and control probe", "procedure": "Render the same card from opposite oblique angles, then isolate or disable the foil color contribution. Inspect band softness, hue distribution, subject mask boundaries and preserved color outside the band. Vary the public band controls individually and confirm their visible effects, then restore them.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-04", "capability": "SURF", "points": 10,
+      "requirement_section": "Holographic Foil",
+      "criterion": "The foil combines small repeating ornament with a distinct restrained granular variation.",
+      "scoring_rule": {
+        "PASS": "The supplied ornament is actually used, repeats at a much smaller scale than the card and is visible within the foil response in an oblique view; a separate subtle granular variation is also visible. Ornament scale is independently adjustable, and neither detail overwhelms the subject or lettering.",
+        "PARTIAL": "The supplied ornament is actually used as visibly repeated fine foil detail in at least one oblique view, but one or more PASS conditions are not met.",
+        "FAIL": "The supplied ornament is not used as visibly repeated fine foil detail."
+      },
+      "evidence_refs": ["image/03_foil_and_glow.png"],
+      "verification": {"method": "Material contribution isolation and close render", "procedure": "Inspect actual use of foil_pattern_tile.png and produce a controlled close render with the foil visible. Independently disable ornament and granular contributions to distinguish them. Vary ornament scale while holding the band fixed, and inspect the normal final framing for excessive coverage. Do not infer this detail from the low-resolution printed background.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-05", "capability": "SURF", "points": 10,
+      "requirement_section": "Sparkles and Contour",
+      "criterion": "The supplied contour drawing produces registered colored emission that travels with the subject.",
+      "scoring_rule": {
+        "PASS": "The supplied outline drives colored luminous outer and internal strokes, its white field is removed, the recognizable contour aligns with the subject, and both travel together throughout the viewing range. Its separate intensity control can disable the contour without removing artwork.",
+        "PARTIAL": "The supplied outline visibly drives recognizable colored luminous subject strokes and its white field is removed, but one or more PASS conditions are not met.",
+        "FAIL": "The supplied outline does not produce recognizable colored luminous subject strokes, or its white field remains as an opaque or luminous rectangle."
+      },
+      "evidence_refs": ["image/03_foil_and_glow.png"],
+      "verification": {"method": "Emission isolation, view sweep and intensity probe", "procedure": "Inspect the supplied outline's actual material contribution with glare disabled. Compare outer and internal strokes to the subject at front and oblique views, then vary its intensity to zero and back. Check that the white field is masked and the contour follows subject parallax. Grade self-emission here; star-ray compositing is assessed separately.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-06", "capability": "SURF", "points": 5,
+      "requirement_section": "Sparkles and Contour",
+      "criterion": "Sparse independently generated bright points supplement the printed artwork and have independent intensity control.",
+      "scoring_rule": {
+        "PASS": "Additional generated bright points are sparse and individually distinguishable, vary in color or intensity, and have an intensity control that disables them while leaving artwork and contour intact.",
+        "PARTIAL": "Additional generated bright points are visibly distinct from the printed background and can be identified as individual points, but one or more PASS conditions are not met.",
+        "FAIL": "There are no individually distinguishable generated bright points beyond the printed artwork."
+      },
+      "evidence_refs": ["image/03_foil_and_glow.png"],
+      "verification": {"method": "Material isolation and controlled render", "procedure": "Disable compositing glare, inspect the point contribution and compare enabled/disabled renders. Verify the points are generated independently of the printed background and test their public intensity control. Check sparseness and distinguishability in the full-card framing.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-07", "capability": "SURF", "points": 5,
+      "requirement_section": "Border and Presentation",
+      "criterion": "The border carries an independently adjustable continuous rainbow foil finish.",
+      "scoring_rule": {
+        "PASS": "The border has visible rainbow foil around all four sides and corners, is distinguishable from the central artwork, does not obscure the title or lower text strips, and can be adjusted independently of the center.",
+        "PARTIAL": "Rainbow foil is actually applied to a recognizable border around the artwork, but one or more PASS conditions are not met.",
+        "FAIL": "No recognizable border around the artwork has a rainbow foil finish."
+      },
+      "evidence_refs": ["image/01_card_appearance.png"],
+      "verification": {"method": "Border material isolation and final-view inspection", "procedure": "Inspect the actual border material contribution, render front and oblique views, and alter its foil appearance without changing the center. Check color continuity around corners and text visibility. Geometry defects are assessed by GEO-01; this row assesses the finish only where border geometry exists.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-01", "capability": "SCN", "points": 5,
+      "requirement_section": "Sparkles and Contour",
+      "criterion": "The rendered stronger sparkle points have four-ray star highlights without washing out the card.",
+      "scoring_rule": {
+        "PASS": "Several stronger generated points produce recognizable four-ray highlights in the rendered result, while smaller points remain distinguishable and the card's subject and lettering retain contrast.",
+        "PARTIAL": "At least one stronger generated point has a recognizable four-ray highlight in the rendered result, but one or more PASS conditions are not met.",
+        "FAIL": "No generated point has a recognizable four-ray highlight in the rendered result, or the claimed highlights are only present in a supplied reference image."
+      },
+      "evidence_refs": ["image/03_foil_and_glow.png"],
+      "verification": {"method": "Rendered compositing comparison", "procedure": "Compare the actual scene's render before and after its highlight treatment. Inspect visible ray structure, weaker point separation and retention of card contrast at final resolution. Confirm the treatment operates on the submitted scene render rather than an external replacement image. Do not award points for compositor-node existence alone.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, reproducible build script and named scene-derived PNG are complete and portable.",
+      "scoring_rule": {
+        "PASS": "All three named deliverables are present. The scene opens with packed resources and editable controls; build.py recreates it from the supplied inputs in Blender 5.1.2 and saves submission.blend; the named 768 x 1024 PNG is rendered from that scene and its compositing setup with Cycles GPU settings.",
+        "PARTIAL": "submission.blend opens with an inspectable card and either build.py or the named PNG is present, but one or more PASS conditions are not met.",
+        "FAIL": "submission.blend cannot open as an inspectable card scene, or neither build.py nor the named PNG is provided."
+      },
+      "evidence_refs": [],
+      "verification": {"method": "Fresh-open, rebuild and render-origin inspection", "procedure": "Open submission.blend in Blender 5.1.2 from an isolated directory without author-machine paths, inspect packed resources and controls, then run build.py using only the supplied input directory. Check named PNG dimensions, render engine/device settings and scene/compositor provenance, and compare a fresh render with the PNG. This procedure is specified for future review and has not been executed during task authoring.", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

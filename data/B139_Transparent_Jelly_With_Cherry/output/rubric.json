@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Transparent Jelly With Cherry",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1g3oQY2E8i",
+    "id": "BV1g3oQY2E8i"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 45, "SURF": 40, "SCN": 5, "PIPE": 10},
+  "weighting_note": "The task centers on four native modeled forms and their optical appearance. Geometry receives 45 points across body, cream, fruit, stem, and surface continuity. Materials receive 40 points, including the central transparent height-tinted jelly. Assembly and presentation receive 5 points, and reproducible saved delivery receives 10. Smooth subdivision results are geometry, procedural shader detail is surface work, and no geometric generator, physical simulation, or timeline behavior is required.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Jelly Body",
+      "criterion": "A closed, tapered molded jelly volume has twelve continuous rounded vertical flutes and a scalloped footprint.",
+      "scoring_rule": {
+        "PASS": "An existing three-dimensional jelly body has multiple distinct raised vertical lobes, and it is a closed low, broad volume with a near-circular footprint, narrower top, twelve evenly distributed flutes extending from shoulder to base, rounded upper and lower transitions, and a usable top surface.",
+        "PARTIAL": "An existing three-dimensional jelly body has multiple distinct raised vertical lobes, but one or more PASS conditions are unmet, including incorrect flute count, uneven spacing, interrupted lobes, weak taper, or incomplete closure.",
+        "FAIL": "No three-dimensional jelly body with multiple distinct raised vertical lobes exists. An undecorated cylinder, flat disk, image plane, or isolated lobe is below the minimum."
+      },
+      "evidence_refs": ["image/01_finished_dessert.png", "image/02_jelly_form.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection and neutral-shaded views",
+        "procedure": "Open the saved scene and identify the jelly by its role. Inspect evaluated top, side, and bottom views; count the perimeter flutes and trace their continuity between the rounded shoulder and base. Compare upper and lower widths, verify the top supports the cream, and inspect mesh closure or an equivalent closed evaluated surface. Do not use object names, source vertex counts, or modifier presence as shape evidence.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Cream Rosette",
+      "criterion": "A compact three-dimensional cream rosette has broad rounded folds sweeping around a recessed center.",
+      "scoring_rule": {
+        "PASS": "An existing thick cream form has multiple rounded folds visibly sweeping around its center, and the result is a low ring-like rosette with distinct grooves and a shallow central recess. Its diameter leaves a visible band of jelly around it when assembled.",
+        "PARTIAL": "An existing thick cream form has multiple rounded folds visibly sweeping around its center, but one or more PASS conditions are unmet, such as weak grooves, an oversized diameter, or a poorly defined recess.",
+        "FAIL": "No thick cream form with multiple rounded folds sweeping around a center exists. A smooth torus, plain sphere, flat decoration, or disconnected isolated fold is below the minimum."
+      },
+      "evidence_refs": ["image/03_cream_rosette.png", "image/01_finished_dessert.png"],
+      "verification": {
+        "method": "Evaluated geometry and proportion inspection",
+        "procedure": "Inspect the cream in isolation from above and at a low oblique angle under neutral shading. Trace the folds around the center, confirm their volume and intervening grooves, then compare the cream footprint against the jelly top in the saved assembly. Assess the rosette's form here; score contact gaps under Presentation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Cherry And Stem",
+      "criterion": "The fruit is a shaped cherry volume with a top dimple, broad shoulders, and a restrained lower indentation.",
+      "scoring_rule": {
+        "PASS": "An existing rounded cherry body has a genuine top depression, and it is plump and slightly squat, with broad shoulders, a fuller middle, gently narrowing lower portion, restrained bottom indentation, and a size smaller than the cream rosette.",
+        "PARTIAL": "An existing rounded cherry body has a genuine top depression, but one or more PASS conditions are unmet, such as a spherical lower profile, missing bottom indentation, or proportions that overwhelm the cream.",
+        "FAIL": "No rounded cherry body with a genuine top depression exists. An unchanged sphere without a dimple, an image of a cherry, or a stem alone is below the minimum."
+      },
+      "evidence_refs": ["image/04_cherry_stem.png", "image/01_finished_dessert.png"],
+      "verification": {
+        "method": "Isolated fruit geometry inspection",
+        "procedure": "Temporarily hide surrounding components in an inspection copy. Examine the cherry from front, top, and bottom with its evaluated surface visible. Confirm the top depression is geometric, inspect the shoulder-to-bottom profile and lower indentation, and compare its width to the cream. Do not infer fruit shape from red color alone.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Cherry And Stem",
+      "criterion": "A thin curved stem has three-dimensional thickness, connects to the cherry dimple, and terminates in an enlarged closed tip.",
+      "scoring_rule": {
+        "PASS": "An existing volumetric stem follows a visibly bent path, and it is slender relative to the cherry, smoothly curved, attached at the top dimple, and finished with a slightly enlarged closed upper tip.",
+        "PARTIAL": "An existing volumetric stem follows a visibly bent path, but one or more PASS conditions are unmet, including excessive thickness, detached placement, abrupt bending, or an unfinished tip.",
+        "FAIL": "No volumetric stem following a visibly bent path exists. A zero-width line, straight stick, detached tip alone, or absent stem is below the minimum."
+      },
+      "evidence_refs": ["image/04_cherry_stem.png", "image/01_finished_dessert.png"],
+      "verification": {
+        "method": "Stem cross-section and attachment inspection",
+        "procedure": "Inspect the stem from two perpendicular angles and at its ends. Verify evaluated thickness along the bend, the root location in the cherry depression, and the closed enlarged tip. Accept an editable curve or equivalent mesh when the evaluated form satisfies the requirement.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Surface Finish",
+      "criterion": "Existing core modeled surfaces preserve smooth curvature and valid surface orientation without accidental geometric defects.",
+      "scoring_rule": {
+        "PASS": "A jelly surface spanning a curved flute crest and valley and at least one rounded modeled topping are present. These core surfaces and all other existing dessert surfaces retain smooth rounded silhouettes, consistent orientation, and intentional grooves or dimples, without accidental creases, open seams, or self-intersections.",
+        "PARTIAL": "A jelly surface spanning a curved flute crest and valley and at least one rounded modeled topping are present, but one or more PASS conditions are unmet on existing surfaces. Local faceting, pinching, inconsistent orientation, or seams are examples.",
+        "FAIL": "The minimum curved jelly crest-to-valley surface plus a rounded modeled topping is absent. Empty geometry, only flat surfaces, or an unused isolated smooth source cannot establish the minimum."
+      },
+      "evidence_refs": ["image/02_jelly_form.png", "image/03_cream_rosette.png", "image/04_cherry_stem.png"],
+      "verification": {
+        "method": "Close neutral-shaded views and evaluated surface diagnostics",
+        "procedure": "In an inspection copy, use neutral shading and oblique light to inspect curved jelly crests and valleys, cream folds, cherry dimples, and any existing stem. Check silhouette continuity, local normals, unintended open seams, and self-intersections. Assess defects on substantive existing surfaces; missing components are assessed by their own shape rows and do not automatically fail this row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 20,
+      "requirement_section": "Surface Finish",
+      "criterion": "The jelly uses active glossy transmission and refraction with an editable pale-blue-to-cyan vertical tint transition.",
+      "scoring_rule": {
+        "PASS": "A material actively used on a substantial curved jelly region produces tinted optical transmission, and the body is glossy and refractive with visible volume, colored edges, and background displacement through its flutes. Its tint transitions from pale blue near the base to stronger cyan or turquoise near the top, with working editable endpoints and height transition.",
+        "PARTIAL": "A material actively used on a substantial curved jelly region produces tinted optical transmission, but one or more PASS conditions are unmet, including weak refraction, uniform tint, a reversed or poorly controlled gradient, cloudy appearance, or ineffective material edits.",
+        "FAIL": "No substantial curved jelly region carries an active material producing tinted optical transmission. An opaque blue surface, alpha-only disappearance, unused shader, or absent jelly is below the minimum."
+      },
+      "evidence_refs": ["image/01_finished_dessert.png"],
+      "verification": {
+        "method": "Active material inspection, controlled optical render, and material edit probe",
+        "procedure": "Inspect the material actually assigned to the jelly. In a temporary scene copy, place a contrasting checker card behind the body and render an oblique view to distinguish transmitted distortion from opaque reflection or alpha disappearance. Inspect the base-to-top tint across curved regions. Temporarily change each tint endpoint and the height transition, rerender or evaluate the material, and confirm the jelly responds; restore the original state. Accept equivalent surface or volume shader implementations without prescribing node names or numerical IOR.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Surface Finish",
+      "criterion": "The cherry carries glossy red nonmetallic skin with working procedural darker-red variation and subtle relief.",
+      "scoring_rule": {
+        "PASS": "An existing curved cherry body carries a predominantly red nonmetallic material, and it has glossy skin with restrained darker-red procedural variation and subtle fine procedural bump detail. Texture scale and relief strength remain editable and affect the used material without destroying the smooth fruit contour.",
+        "PARTIAL": "An existing curved cherry body carries a predominantly red nonmetallic material, but one or more PASS conditions are unmet, such as missing gloss, uniform color, inactive relief, excessive bump, or ineffective texture controls.",
+        "FAIL": "No existing curved cherry body carries a predominantly red nonmetallic material. An unused red material, absent fruit, image plane, or only a red stem is below the minimum."
+      },
+      "evidence_refs": ["image/01_finished_dessert.png"],
+      "verification": {
+        "method": "Material-use inspection, close render, and procedural parameter probe",
+        "procedure": "Inspect the active cherry shader and a close controlled render with a broad light. Verify red and darker-red color variation, glossy nonmetallic highlights, and fine relief on the curved fruit surface. In a temporary copy, change the procedural scale and relief strength separately and confirm both influence the assigned material. Restore the delivered values; do not require the source's exact node graph or numeric settings.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Surface Finish",
+      "criterion": "Cream reads as softly highlighted ivory with fine procedural detail, while the stem has a distinct dark brown surface.",
+      "scoring_rule": {
+        "PASS": "An existing rounded cream fold region carries an opaque pale nonmetallic material. The cream is ivory to warm white with soft highlights, active fine procedural color variation, and delicate grain finer than the folds, and an existing stem carries a distinct dark brown nonmetallic material.",
+        "PARTIAL": "An existing rounded cream fold region carries an opaque pale nonmetallic material, but one or more PASS conditions are unmet, including absent procedural detail, coarse grain, overly hard highlights, or missing or incorrectly surfaced stem.",
+        "FAIL": "No existing rounded cream fold region carries an opaque pale nonmetallic material. An unused cream shader, flat pale patch, absent cream, or brown stem alone is below the minimum."
+      },
+      "evidence_refs": ["image/01_finished_dessert.png", "image/03_cream_rosette.png"],
+      "verification": {
+        "method": "Assigned material inspection and close surface render",
+        "procedure": "Inspect the material used across the cream folds and the existing stem. Under a controlled broad light, compare cream opacity, hue, highlight softness, and grain scale with the fold width, then verify the stem's dark brown nonmetallic appearance. Trace active procedural variation to its visible cream result; a disconnected texture does not satisfy detail. A missing stem can prevent PASS but cannot by itself remove the demonstrated cream minimum.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "Presentation",
+      "criterion": "The final camera presents a supported dessert stack with readable forms and optical contrast in an unobtrusive setting.",
+      "scoring_rule": {
+        "PASS": "Jelly, cream, and cherry exist together as a recognizable vertically stacked dessert in the active camera. Cream contacts the jelly, cherry contacts the cream, and a slightly elevated three-quarter view includes the whole dessert and existing stem tip. The clean setting and lighting reveal flutes, transparency, folds, and fruit highlights without large obscured or clipped regions.",
+        "PARTIAL": "Jelly, cream, and cherry exist together as a recognizable vertically stacked dessert in the active camera, but one or more PASS conditions are unmet, such as floating gaps, excessive intersections, clipping, an unsuitable viewing angle, distracting surroundings, or obscuring reflections.",
+        "FAIL": "The active camera does not show existing jelly, cream, and cherry together as a recognizable vertically stacked dessert. Separate parts, an absent camera view, or source imagery instead of an assembled scene is below the minimum."
+      },
+      "evidence_refs": ["image/01_finished_dessert.png"],
+      "verification": {
+        "method": "Saved camera render and assembly inspection",
+        "procedure": "Render the saved active camera and inspect it at normal viewing size. Orbit an inspection copy to verify cream-to-jelly and cherry-to-cream contact, distinguishing genuine contact from perspective overlap. Assess framing, viewing angle, background restraint, and simultaneous readability of the components. Stem attachment is evaluated in GEO-04; underlying material behavior is evaluated in SURF rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The saved editable scene, recreating script, and named scene-rendered PNG form a reproducible delivery.",
+      "scoring_rule": {
+        "PASS": "A readable submission.blend contains editable jelly and at least one modeled topping. It also retains all required dessert parts, working materials, final camera and lighting, and Cycles GPU settings. build.py recreates the scene from empty and saves submission.blend; that saved result reopens correctly without unavailable dependencies. B139_Transparent_Jelly_With_Cherry.png is present and is a finished render of the actual submitted scene and final camera.",
+        "PARTIAL": "A readable submission.blend contains editable jelly and at least one modeled topping, but one or more PASS conditions are unmet, including incomplete recreation, failure to save or reopen the rebuilt result, missing parts or dependencies, incorrect saved render setup, or a missing or nonconforming named PNG.",
+        "FAIL": "No readable submission.blend contains editable jelly and at least one modeled topping. Only screenshots, an unsaved in-memory reconstruction, a script without a readable saved asset, or a blend containing only reference imagery is below the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Saved-file inspection, clean rebuild, saved-result reopen, and render provenance comparison",
+        "procedure": "Open the delivered submission.blend and inspect editability and saved render settings. Run build.py in a clean Blender 5.1.2 process from an empty scene, using a temporary working location and any script-declared invocation. Confirm it writes submission.blend, then close the build process and reopen that saved result in another clean process. Compare its required geometry, active materials, camera, lighting, and Cycles GPU settings against the delivered scene. Decode the exact named PNG and compare it with a render from the actual submitted scene and final camera, allowing ordinary sampling variation. Check for unavailable external assets. No particular submission directory is required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

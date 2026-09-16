@@ -1,0 +1,176 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "橙色方块融化动画",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=9EcI-YTlxLY",
+    "id": "9EcI-YTlxLY"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 35, "ANM": 25, "RIG": 15, "SURF": 15, "PIPE": 10},
+  "weighting_note": "暂定权重：实际变形动画 ANM25，可逆手动形态控制 RIG15，起终点几何与曲面质量 GEO35，实际橙色材质及颜色变化 SURF15，重建与独立重放 PIPE10。形态混合不是物理模拟；不因修改器或形态键的存在另计 PROC，也不为相机灯光存在计 SCN。几何端点的造型质量只在 GEO 计分，ANM 检查时间变化，RIG 检查手动控制的实际响应与恢复，SURF 检查材质，PIPE 检查依赖与重放。未实施自动验证或校准权重。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 8,
+      "requirement_section": "1. 清晰的方块起点",
+      "criterion": "起点具有方正实体的尺寸比例、平坦大面和清楚直边，没有预先融化的垂坠。",
+      "scoring_rule": {
+        "PASS": "第1帧具有实体方块，三轴尺寸最大/最小不超过1.1，大面平坦且直边清楚，无明显塌陷或垂坠；允许小圆角。",
+        "PARTIAL": "第1帧存在可辨认的实体箱状起点，但尺寸比例、平坦大面/直边、无预先垂坠三项中至少一项不满足，尚未完全失去箱状身份。",
+        "FAIL": "主体缺失，或第1帧不是可辨认的实体箱状起点。"
+      },
+      "evidence_refs": ["image/02_cube.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_fixed_views",
+        "procedure": "读取第1帧最终求值表面，在主体局部主轴下测量三轴范围并计算比例；用固定斜前、侧面视图检查平坦大面、直边、实体厚度和垂坠。允许等效建模方式，不读取对象名或基础网格顶点数作为完成依据。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 顶部塌软与下缘垂坠",
+      "criterion": "终态顶部降低并转为柔软隆起，主体保持松软饱满且顶侧连续的块状实体。",
+      "scoring_rule": {
+        "PASS": "主体存在且第100帧同时满足：顶部低于起点；顶缘与顶部有可见柔软起伏；顶部与侧面连续组成饱满块体。",
+        "PARTIAL": "主体存在且三项中满足一项或两项。",
+        "FAIL": "主体缺失，或三项均不满足。"
+      },
+      "evidence_refs": ["image/01_melted.png", "image/02_cube.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_shape_review",
+        "procedure": "在相同放置基准下比较第1、100帧顶面高度和侧向轮廓，斜前视图观察顶缘起伏与顶侧过渡，侧视图确认饱满体积。只检查最终求值结果，不用未平滑形态键坐标代替终态，也不要求旧教程中的精确位移或宽度增长。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 顶部塌软与下缘垂坠",
+      "criterion": "下缘具有至少两个有差异、与主体连贯且逐渐收拢的圆润垂坠，其间形成上收弧形。",
+      "scoring_rule": {
+        "PASS": "可辨认至少两个圆润垂坠，长度或体量有可见差异，均从宽根部收拢并连接主体，垂坠之间有清楚的上收弧形下缘。",
+        "PARTIAL": "有至少一个连接主体的可辨认垂坠，但完整数量、差异、收拢/圆润或垂坠间上收弧形中至少一项不满足。",
+        "FAIL": "主体缺失，或没有连接主体的可辨认垂坠，只有平底、分离的附加液滴或细针。"
+      },
+      "evidence_refs": ["image/01_melted.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_multiview_review",
+        "procedure": "第100帧围绕主体检查斜前、侧面和必要的背面视图，确认下缘凹凸轮廓和垂坠体量，检查根部至主体的几何连续性。根据实际可见结构识别垂坠，不按原始顶点组、尖端坐标或单张正视图中的局部极小值机械计数。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 7,
+      "requirement_section": "2. 顶部塌软与下缘垂坠",
+      "criterion": "变形主体表面完整，终态曲面平滑，没有明显几何缺陷。",
+      "scoring_rule": {
+        "PASS": "实际存在变形主体；第1、25、50、75、100帧均无可见破洞、分离碎片、异常尖刺或穿插裂缝，终态曲面和垂坠无显著面片折线。",
+        "PARTIAL": "实际存在变形主体且大部分表面完整，但局部出现上述缺陷或终态明显分面；主体整体仍可辨认。",
+        "FAIL": "没有变形主体，或大面积破面/碎裂/异常尖刺使主体结构无法辨认。"
+      },
+      "evidence_refs": ["image/01_melted.png", "image/03_transition.png"],
+      "verification": {
+        "method": "evaluated_surface_inspection",
+        "procedure": "在列出的五帧以中性灰材质和固定软光检查表面，必要时查看求值网格边界与自交区域；检查轮廓和表面法线效果。仅对存在的变形主体评分，缺少垂坠本身由GEO-03处理，不因缺失部位无缺陷获得该部位质量证据。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-01", "capability": "ANM", "points": 15,
+      "requirement_section": "3. 连续的融化过程",
+      "criterion": "第1至100帧具有逐步发展的真实局部几何变形，第25、50、75帧呈不同程度的中间状态。",
+      "scoring_rule": {
+        "PASS": "第1至100帧真实局部形变逐步发展，顶部、下缘和边缘软化共同推进，25/50/75帧均为互不相同的连贯中间状态，无物体切换或透明度替代。",
+        "PARTIAL": "存在可见连续局部形变，但发生范围不符、三种变化不同步，或指定中间帧中有一个或多个缺少清楚的中间程度。",
+        "FAIL": "没有连续局部形变；主体静止、仅整体移动/旋转/缩放，或只通过物体切换/透明度得到不同端点。"
+      },
+      "evidence_refs": ["image/02_cube.png", "image/03_transition.png", "image/01_melted.png"],
+      "verification": {
+        "method": "evaluated_animation_and_geometry_comparison",
+        "procedure": "顺序求值第1至100帧并在固定视图播放，对比25/50/75帧与两端；消除主体整体变换后比较表面与轮廓，确认局部形变真实存在并逐渐推进。检查可见性和透明度，防止端点模型替换冒充变形。端点具体造型质量由GEO处理，本行检查时间发展。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-02", "capability": "ANM", "points": 10,
+      "requirement_section": "3. 连续的融化过程",
+      "criterion": "播放开始和结束平顺，主体原位变形，并在100至250帧保持终态几何。",
+      "scoring_rule": {
+        "PASS": "存在连续局部形变，且三项全满足：变化起止平顺无跳变；主体整体放置和朝向稳定；100至250帧几何保持不变。",
+        "PARTIAL": "存在连续局部形变，且三项满足一项或两项。",
+        "FAIL": "没有连续局部形变，或三项均不满足。"
+      },
+      "evidence_refs": ["image/01_melted.png", "image/03_transition.png"],
+      "verification": {
+        "method": "temporal_continuity_and_hold_probe",
+        "procedure": "按24fps查看完整1至250帧，必要时逐帧检查1至15、85至110附近的变化，比较100/150/200/250帧最终表面。以主体的整体放置基准检查位姿，允许局部变形导致几何重心移动。检查实际速度变化和几何保持结果，不要求某种插值枚举、关键帧数量或固定修改器；颜色保持只在SURF-02评分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-01", "capability": "RIG", "points": 15,
+      "requirement_section": "5. 可逆且可继续编辑的形态控制",
+      "criterion": "融化程度控制能够连续调形、重复往返恢复，并可恢复正常时间驱动。",
+      "scoring_rule": {
+        "PASS": "按文件内说明可进入手动控制；0/0.25/0.5/0.75/1产生连续且不同的实际几何和软化程度；重复1到0恢复差异不超过0.005D；可恢复原时间驱动，全程无需重跑构建脚本。",
+        "PARTIAL": "存在可发现且确实改变几何的控制，并至少产生两个不同状态，但完整中间调节、软化响应、可重复恢复、容差、说明或恢复时间驱动中至少一项不满足。",
+        "FAIL": "没有可操作的形态控制，或控制不改变实际几何、只能切换静态模型，或每次调形必须重跑构建脚本。"
+      },
+      "evidence_refs": ["image/02_cube.png", "image/01_melted.png"],
+      "verification": {
+        "method": "functional_control_round_trip_probe",
+        "procedure": "在副本中按说明暂停时间驱动，按0、0.25、0.5、0.75、1、0、1、0顺序设置控制，每次求值并保存表面；检查连续真实调形与往返重复性，以表面距离而非顶点索引比较恢复差异并除以D。恢复时间驱动后检查1/50/100帧。端点造型准确性仍只在GEO检查，不要求形态键名称、数量或节点配方。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 8,
+      "requirement_section": "4. 随融化变浅的橙色材质",
+      "criterion": "主体实际使用完整覆盖的不透明橙色材质，柔和高光能表现体积。",
+      "scoring_rule": {
+        "PASS": "主体在起终状态均由不透明暖橙色系材质完整覆盖，具有柔和高光且能辨认体积，没有明显未赋材质区域。",
+        "PARTIAL": "主体实际使用橙色材质，但覆盖、不透明性或柔和高光中的至少一项不满足。",
+        "FAIL": "主体缺失，或未实际使用可辨认的橙色材质，仅有默认灰白/其他颜色或完全透明表面。"
+      },
+      "evidence_refs": ["image/01_melted.png", "image/02_cube.png"],
+      "verification": {
+        "method": "assigned_material_and_render_review",
+        "procedure": "检查求值主体的实际材质分配，在固定中性光照下查看起终帧渲染或材质预览，确认完整覆盖、不透明颜色及柔和反射。读取实际参与着色的材质路径作辅助，不以孤立的橙色材质数据块或特定BSDF名称为证据。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 7,
+      "requirement_section": "4. 随融化变浅的橙色材质",
+      "criterion": "主体材质在1至100帧由较饱和橙色连续变成较浅暖橙色，中间状态随融化发展。",
+      "scoring_rule": {
+        "PASS": "固定灯光、世界和色彩管理后，主体材质由较饱和橙色连续变为较浅暖橙色，25/50/75帧呈有序过渡，100帧后保持终态颜色。",
+        "PARTIAL": "主体材质确有由橙色变浅的变化，但过渡跳变、时段/中间顺序不符、终态明显偏离暖橙色或之后未保持中的至少一项成立。",
+        "FAIL": "主体缺失或材质没有由橙色变浅的实际变化，包括仅靠灯光、世界、色彩管理或透明度改变画面。"
+      },
+      "evidence_refs": ["image/02_cube.png", "image/03_transition.png", "image/01_melted.png"],
+      "verification": {
+        "method": "material_time_samples_under_fixed_lighting",
+        "procedure": "固定展示光照与色彩管理，比较1/25/50/75/100/250帧的实际表面着色，辅以材质求值数据确认颜色确由材质变化。允许任何等效材质实现，不强制旧版线性RGB数值或F-curve数量。几何变化不在本行重复评分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 10,
+      "requirement_section": "6. 交付与重放",
+      "criterion": "构建脚本和场景可在独立位置重建与重放，保留控制和动画，直接跳帧与顺序播放一致。",
+      "scoring_rule": {
+        "PASS": "submission.blend与build.py齐全，按说明在Blender5.1.2空场景中可独立重建；无缺失或机器专属依赖；文件保存于第1帧，设置1至250帧/24fps和Cycles GPU；直接求值1/50/100/250与顺序播放一致，重建保留控制和材质动画。",
+        "PARTIAL": "已有可重放场景或可执行重建路径，但脚本、说明、依赖闭合、规定播放/渲染设置、保存帧、跳帧一致性或重建后控制保留中至少一项不满足。",
+        "FAIL": "既没有可重放场景，也没有可执行的重建路径，或关键外部依赖缺失导致资产无法求值。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "isolated_rebuild_and_random_access_replay",
+        "procedure": "在独立临时目录按脚本说明从空场景构建并重开结果，检查文件内资源与相对依赖和播放/渲染设置；分别直接跳帧与从1顺序播放求值1/50/100/250，对比几何及材质并试用保留控制。本行不重新评定艺术质量；仅打开文件不单独给分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

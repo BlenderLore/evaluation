@@ -1,0 +1,121 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "柔软水凝胶表面",
+  "source_video": {"url": "https://www.bilibili.com/video/BV1YHTF6CEBC", "id": "BV1YHTF6CEBC"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "暂定权重，未校准。任务核心是静态灰模的真实形体、圆截面线纹及其空间贴近关系，因此 GEO 为 90 分，拆成七个互不替代的结果检查；PIPE 10 分检验实际编辑和重建。没有材质、仿真或可复用程序生成器目标，故不为修改器存在、几何平滑或灰模显示设置 PROC、SURF 或 SIM 分。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 15,
+      "requirement_section": "1. 低矮的闭合厚板",
+      "criterion": "主体为有完整顶底及侧壁的近方形低矮实体，平面长宽比不超过 1.3，厚度不超过较短平面边长的四分之一且肉眼可辨。",
+      "scoring_rule": {
+        "PASS": "主体存在且同时满足完整实体、近方形和低矮比例要求。",
+        "PARTIAL": "存在可识别的厚板主体，但完整性或至少一个比例要求不满足，仍有可辨厚度和主体轮廓。",
+        "FAIL": "主体缺失，或仅为无厚度表面，或无法辨识为厚板。"
+      },
+      "evidence_refs": ["image/01_overall.png"],
+      "verification": {"method": "evaluated_geometry_and_manual_views", "procedure": "在副本中隐藏线纹，识别主体自身的两个平面主轴及厚度方向，测量去除刚体朝向后的外包尺寸。检查求值后的顶面、底面及侧壁闭合关系，从俯视和两个侧视确认近方形、宽扁比例及实体厚度。不得以顶点数量证明完成。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 圆角与柔和起伏",
+      "criterion": "四个外角以及上下边缘为连续圆润过渡，同时保持厚板轮廓。",
+      "scoring_rule": {
+        "PASS": "主体存在，四个外角及上下边缘全部圆润连续，仍清晰保留近方形厚板轮廓。",
+        "PARTIAL": "主体存在且仍可辨为厚板，至少一类外角或边缘已有圆润过渡，但仍有局部尖角、硬折或局部过度圆化。",
+        "FAIL": "主体缺失，或所有外角和上下边缘均未形成圆角，或圆化后完全失去厚板轮廓。"
+      },
+      "evidence_refs": ["image/01_overall.png"],
+      "verification": {"method": "evaluated_geometry_and_manual_views", "procedure": "隐藏线纹并绕主体观察四角、上沿和下沿，使用近景轮廓或局部截面确认几何过渡。以求值后表面为依据，不以 Bevel 或 Subdivision 修改器是否存在为依据；本项仅检查边缘过渡，不重复扣顶面或侧壁起伏问题。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 15,
+      "requirement_section": "2. 圆角与柔和起伏",
+      "criterion": "顶面具有真实、宽缓、低幅且非周期的多处起伏，整体保持连续平顺。",
+      "scoring_rule": {
+        "PASS": "主体顶面存在多处真实波峰与浅凹，分布非周期且高度变化小于名义厚度，没有顶面尖刺、翻折或明显大块折面。",
+        "PARTIAL": "顶面存在真实起伏，但幅度、宽缓程度、非周期分布或连续质量至少一项不满足。",
+        "FAIL": "主体顶面缺失，或求值几何仍为平面而仅靠颜色、法线或高光产生假起伏。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/03_surface_contact.png"],
+      "verification": {"method": "evaluated_geometry_and_manual_views", "procedure": "在副本中隐藏线纹并用中性显示观察顶面。检查求值后的表面高度或多条穿过内部区域的截面，排除圆角边带后确认多个峰谷、峰谷高度变化小于主体中部名义厚度。结合俯视与低角度近景评估宽缓、非周期分布和连续性，不读取置换强度替代真实形状。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 圆角与柔和起伏",
+      "criterion": "四周侧壁保留柔和的真实起伏，并与顶面圆角连续衔接。",
+      "scoring_rule": {
+        "PASS": "主体的四周侧壁均有柔和几何起伏，过渡连续，没有侧壁尖刺、翻折或重叠闪烁。",
+        "PARTIAL": "至少一面侧壁有真实柔和起伏，但其他侧壁仍完全平直，或侧壁与顶面存在局部不连续缺陷。",
+        "FAIL": "主体侧壁缺失，或所有侧壁均没有真实起伏。"
+      },
+      "evidence_refs": ["image/01_overall.png"],
+      "verification": {"method": "evaluated_geometry_and_manual_views", "procedure": "隐藏线纹，分别查看主体四个侧面并检查与顶面交界的几何连续性。以侧面轮廓及表面采样确认波动，排除仅由材质或平滑法线产生的变化。本项只评价侧壁起伏及其衔接，主体闭合性由 GEO-01 检查。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-05", "capability": "GEO", "points": 15,
+      "requirement_section": "3. 独立的圆截面线纹",
+      "criterion": "至少三条独立开口线纹具有平顺弯曲、细圆截面、基本稳定的粗细及封闭端部。",
+      "scoring_rule": {
+        "PASS": "至少三条独立开口线纹均有平顺弯曲、真实细圆截面、基本稳定的粗细与封闭端部，能辨认各自的起点和终点。",
+        "PARTIAL": "存在至少一条有实际几何体积的线纹，但条数不足三条，或部分线纹的弯曲、圆截面、粗细或端部不符合要求。",
+        "FAIL": "没有有实际几何体积的线纹，或仅有贴图、无厚度路径、控制点显示。"
+      },
+      "evidence_refs": ["image/02_top_layout.png", "image/03_surface_contact.png"],
+      "verification": {"method": "evaluated_geometry_and_manual_closeups", "procedure": "隐藏厚板，识别各条独立开口线纹并检查求值后的可见几何。抽查路径中段及端部的截面、粗细连续性和封口，再与厚板同显确认线纹属于细线尺度。支持曲线或等价实现；曲线数据块数量、Bevel Depth 数值和控制点截图不能单独证明完成。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-06", "capability": "GEO", "points": 10,
+      "requirement_section": "4. 分散布局与表面贴近",
+      "criterion": "线纹在主体顶面投影中有分散且不规则的布局，中央及多个边缘区域有覆盖并保留空白。",
+      "scoring_rule": {
+        "PASS": "至少两条有效线纹分散在中央和多个边缘附近，长度、方向、间距具有变化，留有空白，未形成规则阵列或密集团块。",
+        "PARTIAL": "存在至少两条有效线纹且在顶面内有分布，但覆盖区域、变化或疏密至少一项不满足。",
+        "FAIL": "有效线纹不足两条，或全部位于主体顶面投影范围之外。"
+      },
+      "evidence_refs": ["image/02_top_layout.png"],
+      "verification": {"method": "manual_top_view_and_projected_geometry", "procedure": "将求值后的线纹投影到主体平面主轴形成的俯视图，识别中央及周边占用区域和空白区域，比较路径朝向、长度与间距。只检查平面布局；高度与实际接触由 GEO-07 检查，不要求匹配参考中具体线段数量或精确位置。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-07", "capability": "GEO", "points": 15,
+      "requirement_section": "4. 分散布局与表面贴近",
+      "criterion": "超过一半总线长贴近或浅嵌入顶面，每条线纹有可见部分，整体没有处于统一悬浮平面。",
+      "scoring_rule": {
+        "PASS": "有效线纹超过一半总长度的外壁距顶面不大于局部直径或浅嵌入顶面；每条至少部分可见，且没有全部悬浮在统一水平面。",
+        "PARTIAL": "存在厚板和有效线纹，至少部分线纹贴近顶面且至少有部分线纹可见，但总长度比例、逐条可见性或整体高度关系至少一项不满足。",
+        "FAIL": "厚板或有效线纹缺失，或没有任何线纹部分贴近顶面，或线纹全部不可见。"
+      },
+      "evidence_refs": ["image/03_surface_contact.png"],
+      "verification": {"method": "evaluated_surface_distance_and_manual_visibility", "procedure": "在副本中按弧长采样有效线纹并与主体上表面求最近距离，使用求值后截面直径判断外壁间隙。结合两个侧视和低角度近景区分浅嵌入、深埋、悬空与局部遮挡；统计满足贴近条件的长度比例并逐条检查可见部分。不能只用对象原点高度或 Shrinkwrap 修改器存在作为证据。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "5. 可继续编辑与重建",
+      "criterion": "厚板与线纹可以分别检查，线纹局部路径及截面编辑会产生正确且独立的结果。",
+      "scoring_rule": {
+        "PASS": "厚板与线纹可独立隐藏；抽查线纹的局部路径及截面编辑均实际更新该条形体，其他线纹和厚板保持不变。",
+        "PARTIAL": "厚板和线纹均存在，且独立隐藏、路径编辑、截面编辑三类操作至少一类有效，但未全部满足。",
+        "FAIL": "厚板或线纹缺失，或三类操作均不可用。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "functional_edit_probe", "procedure": "在工程副本中分别隐藏厚板和线纹；抽取两条不同线纹，先移动其中一条的局部中心路径，再改变其截面粗细并触发求值。比较修改前后的几何，确认仅预期线纹受影响且截面随路径更新，之后撤销改动。检查实际行为而非对象名称或未应用修改器列表。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-02", "capability": "PIPE", "points": 5,
+      "requirement_section": "5. 可继续编辑与重建",
+      "criterion": "build.py 能在 Blender 5.1.2 的空场景中重建与交付工程一致的模型及可编辑结构，依赖可携带。",
+      "scoring_rule": {
+        "PASS": "在不同工作目录运行脚本可完整重建厚板、线纹布局和可编辑结构，所需依赖均可获取且不依赖作者机器绝对路径。",
+        "PARTIAL": "脚本能够运行并重建至少一个主体部分，但形态、布局、可编辑结构或依赖可携带性至少一项不满足。",
+        "FAIL": "脚本缺失，或无法运行，或没有重建任何厚板或线纹内容。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "clean_rebuild_and_dependency_audit", "procedure": "未来在 Blender 5.1.2 的独立临时目录和空场景执行交付脚本，检查外部路径及依赖，比较重建结果与 submission.blend 的求值几何、线纹布局及 PIPE-01 编辑探针结果。本阶段只规定程序，不执行 Blender 或自动评分。", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

@@ -1,0 +1,174 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "程序化彩绘玻璃花窗：目标验收",
+  "source_video": "https://www.bilibili.com/video/BV18xqdBYEEv/",
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1.0, "PARTIAL": 0.5, "FAIL": 0.0},
+  "capability_totals": {"GEO": 8, "SURF": 72, "PROC": 15, "PIPE": 5},
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 8,
+      "requirement_section": "1. 完整的薄玻璃面板",
+      "criterion": "A. 面板是横向矩形，比例与输入图像一致且没有明显整体弯曲；B. 面板具有连续薄层厚度，侧面闭合，斜侧看不退化为无厚度平面。",
+      "scoring_rule": {
+        "PASS": "A、B 均成立。",
+        "PARTIAL": "A、B 仅一项成立。",
+        "FAIL": "A、B 均不成立，或不存在有效面板。"
+      },
+      "evidence_refs": ["image/01_overall.jpg"],
+      "verification": {
+        "method": "artifact_geometry_and_multiview",
+        "procedure": "在提交工程副本中识别玻璃组件，检查求值后几何的包围盒、侧面连续性和正面/斜侧视图；允许单个实体、多个相邻玻璃块或其他有效薄层表示，不要求 Solidify、对象名称或固定米制尺寸。横向矩形和薄层关系结合视图判断，记录判定依据。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 18,
+      "requirement_section": "1. 完整的薄玻璃面板；2. 从插画形成彩色玻璃单元",
+      "criterion": "A. 完整输入构图被保留，人物朝向、面部位置、长发延展和边缘内容无镜像、重复或明显拉伸；B. 红橙长发、肤色区域、深色轮廓及蓝青与浅色背景可辨，与提供插画对应。",
+      "scoring_rule": {
+        "PASS": "A、B 均成立。",
+        "PARTIAL": "A、B 仅一项成立；例如构图完整但色彩严重偏离，或主要配色正确但主体被裁掉或变形。",
+        "FAIL": "A、B 均不成立，或画面与输入人物没有可辨对应。"
+      },
+      "evidence_refs": ["image/01_overall.jpg", "image/02_colored_cells.jpg"],
+      "verification": {
+        "method": "artifact_render_visual_comparison",
+        "procedure": "从工程生成完整正面视图，对照提供输入图像与整体参考。比较朝向、人物和头发轮廓、边界内容及主要色区。可用 VLM 提议判断，由人工复核争议；不要求像素级复制、精确 RGB、同一照明或同一分块随机种子。确认工程确实使用提供图像作为内容来源，不能仅按图像节点存在判 PASS。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 16,
+      "requirement_section": "2. 从插画形成彩色玻璃单元",
+      "criterion": "A. 默认状态为紧密铺满的多边形单元，尺寸和分布不规则且没有整体方向性拉长；B. 单元主要使用所在图像区域的代表色，多个单元共同形成图案，既非逐块重复整幅图，也非在连续原图上简单叠加网线。",
+      "scoring_rule": {
+        "PASS": "A、B 均成立。",
+        "PARTIAL": "A、B 仅一项成立。",
+        "FAIL": "A、B 均不成立，或没有可辨的彩色玻璃分块。"
+      },
+      "evidence_refs": ["image/02_colored_cells.jpg", "image/04_micro_surface.jpg"],
+      "verification": {
+        "method": "artifact_closeup_and_material_inspection",
+        "procedure": "检查默认状态的面部、红色头发和蓝色背景三个局部视图，观察单元形态、块内颜色和跨块图案；必要时在工程副本中暂时中和金属条以区分真正分块取色与网线覆盖。沿实际生效材质或几何查看颜色来源，仅用于支持视觉判断，不要求 Voronoi 的数量、节点类型或 Color/Position 输出连接。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 16,
+      "requirement_section": "3. 连续且对齐的金属分隔条",
+      "criterion": "A. 细窄金属条连续围合单元并在交会处连接，没有大片断裂、漏缝或粗重遮挡；B. 金属条沿着彩色单元边界分布，未形成明显错位的两套分块。",
+      "scoring_rule": {
+        "PASS": "A、B 均成立。",
+        "PARTIAL": "A、B 仅一项成立。",
+        "FAIL": "A、B 均不成立，或没有金属分隔网络。"
+      },
+      "evidence_refs": ["image/02_colored_cells.jpg", "image/03_metal_separators.jpg"],
+      "verification": {
+        "method": "artifact_render_alignment_review",
+        "procedure": "在默认材质状态下检查全图及面部、红色头发、蓝色背景的局部，核对单元闭合、交点与色块边界。渲染分辨率应足以区分条宽，避免把抗锯齿造成的混色当错位。可结合有效材质或几何输出检查，不能以某个边缘节点存在替代对齐验收。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 12,
+      "requirement_section": "3. 连续且对齐的金属分隔条；4. 玻璃与金属的材质差异",
+      "criterion": "A. 彩色单元具有玻璃透射和反射，仍能辨认图案而不是不透光印刷；B. 分隔条表现为不透光的暖黄至黄铜色金属，具有与玻璃可区分的高光响应。",
+      "scoring_rule": {
+        "PASS": "A、B 均成立。",
+        "PARTIAL": "A、B 仅一项成立。",
+        "FAIL": "A、B 均不成立，或两者只是一张不响应照明的效果贴图。"
+      },
+      "evidence_refs": ["image/03_metal_separators.jpg", "image/04_micro_surface.jpg"],
+      "verification": {
+        "method": "artifact_controlled_lighting_render",
+        "procedure": "先检查保存场景，再在副本中用柔和侧光和带明暗分区的背光背景观察正面与斜侧视图。核对玻璃透射、反射和金属遮挡/高光差异。允许物理可行的不同着色器和合理风格化，不按 IOR、Metallic、Roughness 的教程数值扣分；源视频的环境倒影不是目标纹理。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-05",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "3. 连续且对齐的金属分隔条；4. 玻璃与金属的材质差异",
+      "criterion": "A. 近看金属条略高于玻璃内侧，边缘/转角有立体明暗层次；B. 玻璃有细微起伏或纹理造成的局部反射变化，边缘扰动克制，没有大波浪、破碎或遮蔽图案的强噪声。",
+      "scoring_rule": {
+        "PASS": "A、B 均成立。",
+        "PARTIAL": "A、B 仅一项成立。",
+        "FAIL": "A、B 均不成立，或起伏强到破坏玻璃单元结构。"
+      },
+      "evidence_refs": ["image/03_metal_separators.jpg", "image/04_micro_surface.jpg", "image/06_irregular_variant.jpg"],
+      "verification": {
+        "method": "artifact_closeup_relief_review",
+        "procedure": "在工程副本中以足够采样生成斜光近景，改变小幅观察角度以区分材质凹凸与预烘焙阴影；查看金属条交会和玻璃中央区域。允许着色凹凸、位移或几何。稳定纹理与路径追踪采样噪点必须区分，不能把源视频中的噪点作为要求。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "5. 可调且保持对应的分块系统",
+      "criterion": "A. 已标识的分块密度控制能在给出的较疏、较密设置下直接生成明显不同的单元数量或尺寸；B. 两种状态均保持完整构图、图像比例及颜色分块与金属条的同步对齐。",
+      "scoring_rule": {
+        "PASS": "A、B 均成立，且无需逐块手工编辑或更换预渲染图。",
+        "PARTIAL": "密度控制确实生效，但其中一种状态发生构图、比例或边线同步问题；或只有一个有效对照状态。",
+        "FAIL": "没有生效的密度控制、只修改无关参数，或需要逐块手工重建/替换预渲染图片。"
+      },
+      "evidence_refs": ["image/01_overall.jpg", "image/02_colored_cells.jpg"],
+      "verification": {
+        "method": "artifact_parameter_intervention",
+        "procedure": "读取工程文本说明中的控制位置、默认值和两个有效对照设置，在副本中逐一应用并求值，在相同正面相机与照明下比较。若说明遗漏，可从有效控制识别，不能仅因此判功能 FAIL；说明完整性由 PIPE 行计分。记录修改前后控制值和结果图。节点存在或参数名称本身不构成通过；验收后恢复默认值。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 5,
+      "requirement_section": "5. 可调且保持对应的分块系统",
+      "criterion": "A. 已标识的规则程度控制能够产生接近网格和明显不规则的两种单元分布；B. 两种分布均铺满面板且颜色、玻璃与金属条继续对应，恢复默认值后回到不规则玻璃效果。",
+      "scoring_rule": {
+        "PASS": "A、B 均成立。",
+        "PARTIAL": "控制能改变分布，但只有一种有效对照状态、出现不对齐，或恢复默认值不能回到默认效果。",
+        "FAIL": "不存在有效的规则程度控制，或只改变颜色而不改变分布。"
+      },
+      "evidence_refs": ["image/05_regular_variant.jpg", "image/06_irregular_variant.jpg"],
+      "verification": {
+        "method": "artifact_parameter_intervention",
+        "procedure": "在工程副本中应用文本说明提供的两种分布设置，保持密度和相机不变，观察网格规则性与分块完整性，再恢复默认设置。若需要读取参数位置，可检查生效节点或修改器，但不规定其实现类型、命名、随机算法或节点数量。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "5. 可调且保持对应的分块系统；提交文件",
+      "criterion": "A. 工程打包了图像和所需依赖，保存有效默认状态、相机与照明，并有可定位控制及有效设置的工程文本说明；B. build.py 在空场景和提供输入下可以重建同一默认资产，不依赖网络、本机绝对路径或未提供插件，随机过程可重现。",
+      "scoring_rule": {
+        "PASS": "A、B 均成立。",
+        "PARTIAL": "A、B 仅一项成立；资产仍可进入内容验收。",
+        "FAIL": "A、B 均不成立。不能打开或没有有效面板的工程不进入内容验收。"
+      },
+      "evidence_refs": ["image/01_overall.jpg"],
+      "verification": {
+        "method": "artifact_dependency_and_script_replay",
+        "procedure": "在隔离副本中打开 submission.blend，检查打包资源、有效相机照明、默认状态及工程文本。随后以 Blender 5.1.2 空场景按脚本说明运行 build.py，仅提供题目输入文件；重开结果并比较面板、图案与控制的默认输出。比对语义和稳定结果，不要求二进制文件哈希相等。此版本只规定该验收步骤，尚未运行 Blender 兼容性或脚本回放。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

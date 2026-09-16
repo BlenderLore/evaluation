@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Interlaced Porous Cube",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1hYM96fEso",
+    "id": "BV1hYM96fEso"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 55, "PROC": 30, "SURF": 5, "PIPE": 10},
+  "weighting_note": "Geometry and procedural behavior are the central capabilities: the task constructs two organic porous phases and preserves their shared generation and scale changes. Phase isolation supports inspection of those generated outputs and is not scored separately. Simple phase colors receive five points for legibility. Ten pipeline points cover reconstruction of the saved artifact and its actual render.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Cubic Envelope",
+      "criterion": "The evaluated sample has a coherent cubic envelope with pore structure extending around its faces.",
+      "scoring_rule": {
+        "PASS": "The combined geometry has comparable width, depth, and height, recognizably cubic faces, and organic pattern coverage on the top and around the sides without an unpatterned slab replacing a major face.",
+        "PARTIAL": "A substantial three-dimensional porous sample has recognizable box-like extent and pattern on more than one face, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no substantial three-dimensional porous sample with recognizable box-like extent and pattern on more than one face; a flat panel, isolated patch, or unrelated shape does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_two_phase_reference.png", "image/03_completed_cube.png"],
+      "verification": {
+        "method": "evaluated geometry and multi-view inspection",
+        "procedure": "Open the saved scene and inspect the evaluated sample from front, side, top, and an orbit view. Compare its bounding extents and examine whether pattern coverage wraps around a coherent cubic envelope. Ignore the camera's perspective when assessing proportions.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 20,
+      "requirement_section": "2. Porous Phase Geometry",
+      "criterion": "Two substantial phases contain real irregular three-dimensional pores, lobes, and bridges.",
+      "scoring_rule": {
+        "PASS": "Each isolated phase extends across the sample in all three dimensions and shows repeated geometric openings, organic variation in their outlines and size, and thicker lobes joined by narrower bridges.",
+        "PARTIAL": "At least one substantial phase extends through a three-dimensional region and contains repeated actual openings joined by lobes or bridges, but one or more PASS conditions are unmet across the two phases.",
+        "FAIL": "Neither phase demonstrates a substantial three-dimensional porous region with repeated actual openings and lobes or bridges. Painted holes, shallow surface marks, and small decorative fragments do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_single_phase_shape.png", "image/01_two_phase_reference.png"],
+      "verification": {
+        "method": "isolated evaluated mesh inspection",
+        "procedure": "Temporarily inspect each phase alone using its retained output or visibility control. Orbit and inspect a section or wireframe of the evaluated geometry to distinguish holes with geometric depth from texture or bump. Examine multiple regions of each phase for irregular pores and connecting solid forms, then restore the combined state.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "3. Interlaced Relationship",
+      "criterion": "The two phases alternate coherently within one sample, with one revealed in the other's openings and recesses.",
+      "scoring_rule": {
+        "PASS": "Both phases visibly interlace across the top and both sides in a three-quarter view, remain registered around corners, and show no visible competing-face flicker. Their relationship reads as two distributed networks sharing one sample.",
+        "PARTIAL": "Both geometric phases occupy a shared sample region and visibly alternate across a substantial area of at least one face, but one or more PASS conditions are unmet.",
+        "FAIL": "Two geometric phases do not visibly alternate across a substantial area of one shared face. A single phase, disconnected side-by-side samples, or fully coincident duplicates with no discernible interlacing do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_two_phase_reference.png"],
+      "verification": {
+        "method": "combined and isolated controlled views",
+        "procedure": "Inspect combined geometry with contrasting diagnostic colors if needed, then compare each isolated phase at unchanged transforms. Orbit the cube to confirm that openings reveal the other phase on several faces and that this relationship continues around corners. Check near-tangent views for visible flicker without imposing an unsupported requirement of globally disjoint interior volumes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "4. Rounded Surface Finish",
+      "criterion": "Existing core surfaces have a rounded, clean geometric finish while retaining their pores.",
+      "scoring_rule": {
+        "PASS": "Both substantial phases have rounded lobes, bridges, and pore rims, retain readable openings, and avoid prominent voxel steps, polygon bands, spikes, or shading breaks across their core surfaces.",
+        "PARTIAL": "An existing substantial porous phase has rounded core lobes and pore rims over a meaningful continuous region, but one or more PASS conditions are unmet; defects elsewhere or an absent second phase prevent PASS without erasing demonstrated finish.",
+        "FAIL": "No existing substantial porous phase demonstrates rounded core lobes and pore rims over a meaningful continuous region. Empty geometry, tiny smooth patches, or uniformly faceted core surfaces do not meet the minimum."
+      },
+      "evidence_refs": ["image/03_completed_cube.png", "image/01_two_phase_reference.png"],
+      "verification": {
+        "method": "neutral-shaded close inspection",
+        "procedure": "Inspect both phases in neutral smooth shading at full-object and close range. Use raking illumination or a controlled clay render to examine core lobes, bridges, and pore rims for geometric steps, pinching, and shading discontinuities. Compare the evaluated silhouette with its face structure rather than awarding points for a smoothing modifier's presence.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "5. Editable Procedural Construction",
+      "criterion": "A shared three-dimensional pattern drives both phases and can regenerate a coordinated alternative realization.",
+      "scoring_rule": {
+        "PASS": "The saved procedural system derives both phases from one shared spatial pattern; changing the documented pattern control regenerates both in coordination while retaining their interlaced relationship, and restoring it deterministically restores the submitted geometry. Documented controls allow either phase to be inspected alone without altering its geometry or alignment, and the saved default shows both.",
+        "PARTIAL": "An inspectable shared procedural pattern generates both substantial phases and a documented pattern change updates at least one phase, but one or more PASS conditions are unmet.",
+        "FAIL": "No inspectable shared procedural pattern generates both substantial phases, or the documented pattern change cannot produce any geometric update. Baked meshes and unused procedural graphs do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_single_phase_shape.png", "image/03_completed_cube.png"],
+      "verification": {
+        "method": "construction inspection and reversible pattern probe",
+        "procedure": "Read the retained control documentation and trace the active geometric dependencies of both outputs. Use the documented phase controls to inspect each output independently and confirm that isolation preserves its evaluated geometry and alignment. Record the submitted state, change the documented pattern seed or offset to another usable value, evaluate both phases, and inspect their coordinated change. Restore the original value and combined visibility, then compare evaluated geometry with the recorded state. Do not require a particular node recipe or node count.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "5. Editable Procedural Construction",
+      "criterion": "A pore-scale control changes the structure's spatial detail while keeping the sample dimensions fixed.",
+      "scoring_rule": {
+        "PASS": "Modest documented changes in both directions produce visibly coarser and finer usable pore structures in both phases without scaling the cubic envelope; restoring the control restores the submitted geometry.",
+        "PARTIAL": "The documented scale control changes actual pore geometry in at least one phase while keeping the overall sample dimensions fixed, but one or more PASS conditions are unmet.",
+        "FAIL": "The scale control cannot change actual pore geometry while preserving sample dimensions. Object scaling, a shading-only change, or an unused control does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_two_phase_reference.png", "image/03_completed_cube.png"],
+      "verification": {
+        "method": "reversible geometric scale probe",
+        "procedure": "Record the original envelope and view, then use documented nearby values on each side of the pore-scale setting. Evaluate each state and compare characteristic opening size and spatial frequency in both phases at the same camera scale. Confirm that envelope dimensions remain fixed and the original state returns on restoration. Assess pore-scale response here; assess common-pattern coordination under PROC-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "6. Phase Color Separation",
+      "criterion": "Actual materials give the two geometric phases consistently distinguishable solid colors.",
+      "scoring_rule": {
+        "PASS": "Both substantial phases carry different, consistently applied solid base colors with opaque, restrained surface responses that make their boundaries and rounded forms readable.",
+        "PARTIAL": "Both substantial phases have actual material assignments and a visible color distinction across part of the combined sample, but one or more PASS conditions are unmet.",
+        "FAIL": "Both substantial phases with an actual material-based visible color distinction are not present. Viewport-only colors, an absent phase, or a color difference confined to an unrelated object do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_two_phase_reference.png"],
+      "verification": {
+        "method": "material assignment and controlled render inspection",
+        "procedure": "Inspect materials actually assigned to the evaluated phase geometry and render with neutral illumination if the final lighting obscures their base colors. Confirm two distinct solid phase colors and an opaque readable surface response. Do not require the reference's exact pink or purple hues or shader values.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The reconstruction script saves a self-contained Blender file whose reopened state reproduces the submitted scene.",
+      "scoring_rule": {
+        "PASS": "Both submission.blend and build.py are delivered; executing the script in a clean Blender 5.1.2 session recreates and saves submission.blend, and opening that newly saved file in a second session reproduces the submitted geometry, retained controls, materials, and render setup without external assets or manual preparation.",
+        "PARTIAL": "The script completes a save and the resulting file reopens with substantial recreated sample geometry, but one or more PASS conditions are unmet.",
+        "FAIL": "The script does not save a file that reopens with substantial recreated sample geometry. A missing script, missing saved result, or unsaved in-memory construction does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "clean rebuild followed by saved-file reopening",
+        "procedure": "Preserve the supplied files, run build.py in a clean Blender 5.1.2 process in an isolated working directory, and confirm that it writes submission.blend. Close that process and open the newly saved file in a second Blender process. Compare its evaluated scene, controls, materials, and render setup with the delivered submission. Inspect dependency paths and record any manual intervention. Runtime compatibility is to be checked at evaluation time.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named PNG is an inspectable render of the actual saved sample.",
+      "scoring_rule": {
+        "PASS": "B98_Interlaced_Porous_Cube.png is delivered as a genuine render of the submitted scene using its Cycles GPU setup, and frames the complete sample in a three-quarter view at sufficient detail to inspect its visible pores, phase boundaries, and rounded surfaces.",
+        "PARTIAL": "A genuine PNG render of the submitted sample is delivered, but one or more PASS conditions are unmet.",
+        "FAIL": "No genuine PNG render of the submitted sample is delivered. A source image, viewport screenshot, unrelated render, or external replacement does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_two_phase_reference.png", "image/03_completed_cube.png"],
+      "verification": {
+        "method": "render provenance and framing comparison",
+        "procedure": "Decode the delivered PNG, inspect saved render settings, and produce a comparison render from the reopened submission using its saved camera. Compare geometry, phase pattern, materials, and framing to establish that the PNG depicts the actual scene. Assess delivery, framing, and inspectability here without re-awarding geometry or material quality.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "玻璃蜂蜜罐与黏稠滴落",
+  "source_video": {"url": "https://www.bilibili.com/video/BV1i2MwzMEcE", "id": "BV1i2MwzMEcE"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 30, "SIM": 35, "SURF": 30, "PIPE": 5},
+  "weighting_note": "暂定内容权重：真实液体演化与接触是中心能力，占35分；容器、棒体和静态蜂蜜形体共30分；三类可区分表面共30分；依赖闭合和重放占5分。各行5至15分，避免把修改器、节点或对象数量当作成果。未通过提交样本校准。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 开口玻璃罐",
+      "criterion": "圆润罐腹、收肩短颈与双层次口沿构成真正有内外壁和封闭底部的开口容器。",
+      "scoring_rule": {
+        "PASS": "罐腹、收肩、短颈、卷边和下方凸环均可辨；内部开口、壁厚与底厚真实存在，玻璃实体连续且近景平滑。",
+        "PARTIAL": "真实开口和有厚度的容器成立，整体仍可识别为参考罐形，但未达到PASS：罐身或口沿缺少部分层次，或局部有可见夹痕、厚度突变等缺陷。",
+        "FAIL": "无可识别罐体，或容器是实心/零厚度假壳，或缺失底部，或破洞及自相交已破坏容器结构。"
+      },
+      "evidence_refs": ["image/01_complete.png", "image/02_jar.png"],
+      "verification": {"method": "evaluated_geometry_and_visual_review", "procedure": "隐藏蜂蜜与棒体，检查求值后的罐体。以正视、侧视、俯视和口沿近景确认轮廓；在副本上用截面检查连续内外壁及底部，确认口沿连接为有体积实体。不得用顶点数或包围盒比例代替容器判定。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 蜂蜜棒",
+      "criterion": "细长圆头手柄与具有至少两道真实环形储蜜槽的圆润棒头组成完整蜂蜜棒，并斜置于罐口上方。",
+      "scoring_rule": {
+        "PASS": "手柄、圆头末端、较粗棒头和至少两道几何凹槽均清楚可辨；倾斜位置与罐口关系合理，近景无明显断裂或尖刺。",
+        "PARTIAL": "完整手柄、较粗棒头和至少一道真实储蜜槽成立，但未达到PASS：仅有一道凹槽，或末端/槽边生硬，或位置与倾斜关系不符合要求。",
+        "FAIL": "没有完整可识别的蜂蜜棒结构，或没有真实储蜜槽，或棒头与手柄严重断开。"
+      },
+      "evidence_refs": ["image/01_complete.png", "image/03_dipper.png"],
+      "verification": {"method": "evaluated_geometry_and_visual_review", "procedure": "隐藏全部蜂蜜后，从沿棒轴和垂直棒轴的方向检查求值形体，观察径向凹槽是否绕棒头形成实际沟槽，确认手柄及末端完整；恢复罐体后检查空间摆放。材质条纹、面密度或独立对象数不作为槽体证据。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "3. 罐内蜂蜜与口沿流挂",
+      "criterion": "罐内蜂蜜有留出空气区的液面和贴合内腔的体积，口沿另有接触玻璃并以圆润厚滴结束的静态流挂。",
+      "scoring_rule": {
+        "PASS": "罐内蜂蜜体积、基本平缓液面及上方空气区成立；口沿流挂从口沿连续向外壁下垂，中段收窄、末端鼓起且有厚度；两者无明显悬空间隙或穿出玻璃。",
+        "PARTIAL": "未达到PASS，但至少一种蜂蜜形体仍可清楚辨认为罐内有液面的体积或由口沿向下的有厚度流挂；另一种可缺失，或两者存在部分形态、贴合及平滑缺陷。",
+        "FAIL": "两种形体均缺失或均无法清楚辨认为要求的体积与流挂；包括两者同时严重穿透/悬空而失去与罐体关系的情况。"
+      },
+      "evidence_refs": ["image/01_complete.png", "image/02_jar.png"],
+      "verification": {"method": "evaluated_geometry_and_visual_review", "procedure": "关闭透明材质干扰并隐藏棒头模拟液体，使用截面与侧视检查罐内蜂蜜的体积、液面和内腔位置；近看口沿流挂厚度及上下端形态，确认与玻璃的真实接触。允许两个部分采用任意合理组织，不按网格数量计分。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SIM-01", "capability": "SIM", "points": 15,
+      "requirement_section": "4. 高黏度液体过程",
+      "criterion": "第1至24帧内，实际模拟的棒头蜂蜜从贴附层受重力演化为朝向罐口的下垂长滴。",
+      "scoring_rule": {
+        "PASS": "1至24帧有可重现的真实液体演化；初期贴住棒头，展示帧至少一条长滴明显伸到棒头下方，最低滴端相对早期清楚下降，且不是固定形体整体变换。",
+        "PARTIAL": "真实模拟及初期贴附成立，并有可辨形变，但截至第24帧只出现轻微鼓胀/短下垂，或早期与展示状态之一不够清楚，未完整形成要求的过程。",
+        "FAIL": "缺少可求值的液体过程，或全段静止，或仅用固定网格变换、模型切换/预置形状替代实际液体模拟，或液体并非从棒头向罐口方向下垂。"
+      },
+      "evidence_refs": ["image/04_liquid_early.png", "image/05_liquid_late.png"],
+      "verification": {"method": "evaluated_simulation_sequence_and_functional_probe", "procedure": "按提交重放入口从初始状态求值1至24帧，记录至少1、6、12、18、24帧及展示帧的液体轮廓并比较；确认液体形状实际改变。检查被使用的求解配置和缓存来源，在工程副本中清除缓存并重算短段验证液体由模拟生成；只有域/Flow对象或已有单帧网格不算证明。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SIM-02", "capability": "SIM", "points": 10,
+      "requirement_section": "4. 高黏度液体过程",
+      "criterion": "液体演化具有厚包覆、黏性颈部和圆润滴端，高黏度外观在连续帧中成立。",
+      "scoring_rule": {
+        "PASS": "已求值的液体在下垂阶段保持较厚包覆层与连续拉伸颈部，滴端圆润，局部细节平滑；无主导画面的大量水花、颗粒或爆裂。",
+        "PARTIAL": "实际演化的液体具有包覆层和连颈，但部分帧出现明显锯齿、过早碎裂或偏水状细流；主要蜂蜜体仍连续可辨。",
+        "FAIL": "不存在可检查的动态液体，或主要形态是松散颗粒、大量飞溅、断裂薄片，或完全没有黏性包覆与拉伸颈部。"
+      },
+      "evidence_refs": ["image/01_complete.png", "image/05_liquid_late.png"],
+      "verification": {"method": "evaluated_simulation_visual_review", "procedure": "在中性光照下逐帧检查下垂开始至展示帧，重点观察棒头包覆、连接颈部及最下方滴端，必要时以灰模排除高光掩盖。以求值后的连续形态评价黏稠感，不以黏度开关、求解器数值或网格分辨率直接给分。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SIM-03", "capability": "SIM", "points": 10,
+      "requirement_section": "4. 高黏度液体过程",
+      "criterion": "固定的蜂蜜棒和罐体具有有效液体碰撞，液体贴附或绕行接触面且不被域边界截断。",
+      "scoring_rule": {
+        "PASS": "全段罐体和棒体固定；棒头接触处液体贴附或绕行，罐体碰撞有效；可见过程无明显穿透、域边界硬切或瞬间消失。",
+        "PARTIAL": "棒头接触与固定支撑成立，但罐体碰撞功能未成立，或出现局部短暂穿透/边界缺陷而主要流动仍可追踪。",
+        "FAIL": "液体持续穿过棒头，或棒体/罐体运动破坏固定关系，或两者碰撞均无效，或液体被边界大量截断/消失而无法追踪接触过程。"
+      },
+      "evidence_refs": ["image/04_liquid_early.png", "image/05_liquid_late.png"],
+      "verification": {"method": "evaluated_contact_and_collision_probe", "procedure": "记录全段支撑物世界变换并从多个方向观察接触区。在副本上检查液体与求值碰撞表面关系；若片段未触罐体，则用相同液体设置做局部短接触探针，使液体接近罐口或罐壁，比较开启/关闭罐体碰撞后的响应。仅探针用副本，不修改交付原件，不要求正式片段发生落入罐内事件。禁止仅因存在Effector修饰器判PASS。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 10,
+      "requirement_section": "5. 玻璃、蜂蜜与木质外观",
+      "criterion": "玻璃罐清透略暖，内景可见，曲面和厚边呈现反射、折射与厚度层次。",
+      "scoring_rule": {
+        "PASS": "实际罐面显示清透暖色玻璃，内部蜂蜜与空气区可见，口沿和底缘有合理反射/折射层次，主体不呈不透明壳。",
+        "PARTIAL": "可辨为透光玻璃且能看到部分内景，但过暗、过雾、色偏或反射遮蔽使口沿/内景之一难读；仍保留玻璃特征。",
+        "FAIL": "罐体缺失或实际材质不透光，呈陶瓷、金属、纯塑料，或内部结构完全不可辨。"
+      },
+      "evidence_refs": ["image/01_complete.png"],
+      "verification": {"method": "assigned_material_and_rendered_visual_review", "procedure": "在Cycles GPU展示视角和一个侧向检查视角观察实际罐面，可临时调整背景明暗以区分材质与灯光问题；追溯罐面实际使用的着色输出。未被分配的玻璃节点或未连接输出不算证据。几何缺陷只在GEO-01计分，本行评价存在的罐面表面响应。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 10,
+      "requirement_section": "5. 玻璃、蜂蜜与木质外观",
+      "criterion": "三个蜂蜜区域均为一致的金黄至琥珀色透光湿润表面，并呈厚薄层次。",
+      "scoring_rule": {
+        "PASS": "罐内蜂蜜、棒头动态液体及口沿流挂均呈协调的琥珀金黄色、透光与湿亮高光；厚处浓、薄缘亮，动态液体与流挂可更光滑。",
+        "PARTIAL": "至少一个实际蜂蜜区域满足上述表面特征，但其余区域缺失、材质未覆盖或颜色/光泽不一致；或三者基本一致但透光/厚薄层次偏弱。",
+        "FAIL": "没有任何实际蜂蜜区域具有琥珀色透光湿润特征，或全部表现成不透明平色/金属/无材质的液体。"
+      },
+      "evidence_refs": ["image/01_complete.png"],
+      "verification": {"method": "assigned_material_and_rendered_visual_review", "procedure": "在展示帧分别检查罐内蜂蜜、模拟网格和口沿流挂实际表面，并比较至少一个早期帧，确认材质随动态液体使用。观察边缘与厚处透光差异；允许不同数据块或等效着色模型，不按Glass节点数量及固定粗糙度判定。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-03", "capability": "SURF", "points": 10,
+      "requirement_section": "5. 玻璃、蜂蜜与木质外观",
+      "criterion": "蜂蜜棒具有浅木至暖棕色的细微非均匀纹理、沿柄长方向的变化和区别于蜂蜜的适度粗糙度。",
+      "scoring_rule": {
+        "PASS": "露出的棒体可辨为暖色木质，具有细微非均匀纹理且手柄变化总体顺长向展开；高光柔和、表面不透明，与蜂蜜湿亮反射清楚区分。",
+        "PARTIAL": "棒体存在且为暖色不透明表面，并有可辨的非均匀纹理或色调变化，但未达到PASS：纹理过粗、方向杂乱或高光过于塑料化。",
+        "FAIL": "棒体缺失，或没有任何可辨的非均匀纹理/色调变化，或表现为透明蜂蜜、玻璃、金属或非木质色调，未达到PARTIAL的木质表面底线。"
+      },
+      "evidence_refs": ["image/01_complete.png", "image/03_dipper.png"],
+      "verification": {"method": "assigned_material_and_rendered_visual_review", "procedure": "在展示视角与手柄近景观察露出棒体；必要时隐藏蜂蜜检查完整棒体表面。确认纹理真正影响被使用的材质输出而非孤立节点，检查长度方向与非均匀色调，无指定Noise或Color Ramp节点数量要求。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "6. 编辑与重放",
+      "criterion": "各主要组件可独立检查，提交迁移后依赖闭合且可按给定入口重放或重建1至24帧液体过程。",
+      "scoring_rule": {
+        "PASS": "所有主要组件可分别选取/隐藏；迁移目录后直接重放或通过build.py自动生成缓存可重放指定片段，材质和依赖完整；build.py可从空场景重建相应资产与模拟关系。",
+        "PARTIAL": "未达到PASS，但交付了可运行的build.py且在迁移副本中能恢复完整片段及材质；存在有明确说明的路径修正、部分组件不能独立检查，或build.py可运行但重建关系不完整的问题。",
+        "FAIL": "未交付可运行的build.py，或迁移后不能恢复完整片段及材质；包括缺少关键缓存/纹理且无可用生成路径、仅有展示静帧的情况。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "relocation_replay_and_rebuild_probe", "procedure": "复制完整提交到新目录，打开blend检查相对依赖及各组件隐藏行为；按提交入口播放1至24帧。随后在独立空场景运行build.py及其缓存入口，比较几何、材质、初始状态与碰撞关系。重放内容是否正确由SIM/SURF行评价，本行仅评价组织、依赖和可恢复性；文件能打开本身不单独得分。", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

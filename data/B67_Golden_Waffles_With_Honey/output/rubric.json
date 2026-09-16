@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Golden Waffles With Honey",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1srtCzHEpx",
+    "id": "BV1srtCzHEpx"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 45, "SURF": 35, "SCN": 10, "PIPE": 10},
+  "weighting_note": "The central task is the combined waffle relief and honey geometry, supported by three distinct material outcomes. Arrangement receives points for the overlapping composition and legible final view. No procedural-geometry points are awarded for an incidental modifier stack, and delivery is limited to ten points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Rounded Waffle Bodies",
+      "criterion": "Two separate, shallow waffle bodies have similar scale, broad circular silhouettes, softly scalloped perimeters, and visible baked-piece thickness.",
+      "scoring_rule": {
+        "PASS": "Both waffles meet the stated silhouette, proportion, scale relationship, and visible-thickness requirements.",
+        "PARTIAL": "At least one editable solid body has a recognizable broad, shallow waffle silhouette and visible thickness, but any PASS condition is unmet.",
+        "FAIL": "No editable body meets that minimum, including flat image substitutes, zero-thickness surfaces, or objects without a recognizable broad waffle silhouette."
+      },
+      "evidence_refs": ["image/01_waffles_and_honey.png", "image/02_waffle_geometry.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection and neutral-shaded orthographic views",
+        "procedure": "Open the submitted scene, identify the waffle bodies by their evaluated form rather than names, and isolate them from honey and lighting helpers. Inspect top and side views with neutral shading to assess roundness, scalloping, relative size, and depth. Confirm that the apparent thickness belongs to editable geometry rather than a material or image.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Grid Relief and Geometry Finish",
+      "criterion": "Each waffle contains a clear orthogonal grid of recessed square pockets with real floors, walls, and raised separating ridges.",
+      "scoring_rule": {
+        "PASS": "Both waffles have repeated broad square pockets and connected raised ridges that remain legible in top and oblique views; the pattern is real depth rather than only shading.",
+        "PARTIAL": "At least one existing waffle has a recognizable repeated grid with real recessed floors and raised separators, but any PASS condition is unmet.",
+        "FAIL": "No existing waffle demonstrates that minimum, including color-only grids, isolated dimples without an orthogonal pocket pattern, or relief too weak to identify floors and separators."
+      },
+      "evidence_refs": ["image/02_waffle_geometry.png", "image/03_honey_path.png"],
+      "verification": {
+        "method": "Evaluated mesh inspection and controlled gray render",
+        "procedure": "Temporarily hide the honey and override the waffle materials with neutral diffuse shading in a copy of the scene. Render or inspect top and oblique views, then examine cross-sections through representative adjacent pockets in the evaluated geometry. Confirm recessed floors, connecting walls, raised ridges, and repeated orthogonal organization on each waffle.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Grid Relief and Geometry Finish",
+      "criterion": "Waffle ridge intersections, pocket transitions, perimeter, and sidewalls form smooth, continuous pillowy geometry.",
+      "scoring_rule": {
+        "PASS": "Both waffles have softened transitions and continuous sidewalls, with no visible open seams, accidental spikes, severe pinching, or faceting across their main curved surfaces.",
+        "PARTIAL": "At least one existing waffle has substantially continuous sidewall and relief surfaces with visible softening across most major transitions, but any PASS condition is unmet. A missing second waffle does not invalidate the finish demonstrated by the existing core surfaces.",
+        "FAIL": "No existing waffle meets that minimum; isolated smooth fragments, unsoftened block grids, or broadly broken or disconnected surfaces do not qualify."
+      },
+      "evidence_refs": ["image/01_waffles_and_honey.png", "image/02_waffle_geometry.png"],
+      "verification": {
+        "method": "Neutral-shaded close inspection of evaluated surfaces and normals",
+        "procedure": "Inspect the perimeter, sidewall, representative pocket walls, and ridge intersections on every existing waffle from several angles. Use a neutral material and grazing light to expose faceting and pinching. Inspect evaluated geometry at suspected seams to distinguish real openings from shading. Assess finish on substantive existing surfaces; do not score absent surfaces as clean.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Honey Drizzle",
+      "criterion": "An editable rounded honey strand forms loose repeated sweeps over both waffles and follows their surface heights.",
+      "scoring_rule": {
+        "PASS": "The honey forms repeated elongated back-and-forth turns across both exposed tops, leaves much of the grid visible, has a smooth rounded section and natural ends, and rests on raised surfaces with only small pocket bridges. Its path and thickness remain editable.",
+        "PARTIAL": "An editable three-dimensional rounded strand makes a recognizable back-and-forth drizzle over at least one waffle and visibly contacts its upper surface in multiple places, but any PASS condition is unmet.",
+        "FAIL": "The minimum is absent, including a flat painted line, a single straight tube, a wholly floating or deeply buried strand, or honey without editable three-dimensional geometry."
+      },
+      "evidence_refs": ["image/01_waffles_and_honey.png", "image/03_honey_path.png"],
+      "verification": {
+        "method": "Top and side geometry inspection with an editability probe",
+        "procedure": "Inspect the honey in top and low oblique views, then temporarily isolate it to inspect its section and endpoints. Compare its height against the waffle surfaces along each sweep, distinguishing short bridges across pockets from long unsupported spans. In a disposable copy, alter one path segment and the strand thickness using the submitted editable representation, confirm evaluated geometry changes locally as intended, and restore the original state.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Toasted Waffle Surface",
+      "criterion": "Both waffles use a procedural baked color progression from pale golden edges to richer golden and orange-brown inner regions, with editable colors and transition spread.",
+      "scoring_rule": {
+        "PASS": "Both waffles visibly share the required baked color progression, the variation is generated by their assigned materials rather than lighting alone, and the light color, toasted color, and transition spread can each be adjusted with a visible corresponding effect.",
+        "PARTIAL": "At least one existing waffle has an assigned material with visible pale-gold and orange-brown baked variation beyond lighting alone, but any PASS condition is unmet.",
+        "FAIL": "No existing waffle has that minimum material result, including uniform color, variation supplied only by shadows, or materials that exist but are not used on waffle surfaces."
+      },
+      "evidence_refs": ["image/01_waffles_and_honey.png"],
+      "verification": {
+        "method": "Assigned-material inspection and controlled color probes",
+        "procedure": "Render the waffles under neutral broad illumination in a copy of the scene and inspect the edge-to-interior color progression. Trace the materials actually assigned to waffle surfaces to identify their procedural color controls. Change each required control separately to a visibly distinct value, rerender a small region to confirm its intended effect, and restore the submitted values. Node names and node counts are not acceptance evidence.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Toasted Waffle Surface",
+      "criterion": "Waffle surfaces remain opaque and exhibit subtle irregular baked relief with adjustable scale and strength and restrained broad highlights.",
+      "scoring_rule": {
+        "PASS": "Both waffles show fine irregular relief at close range without obscuring the grid or distorting the silhouette, remain opaque, and have broad restrained highlights. Texture scale and strength each produce a visible adjustable effect.",
+        "PARTIAL": "A substantial existing waffle surface is opaque and shows irregular fine-scale relief under controlled close lighting, but any PASS condition is unmet.",
+        "FAIL": "No substantial existing waffle surface meets that minimum, including entirely smooth surfaces, noise visible only as flat color, or relief demonstrated solely by an unassigned material."
+      },
+      "evidence_refs": ["image/01_waffles_and_honey.png"],
+      "verification": {
+        "method": "Grazing-light material render and texture-control probes",
+        "procedure": "Render close views of the actual waffle surfaces with a broad grazing light and inspect relief, highlight width, opacity, and silhouette. Temporarily disable the relief contribution to distinguish shading relief from flat color noise. Independently vary the submitted texture scale and strength controls and verify visible changes before restoring them. Evaluate existing core surfaces even when another waffle is absent.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Honey Surface",
+      "criterion": "Honey has warm yellow-amber transmission, readable underlying waffle detail, refraction, and glossy highlights that reveal its rounded volume.",
+      "scoring_rule": {
+        "PASS": "The visible drizzle has a warm yellow-to-amber transmissive appearance, reveals underlying waffle color and form in thinner areas, and shows refraction and bright rounded highlights without becoming opaque, metallic, or nearly invisible.",
+        "PARTIAL": "A substantive visible segment of actual honey geometry has an assigned warm transmissive material with readable underlying form and a glossy response, but any PASS condition is unmet.",
+        "FAIL": "No substantive honey segment meets that minimum, including absent honey, an opaque colored tube, a metallic wire, or a material that exists but is not assigned to the drizzle."
+      },
+      "evidence_refs": ["image/01_waffles_and_honey.png"],
+      "verification": {
+        "method": "Actual-material render with a temporary transmission diagnostic",
+        "procedure": "Inspect the assigned honey material in the final view and a close oblique render. In a copy, place a temporary contrasting strip behind an isolated honey segment and render to confirm transmitted visibility and refractive distortion through its volume. Compare its highlight response with the waffles under the same light. Remove the diagnostic strip and restore the scene; no particular shader node type is required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "Arrangement and Presentation",
+      "criterion": "The offset, modestly rotated waffle pair has plausible contact and an unobstructed oblique presentation of both patterned tops, thickness, and honey.",
+      "scoring_rule": {
+        "PASS": "Both waffles are offset and modestly rotated in a shallow partial overlap with plausible contact; substantial patterned areas and outer edges remain exposed on each. The final camera contains the entire pair with clear margins, and illumination makes the relief, toasted colors, and honey readable without distracting decoration or clipped highlights.",
+        "PARTIAL": "Both waffles form a recognizable partial-overlap pair and the final view shows an exposed patterned region on each, but any PASS condition is unmet.",
+        "FAIL": "The minimum two-waffle composition is absent, including a single waffle, fully concealed second waffle, disjoint side-by-side placement without overlap, or framing that hides the patterned region of either waffle."
+      },
+      "evidence_refs": ["image/01_waffles_and_honey.png", "image/02_waffle_geometry.png"],
+      "verification": {
+        "method": "Scene-space inspection and final-camera render review",
+        "procedure": "Inspect both bodies in top and side views to establish partial overlap, relative rotation, exposed regions, and physical contact without a large air gap or deep intersection. Render the submitted camera from the actual scene and assess margins and feature visibility. Attribute intrinsic material defects to the relevant surface rows; this row assesses placement, viewpoint, and illumination.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, reproducible build script, and correctly named scene-rendered PNG form a complete usable submission.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the complete editable scene; build.py reconstructs its geometry, materials, editable settings, camera, lighting, and render settings from an empty scene; and B67_Golden_Waffles_With_Honey.png is a valid still rendered from that scene using the requested Blender version and Cycles GPU configuration.",
+        "PARTIAL": "submission.blend opens and contains editable core waffle or honey geometry with assigned materials, but any PASS condition is unmet.",
+        "FAIL": "No opening submission.blend contains that minimum editable scene, including a render-only submission or a scene containing only image replacements."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Future clean-build replay and artifact consistency check",
+        "procedure": "In a future authorized Blender 5.1.2 environment, open submission.blend and inspect editable scene data and missing-resource reports. Run build.py from an empty scene in a separate temporary directory, confirm it saves a usable scene with the declared settings and adjustable features, and compare its evaluated result with the submitted scene. Decode the named PNG and compare it with a render of the actual submitted camera. Record execution errors, absent files, external dependencies, or a mismatch between scene and image. This authoring package has not run Blender or tested runtime compatibility.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

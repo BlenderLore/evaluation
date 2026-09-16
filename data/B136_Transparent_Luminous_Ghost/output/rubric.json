@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Transparent Luminous Ghost",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1dvsHzNEBS",
+    "id": "BV1dvsHzNEBS"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 55, "SURF": 35, "PIPE": 10},
+  "weighting_note": "The source primarily models the shell and its facial and silhouette features, then develops transmission and material emission. Geometry receives 55 points split across body structure, hem, appendages, eyes, and finish; materials receive 35 points split across shell, core, and eye contrast. Delivery and a saved reproducible build receive 10 points. Modifier presence is not procedural geometry credit. No timeline behavior or compositor glare is required, so ANM, SIM, and SCN receive no points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. Bell-Shaped Shell",
+      "criterion": "A compact bell-shaped body has an open underside, a real cavity, and a continuous thin shell wall.",
+      "scoring_rule": {
+        "PASS": "An existing three-dimensional body has a rounded upper region and sides widening toward the base; it also has the compact bell silhouette, open underside, interior cavity, and continuous thin wall with a visible rim required by the section.",
+        "PARTIAL": "An existing three-dimensional body has a rounded upper region and sides widening toward the base, but it fails one or more PASS conditions, such as having a capped bottom, incomplete cavity, uneven wall, or weak proportions.",
+        "FAIL": "No existing three-dimensional body combines a rounded upper region with sides widening toward the base. A flat silhouette, isolated sphere, or unrelated mesh does not meet this minimum."
+      },
+      "evidence_refs": ["image/01_luminous_result.png", "image/02_shape_and_features.png", "image/03_internal_core.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Open the submitted blend and inspect evaluated body geometry from front, side, and underside. Use a temporary section or transparent inspection view to distinguish a true wall and cavity from a solid volume. Judge the bell silhouette independently of appendage completeness and material appearance.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "2. Scalloped Hem and Folds",
+      "criterion": "Repeated scallops around the lower edge flow upward into soft three-dimensional folds.",
+      "scoring_rule": {
+        "PASS": "An existing shell lower edge contains multiple adjoining high-low scallops with associated inward-outward contours; these are rounded, extend into visible lower-body folds, and continue around the front, sides, and rear.",
+        "PARTIAL": "An existing shell lower edge contains multiple adjoining high-low scallops with associated inward-outward contours, but one or more PASS conditions are unmet, including incomplete circumferential coverage, angular scallops, or folds that fade too abruptly.",
+        "FAIL": "The shell has no lower edge with multiple adjoining high-low scallops and associated inward-outward contours. A smooth circular rim, a single isolated notch, or texture-only waves fails this minimum."
+      },
+      "evidence_refs": ["image/01_luminous_result.png", "image/02_shape_and_features.png"],
+      "verification": {
+        "method": "evaluated_geometry_orbit",
+        "procedure": "Inspect the evaluated shell in solid shading while orbiting all sides and looking up toward the opening. Trace the lower boundary and the curved crest-to-valley regions above it. Confirm that repeated height and radial changes are geometry and that folds continue into the body.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "3. Ears and Arms",
+      "criterion": "Paired rounded ears and short arms establish the demonstrated silhouette and are balanced on the body.",
+      "scoring_rule": {
+        "PASS": "The body has at least one recognizable ear and one recognizable arm, and the complete result has two short rounded top ears separated by a shallow dip plus two small arms below the eyes projecting forward and outward, with balanced placement and natural attachment.",
+        "PARTIAL": "The body has at least one recognizable ear and one recognizable arm, but one or more PASS conditions are unmet, such as a missing partner, weak center dip, oversized arms, asymmetric placement, or poor attachment.",
+        "FAIL": "The body does not have both at least one recognizable top ear and at least one recognizable attached arm. Unused detached primitives do not establish either feature."
+      },
+      "evidence_refs": ["image/02_shape_and_features.png", "image/01_luminous_result.png"],
+      "verification": {
+        "method": "evaluated_silhouette_and_spatial_inspection",
+        "procedure": "Inspect the submitted body from front, side, and three-quarter views in solid shading. Identify the upper peaks and short lower lateral projections by their evaluated position and shape, without relying on object names or whether they are separate meshes. Check relative scale, left-right balance, and attachment.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "4. Rounded Eyes",
+      "criterion": "The front of the shell carries a balanced pair of shallow rounded oval eye forms.",
+      "scoring_rule": {
+        "PASS": "At least one identifiable shallow three-dimensional oval eye is attached to the upper front shell, and the complete result has two similarly sized vertical oval eyes with rounded edges, even height, clear separation, balanced spacing, and attachment following the shell curvature.",
+        "PARTIAL": "At least one identifiable shallow three-dimensional oval eye is attached to the upper front shell, but one or more PASS conditions are unmet, such as a missing second eye, mismatched size, poor spacing, an edge gap, excessive depth, or unrounded edges.",
+        "FAIL": "There is no identifiable shallow three-dimensional oval eye attached to the upper front shell. A painted mark, floating unused eye source, or unrelated sphere does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_shape_and_features.png", "image/01_luminous_result.png"],
+      "verification": {
+        "method": "evaluated_geometry_detail_inspection",
+        "procedure": "Inspect actual eye geometry in front and close side views. Check oval outline, shallow depth, edge rounding, position on the curved shell, and the pair's relative scale and height. Assess form with a neutral inspection material so dark eye color is not scored here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 6,
+      "requirement_section": "5. Continuous Surface Finish",
+      "criterion": "The existing curved body and folds have clean, smooth geometry and consistent normals without losing their shape.",
+      "scoring_rule": {
+        "PASS": "An existing curved shell region includes an adjoining fold crest and valley, and this core region plus the remaining existing shell and feature transitions have smooth curvature, consistent shading, retained folds, and no unintended holes, self-intersections, pinching, faceting, or shading seams. The intentional bottom opening is allowed.",
+        "PARTIAL": "An existing curved shell region includes an adjoining fold crest and valley, but one or more PASS conditions are unmet on the assessed existing surfaces. Missing minor ears, arms, or an eye alone does not force FAIL, and absent surfaces provide no evidence of finish.",
+        "FAIL": "No existing curved shell region includes an adjoining fold crest and valley. A flat sheet, isolated smooth primitive, or unused source mesh fails this minimum."
+      },
+      "evidence_refs": ["image/02_shape_and_features.png"],
+      "verification": {
+        "method": "neutral_shading_and_mesh_inspection",
+        "procedure": "Inspect the evaluated shell with a neutral material and directional inspection light while orbiting at close range. Examine at least an adjoining curved crest and valley, then the other existing feature transitions. Check for broken normals and self-intersections. Score smoothness on existing geometry rather than repeating the feature-completeness judgments in GEO-01 through GEO-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "6. Translucent Shell and Luminous Core",
+      "criterion": "The applied shell material transmits interior light and color while retaining pale glossy form and subtle grazing-angle emission.",
+      "scoring_rule": {
+        "PASS": "An existing curved body shell has an assigned material that visibly transmits interior light or color; the material also creates the required pale glossy surface, readable curved reflections and folds, and subtle view-dependent self-emission that brightens grazing regions without flattening the shell.",
+        "PARTIAL": "An existing curved body shell has an assigned material that visibly transmits interior light or color, but one or more PASS conditions are unmet, such as weak gloss, excessive opacity in other regions, flat uniform emission, absent self-emission, or overexposure that obscures folds.",
+        "FAIL": "No existing curved body shell uses a material that visibly transmits interior light or color. An unused transparent material, an opaque painted glow, a flat composited image, or glare alone fails this minimum."
+      },
+      "evidence_refs": ["image/01_luminous_result.png", "image/03_internal_core.png"],
+      "verification": {
+        "method": "assigned_material_inspection_and_controlled_render_probe",
+        "procedure": "Inspect materials actually assigned to the shell and trace their effective surface output. In a temporary scene copy, render curved shell regions with a distinct colored object or light behind them to test transmission independently of core completeness. Compare grazing and facing regions with compositor effects bypassed; temporarily disable the shell's effective emission contribution to confirm material self-emission. Judge gloss and fold readability in the submitted final scene.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "6. Translucent Shell and Luminous Core",
+      "criterion": "A contained spherical core uses real warm material emission to create the internal luminous center.",
+      "scoring_rule": {
+        "PASS": "A spherical core exists inside the body and its assigned self-emissive material visibly contributes internal luminosity; it is smooth, fully contained in the upper central body with clearance from shell, eyes, and hem, gives an orange-yellow center through the pale shell, preserves surrounding form, and has emission editable independently of the shell material.",
+        "PARTIAL": "A spherical core exists inside the body and its assigned self-emissive material visibly contributes internal luminosity, but one or more PASS conditions are unmet, including incorrect hue, weak or clipped glow, poor containment or placement, a rough sphere, or coupled material controls.",
+        "FAIL": "There is no spherical core inside the body whose assigned self-emissive material visibly contributes internal luminosity. A disconnected emissive material, external lamp alone, opaque painted patch, or composited glow fails this minimum."
+      },
+      "evidence_refs": ["image/01_luminous_result.png", "image/03_internal_core.png"],
+      "verification": {
+        "method": "material_assignment_spatial_inspection_and_emission_probe",
+        "procedure": "Inspect a section or transparent view of the saved scene to locate the spherical core and confirm clearance. Trace the assigned material's effective emission, then compare controlled renders with the core emission at its submitted value and temporarily zeroed while holding shell material, geometry, lighting, and exposure fixed. Bypass image glare when attributing luminosity. Confirm a warm transmitted center in the final scene and that editing core emission leaves the shell material independently editable.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "4. Rounded Eyes",
+      "criterion": "Applied opaque dark eye materials preserve readable eye contrast against the luminous body.",
+      "scoring_rule": {
+        "PASS": "At least one identifiable eye on the shell uses an opaque dark material, and both required eyes have that treatment and remain distinctly readable against the glowing body in the final view.",
+        "PARTIAL": "At least one identifiable eye on the shell uses an opaque dark material, but one or more PASS conditions are unmet, such as a missing or differently treated second eye or loss of contrast under the final lighting.",
+        "FAIL": "No identifiable eye on the shell uses an opaque dark material. An unused material, a dark background region, or a composited eye mark fails this minimum."
+      },
+      "evidence_refs": ["image/01_luminous_result.png"],
+      "verification": {
+        "method": "assigned_material_and_final_view_inspection",
+        "procedure": "Inspect material assignments on the actual eye surfaces, then compare the submitted render with a render from the saved scene. Confirm opacity and dark contrast against the shell. Judge material behavior rather than eye shape or symmetry, which belong to GEO-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The build script recreates and saves an independently reopenable scene containing the required editable result.",
+      "scoring_rule": {
+        "PASS": "Both submission.blend and build.py exist, and running build.py from an empty Blender 5.1.2 scene saves a new reopenable submission.blend containing recognizable ghost geometry and assigned materials; that saved reconstruction also includes all required geometry, materials, camera, lighting, and Cycles GPU render settings, reproduces the submitted result, and needs no external assets.",
+        "PARTIAL": "Both submission.blend and build.py exist, and the script saves a new reopenable blend containing recognizable ghost geometry and assigned materials, but one or more PASS conditions are unmet, such as missing camera setup, incomplete features, or render-setting differences.",
+        "FAIL": "The pair of files is missing, or executing build.py does not save a new reopenable blend containing recognizable ghost geometry and assigned materials. Rebuilding only an unsaved in-memory scene fails this minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "future_clean_build_and_saved_artifact_probe",
+        "procedure": "In a temporary working location with the submitted artifacts preserved, launch Blender 5.1.2 from an empty scene and execute the provided script. Confirm a newly written submission.blend, open that saved file in a separate Blender process, and inspect actual geometry, assigned materials, camera, lighting, and Cycles GPU settings. Compare this reopened saved result with the submitted blend; do not accept only the script's in-memory state.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named PNG is a render of the saved submitted scene and provides the requested whole-ghost view.",
+      "scoring_rule": {
+        "PASS": "A decodable actual scene-rendered PNG depicts the recognizable ghost, agrees with the saved scene, and contains no viewport interface overlays or replacement source imagery; it also has the filename B136_Transparent_Luminous_Ghost.png and shows the complete ghost in the final view defined in section 7.",
+        "PARTIAL": "A decodable actual scene-rendered PNG depicts the recognizable ghost, agrees with the saved scene, and contains no viewport interface overlays or replacement source imagery, but one or more PASS conditions are unmet, such as an incorrect filename, clipped hem or ears, weak framing, or a view that hides required features.",
+        "FAIL": "No decodable actual scene-rendered PNG depicts the recognizable ghost and agrees with the saved scene without viewport interface overlays or replacement source imagery. A source-image replacement, viewport screenshot, or image inconsistent with the saved scene fails this minimum."
+      },
+      "evidence_refs": ["image/01_luminous_result.png"],
+      "verification": {
+        "method": "image_decode_and_saved_scene_render_comparison",
+        "procedure": "Decode the submitted PNG, inspect its filename and whole-ghost framing against section 7, then render the actual saved submission.blend camera for comparison. Confirm matching geometry, materials, and view rather than pixel identity across render noise. Check image provenance and visible interface artifacts. Material quality is assessed in SURF rows, not rescored here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "网笼球壳爆炸与闪光",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=7tEGpHcEtgQ",
+    "id": "7tEGpHcEtgQ"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 20, "SURF": 25, "SIM": 35, "ANM": 15, "PIPE": 5},
+  "weighting_note": "暂定内容权重，未经实测校准。SIM 35 分衡量真实分离、外抛与重力响应；SURF 25 分衡量两类碎片材质和中心发光；GEO 20 分衡量球壳与三维网笼；ANM 15 分衡量独立闪光的时间行为；PIPE 5 分衡量可移植重建。本题五种维度均有独立可观察结果，不把普通灯光设置列为 SCN，不因使用修改器而增加 PROC。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 完整球壳与三角网笼",
+      "criterion": "初态球壳完整、平滑，主要分片保留原球面的弧形表面。",
+      "scoring_rule": {
+        "PASS": "初态为完整平滑球壳，无醒目缺口、裂缝或尖刺；主要碎片仍能辨认为原球面的弧形壳片。",
+        "PARTIAL": "存在可辨认的球形壳体，但未同时满足完整平滑初态和可辨弧形主碎片；不满足 PASS。",
+        "FAIL": "不存在可辨认的球形壳体。"
+      },
+      "evidence_refs": ["image/02_intact.png", "image/01_peak.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "评估提交文件第 1 帧的实际球壳几何，从正面、侧面及斜视检查轮廓和表面；顺序运行至第 15 至 24 帧，检查代表性主碎片的局部曲面。不检查 UV 球分段数、应用修改器历史或对象名称；无球壳时不因没有缺陷而给分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 完整球壳与三角网笼",
+      "criterion": "真实三维三角网笼围绕球壳，细条与空隙比例合理并有可见层次。",
+      "scoring_rule": {
+        "PASS": "三维网条围绕整个球壳形成细密三角网格，同心且略高于球面；条体大体等粗、明显细于网格空隙，能从空隙看到内层球壳。",
+        "PARTIAL": "存在可辨认的真实三维三角网笼及网孔，但覆盖、粗细、同心关系或内层可见性未满足 PASS。",
+        "FAIL": "缺少可辨认的真实三维三角网笼或网孔，例如只有贴图线纹或实心外球。"
+      },
+      "evidence_refs": ["image/02_intact.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "第 1 帧从侧面和斜视观察实际求值几何，确认网条具有截面、网孔开放且包围球体；临时单独查看网笼并旋转视角，排除只在正面有效的贴图或平面线。按可见形态检查，不限定三角网格细分数、条体截面配方或修改器。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 10,
+      "requirement_section": "2. 材质与闪光外观",
+      "criterion": "黑色近哑光球壳与深红褐色网笼外观清楚，分片后材质归属保持正确。",
+      "scoring_rule": {
+        "PASS": "两类组件均存在，同时满足三项：球壳不透明黑色且只有轻微高光；网笼深红褐色；分片后材质持续附着在对应表面。",
+        "PARTIAL": "两类组件均存在，三项表面要求只满足一项或两项。",
+        "FAIL": "任一类组件缺失，或三项材质要求均未满足。"
+      },
+      "evidence_refs": ["image/02_intact.png", "image/03_fading.png", "image/04_after.png"],
+      "verification": {
+        "method": "material_assignment_and_render_review",
+        "procedure": "检查第 1、20、24 帧实际求值几何使用的材质，并在中性照明下观察壳片和网条，避免峰值闪光的暖色覆盖影响颜色判断。以实际表面外观和归属判定，不限定材质槽顺序、节点类型、RGB 数值或视图变换。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 15,
+      "requirement_section": "2. 材质与闪光外观",
+      "criterion": "三维球形表面产生实际橙红色自发光，并形成白黄亮核和柔和暖色辉光。",
+      "scoring_rule": {
+        "PASS": "闪光使用实际三维球形自发光表面，峰值具有白黄亮核及橙红色衰减辉光，附近碎片轮廓可辨；将发光强度降为零后亮核和辉光都消失。",
+        "PARTIAL": "存在实际球形自发光且关闭后亮核消失，但其余外观或辉光响应未完全满足 PASS。",
+        "FAIL": "缺少球形自发光表面，或效果仅为灯光、背景图片、体积烟火或无关光斑，或关闭实际发光后亮核仍不变。"
+      },
+      "evidence_refs": ["image/01_peak.png"],
+      "verification": {
+        "method": "surface_function_probe_and_render_review",
+        "procedure": "在第 15 帧使用提交的 EEVEE GPU 展示设置查看实际发光与合成结果；检查表面和相连的发光贡献，在副本中暂时将其强度降为零并重渲染后恢复，确认亮核和辉光响应。检查的是表面发光效果，不要求旧版 Bloom 开关、指定节点名称或单独 Emission 节点。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SIM-01", "capability": "SIM", "points": 15,
+      "requirement_section": "3. 爆发与碎片模拟",
+      "criterion": "模拟使球壳和网笼在短窗口内一起分离，完整初态在爆发后真正消失。",
+      "scoring_rule": {
+        "PASS": "从初态重算后第 1 至 9 帧完整静止，第 10 至 12 帧完成主要分离，第 15 帧出现多块真实碎片和空出的中心；球壳与网笼都参与，且没有额外载体白点或重复球体。",
+        "PARTIAL": "确由可重算模拟使球壳和网笼分离，但爆发窗口、残留完整球体或载体可见性至少一项不符；不满足 PASS。",
+        "FAIL": "没有可重算分离模拟，或主体保持完整只作整体移动，或球壳与网笼只有一类发生分离，或仅用图像切换表示爆炸。"
+      },
+      "evidence_refs": ["image/02_intact.png", "image/01_peak.png"],
+      "verification": {
+        "method": "simulation_recompute_and_evaluated_mesh_review",
+        "procedure": "按文件说明从第 1 帧清理并重算，逐帧查看第 1 至 15 帧的实际求值几何。确认两类表面均从初始球体分离，并检查最终渲染没有无关模拟载体。判定实际结果和可重算来源，不以粒子系统、Explode 修改器的存在或数量代替结果。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SIM-02", "capability": "SIM", "points": 10,
+      "requirement_section": "3. 爆发与碎片模拟",
+      "criterion": "碎片向多个方向以不同速度外抛，保持形状并发生可见朝向变化。",
+      "scoring_rule": {
+        "PASS": "多数主碎片向球心周围多个方向飞散，距离和速度有差异；主碎片保持自身形状，运动中有可见朝向变化。",
+        "PARTIAL": "存在独立碎片运动，且主要结果不是整团平移、原地下落或拉伸，但方向、速度差异、朝向变化或形状保持未满足 PASS。",
+        "FAIL": "没有可辨独立运动碎片，或主要结果为整团平移、原地下落，或主要碎片被拉成长条而不再读作独立壳片。"
+      },
+      "evidence_refs": ["image/01_peak.png", "image/03_fading.png"],
+      "verification": {
+        "method": "evaluated_trajectory_and_visual_review",
+        "procedure": "顺序计算第 12 至 40 帧，选择球心不同方向上的代表性主碎片追踪实际位置、局部姿态和形状，结合播放确认是不同轨迹的外抛。允许不同模拟方式，不检查源教程的速度数值、随机种子或旋转开关。碎片连续存在和结束状态仅在 SIM-03 判定。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SIM-03", "capability": "SIM", "points": 10,
+      "requirement_section": "5. 完整播放与重算",
+      "criterion": "重力实际影响碎片轨迹，默认播放至第 60 帧连续且可重新计算。",
+      "scoring_rule": {
+        "PASS": "向下重力实际参与后期轨迹；将实际重力暂设为零并重算后轨迹相应改变；默认过程可重算，碎片至第 60 帧连续存在且继续离开中心，无跳回、冻结或重组。",
+        "PARTIAL": "存在可重算的默认碎片运动，可获得完整第 1 至 60 帧过程且没有整体很快消失或冻结，但重力响应、结束状态或回放连续性未满足 PASS。",
+        "FAIL": "没有可重算运动来源，或默认碎片整体很快消失或冻结，或无法获得完整的第 1 至 60 帧过程。"
+      },
+      "evidence_refs": ["image/04_after.png"],
+      "verification": {
+        "method": "simulation_parameter_probe_and_sequential_playback",
+        "procedure": "在副本中按说明重算默认第 1 至 60 帧，保存代表性碎片后期轨迹；只将实际运动系统的重力设为零，再从初态重算并比较后期竖直位移，随后恢复默认。追踪实际场景几何而不是相机可见性，确认出画碎片没有被删；再次重算默认过程检查可重复性。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-01", "capability": "ANM", "points": 10,
+      "requirement_section": "4. 闪光时序",
+      "criterion": "固定球心的闪光按时膨胀、收缩并消失，亮核尺寸符合公开比例。",
+      "scoring_rule": {
+        "PASS": "闪光中心固定在原球心，第 1 至 10 帧不可见，第 15 帧直径达到 0.6D 至 0.8D 的峰值，第 20 帧不超过 0.15D，第 22 至 60 帧不可见，期间尺寸变化可观察。",
+        "PARTIAL": "存在可辨认的闪光尺寸变化过程，但中心、时刻、尺寸比例、过渡或结束可见性未满足 PASS。",
+        "FAIL": "闪光缺失，或没有可辨认的尺寸变化过程，例如尺寸始终不变或只作瞬间开关。"
+      },
+      "evidence_refs": ["image/01_peak.png", "image/03_fading.png", "image/04_after.png"],
+      "verification": {
+        "method": "evaluated_animation_sampling",
+        "procedure": "以第 1 帧球壳直径 D 为基准，逐帧求值第 1 至 24 帧并抽查至第 60 帧，测量实际闪光球面的中心、可见性和尺寸，辉光范围不计入亮核直径。结合顺序播放排除只有几个截图状态；不检查关键帧数量、对象名或插值类型。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-02", "capability": "ANM", "points": 5,
+      "requirement_section": "4. 闪光时序",
+      "criterion": "实际发光强度随时间先增强后减弱，并与尺寸峰值同步。",
+      "scoring_rule": {
+        "PASS": "实际发光强度在第 10 至 15 帧增强，第 15 帧最强，第 20 帧已下降，与尺寸峰值同步；过渡中存在变化。",
+        "PARTIAL": "实际发光强度有时间变化，但增减方向、峰值时刻、下降时刻或过渡未满足 PASS。",
+        "FAIL": "缺少实际发光变化，或仅靠球体变大变小、曝光或灯光变化使画面亮度改变。"
+      },
+      "evidence_refs": ["image/01_peak.png", "image/03_fading.png"],
+      "verification": {
+        "method": "evaluated_material_animation_probe",
+        "procedure": "求值第 10、12、15、18、20 帧表面实际发光贡献或其控制源，比较强度的先升后降及峰值；在副本中固定闪光几何尺寸后比较发光结果，排除只因面积变化而变亮。颜色节点结构和强度绝对数值不作固定要求。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "6. 交付内容",
+      "criterion": "交付能够从空场景离线重建，资源和模拟缓存依赖完整且说明明确。",
+      "scoring_rule": {
+        "PASS": "submission.blend 与 build.py 齐全，脚本按说明在目标环境从空场景生成并保存资产及所需缓存；资源闭合，无机器绝对路径或联网依赖；文件保存于第 1 帧并有重算说明。",
+        "PARTIAL": "文件和脚本均存在、主体可重建且必需资源可用，但重建说明、缓存生成步骤、路径或初始保存状态仍需手动修正；不满足 PASS。",
+        "FAIL": "缺少必要交付、脚本不能重建主体，或依赖缺失外部资源与不可获取缓存而无法完成离线重建。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "clean_environment_rebuild_and_dependency_audit",
+        "procedure": "在干净工作目录依照脚本开头说明用 Blender 5.1.2 重建，禁用联网依赖，检查保存文件、相对资源、缓存生成和文件内说明。此项只评交付可移植性，运动是否正确由 SIM 和 ANM 各行判定；不单独为文件可打开给分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Wavy Flake Molecular Array Board",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1oSQZBREmg",
+    "id": "BV1oSQZBREmg"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 40, "PROC": 45, "SCN": 5, "PIPE": 10},
+  "weighting_note": "Geometry and reusable geometric relationships dominate this modeling task. Sphere quality, lattice structure, flake thickness, and flake undulation are assessed independently. Procedural points require actual response to edits. Presentation receives five points for inspection visibility, and delivery receives ten points. No material technique is central to the source scope.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Two-Layer Sphere Lattice",
+      "criterion": "The repeated units are equal-sized, round, smoothly shaded spheres.",
+      "scoring_rule": {
+        "PASS": "At least one complete row of recognizable spherical units exists, and the existing lattice units are consistently equal-sized spheres with round silhouettes and smooth shading, without conspicuous flattening, faceting, or normal artifacts.",
+        "PARTIAL": "At least one complete row of recognizable spherical units exists, but not every PASS condition is met; size inconsistency, visible faceting, or distorted units are examples.",
+        "FAIL": "There is no complete row of recognizable spherical units. Unrelated objects and non-spherical repeated units do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_board.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_controlled_render",
+        "procedure": "Open the submitted scene, isolate the existing lattice, and inspect evaluated units at interior and boundary positions. Compare their bounds and round silhouettes, then inspect a neutral-lit close render for faceting and shading discontinuities. Assess sphere quality independently of missing flakes or incomplete lattice extent.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Two-Layer Sphere Lattice",
+      "criterion": "The base is a dense, orderly rectangular lattice with two aligned layers and readable individual units.",
+      "scoring_rule": {
+        "PASS": "The evaluated base forms two complete vertically aligned layers with regular rows in both horizontal directions, a roughly square to slightly rectangular footprint, intact outer boundaries, and near-touching neighbors that remain visually distinct.",
+        "PARTIAL": "A recognizable two-dimensional array of spherical units exists, but not every PASS condition is met; a missing second layer, incomplete edges, irregular spacing, or an overly elongated footprint are examples.",
+        "FAIL": "No recognizable two-dimensional sphere array exists. A single row, isolated sphere group, or continuous block does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_board.png"],
+      "verification": {
+        "method": "evaluated_geometry_inspection",
+        "procedure": "Temporarily hide the flakes in an inspection copy. Inspect top, front, and side views of the evaluated base; compare unit centers to rows and layers, check footprint proportions and boundary completeness, and inspect neighbor contacts. Judge static arrangement here, not whether generation controls work.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Wavy Flake Geometry",
+      "criterion": "The flake is a coherent five-sided thin sheet with a continuous visible side rim.",
+      "scoring_rule": {
+        "PASS": "The shared flake and its substantive visible copies retain a recognizable five-sided boundary, a coherent sheet surface, and small but visible thickness with a continuous rim; they are neither bulky solids nor torn or self-intersecting sheets.",
+        "PARTIAL": "At least one substantive visible flake is a coherent polygonal sheet, but not every PASS condition is met; an unclear five-sided outline, missing thickness, rim gaps, or excessive thickness are examples.",
+        "FAIL": "No substantive visible coherent polygonal sheet exists. Lines, particles, bulky blocks, or a source that is absent from the assembled asset do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_wavy_flake.png", "image/01_complete_board.png"],
+      "verification": {
+        "method": "evaluated_mesh_and_multiview_inspection",
+        "procedure": "Inspect the evaluated shared flake and several distributed copies from above and at a low angle. Trace the boundary, compare edge thickness to sheet width, and inspect the rim for continuity, open tears, and self-intersections. Do not infer thickness from shading alone.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Wavy Flake Geometry",
+      "criterion": "The flake surface has broad smooth undulations that carry through to its perimeter.",
+      "scoring_rule": {
+        "PASS": "Substantive visible flakes show several broad smooth rises and depressions, with a correspondingly undulating perimeter and continuous face shading; the result reads as a softly deformed sheet without sharp crumpling or conspicuous faceting.",
+        "PARTIAL": "At least one substantive visible sheet has an actual broad geometric rise or depression, but not every PASS condition is met; limited variation, sharp folds, uneven shading, or insufficiently smooth curvature are examples.",
+        "FAIL": "No substantive visible sheet has a broad geometric rise or depression. Flat sheets, rigidly tilted planes, and shading-only wave illusions do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_wavy_flake.png"],
+      "verification": {
+        "method": "geometric_profile_and_controlled_render",
+        "procedure": "Inspect an evaluated sheet in side and oblique views and compare its surface heights to a best-fit plane. Use a neutral material and broad light to distinguish broad geometric undulations from texture or faceted shading. Assess the existing core sheet surfaces even when coating coverage is incomplete.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "3. Reusable Geometry Controls",
+      "criterion": "The lattice regenerates coherently from a shared sphere source with editable repetition and spacing.",
+      "scoring_rule": {
+        "PASS": "Editing the shared sphere source updates the lattice; independently changing either horizontal repetition count or the vertical count adds or removes a complete row, column, or layer; changing spacing updates the repeated structure coherently, and restoration returns the original arrangement.",
+        "PARTIAL": "A live shared-source repetition system exists and at least one count or spacing edit produces a coherent change in multiple evaluated units, but not every PASS condition is met.",
+        "FAIL": "No live shared-source repetition system responds coherently to a count or spacing edit. Baked duplicates, unused generators, and inert labeled controls do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_board.png"],
+      "verification": {
+        "method": "functional_geometry_probe",
+        "procedure": "In an inspection copy, record the evaluated lattice and controls. Change each horizontal count by one, change the vertical count by one, adjust spacing, and make a small sphere-source edit, restoring after each probe. Compare evaluated unit centers, bounds, and shape to confirm complete coherent updates and restoration; do not require a particular modifier or node implementation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "3. Reusable Geometry Controls",
+      "criterion": "Flake wave amplitude and thickness are independently adjustable geometric properties.",
+      "scoring_rule": {
+        "PASS": "Reducing a live wave-amplitude control makes the flake geometrically flatter while preserving its five-sided outline and rim; changing a separate thickness control changes the rim thickness without changing the broad face shape; restoration recovers the original evaluated flake.",
+        "PARTIAL": "At least one live geometric control meaningfully changes wave amplitude or sheet thickness while preserving a coherent sheet, but not every PASS condition is met.",
+        "FAIL": "Neither wave amplitude nor thickness can be changed through a live geometric control while retaining a coherent sheet. Manual remeshing, display-only controls, and unused effects do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_wavy_flake.png"],
+      "verification": {
+        "method": "functional_geometry_probe",
+        "procedure": "Record the evaluated flake in an inspection copy. Reduce wave amplitude toward flat and compare broad surface height variation, outline, and rim. Restore it, then increase thickness and compare rim thickness and broad face shape. Restore both controls and compare against the original geometry. Inspect effective behavior rather than modifier names or internal numeric values.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "4. Flake Coating and Distribution",
+      "criterion": "A reproducible shared-source scattering system creates a varied flake coating anchored near the upper lattice.",
+      "scoring_rule": {
+        "PASS": "The evaluated coating spans the upper footprint with varied orientations and tilts, local overlap, readable gaps, and lower edges near the upper sphere layer. Live density or count and seed or equivalent distribution controls change coverage and placement or orientation; a source edit propagates to the flakes; restoring controls reproduces the original arrangement. No conspicuous floating cluster or deep penetration through both layers is present.",
+        "PARTIAL": "A live system produces multiple source-linked flakes in at least two separated regions above the lattice, and a distribution control meaningfully changes their count, placement, or orientation, but not every PASS condition is met.",
+        "FAIL": "No live source-linked flake distribution above the lattice responds to a distribution control, or it does not reach at least two separated regions. Manually placed baked flakes, unused generators, and a source-only model do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_board.png", "image/03_flake_distribution.png"],
+      "verification": {
+        "method": "functional_distribution_probe_and_spatial_inspection",
+        "procedure": "Inspect the saved coating from top and low side views for footprint coverage, gaps, varied orientation, and anchoring. In an inspection copy, record instance transforms, alter density or count, alter the seed or equivalent placement control, and make a small shared-flake edit. Confirm evaluated changes and source propagation. Restore controls and compare transforms to the recorded state. Judge these geometric relationships rather than any particular particle-system API.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "5. Presentation",
+      "criterion": "The actual scene render clearly presents the whole board, its two exposed edges, and its flake coating.",
+      "scoring_rule": {
+        "PASS": "The actual final-camera render uses a three-quarter view with the whole board and comfortable silhouette margins, two exposed lattice edges, and the flake coating clearly readable. Lighting reveals contours, folds, rims, and depth; no construction plane, detached source object, interface overlay, label, or distracting clutter is visible.",
+        "PARTIAL": "An actual scene render or a controlled render of the saved final camera visibly shows both a sphere base and a flake coating, but not every PASS condition is met; clipping, obstructed edges, poor lighting, or visible construction geometry are examples.",
+        "FAIL": "No actual-scene camera view visibly presents both the sphere base and the flake coating. Reference images, screenshots, and a camera pointed away from the asset do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_board.png"],
+      "verification": {
+        "method": "saved_camera_render_inspection",
+        "procedure": "Render the reopened submitted scene from its saved final camera and inspect the resulting image for whole-asset framing, two-layer edge visibility, readable flakes, lighting, and absence of construction objects. Compare the delivered PNG to this view. Color choice is not scored, and source interface elements in reference crops are not presentation targets.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The saved scene, reconstruction script, and actual-scene PNG form a complete reproducible delivery.",
+      "scoring_rule": {
+        "PASS": "All three named deliverables are present. submission.blend opens with both core structures, editable generators, and complete data. In a fresh Blender 5.1.2 session, build.py recreates the scene and explicitly saves submission.blend; reopening that saved result shows the corresponding scene. The named PNG is a render of the actual submitted scene from its final camera.",
+        "PARTIAL": "A delivered submission.blend opens and contains both core structures, and either a working reconstruction script that saves a scene or a valid actual-scene PNG is provided, but not every PASS condition is met.",
+        "FAIL": "There is no openable submitted scene containing both core structures, or neither a saving reconstruction script nor a valid actual-scene PNG is available. An unsaved in-memory rebuild alone does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "clean_session_rebuild_save_reopen_and_render_comparison",
+        "procedure": "Check the three required filenames and open submission.blend in Blender 5.1.2 for missing dependencies. Run build.py in a fresh factory-startup background session with an empty working output directory, verify that it creates submission.blend, end that process, and reopen the newly saved file in another fresh process. Compare its core geometry, active controls, materials, camera, and render setup to the delivered scene. Render the delivered scene camera and compare composition and content with B108_Wavy_Flake_Molecular_Array_Board.png to establish scene provenance.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

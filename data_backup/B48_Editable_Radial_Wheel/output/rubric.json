@@ -1,0 +1,208 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Editable Radial Wheel",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=4dBrtKbLOwg",
+    "id": "4dBrtKbLOwg"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 60,
+    "PROC": 20,
+    "RIG": 10,
+    "PIPE": 10
+  },
+  "weighting_note": "The six independent geometry concerns receive 60 points. Live propagation from one source segment is central and receives 20 points through a functional probe. Whole-wheel placement receives 10, and delivery 10. No points are assigned to incidental material, camera, or modifier presence.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Closed Wheel",
+      "criterion": "Upright circular wheel with ten equally spaced spokes.",
+      "scoring_rule": {
+        "PASS": "The wheel is upright with a horizontal axis and approximately 2 m diameter; ten equally spaced spokes occupy 36-degree sectors around a common centre, leaving open spaces between them.",
+        "PARTIAL": "A recognizable wheel with an outer ring and at least five distributed spokes exists but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable wheel with an outer ring and at least five distributed spokes exists."
+      },
+      "evidence_refs": [
+        "image/03_radial_arrangement.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_dimension_inspection",
+        "procedure": "Inspect evaluated front orthographic geometry, measure overall diameter in scene units, and compare spoke angular positions around the fitted rim centre. Judge circular arrangement here; assess seam welding separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Segment Form",
+      "criterion": "Simple tapering spokes with shallow bends.",
+      "scoring_rule": {
+        "PASS": "Every sector uses the simple spoke design: a broad spoke from the middle of the narrow rim band tapering inward with a gentle shallow S-like directional change matching the segment reference.",
+        "PARTIAL": "The wheel contains recognizable broad inward-reaching spokes but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable broad inward-reaching spokes are present."
+      },
+      "evidence_refs": [
+        "image/01_simple_segment.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect the accessible source segment and the evaluated wheel from the front. Compare spoke taper and directional changes with the simple segment reference; ignore ornamentation in the arrangement-only image.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Depth and Refinement",
+      "criterion": "Solid shallow segment body with a deeper rim lip.",
+      "scoring_rule": {
+        "PASS": "Spokes and centre web form a shallow solid body; the rim band projects farther along the wheel axis, making a visible tread lip and T-like side profile consistent with the simple segment.",
+        "PARTIAL": "The spoke geometry has nonzero solid depth but one or more PASS conditions are unmet.",
+        "FAIL": "Spokes are absent or remain zero-thickness surfaces."
+      },
+      "evidence_refs": [
+        "image/02_segment_depth.png"
+      ],
+      "verification": {
+        "method": "evaluated_cross_section_inspection",
+        "procedure": "Inspect side and oblique views, then measure axial extents on a representative spoke and rim band. Inspect a cross-section to confirm actual depth and the tread-lip relationship.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Segment Form",
+      "criterion": "Fan-like spoke tips form a closed central hub.",
+      "scoring_rule": {
+        "PASS": "Every spoke joins a small fan-like centre web reaching the wheel axis, and the repeated webs form a closed central hub with a defined transition shoulder.",
+        "PARTIAL": "At least half of the spokes connect to a central web region but one or more PASS conditions are unmet.",
+        "FAIL": "Fewer than half of the spokes connect to a central web region."
+      },
+      "evidence_refs": [
+        "image/01_simple_segment.png",
+        "image/02_segment_depth.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_section_inspection",
+        "procedure": "Inspect front and rear close-ups and a section through the centre. Confirm spoke-to-web continuity and occupied geometry at the wheel axis. Assess the presence and shape of the hub here; score duplicate seam topology separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Closed Wheel",
+      "criterion": "Welded repeat boundaries and intact shell topology.",
+      "scoring_rule": {
+        "PASS": "All neighbouring rim and hub boundaries, including the last-to-first join, are genuinely joined; the evaluated wheel has no unintended boundary edges, overlapping seam shells, or internal seam caps.",
+        "PARTIAL": "At least one neighbouring pair of sectors has genuinely joined rim and hub boundaries but one or more PASS conditions are unmet.",
+        "FAIL": "No neighbouring pair has genuinely joined rim and hub boundaries."
+      },
+      "evidence_refs": [
+        "image/03_radial_arrangement.png"
+      ],
+      "verification": {
+        "method": "evaluated_mesh_topology_inspection",
+        "procedure": "Evaluate the full wheel to a temporary mesh. Inspect edge incidence, duplicate coincident boundary vertices, overlapping faces, and internal caps at every sector join, explicitly including the closing join; discard the temporary mesh.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Depth and Refinement",
+      "criterion": "Smooth, coherent surfaces retain the intended hard-surface shape.",
+      "scoring_rule": {
+        "PASS": "The rim, spokes, and hub have smooth curved silhouettes and coherent normals, with no accidental creases, pinching, or faceting; bends and the centre shoulder remain defined.",
+        "PARTIAL": "The rim, spokes, and hub exist as inspectable curved surfaces but one or more PASS conditions are unmet.",
+        "FAIL": "The rim, spokes, or hub is absent or lacks inspectable curved surfaces."
+      },
+      "evidence_refs": [
+        "image/01_simple_segment.png"
+      ],
+      "verification": {
+        "method": "controlled_neutral_shading_inspection",
+        "procedure": "Inspect neutral-shaded front and oblique views and close-ups of rim corners and hub transitions. Evaluate smoothing artifacts only, without re-scoring missing components or wrong proportions.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 20,
+      "requirement_section": "Live Construction",
+      "criterion": "One editable segment drives the repeated wheel and smooth refinement.",
+      "scoring_rule": {
+        "PASS": "One editable source segment drives all ten sectors; a local spoke edit propagates consistently to every sector without manual copy edits, radial construction remains live, and smooth refinement remains editable.",
+        "PARTIAL": "A local source-segment geometry edit propagates to at least two sectors through a live dependency but one or more PASS conditions are unmet.",
+        "FAIL": "No local source-segment edit propagates to at least two sectors through a live dependency; independent static copies or only a baked full wheel fail."
+      },
+      "evidence_refs": [
+        "image/01_simple_segment.png",
+        "image/03_radial_arrangement.png"
+      ],
+      "verification": {
+        "method": "functional_geometry_edit_probe",
+        "procedure": "In a disposable copy, identify the source segment and make a small local spoke-width change away from join boundaries. Re-evaluate and confirm the same change in all ten angular sectors. Inspect and vary the live smoothing refinement, then undo the probe. A modifier name or count alone is insufficient.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-01",
+      "capability": "RIG",
+      "points": 10,
+      "requirement_section": "Placement Control",
+      "criterion": "One control translates the entire wheel without distortion.",
+      "scoring_rule": {
+        "PASS": "A single clearly identifiable control is centred on the wheel and translates the entire wheel rigidly in every direction, carrying all source and generation dependencies while preserving shape, radial spacing, and joined boundaries.",
+        "PARTIAL": "A clearly identifiable placement control carries at least half of the wheel through a translation but one or more PASS conditions are unmet.",
+        "FAIL": "No clearly identifiable placement control carries at least half of the wheel through a translation."
+      },
+      "evidence_refs": [
+        "image/03_radial_arrangement.png"
+      ],
+      "verification": {
+        "method": "functional_placement_probe",
+        "procedure": "Read the build.py identification comment and inspect the control. In a disposable copy, translate it by a vector with nonzero components on all three axes, each about one quarter of the wheel diameter. Compare evaluated geometry before and after after subtracting that translation, and verify join integrity; restore the scene.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "Editable scene, reproducible script, and actual scene render.",
+      "scoring_rule": {
+        "PASS": "The named blend and build script are supplied; build.py recreates the scene from empty in Blender 5.1.2 without external assets. The named PNG is a Cycles GPU render of the submitted scene with a neutral, readable front-oblique full-wheel composition.",
+        "PARTIAL": "submission.blend opens and contains an editable recognizable wheel but one or more PASS conditions are unmet.",
+        "FAIL": "submission.blend is absent, fails to open, or contains no editable recognizable wheel."
+      },
+      "evidence_refs": [
+        "image/01_simple_segment.png",
+        "image/03_radial_arrangement.png"
+      ],
+      "verification": {
+        "method": "artifact_open_rebuild_and_render_comparison",
+        "procedure": "Open submission.blend in Blender 5.1.2 and run build.py in an isolated empty scene. Compare rebuilt geometry and controls, inspect Cycles GPU settings, and reproduce the saved camera render to compare with the named PNG.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

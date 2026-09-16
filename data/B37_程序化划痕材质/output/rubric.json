@@ -1,0 +1,144 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "程序化划痕材质",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=B2_u458H5Mk",
+    "id": "B2_u458H5Mk"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"SURF": 90, "PIPE": 10},
+  "weighting_note": "暂定权重，未经模型标定。来源是纯材质任务，SURF 的 90 分拆分为颜色、反射响应、线形、不规则度、分布、贴附连续性与程序化编辑七个独立结果；不因程序化着色而计入 PROC，也不因展示球及灯光存在而增设 GEO 或 SCN。PIPE 10 分仅评价可迁移重建。",
+  "rubric": [
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 15,
+      "requirement_section": "1. 宝蓝色底面与深色划痕",
+      "criterion": "球体上实际使用的材质呈宝蓝色底面与近黑色划痕，划痕在低反射观察条件下仍作为颜色差异存在。",
+      "scoring_rule": {
+        "PASS": "存在有效表面，非高光区域的主体为饱和宝蓝色，划痕为近黑或深蓝黑色，且在均匀照明和弱反射条件下仍可辨；没有彩色花纹、白色亮纹或大片灰污替代目标配色。",
+        "PARTIAL": "存在有效表面，且至少局部同时可辨蓝色基底和实际颜色形成的较暗痕迹，但未满足全部 PASS 条件。",
+        "FAIL": "不存在有效表面，或不能同时辨认蓝色基底与实际颜色形成的较暗痕迹；仅靠阴影、凹凸反光或独立几何线产生划痕也属于此分支。"
+      },
+      "evidence_refs": ["image/01_final_blue.png"],
+      "verification": {
+        "method": "artifact_material_evaluation_and_visual_review",
+        "procedure": "从提交文件中找到球体实际使用的材质及其有效输出。在副本中用中性均匀照明观察非高光区域，并检查或隔离实际表面颜色贡献，确认深色痕迹不是阴影或镜面反射。人工比较颜色关系；节点名称和未连接色块不能作为完成证据。本项只评价配色及颜色信号，不评价线形、覆盖率或光泽。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 15,
+      "requirement_section": "2. 光泽塑料的表面响应",
+      "criterion": "有效底面具有平滑、不透明、非金属塑料响应，宽柔高光不被显著划痕凹凸主导。",
+      "scoring_rule": {
+        "PASS": "在中性侧光下有效底面呈不透明非金属塑料，具有宽而柔和的高光和高光外的蓝色；不存在粉笔感、清晰镜面、金属感或自发光替代，划痕不成为主导高光的深沟、凸线或破裂表面。",
+        "PARTIAL": "存在实际使用的连续底面，并在改变侧光方向后产生可辨反射高光，但未满足全部 PASS 条件。",
+        "FAIL": "没有实际使用的连续底面，或在适当的中性侧光测试中没有可辨反射高光；只用发光或贴上亮斑模拟高光也属于此分支。"
+      },
+      "evidence_refs": ["image/01_final_blue.png"],
+      "verification": {
+        "method": "controlled_lighting_probe_and_visual_review",
+        "procedure": "在提交工程副本中保持材质，使用中性面积光并改变其方位，观察高光移动、宽度、底色保留、不透明度和塑料响应；检查有效着色路径支持观察结论。以掠射视角检查划痕是否形成主导性的沟槽或凸起。不得因未找到某类节点就判定通过，也不在本项重复评价颜色准确度或划痕线形。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03", "capability": "SURF", "points": 15,
+      "requirement_section": "3. 细长且略有不规则的划痕",
+      "criterion": "划痕以长度明显大于宽度的曲线、细弧和片段为主，具有长短与方向变化。",
+      "scoring_rule": {
+        "PASS": "近看可辨多条相互分离的细长痕迹，整体以弯曲短线、细弧或不完整环状片段为主，长短和方向有变化；没有被规则平行直线、粗裂缝、整片网格或圆点噪声主导。",
+        "PARTIAL": "有效材质中存在清楚可辨、长度明显大于宽度的划痕，但未满足全部 PASS 条件。",
+        "FAIL": "有效材质中没有清楚可辨且长度明显大于宽度的划痕，包括只有圆点、色块、不可辨噪声或完全没有划痕。"
+      },
+      "evidence_refs": ["image/01_final_blue.png", "image/03_rougher_detail.png"],
+      "verification": {
+        "method": "artifact_render_closeup_review",
+        "procedure": "从提交材质球取得足以分辨细线的近景，并在至少两个表面区域比较主导痕迹的长宽关系、弧形、长度和方向变化。允许额外观察有效颜色或划痕信号，以排除高光遮挡。判断来自实际材质求值，不使用提交者的截图替代。本项评价大尺度线形；沿线细小曲折及断续由 SURF-04 单独评价。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04", "capability": "SURF", "points": 10,
+      "requirement_section": "3. 细长且略有不规则的划痕",
+      "criterion": "默认细线含克制的局部曲折、宽窄变化、断续或收细，避免完全机械光滑或过度破碎。",
+      "scoring_rule": {
+        "PASS": "存在可辨细长划痕，其默认状态在部分线段上具有轻微曲折、局部宽窄变化、细碎中断或收细末端；这些变化不破坏细线识别，且不被粗重锯齿或大块碎斑主导。",
+        "PARTIAL": "存在可辨细长划痕，并能在其中识别至少一种真实的局部不规则变化，但未满足全部 PASS 条件。",
+        "FAIL": "不存在可辨细长划痕，或全部可辨划痕均缺少局部不规则变化；仅靠采样噪点或图像压缩产生的不规则不计。"
+      },
+      "evidence_refs": ["image/01_final_blue.png", "image/03_rougher_detail.png"],
+      "verification": {
+        "method": "resolved_surface_detail_review",
+        "procedure": "在足够采样、可辨划痕宽度的实际材质近景中沿数条细线查看局部路径、线宽、断续与末端。必要时提高观察分辨率，区分真实材质变化与渲染噪点。第三张图仅作更强不规则度的形态对照，不能要求默认结果同样粗糙。此项不再次评价整体覆盖率或参数功能。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-05", "capability": "SURF", "points": 10,
+      "requirement_section": "4. 稀疏分布与连续覆盖",
+      "criterion": "默认划痕着色面积不超过表面积的 10%，在蓝色主导的表面上呈非周期、非整齐复制的稀疏分布。",
+      "scoring_rule": {
+        "PASS": "球体不同区域均存在可见划痕，实际划痕着色覆盖率大于零且不超过 10%，干净底面连通并占主导；无明确周期网格、成排复制或大片重复图案。",
+        "PARTIAL": "存在可见划痕且实际划痕着色覆盖率大于零、小于 50%，但未满足全部 PASS 条件。",
+        "FAIL": "没有可见划痕，或实际划痕着色覆盖率达到或超过 50%，或缺少能够评估的有效表面。"
+      },
+      "evidence_refs": ["image/01_final_blue.png", "image/02_sparse_mask.png"],
+      "verification": {
+        "method": "surface_sampling_and_spatial_visual_review",
+        "procedure": "在副本中对有效表面颜色或能够证明实际颜色贡献的划痕信号进行近似均匀、按表面积加权采样，估计暗色划痕覆盖率；不得把高光、阴影或背景算作划痕。结合整球多方向视图判断分布及重复形态。阈值附近增加采样，不从单张局部参考推算覆盖率。本项只评价覆盖及分布，接缝和变换贴附由 SURF-06 评价。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-06", "capability": "SURF", "points": 10,
+      "requirement_section": "4. 稀疏分布与连续覆盖",
+      "criterion": "划痕围绕球体连续、尺度稳定，并在物体平移和旋转后保持贴附。",
+      "scoring_rule": {
+        "PASS": "存在有效划痕，正面、背面和顶部均可观察到连续材质，且没有明显接缝、极点挤压、大片空白或无缘由的尺度跳变；平移和旋转球体后，相同表面位置的图案保持一致。",
+        "PARTIAL": "存在有效划痕，且正面、背面、顶部连续性或平移旋转贴附两组检查至少有一组全部满足，但未满足全部 PASS 条件。",
+        "FAIL": "没有有效划痕，或连续性和变换贴附两组检查均未全部满足。"
+      },
+      "evidence_refs": ["image/02_sparse_mask.png"],
+      "verification": {
+        "method": "multiview_and_rigid_transform_probe",
+        "procedure": "观察提交球体正面、背面、顶部的实际材质，检查接缝、极点和尺度。随后在副本中选取表面局部坐标样点，平移并旋转球体，同时把照明和相机按同一刚体变换移动，比较相同局部位置的颜色或划痕信号，确认图案没有在表面滑动。还原工程；不要求某一种坐标节点或 UV 方案。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-07", "capability": "SURF", "points": 15,
+      "requirement_section": "5. 可编辑的程序化划痕",
+      "criterion": "真实的程序化材质可通过明确的参数改变划痕路径不规则度，并可恢复默认状态。",
+      "scoring_rule": {
+        "PASS": "实际划痕由可重新求值的材质系统生成，无图片纹理、烘焙结果或逐条手工痕迹依赖；明确标识的控制在说明中的两个设置之间改变路径曲折或破碎程度，保留细线和蓝色基底，且恢复默认值后恢复原分布；控制说明与可编辑颜色均有效。",
+        "PARTIAL": "实际可见划痕确由不依赖图片、烘焙结果或逐条手工痕迹的可重新求值材质系统生成，但未满足全部 PASS 条件。",
+        "FAIL": "没有实际可见划痕，或划痕依赖图片、烘焙结果、预渲染替代或逐条手工痕迹，或系统无法重新求值。"
+      },
+      "evidence_refs": ["image/01_final_blue.png", "image/03_rougher_detail.png"],
+      "verification": {
+        "method": "active_material_dependency_audit_and_parameter_roundtrip",
+        "procedure": "检查球体材质的有效输出依赖及纹理来源，确认划痕是运行中的程序化材质信号。按工程文本找到控制，记录默认结果，分别使用两个有效设置重求值，比较同一近景中路径的不规则程度；仅变颜色、整体光泽或更换随机图案不算有效控制。恢复默认设置并比较划痕位置与形态，同时验证颜色可编辑。不得以存在节点组、滑块或节点数量代替功能验证。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 10,
+      "requirement_section": "提交文件",
+      "criterion": "build.py 能在便携环境中重建同一默认材质工程，依赖闭合且程序化控制保留。",
+      "scoring_rule": {
+        "PASS": "脚本按说明在 Blender 5.1.2 空场景中执行，生成有效工程；无需网络、本机绝对路径、外部贴图或未提供插件，重建后保留原提交的默认材质、划痕分布、有效控制、观察设置及 Cycles GPU 配置；随机过程可重复。",
+        "PARTIAL": "脚本按说明能从空场景生成并打开含实际划痕材质球的工程，但未满足全部 PASS 条件。",
+        "FAIL": "缺少 build.py，或脚本按说明不能从空场景生成并打开含实际划痕材质球的工程。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "isolated_rebuild_and_artifact_comparison",
+        "procedure": "在临时目录按脚本说明从空场景重建并保存，检查绝对路径、网络及插件依赖，打开生成工程并确认材质实际赋给球体。在相同观察条件下比较原提交与重建结果的默认颜色、划痕分布和参数控制，确认随机种子使重建可复现，并核对保存的 Cycles GPU 配置。本项比较原提交的可重建性，不再次评价其视觉质量是否达到参考；运行仅是未来验收方案，当前未执行。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "单次橙色烟花爆发",
+  "source_video": {"url": "https://www.youtube.com/watch?v=zGoe8A1DH4Q", "id": "zGoe8A1DH4Q"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"ANM": 45, "SURF": 15, "SCN": 30, "PIPE": 10},
+  "weighting_note": "暂定权重，尚未校准。ANM 45 分覆盖独立时间过程、空间扩散、重力式下坠和消隐；SURF 15 分评价暖色自发光；SCN 30 分评价最终画面光晕、参考成片构图及暗场景；PIPE 10 分评价重播和可迁移重建。光晕作为成片合成效果归入 SCN，避免与自发光材质混计。允许等价时间求值，故不把特定粒子求解器或模拟器存在计入 SIM，也不因点的几何来源添加 GEO/PROC。",
+  "rubric": [
+    {
+      "id": "ANM-01", "capability": "ANM", "points": 10,
+      "requirement_section": "1. 单次爆发与时间范围",
+      "criterion": "1 至 80 帧、24 fps 的动画中，从一个固定紧凑区域仅发生一次短促爆发，新火花只在第 1 至 15 帧产生。",
+      "scoring_rule": {
+        "PASS": "存在可见的多火花爆发，且三项均满足：(A) 范围 1 至 80、24 fps；(B) 第 5 帧已有紧凑火花团，出生仅发生于 1 至 15 帧且没有第二次爆发；(C) 所有出生位置来自同一个固定紧凑区域。",
+        "PARTIAL": "存在可见的多火花爆发，且 A、B、C 恰有两项满足。",
+        "FAIL": "不存在可见的多火花爆发，或 A、B、C 满足不足两项。"
+      },
+      "evidence_refs": ["image/03_early.png"],
+      "verification": {"method": "evaluated_animation_and_visual", "procedure": "读取交付时间范围和 fps；从 1 帧顺序求值到 80 帧，观察出生事件、紧凑发射区域和是否再次爆发。可追踪实际点、实例或可见几何的激活时刻及位置，并核对相机播放。不得以粒子系统计数、发射器名称或某个 emission_end 属性独自替代行为证据。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "ANM-02", "capability": "ANM", "points": 15,
+      "requirement_section": "2. 空间扩散与轻微下坠",
+      "criterion": "火花以独立连续轨迹向外展开，中期构成有空间深度和间隙的近球形壳层，满足公开扩散幅度。",
+      "scoring_rule": {
+        "PASS": "存在真实空间火花，且三项均满足：(A) 20、40 帧共同存活火花的起点距离中位数比至少为 1.4；(B) 正交观察显示中期近球形壳层、空间深度和可见间隙；(C) 火花独立连续运动，无无缘由的瞬移或长期悬停。",
+        "PARTIAL": "主体不是图片、平面圆环或整体缩放的静态点云，存在真实空间火花，且 A、B、C 恰有两项满足。",
+        "FAIL": "A、B、C 满足不足两项，或主体是图片、平面圆环、整体缩放的静态点云。"
+      },
+      "evidence_refs": ["image/03_early.png", "image/04_expanded.png", "image/01_final.png"],
+      "verification": {"method": "evaluated_geometry_motion_and_visual", "procedure": "在临时副本中按实际可见火花追踪 20 至 40 帧的空间位置，并以固定爆发起点计算共同存活样本距离的中位数比。比较两个正交视图及相邻帧，确认三维壳层、透空和独立连续运动；不得按发射球拓扑、点数量或节点图形代替。此行只评分外扩、空间分布与连续性，下坠方向由 ANM-03 单独判断。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "ANM-03", "capability": "ANM", "points": 10,
+      "requirement_section": "2. 空间扩散与轻微下坠",
+      "criterion": "火花轨迹表现轻微重力式下坠，上射火花减速，横向火花向 -Z 偏转，同时保留向外展开。",
+      "scoring_rule": {
+        "PASS": "有可追踪的外射火花，且上射火花上升速度逐渐降低、横向火花向 -Z 弯曲两类行为都可见；下坠轻微，整体继续向外展开。",
+        "PARTIAL": "未达到 PASS，但至少能追踪到一类符合上述重力趋势的火花；可有下坠过重或部分方向轨迹缺乏弯曲的问题。",
+        "FAIL": "没有可追踪的外射火花，或完全不呈现上述重力趋势，包括全程直线匀速外扩、整体刚性下移而火花无曲率的情况。"
+      },
+      "evidence_refs": ["image/03_early.png", "image/04_expanded.png"],
+      "verification": {"method": "trajectory_probe_and_visual", "procedure": "用世界 Z 轴为基准，连续求值并追踪上射和横向火花各自的位置、速度趋势；用侧视图核对曲率与轻微下坠。只检查最终轨迹结果，不要求 scene.gravity、field weight、求解器、积分形式或粒子系统的特定值。相机固定，排除相机移动造成的伪下坠。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "ANM-04", "capability": "ANM", "points": 10,
+      "requirement_section": "4. 逐渐稀疏和熄灭",
+      "criterion": "火花逐渐减少，存活火花在 50 至 70 帧自身减暗，并在 70 至 80 帧完全熄灭。",
+      "scoring_rule": {
+        "PASS": "存在早期可见火花，且三项均满足：(A) 第 15 帧后不同火花分散消失，第 50 帧仍有残余；(B) 55、60、65 帧显示存活火花自身持续减暗，无整团突然闪灭或重新变亮；(C) 70 至 80 帧均无可见火花或光晕。",
+        "PARTIAL": "存在早期可见火花，且 A、B、C 恰有两项满足。",
+        "FAIL": "不存在早期可见火花，或 A、B、C 满足不足两项。"
+      },
+      "evidence_refs": ["image/04_expanded.png", "image/05_fading.png"],
+      "verification": {"method": "temporal_render_and_material_evaluation", "procedure": "以固定曝光和相机连续检查 15 至 80 帧，重点比较 50、55、60、65、70、80 帧。区分可见火花数量、单个存活火花亮核亮度和光晕强度，核对实际使用的材质或其他发光贡献；仅减少数量、缩小点云、动画曲线或关键帧存在均不能证明亮度渐变。空场景不得因末帧为黑得到此行分数。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 15,
+      "requirement_section": "3. 火花表面与柔和光晕",
+      "criterion": "实际可见火花呈统一暖橙至红橙色自发光，具有明亮细小亮核，不依赖外部灯照成灰球。",
+      "scoring_rule": {
+        "PASS": "火花可见，且统一饱和暖橙色、自发光、细小明亮亮核三项全部满足。",
+        "PARTIAL": "火花可见，且三项恰有两项满足。",
+        "FAIL": "火花不可见，或三项满足不足两项。"
+      },
+      "evidence_refs": ["image/01_final.png", "image/02_sparks.png"],
+      "verification": {"method": "used_surface_inspection_and_render", "procedure": "渲染第 39 帧并检查实际可见火花使用的材质或等价发光贡献；在临时副本中关闭外部灯验证亮核仍自发光。依据渲染结果判定暖色及亮核，不要求固定 RGB、Emission Strength、材质名称、节点种类或色彩管理预设。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-01", "capability": "SCN", "points": 15,
+      "requirement_section": "3. 火花表面与柔和光晕",
+      "criterion": "火花周围存在柔和衰减的光晕，同时保留独立亮点和暗隙，避免融合成光团或大片过曝。",
+      "scoring_rule": {
+        "PASS": "火花可见，且柔和衰减光晕、亮点间暗隙、无大片纯白过曝或不透明光团三项全部满足。",
+        "PARTIAL": "火花可见，且三项恰有两项满足。",
+        "FAIL": "火花不可见，或三项满足不足两项。"
+      },
+      "evidence_refs": ["image/02_sparks.png"],
+      "verification": {"method": "final_render_visual", "procedure": "检查交付设置下第 39 帧的最终合成结果及亮点局部，确认亮核外有连续衰减的可见光晕，多个相邻火花间仍存在暗隙。检查实际输出而非 Bloom 开关或合成节点存在；允许 Blender 5.1.2 中等价光晕方式。此行评价光晕及亮点分离，不重复评价色相。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-02", "capability": "SCN", "points": 10,
+      "requirement_section": "5. 构图与场景",
+      "criterion": "固定相机以 16:9 画幅完整呈现爆发；第 39 帧火花团在上半部，高度占画面 20% 至 40%，动画中不被裁断。",
+      "scoring_rule": {
+        "PASS": "火花可见，且三项均满足：(A) 相机固定、画幅 16:9；(B) 第 39 帧主体完整位于上半部，高度占 20% 至 40%；(C) 第 15 至 65 帧的可见火花完整留在画面内并与边缘留有空白。",
+        "PARTIAL": "火花可见，且 A、B、C 恰有两项满足。",
+        "FAIL": "火花不可见，或 A、B、C 满足不足两项。"
+      },
+      "evidence_refs": ["image/01_final.png"],
+      "verification": {"method": "camera_render_sequence_and_measurement", "procedure": "读取实际渲染宽高比并检查相机求值变换是否恒定，渲染 39 帧测火花主体包围范围与画面关系，逐帧预览 15 至 65 帧确认无截断。忽略不可见火花和无限微弱光晕边缘；不要求固定相机坐标、焦距、像素分辨率或世界尺度。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-03", "capability": "SCN", "points": 5,
+      "requirement_section": "5. 构图与场景",
+      "criterion": "火花处于有足够反差的近黑背景中，最终画面不露出发射器、实例源、地面或辅助几何。",
+      "scoring_rule": {
+        "PASS": "火花可见，背景近黑且衬托火花，并且没有可见辅助几何，两项均满足。",
+        "PARTIAL": "火花可见，两项恰有一项满足。",
+        "FAIL": "火花不可见，或两项均不满足。"
+      },
+      "evidence_refs": ["image/01_final.png"],
+      "verification": {"method": "render_sequence_visual", "procedure": "检查 5、15、39、60、70 帧最终渲染，确认近黑背景和辅助几何隐藏的实际效果；不得以 hide_render、缩放值、对象名称或保留默认灯光代替渲染检查。多次爆发是否出现仅由 ANM-01 评分，此行不重复扣分。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "6. 交付与重播",
+      "criterion": "重新打开文件后可重复顺序播放及随机跳帧，结果不依赖未完成烘焙或历史播放状态，内有重播说明。",
+      "scoring_rule": {
+        "PASS": "存在可见动画，且三项均满足：(A) 文件内说明足以定位第 1 帧重播和缓存或求值方式；(B) 重开后两次顺序播放结果一致；(C) 随机跳到 20、40、60 帧的运动与亮度状态和顺序播放一致。",
+        "PARTIAL": "存在可见动画，且 A、B、C 恰有两项满足。",
+        "FAIL": "不存在可见动画，或 A、B、C 满足不足两项。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "reopen_and_replay_probe", "procedure": "将交付复制到临时目录，重新打开 submission.blend，按内部说明连续两次从 1 播至 80，记录 20、40、60 帧的求值状态或相机图像；另行重开并依 60、20、40 的顺序跳转，对照顺序结果。容许纯渲染采样噪声，不容许火花位置、生命状态或发光明显不同。不检查 is_baked 等特定缓存标记。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-02", "capability": "PIPE", "points": 5,
+      "requirement_section": "6. 交付与重播",
+      "criterion": "build.py 能在 Blender 5.1.2 重建完整资产并保存于第 39 帧，EEVEE GPU 渲染设置和所有依赖随交付可用。",
+      "scoring_rule": {
+        "PASS": "两项均满足：(A) 按脚本开头方式从起始场景重建可见完整爆发资产并保存于第 39 帧；(B) 迁移到新目录后资源与必要缓存全部可用，EEVEE GPU 渲染的最终光晕设置完整且无需联网或本机绝对路径。",
+        "PARTIAL": "A、B 恰有一项满足。",
+        "FAIL": "A、B 均不满足。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "portable_build_and_dependency_probe", "procedure": "在提供 GPU 的 Blender 5.1.2 环境中，复制交付到独立目录并依据脚本说明重建；检查脚本生成的实际运动资产、保存帧、渲染引擎和最终光晕。扫描并实际解析外部依赖，验证均为已提供相对资源或内嵌内容。不得仅因 .blend 可打开或脚本文件存在给分。此项是未来验收步骤，当前内容阶段未执行 Blender 或 GPU。", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Green Apple",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1nY9gYzEGr",
+    "id": "BV1nY9gYzEGr"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 45, "SURF": 40, "SCN": 5, "PIPE": 10},
+  "weighting_note": "Geometry and procedural surface appearance are the central independent outcomes. Shape, depressions, stem assembly, and evaluated finish receive 45 points; color structure, speckling, and surface response receive 40. Presentation receives 5, and reproducible saved-scene delivery receives 10. Counts of objects, nodes, materials, cameras, or lights do not establish these outcomes.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Apple Form",
+      "criterion": "The body has a plump, slightly squat apple silhouette with broad rounded shoulders and a modestly narrower lower half.",
+      "scoring_rule": {
+        "PASS": "A substantial rounded body with a coherent closed outer silhouette exists, is approximately round from above and slightly squat in side elevation, and has broad rounded upper shoulders that transition continuously into a modestly narrower lower half.",
+        "PARTIAL": "A substantial rounded fruit body with a coherent closed outer silhouette exists, but one or more PASS conditions are unmet; for example, it remains spherical, has an elongated outline, or lacks the shoulder-to-base proportion.",
+        "FAIL": "No substantial rounded fruit body with a coherent closed outer silhouette exists. A flat image, isolated fragment, or unrelated primitive does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_green_apple.png"],
+      "verification": {
+        "method": "Evaluated geometry and orthographic inspection",
+        "procedure": "Open submission.blend, isolate the evaluated body, and inspect neutral-shaded front, side, and top views. Compare its width-to-height character, shoulder fullness, and narrowing lower outline with the public description and reference. Evaluate the shape independently of its material and ignore the localized depressions scored separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Apple Form",
+      "criterion": "The top stem recess and smaller bottom depression are localized inward geometric features.",
+      "scoring_rule": {
+        "PASS": "A substantial fruit body contains both a shallow rounded top-center recess and a smaller inward bottom-center depression; each is actual geometry and is legible from its corresponding inspection view, with the lower body turning into the bottom depression.",
+        "PARTIAL": "A substantial fruit body contains at least one clearly inspectable, localized inward geometric depression at the top or bottom center, but one or more PASS conditions are unmet.",
+        "FAIL": "The substantial body is absent, or neither pole contains a clearly inspectable localized inward geometric depression. Shading-only dimples and open holes do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_green_apple.png", "image/02_lower_surface.png"],
+      "verification": {
+        "method": "Evaluated surface and pole-view inspection",
+        "procedure": "Temporarily hide the stem and inspect the evaluated body from above and below with neutral shading and side lighting. Inspect surface positions or a temporary geometric cross-section to confirm inward displacements at both poles, rather than dark texture patches. Compare their relative extent, scoring only the recess form here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Stem and Assembly",
+      "criterion": "A slender curved stem is proportioned and seated naturally in the apple's top recess.",
+      "scoring_rule": {
+        "PASS": "A substantial body and a slender volumetric stem are present. The stem rises from inside the top recess, bends gently to one side, has a rounded cross-section and closed slightly shaped tip, is visibly shorter than the body height, and has no floating base gap or intersection exposed across the outer shoulder.",
+        "PARTIAL": "A substantial body and a recognizable slender volumetric stem extending above its top center are present, but one or more PASS conditions are unmet, including an incorrect curve, tip, proportion, or attachment.",
+        "FAIL": "The body or recognizable slender volumetric stem extending above its top center is absent. A painted stem, floating unrelated fragment, or flat line does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_green_apple.png"],
+      "verification": {
+        "method": "Multi-view evaluated assembly inspection",
+        "procedure": "Inspect the body and stem in front, side, and elevated views, then inspect the stem tip and base closely. Check curvature, cross-section, visible length relative to body height, and the actual position of the base within the recess. Accept equivalent editable mesh or curve construction.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Stem and Assembly",
+      "criterion": "The editable body and stem have clean evaluated surfaces and smooth silhouettes.",
+      "scoring_rule": {
+        "PASS": "A substantial body and stem are both present as editable geometry. Both retain their modeled profiles with continuous shading and smooth evaluated silhouettes, and have no visible faceting, unintended holes, or severe pinching on their exposed surfaces.",
+        "PARTIAL": "A substantial editable body exists and its main exposed surface is continuously shaded with a mostly smooth silhouette, but one or more PASS conditions are unmet. A missing stem prevents PASS but does not remove this body-surface minimum.",
+        "FAIL": "A substantial editable body is absent, or its main exposed surface cannot demonstrate continuous shading and a mostly smooth silhouette. A noneditable image substitute cannot meet the minimum."
+      },
+      "evidence_refs": ["image/01_green_apple.png", "image/02_lower_surface.png"],
+      "verification": {
+        "method": "Neutral-shaded orbit and editability inspection",
+        "procedure": "Inspect the saved editable geometry and orbit a neutral-shaded evaluated view at whole-object and detail distances. Check exposed body and stem surfaces for facet steps, accidental openings, and pinched shading. Assess surface quality separately from the proportions and intended recess features scored in the other geometry rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Procedural Skin Pattern",
+      "criterion": "Procedural skin color combines a fresh green base with continuous, gentle broad variation and a working variation control.",
+      "scoring_rule": {
+        "PASS": "A substantial body is predominantly fresh green and displays softly blended yellow-green and lighter-green broad mottling around its surface. The pattern has no visible mapping seam, repetitive bands, or dominating isolated patches. An editable procedural control visibly changes the broad variation without changing body geometry or the fine speckle scale.",
+        "PARTIAL": "A substantial body has a predominantly green assigned surface with visible procedural broad color variation, but one or more PASS conditions are unmet, including color balance, continuity, pattern restraint, or the independent control behavior.",
+        "FAIL": "The substantial body is absent, is not predominantly green, or lacks visible procedural broad color variation. A flat uniform color or source-image substitute does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_green_apple.png", "image/02_lower_surface.png"],
+      "verification": {
+        "method": "Controlled renders and material function probe",
+        "procedure": "Render several body views under fixed neutral lighting and inspect broad color organization independently of individual flecks. Trace the material actually assigned to the body to its procedural inputs. In a temporary copy, alter the stated broad-variation control and compare before/after renders while verifying that body geometry and fine speckle scale remain unchanged; restore the original setting.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Procedural Skin Pattern",
+      "criterion": "Fine pale speckles are irregular, subordinate, distributed over the apple, and controlled independently of the broad mottling.",
+      "scoring_rule": {
+        "PASS": "A substantial green body carries many clearly visible procedural small pale yellow-green speckles with irregular spacing over substantive side regions, the top shoulder, and the lower surface. They remain subordinate to the green skin, and an editable procedural speckle-scale control visibly changes their size without changing body geometry or the broad mottling scale.",
+        "PARTIAL": "A substantial green body carries clearly visible procedural small pale speckles over a substantive side region, but one or more PASS conditions are unmet, including coverage, spacing, relative size, color, visual dominance, or control independence.",
+        "FAIL": "The substantial green body is absent or lacks clearly visible procedural small pale speckles over a substantive side region. Large patches, a few isolated dots, or a source-image substitute do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_green_apple.png", "image/02_lower_surface.png"],
+      "verification": {
+        "method": "Multi-view detail renders and material function probe",
+        "procedure": "Inspect fixed-lighting close renders of the side, top shoulder, and lower body to assess speckle size, spacing, contrast, and coverage. In a temporary scene copy, change the actual procedural speckle-scale control and compare the result. Confirm that broad mottling scale and evaluated geometry remain intact, then restore the setting.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Surface Finish",
+      "criterion": "Waxy skin response and independently editable olive-green stem finish distinguish the two surfaces.",
+      "scoring_rule": {
+        "PASS": "A substantial body and stem are present. The body has a smooth waxy gloss with broad readable highlights while retaining its fine pattern in lit and shaded regions, without mirror-like reflections or coarse rocky relief. The stem is darker olive green with subtle variation and restrained fine texture, remains distinct at the junction, and can be recolored without recoloring the body.",
+        "PARTIAL": "A substantial body demonstrates smooth, non-mirror reflective highlights and retains an inspectable skin pattern over a substantive visible region, but one or more PASS conditions are unmet. A missing or unfinished stem prevents PASS while the stated body-surface minimum may still qualify.",
+        "FAIL": "The substantial body is absent, or it does not demonstrate smooth non-mirror highlights with an inspectable skin pattern over a substantive visible region. An unshaded image substitute does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_green_apple.png", "image/02_lower_surface.png"],
+      "verification": {
+        "method": "Fixed-lighting surface renders and assignment probe",
+        "procedure": "Use broad neutral lighting to render the body and stem at whole-apple and detail distances. Judge highlight breadth, surface relief, pattern visibility, and stem distinction without rescoring pattern structure. In a temporary copy, recolor the active stem surface and confirm the body color does not change; restore the original appearance.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "Presentation",
+      "criterion": "The saved camera composition exposes the apple's form and skin clearly against an unobtrusive background.",
+      "scoring_rule": {
+        "PASS": "The saved camera view contains the complete body and stem in a slightly elevated three-quarter composition, visibly exposes the top recess, and uses an unobtrusive background and lighting that make the green variation, speckles, and rounded volume readable.",
+        "PARTIAL": "The saved camera produces a readable view of a substantial apple body whose rounded volume and green surface pattern can be assessed, but one or more PASS conditions are unmet, including stem completeness, top visibility, framing, background, or lighting.",
+        "FAIL": "The saved camera cannot produce a readable view of a substantial apple body with assessable rounded volume and green surface pattern. An absent camera, empty view, or effectively black view does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_green_apple.png"],
+      "verification": {
+        "method": "Saved-camera render inspection",
+        "procedure": "Render the active saved camera without changing its transform, framing, background, or lights. Inspect full-asset framing, viewpoint, top-recess visibility, background distraction, and whether surface details and form remain readable. Score presentation behavior rather than camera or light existence.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The delivered project, reconstruction script, and actual-scene PNG form a reproducible saved-scene submission.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with an editable apple scene and the requested saved render configuration. build.py runs from an empty Blender 5.1.2 scene without external assets or extra add-ons, recreates the scene, and saves submission.blend. That newly saved file reopens with the reconstructed scene intact, and B111_Green_Apple.png is a PNG rendered from the actual submitted scene.",
+        "PARTIAL": "submission.blend opens with a substantial editable apple scene and at least one of these is additionally verified: build.py recreates the scene and saves an openable submission.blend, or the named PNG is rendered from the actual submitted scene. One or more PASS conditions remain unmet.",
+        "FAIL": "submission.blend does not open with a substantial editable apple scene, or neither a script-created saved and openable reconstruction nor the named actual-scene PNG can be verified. An in-memory rebuild that never saves submission.blend does not satisfy the reconstruction minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean reconstruction, saved-file reopen, and render provenance check",
+        "procedure": "Preserve the delivery, then open submission.blend and inspect its scene and saved Blender 5.1.2 Cycles GPU configuration. In an isolated copy of the package, run build.py using a factory-empty Blender scene and confirm that it writes a new submission.blend. Resolve the generated file from the script's output path without imposing an additional current-working-directory requirement. Close Blender and reopen that exact saved result to inspect the reconstructed geometry, active materials, and camera. Compare its scene with the delivered project. Decode the named PNG and compare it with a fresh render of the actual delivered scene to establish provenance rather than accepting a filename or screenshot alone.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

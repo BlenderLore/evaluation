@@ -1,0 +1,133 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Editable Curved Staircase",
+  "source_video": {"url": "https://www.youtube.com/watch?v=iKwRgs-fzOY", "id": "iKwRgs-fzOY"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 60, "PROC": 30, "PIPE": 10},
+  "weighting_note": "Geometry receives 60 points across the stair profile, proportions, curved layout, shell thickness, clearance, and surface integrity. The source-central recoverable geometric construction and functional bend/thickness relationships receive 30 PROC points. These are geometric generation controls rather than character-pose controls. Delivery and reproducibility receive 10 points. No material, animation, or incidental lighting capability is scored.",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 15,
+      "requirement_section": "Stair Profile and Proportions",
+      "criterion": "The flight contains eight regular tread-riser pairs with equal regular rise and equal centerline tread depth, preserving an angular stepped profile.",
+      "scoring_rule": {
+        "PASS": "Exactly eight regular tread-riser pairs form the continuous flight; regular rises and centerline tread depths are equal, and distinct planar treads meet upright risers without a rounded or ramp-like profile.",
+        "PARTIAL": "At least four connected, clearly distinct tread-riser pairs form a recognizable flight whose dominant form remains an angular staircase, but any PASS condition is unmet.",
+        "FAIL": "Fewer than four connected, clearly distinct tread-riser pairs exist, or the dominant form is a ramp, rounded slope, or disconnected collection of blocks."
+      },
+      "evidence_refs": ["image/01_curved_form.png", "image/02_open_ribbon.png"],
+      "verification": {"method": "evaluated_geometry_and_visual_inspection", "procedure": "Inspect the saved staircase and its recoverable ribbon in side and elevated views. Distinguish the two terminal strips from the eight regular pairs; count the regular pairs and compare their rises and centerline depths. Inspect planar face regions rather than using polygon counts as a proxy for steps.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "Stair Profile and Proportions",
+      "criterion": "The staircase has the specified scale-free straight-form proportions and full-width terminal strips at both ends.",
+      "scoring_rule": {
+        "PASS": "The recoverable straight ribbon has run/H from 0.63 to 0.77 and width/H from 0.576 to 0.704. A full-width upper horizontal terminal strip and lower vertical terminal strip are present, each roughly the size of its adjacent regular tread or riser.",
+        "PARTIAL": "A measurable straight ribbon with at least four regular pairs and at least one attached terminal strip exists, but any PASS condition is unmet.",
+        "FAIL": "There is no measurable straight stair ribbon with at least four regular pairs, or neither attached terminal strip exists."
+      },
+      "evidence_refs": ["image/02_open_ribbon.png"],
+      "verification": {"method": "normalized_geometry_measurement", "procedure": "Recover the unthickened straight form, measure its total vertical envelope H, total horizontal run, and cross-flight width in the staircase's own orientation. Compare the two ratios to the public bands. Inspect the orientation, attachment, width, and relative size of both terminal strips. This row scores static proportions and terminals, not how the recovery control works.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "Half-Turn Layout",
+      "criterion": "The saved flight follows a regular half-turn around a vertical axis while keeping its steps upright.",
+      "scoring_rule": {
+        "PASS": "The flight sweeps 175 to 185 degrees in plan with a regular inner and outer boundary and a clear inner opening. Treads remain horizontal and risers upright throughout; the run does not tip, corkscrew, or double back.",
+        "PARTIAL": "At least four sequential steps visibly turn around a common vertical axis and expose an inner opening, and the dominant form remains an upright curved flight, but any PASS condition is unmet.",
+        "FAIL": "Fewer than four sequential steps participate in a recognizable plan-view curve with an inner opening, or the dominant deformation is a tilted or corkscrewed flight."
+      },
+      "evidence_refs": ["image/01_curved_form.png"],
+      "verification": {"method": "orthographic_geometry_inspection", "procedure": "Inspect evaluated geometry from above and from the side. Measure the total sweep between the end directions of the flight and inspect intermediate step directions, tread planes, and riser orientation. Separate intended polygonal step boundaries from a crumpled or reversing path.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 10,
+      "requirement_section": "Slab and Geometry Finish",
+      "criterion": "The saved folded flight forms a continuous closed slab with the required relative thickness and an open underside.",
+      "scoring_rule": {
+        "PASS": "The whole folded flight has closed narrow boundary rims and an open space beneath it. Slab thickness is 0.36 to 0.54 of a regular riser height and remains even across width, along the flight, and at tread-riser corners without inner-edge pinching.",
+        "PARTIAL": "At least four contiguous tread-riser pairs have visible slab thickness and a substantially open underside, and the dominant form remains a folded slab, but any PASS condition is unmet.",
+        "FAIL": "Fewer than four contiguous pairs have visible slab thickness, or the dominant form is a filled stair-shaped block rather than a folded slab."
+      },
+      "evidence_refs": ["image/03_slab_detail.png", "image/01_curved_form.png"],
+      "verification": {"method": "evaluated_shell_measurement", "procedure": "Inspect cross-sections or opposing surface distances at lower, middle, and upper steps, including inner edges, outer edges, and corners. Normalize thickness by a regular riser height and inspect the boundary rims and underside. Score the saved shell here; changed-thickness behavior belongs to PROC-03.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-05", "capability": "GEO", "points": 10,
+      "requirement_section": "Slab and Geometry Finish",
+      "criterion": "The bent staircase has clear neighboring step ends and no self-interpenetrating or collapsed regions.",
+      "scoring_rule": {
+        "PASS": "All neighboring step ends are separated, especially at the inner edge, and the flight contains no unintended self-intersection, overlapping surface region, or collapsed corner.",
+        "PARTIAL": "At least four contiguous tread-riser pairs retain usable noncollapsed faces with no mutual interpenetration and the staircase's stepped structure remains readable, but any PASS condition is unmet elsewhere.",
+        "FAIL": "No four contiguous tread-riser pairs retain noncollapsed faces free of mutual interpenetration, or intersections obscure the staircase's stepped structure."
+      },
+      "evidence_refs": ["image/01_curved_form.png"],
+      "verification": {"method": "intersection_and_clearance_inspection", "procedure": "Orbit evaluated geometry and inspect the inner step ends from above and below. Use mesh intersection inspection or section views to distinguish intentional tread-riser joins from faces crossing adjacent steps. Inspect clearance and collapse independently of normal shading and shell-thickness accuracy.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-06", "capability": "GEO", "points": 5,
+      "requirement_section": "Slab and Geometry Finish",
+      "criterion": "Existing core stair surfaces have coherent normals and clean planar shading without accidental holes or duplicate faces.",
+      "scoring_rule": {
+        "PASS": "The complete staircase has coherent outward-facing surfaces, clean planar shading, and no accidental holes, duplicate faces, or visible shading seams; its angular silhouette remains clear.",
+        "PARTIAL": "At least four contiguous tread-riser pairs have coherent visible core surfaces and readable planar shading, but any PASS condition is unmet. An absent minor terminal part prevents PASS but does not alone force FAIL.",
+        "FAIL": "Fewer than four contiguous tread-riser pairs demonstrate coherent visible core surfaces and readable planar shading. Missing surfaces cannot establish this minimum."
+      },
+      "evidence_refs": ["image/01_curved_form.png", "image/03_slab_detail.png"],
+      "verification": {"method": "mesh_and_controlled_view_inspection", "procedure": "Inspect face orientation, boundary defects, duplicate faces, and planar shading on the evaluated slab under neutral lighting. Use the source crops for the angular character. Do not score thickness or step-to-step interpenetration again in this finish row.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PROC-01", "capability": "PROC", "points": 10,
+      "requirement_section": "Editable Geometry",
+      "criterion": "The finished staircase derives live from a recoverable connected, unthickened straight ribbon.",
+      "scoring_rule": {
+        "PASS": "Disabling bending and thickness generation on the construction used by the final asset recovers one connected unthickened straight ribbon with open side boundaries, all eight regular pairs and both terminal strips, and no enclosing side, back, or bottom panels. Restoring the stages restores the final asset.",
+        "PARTIAL": "The final asset derives live from a recoverable unthickened straight ribbon containing at least four connected regular pairs, and can be restored, but any PASS condition is unmet.",
+        "FAIL": "The final asset has no live recoverable unthickened straight ribbon with at least four connected pairs, cannot be restored, or only presents an unrelated demonstration copy."
+      },
+      "evidence_refs": ["image/02_open_ribbon.png", "image/03_slab_detail.png"],
+      "verification": {"method": "non_destructive_construction_probe", "procedure": "On a temporary copy, identify the construction feeding the visible staircase and disable its bending and thickness-generation stages. Inspect the resulting ribbon and restore those stages. Verify that this same construction drives the final asset. Accept equivalent live geometric implementations without requiring particular node names, modifier counts, or topology counts.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PROC-02", "capability": "PROC", "points": 10,
+      "requirement_section": "Editable Geometry",
+      "criterion": "The clearly labeled bend-angle control changes the flight's plan curvature while retaining its stair structure and restores the saved half-turn.",
+      "scoring_rule": {
+        "PASS": "A clear English bend-angle control changes a flight of at least four connected steps from the saved 180-degree form to a more open 120-degree flight and to a straight zero-degree flight. At those settings it preserves all existing steps, total height, horizontal treads, and intact slab, and returning to 180 degrees restores the saved shape.",
+        "PARTIAL": "An editable control produces a visible reversible change in plan curvature across at least four connected steps, but any PASS condition is unmet.",
+        "FAIL": "No editable control produces a visible reversible plan-curvature change across at least four connected steps, including cases where only a static duplicate or baked alternative is shown."
+      },
+      "evidence_refs": ["image/01_curved_form.png", "image/03_slab_detail.png"],
+      "verification": {"method": "bend_control_probe", "procedure": "On a temporary copy, change the public bend control to 120 and then zero degrees, recording evaluated views and stair height at each setting. Confirm that the same construction responds and keeps its steps upright; restore 180 degrees and compare with the saved evaluated shape. This is a future functional test, not an animation requirement.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PROC-03", "capability": "PROC", "points": 10,
+      "requirement_section": "Editable Geometry",
+      "criterion": "Independent thickness generation responds across the bent flight without changing its bend or squeezing inner-edge thickness.",
+      "scoring_rule": {
+        "PASS": "A clear English thickness control changes the slab to 75 percent and 125 percent of its saved thickness throughout a flight containing at least four connected tread-riser pairs while preserving all existing step layout and bend. Thickness is generated on the bent surface and remains even at inner and outer edges in both variants. Restoring the saved value restores the slab.",
+        "PARTIAL": "An independent editable control visibly and reversibly changes thickness on at least four connected tread-riser pairs, but any PASS condition is unmet.",
+        "FAIL": "No independent editable control visibly and reversibly changes thickness on at least four connected pairs, or it only scales or replaces the entire staircase instead of changing its slab thickness."
+      },
+      "evidence_refs": ["image/03_slab_detail.png", "image/01_curved_form.png"],
+      "verification": {"method": "thickness_control_and_dependency_probe", "procedure": "On a temporary copy, set thickness to 0.75 and 1.25 times its saved value. Compare evaluated inner/outer shell distances, stair layout, and bend at each setting; inspect the live dependency to confirm thickness generation follows bending. Restore the saved value and compare the result. Score response and geometric dependency here, not the default thickness target again.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The native scene, reproducible construction script, and named actual-scene render form a usable complete submission.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens in Blender 5.1.2 with the editable scene; build.py recreates it from the empty input set and saves the scene; B68_Editable_Curved_Staircase.png is a Cycles GPU render of that scene with the complete flight, inner opening, steps, and slab edges readable in an elevated three-quarter view.",
+        "PARTIAL": "submission.blend opens with a substantive staircase and at least one of the usable construction script or authentic scene-rendered PNG is provided, but any PASS condition is unmet.",
+        "FAIL": "submission.blend is absent or unusable, contains no substantive staircase, or neither a usable construction script nor an authentic scene-rendered PNG is supplied."
+      },
+      "evidence_refs": ["image/01_curved_form.png"],
+      "verification": {"method": "fresh_build_and_render_provenance_check", "procedure": "In a clean temporary directory, open the native file and run build.py with Blender 5.1.2. Compare the regenerated scene and its functional controls to the submission, inspect render engine/device settings, and render a comparison frame to verify the named PNG derives from the actual scene and communicates the required form. This verification is specified only and was not executed during task authoring.", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

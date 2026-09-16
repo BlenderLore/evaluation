@@ -1,0 +1,177 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Cream Material",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV11Dc4e2Epo",
+    "id": "BV11Dc4e2Epo"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 5,
+    "SURF": 85,
+    "PIPE": 10
+  },
+  "weighting_note": "This is a focused procedural material task: six distinct SURF checks cover color, fine variation, relief, light response, independent controls, and spatial attachment. The user-authorized simple cake substrate receives only 5 points; no ornate missing starter geometry is required. Delivery is capped at 10 points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Starting Scene and Simple Base",
+      "criterion": "A simple editable round cake base supports material inspection.",
+      "scoring_rule": {
+        "PASS": "The base is a short round solid with a flat top, rounded upper edge, and smooth continuous side wall; it remains editable.",
+        "PARTIAL": "An editable round three-dimensional base with a top and side wall exists. One or more PASS conditions are unmet.",
+        "FAIL": "No editable round three-dimensional base with a top and side wall exists."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact inspection, controlled renders and reversible material probes",
+        "procedure": "Inspect evaluated geometry in neutral shading from front, top and oblique views; check top/side continuity and edge rounding.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Cream Color",
+      "criterion": "The applied surface has a restrained pale warm cream palette.",
+      "scoring_rule": {
+        "PASS": "The base top and side are pale warm white with a restrained ivory tint and soft low-contrast cream transitions; no dark specks, strong yellow patches, or broad staining dominate.",
+        "PARTIAL": "An actual base surface visibly uses a pale cream material. One or more PASS conditions are unmet.",
+        "FAIL": "No actual base surface visibly uses a pale cream material."
+      },
+      "evidence_refs": [
+        "image/01_cream_detail.png",
+        "image/02_cream_surface.png"
+      ],
+      "verification": {
+        "method": "artifact inspection, controlled renders and reversible material probes",
+        "procedure": "Inspect the applied material and neutral-lit top/side renders. Use a diffuse-color pass or temporarily remove relief in a copy to separate intrinsic palette from lighting.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Fine Color Variation",
+      "criterion": "Fine irregular three-dimensional color variation remains subtle at object scale.",
+      "scoring_rule": {
+        "PASS": "Procedural color variation is fine and irregular, visible close up, coherent at object scale, and free of obvious tiling, straight stripes, or stretched side-wall streaks; no image texture drives it.",
+        "PARTIAL": "The applied base material contains visible procedural irregular color variation. One or more PASS conditions are unmet.",
+        "FAIL": "The base is absent, or no procedural irregular color variation is visible in its applied material."
+      },
+      "evidence_refs": [
+        "image/01_cream_detail.png"
+      ],
+      "verification": {
+        "method": "artifact inspection, controlled renders and reversible material probes",
+        "procedure": "Inspect close and whole-object views with relief disabled in a copy; inspect material dependencies for procedural generation and compare top versus side pattern shape.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Shallow Surface Grain",
+      "criterion": "Shallow grain produces real light-response detail without damaging the main form.",
+      "scoring_rule": {
+        "PASS": "A separate procedural normal or shallow-relief pattern is coarser than the color pattern and creates gentle uneven highlights and tiny bumps under oblique light, while avoiding craters, spikes and silhouette damage.",
+        "PARTIAL": "Procedural relief or normal detail visibly changes light response on an actual base surface. One or more PASS conditions are unmet.",
+        "FAIL": "No actual base surface shows procedural relief or normal detail affecting light response."
+      },
+      "evidence_refs": [
+        "image/01_cream_detail.png"
+      ],
+      "verification": {
+        "method": "artifact inspection, controlled renders and reversible material probes",
+        "procedure": "Render under two oblique light directions with base color temporarily flattened in a copy. Compare against a relief-disabled render and inspect silhouette; verify the relief is coarser than the isolated color pattern.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Soft Light Response",
+      "criterion": "Opaque nonmetallic cream keeps soft highlights and readable detail.",
+      "scoring_rule": {
+        "PASS": "The material is opaque and nonmetallic with soft visible highlights, retaining cream and grain detail in bright and shaded regions under more than one neutral light direction.",
+        "PARTIAL": "A present cream-coated surface is opaque and nonmetallic with a visible light response. One or more PASS conditions are unmet.",
+        "FAIL": "No present cream-coated surface is opaque and nonmetallic with a visible light response."
+      },
+      "evidence_refs": [
+        "image/01_cream_detail.png"
+      ],
+      "verification": {
+        "method": "artifact inspection, controlled renders and reversible material probes",
+        "procedure": "Inspect renders under two neutral area-light directions and applied shader behavior. Assess opacity and highlight softness separately from palette and relief shape.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-05",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Editable and Attached Texture",
+      "criterion": "Independent material controls change color and relief without unwanted coupling.",
+      "scoring_rule": {
+        "PASS": "Editable controls cover cream color range, color scale, relief scale, relief strength and highlight softness; relief-scale/strength edits leave color unchanged, and color-scale edits leave relief unchanged.",
+        "PARTIAL": "At least one editable color-pattern control and one editable relief control visibly affect the applied material. One or more PASS conditions are unmet.",
+        "FAIL": "An editable color-pattern control or editable relief control with a visible effect is absent."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact inspection, controlled renders and reversible material probes",
+        "procedure": "Identify the documented controls. In disposable copies, change each separately and compare isolated color and relief render passes to verify independent effects; discard probe changes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-06",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Editable and Attached Texture",
+      "criterion": "Patterns remain attached across movement and reuse on rounded geometry.",
+      "scoring_rule": {
+        "PASS": "Both procedural patterns remain attached through base translation and rotation, continue smoothly across the rounded edge, and work when the same material is assigned to a second simple rounded object without image textures or repainting.",
+        "PARTIAL": "Both patterns are applied to the base and remain attached during at least one nonzero translation. One or more PASS conditions are unmet.",
+        "FAIL": "The base lacks either pattern, or either pattern visibly slides during a nonzero translation."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact inspection, controlled renders and reversible material probes",
+        "procedure": "In a copy, translate and rotate the base while comparing texture at corresponding local surface points. Inspect edge continuity; assign the material to a new rounded primitive and confirm both patterns respond. Restore the scene.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, reproducible script and named scene render are delivered.",
+      "scoring_rule": {
+        "PASS": "All named files are present; the blend opens with the editable applied material; build.py reconstructs the scene in Blender5.1.2 without external assets; the named PNG is a Cycles GPU render from that scene showing the requested material detail.",
+        "PARTIAL": "submission.blend opens and contains a base with an editable applied cream material. One or more PASS conditions are unmet.",
+        "FAIL": "submission.blend is absent, cannot open, or lacks a base with an editable applied cream material."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact inspection, controlled renders and reversible material probes",
+        "procedure": "Open the blend, run the script in an isolated empty Blender5.1.2 scene, compare rebuilt geometry/materials, and reproduce the camera render to verify the delivered PNG. Inspect Cycles GPU settings.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

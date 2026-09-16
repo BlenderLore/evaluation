@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "视角扫光烫金闪卡",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1K1doB5Eq3",
+    "id": "BV1K1doB5Eq3"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 10, "SURF": 80, "PIPE": 10},
+  "weighting_note": "暂定内容稿：本题核心是两张输入图共同形成的视角响应材质，SURF 80 分分为原画、遮罩配准、视角变化、局部覆盖、颗粒、金色辉光和范围调节七个独立结果。平整卡面 GEO 10，资源闭合与脚本重建 PIPE 10。普通着色参数归 SURF；没有把节点存在或合成器连接另计为 PROC/SCN，也不虚构动画任务。权重未经参考产物校准。",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. 完整卡面与彩色原画",
+      "criterion": "卡面是竖向平整连续的矩形载体，宽高比与 input.png 偏差不超过 2%，正面和斜侧观察没有缺面、折叠或重叠面闪烁。",
+      "scoring_rule": {
+        "PASS": "存在可观察卡面，且同时满足 A：矩形宽高比在 2% 范围内；B：卡面连续平整，在正面和斜侧均没有上述几何缺陷。",
+        "PARTIAL": "存在可观察卡面，但 A、B 恰好满足一项。",
+        "FAIL": "没有可观察卡面，或 A、B 均不满足。"
+      },
+      "evidence_refs": ["image/01_foil_overall.png", "image/02_other_view.png"],
+      "verification": {
+        "method": "artifact_geometry_and_multiview_review",
+        "procedure": "在提交工程中定位实际承载画面的求值后表面，测量卡面局部平面内的长宽，并与输入图 622:1112 比较。检查实际面分布和正面、斜侧渲染，区分薄平面与合法薄厚度，不按对象数量或修改器名称判断。忽略来源画面中的选择外框；无背面设计不扣分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "1. 完整卡面与彩色原画",
+      "criterion": "实际卡面使用提供的彩色原图，完整保留主体、帽子、花卉、纸巾盒、胡萝卜与底部文字的构图和颜色关系。",
+      "scoring_rule": {
+        "PASS": "原图确实参与实际表面着色，且同时满足 A：上述构图完整、正向、单次显示；B：非扫光区域保留原图的颜色关系与可辨识细节。",
+        "PARTIAL": "原图确实参与实际表面着色，但 A、B 恰好满足一项。",
+        "FAIL": "没有实际使用提供的彩色原图，或 A、B 均不满足。"
+      },
+      "evidence_refs": ["image/01_foil_overall.png", "image/02_other_view.png"],
+      "verification": {
+        "method": "artifact_texture_use_and_visual_review",
+        "procedure": "检查分配给卡面的有效表面着色依赖，确认输入原图真实影响输出。在工作副本中临时替换该图为明显纯色，确认基础图案改变后撤销；结合较弱扫光状态与输入原图对照完整构图和颜色。几何比例问题仅归 GEO-01，此项检查纹理铺设及原画保留。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 14,
+      "requirement_section": "2. 与线稿对应的烫金图案",
+      "criterion": "提供的白底黑线输入实际控制烫金覆盖，黑色笔画亮起，白色空白保留彩色底图；外框、主体面部与帽子、花卉枝叶、底部文字四处的亮线与原画对应。",
+      "scoring_rule": {
+        "PASS": "线稿实际控制烫金且黑白角色正确，四处重点区域均保留对应轮廓、纹样或字形，没有明显整体偏移的双重轮廓。",
+        "PARTIAL": "线稿实际控制烫金且黑白角色正确，但四处中只有两处或三处保留正确对应关系。",
+        "FAIL": "未实际使用所给线稿，或黑白角色反转造成空白区域大面积发亮，或正确对应的重点区域少于两处。"
+      },
+      "evidence_refs": ["image/01_foil_overall.png", "image/02_other_view.png", "image/03_foil_detail.png"],
+      "verification": {
+        "method": "artifact_mask_intervention_and_registration_review",
+        "procedure": "在副本中定位线稿的实际影响路径，用全白、全黑测试图暂时替换输入，确认覆盖位置确由线稿明暗决定，随后恢复。分别把亮带移到四处重点区域，比较亮线与彩色图的对应位置，容许输入本身细微绘制差异。线条附近柔光不等于白色空白被错误作为烫金填充，需结合未加辉光的实际表面输出判断。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 18,
+      "requirement_section": "3. 随观察方向变化的扫光",
+      "criterion": "固定时间、卡片、照明与材质参数，仅观察方向变化就产生实际扫光；三处记录视角覆盖弱光与强光，连续观察时亮带经过图案且同一段图案可以由亮回暗。",
+      "scoring_rule": {
+        "PASS": "固定其余条件后，三处记录视角包含较弱和明显扫光，至少两处亮带位置明显不同且同一段图案确有亮暗切换；视角间连续移动时亮带平滑经过图案，无整面开关或分段跳变。",
+        "PARTIAL": "观察方向确实能改变图案上的发亮覆盖，但未同时达到 PASS 的三视角状态覆盖、同一图案亮暗切换和连续移动要求。",
+        "FAIL": "固定其余条件后观察方向不改变图案上的发亮覆盖，或变化仅来自时间轴、预渲染画面切换、相机换位造成的屏幕位置变化。"
+      },
+      "evidence_refs": ["image/01_foil_overall.png", "image/02_other_view.png"],
+      "verification": {
+        "method": "artifact_fixed_state_camera_probe",
+        "procedure": "使用提交说明的三个观察方向，并在相邻方向间取若干中间视角；保持帧、物体变换、灯光和材质输入固定，以相同曝光和足够采样渲染。将比较锚定到卡面图案或表面坐标，跟踪亮带覆盖和同一局部的亮暗，而不是屏幕坐标。确认相机移动触发真实材质响应；不按 Reflection、Mapping 等节点是否存在给分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. 局部亮带与细碎闪点",
+      "criterion": "默认明显扫光状态保留有方向性的局部亮带，同时存在亮起与未亮起的图案区域。",
+      "scoring_rule": {
+        "PASS": "存在可辨识的实际发亮图案，且同时满足 A：默认明显扫光状态有亮线与未亮线共存；B：主要亮区形成一片方向可辨的局部带状区域。",
+        "PARTIAL": "存在可辨识的实际发亮图案，但 A、B 恰好满足一项。",
+        "FAIL": "没有实际发亮图案，或 A、B 均不满足，例如整张线稿持续全亮。"
+      },
+      "evidence_refs": ["image/01_foil_overall.png", "image/02_other_view.png"],
+      "verification": {
+        "method": "artifact_default_coverage_review",
+        "procedure": "在默认参数下选取提交说明中的明显扫光视角，观察完整卡面及实际表面亮区，区分主体光带与辉光扩散。仅判断默认空间覆盖与方向性；视角能否改变覆盖归 SURF-03，范围控制能否调节归 SURF-07。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-05",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. 局部亮带与细碎闪点",
+      "criterion": "亮带过渡区有细小密集、疏密有变化的材质颗粒闪点，尺度小于眼睛、花瓣和字母，并保留底图清晰度。",
+      "scoring_rule": {
+        "PASS": "实际表面包含颗粒闪点，且同时满足 A：过渡区出现细碎破亮边、颗粒明显小于所列图案元素；B：颗粒在不同区域有疏密变化，未把非亮区底图变成雪花噪声。",
+        "PARTIAL": "实际表面包含颗粒闪点，但 A、B 恰好满足一项。",
+        "FAIL": "无实际材质颗粒，或 A、B 均不满足；仅有低采样噪点不计作材质颗粒。"
+      },
+      "evidence_refs": ["image/03_foil_detail.png"],
+      "verification": {
+        "method": "artifact_converged_closeup_and_material_review",
+        "procedure": "近看亮带过渡区和相邻非亮区，使用足够分辨率与采样，使眼睛、花瓣或字母可作为尺度参照。在固定视角提高采样或重新渲染，确认细碎结构仍由材质保留；必要时在副本中干预其纹理分支确认实际影响。源视频压缩颗粒和视口噪点不要求逐点复制。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-06",
+      "capability": "SURF",
+      "points": 12,
+      "requirement_section": "5. 暖金光泽与克制的辉光",
+      "criterion": "亮线呈暖金至浅金色，具有跟随线条的柔和金色光晕，整体仍可辨认原画且近看能区分亮线与外侧光晕。",
+      "scoring_rule": {
+        "PASS": "有实际发亮线条，且同时满足 A：亮线和周围光晕具有暖金色关系；B：光晕柔和且局部，主体、花卉、文字仍可辨认，线条与外侧光晕可区分。",
+        "PARTIAL": "有实际发亮线条，但 A、B 恰好满足一项。",
+        "FAIL": "没有实际发亮线条，或 A、B 均不满足。"
+      },
+      "evidence_refs": ["image/01_foil_overall.png", "image/03_foil_detail.png"],
+      "verification": {
+        "method": "artifact_rendered_surface_and_glow_review",
+        "procedure": "以提交默认渲染设置观察整体和局部，比较亮线核心、外围光晕和未扫光底图。允许材质或合成等效实现，不按 Emission、Mix Shader 或 Glare 节点数量给分。只检查暖金外观及辉光层次，不将线稿偏移或视角失效重复归入此项。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-07",
+      "capability": "SURF",
+      "points": 6,
+      "requirement_section": "4. 局部亮带与细碎闪点",
+      "criterion": "扫光宽度或覆盖范围控制可定位并真实生效，同一视角下产生较窄、较宽两种状态且保留线稿配准与视角响应。",
+      "scoring_rule": {
+        "PASS": "记录的控制可定位，按较窄与较宽值操作后有效覆盖范围明显变化，并保持配准与视角响应；默认值明确且可恢复。",
+        "PARTIAL": "可定位控制且确实改变覆盖范围，但只提供一个有效变化状态，或变化后配准、视角响应、默认值恢复中至少一项有问题。",
+        "FAIL": "无法定位可用控制，或控制不改变实际发亮覆盖范围，只改变整体曝光、颜色、相机位置或预渲染画面。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact_parameter_intervention",
+        "procedure": "按工程文本定位控制，在同一帧、相机、照明下依次采用默认、较窄、较宽值，观察实际亮区覆盖的变化；在改变后的状态小幅移动观察方向确认材质仍响应，并恢复默认值。仅有标签、节点名称或未连接参数不视为有效控制。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "提交文件",
+      "criterion": "工程包含打包的两张输入图，build.py 可由空场景在可传入的路径下重建同一默认结果，所需观察方向和控制设置有可执行的工程说明。",
+      "scoring_rule": {
+        "PASS": "同时满足 A：两图及所需资源在提交中闭合，工程文本能重现观察方向与控制设置；B：脚本使用提供输入，在独立目录可重建等价的默认卡面与材质，无原机器绝对路径、网络或未提供插件依赖。",
+        "PARTIAL": "可观察提交工程存在，A、B 恰好满足一项。",
+        "FAIL": "无可观察提交工程，或 A、B 均不满足。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact_dependency_and_clean_rebuild",
+        "procedure": "检查提交实际使用的两张图是否打包，以及工程文本中的观察方向和控制值。将 submission.blend、build.py 与本题 input 放入独立目录，隔离原路径；按脚本说明用 Blender 5.1.2 从空场景重建，再比较原画、默认扫光参数和固定视角结果。重建不要求逐像素一致，但不能缺图或依赖原机器文件。打开成功只是前提，不单独奖励。此处仅规定未来验证过程，本轮不运行 Blender 或评分器。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

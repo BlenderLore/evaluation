@@ -1,0 +1,225 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Strawberry Jelly Cake",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1TkmjB1EFA",
+    "id": "BV1TkmjB1EFA"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 35,
+    "PROC": 10,
+    "SURF": 45,
+    "PIPE": 10
+  },
+  "weighting_note": "GEO 35 covers the matching layered pieces, modeled fruit detail, and placement. PROC 10 checks the retained arc repetition relationship. SURF 45 separates fruit skin, required image mapping, jelly optics, cream, and biscuit. PIPE 10 covers reproducible delivery.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Cake and Detached Slice",
+      "criterion": "A missing-wedge cake and matching detached slice share three aligned geometric layers.",
+      "scoring_rule": {
+        "PASS": "Both pieces have matching tall jelly, shorter cream, and thin base layers with corresponding cut faces/heights; layers are separately editable, closed, closely stacked, softly rounded outside, and retain readable wedge cuts without cracks or deep overlaps.",
+        "PARTIAL": "A main round cake and detached wedge both contain at least two distinct stacked geometric layers. Not all PASS conditions are met.",
+        "FAIL": "The main cake or detached wedge is absent, or either piece has fewer than two distinct stacked geometric layers."
+      },
+      "evidence_refs": [
+        "image/01_jelly_cake.png",
+        "image/02_layer_geometry.png"
+      ],
+      "verification": {
+        "method": "artifact geometry, material, and functional inspection",
+        "procedure": "Inspect neutral front/top/oblique views, isolate each layer, inspect closure and contacts, and compare the wedge shape and layer heights between both pieces.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Strawberry Form and Surface Detail",
+      "criterion": "Strawberries have tapered rounded bodies, recessed sockets, real seeds, and genuine cut faces.",
+      "scoring_rule": {
+        "PASS": "Strawberries have rounded shoulders and tapered tips, many recessed sockets containing small seed forms, smooth skin between sockets, suitable size for the jelly, and real flat cut faces on the cut fruit.",
+        "PARTIAL": "Recognizable three-dimensional strawberries have some modeled surface seed detail. Not all PASS conditions are met.",
+        "FAIL": "Recognizable three-dimensional strawberries or modeled seed detail are absent."
+      },
+      "evidence_refs": [
+        "image/03_strawberry_geometry.png"
+      ],
+      "verification": {
+        "method": "artifact geometry, material, and functional inspection",
+        "procedure": "Inspect an isolated whole and cut strawberry in neutral close renders; inspect cross-sections and evaluated geometry to distinguish sockets/seeds from painted dots and flat faces from image planes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Fruit Placement and Editable Repetition",
+      "criterion": "Whole and outward-facing cut fruit fit the jelly and the detached slice.",
+      "scoring_rule": {
+        "PASS": "Whole fruit sits within the jelly; peripheral cut fruit follows the retained outer arc with outward faces; the slice contains fruit; the cutout has no floating remnants and fruit/seed placement is balanced without protruding fragments.",
+        "PARTIAL": "Both whole and cut strawberries are visibly embedded in the main cake jelly. Not all PASS conditions are met.",
+        "FAIL": "Whole or cut strawberries are absent from the main cake jelly, or they are not embedded in it."
+      },
+      "evidence_refs": [
+        "image/01_jelly_cake.png"
+      ],
+      "verification": {
+        "method": "artifact geometry, material, and functional inspection",
+        "procedure": "Inspect overhead and oblique views with jelly temporarily hidden, then restore jelly to inspect the outward faces and slice content.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Fruit Placement and Editable Repetition",
+      "criterion": "Peripheral strawberry repetition keeps bodies, seeds, and outward-facing cuts coordinated.",
+      "scoring_rule": {
+        "PASS": "Editing arc span and radius repositions complete fruit/seed units together, and changing count changes their number while retaining outward cut-face orientation.",
+        "PARTIAL": "An arc control or repetition count changes the generated peripheral strawberry arrangement. Not all PASS conditions are met.",
+        "FAIL": "No arc control or repetition count produces a real change in the peripheral fruit arrangement."
+      },
+      "evidence_refs": [
+        "image/01_jelly_cake.png"
+      ],
+      "verification": {
+        "method": "artifact geometry, material, and functional inspection",
+        "procedure": "On a temporary copy, vary span, radius, and count independently and compare evaluated unit positions, seed alignment, unit count, and cut-face directions; restore the submitted values.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Strawberry Form and Surface Detail",
+      "criterion": "Glossy red skin and pale yellow seeds give the modeled fruit a distinct finish.",
+      "scoring_rule": {
+        "PASS": "The modeled strawberries have glossy red skin and distinguishable pale yellow seeds, with smooth skin between sockets and no uniformly rough or metallic appearance.",
+        "PARTIAL": "Present strawberries use a red applied skin material. Not all PASS conditions are met.",
+        "FAIL": "The strawberries are absent or have no applied red skin material."
+      },
+      "evidence_refs": [
+        "image/01_jelly_cake.png",
+        "image/03_strawberry_geometry.png"
+      ],
+      "verification": {
+        "method": "artifact geometry, material, and functional inspection",
+        "procedure": "Inspect actual fruit material assignments and controlled close renders under soft and grazing lights, evaluating both skin and seed surfaces.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Strawberry Cut-Face Mapping",
+      "criterion": "The supplied image is correctly mapped onto real strawberry cut faces.",
+      "scoring_rule": {
+        "PASS": "The supplied texture is applied to the actual cut faces with the pale core aligned along each fruit, red flesh fitted to its silhouette, no distracting background/border patches or stretching, and skin/seeds kept visually distinct.",
+        "PARTIAL": "At least one real strawberry cut face visibly uses the supplied texture image. Not all PASS conditions are met.",
+        "FAIL": "No real strawberry cut face visibly uses the supplied texture image."
+      },
+      "evidence_refs": [
+        "image/01_jelly_cake.png"
+      ],
+      "verification": {
+        "method": "artifact geometry, material, and functional inspection",
+        "procedure": "Inspect image provenance and UV/material assignment on cut faces, isolate representative cut fruit, and render front-on to assess the core direction, coverage, border, and distortion.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Transparent Red Jelly",
+      "criterion": "Transparent red jelly reveals embedded fruit and gains depth through its light response.",
+      "scoring_rule": {
+        "PASS": "Both jelly layers share a coherent transparent red treatment with visible internal fruit, stronger coloration over longer light paths, smooth controlled reflections and edge refraction, and clean top, side, and cut surfaces without black seams.",
+        "PARTIAL": "The main cake and slice both have an applied transparent red upper-layer material that reveals some embedded fruit. Not all PASS conditions are met.",
+        "FAIL": "Either upper layer lacks an applied transparent red treatment that reveals some embedded fruit."
+      },
+      "evidence_refs": [
+        "image/01_jelly_cake.png"
+      ],
+      "verification": {
+        "method": "artifact geometry, material, and functional inspection",
+        "procedure": "Render the main cake and slice under front and rear lighting; inspect fruit visibility, longer-path color depth, edge response, and all jelly surfaces using their actual materials.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "Cream and Biscuit Materials",
+      "criterion": "Cream has a consistent warm pale finish with fine procedural relief.",
+      "scoring_rule": {
+        "PASS": "Cream on both cake pieces has a consistent warm pale finish and fine soft irregular surface relief controlled by an effective editable procedural texture.",
+        "PARTIAL": "A present cream layer has an applied warm pale material. Not all PASS conditions are met.",
+        "FAIL": "The cream is absent or lacks an applied warm pale material."
+      },
+      "evidence_refs": [
+        "image/01_jelly_cake.png"
+      ],
+      "verification": {
+        "method": "artifact geometry, material, and functional inspection",
+        "procedure": "Inspect cream materials on both pieces with grazing lighting and temporarily vary the procedural texture scale to confirm effective control.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-05",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "Cream and Biscuit Materials",
+      "criterion": "Biscuit has a golden-brown coarse crumb finish distinct from cream.",
+      "scoring_rule": {
+        "PASS": "Both biscuit bases share a golden-brown finish with effective editable procedural crumb texture visibly coarser and rougher in highlight response than the cream.",
+        "PARTIAL": "A present biscuit layer has an applied golden-brown material. Not all PASS conditions are met.",
+        "FAIL": "The biscuit is absent or lacks an applied golden-brown material."
+      },
+      "evidence_refs": [
+        "image/01_jelly_cake.png"
+      ],
+      "verification": {
+        "method": "artifact geometry, material, and functional inspection",
+        "procedure": "Render cream and base together under identical lighting, compare texture scale and highlight response, and vary the base texture control on a copy.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable project, input-dependent build script, and authentic cake PNG are delivered.",
+      "scoring_rule": {
+        "PASS": "All three named files exist; the blend retains requested editability and live repetition, the supplied image resolves or is packed, build.py recreates the scene from the start and input, and the actual-scene PNG reveals the complete cake, slice, layers, cutout, and fruit using Blender 5.1.2 and Cycles GPU settings.",
+        "PARTIAL": "A readable submission.blend contains the recognizable layered cake and slice. Not all PASS conditions are met.",
+        "FAIL": "submission.blend is absent, unreadable, or lacks the recognizable layered cake and slice."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact geometry, material, and functional inspection",
+        "procedure": "Open the blend, inspect dependency resolution and render settings, run build.py in clean Blender 5.1.2 with the supplied input, and compare the rebuilt scene and controlled render to the delivered blend and PNG. No runtime execution is claimed during authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

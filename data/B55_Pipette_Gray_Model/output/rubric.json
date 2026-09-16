@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Pipette Gray Model",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1EA5T6sEvE",
+    "id": "BV1EA5T6sEvE"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "This is an exterior gray-model exercise. Geometry receives 90 points distributed across eight distinct shape and finish outcomes. The source does not establish material, rigging, simulation, or procedural-generator work. Modifier existence is not procedural credit. The remaining 10 points cover editable reconstruction and the required scene-render delivery.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Main Housing",
+      "criterion": "The main grip is a slender closed housing with a capsule-shaped horizontal section and a width hierarchy over both shafts.",
+      "scoring_rule": {
+        "PASS": "The grip is vertically slender, has two rounded section ends connected by short straight sides, has continuous closed exterior sides, and is visibly wider than both the upper shaft and lower nozzle.",
+        "PARTIAL": "A recognizable slender three-dimensional grip is present, but at least one PASS condition is unmet, such as a circular section, weak straight sides, or an unclear width hierarchy.",
+        "FAIL": "No recognizable slender three-dimensional grip is present. A flat image, disconnected fragments, or an unrelated primitive does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_silhouette.png", "image/02_capsule_section.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect the evaluated housing in top, front, and side views. Inspect a horizontal section through the central grip, excluding the control recess. Confirm rounded ends, connecting straight sides, closed exterior form, and the grip-to-shaft width hierarchy. Judge local finish only under GEO-08.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Lower Shoulder and Nozzle",
+      "criterion": "The lower assembly preserves the stepped asymmetric shoulder and long narrow nozzle with a reduced closed terminal section.",
+      "scoring_rule": {
+        "PASS": "The grip leads through a short stepped transition and an angled shoulder into a long narrow cylindrical nozzle. The nozzle is offset toward one rounded end of the housing, remains parallel to its vertical direction, has a reduced terminal section and closed end, and joins without a visible gap or twisted section.",
+        "PARTIAL": "A connected-looking lower nozzle is visibly narrower than the grip and longer than its own width, but at least one PASS condition is unmet, such as a centered shoulder, missing terminal reduction, or insufficient shoulder definition.",
+        "FAIL": "There is no connected-looking lower nozzle narrower than the grip and longer than its own width. A detached rod, surface marking, or short bottom bump does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_silhouette.png", "image/03_lower_shoulder.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect the lower assembly in orthographic views along both horizontal axes and from below. Compare the shoulder's inward slope and nozzle offset with the references. Confirm the stepped transition, elongated round section, parallel shaft direction, terminal reduction, closed end, and visible continuity at joins.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Upper Plunger",
+      "criterion": "The upper plunger has a long narrow shaft, a broad thin cap, and a coherent aligned connection into the upper neck.",
+      "scoring_rule": {
+        "PASS": "A plunger projects above the housing with a long narrow shaft and a cap visibly broader than the shaft and thinner than its own width. The cap is centered on the shaft, the shaft aligns with the upper neck, and the connection is visually coherent.",
+        "PARTIAL": "A recognizable shaft-and-cap plunger projects above the housing, but at least one PASS condition is unmet, such as a bulky cap, short shaft, or misaligned connection.",
+        "FAIL": "No recognizable shaft-and-cap plunger projects above the housing. A bare rod, isolated cap, or image substitute does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_silhouette.png", "image/05_upper_assembly.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect the upper assembly in front and side views, then orbit around it. Check the shaft-and-cap silhouette, cap thickness and centering, and the shaft-to-neck connection. Assess independent editability under PIPE-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Opposing Side Controls",
+      "criterion": "The curved trigger forms a rounded horizontal finger rest with an underside that deepens toward its housing attachment.",
+      "scoring_rule": {
+        "PASS": "A short horizontal trigger extends from one side at the top of the grip. It has a fairly flat top, curved underside deepening toward its root, rounded outer end, softened edges, and a convincing attachment to the housing.",
+        "PARTIAL": "A distinct three-dimensional horizontal trigger extends from the upper grip and meets the housing, but at least one PASS condition is unmet, such as a rectangular underside, sharp end, or weak root shape.",
+        "FAIL": "No distinct three-dimensional horizontal trigger extends from and meets the upper grip. A detached piece or painted shape does not meet the minimum."
+      },
+      "evidence_refs": ["image/04_control_recess.png", "image/05_upper_assembly.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect the trigger from its side, top, and underside. Compare the top and lower profiles, rounded outer end, edge treatment, and attachment to the reference. Do not use modifier presence or vertex counts as evidence of the shape.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Opposing Side Controls",
+      "criterion": "A genuine recessed control area cuts into the upper housing opposite the curved trigger and preserves the lower grip.",
+      "scoring_rule": {
+        "PASS": "The upper housing opposite the trigger has a real recess with visible depth, clear side boundaries, and a defined lower ledge. The recess remains confined to the upper control area and leaves the lower grip intact.",
+        "PARTIAL": "A real geometric indentation is present in the upper housing opposite the trigger, but at least one PASS condition is unmet, such as unclear boundaries, weak depth, or a poorly defined lower ledge.",
+        "FAIL": "There is no real geometric indentation in the specified opposite upper control area. A dark material patch, an external box, or a recess on an unrelated part does not meet the minimum."
+      },
+      "evidence_refs": ["image/04_control_recess.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_section_inspection",
+        "procedure": "Temporarily hide the side button and paddle in a duplicate inspection scene. Inspect the evaluated housing from oblique views and through a section crossing the control area to confirm real inward geometry, side boundaries, lower ledge, and preservation of the lower grip. Restore visibility afterward.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Opposing Side Controls",
+      "criterion": "A narrow vertical side button has a rounded outer face and sits legibly within the opposite control recess.",
+      "scoring_rule": {
+        "PASS": "A narrow vertical button sits in the opposite recess, has a rounded outward face and flatter back toward the housing, and retains a distinguishable border and lower end without emerging through the opposite side of the grip.",
+        "PARTIAL": "A distinct narrow vertical three-dimensional button occupies the opposite upper control area, but at least one PASS condition is unmet, such as a flat outward face, poor recess fit, or an obscured lower end.",
+        "FAIL": "No distinct narrow vertical three-dimensional button occupies the opposite upper control area. A painted stripe or the paddle alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/05_upper_assembly.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect the button in the assembled scene and in isolation, including its top section and back. Confirm vertical proportions, rounded front, flatter back, position in the recess, and readable border and lower end. Check that it does not extend out the other side of the grip.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Opposing Side Controls",
+      "criterion": "A thin horizontal paddle with a rounded outer end sits above the vertical side button and remains distinct from the other controls.",
+      "scoring_rule": {
+        "PASS": "A horizontal paddle sits above the vertical side button on the side opposite the curved trigger. It has a rounded outer end in top view, a thin solid profile, softened outer edges, and a shape visibly separate from both the side button and curved trigger.",
+        "PARTIAL": "A distinct solid horizontal paddle exists in the opposite upper control area, but at least one PASS condition is unmet, such as a square end, bulky thickness, sharp edges, or poor separation from the button.",
+        "FAIL": "No distinct solid horizontal paddle exists in the opposite upper control area. The curved trigger alone, a painted mark, or the vertical button alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/05_upper_assembly.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect the paddle from above and from the side, then inspect the full upper assembly. Confirm the rounded end, thin solid profile, softened edges, placement over the vertical button, and distinction from the curved trigger. Judge local shading faults under GEO-08.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-08",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Editable Geometry and Finish",
+      "criterion": "All required components have finished evaluated geometry and controlled shading while retaining intentional edges.",
+      "scoring_rule": {
+        "PASS": "The housing, lower nozzle, plunger, trigger, vertical button, and paddle are all present and readable. Curved surfaces shade continuously, intentional ledges remain defined, and none has accidental holes, inverted faces, spikes, major pinching, or exposed intersections that obscure its form.",
+        "PARTIAL": "All required components are present and readable as three-dimensional forms, but at least one PASS finish condition is unmet. Local faceting, pinching, shading discontinuities, or exposed attachment faults are examples.",
+        "FAIL": "Any required component is missing or unreadable as a three-dimensional form. Absence of geometry does not earn finish credit."
+      },
+      "evidence_refs": ["image/01_complete_silhouette.png", "image/05_upper_assembly.png"],
+      "verification": {
+        "method": "controlled_shading_and_mesh_inspection",
+        "procedure": "Orbit around the evaluated model using a neutral diffuse inspection material and broad lighting. Inspect suspicious regions with face orientation and wireframe overlays. Judge shading continuity, unintended open boundaries, normal direction, pinching, spikes, and exposed intersections; do not re-score overall shape or proportions from GEO-01 through GEO-07.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The Blender file and build script provide an editable, reproducible model and presentation scene.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens in Blender 5.1.2 with independently editable housing, plunger, trigger, vertical button, and paddle. build.py rebuilds the same model and presentation scene from an empty scene without unavailable external assets.",
+        "PARTIAL": "submission.blend opens and contains editable pipette geometry, but at least one PASS condition is unmet, including missing or incomplete build.py, reconstruction differences, or inseparable required components.",
+        "FAIL": "submission.blend is absent, cannot be opened, or contains no editable three-dimensional pipette geometry. Render images alone do not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "file_inspection_and_future_reconstruction_probe",
+        "procedure": "Open submission.blend in Blender 5.1.2 and inspect component editability without altering the original. Review build.py, then run it in a separate empty scene and compare the rebuilt geometry and presentation setup with the submission. Record external dependency failures and meaningful differences. This procedure is specified for future submissions and has not been executed during task authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Presentation",
+      "criterion": "The named PNG is a clear full-model render from the submitted Cycles scene.",
+      "scoring_rule": {
+        "PASS": "B55_Pipette_Gray_Model.png is rendered from the submitted scene using Cycles with GPU rendering. It shows the full cap-to-nozzle model in a close three-quarter view on a plain background with neutral gray appearance and lighting that reveals the housing transitions, both control sides, rounded forms, and recess depth.",
+        "PARTIAL": "A PNG rendered from the actual submitted scene shows a recognizable pipette, but at least one PASS condition is unmet, such as the filename, framing, engine setup, obscured controls, weak lighting, or non-neutral presentation.",
+        "FAIL": "No PNG rendered from the actual submitted scene shows a recognizable pipette. A source image, viewport screenshot, external replacement, or unrelated render does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_silhouette.png", "image/05_upper_assembly.png"],
+      "verification": {
+        "method": "render_provenance_and_manual_inspection",
+        "procedure": "Inspect the PNG and the submitted camera and Cycles configuration. Re-render the submitted camera in an authorized evaluation environment and compare model, viewpoint, and lighting with the PNG. Check full-model framing, three-quarter visibility, neutral gray presentation, plain background, and readable geometry; do not assign independent lighting-design credit.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

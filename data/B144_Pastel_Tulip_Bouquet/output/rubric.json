@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Pastel Tulip Bouquet",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1U5RmBSEMu",
+    "id": "BV1U5RmBSEMu"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 65, "SURF": 25, "PIPE": 10},
+  "weighting_note": "Geometry receives 65 points because the source independently constructs petal shells, layered heads, curved stems, folded leaves, and a hollow sphere holder. Static bouquet arrangement and ordinary component editability do not establish a rig or procedural generator. Surface appearance receives 25 points, and saved reconstruction and actual-scene render delivery share the remaining 10 points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Tulip Heads",
+      "criterion": "The flower petals have a rounded, tapered, inward-curving shell form with actual thickness and smooth curved surfaces.",
+      "scoring_rule": {
+        "PASS": "At least one assembled head contains editable curved petal shells with actual thickness, and all petals used by the submitted heads have broad rounded bodies, tapered lower ends, convex exteriors, concave interiors, inward-curving upper edges, softly rounded rims, and smooth visible surfaces without coarse facets or sharp shading creases.",
+        "PARTIAL": "At least one assembled head contains editable curved petal shells with actual thickness, but any PASS condition is unmet, including incomplete shaping, uneven rims, or visible faceting on existing petals.",
+        "FAIL": "No assembled head contains editable curved petal shells with actual thickness; flat cards, an undivided solid bud, or isolated unused petal samples do not meet this minimum."
+      },
+      "evidence_refs": ["image/01_bouquet.png", "image/02_layered_head.png"],
+      "verification": {
+        "method": "Evaluated geometry and neutral-shaded inspection",
+        "procedure": "Open submission.blend, isolate the visible petal geometry from an assembled head, and orbit around representative outer and inner petals. Inspect evaluated cross-sections or edge views for thickness and concavity, then inspect all submitted heads under neutral shading for the stated curvature and finish. Head count and layering are assessed separately in GEO-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Tulip Heads",
+      "criterion": "Three flower heads form overlapping outer and smaller staggered inner petal layers, with closed lower cups and readable upper openings.",
+      "scoring_rule": {
+        "PASS": "At least one recognizable assembled head has overlapping petals around a smaller inner layer, and exactly three heads satisfy this structure: plump upright cups, staggered inner and outer seams, lower closure around the stem position, and upper openings revealing inner rims. Any interior filler remains contained within the petals.",
+        "PARTIAL": "At least one recognizable assembled head has overlapping petals around a smaller inner layer, but any PASS condition is unmet, including a missing head, obscured inner rims, poorly staggered layers, open lower gaps, or protruding filler.",
+        "FAIL": "No recognizable assembled head has overlapping petals around a smaller inner layer. A single undivided bud, loose petals, or only an outer petal ring is below the minimum."
+      },
+      "evidence_refs": ["image/01_bouquet.png", "image/02_layered_head.png"],
+      "verification": {
+        "method": "Multi-angle geometry inspection",
+        "procedure": "Inspect the saved bouquet from the delivery camera, above, and from the side. Count recognizable heads and inspect their petal layout, visible inner rims, lower closure, and any filler intrusion. Temporarily hide outer petals in a duplicate scene when needed to inspect the inner layer.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Stems and Leaves",
+      "criterion": "Each flower has a slender, gently curved tubular stem that continuously connects its head to the holder opening.",
+      "scoring_rule": {
+        "PASS": "At least one recognizable flower has a continuous solid stem connecting its head base to the holder opening, and all three flowers have gently curved stems with round cross-sections, diameters much smaller than their heads, no abrupt kinks, and lower ends entering the opening.",
+        "PARTIAL": "At least one recognizable flower has a continuous solid stem connecting its head base to the holder opening, but any PASS condition is unmet, including missing connections on other flowers, overly thick stems, angular bends, or flattened cross-sections.",
+        "FAIL": "No recognizable flower has a continuous solid stem connecting its head base to the holder opening. Disconnected decorative lines or stems without this head-to-holder connection are below the minimum."
+      },
+      "evidence_refs": ["image/01_bouquet.png"],
+      "verification": {
+        "method": "Evaluated stem and endpoint inspection",
+        "procedure": "Temporarily hide leaves in a duplicate of the saved scene. Trace each stem from the head base to its lower end, inspect connections to the holder opening, and examine side and cross-sectional views for smooth curvature, solid round form, and relative width. Accept equivalent editable mesh or curve construction.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Stems and Leaves",
+      "criterion": "Each stem carries paired slender leaves with tapered tips and attachments, lengthwise folds, longitudinal bends, and thin solid edges.",
+      "scoring_rule": {
+        "PASS": "At least one stem has a pair of attached elongated solid leaves with tapered tips, and each of the three stems has such a pair. The leaves have tapered attachments, broader middles, shallow lengthwise folds, gentle longitudinal bends, thin solid edges, and smooth surfaces; their tips spread outward below the flower heads.",
+        "PARTIAL": "At least one stem has a pair of attached elongated solid leaves with tapered tips, but any PASS condition is unmet, including incomplete foliage on other stems, absent folds or bends, thick edges, rough surfaces, or poorly placed tips.",
+        "FAIL": "No stem has a pair of attached elongated solid leaves with tapered tips. Isolated leaf samples, flat image cards, or unrelated foliage do not meet this minimum."
+      },
+      "evidence_refs": ["image/01_bouquet.png", "image/03_folded_leaf.png"],
+      "verification": {
+        "method": "Leaf geometry and attachment inspection",
+        "procedure": "Inspect each stem's leaves in the saved scene, hiding neighboring flowers as necessary. Examine front, side, and edge views for tapered leaf form, fold, bend, thickness, surface smoothness, attachment, and tip placement relative to the heads.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Sphere Holder",
+      "criterion": "The holder is a regular, approximately cubical sphere assembly with three-level outer walls and a supported central planting opening.",
+      "scoring_rule": {
+        "PASS": "A recognizable solid holder has repeated round lobes on adjacent sides and a central top opening, and it forms approximately cubical walls three sphere levels high and three lobes across each side. Similarly sized spheres are regularly spaced, touching or slightly overlapping while retaining smooth individual round profiles, and the opening continues through the middle level above supporting lower geometry.",
+        "PARTIAL": "A recognizable solid holder has repeated round lobes on adjacent sides and a central top opening, but any PASS condition is unmet, including irregular spacing, incorrect wall proportions, coarse sphere surfaces, a shallow opening, missing lower support, or excessive overlaps that obscure individual spheres.",
+        "FAIL": "There is no recognizable solid holder with repeated round lobes on adjacent sides and a central top opening. A plain cube, a flat row of spheres, or a solid sphere cluster with no planting opening is below the minimum."
+      },
+      "evidence_refs": ["image/01_bouquet.png", "image/04_holder_opening.png"],
+      "verification": {
+        "method": "Isolated holder and cavity inspection",
+        "procedure": "Hide the flowers in a duplicate scene and inspect the holder from the front, side, above, and in a vertical section. Check the three-level wall pattern, regular sphere proportions and spacing, smooth profiles, central opening through upper and middle levels, and support below the opening. Do not require arrays, an exact mesh-island count, or a particular object organization.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Bouquet Arrangement",
+      "criterion": "The bouquet has a clear lower-front and higher-back arrangement with independently editable flower assemblies.",
+      "scoring_rule": {
+        "PASS": "At least two independently editable flower assemblies are planted in a common holder, and the complete bouquet has three distinct heads with one lower front flower and two higher rear flowers, modest positional and tilt variation, and visible heads above foliage. The holder remains a substantial lower mass consistent with the reference proportions. All three flower assemblies, their petals, stems, and leaves are accessible for editing, and the holder is separately editable.",
+        "PARTIAL": "At least two independently editable flower assemblies are planted in a common holder, but any PASS condition is unmet, including an incomplete trio, nearly coincident heads, absent height variation, obscuring foliage, strongly mismatched holder proportions, or restricted component access.",
+        "FAIL": "Fewer than two independently editable flower assemblies are planted in a common holder. A single flower, a flattened image, or an inseparable baked representation without editable flower assemblies is below the minimum."
+      },
+      "evidence_refs": ["image/01_bouquet.png"],
+      "verification": {
+        "method": "Spatial inspection and ordinary editing probe",
+        "procedure": "Inspect the saved bouquet from its camera and orthogonal views for the stated height and front/back relationships. In a duplicate scene, select and translate one flower assembly, confirm the other flowers and holder remain unchanged, then inspect component access and undo the change. This tests ordinary editability, not rig behavior or animation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Materials",
+      "criterion": "Assigned petal materials produce smooth pale-peach-to-coral transitions from lower portions to upper rims and inner curls.",
+      "scoring_rule": {
+        "PASS": "At least one assembled head has visible inner and outer petal surfaces with an assigned, visible peach-to-pink transition, and the visible inner and outer petals of all three heads consistently transition lengthwise from pale peach or cream below to coral pink at upper rims and curls, with smooth blending and a soft opaque response.",
+        "PARTIAL": "At least one assembled head has visible inner and outer petal surfaces with an assigned, visible peach-to-pink transition, but any PASS condition is unmet, including incomplete material coverage on other heads, inverted or inconsistent transitions, abrupt bands, or unsuitable surface response.",
+        "FAIL": "No assembled head has visible inner and outer petal surfaces with an assigned, visible peach-to-pink transition. Unused materials, flat single-color petals, or a color effect supplied only by lighting do not meet this minimum."
+      },
+      "evidence_refs": ["image/01_bouquet.png"],
+      "verification": {
+        "method": "Assigned-material inspection and controlled render",
+        "procedure": "Inspect the material assignments on actual outer and inner petal geometry. In a duplicate scene use neutral illumination to render the heads, checking the lower-to-upper color direction, smooth blending, coverage, and opaque soft response. Inspect material evaluation to distinguish the gradient from colored illumination; accept equivalent shader implementations.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Materials",
+      "criterion": "The foliage is fresh yellow-green and the sphere holder is opaque white, with soft highlights that preserve their modeled forms.",
+      "scoring_rule": {
+        "PASS": "An existing stem and attached leaf visibly use a yellow-green material and an existing rounded region of the holder visibly uses a white material, and all stems and leaves use consistent fresh yellow-green surfaces with gentle highlights while the complete holder uses opaque white surfaces with soft highlights and readable shading between spheres. The colors remain distinct under neutral lighting.",
+        "PARTIAL": "An existing stem and attached leaf visibly use a yellow-green material and an existing rounded region of the holder visibly uses a white material, but any PASS condition is unmet, including incomplete assignment coverage, uneven color, excessive gloss or transparency, or shading that obscures the leaf folds or sphere separation.",
+        "FAIL": "The submitted geometry lacks either a visibly yellow-green stem with an attached yellow-green leaf or a visibly white rounded holder region. Unused materials, colors supplied only by lighting, or absent surfaces do not meet this minimum."
+      },
+      "evidence_refs": ["image/01_bouquet.png"],
+      "verification": {
+        "method": "Surface assignment and neutral-light render inspection",
+        "procedure": "Inspect materials assigned to stems, leaves, and the holder. Render these existing components under neutral lighting in a duplicate scene, checking yellow-green foliage, opaque white spheres, coverage, restrained highlights, visible folds, and shading between sphere lobes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The supplied build script reconstructs the scene and saves a usable submission.blend that reproduces the submitted bouquet.",
+      "scoring_rule": {
+        "PASS": "Both submission.blend and build.py are supplied, and running build.py from an empty Blender 5.1.2 scene, without a prebuilt solution scene or unavailable assets, produces a saved submission.blend containing recognizable editable flower-and-holder geometry. Reopening that saved file reproduces the submitted bouquet's complete geometry, materials, camera, and lighting.",
+        "PARTIAL": "Both files are supplied and running build.py from an empty Blender scene, without a prebuilt solution scene or unavailable assets, produces a saved submission.blend containing recognizable editable flower-and-holder geometry, but any PASS condition is unmet, including incomplete reconstruction of materials, components, or presentation settings.",
+        "FAIL": "Either file is missing, the script cannot produce a saved submission.blend containing recognizable editable flower-and-holder geometry, or it depends on a prebuilt solution scene or unavailable assets. An unsaved in-memory rebuild does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Isolated reconstruction and saved-file reopening",
+        "procedure": "Inspect the supplied submission.blend, then run build.py in a clean temporary working location with Blender 5.1.2 starting from an empty scene. Confirm the script writes submission.blend, open that saved file in a fresh Blender process, and compare its editable bouquet, materials, camera, and lighting with the submitted scene. Inspect dependencies to confirm no prebuilt solution file or unavailable asset is required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named PNG is an actual-scene Cycles render that clearly presents the entire submitted bouquet.",
+      "scoring_rule": {
+        "PASS": "B144_Pastel_Tulip_Bouquet.png is supplied and is demonstrably rendered from submission.blend, and it shows the entire bouquet from a slightly elevated three-quarter view with all heads, foliage, and the holder legible at sufficient detail to inspect petal layers and sphere arrangement. The saved scene uses Cycles with GPU rendering configured.",
+        "PARTIAL": "The named PNG is supplied and is demonstrably rendered from submission.blend, but any PASS condition is unmet, including cropped geometry, poor visibility or detail, unsuitable viewing angle, or incomplete Cycles GPU configuration.",
+        "FAIL": "The named PNG is missing, unreadable, or cannot be established as a render of submission.blend. A source image, viewport screenshot, or externally created replacement is excluded."
+      },
+      "evidence_refs": ["image/01_bouquet.png"],
+      "verification": {
+        "method": "Render provenance and delivery inspection",
+        "procedure": "Open the named PNG and inspect framing and detail. Inspect the saved scene's active camera and Cycles GPU configuration, then reproduce its render from the submitted scene and compare geometry, material appearance, framing, and lighting with the PNG to establish actual-scene provenance. Do not require an output directory that is absent from the public task.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

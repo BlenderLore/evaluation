@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Pancake Stack with Amber Syrup",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1XUQuYQEqz",
+    "id": "BV1XUQuYQEqz"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 55, "SURF": 40, "PIPE": 5},
+  "weighting_note": "The core work is modeling a soft food assembly and its flowing coating, so geometry receives 55 points across five independent outcomes. Surface work receives 40 points for baked color, fine grain, translucent syrup, and butter appearance. Five points cover the saved scene, reproducible build, and actual-scene render. Shader procedures are SURF; no procedural geometry, motion, or physical simulation is required.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. Pancake Shape",
+      "criterion": "The pancake bodies have filled, soft, rounded profiles with coherent smooth evaluated geometry.",
+      "scoring_rule": {
+        "PASS": "At least one substantial pancake body exists with a filled circular footprint, clear thickness, and a curved shoulder-to-side transition. Every pancake body in the submitted stack has the required broad, low proportions, gently domed top, rounded shoulders, softly bulging sides, closed geometry, and smooth silhouette without visible pinching or sharp cylindrical rims. Count and stacking are assessed separately.",
+        "PARTIAL": "At least one substantial pancake body exists with a filled circular footprint, clear thickness, and a curved shoulder-to-side transition, but one or more PASS conditions are unmet.",
+        "FAIL": "No substantial pancake body has the minimum filled circular footprint, clear thickness, and curved shoulder-to-side transition. Empty geometry, flat discs, and open rings do not meet this minimum."
+      },
+      "evidence_refs": ["image/02-pancake-bodies.png", "image/01-finished-stack.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection and neutral-shaded views",
+        "procedure": "Open the saved scene and isolate the pancake geometry without changing its evaluated shape. Inspect top, side, and oblique views with neutral shading. Check that each existing body is filled and closed, has visible thickness and a curved shoulder, and retains a smooth soft profile. Assess the shape quality of the existing bodies here; assess their count and arrangement in GEO-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Three-Layer Stack",
+      "criterion": "Exactly three comparable pancake bodies form a balanced, closely seated vertical stack with readable layer boundaries.",
+      "scoring_rule": {
+        "PASS": "At least two recognizable pancake bodies are vertically ordered with overlapping horizontal footprints, and the final assembly contains exactly three similarly sized pancakes in a compact balanced stack. Adjacent layers touch or nearly touch, all three layers remain individually readable, and no conspicuous gap or deep intersection erases their boundaries.",
+        "PARTIAL": "At least two recognizable pancake bodies are vertically ordered with overlapping horizontal footprints, but one or more PASS conditions are unmet.",
+        "FAIL": "Fewer than two recognizable pancake bodies are vertically ordered with overlapping horizontal footprints; a single pancake or a scattered arrangement does not meet the minimum."
+      },
+      "evidence_refs": ["image/02-pancake-bodies.png"],
+      "verification": {
+        "method": "Spatial and contact inspection",
+        "procedure": "Identify pancake components in the saved scene by their geometry. Inspect front and side views and their evaluated bounds to establish the count, relative size, vertical order, and overlapping footprints. Inspect each neighboring pair for near-contact, obvious floating gaps, or intersections that remove the visual separation of layers.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Butter Pat",
+      "criterion": "A small rounded rectangular butter pat has clear thickness and sits convincingly on the top of the food assembly.",
+      "scoring_rule": {
+        "PASS": "An independently editable, recognizably rectangular butter body with a broad upper face and visible thickness exists at the top of a pancake. It is a small squat pat with rounded edges and corners, sits near the back of the syrup-covered area without a conspicuous gap or deep burial, and leaves substantial pancake surface visible around it.",
+        "PARTIAL": "An independently editable, recognizably rectangular butter body with a broad upper face and visible thickness exists at the top of a pancake, but one or more PASS conditions are unmet.",
+        "FAIL": "No independently editable, recognizably rectangular butter body with a broad upper face and visible thickness exists at the top of a pancake. A flat decal, sphere, absent pat, or detached unrelated block does not meet the minimum."
+      },
+      "evidence_refs": ["image/03-butter-placement.png", "image/01-finished-stack.png"],
+      "verification": {
+        "method": "Evaluated geometry and seating inspection",
+        "procedure": "Inspect the butter in oblique and side views, including its contact with the pancake or syrup. Confirm a three-dimensional rounded rectangular body that can be edited separately. Compare its scale with the top pancake and inspect the broad face, squat thickness, corner rounding, and placement relative to the coating.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "4. Syrup Geometry",
+      "criterion": "A thin conforming syrup coating has an irregular exposed boundary and two unequal smoothly rounded hanging drips.",
+      "scoring_rule": {
+        "PASS": "An independently editable syrup coating covers a substantial top-pancake region and continues into at least one hanging drip beyond the top shoulder. The complete coating is continuous, thin but visibly thick at its edge, follows the pancake without visible clipping or hovering, and leaves substantial top surface exposed. Its irregular flowing boundary forms two clearly separated rounded drips, one longer and wider reaching over the middle pancake and one shorter and narrower, with smooth tips and no rigid slab appearance.",
+        "PARTIAL": "An independently editable syrup coating covers a substantial top-pancake region and continues into at least one hanging drip beyond the top shoulder, but one or more PASS conditions are unmet.",
+        "FAIL": "No independently editable coating both covers a substantial top-pancake region and continues into a hanging drip beyond the top shoulder. A flat color patch, disconnected hanging strip, complete absence of drips, or isolated unused coating does not meet the minimum."
+      },
+      "evidence_refs": ["image/04-syrup-shape.png", "image/01-finished-stack.png"],
+      "verification": {
+        "method": "Coating silhouette, thickness, and surface-contact inspection",
+        "procedure": "Inspect the evaluated coating in neutral shading from above, the final camera, and both sides. Confirm a connected top region and hanging geometry, then trace the perimeter and compare the two drip lengths and widths. Inspect edge cross-sections and near-contact regions for actual thickness, rounded tips, clipping, or a visible gap from the pancake. Do not require a particular modifier, mesh construction, or numeric thickness.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "4. Syrup Geometry",
+      "criterion": "A small detached syrup drop adds a rounded flattened detail beneath and in front of the stack.",
+      "scoring_rule": {
+        "PASS": "An independently editable, three-dimensional detached drop exists beneath the pancake stack. It is small relative to a pancake, flattened with a smooth rounded outline and visible volume, separated from the coating, and positioned slightly in front so it is clearly visible in the final view.",
+        "PARTIAL": "An independently editable, three-dimensional detached drop exists beneath the pancake stack, but one or more PASS conditions are unmet.",
+        "FAIL": "No independently editable, three-dimensional detached drop exists beneath the pancake stack. A painted mark, a connected tip of the main coating, or an absent drop does not meet the minimum."
+      },
+      "evidence_refs": ["image/04-syrup-shape.png", "image/01-finished-stack.png"],
+      "verification": {
+        "method": "Drop geometry and placement inspection",
+        "procedure": "Locate the detached drop in the saved scene and inspect side and oblique views. Check that it has visible volume, a rounded flattened form, and editable geometry separate from the coating. Compare its scale and position with the stack and confirm it remains distinguishable in the final camera view.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "5. Food Materials",
+      "criterion": "Pancake surfaces transition from warm toasted tops to a lighter creamy side band.",
+      "scoring_rule": {
+        "PASS": "At least one substantial pancake has an assigned material that visibly distinguishes a warm toasted upper region from a lighter creamy side band across its curved shoulder. All three pancakes exhibit this baked color structure with smooth transitions, consistent visual treatment, and no hard painted-stripe appearance.",
+        "PARTIAL": "At least one substantial pancake has an assigned material that visibly distinguishes a warm toasted upper region from a lighter creamy side band across its curved shoulder, but one or more PASS conditions are unmet.",
+        "FAIL": "No substantial pancake shows an assigned material with a warm toasted upper region and lighter creamy side band across a curved shoulder. Uniform coloring, unused materials, or color visible only on a flat test surface does not meet the minimum."
+      },
+      "evidence_refs": ["image/01-finished-stack.png"],
+      "verification": {
+        "method": "Assigned-material inspection and controlled color views",
+        "procedure": "Inspect the saved scene under its final lighting and, if necessary, neutral broad lighting in a temporary copy. Confirm the color treatment is assigned to actual pancake surfaces and follows the top-to-side transition on each body. Judge hue families and smooth distribution from the visible result without requiring particular shader nodes or color codes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "5. Food Materials",
+      "criterion": "Fine irregular surface grain responds to light while preserving the pancakes' soft large-scale form.",
+      "scoring_rule": {
+        "PASS": "Fine irregular surface relief is visibly effective on a substantial top-to-side region of at least one actual pancake. All three pancakes carry subtle grain much smaller than their thickness, with a readable response to light and no coarse lumps, oversized patterning, or disruption of the soft overall form.",
+        "PARTIAL": "Fine irregular surface relief is visibly effective on a substantial top-to-side region of at least one actual pancake, but one or more PASS conditions are unmet.",
+        "FAIL": "No substantial top-to-side region of an actual pancake exhibits fine irregular surface relief. Unused textures, perfectly smooth surfaces, isolated test swatches, or coarse deformations without fine grain do not meet the minimum."
+      },
+      "evidence_refs": ["image/01-finished-stack.png"],
+      "verification": {
+        "method": "Close surface inspection with a lighting probe",
+        "procedure": "Inspect close rendered views of actual pancake top and side surfaces. In a temporary copy, vary a broad light direction and compare the response of the fine surface detail with the unchanged large-scale silhouette. Confirm the detail is effective on the assigned surfaces of all three bodies. Do not score render sampling noise or a color-only speckle pattern as relief.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "5. Food Materials",
+      "criterion": "Syrup combines an amber tinted body, glossy highlights, and visible partial transparency on the coating and drop.",
+      "scoring_rule": {
+        "PASS": "An actual syrup coating over a pancake has an assigned amber material with visible gloss and some underlying pancake color or form visible through a thinner region. The whole coating and detached drop share a coherent warm amber appearance, preserve tinted thickness and rounded-edge definition, and avoid both opaque plastic appearance and near-invisibility.",
+        "PARTIAL": "An actual syrup coating over a pancake has an assigned amber material with visible gloss and some underlying pancake color or form visible through a thinner region, but one or more PASS conditions are unmet.",
+        "FAIL": "No actual syrup coating over a pancake has all three minimum effects: amber tint, visible gloss, and some visible underlying pancake color or form through a thinner region. An unused shader, isolated sample, fully opaque coating, or invisible sheet does not meet the minimum."
+      },
+      "evidence_refs": ["image/01-finished-stack.png"],
+      "verification": {
+        "method": "Rendered material inspection and transmission probe",
+        "procedure": "Inspect the assigned coating and drop materials in the saved scene and close renders of a thin coating region and a rounded drip edge. In a temporary copy, vary broad lighting and change the underlying pancake color to a contrasting value to confirm that the observed transparency is a material interaction with the actual geometry. Restore the original state after inspection. Require visible amber tint, gloss, and transmission rather than a specific node recipe.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "3. Butter Pat",
+      "criterion": "The butter has a pale warm-yellow opaque surface and soft highlights distinct from the syrup.",
+      "scoring_rule": {
+        "PASS": "An actual three-dimensional butter pat has an assigned visibly warm-yellow surface. Its color is pale, its body reads as opaque, and its soft highlights distinguish it from the darker glossy syrup while preserving the pat's rounded form.",
+        "PARTIAL": "An actual three-dimensional butter pat has an assigned visibly warm-yellow surface, but one or more PASS conditions are unmet.",
+        "FAIL": "No actual three-dimensional butter pat has an assigned visibly warm-yellow surface. An absent pat, unused material, or unrelated yellow test object does not meet the minimum."
+      },
+      "evidence_refs": ["image/01-finished-stack.png"],
+      "verification": {
+        "method": "Assigned butter surface and highlight inspection",
+        "procedure": "Inspect the material assigned to the actual butter pat and render it under the final lighting. Compare the pat's pale warm-yellow color, opacity, and broad soft highlights with the darker syrup. Assess its existing surface here; geometric rounding and placement are assessed in GEO-03.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The submission includes an editable saved scene, a working script that recreates and saves it, and the named actual-scene PNG.",
+      "scoring_rule": {
+        "PASS": "A readable submission.blend contains actual editable pancake-assembly geometry and assigned materials. The supplied build.py runs from an empty scene in Blender 5.1.2, recreates the complete scene and saves submission.blend, and that saved result reopens with geometry, materials, camera, lighting, and Cycles GPU render settings intact. B118_Pancake_Stack_with_Amber_Syrup.png is a render of the submitted scene with the elevated three-quarter view and complete framing required in Section 6.",
+        "PARTIAL": "A readable submission.blend contains actual editable pancake-assembly geometry and assigned materials, but one or more PASS conditions are unmet.",
+        "FAIL": "No readable submission.blend contains actual editable pancake-assembly geometry and assigned materials. Images alone, an empty scene, or an unsaved in-memory reconstruction do not meet the minimum."
+      },
+      "evidence_refs": ["image/01-finished-stack.png"],
+      "verification": {
+        "method": "Saved-file inspection, independent rebuild, and render provenance comparison",
+        "procedure": "Locate the three named deliverables without imposing an additional directory layout. Open submission.blend and inspect its editable scene. Run build.py in Blender 5.1.2 from an empty scene in a temporary workspace using its declared invocation, then locate and reopen the submission.blend that it actually saved. Check that the recreated geometry, assigned materials, camera, lights, and Cycles GPU settings persist after reopening. Compare a render of the submitted saved scene with the named PNG to confirm actual-scene provenance and the public presentation requirements. Do not award the rebuild condition for an in-memory scene that was never saved.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

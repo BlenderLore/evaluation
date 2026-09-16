@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Beaker with Pouring Spout",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1R5L46rEuG",
+    "id": "BV1R5L46rEuG"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "The demonstrated task is native mesh modeling. Geometry receives 90 points distributed across proportions, cavity, thickness, spout, rim, base, geometric finish, and editability. The title-card glass and liquid are outside the demonstrated scope. Modifier presence does not earn procedural points, and gray-model smoothness is geometry. Delivery and rebuilding share the remaining 10 points. Assess shading finish independently from missing minor parts; geometric openings, thickness, spout shape, rim continuity, and base form are assessed in their own rows.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Body and Open Cavity",
+      "criterion": "An upright, nearly cylindrical body has the tall compact proportions and nearly vertical long sidewalls of the reference.",
+      "scoring_rule": {
+        "PASS": "A recognizable upright curved vessel body exists around most of its circumference; its height is moderately greater than its body diameter, its horizontal body sections are approximately circular, and its long sidewalls are nearly vertical away from the localized upper spout region.",
+        "PARTIAL": "A recognizable upright curved vessel body exists around most of its circumference, but one or more PASS conditions are unmet, including overly squat or elongated proportions, noticeable taper, oval body sections, or broad sidewall distortion.",
+        "FAIL": "There is no recognizable upright curved vessel body around most of its circumference; an isolated fragment, flat surface, or unrelated shape does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_completed_beaker.png"],
+      "verification": {
+        "method": "Evaluated geometry measurements and orthographic inspection",
+        "procedure": "Open the submitted scene, identify the actual vessel, and inspect front, side, and horizontal sections of its evaluated geometry. Compare height with the diameter of the main body excluding the spout and rim. Judge the qualitative proportions against the public reference and check that upper spout deformation does not distort the lower cylindrical body.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. Body and Open Cavity",
+      "criterion": "The mouth opens into a deep interior cavity with a closed floor near the bottom.",
+      "scoring_rule": {
+        "PASS": "An open cavity extends substantially down inside the body and an interior floor closes at least most of the bottom; the mouth is fully unobstructed, the interior reaches near the bottom, and the floor completely closes the cavity without unintended holes or filler.",
+        "PARTIAL": "An open cavity extends substantially down inside the body and an interior floor closes at least most of the bottom, but one or more PASS conditions are unmet, such as a local floor gap, a partially obstructed mouth, or an interior that stops noticeably too high.",
+        "FAIL": "The minimum deep open cavity and mostly closed interior floor are absent. A capped solid, shallow indentation, open-ended tube, or interior hidden by unrelated filler does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_completed_beaker.png", "image/02_rim_and_spout.png"],
+      "verification": {
+        "method": "Cross-section and interior inspection",
+        "procedure": "Inspect the actual evaluated vessel from above and through a temporary clipping section on a disposable copy. Trace the open mouth down the inner wall to the interior floor and check closure at the bottom. Hide unrelated presentation objects to determine whether any apparent cavity is only an image or a shallow surface.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Wall Thickness and Rounded Base",
+      "criterion": "Real, modest thickness separates the inner and outer vessel surfaces and continues through the bottom and spout.",
+      "scoring_rule": {
+        "PASS": "Distinct inner and outer walls exist across most of the body height on at least two broad opposing side regions; modest finite thickness continues around the body, across the bottom, and into the spout, stays reasonably even along the main cylindrical wall, and does not collapse or cross itself.",
+        "PARTIAL": "Distinct inner and outer walls exist across most of the body height on at least two broad opposing side regions, but one or more PASS conditions are unmet, including excessive or uneven thickness, missing thickness in a local region, a spout without matching inner thickness, or a local surface crossing.",
+        "FAIL": "Distinct inner and outer walls across most of the body height on two broad opposing side regions are absent. A single thin sheet, solid body, or decorative rim surrounding an unthickened wall does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_rim_and_spout.png"],
+      "verification": {
+        "method": "Evaluated wall cross-sections",
+        "procedure": "Take temporary sections through opposite main-body walls, the bottom, and the spout of a disposable evaluated copy. Check that paired surfaces have positive separation and form actual shell thickness. Compare wall thickness with body diameter and inspect thickness variation without using modifier names as evidence.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "3. Pouring Spout",
+      "criterion": "A localized, open pouring spout has a gently pointed tip and smoothly joined shoulders.",
+      "scoring_rule": {
+        "PASS": "An identifiable localized outward extension of the vessel's own upper wall exists at its mouth; it forms an open pouring tip continuous with the cavity, has a gently pointed rounded end, returns smoothly to the circular mouth on both shoulders, and blends into the upper wall while preserving the lower cylindrical body.",
+        "PARTIAL": "An identifiable localized outward extension of the vessel's own upper wall exists at its mouth, but one or more PASS conditions are unmet, such as a blunt tip, blocked pouring channel, abrupt shoulders, lopsided transition, or deformation extending too far down the body.",
+        "FAIL": "No identifiable localized outward extension of the vessel's own upper wall exists at its mouth. A separate attached ornament, uniformly oval mouth, or merely tilted vessel does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_completed_beaker.png", "image/02_rim_and_spout.png"],
+      "verification": {
+        "method": "Top and side geometry inspection",
+        "procedure": "Inspect evaluated top and side views and a close view from inside the mouth. Trace both spout shoulders from the ordinary circular mouth to the tip and verify that the cavity reaches the tip. Compare the localized deformation with the lower body's sections.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "4. Continuous Thick Rim",
+      "criterion": "A rounded thick rim follows the complete mouth and spout as an integrated continuous band.",
+      "scoring_rule": {
+        "PASS": "A rounded band integrated with the vessel covers at least half of its mouth perimeter; it continues around the complete opening and spout without breaks or abrupt steps, projects slightly beyond the adjacent wall, is visibly thicker than that wall, and keeps a consistent rounded profile around the ordinary circular region with a smooth spout transition.",
+        "PARTIAL": "A rounded band integrated with the vessel covers at least half of its mouth perimeter, but one or more PASS conditions are unmet, including an incomplete band, loss of the band at the spout, abrupt profile changes, or an excessively heavy or barely distinguishable rim.",
+        "FAIL": "An integrated rounded band covering at least half of the actual vessel mouth perimeter is absent. A detached ring, isolated bead, or raw unthickened wall edge does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_rim_and_spout.png"],
+      "verification": {
+        "method": "Rim perimeter and profile inspection",
+        "procedure": "Orbit the evaluated mouth and inspect temporary rim cross-sections through the circular region, shoulders, and spout tip. Confirm that the band belongs to the vessel and maintains its rounded profile around the opening. Compare its width with the adjacent wall and trace any discontinuities.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Wall Thickness and Rounded Base",
+      "criterion": "A broad flat underside joins the upright sidewall through a narrow rounded lower perimeter.",
+      "scoring_rule": {
+        "PASS": "A base attached to the main body has a broad approximately planar support region; that underside remains flat and stable, and a narrow rounded transition follows the lower perimeter into the sidewall without consuming a substantial part of the body height.",
+        "PARTIAL": "A base attached to the main body has a broad approximately planar support region, but one or more PASS conditions are unmet, such as sharp lower corners, an uneven transition, an excessively large lower rounding, or a slightly warped support region.",
+        "FAIL": "The actual body lacks a base with a broad approximately planar support region. A missing underside, separate display pedestal, or fully rounded bottom supported only at a point does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_completed_beaker.png", "image/03_rounded_base.png"],
+      "verification": {
+        "method": "Underside plane and lower profile inspection",
+        "procedure": "Inspect the actual lower-body geometry from underneath and in an orthographic section. Compare the support region with a temporary plane and trace the curved transition into the sidewall. Assess base form here; cavity-floor closure is assessed separately in GEO-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "5. Smooth Editable Geometry",
+      "criterion": "Existing core vessel surfaces have smooth curvature and consistent orientation without unintended shading defects.",
+      "scoring_rule": {
+        "PASS": "Substantial curved outer and inner walls of the actual body both exist; those core walls and any completed lower transition, rim, and spout show smooth curvature, consistent orientation, and no conspicuous coarse facets, unintended dents, pinched highlights, or abrupt shading seams under clear neutral lighting.",
+        "PARTIAL": "Substantial curved outer and inner walls of the actual body both exist, but one or more PASS finish conditions are unmet on those surfaces or completed features. Missing minor features alone do not force FAIL, and absent surfaces cannot establish this minimum.",
+        "FAIL": "The actual body does not contain substantial curved outer and inner walls that can demonstrate the required geometric finish. An isolated smooth fragment, flat plane, or outer wall without an inner wall does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_completed_beaker.png", "image/02_rim_and_spout.png"],
+      "verification": {
+        "method": "Controlled neutral inspection and surface orientation check",
+        "procedure": "On a disposable scene copy, inspect existing core outer and inner surfaces under neutral lighting from several directions, and examine geometry normals or face orientation where shading is suspicious. Judge curved-surface finish only; do not deduct again for a missing component, wall-thickness defect, spout shape, rim discontinuity, or base shape already assigned to its dedicated row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-08",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "5. Smooth Editable Geometry",
+      "criterion": "The visible vessel is backed by coherent editable geometry, including locally editable internal surfaces, rim, and spout.",
+      "scoring_rule": {
+        "PASS": "The visible main body is backed by editable geometry whose edits affect the actual vessel; body, interior, rim, and spout form coherent vessel geometry and remain locally editable, and a local spout-profile adjustment is possible without rebuilding the whole container.",
+        "PARTIAL": "The visible main body is backed by editable geometry whose edits affect the actual vessel, but one or more PASS conditions are unmet, such as an uneditable dependent feature, disconnected vessel construction, missing local feature geometry, or a spout that cannot be adjusted locally.",
+        "FAIL": "The visible main body has no editable geometry whose changes affect the vessel. An image, unrelated hidden source, or inaccessible external object does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_rim_and_spout.png"],
+      "verification": {
+        "method": "Disposable local mesh-edit probe",
+        "procedure": "Duplicate the submitted vessel in a disposable file. Inspect the editable geometry or its editable generating source, then make a small local change to the spout profile and confirm that the displayed vessel updates locally while the main body persists. Undo the probe. Accept direct mesh geometry and equivalent non-destructive construction; require no particular modifier or original modeling action.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The saved scene and required PNG are usable and the image visibly comes from the submitted beaker scene.",
+      "scoring_rule": {
+        "PASS": "The required submission.blend opens and contains an identifiable beaker scene; the named PNG is present and is an actual render of that scene, the saved scene contains its presentation setup with Cycles GPU configured, and the image clearly frames the whole beaker from slightly above so its cavity, rim, spout, and lower edge can be inspected without missing dependencies.",
+        "PARTIAL": "The required submission.blend opens and contains an identifiable beaker scene, but one or more PASS conditions are unmet, such as a missing or mismatched PNG, an incomplete saved presentation setup, missing dependencies, incorrect render configuration, or obstructed framing.",
+        "FAIL": "The required submission.blend is absent, cannot be opened, or contains no identifiable beaker scene. A PNG alone does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Saved-scene and render provenance inspection",
+        "procedure": "Open submission.blend in Blender 5.1.2 and check dependencies, camera, lighting, material, and render settings. Inspect B126_Beaker_with_Pouring_Spout.png and compare its visible geometry and composition with a controlled render from the saved scene. Check the public viewing requirements without requiring any unlisted output directory.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "build.py reconstructs the scene from scratch and saves a usable submission.blend containing the resulting geometry and presentation.",
+      "scoring_rule": {
+        "PASS": "Executing build.py from a clean Blender scene writes an openable submission.blend containing an identifiable beaker; the script completes without error, and reopening that saved result shows the complete required beaker geometry, editable construction, materials, camera, lighting, and render configuration without manual scene repair or loading the submitted solution file as its starting scene.",
+        "PARTIAL": "Executing build.py from a clean Blender scene writes an openable submission.blend containing an identifiable beaker without loading the submitted solution file as its starting scene, but one or more PASS conditions are unmet in the reopened saved result.",
+        "FAIL": "build.py is missing, loads the submitted solution file as its starting scene instead of recreating it, or does not execute far enough to write an openable submission.blend containing an identifiable beaker. An unsaved in-memory reconstruction does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean execution and saved-result verification",
+        "procedure": "In an isolated temporary working area, run the submitted build.py using Blender 5.1.2 from factory startup with no preloaded scene. Locate the submission.blend it saves, close that process, and open the saved file in a fresh Blender process. Inspect the reopened scene against the public geometry, editability, and presentation requirements. Do not treat the script's in-memory scene or console messages as proof that the required saved result exists.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

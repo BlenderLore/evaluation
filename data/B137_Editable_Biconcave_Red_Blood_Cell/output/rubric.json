@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Editable Biconcave Red Blood Cell",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1CKutzsEPo",
+    "id": "BV1CKutzsEPo"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 70, "PROC": 20, "PIPE": 10},
+  "weighting_note": "The source is a modeling task. Geometry receives 70 points across independent disk proportions, two-sided concavity, perimeter shape, bend, smooth finish, and surface integrity. The two live geometric evaluation behaviors receive 20 PROC points based on functional changes, not modifier presence. Delivery receives 10 PIPE points. The colored opening showcase does not establish a material task, and these geometric parameters do not establish a rigging task.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Disk Proportions",
+      "criterion": "The cell has the proportions of a compact, thick disk with an approximately circular broad outline.",
+      "scoring_rule": {
+        "PASS": "An existing three-dimensional cell body has two broad faces, a filled center, and measurable thickness; in its unbent state the broad dimensions are similar, the outline is approximately circular, and its thickness is visibly smaller than its diameter without becoming sheet-like.",
+        "PARTIAL": "An existing three-dimensional cell body has two broad faces, a filled center, and measurable thickness, and reads as a flattened body, but does not meet every PASS condition, such as an overly elongated outline or an excessively thick or thin disk.",
+        "FAIL": "There is no three-dimensional cell body with two broad faces, a filled center, and measurable thickness, or the body does not read as a flattened form. A sphere, line, flat sheet, or open-centered ring is below the minimum."
+      },
+      "evidence_refs": ["image/04_smooth_bowl.png"],
+      "verification": {
+        "method": "Evaluated geometry and orthographic inspection",
+        "procedure": "Open the saved scene and locate the delivered cell. In a temporary copy, neutralize its bend using the retained control when possible. Inspect the evaluated broad-face and edge projections and compare its principal broad extents and thickness. If no working bend control exists, inspect the closest available broad and edge views; control functionality is assessed separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 20,
+      "requirement_section": "Two-Sided Concavity",
+      "criterion": "Both broad faces have broad geometric depressions surrounding a thinner solid central bridge.",
+      "scoring_rule": {
+        "PASS": "A cell body with both broad faces present and a positive-thickness central bridge has at least one genuine central depression, and both faces sink inward over broad central regions with gradual transitions into fuller annuli; the center remains solid and thinner than the surrounding ring.",
+        "PARTIAL": "A cell body with both broad faces present and a positive-thickness central bridge has at least one genuine central depression, but does not meet every PASS condition, such as a weak or missing depression on the other face, an overly narrow pit, or insufficient central thinning.",
+        "FAIL": "Both broad faces or a positive-thickness central bridge are not present, neither face has a genuine central depression, or the apparent concavity is only shading, a decal, or an open hole through the body."
+      },
+      "evidence_refs": ["image/02_first_face.png", "image/03_opposing_face.png", "image/04_smooth_bowl.png"],
+      "verification": {
+        "method": "Opposing views and geometric cross-sections",
+        "procedure": "Inspect both broad faces with neutral diagnostic shading and take evaluated cross-sections through the center along two broad directions. Compare the face centers with the surrounding annuli and verify that a positive-thickness bridge separates the opposing depressions. Distinguish surface curvature from material appearance.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Rim and Surface Integrity",
+      "criterion": "The outer perimeter has a full rounded profile joining the two broad faces.",
+      "scoring_rule": {
+        "PASS": "An existing disk has a visibly rounded outer rim across most of its perimeter, and this plump convex profile continues around the complete edge, joining the broad faces without a sharp flange or narrow sheet seam.",
+        "PARTIAL": "An existing disk has a visibly rounded outer rim across most of its perimeter, but does not meet every PASS condition, such as local flattening, uneven rim fullness, or a limited sharp section.",
+        "FAIL": "No disk with a rounded rim across most of its perimeter exists, or the predominant edge is a sharp flange, a paper-thin seam, or disconnected sheet edges."
+      },
+      "evidence_refs": ["image/03_opposing_face.png", "image/05_bent_edge.png"],
+      "verification": {
+        "method": "Perimeter sweep and section inspection",
+        "procedure": "Orbit around the delivered cell and inspect representative evaluated cross-sections at different positions around the edge. Check the convex edge profile and its transition between the broad faces. Assess edge fullness here; center depression and microscopic surface smoothness have separate checks.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Gentle Bend",
+      "criterion": "The saved cell exhibits a gentle continuous overall bend while retaining its disk identity.",
+      "scoring_rule": {
+        "PASS": "An existing disk-like cell has visible overall curvature, and its saved bend is mild and continuous, comparable to the reference, while preserving the two depressions and rounded perimeter without folds, twists, or a sharp crease.",
+        "PARTIAL": "An existing disk-like cell has visible overall curvature, but does not meet every PASS condition, such as excessive curvature, uneven bending, or local distortion of an otherwise recognizable disk.",
+        "FAIL": "No disk-like cell with visible overall curvature exists, the saved body is unbent, or folding, twisting, or collapse destroys the disk identity."
+      },
+      "evidence_refs": ["image/01_completed_cell.png", "image/05_bent_edge.png"],
+      "verification": {
+        "method": "Saved-state oblique and edge inspection",
+        "procedure": "Inspect the evaluated saved state from oblique and edge-biased directions. Follow the body mid-surface across the disk to distinguish global bending from its local central depressions. Compare the visible arc with the reference and check whether the body remains recognizable without folds or twist. This row assesses the saved shape, independently of whether its control works.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Rim and Surface Integrity",
+      "criterion": "The evaluated curved surfaces and silhouette have a smooth modeling finish.",
+      "scoring_rule": {
+        "PASS": "At least one complete curved depression-to-rim region exists, and the complete cell, including both broad faces and perimeter, has smooth curvature and a smooth silhouette at the saved setting without visible polygon steps, pinched centers, or abrupt shading bands.",
+        "PARTIAL": "At least one complete curved depression-to-rim region exists and demonstrates a substantially smooth surface, but does not meet every PASS condition, including finish defects elsewhere or incomplete coverage of the full cell.",
+        "FAIL": "No complete curved depression-to-rim region exists, or the available core region is predominantly faceted, pinched, or broken by abrupt shading. A flat or absent surface cannot meet the minimum."
+      },
+      "evidence_refs": ["image/01_completed_cell.png", "image/04_smooth_bowl.png"],
+      "verification": {
+        "method": "Neutral shaded inspection at saved evaluation",
+        "procedure": "Use neutral shading on a temporary copy at the delivered evaluation settings. Inspect both bowls and the perimeter at a useful object-filling view, then examine the silhouette. Attribute geometric faceting and normal-related finish to this row; material color and showcase gloss are not required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Rim and Surface Integrity",
+      "criterion": "The cell is a closed, connected, editable surface with positive thickness and coherent orientation.",
+      "scoring_rule": {
+        "PASS": "A continuous editable cell body spans both broad faces and the outer edge; it is one connected closed surface with positive thickness, consistent outward-facing normals, no holes, and no self-intersections.",
+        "PARTIAL": "A continuous editable cell body spans both broad faces and the outer edge, but does not meet every PASS condition, such as localized openings, inconsistent normals, or isolated intersections.",
+        "FAIL": "No continuous editable cell body spans both broad faces and the outer edge, or only disconnected fragments, loose sheets, or a non-editable image representation are supplied."
+      },
+      "evidence_refs": ["image/02_first_face.png", "image/03_opposing_face.png"],
+      "verification": {
+        "method": "Native structure and evaluated mesh audit",
+        "procedure": "Inspect the native editable surface structure and obtain a temporary evaluated mesh. Check connected components, boundary and non-manifold edges, face orientation, central thickness, and intersections. Verify that the core geometry can be edited rather than being only a reference image. Do not require a particular vertex count, face type, object name, or construction primitive.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Geometric Evaluation",
+      "criterion": "A retained bend amount changes and restores the cell's evaluated overall curvature.",
+      "scoring_rule": {
+        "PASS": "A retained geometric bend control visibly changes the delivered cell's curvature without rebuilding or swapping the body; zero recovers an unbent biconcave disk, reduced magnitude reduces curvature, and restoring the saved value restores the delivered shape while preserving depressions, positive thickness, and the smooth perimeter.",
+        "PARTIAL": "A retained geometric bend control visibly changes the delivered cell's curvature without rebuilding or swapping the body, but does not meet every PASS condition, such as distortion at zero, loss of a depression during adjustment, or imperfect restoration.",
+        "FAIL": "No retained geometric bend control visibly changes the delivered cell's curvature, or the apparent control only transforms the whole object, changes shading, exchanges separate models, or requires manually rebuilding the mesh."
+      },
+      "evidence_refs": ["image/04_smooth_bowl.png", "image/01_completed_cell.png", "image/05_bent_edge.png"],
+      "verification": {
+        "method": "Non-destructive geometric parameter probe",
+        "procedure": "On a temporary scene copy, record the saved bend value and evaluated shape. Set the retained amount to zero, then half its saved magnitude, then restore it. Compare evaluated coordinates or cross-sections and oblique views at each state. Confirm an unbent biconcave disk, intermediate curvature, restoration, and retained thickness. If the saved value is zero, use a modest supported nonzero amount to establish whether the functional minimum exists; the required reduction from a saved bent state is still unmet. Modifier or node presence alone earns no credit.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Geometric Evaluation",
+      "criterion": "A retained refinement control changes geometric evaluation density and restores the smooth cell.",
+      "scoring_rule": {
+        "PASS": "A retained refinement control changes the evaluated geometric density of the same cell; lowering a supported setting produces a coarser evaluation, and restoring the saved higher setting recovers the smooth surface while retaining the biconcave profile and bend.",
+        "PARTIAL": "A retained refinement control changes the evaluated geometric density of the same cell, but does not meet every PASS condition, such as significant profile drift, degraded bending, or a saved setting that remains visibly coarse.",
+        "FAIL": "No retained control changes the evaluated geometric density of the cell, or the only available change is shading, object scaling, a static alternate model, or manual remeshing."
+      },
+      "evidence_refs": ["image/02_first_face.png", "image/04_smooth_bowl.png", "image/01_completed_cell.png"],
+      "verification": {
+        "method": "Geometric refinement probe",
+        "procedure": "In a temporary copy, record the delivered refinement setting and evaluated geometry. Select a lower supported density setting and compare the evaluated tessellation and shape. Restore the saved setting and inspect its geometric density, smooth bowl-to-rim transitions, and retained bend. If the saved setting is already the minimum, use a supported higher setting to establish whether geometric density can change, while treating the required lower-and-restore sequence as unmet. Accept equivalent native evaluation methods; do not require an exact modifier type, level, count, or stack order.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The saved scene opens and build.py recreates and saves an equivalent editable scene.",
+      "scoring_rule": {
+        "PASS": "A readable submission.blend and executable Blender build.py are supplied; running the script from a fresh Blender session in a clean working directory creates submission.blend, and reopening that saved result reveals the equivalent cell, live geometric behavior, and inspection setup.",
+        "PARTIAL": "A readable submission.blend and executable Blender build.py are supplied, and the script creates a readable submission.blend containing the cell, but does not meet every PASS condition, such as incomplete restoration of geometric controls or the inspection setup.",
+        "FAIL": "The submitted scene is unreadable or absent, build.py is absent or cannot execute, or the script does not save a readable submission.blend containing the cell. An unsaved in-memory reconstruction is below the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Fresh-session build and saved-file reopening",
+        "procedure": "Open the submitted submission.blend. Run build.py with Blender 5.1.2 in a fresh session with a clean working directory. Confirm that submission.blend is saved there, then open that generated file in another fresh session and compare its core cell geometry, retained control behavior, camera, and lighting with the submission. Judge reproducibility here rather than awarding the geometry rows again.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named PNG is a legible Cycles render of the actual submitted cell scene.",
+      "scoring_rule": {
+        "PASS": "A readable B137_Editable_Biconcave_Red_Blood_Cell.png depicts the submitted cell and is consistent with an actual scene render; the saved scene is configured for Cycles GPU rendering, and the image shows the entire cell against a plain background with an oblique view and lighting that reveal the depression, rounded edge, and bend.",
+        "PARTIAL": "A readable B137_Editable_Biconcave_Red_Blood_Cell.png depicts the submitted cell and is consistent with an actual scene render, but does not meet every PASS condition, such as unclear framing, clipping, poorly revealed form, or incorrect saved render configuration.",
+        "FAIL": "The named PNG is absent or unreadable, does not depict the submitted cell, or is a source image, viewport screenshot, or external replacement rather than an actual render of the submitted scene."
+      },
+      "evidence_refs": ["image/01_completed_cell.png", "image/05_bent_edge.png"],
+      "verification": {
+        "method": "Image decoding and scene-render consistency inspection",
+        "procedure": "Decode the PNG, inspect the saved Cycles device and camera configuration, and compare the PNG with a controlled rerender from the saved scene on an available authorized GPU. Check subject identity, framing, and shape visibility rather than requiring a pixel match or the source viewport appearance. The reference images establish form only, not a material style.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

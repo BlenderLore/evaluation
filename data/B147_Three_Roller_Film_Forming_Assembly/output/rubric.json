@@ -1,0 +1,148 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Three-Roller Film Forming Assembly",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1VtM96AECg",
+    "id": "BV1VtM96AECg"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 85, "SURF": 5, "PIPE": 10},
+  "weighting_note": "The source teaches static mechanical geometry. Geometry therefore receives 85 points, distributed across the frame, controls, roller placement, coaxial end structures, fasteners, film path, film thickness, and hard-surface finish. Materials receive 5 points for the simple source appearance. Delivery and reproducibility total 10 points. Symmetry and modifier presence alone do not receive procedural credit; no animation or simulation is required.",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 15,
+      "requirement_section": "1. Rear Frame",
+      "criterion": "An attached L-shaped rear frame provides the base, rear housing, and paired front side arms.",
+      "scoring_rule": {
+        "PASS": "An existing upright rear housing joins a forward-extending low base into a recognizable L-shaped frame; both matching front side arms attach to the base, are level, and leave an open working gap between them.",
+        "PARTIAL": "An existing upright rear housing joins a forward-extending low base into a recognizable L-shaped frame, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no recognizable attached L-shaped frame made from an upright rear housing and a forward-extending low base. Isolated blocks or a base alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_geometry_overview.png"],
+      "verification": {"method": "Evaluated geometry and orthographic inspection", "procedure": "Open submission.blend and inspect the evaluated frame from front and side. Confirm the housing/base junction, forward base extent, and left/right arm positions. Judge the first-station frame only; the downstream exposed stations are intentional.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "2. Front Panel and Controls",
+      "criterion": "The housing front has a depth-stepped rectangular panel and two aligned projecting round controls.",
+      "scoring_rule": {
+        "PASS": "An existing housing front carries a modeled rectangular panel with a narrow border and shallow depth step, plus two matching round controls above it; the controls have short stems and wider projecting heads, align horizontally, and flank the centered panel.",
+        "PARTIAL": "An existing housing front carries at least one recognizable modeled bordered panel or projecting round control, but one or more PASS conditions are unmet.",
+        "FAIL": "An existing housing front does not carry either a recognizable modeled bordered panel or a projecting round control. A painted mark or unattached example part does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_assembly_appearance.png", "image/02_geometry_overview.png"],
+      "verification": {"method": "Geometry inspection with oblique close views", "procedure": "Inspect the saved housing from the front and obliquely. Confirm that the panel boundary changes depth, then inspect both control profiles for stems and wider heads. Compare their centers, sizes, and projection from the housing.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 15,
+      "requirement_section": "3. Roller Layout",
+      "criterion": "Three parallel transverse working barrels occupy the first, raised middle, and lower downstream stations.",
+      "scoring_rule": {
+        "PASS": "Three actual cylindrical working barrels are placed in the assembly and span its working width, with the first at the base's front opening, the second farther forward and higher, and the third farther forward and lower than the second. Their axes are parallel, lengths and radii are comparable, and the downstream spacing permits a film valley.",
+        "PARTIAL": "At least one actual cylindrical working barrel spans the assembly's working width and is positioned as a roller station relative to the rear frame, but one or more PASS conditions are unmet.",
+        "FAIL": "No actual cylindrical working barrel spans the assembly's working width at a roller station relative to the rear frame. End discs without a barrel or an isolated unused cylinder do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_geometry_overview.png", "image/05_film_profile.png"],
+      "verification": {"method": "Evaluated barrel geometry and spatial comparison", "procedure": "Identify working barrels by their geometry and positions, not names. Inspect top and side views; compare transverse axis directions, barrel spans and radii, feed-order positions, and middle-versus-last heights. Temporarily hide the film if necessary and restore visibility afterward.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 10,
+      "requirement_section": "3. Roller Layout",
+      "criterion": "Coaxial axle necks and thin circular end caps complete both ends of the roller stations.",
+      "scoring_rule": {
+        "PASS": "At least one installed barrel has a narrower axle neck and wider circular cap at an end, and all three barrels have these structures at both ends. Necks and caps are coaxial with their barrel; the first station's necks enter the side arms with caps outside them, and all caps have thin profiles and gently rounded rims.",
+        "PARTIAL": "At least one installed barrel has a recognizable narrower axle neck and wider circular cap at an end, but one or more PASS conditions are unmet.",
+        "FAIL": "No installed barrel has both a recognizable narrower axle neck and wider circular cap at an end. Detached samples and plain uncapped barrel ends do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_assembly_appearance.png", "image/02_geometry_overview.png"],
+      "verification": {"method": "End-on and axial-section geometry inspection", "procedure": "Inspect both ends of every saved roller station. Compare neck and cap centers to the barrel axis, examine cap thickness and rim profile, and check how the first necks pass into the paired arms. Exclude fastener count and fastener depth from this row.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-05", "capability": "GEO", "points": 10,
+      "requirement_section": "4. End-Cap Fasteners",
+      "criterion": "Every end cap carries an even four-point pattern of projecting round fasteners with recessed centers.",
+      "scoring_rule": {
+        "PASS": "At least one installed end cap carries two or more modeled round projecting fasteners with discernible exposed end faces, and every end cap on the three roller stations carries exactly four such fasteners. They form a balanced, evenly spaced pattern inside the rim, are seated against the cap, and each has an inset center on its exposed end.",
+        "PARTIAL": "At least one installed end cap carries two or more modeled round projecting fasteners with discernible exposed end faces, but one or more PASS conditions are unmet.",
+        "FAIL": "No installed end cap carries at least two modeled round projecting fasteners with discernible exposed end faces. Flat marks, holes alone, and detached example fasteners do not meet the minimum."
+      },
+      "evidence_refs": ["image/03_end_cap_pattern.png", "image/04_fastener_depth.png"],
+      "verification": {"method": "Evaluated fastener inspection", "procedure": "Inspect each cap end-on to count and compare radial spacing. Inspect oblique close views or mesh sections to confirm projection, seating, and recessed end centers. Do not infer fasteners from dark texture marks or object counts.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-06", "capability": "GEO", "points": 15,
+      "requirement_section": "5. Continuous Film",
+      "criterion": "A centered continuous film follows the three-roller route with smooth crests, valleys, and a flatter free end.",
+      "scoring_rule": {
+        "PASS": "An existing continuous film crosses at least one installed roller in a curved crest with an adjacent valley, and the full film runs from beneath the panel across the base and all three rollers to a flatter free end. It has smooth transitions, a raised middle crest and a lower downstream crest, near-constant width covering most barrel length inside the caps, straight transverse edges, and close upper-barrel crossings without visible penetration or large gaps.",
+        "PARTIAL": "An existing continuous film crosses at least one installed roller in a curved crest with an adjacent valley, but one or more PASS conditions are unmet.",
+        "FAIL": "No existing continuous film crosses an installed roller in a curved crest with an adjacent valley. A flat sheet, disconnected scraps, or an unrelated wavy surface does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_assembly_appearance.png", "image/02_geometry_overview.png", "image/05_film_profile.png"],
+      "verification": {"method": "Evaluated film profile and clearance inspection", "procedure": "Inspect the saved film from above, from the roller-axis side, and obliquely. Trace its continuous route from the panel to the free end. Inspect transverse sections through each barrel crossing for overlap or separation, and compare the visible crest-to-valley transitions and film width to the references. Assess thickness separately.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-07", "capability": "GEO", "points": 5,
+      "requirement_section": "5. Continuous Film",
+      "criterion": "The film is a separately editable thin solid with continuous edge walls through its curved regions.",
+      "scoring_rule": {
+        "PASS": "An existing film has opposing surfaces joined by edge walls through at least one curved crest-to-valley region, and this thin, approximately uniform thickness continues throughout the film, including entry and free end. The thickness is much smaller than a roller radius, and the film can be edited independently of the mechanical parts to revise its path and thickness.",
+        "PARTIAL": "An existing film has opposing surfaces joined by edge walls through at least one curved crest-to-valley region, but one or more PASS conditions are unmet.",
+        "FAIL": "No existing film has opposing surfaces joined by edge walls through a curved crest-to-valley region. A zero-thickness surface or a thickened flat sample alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_assembly_appearance.png", "image/02_geometry_overview.png"],
+      "verification": {"method": "Evaluated mesh section and editability inspection", "procedure": "Inspect film cross sections at a crest, valley, and free end to confirm distinct opposing surfaces and joined edge walls; compare thickness to a roller radius. In a temporary copy, isolate the film and make a small path or thickness edit, confirming that mechanical geometry remains independent. Equivalent mesh, curve, or modifier implementations are allowed.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-08", "capability": "GEO", "points": 5,
+      "requirement_section": "6. Finish and Appearance",
+      "criterion": "Core manufactured surfaces retain flat housing faces and smooth round barrel surfaces.",
+      "scoring_rule": {
+        "PASS": "An existing housing and at least one installed working barrel provide inspectable core surfaces; the housing and existing arms retain broad flat faces with small softened edges, and existing barrel sides have smooth shading and round silhouettes without conspicuous facets, creases, or accidental overlaps at their component boundaries.",
+        "PARTIAL": "An existing housing and at least one installed working barrel provide inspectable core surfaces, but one or more PASS conditions are unmet.",
+        "FAIL": "An existing housing and at least one installed working barrel do not both provide inspectable core surfaces. Isolated smooth samples do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_assembly_appearance.png", "image/02_geometry_overview.png"],
+      "verification": {"method": "Neutral-light geometry and normal inspection", "procedure": "Use controlled neutral lighting or a solid viewport inspection of the saved core surfaces. Check flat housing faces, edge transitions, and lateral barrel silhouettes and shading. This row assesses finish of existing core surfaces, not missing-component counts, film route, or material colors.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 5,
+      "requirement_section": "6. Finish and Appearance",
+      "criterion": "Assigned materials separate the light housing, dark rollers, pale green film, and restrained metallic details.",
+      "scoring_rule": {
+        "PASS": "At least two existing core groups among the housing, rollers, and film are visibly distinguished by assigned materials, and all three groups are present with a light neutral housing, dark working rollers, and pale green film. Existing visible caps and controls have a restrained metallic appearance, and the differences remain readable under the saved lighting.",
+        "PARTIAL": "At least two existing core groups among the housing, rollers, and film are visibly distinguished by assigned materials, but one or more PASS conditions are unmet.",
+        "FAIL": "Fewer than two existing core groups among the housing, rollers, and film are visibly distinguished by assigned materials. Unused materials, viewport selection colors, and missing surfaces do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_assembly_appearance.png"],
+      "verification": {"method": "Material use inspection and controlled render", "procedure": "Inspect actual material assignments on existing core geometry and compare the submitted image with a controlled render from submission.blend. Confirm visible light/dark/green separation and restrained metallic detail response; do not score material datablock counts.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable saved scene is reproducibly created and saved by build.py.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with an editable rear frame, at least one installed working barrel, and a film, and build.py runs from an empty Blender 5.1.2 scene without unavailable inputs, recreates the submitted assembly, and saves submission.blend with its materials, camera, and lighting. The saved rebuilt file opens and contains the recreated result.",
+        "PARTIAL": "submission.blend opens with an editable rear frame, at least one installed working barrel, and a film, but one or more PASS conditions are unmet.",
+        "FAIL": "submission.blend is absent or unreadable, or it does not contain an editable rear frame, at least one installed working barrel, and a film. An unsaved in-memory rebuild alone does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {"method": "Saved-artifact inspection and independent rebuild probe", "procedure": "Open the submitted blend in Blender 5.1.2 and inspect its editable core geometry. Run build.py in an isolated temporary location from an empty scene, then close Blender and reopen the submission.blend saved by that run. Compare its core geometry, materials, camera, and lighting to the submitted scene. Check the saved file, not only the script's in-memory scene; no particular submission directory is required.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-02", "capability": "PIPE", "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named PNG is a readable Cycles GPU render of the submitted assembly.",
+      "scoring_rule": {
+        "PASS": "B147_Three_Roller_Film_Forming_Assembly.png decodes as a nonblank render from submission.blend showing the rear housing and at least one working barrel, and it uses Cycles GPU with the whole assembly in a clear three-quarter view. Both controls, all three roller stations, near-side cap details, the full film path, and free end are visible at a useful inspection size.",
+        "PARTIAL": "B147_Three_Roller_Film_Forming_Assembly.png decodes as a nonblank render from submission.blend showing the rear housing and at least one working barrel, but one or more PASS conditions are unmet.",
+        "FAIL": "The named PNG is missing, unreadable, blank, does not show the rear housing together with at least one inspectable working barrel, or is not rendered from submission.blend. Source images, viewport screenshots, and external replacements cannot meet the minimum."
+      },
+      "evidence_refs": ["image/01_assembly_appearance.png", "image/02_geometry_overview.png"],
+      "verification": {"method": "Image decode, render-setting inspection, and source-scene comparison", "procedure": "Decode the delivered PNG. Inspect the saved engine and device settings and render the submitted camera on an available authorized GPU; compare geometry, camera, and material arrangement against the PNG. Inspect the resulting framing and detail visibility. Confirm the file is a scene render rather than a reference image or viewport capture.", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

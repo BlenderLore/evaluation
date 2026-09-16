@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Editable Honeycomb Ball and Strut Sheet",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1Xc8Fz2E2b",
+    "id": "BV1Xc8Fz2E2b"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 60, "PROC": 25, "SURF": 5, "PIPE": 10},
+  "weighting_note": "Most weight belongs to the actual honeycomb geometry: cell topology, spherical junctions, cylindrical members, connection quality, and smooth geometric finish are distinct outcomes. Shared-network dependency and independent sphere/rod sizing receive PROC credit through distinct position-edit and size-response probes. The simple demonstrated pink appearance receives a small SURF allocation, and reproducible saving plus scene-derived rendering total 10 PIPE points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Honeycomb Layout",
+      "criterion": "The sheet has a connected, planar, regular honeycomb layout with the specified 19-cell compact boundary.",
+      "scoring_rule": {
+        "PASS": "At least three edge-sharing closed hexagonal cells exist, and the complete visible sheet has 19 regular, equally sized open cells in staggered rows of 3, 4, 5, 4, and 3. Its network lies in one plane with shared junctions and edges, the compact symmetric boundary, and no filled cells, extra layers, isolated fragments, or external branches.",
+        "PARTIAL": "At least three edge-sharing closed hexagonal cells form a recognizable honeycomb patch, but one or more PASS conditions are not met.",
+        "FAIL": "Fewer than three edge-sharing closed hexagonal cells are present, or the result does not form a recognizable honeycomb patch. An unused hidden source network alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_honeycomb_sheet.png", "image/02_planar_network.png"],
+      "verification": {
+        "method": "Evaluated geometry and face-on inspection",
+        "procedure": "Inspect the submitted visible geometry and its network from a face-on orthographic view. Trace closed cells, count the five staggered rows, compare edge lengths and hexagonal angles, and inspect a side view for network planarity and extra layers. Inspect disconnected geometry and cell interiors separately. Ignore small sphere and rod surface thickness when evaluating network planarity.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Spherical Junctions",
+      "criterion": "Round, equally sized three-dimensional spheres populate the network junctions at appropriate proportions.",
+      "scoring_rule": {
+        "PASS": "Spherical junctions exist around at least three connected hexagonal cells, and every junction of the required complete patch has exactly one centered, equal-sized sphere. The spheres are three-dimensional and round, wider than the rods, and small enough to preserve clear cell openings.",
+        "PARTIAL": "Spherical junctions exist around at least three connected hexagonal cells, but one or more PASS conditions are not met.",
+        "FAIL": "The submission lacks spherical junctions around at least three connected hexagonal cells, or its apparent junctions are flat discs, image features, or other non-spherical replacements. An isolated sphere source is insufficient."
+      },
+      "evidence_refs": ["image/01_honeycomb_sheet.png", "image/03_junction_detail.png"],
+      "verification": {
+        "method": "Evaluated geometry and multi-view inspection",
+        "procedure": "Inspect junction geometry in the submitted scene from face-on, oblique, and side views. Compare sphere extents along three perpendicular axes, check their centers against network junctions, inspect boundary coverage and shared corners for duplicated spheres, and compare sphere diameter with rod diameter and open cell area. Evaluate shape and population here; evaluate shading finish in GEO-05.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Cylindrical Struts and Contacts",
+      "criterion": "The network edges are represented by substantial straight cylindrical rods of consistent thickness.",
+      "scoring_rule": {
+        "PASS": "Three connected hexagonal cells have actual three-dimensional rod boundaries, and every edge of the complete required patch has one straight circular-section rod of consistent thickness, with visible length between junction spheres and no flat strips, doubled members, or cross-cell shortcuts.",
+        "PARTIAL": "Three connected hexagonal cells have actual three-dimensional rod boundaries, but one or more PASS conditions are not met.",
+        "FAIL": "Fewer than three connected hexagonal cells have actual three-dimensional rod boundaries, or the apparent members consist solely of flat strips, viewport lines, textures, or image content."
+      },
+      "evidence_refs": ["image/01_honeycomb_sheet.png", "image/03_junction_detail.png"],
+      "verification": {
+        "method": "Evaluated member geometry and cross-section inspection",
+        "procedure": "Inspect evaluated rods along internal and boundary edges. Examine sections perpendicular to representative rod centerlines to distinguish circular solids from flat strips; compare thickness, straightness, and exposed length. Trace each network edge to a member and check for duplicates or diagonal members. Reserve rod-end contact defects for GEO-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Cylindrical Struts and Contacts",
+      "criterion": "Rod ends meet their intended junction spheres with clean contacts.",
+      "scoring_rule": {
+        "PASS": "At least three connected cells contain both sphere junctions and incident rods, and all rod ends throughout the complete required patch enter the intended spheres cleanly, with no visible gaps, protruding caps, or visibly offset attachments.",
+        "PARTIAL": "At least three connected cells contain both sphere junctions and incident rods, and some rod ends visibly meet their intended spheres, but one or more PASS conditions are not met.",
+        "FAIL": "Fewer than three connected cells contain both sphere junctions and incident rods, or no rod end visibly meets its intended sphere. Missing components cannot demonstrate clean contact."
+      },
+      "evidence_refs": ["image/03_junction_detail.png"],
+      "verification": {
+        "method": "Close geometry inspection under neutral lighting",
+        "procedure": "Inspect internal three-way junctions and boundary junctions in the submitted scene from multiple angles using a temporary neutral material if needed. Check rod axes and endpoints against their intended spheres, looking for gaps, exposed caps, or offset attachments. This row assesses contacts only, not cell count, cylinder shape, or shading smoothness. Restore temporary inspection settings without saving.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Surface and Presentation",
+      "criterion": "Existing core sphere and rod surfaces have smooth geometric silhouettes and continuous shading.",
+      "scoring_rule": {
+        "PASS": "Spheres and rods populate at least three connected hexagonal cells, and those core surfaces plus all other existing sheet surfaces have smoothly rounded silhouettes and continuous shading at normal inspection distance, without obvious faceting, polygonal rod profiles, or shading seams.",
+        "PARTIAL": "Spheres and rods populate at least three connected hexagonal cells, but one or more PASS conditions are not met on the existing geometry.",
+        "FAIL": "Spheres and rods do not populate at least three connected hexagonal cells. Empty output, isolated source primitives, or image-only geometry cannot establish the minimum surface finish."
+      },
+      "evidence_refs": ["image/01_honeycomb_sheet.png", "image/03_junction_detail.png"],
+      "verification": {
+        "method": "Neutral-material silhouette and normal inspection",
+        "procedure": "Inspect the existing core spheres and rods at full-sheet and close viewing distances. Use a temporary neutral material and broad lighting to expose facet bands and normal discontinuities, and inspect silhouettes independently of highlights. Check whether visible seams originate in geometry or normals. Do not deduct solely for a missing minor boundary component already assessed in its construction row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Editable Network",
+      "criterion": "One retained network drives both the populated sphere centers and the attached rod endpoints.",
+      "scoring_rule": {
+        "PASS": "An editable shared network drives spheres and rods across at least three connected cells. Moving an interior network junction within the plane updates its sphere and every incident rod in the required complete patch while leaving remote junctions unchanged and preserving connections; the behavior remains available in the reopened saved scene.",
+        "PARTIAL": "An editable shared network drives spheres and rods across at least three connected cells, and moving a network junction updates its sphere and at least one incident rod without manual member edits, but one or more PASS conditions are not met.",
+        "FAIL": "No editable network drives both components across at least three connected cells, or a network edit does not update both a sphere and an incident rod. A baked result, unrelated demonstration graph, or manual repair of members is insufficient."
+      },
+      "evidence_refs": ["image/02_planar_network.png", "image/03_junction_detail.png"],
+      "verification": {
+        "method": "Saved-scene functional dependency probe",
+        "procedure": "Open a disposable copy of submission.blend and identify the network that actually generates the visible sheet. Move an interior junction within the plane by about one tenth of a typical edge length, reevaluate, and compare its sphere center, every incident rod endpoint, and several remote junctions before and after. Restore the position and confirm the visible geometry returns. Inspect saved dependencies to establish that the same shared network supplies both components; no specific node types or names are required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Size Controls",
+      "criterion": "Independent saved controls adjust junction size and rod thickness throughout the populated sheet.",
+      "scoring_rule": {
+        "PASS": "At least three connected cells contain spheres and rods, and two clearly identifiable controls independently adjust all sphere sizes and all rod thicknesses in the complete patch. Modest increases and decreases preserve the other component's size, network positions, connections, and editability after saving.",
+        "PARTIAL": "At least three connected cells contain spheres and rods, and at least one retained control coherently changes its intended component size across those cells, but one or more PASS conditions are not met.",
+        "FAIL": "Fewer than three connected cells contain spheres and rods, or no retained control coherently changes its intended component size across those cells. Editing every component separately or scaling the entire sheet is insufficient."
+      },
+      "evidence_refs": ["image/01_honeycomb_sheet.png", "image/03_junction_detail.png"],
+      "verification": {
+        "method": "Saved manual-control perturbation probe",
+        "procedure": "In a disposable copy of the saved scene, locate the two size controls by their labels or clear documented role in the setup. Increase then decrease each control modestly, such as by 20 percent, one at a time. Compare representative sphere diameters, rod cross-sections, junction positions, and connections across the sheet. Check independence and restore the defaults. Any native control representation is acceptable; this probe concerns manual sizing, not shared-network position propagation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "Surface and Presentation",
+      "criterion": "The actual sphere and rod surfaces use a consistent pale pink or pink-lavender material with readable soft highlights.",
+      "scoring_rule": {
+        "PASS": "Both sphere and rod surfaces exist across at least three connected cells and use the intended pale pink or pink-lavender material, with consistent treatment across all existing sheet surfaces and soft highlights that retain readable round forms.",
+        "PARTIAL": "Both sphere and rod surfaces exist across at least three connected cells and an assigned rendered material visibly colors at least one component pale pink or pink-lavender, but one or more PASS conditions are not met.",
+        "FAIL": "The required existing core surfaces are absent, or neither component uses an assigned rendered pale pink or pink-lavender material. Viewport display color or a pink reference image alone is insufficient."
+      },
+      "evidence_refs": ["image/01_honeycomb_sheet.png"],
+      "verification": {
+        "method": "Assigned material inspection and controlled render",
+        "procedure": "Inspect materials actually used by evaluated spheres and rods, including instanced geometry. Compare a controlled render under broad neutral lighting with the pink reference, checking hue consistency and soft highlights on both components. Separate material appearance from normal or silhouette defects assessed in GEO-05. Do not require a particular shader recipe.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The build script reproducibly creates and saves the complete editable scene.",
+      "scoring_rule": {
+        "PASS": "The delivered submission.blend opens, and executing build.py from an empty Blender scene creates and saves submission.blend that reopens with the complete visible sheet, editable shared network, independent size controls, materials, and render setup consistent with the delivered scene.",
+        "PARTIAL": "The delivered submission.blend opens, and build.py creates and saves a submission.blend containing at least a recognizable three-cell sphere-and-rod honeycomb that reopens, but one or more PASS conditions are not met.",
+        "FAIL": "The delivered submission.blend does not open, or build.py is absent, does not create and save submission.blend, or its saved file does not reopen with a recognizable three-cell sphere-and-rod honeycomb. An unsaved in-memory build is insufficient."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean build and saved-artifact inspection",
+        "procedure": "Run the provided build.py with Blender 5.1.2 from an empty scene in a disposable working location using any documented invocation. Verify that it writes submission.blend, close Blender, and reopen that exact saved file. Compare its visible model, materials, camera, lights, shared-network behavior, and size controls with the delivered submission.blend. Do not impose an output directory beyond the public filenames.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The required PNG is a clear render of the actual submitted scene.",
+      "scoring_rule": {
+        "PASS": "The required named PNG is present and is rendered from the actual submitted scene using its saved Cycles GPU setup. It shows the complete sheet in a slightly oblique view against a dark unobtrusive background, with all boundary junctions inside the image and the cell openings readable.",
+        "PARTIAL": "A PNG with the required name is verifiably rendered from the actual submitted scene and shows a recognizable sphere-and-rod honeycomb, but one or more PASS conditions are not met.",
+        "FAIL": "The required named PNG is absent, does not show a recognizable sphere-and-rod honeycomb, or is not a render of the submitted scene. Source imagery, viewport screenshots, and external replacements are excluded."
+      },
+      "evidence_refs": ["image/01_honeycomb_sheet.png"],
+      "verification": {
+        "method": "Render-delivery and saved-scene comparison",
+        "procedure": "Decode B134_Editable_Honeycomb_Ball_and_Strut_Sheet.png, inspect framing and readability, and compare it against a fresh render from submission.blend using its saved camera and render settings. Inspect the saved engine and device selection. Confirm consistent geometry, material, lighting, and background; allow ordinary sampling differences. The authoring phase does not run this future render check.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Cartoon Magic Potion",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1AfcUzwEjC",
+    "id": "BV1AfcUzwEjC"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 40,
+    "SURF": 45,
+    "SCN": 5,
+    "PIPE": 10
+  },
+  "weighting_note": "The source is primarily geometric assembly and illustrated surface design: GEO 40 and SURF 45 cover distinct form and material outcomes. SCN 5 addresses graphic composition and PIPE 10 delivery. Realized static bubbles do not justify SIM or ANM credit; material randomness is SURF.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Bottle and Liquid Geometry",
+      "criterion": "A smooth three-dimensional bottle shell has a short neck and a broad rounded mouth ring.",
+      "scoring_rule": {
+        "PASS": "The bottle has a smooth rounded body, short narrow neck, broad rounded mouth ring, and real shell thickness; shell and smoothing remain editable.",
+        "PARTIAL": "A rounded three-dimensional bottle body and neck are present. Not all PASS conditions are met.",
+        "FAIL": "No rounded three-dimensional bottle body with a neck is present."
+      },
+      "evidence_refs": [
+        "image/01_magic_potion.png",
+        "image/02_bottle_and_liquid.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled render",
+        "procedure": "Inspect evaluated geometry in front, side, and oblique views and a section through the shell; make a temporary shell-thickness or smoothing edit and verify its effect.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Bottle and Liquid Geometry",
+      "criterion": "A separate liquid volume fits the lower bottle and has a closed wavy upper surface.",
+      "scoring_rule": {
+        "PASS": "The liquid follows the body without breaking through the wall, has a closed gently tilted wavy upper surface with an elliptical visible boundary, and leaves clear space below the neck.",
+        "PARTIAL": "An editable three-dimensional liquid volume sits within the lower bottle. Not all PASS conditions are met.",
+        "FAIL": "No editable three-dimensional liquid volume sits within the lower bottle."
+      },
+      "evidence_refs": [
+        "image/02_bottle_and_liquid.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled render",
+        "procedure": "Temporarily hide the bottle shell, inspect the liquid boundary and volume from multiple views, then restore the shell and inspect their spatial relationship.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Heart Stopper and Decorations",
+      "criterion": "The thick heart stopper has a readable rounded heart silhouette and coherent placement.",
+      "scoring_rule": {
+        "PASS": "The heart has two rounded lobes, a visible cleft, a tapered bottom, and real side thickness; it is centered above the mouth ring in a coherent arrangement.",
+        "PARTIAL": "A three-dimensional heart-like stopper is present above the bottle. Not all PASS conditions are met.",
+        "FAIL": "No three-dimensional heart-like stopper is present above the bottle."
+      },
+      "evidence_refs": [
+        "image/01_magic_potion.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled render",
+        "procedure": "Inspect neutral-material front and side views of the heart and its position relative to the mouth ring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Heart Stopper and Decorations",
+      "criterion": "Varied stars and round bubbles occupy the liquid without obscuring it or protruding outside.",
+      "scoring_rule": {
+        "PASS": "Several editable three-dimensional stars and bubbles vary in size, are irregularly distributed inside the liquid, preserve its readability, and remain fixed across the timeline.",
+        "PARTIAL": "Both star-like and round bubble geometry are present in the liquid. Not all PASS conditions are met.",
+        "FAIL": "Star-like geometry or round bubble geometry is absent from the liquid."
+      },
+      "evidence_refs": [
+        "image/03_bubble_detail.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled render",
+        "procedure": "Inspect the decorations in isolation and in the liquid from front and oblique views; compare evaluated transforms at several timeline frames.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Illustrated Transparency and Pink Layers",
+      "criterion": "The shell produces a light transparent pink body with a stronger contour and clean overlaps.",
+      "scoring_rule": {
+        "PASS": "The shell is light transparent pink with a stronger pink contour; the liquid remains visible through it and overlapping surfaces show no black patches, missing layers, or distracting sorting artifacts.",
+        "PARTIAL": "The applied shell material allows the actual inner liquid to remain visible. Not all PASS conditions are met.",
+        "FAIL": "The shell is absent or its applied material does not allow the actual inner liquid to remain visible."
+      },
+      "evidence_refs": [
+        "image/01_magic_potion.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled render",
+        "procedure": "Render the actual bottle with inner liquid from the presentation view and nearby angles in EEVEE; inspect contour strength and overlapping transparent layers.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Illustrated Transparency and Pink Layers",
+      "criterion": "Editable gradients separate the shell, liquid layers, ring, and heart in an illustrated pink palette.",
+      "scoring_rule": {
+        "PASS": "Smooth editable gradients and clean illumination distinguish pale shell, saturated liquid, mouth ring, and heart; the liquid top and lower volume are visibly related but separate layers.",
+        "PARTIAL": "Applied pink materials distinguish at least two of the present major components. Not all PASS conditions are met.",
+        "FAIL": "Fewer than two present major components are distinguished by applied pink materials."
+      },
+      "evidence_refs": [
+        "image/01_magic_potion.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled render",
+        "procedure": "Inspect applied material use and render each major component in the complete scene; temporarily change a gradient color control to verify it affects its intended surface.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Highlights and Bubble Color Control",
+      "criterion": "White self-lit accents follow the bottle and liquid without rendering defects.",
+      "scoring_rule": {
+        "PASS": "Large and small white left-side highlights follow the bottle, a continuous bright accent traces the liquid boundary, and stars remain clean white without flicker, heavy bloom, or visible floating gaps.",
+        "PARTIAL": "At least one bottle highlight and a star have an applied white self-lit appearance. Not all PASS conditions are met.",
+        "FAIL": "An applied white self-lit bottle highlight or an applied white self-lit star is absent."
+      },
+      "evidence_refs": [
+        "image/01_magic_potion.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled render",
+        "procedure": "Render the submitted view and a slight camera offset; inspect white accents on the present geometry and compare a render with scene lights reduced to verify self-lit appearance.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Highlights and Bubble Color Control",
+      "criterion": "A shared editable bubble material gives stable discrete pink colors with adjustable balance.",
+      "scoring_rule": {
+        "PASS": "A shared applied material assigns stable individual bubbles to two discrete pink tones; both appear in the submitted state, and one material control changes their population balance without per-bubble material assignments.",
+        "PARTIAL": "Present bubbles visibly use two pink tones. Not all PASS conditions are met.",
+        "FAIL": "Present bubbles do not visibly use two pink tones, or bubbles are absent."
+      },
+      "evidence_refs": [
+        "image/03_bubble_detail.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled render",
+        "procedure": "Inspect material assignments, repeat the same render to verify stable colors, and change the shared balance control in both directions on a copy; confirm a visible population change and discrete colors.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "Final Composition",
+      "criterion": "The complete potion reads clearly as a soft pink illustration on a peach-pink background.",
+      "scoring_rule": {
+        "PASS": "The full asset fits with clear margins in a front-biased view against pale peach-pink; silhouette and liquid boundary remain legible when reduced, and no grids, interface overlays, or construction objects intrude.",
+        "PARTIAL": "A rendered view shows the bottle, ring, heart, and liquid. Not all PASS conditions are met.",
+        "FAIL": "No rendered view shows the bottle, ring, heart, and liquid together."
+      },
+      "evidence_refs": [
+        "image/01_magic_potion.png"
+      ],
+      "verification": {
+        "method": "artifact inspection and controlled render",
+        "procedure": "Render the submitted camera and inspect both full size and a quarter-size view for framing, background, and graphic clarity.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable project, reproducible script, and authentic PNG are delivered.",
+      "scoring_rule": {
+        "PASS": "All three named files exist; the blend contains the editable requested assets and materials, build.py recreates them from the stated start, and the PNG is rendered from that scene using Blender 5.1.2 and EEVEE GPU rendering.",
+        "PARTIAL": "A readable submission.blend contains the recognizable potion asset. Not all PASS conditions are met.",
+        "FAIL": "submission.blend is absent, unreadable, or lacks a recognizable potion asset."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact inspection and controlled render",
+        "procedure": "Open the blend, inspect editability and render settings, run build.py in a clean Blender 5.1.2 process, and compare the rebuilt scene and a controlled render to the delivered blend and PNG. No runtime check is claimed during authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Low-Poly Stone Well Base",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=QPh8h0hWkg0",
+    "id": "QPh8h0hWkg0"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 65, "PROC": 25, "PIPE": 10},
+  "weighting_note": "Geometry receives 65 points because the source is a modeling task with no material or lighting design scope. The independent geometric checks cover the hollow wall, profile, stone variety, chiselled form, masonry placement, and solid integrity. Functional row bending and post-bend simplification receive 25 points. Reproducible saved artifacts and a faithful scene render receive 10 points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "Hollow Four-Course Wall",
+      "criterion": "The evaluated asset is a hollow circular wall of four horizontal stone courses with a continuous central opening and clean ring closure.",
+      "scoring_rule": {
+        "PASS": "Four horizontal stone courses form round closed rings around a shared open center. The opening extends through the wall, has visible inner stone surfaces and wall thickness, and each ring's closure resembles its other masonry joints without a conspicuous gap or doubled block.",
+        "PARTIAL": "At least two stacked stone courses visibly surround a real shared central opening, but one or more PASS conditions are not met.",
+        "FAIL": "Fewer than two stacked courses surround a shared opening, or the apparent opening is a surface recess or image rather than a hollow wall."
+      },
+      "evidence_refs": ["image/01_finished_stone_wall.png", "image/02_open_center_and_profile.png"],
+      "verification": {
+        "method": "Evaluated geometry and controlled orthographic views",
+        "procedure": "Open submission.blend and inspect the evaluated wall from above, from the side, and from inside the opening. Isolate each course to inspect its full perimeter and closure joint. Confirm that the central void extends through all courses and that actual inner surfaces give the wall thickness; use plan silhouettes to assess roundness.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Wall Profile and Masonry Joints",
+      "criterion": "The wall has a broad base, narrower middle, flared top rim, and the public scale-free proportions.",
+      "scoring_rule": {
+        "PASS": "The four-course wall has a height-to-base-diameter ratio of 0.55 to 0.70. Each middle course is 0.80 to 0.90 of the base diameter; the top is 0.90 to 0.98 of the base diameter and wider than either middle course. The base remains the widest course.",
+        "PARTIAL": "At least three stacked courses form a measurable low wall with positive height and diameter, but one or more PASS conditions are not met.",
+        "FAIL": "Fewer than three stacked courses form a measurable wall, or no meaningful wall height and base diameter can be measured."
+      },
+      "evidence_refs": ["image/01_finished_stone_wall.png", "image/02_open_center_and_profile.png"],
+      "verification": {
+        "method": "Evaluated bounds and profile inspection",
+        "procedure": "Isolate the well geometry from presentation objects and backups. Measure its overall height and each course's maximum horizontal outer diameter from evaluated vertices, compute the public ratios, and inspect a front orthographic silhouette to confirm the broad foot, narrowed middle, and wider rim.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Stone Variety",
+      "criterion": "The masonry uses elongated, medium-width, and squarish stone families with shape variation and irregular joint spacing.",
+      "scoring_rule": {
+        "PASS": "At least one substantial course exists, and each existing substantial course mixes elongated, medium-width, and small squarish blocks in an irregular sequence. Medium blocks differ from elongated blocks in end shape as well as length. Subtle end tilts and uneven joint intervals are visible while the stones retain compatible height and depth and a coarse masonry scale.",
+        "PARTIAL": "At least one substantial course contains two visibly distinct stone width families, but one or more PASS conditions are not met.",
+        "FAIL": "No substantial course contains two visibly distinct stone width families, or the asset lacks distinguishable masonry blocks."
+      },
+      "evidence_refs": ["image/03_stone_size_variants.png", "image/01_finished_stone_wall.png"],
+      "verification": {
+        "method": "Evaluated stone comparison and multi-angle inspection",
+        "procedure": "Orbit each existing course and compare its block widths and joint intervals. Inspect isolated stones or the unbent sources to separate true end-shape variation from perspective distortion. Confirm that all three size families occur in the visible masonry rather than only in an unused backup.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "Chiselled Stone Geometry",
+      "criterion": "Existing stone geometry has broad block faces, narrow chamfers, uneven corners, and restrained chipped facets rather than plain boxes or smooth rounded forms.",
+      "scoring_rule": {
+        "PASS": "At least one substantial course exists, and the existing core masonry shows broad mostly planar block faces, narrow geometric chamfers, subtly uneven corners, and irregular chipped facets across its outer, inner, and upper surfaces. Silhouettes remain recognizably rectangular and the angular character comes from the mesh rather than a texture or shading trick.",
+        "PARTIAL": "At least one substantial course has recognizable block faces and actual geometric chamfers, but one or more PASS conditions are not met.",
+        "FAIL": "No substantial course has both recognizable block faces and geometric chamfers, or all apparent chipped detail is produced solely by materials or images."
+      },
+      "evidence_refs": ["image/01_finished_stone_wall.png", "image/03_stone_size_variants.png"],
+      "verification": {
+        "method": "Geometry inspection with neutral material override",
+        "procedure": "Inspect evaluated edges and silhouettes on representative existing outer, inner, and rim stones. Make controlled close views with a neutral material override and directional lighting to distinguish geometric facets from normal-map or color effects. Assess block character and restrained irregularity without awarding absent surfaces credit.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 11,
+      "requirement_section": "Wall Profile and Masonry Joints",
+      "criterion": "Courses are concentric, seated against one another, and their vertical joints are staggered at adjacent interfaces.",
+      "scoring_rule": {
+        "PASS": "At least one adjacent pair of courses exists, and every existing adjacent course interface is seated without a floating course or deep overlap hiding substantial masonry. Course centers follow one vertical axis, and the majority of vertical stone joints at each interface are laterally offset so long continuous vertical seams do not dominate.",
+        "PARTIAL": "At least one adjacent pair of courses forms a recognizable seated stack, but one or more PASS conditions are not met.",
+        "FAIL": "No adjacent pair forms a recognizable seated stack; courses are disconnected or overlap so deeply that their stacking relationship is lost."
+      },
+      "evidence_refs": ["image/01_finished_stone_wall.png", "image/02_open_center_and_profile.png"],
+      "verification": {
+        "method": "Evaluated spatial and masonry-joint inspection",
+        "procedure": "Compare the plan centers and vertical extents of the evaluated courses. Inspect side views around the full circumference and identify the actual vertical joints where courses meet. Assess seating and joint offsets from geometry, rather than using object rotations as a proxy. Treat small local hand-cut contacts separately from broad floating gaps or buried courses.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Chiselled Stone Geometry",
+      "criterion": "Existing masonry consists of separate closed three-dimensional stone shells with complete surfaces and consistent orientation.",
+      "scoring_rule": {
+        "PASS": "At least one substantial course exists, and the existing core stones remain separate closed shells with complete inner, outer, top, bottom, and end surfaces, consistent outward orientation, and no exposed missing faces or stray fragments. Small intentional overlaps between otherwise complete stones are acceptable.",
+        "PARTIAL": "At least one substantial course contains distinguishable solid stone shells with mostly complete outer and inner surfaces, but one or more PASS conditions are not met.",
+        "FAIL": "No substantial course contains distinguishable solid stone shells with mostly complete outer and inner surfaces, including a single grooved shell or flat image posing as masonry."
+      },
+      "evidence_refs": ["image/02_open_center_and_profile.png", "image/03_stone_size_variants.png"],
+      "verification": {
+        "method": "Connected-component, boundary-edge, and normal inspection",
+        "procedure": "In a temporary copy, inspect the evaluated geometry per stone component or instance. Check boundary edges, complete end and underside faces, outward normals, and isolated fragments. Visually inspect suspicious components to distinguish legitimate intersections of closed stones from missing surfaces or fused substitutes. Do not count missing entire courses again as mesh defects.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Editable Construction",
+      "criterion": "Live independent row-to-ring controls deform retained straight stone rows into the finished courses.",
+      "scoring_rule": {
+        "PASS": "All four courses retain editable straight stone rows and independently functional bend amounts. On each course, a reduced bend opens an arc and zero bend reveals the straight row; other courses remain unchanged. Restoring the saved value restores that course's finished ring without rebuilding.",
+        "PARTIAL": "At least one existing course passes the straight-row, arc, and restored-ring functional probe, but one or more PASS conditions are not met.",
+        "FAIL": "No course passes the straight-row, arc, and restored-ring probe, including a static curved mesh with an ineffective control or an unrelated spare row."
+      },
+      "evidence_refs": ["image/02_open_center_and_profile.png"],
+      "verification": {
+        "method": "Non-destructive functional geometry probe",
+        "procedure": "In a temporary reopened copy of submission.blend, identify each actual bend control from the scene and build.py. Record its saved value and evaluated geometry. Test a reduced value and zero, inspect the resulting arc and straight source row, and confirm other courses do not change. Restore the saved value and compare the evaluated result with the initial ring. Accept equivalent live implementations based on the observed behavior.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Construction",
+      "criterion": "Independent live simplification acts on curved stones and changes evaluated facet density while preserving recognizable masonry.",
+      "scoring_rule": {
+        "PASS": "Each of the four courses has an independently working post-bend geometric simplification control. Reducing simplification restores faces; stronger simplification reduces them, and both tested states remain recognizable curved masonry. The saved state uses the chipped result.",
+        "PARTIAL": "At least one course has a functional post-bend simplification control that changes its evaluated face count while leaving recognizable masonry, but one or more PASS conditions are not met.",
+        "FAIL": "No course has a functional post-bend geometric simplification control, or every apparent control only affects shading, is ineffective, or destroys recognizable masonry in every changed state."
+      },
+      "evidence_refs": ["image/01_finished_stone_wall.png", "image/02_open_center_and_profile.png"],
+      "verification": {
+        "method": "Dependency inspection and controlled facet-density probe",
+        "procedure": "Inspect the evaluated dependency order to establish that simplification receives already bent geometry. On a temporary copy, record each course's saved control and face count, then test lower and higher simplification settings appropriate to that control. Compare actual evaluated face counts and close views, verify other courses remain unchanged, and restore the saved settings. Modifier presence or a numeric ratio alone does not establish success.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The native project and build script provide a reproducible saved wall with its controls and organized reusable unbent stones.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the finished editable wall and a separately organized, individually editable backup row preserving the three stone families and their arrangement, disabled in presentation and renders. build.py recreates the scene from a new scene without external assets and explicitly saves submission.blend; the newly saved file reopens independently with the wall, backup, and functional controls intact.",
+        "PARTIAL": "A delivered submission.blend opens with usable editable well geometry, but one or more PASS conditions are not met.",
+        "FAIL": "No delivered submission.blend opens with usable editable well geometry."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean rebuild followed by independent saved-file reopening",
+        "procedure": "First open the delivered submission.blend and inspect its editable wall and backup. Then run build.py in a clean Blender 5.1.2 process with a new scene and an isolated output directory. Require the script to write submission.blend, close that process, and open the generated file in a fresh Blender process. Inspect the saved wall, backup visibility and editability, and actual procedural controls. An unsaved in-memory reconstruction does not satisfy the rebuild requirement.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named PNG faithfully presents the actual submitted scene using the requested engine and clear elevated three-quarter framing.",
+      "scoring_rule": {
+        "PASS": "B100_Low_Poly_Stone_Well_Base.png is a valid PNG rendered from submission.blend using Cycles with GPU rendering, and agrees with the saved scene. Its elevated three-quarter view clearly shows the whole well, open center, four courses, and geometric facets without visible backup stones or obstructing presentation elements.",
+        "PARTIAL": "A valid delivered PNG can be established as a render of the submitted well scene, but one or more PASS conditions are not met.",
+        "FAIL": "No valid delivered PNG can be established as a render of the submitted scene, including a viewport screenshot, source reference image, or external replacement."
+      },
+      "evidence_refs": ["image/01_finished_stone_wall.png", "image/02_open_center_and_profile.png"],
+      "verification": {
+        "method": "Image decoding, saved render settings, and controlled rerender comparison",
+        "procedure": "Decode the delivered PNG and inspect the reopened scene's active camera, Cycles GPU settings, materials, and render visibility. Render a controlled comparison from the saved scene and compare composition and visible geometry with the delivery. Confirm the opening and full wall are readable and the source backup is excluded. Resolve image provenance using the rerender and scene rather than filename or metadata alone.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

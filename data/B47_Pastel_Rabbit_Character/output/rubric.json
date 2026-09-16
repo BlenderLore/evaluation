@@ -1,0 +1,229 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Pastel Rabbit Character",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1KsKJ6JEAo",
+    "id": "BV1KsKJ6JEAo"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 70,
+    "SURF": 20,
+    "PIPE": 10
+  },
+  "weighting_note": "Geometry receives 70 points because the source is primarily a multicomponent character-modeling task, distributed across head, ears, face, body, dress, bow, and surface continuity. Surface color and functional mesh painting receive 20 points. Delivery is capped at 10 points. Modifier presence receives no separate credit.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Head and Ears",
+      "criterion": "Broad, rounded head silhouette.",
+      "scoring_rule": {
+        "PASS": "The head is broad and full at the sides, with a gently flattened lower contour and proportions consistent with the reference.",
+        "PARTIAL": "A recognizable rounded head is present but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable rounded head is present."
+      },
+      "evidence_refs": [
+        "image/01_character.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect evaluated front and side orthographic views of the head in the submitted scene; compare its silhouette and proportions with the reference.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Head and Ears",
+      "criterion": "Two attached rounded ears with shallow recessed fronts.",
+      "scoring_rule": {
+        "PASS": "Both ears are large upright rounded ovals, have a shallow nonperforating front recess and a substantial rounded rim, and match the broad reference proportions.",
+        "PARTIAL": "Two recognizable ears are attached above the head but one or more PASS conditions are unmet.",
+        "FAIL": "Fewer than two recognizable ears are attached above the head."
+      },
+      "evidence_refs": [
+        "image/01_character.png",
+        "image/02_recessed_ears.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect front, oblique, and rear views with neutral shading. Inspect a section or mesh cross-section through each ear to distinguish a true recess from a painted patch or through-hole.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Face and Body",
+      "criterion": "Raised eyes and nose fit the lower front of the head.",
+      "scoring_rule": {
+        "PASS": "Two evenly spaced raised eyes lie on the lower head, with a smaller centered nose slightly below; all three features fit the head surface without floating gaps.",
+        "PARTIAL": "Two eyes and a nose are recognizable on the front of the head but one or more PASS conditions are unmet.",
+        "FAIL": "The head lacks two recognizable eyes or a recognizable nose."
+      },
+      "evidence_refs": [
+        "image/01_character.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect front and close oblique views, then inspect evaluated geometry at each facial attachment. Judge feature size, centering, spacing, and contact.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Face and Body",
+      "criterion": "Compact torso, attached paired limbs, and garment buttons.",
+      "scoring_rule": {
+        "PASS": "The compact torso connects to the head; two short rounded arms flank it, two rounded feet extend below the skirt, and two buttons sit vertically on the garment front without floating gaps.",
+        "PARTIAL": "A torso and at least one attached arm and one attached foot are present but one or more PASS conditions are unmet.",
+        "FAIL": "A torso, at least one attached arm, or at least one attached foot is missing."
+      },
+      "evidence_refs": [
+        "image/01_character.png",
+        "image/03_layered_dress.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Temporarily hide the skirt in a copy of the scene to inspect the torso, then restore it and inspect front and oblique views for limb placement, attachments, and buttons.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Layered Dress",
+      "criterion": "Two distinct continuous flounces with thick wavy hems.",
+      "scoring_rule": {
+        "PASS": "Two distinct vertically offset continuous flounces surround the lower torso, each with a soft repeating wavy hem and edge thickness; the upper layer is smaller, both remain legible, and they do not cross or expose large waist gaps.",
+        "PARTIAL": "At least one continuous flared skirt layer surrounds the lower torso but one or more PASS conditions are unmet.",
+        "FAIL": "No continuous flared skirt layer surrounds the lower torso."
+      },
+      "evidence_refs": [
+        "image/01_character.png",
+        "image/03_layered_dress.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect evaluated front, oblique, and underside geometry with neutral shading. Trace each hem around the full circumference and inspect thickness and separation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Bow and Surface Form",
+      "criterion": "Attached ear-root bow with knot, lobes, and tails.",
+      "scoring_rule": {
+        "PASS": "The ear-root bow includes a rounded knot, two spreading lobes with pinched inner ends, and two short hanging tails; it remains clearly attached and readable in front and oblique views.",
+        "PARTIAL": "An attached accessory at an ear root reads as a bow with a central knot and two lobes but one or more PASS conditions are unmet.",
+        "FAIL": "No attached ear-root bow with a central knot and two recognizable lobes is present."
+      },
+      "evidence_refs": [
+        "image/01_character.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect the accessory in front and oblique close-ups, including its connection to the ear root, and identify the evaluated knot, lobes, and tails.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Bow and Surface Form",
+      "criterion": "Smooth and intact curved surface finish.",
+      "scoring_rule": {
+        "PASS": "The head, both ears, body, both skirt layers, and bow are present, with smooth curved silhouettes and coherent normals, without unintended creases, faceting, or accidental surface holes.",
+        "PARTIAL": "The head, both ears, body, a skirt layer, and bow are present as inspectable surfaces but one or more PASS conditions are unmet.",
+        "FAIL": "The head, either ear, body, all skirt layers, or bow is absent or has no inspectable surface."
+      },
+      "evidence_refs": [
+        "image/01_character.png",
+        "image/03_layered_dress.png"
+      ],
+      "verification": {
+        "method": "controlled_neutral_shading_inspection",
+        "procedure": "Inspect a neutral material override from front and oblique views and selected close-ups. Assess only surface continuity, normal consistency, and unintended faceting; score component shape and placement in their own rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Pastel Finish",
+      "criterion": "Coherent nonmetallic pastel palette and white garment accents.",
+      "scoring_rule": {
+        "PASS": "Exposed character surfaces are warm white; eyes, nose, garment, and bow are pale blue; buttons and narrow hem trim are white. The corresponding components exist and materials show soft nonmetallic highlights.",
+        "PARTIAL": "The head and garment exist and visibly use distinct warm-white and pale-blue surface colors but one or more PASS conditions are unmet.",
+        "FAIL": "The head or garment is absent, or they do not visibly use distinct warm-white and pale-blue colors."
+      },
+      "evidence_refs": [
+        "image/01_character.png"
+      ],
+      "verification": {
+        "method": "material_usage_and_controlled_render",
+        "procedure": "Inspect material assignment on evaluated surfaces and a neutral-lit render. Confirm visible color regions and nonmetallic response; unused material datablocks do not count.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Pastel Finish",
+      "criterion": "Editable mesh-color blush and ear interior coloration.",
+      "scoring_rule": {
+        "PASS": "Both cheeks have soft pink blush and both ear interiors have pink coloration, driven by editable mesh color attributes actually consumed by the corresponding materials.",
+        "PARTIAL": "At least one soft pink cheek or ear-interior region is driven visibly by an editable mesh color attribute but one or more PASS conditions are unmet.",
+        "FAIL": "No visible pink cheek or ear-interior region is driven by an editable mesh color attribute."
+      },
+      "evidence_refs": [
+        "image/01_character.png",
+        "image/02_recessed_ears.png"
+      ],
+      "verification": {
+        "method": "material_graph_and_functional_color_probe",
+        "procedure": "Inspect color attributes and their material use. In a disposable scene copy, change a small attribute patch on a cheek and an ear interior and confirm that controlled renders change locally; then discard changes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "Editable project, reproducible build, and actual scene render.",
+      "scoring_rule": {
+        "PASS": "submission.blend contains the editable complete scene; build.py reconstructs it from an empty scene in Blender 5.1.2 without external assets; the named PNG is a Cycles GPU render of that scene with the full character and required details legible.",
+        "PARTIAL": "submission.blend opens with an editable recognizable rabbit containing its head, ears, torso, and dress but one or more PASS conditions are unmet.",
+        "FAIL": "submission.blend is absent, fails to open, or does not contain an editable recognizable rabbit with head, ears, torso, and dress."
+      },
+      "evidence_refs": [
+        "image/01_character.png"
+      ],
+      "verification": {
+        "method": "artifact_open_rebuild_and_render_comparison",
+        "procedure": "Open submission.blend in Blender 5.1.2, run build.py in an isolated empty scene, and compare the rebuilt result. Confirm GPU Cycles settings and reproduce the saved camera render to compare with the named PNG; inspect full-character framing.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

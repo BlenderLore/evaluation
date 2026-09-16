@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Helical Strand Nanoparticle",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1DHoeBsEhE",
+    "id": "BV1DHoeBsEhE"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 50, "PROC": 40, "PIPE": 10},
+  "weighting_note": "Geometry receives 50 points across the core, actual three-dimensional helical form, attachment proportions, tube finish, and spherical coverage. The reusable generator receives 40 points across source propagation, spacing controls, normal alignment, and repeatable variation. Pipeline work is limited to 10 points. Materials and incidental camera or light existence receive no separate credit because the source scope is modeling.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Spherical Core",
+      "criterion": "A visible solid spherical core has a continuous silhouette and smooth shading, independently of the strand population.",
+      "scoring_rule": {
+        "PASS": "A visible solid central body exists, is nearly spherical from multiple views, has a continuous smooth silhouette and shading, and remains independently adjustable without an exposed duplicate shell.",
+        "PARTIAL": "A visible solid central body exists, but one or more PASS conditions are unmet, such as evident flattening, faceting, shading discontinuity, inseparable editing, or an exposed duplicate shell.",
+        "FAIL": "No visible solid central body exists; an empty center, wireframe carrier, or strand-only cluster does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_particle_overview.png", "image/02_modeling_result.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_multiview_inspection",
+        "procedure": "Open the submitted blend and inspect the evaluated central body from three distinct directions, temporarily isolating it if necessary. Check solid volume, silhouette, shading, and independent adjustment in a temporary copy, then restore it. Do not require a particular sphere primitive or subdivision modifier.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Helical Strand",
+      "criterion": "The used strand source is an open elongated tubular helix with about three turns and real three-dimensional coil depth.",
+      "scoring_rule": {
+        "PASS": "A continuous open tubular strand with at least one full three-dimensional helical turn is used by the visible assembly, and its full form has about three turns around a longitudinal axis, elongated proportions, and roughly consistent coil width.",
+        "PARTIAL": "A continuous open tubular strand with at least one full three-dimensional helical turn is used by the visible assembly, but one or more PASS conditions are unmet, including the turn count, elongated proportions, or consistent coil width.",
+        "FAIL": "No used continuous open tubular strand completes a three-dimensional helical turn. A planar wave, straight tube, disconnected rings, or an unused isolated helix does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_particle_overview.png", "image/03_coil_attachment_detail.png"],
+      "verification": {
+        "method": "evaluated_centerline_and_source_inspection",
+        "procedure": "Trace the used source or an evaluated strand centerline in longitudinal and end-on views. Confirm depth and rotation around its axis, count the approximate turns, and compare axial extent to coil width. Inspect the source-to-population reference so an unused demonstration helix cannot supply evidence.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Radial Assembly",
+      "criterion": "Strand roots attach to the core and the strand-to-core proportions match the small attached-filament appearance.",
+      "scoring_rule": {
+        "PASS": "A core and multiple visible tubular strands are present; their roots meet or slightly enter its surface without visible floating gaps or long exposed crossings through the core, their outward reach is roughly half to one core radius, and their coil widths are much smaller than their lengths.",
+        "PARTIAL": "A core and multiple visible tubular strands are present, but one or more PASS conditions for root attachment or relative proportions are unmet.",
+        "FAIL": "The core or multiple visible tubular strands are absent, so a core-to-strand attachment and scale relationship cannot be inspected."
+      },
+      "evidence_refs": ["image/01_particle_overview.png", "image/03_coil_attachment_detail.png"],
+      "verification": {
+        "method": "evaluated_geometry_attachment_and_ratio_inspection",
+        "procedure": "Inspect root neighborhoods from front, side, and rear in the saved scene, using a temporary section or transparent view to distinguish shallow attachment from excessive penetration. Compare typical strand axial reach and coil width to the core radius. Assess attachment and proportions here; reserve outward-axis functionality for PROC-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Helical Strand",
+      "criterion": "The populated tubular strands have smooth, continuous bends and stable round cross-sections.",
+      "scoring_rule": {
+        "PASS": "At least one substantial curved crest-to-valley tube run exists in the visible assembly, and the populated strands have continuous smooth bends and fine round cross-sections without visible faceting, sharp kinks, or local collapse.",
+        "PARTIAL": "At least one substantial curved crest-to-valley tube run exists in the visible assembly, but one or more PASS conditions for tube finish are unmet on the existing strands.",
+        "FAIL": "No substantial curved crest-to-valley tube run exists in the visible assembly; isolated points, flat lines, or an unused source cannot establish tube finish."
+      },
+      "evidence_refs": ["image/01_particle_overview.png", "image/03_coil_attachment_detail.png"],
+      "verification": {
+        "method": "close_geometry_and_shading_inspection",
+        "procedure": "Inspect several existing strand bends and cross-sections in the evaluated scene with neutral shading and close views. Check visible faceting, continuity, and cross-section collapse without requiring a particular curve resolution or bevel setting. Do not penalize missing unrelated core geometry in this finish row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Editable Distribution",
+      "criterion": "A shared editable source drives the visible strands, and their relative size can change independently of the core.",
+      "scoring_rule": {
+        "PASS": "Editing the shared strand source changes multiple visible generated strands, the source's shape and thickness changes propagate across the population, and a shared relative-size control resizes the strands without scaling the core.",
+        "PARTIAL": "Editing the shared strand source changes multiple visible generated strands, but one or more PASS conditions for population-wide shape or thickness propagation or independent relative-size control are unmet.",
+        "FAIL": "Editing a shared source does not change multiple visible generated strands; disconnected copies, a baked result alone, or an unused procedural source do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_modeling_result.png"],
+      "verification": {
+        "method": "reversible_source_and_scale_probe",
+        "procedure": "In a temporary copy of the saved blend, identify the actual live source dependency. Make a conspicuous reversible change to a coil and to tube thickness, update the scene, and inspect multiple emitted strands around the sphere. Restore those changes, then adjust the shared strand-size control and confirm that the core dimensions stay unchanged. Accept equivalent live implementations without testing node names.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Radial Assembly",
+      "criterion": "The strand population covers the spherical surface irregularly and leaves the core readable.",
+      "scoring_rule": {
+        "PASS": "Multiple visible strands occupy a curved spherical region, and the population covers the full sphere with irregular, separated roots, a clearly readable core, and no obvious latitude rows, single belt, large empty hemisphere, or dense clumps.",
+        "PARTIAL": "Multiple visible strands occupy a curved spherical region, but one or more PASS conditions for full coverage, irregular distribution, separation, or core readability are unmet.",
+        "FAIL": "Multiple visible strands do not occupy a curved spherical region; a flat patch or an unused source alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_particle_overview.png", "image/02_modeling_result.png"],
+      "verification": {
+        "method": "evaluated_surface_population_inspection",
+        "procedure": "Inspect evaluated root positions from front, rear, side, top, and bottom views. Compare spherical coverage, irregular spacing, local clumping, and core visibility. Judge the resulting spatial distribution here; source, density, spacing, orientation, and variation behavior are assessed in the dedicated PROC rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Distribution",
+      "criterion": "Density and minimum-separation controls produce meaningful independent changes to the evaluated root population.",
+      "scoring_rule": {
+        "PASS": "A populated procedural spherical assembly responds to at least one density or spacing control, and both required controls function: lower density reduces the population and greater separation spreads roots farther apart, while preserving the strand shape, spherical attachment, and outward alignment.",
+        "PARTIAL": "A populated procedural spherical assembly responds to at least one density or spacing control, but one or more PASS conditions for both controls or preservation of the other relationships are unmet.",
+        "FAIL": "No populated procedural spherical assembly responds meaningfully to a density or spacing control; disconnected, ineffective, or display-only controls do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_modeling_result.png"],
+      "verification": {
+        "method": "controlled_density_and_spacing_probe",
+        "procedure": "In a temporary copy, hold the seed and source fixed and lower density through a range where density limits the population; compare evaluated root count before and after. Restore it, increase minimum separation, and compare nearest-neighbor root distances while allowing count to decrease. Inspect that source shape, surface attachment, and outward orientation survive each change. Accept any mechanism that performs these functions.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-04",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Radial Assembly",
+      "criterion": "The procedural strands' longitudinal axes follow the carrier's outward spherical normals.",
+      "scoring_rule": {
+        "PASS": "Multiple generated strands on distinct spherical regions have an active local outward-direction relationship with predominantly outward growth, and the populated strands consistently extend along their local outward normals around the sphere, including after a population adjustment.",
+        "PARTIAL": "Multiple generated strands on distinct spherical regions have an active local outward-direction relationship with predominantly outward growth, but one or more PASS conditions for consistent normal alignment or retention after adjustment are unmet.",
+        "FAIL": "The assembly lacks multiple generated strands on distinct spherical regions with an active local outward-direction relationship and predominantly outward growth. Fixed global orientation, predominantly tangential or inward growth, or an unused alignment control does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_particle_overview.png", "image/02_modeling_result.png"],
+      "verification": {
+        "method": "evaluated_axis_normal_comparison_and_function_probe",
+        "procedure": "Compare each inspected strand's longitudinal coil axis, rather than its oscillating local tube tangent, with the outward carrier normal at its root. Inspect strands at the front, sides, top, bottom, and rear. Change density or seed in a temporary copy and confirm that newly placed strands retain outward orientation. Inspect the functioning directional dependency without requiring a named alignment node or axis label.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-05",
+      "capability": "PROC",
+      "points": 5,
+      "requirement_section": "Editable Distribution",
+      "criterion": "Seeded rotation variation changes individual coil roll while retaining outward growth and reproducibility.",
+      "scoring_rule": {
+        "PASS": "An active control changes individual roll on multiple populated strands, both the seed and rotation-variation control affect that variation, the axes remain outward, and restoring the settings reproduces the same arrangement and rotations.",
+        "PARTIAL": "An active control changes individual roll on multiple populated strands, but one or more PASS conditions for the two controls, preserved outward direction, or reproducibility are unmet.",
+        "FAIL": "No active control changes individual roll on multiple populated strands; a uniform rotation of the whole particle, static differences, or an unused random source does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_particle_overview.png", "image/03_coil_attachment_detail.png"],
+      "verification": {
+        "method": "seed_variation_and_restore_probe",
+        "procedure": "Record the baseline seed, variation setting, root arrangement, and several coil rotations. In a temporary copy, test each control separately and inspect individual roll around the outward axes. Restore the baseline settings and compare evaluated placements and rotations. Do not require a particular random node, angle range, or seed value.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The build script recreates the scene and saves a usable submission.blend with the intended editable relationships.",
+      "scoring_rule": {
+        "PASS": "Running build.py from a clean Blender scene creates and saves a readable submission.blend; reopening that saved result shows the complete intended model and its functional editable dependencies without unavailable assets.",
+        "PARTIAL": "Running build.py from a clean Blender scene creates and saves a readable submission.blend with a substantive core and strand result, but one or more PASS conditions for completeness, dependencies, or self-contained recreation are unmet.",
+        "FAIL": "The build script is absent, fails to save a readable submission.blend, or the reopened saved result lacks a substantive core and strand result. An unsaved in-memory scene does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "clean_build_saved_result_reopen",
+        "procedure": "Run the submitted build.py in a clean Blender 5.1.2 process in an isolated temporary working location. Locate the submission.blend saved by that run, close the build process, and reopen that exact saved file in a fresh process. Inspect its model and sample the source and distribution relationships. This is a specified future artifact check, not an authoring-time Blender compatibility claim.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The saved scene and required PNG constitute an inspectable static submission rendered from the actual model.",
+      "scoring_rule": {
+        "PASS": "A readable submission.blend and the required PNG are present, and the PNG is rendered from that saved scene using the requested Cycles GPU setup, shows the complete particle with margins and legible coils and attachment, and excludes standalone helper geometry.",
+        "PARTIAL": "A readable submission.blend and the required PNG are present, and the PNG corresponds to the actual modeled scene, but one or more PASS conditions for render setup, complete framing, geometric legibility, or helper exclusion are unmet.",
+        "FAIL": "A readable submission.blend or the required PNG is absent, or the PNG is a source image, viewport screenshot, external replacement, or otherwise does not correspond to the submitted modeled scene."
+      },
+      "evidence_refs": ["image/01_particle_overview.png", "image/02_modeling_result.png"],
+      "verification": {
+        "method": "submission_integrity_and_render_correspondence",
+        "procedure": "Open submission.blend and decode B140_Helical_Strand_Nanoparticle.png. Inspect saved render settings and compare the PNG with the scene's camera composition, geometry, visibility, and lighting; make a controlled render if needed to establish correspondence. Apply the Presentation section's framing and legibility requirements without imposing a specific color palette, resolution, or output directory.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

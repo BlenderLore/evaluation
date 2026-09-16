@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Nanoflower",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1igdzB5EZq",
+    "id": "BV1igdzB5EZq"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": { "PASS": 1, "PARTIAL": 0.5, "FAIL": 0 },
+  "capability_totals": { "GEO": 60, "PROC": 30, "PIPE": 10 },
+  "weighting_note": "The modeled sheets, spherical envelope, coverage, orientation, and geometric finish carry 60 points. The genuine shared-source and distribution relationships carry 30 points, with functional probes distinct from static appearance. Delivery and recreation share 10 points. Static particle placement is not a physical simulation, and the optional showcase material receives no surface points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Thin Fan-Shaped Sheets",
+      "criterion": "The nanoflower uses thin, broad fan-shaped sheets with a narrow root and a rounded outer rim.",
+      "scoring_rule": {
+        "PASS": "The aggregate contains repeated sheet geometry with inspectable surface area, and representative deployed sheets have two sides converging toward a narrow root, a broad fan body, a continuous rounded outer rim, and a thin profile.",
+        "PARTIAL": "The aggregate contains repeated sheet geometry with inspectable surface area, but at least one PASS condition is unmet. Examples include a weakly defined root, an overly narrow fan, an angular rim, or excessive thickness that still leaves the units recognizable as sheets.",
+        "FAIL": "There is no repeated sheet geometry with inspectable surface area in the aggregate. An isolated unused source, lines, point particles, or solid lumps without a sheet form do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_wrinkled_sheet.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "Inspect the submitted scene's evaluated aggregate and isolate representative deployed units or trace them to their actual source. View their outline and profile from face-on and oblique directions. Compare the converging root, breadth, rim, and thinness with the reference. Do not require a particular topology, face count, or modifier.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Thin Fan-Shaped Sheets",
+      "criterion": "The deployed sheets have genuine broad folds that develop from their roots toward their rims.",
+      "scoring_rule": {
+        "PASS": "Deployed sheets include an inspectable nonplanar surface region with a geometric crest and valley. Representative sheets show broad folds extending from the root toward the outer edge, mild rim irregularity, and a coherent fan surface without folds collapsing the body into a line or closed lump.",
+        "PARTIAL": "Deployed sheets include an inspectable nonplanar surface region with a geometric crest and valley, but at least one PASS condition is unmet. The folds may be too weak, too fine, poorly directed, or excessively crumpled while retaining a recognizable sheet surface.",
+        "FAIL": "No deployed sheet provides an inspectable nonplanar surface region with a geometric crest and valley. Flat sheets, shading-only wrinkles, and an unused wrinkled source do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_wrinkled_sheet.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_controlled_shading",
+        "procedure": "Inspect representative deployed sheets in evaluated geometry and in a neutral solid-shaded view. Rotate around the sheet and examine crest-to-valley depth to distinguish actual folds from texture or normal effects. Assess fold width, direction, and the continued readability of the fan surface separately from its boundary proportions.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Spherical Nanoflower",
+      "criterion": "The sheets form one complete rounded aggregate with comparable width, height, and depth.",
+      "scoring_rule": {
+        "PASS": "Repeated sheet geometry forms a three-dimensional aggregate around a common center and occupies both sides of that center along all three principal axes. Its envelope is approximately spherical, has comparable width, height, and depth, and remains rounded in orthogonal and oblique views.",
+        "PARTIAL": "Repeated sheet geometry forms a three-dimensional aggregate around a common center and occupies both sides of that center along all three principal axes, but at least one PASS condition is unmet. Examples include a visibly stretched, flattened, or lobed envelope.",
+        "FAIL": "Repeated sheet geometry does not form a three-dimensional aggregate around a common center occupying both sides along all three principal axes. A single sheet, planar arrangement, hemisphere, or unrelated scattered groups do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_nanoflower.png"],
+      "verification": {
+        "method": "multi_view_evaluated_geometry_inspection",
+        "procedure": "Exclude the independent source from the measurement. Inspect the aggregate's evaluated bounds and view it along three orthogonal directions plus an oblique direction. Check the common central region, three-dimensional extent, and rounded envelope. Judge envelope shape here; score local surface coverage in GEO-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "2. Spherical Nanoflower",
+      "criterion": "Overlapping sheets provide dense coverage around the aggregate, including its top, bottom, and sides.",
+      "scoring_rule": {
+        "PASS": "A three-dimensional aggregate has populated sheet regions on its top, bottom, and sides, with actual overlap visible between neighboring sheets in multiple separated regions. Dense sheet coverage defines most of its visible surface and silhouette, with small interlayer recesses and without large unpopulated wedges or broad exposed support areas.",
+        "PARTIAL": "A three-dimensional aggregate has populated sheet regions on its top, bottom, and sides, with actual overlap visible between neighboring sheets in multiple separated regions, but at least one PASS condition is unmet. Coverage may be sparse, uneven, or interrupted by substantial bare regions.",
+        "FAIL": "The aggregate lacks populated sheet regions on its top, bottom, or sides, or lacks actual overlap between neighboring sheets in multiple separated regions. A smooth support sphere or a few isolated sheets does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_nanoflower.png", "image/03_layered_structure.png"],
+      "verification": {
+        "method": "multi_view_surface_coverage_inspection",
+        "procedure": "Orbit the evaluated aggregate and inspect its top, underside, and several side views under neutral lighting. Identify whether sheet surfaces, their overlap, and interlayer recesses dominate the visible exterior. Check any apparently bare region from another angle to distinguish a genuine coverage gap from ordinary occlusion. Do not substitute a fixed particle count for this outcome.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Layered Surface Structure",
+      "criterion": "Outward-growing sheets have varied orientations and readable crossing layers.",
+      "scoring_rule": {
+        "PASS": "Multiple neighboring deployed sheets have distinguishable broad faces and thin edges in a close view, and at least one group has roots directed toward the inner region with broader parts extending outward. Across representative separated regions, that inward-root/outward-fan relationship is maintained, neighboring angular orientations vary, and crossing edges reveal depth between layers.",
+        "PARTIAL": "Multiple neighboring deployed sheets have distinguishable broad faces and thin edges in a close view, and at least one group has roots directed toward the inner region with broader parts extending outward, but at least one PASS condition is unmet. Examples include excessive parallel banding, inconsistent outward arrangement, or weak depth separation in several regions.",
+        "FAIL": "The deployed geometry does not provide multiple neighboring sheets with distinguishable broad faces and thin edges, or no group demonstrates roots directed inward with broader parts extending outward. An undifferentiated surface, spikes alone, or entirely tangential flat tiles do not meet the minimum."
+      },
+      "evidence_refs": ["image/03_layered_structure.png", "image/02_wrinkled_sheet.png"],
+      "verification": {
+        "method": "local_geometry_orientation_and_visual_inspection",
+        "procedure": "Inspect separated close-up regions around the evaluated aggregate. Follow each sampled sheet from its narrow root to its broad edge, relating that direction to the central region. Compare neighboring sheet angles and inspect crossed edges from an oblique view. Evaluate orientation and layer readability here, independently of the coverage amount assessed in GEO-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "5. Geometry Finish",
+      "criterion": "Existing curved sheet surfaces remain coherent and shade continuously without disruptive geometry defects.",
+      "scoring_rule": {
+        "PASS": "The aggregate contains deployed sheet surfaces with an inspectable curved crest-to-valley region and a continuous interior. Those surfaces shade continuously over the broad folds, with consistent surface orientation and without interior tears, duplicated coincident faces, unstable flicker, or isolated spikes that obscure the fan form. Intentional boundaries, creases, and intersections between separate sheets are acceptable.",
+        "PARTIAL": "The aggregate contains deployed sheet surfaces with an inspectable curved crest-to-valley region and a continuous interior, but at least one PASS condition is unmet. Local defects may interrupt otherwise substantive existing surfaces; missing minor sheets alone do not force FAIL.",
+        "FAIL": "No deployed sheet surface provides an inspectable curved crest-to-valley region with a continuous interior. Missing surfaces, only flat surfaces, an unused source, or geometry too broken to expose such a region do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_wrinkled_sheet.png"],
+      "verification": {
+        "method": "geometry_integrity_and_neutral_shading_inspection",
+        "procedure": "Inspect the shared source and representative deployed sheets with neutral shading and close geometry views. Examine broad curved regions for unwanted faceting, inconsistent normals, interior cracks, coincident duplicate faces, and disruptive spikes. Rotate or refresh the view to inspect flicker. Separate intended inter-sheet intersections from defects within an individual sheet.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "4. Editable Distribution",
+      "criterion": "A live shared sheet source controls deployed geometry throughout the saved nanoflower.",
+      "scoring_rule": {
+        "PASS": "The saved scene contains a populated distribution linked to an editable sheet source, and a temporary source-geometry edit propagates to multiple deployed sheets. The change reaches separated regions across the aggregate after reevaluation, the source remains independently inspectable, and restoring the source edit restores the distributed geometry.",
+        "PARTIAL": "The saved scene contains a populated distribution linked to an editable sheet source, and a temporary source-geometry edit propagates to multiple deployed sheets, but at least one PASS condition is unmet. Some regions may be disconnected from the source or restoration may be incomplete.",
+        "FAIL": "A temporary edit of a saved editable sheet source does not propagate to multiple deployed sheets. An unused source, static copies, an empty generator, or a relationship existing only in a separate build script does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_wrinkled_sheet.png", "image/01_nanoflower.png"],
+      "verification": {
+        "method": "non_destructive_shared_source_probe",
+        "procedure": "Work on a temporary copy of submission.blend. Locate the source actually used by the populated generator and record evaluated sheets in separated regions. Make a small distinctive edit to a broad source region, reevaluate, and compare the deployed results. Restore the edit and verify the original distribution returns. Inspect actual propagation rather than object names or the mere existence of links.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "4. Editable Distribution",
+      "criterion": "An editable population setting regenerates the sheet distribution at lower and higher densities.",
+      "scoring_rule": {
+        "PASS": "The saved populated generator has a population or density setting whose change alters the actual deployed sheet population. Both a lower and a higher test setting produce corresponding population changes while preserving spherical placement and the shared sheet source; restoring the default returns the finished dense state.",
+        "PARTIAL": "The saved populated generator has a population or density setting whose change alters the actual deployed sheet population, but at least one PASS condition is unmet. Only one direction may work, placement may break at a test setting, or the default may fail to restore.",
+        "FAIL": "No editable population or density setting in the saved populated generator changes the actual deployed sheet population. Changing only visibility, material, or scale, or editing a label without an evaluated effect, does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_nanoflower.png"],
+      "verification": {
+        "method": "non_destructive_population_probe",
+        "procedure": "On a temporary scene copy, record the default population and generator source. Reduce and increase its population or density setting by moderate amounts within its intended usable range. Reevaluate and inspect the actual instance or generated-sheet population and spatial placement. Restore the default and compare the evaluated dense state. Exact source particle counts are not required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "4. Editable Distribution",
+      "criterion": "Sheet reach and angular variation remain functional distribution controls in the saved scene.",
+      "scoring_rule": {
+        "PASS": "The saved populated generator has at least one functional sheet-reach/scale or angular-variation control that changes multiple deployed sheets. Both required controls work: reach or scale changes extension and overlap without changing the population setting, and angular variation changes neighboring orientations while retaining outward placement around the central region. Restoring the controls restores the default geometry.",
+        "PARTIAL": "The saved populated generator has at least one functional sheet-reach/scale or angular-variation control that changes multiple deployed sheets, but at least one PASS condition is unmet. One control may be missing, changes may disrupt the required spatial relationship, or restoration may be incomplete.",
+        "FAIL": "Neither an editable sheet-reach/scale control nor an angular-variation control in the saved populated generator changes multiple deployed sheets. Whole-aggregate transforms, manual edits to separate static copies, and unused controls do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_nanoflower.png", "image/03_layered_structure.png"],
+      "verification": {
+        "method": "non_destructive_distribution_control_probes",
+        "procedure": "On a temporary scene copy, record the default population, sheet extensions, and representative orientations. Change reach or scale alone by a moderate amount and inspect sheet extension and overlap while holding population fixed. Restore it, then change angular variation and compare several neighboring orientations and outward placement. Restore the default and compare the geometry. Test evaluated behavior rather than a specific node or particle API.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene and its correctly framed actual-scene PNG are delivered.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with a populated nanoflower scene that can be inspected. It contains the shared source, distribution, and final render setup, and B131_Procedural_Nanoflower.png is an actual render of that submitted scene using the required engine and GPU setting, showing the complete aggregate with surrounding space and readable layers while excluding the loose source from the composition.",
+        "PARTIAL": "submission.blend opens with a populated nanoflower scene that can be inspected, but at least one PASS condition is unmet. The PNG, render setup, framing, source exclusion, or a required saved component may be incomplete.",
+        "FAIL": "submission.blend is missing, unreadable, or does not contain an inspectable populated nanoflower scene. A PNG alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_nanoflower.png"],
+      "verification": {
+        "method": "artifact_open_and_render_consistency_check",
+        "procedure": "Open submission.blend in Blender 5.1.2 and inspect its populated scene and render configuration. Decode the named PNG, check framing and source exclusion, and compare it with a controlled render of the submitted camera and scene to establish actual-scene provenance. Inspect the configured Cycles GPU setting. No particular output directory, resolution, or material color is required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "build.py recreates the scene and saves a usable submission.blend on disk.",
+      "scoring_rule": {
+        "PASS": "Running build.py from a fresh starting scene creates a populated nanoflower and saves a readable submission.blend on disk. Reopening that saved result retains the created geometry, shared-source and distribution relationships, finished default settings, and render setup corresponding to the delivered scene.",
+        "PARTIAL": "Running build.py from a fresh starting scene creates a populated nanoflower and saves a readable submission.blend on disk, but at least one PASS condition is unmet. The saved result may lose a relationship, a default setting, or part of its render setup.",
+        "FAIL": "build.py is missing, does not execute sufficiently to create a populated nanoflower, or does not save a readable submission.blend containing that result. An unsaved in-memory result or a script that merely opens or copies a prebuilt solution does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "fresh_scene_build_and_saved_result_reopen",
+        "procedure": "Inspect build.py, then run it in a clean Blender 5.1.2 session with only the stated empty-input starting conditions in a temporary working location. Confirm it creates and writes submission.blend. Close the session, reopen that saved file from disk, and inspect its geometry, live generator relationships, default state, and render setup against the delivered scene. Do not accept inspection of only an unsaved in-memory scene.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

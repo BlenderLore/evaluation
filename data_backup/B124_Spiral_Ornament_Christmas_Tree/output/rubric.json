@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Spiral Ornament Christmas Tree",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1X3BUBXEUr",
+    "id": "BV1X3BUBXEUr"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 40, "PROC": 30, "SURF": 20, "SCN": 5, "PIPE": 5},
+  "weighting_note": "Forty points assess the pine skeleton, needle canopy, and dimensional topper as separate geometric results. Thirty points assess the two independent, functional ornament distributions. Twenty points assess material behavior on the actual foliage, stars, and baubles. Presentation and reproducible delivery receive five points each. A paused particle arrangement is not an animation or physical-simulation deliverable, and extension identity earns no credit.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Pine Structure and Foliage",
+      "criterion": "An upright conical pine has a branching skeleton with depth, a central trunk, main branches, and finer offshoots.",
+      "scoring_rule": {
+        "PASS": "A recognizable three-dimensional branching pine exists with a central trunk and outward main branches; finer offshoots support the canopy, the lower branches are broad, and the upper structure narrows coherently to a tip from the front and sides.",
+        "PARTIAL": "A recognizable three-dimensional branching pine exists with a central trunk and outward main branches, but at least one PASS condition is unmet, such as weak taper, missing finer offshoots, or an unevenly developed back side.",
+        "FAIL": "There is no recognizable three-dimensional branching pine with both a central trunk and outward main branches; an unbranched trunk, solid cone, or flat tree image does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_decorated_tree.png", "image/02_top_star.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_multiview_inspection",
+        "procedure": "Open the saved scene, temporarily hide ornaments and foliage where needed, and inspect the evaluated trunk and branches from front, side, and rear views. Follow branch connections and compare the lower, middle, and upper silhouette. Restore the scene after inspection.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Pine Structure and Foliage",
+      "criterion": "Dense, slender needle geometry produces a full canopy with a feathery edge and visible local structure.",
+      "scoring_rule": {
+        "PASS": "Needle-like geometry forms substantial foliage in the lower, middle, and upper canopy; it fills the tree in depth, retains individual needle silhouettes and cluster gaps at close range, and avoids large bare patches or broad fused sheets.",
+        "PARTIAL": "Needle-like geometry forms substantial foliage in at least two canopy height regions, but at least one PASS condition is unmet, including incomplete coverage, coarse needles, weak depth, or locally fused geometry.",
+        "FAIL": "Needle-like geometry does not form substantial foliage in at least two canopy height regions. Isolated sample needles, a smooth cone, broad leaf sheets without needle form, or a foliage image alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_decorated_tree.png", "image/03_star_spiral.png"],
+      "verification": {
+        "method": "evaluated_geometry_close_view_inspection",
+        "procedure": "Inspect the evaluated canopy in neutral solid shading with decorations hidden. Check lower, middle, and upper regions from front and side views, then zoom into representative branch tips to distinguish slender needles, cluster spacing, and actual geometric depth from texture-only detail.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Dimensional Top Star",
+      "criterion": "The topper is a dimensional five-point star proportioned and seated at the tree tip.",
+      "scoring_rule": {
+        "PASS": "A recognizable five-point topper with real thickness exists at the tree tip; its front and back have raised or faceted form, its finished edges retain the points, and it is upright, centered, close to the tip, larger than the repeated stars, and much narrower than the canopy.",
+        "PARTIAL": "A recognizable five-point topper with real thickness exists at the tree tip, but at least one PASS condition is unmet, such as flat front/back faces, unfinished edges, poor alignment, a visible attachment gap, or unsuitable proportions.",
+        "FAIL": "No recognizable five-point topper with real thickness exists at the tree tip. A flat image, zero-thickness face, isolated source star elsewhere, or different topper shape does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_decorated_tree.png", "image/02_top_star.png"],
+      "verification": {
+        "method": "mesh_and_spatial_inspection",
+        "procedure": "Inspect the topper from front, rear, and oblique views in neutral shading. Confirm five outer points, actual thickness, surface relief, and edge quality. Compare its placement and proportions against the evaluated tree and visible repeated stars; do not require a particular bevel modifier or world-unit width.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Two Editable Ornament Spirals",
+      "criterion": "A dense, tapering star garland has functional guide and density controls and retains a stable saved arrangement.",
+      "scoring_rule": {
+        "PASS": "Recognizable small stars populate at least one complete spiral turn and respond to at least one exposed distribution control; the finished garland extends through several complete turns across the lower, middle, and upper canopy and around its back, follows the outer foliage, preserves individual star silhouettes, updates both guide shape and density predictably, leaves the bauble distribution unchanged when edited, and is fully present after reopening.",
+        "PARTIAL": "Recognizable small stars populate at least one complete spiral turn and respond to at least one exposed distribution control, but at least one PASS condition is unmet, such as incomplete height coverage, clumping, a missing shape or density response, coupling to the baubles, or an unstable saved arrangement.",
+        "FAIL": "Recognizable small stars do not populate at least one complete spiral turn, or no exposed distribution control produces a meaningful evaluated change. A guide with no populated stars, disconnected instances, or manually placed stars with no functional regeneration relationship do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_decorated_tree.png", "image/03_star_spiral.png"],
+      "verification": {
+        "method": "functional_distribution_probe_and_reopen_check",
+        "procedure": "In a temporary copy, inspect evaluated star positions around the tree and record the bauble positions. Make a gentle change to the star guide shape, then change star repetition density. Evaluate or run the documented script regeneration and open the newly saved file where applicable. Confirm that the star arrangement follows both changes without manually relocating instances and that bauble positions remain unchanged. Restore the original controls and reopen the submitted scene to verify the complete static arrangement is immediately available.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Two Editable Ornament Spirals",
+      "criterion": "A second, sparser spiral distributes baubles independently through editable shape and density relationships.",
+      "scoring_rule": {
+        "PASS": "Round baubles populate at least one complete spiral turn and respond to at least one exposed distribution control; the finished arrangement extends through several complete turns across the lower, middle, and upper canopy and around its back, stays near the outer foliage, is visibly sparser than the star garland, updates both guide shape and density predictably, leaves the stars unchanged when edited, and is fully present after reopening.",
+        "PARTIAL": "Round baubles populate at least one complete spiral turn and respond to at least one exposed distribution control, but at least one PASS condition is unmet, such as incomplete coverage, excessive burial or detachment, unsuitable density, a missing control response, coupling to stars, or an unstable saved arrangement.",
+        "FAIL": "Round baubles do not populate at least one complete spiral turn, or no exposed distribution control produces a meaningful evaluated change. An unpopulated guide, isolated source sphere, or manually placed baubles with no functional regeneration relationship do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_decorated_tree.png", "image/04_bauble_spiral.png"],
+      "verification": {
+        "method": "functional_distribution_probe_and_reopen_check",
+        "procedure": "In a temporary copy, inspect evaluated bauble positions and record the star positions. Make a gentle shape change to the bauble guide and change its repetition density. Evaluate or regenerate through the documented script, opening the saved result if used. Confirm independent, meaningful bauble updates with unchanged star positions, compare ornament density and canopy clearance, then restore and reopen the original saved arrangement.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "Surface Treatment",
+      "criterion": "Green materials applied to the actual needle canopy preserve readable foliage structure.",
+      "scoring_rule": {
+        "PASS": "Substantial existing needle foliage in at least two canopy height regions has an applied green surface; all existing core foliage reads as rich green with light and shadow variation that reveals its fine form and distinguishes it from the decorations.",
+        "PARTIAL": "Substantial existing needle foliage in at least two canopy height regions has an applied green surface, but at least one PASS condition is unmet, such as inconsistent assignments, washed-out color, or flattened surface response.",
+        "FAIL": "No applied green surface is demonstrated on substantial existing needle foliage in at least two canopy height regions. An unused material, isolated needle sample, or colored solid cone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_decorated_tree.png"],
+      "verification": {
+        "method": "material_assignment_and_controlled_render_inspection",
+        "procedure": "Inspect material use on the evaluated needles and view representative existing lower, middle, and upper foliage under neutral controlled lighting. Confirm green response and local tonal variation on real foliage; exclude canopy coverage already assessed by GEO-02 from this material assessment.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Surface Treatment",
+      "criterion": "The actual topper and small stars emit warm pale-yellow light while retaining readable star forms.",
+      "scoring_rule": {
+        "PASS": "The topper or a populated spiral turn of small stars demonstrates an applied warm emitting surface; both the topper and the repeated stars are present with that treatment, and their brightness retains clear star silhouettes in the final presentation.",
+        "PARTIAL": "The topper or a populated spiral turn of small stars demonstrates an applied warm emitting surface, but at least one PASS condition is unmet, including a missing treated family, inconsistent assignments, or excessive brightness that obscures the points.",
+        "FAIL": "Neither the topper nor a populated spiral turn of small stars demonstrates an applied warm emitting surface. An unused shader, isolated hidden source, external glow image, or bright diffuse material alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_decorated_tree.png"],
+      "verification": {
+        "method": "emission_assignment_and_low_light_probe",
+        "procedure": "Trace the active material assignments on the topper and evaluated small stars. In a temporary controlled render, reduce external illumination and disable any added glare to confirm material self-emission. Return to the submitted presentation to assess warm color and retained five-point silhouettes without demanding a particular shader value or glow implementation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "Surface Treatment",
+      "criterion": "Applied bauble materials read as light reflective metal with moderately soft highlights.",
+      "scoring_rule": {
+        "PASS": "Visible baubles in a populated spiral turn demonstrate an applied metallic response; the existing bauble family has a consistent light metal finish with readable reflections, moderate softness, and tonal variation that describes the round surfaces.",
+        "PARTIAL": "Visible baubles in a populated spiral turn demonstrate an applied metallic response, but at least one PASS condition is unmet, such as inconsistent material use, extremely sharp reflections, overly dull response, or a finish too dark to match the intended light metal.",
+        "FAIL": "Visible baubles in a populated spiral turn do not demonstrate an applied metallic response. An unused metal material, hidden source sphere, or flat diffuse white treatment does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_decorated_tree.png", "image/04_bauble_spiral.png"],
+      "verification": {
+        "method": "material_assignment_and_reflection_probe",
+        "procedure": "Inspect materials actually used by the evaluated baubles. Place broad light sources or a contrasting neutral test environment around a temporary copy and render representative existing baubles. Assess metallic reflection and highlight softness independently of how many baubles the procedural distribution supplies.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "Presentation",
+      "criterion": "The intended view presents the complete tree with readable depth, materials, and clean framing.",
+      "scoring_rule": {
+        "PASS": "An intended camera view visibly presents the pine and decorations; it includes the complete topper and lowest branches with margins, uses a front three-quarter angle and restrained background, makes foliage depth and both ornament treatments readable together, and excludes unintended helpers.",
+        "PARTIAL": "An intended camera view visibly presents the pine and decorations, but at least one PASS condition is unmet, such as cropping, weak depth, distracting background, hidden material distinctions, or visible construction helpers.",
+        "FAIL": "No intended camera view visibly presents the pine and decorations, including a blank view, a camera aimed elsewhere, or a reference image replacing the scene."
+      },
+      "evidence_refs": ["image/01_decorated_tree.png"],
+      "verification": {
+        "method": "camera_render_and_scene_inspection",
+        "procedure": "Inspect the intended camera framing and render a verification image from the submitted scene. Compare its framing and visibility with the delivered PNG. Assess scene integration and presentation only; use the dedicated geometry and surface rows for defects intrinsic to those components.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, self-contained rebuild, and actual-scene PNG are delivered and reproduce the saved result.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens as an editable scene containing the pine and decorations; build.py recreates that scene from a clean Blender 5.1.2 state, saves submission.blend, and the newly saved file reopens with the intended geometry, controls, materials, camera, and lighting. The correctly named PNG is a Cycles GPU render of the submitted scene, and the package has no unavailable required dependencies.",
+        "PARTIAL": "submission.blend opens as an editable scene containing the pine and decorations, but at least one PASS condition is unmet, such as a missing or failing script, no saved rebuild result, incomplete regeneration, missing render, incorrect render provenance, or an unavailable dependency.",
+        "FAIL": "submission.blend is missing, cannot be opened, or does not contain an editable scene with both the pine and decorations. A script that only creates an unsaved in-memory scene does not meet this minimum by itself."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "clean_rebuild_saved_artifact_and_render_provenance_check",
+        "procedure": "Open the delivered submission.blend in Blender 5.1.2. Run build.py from a clean Blender process in an isolated working location without the author's caches or unavailable extensions. Check that it writes submission.blend to its declared location, then close the process and reopen that newly saved file to inspect the scene and exercise the ornament controls. Verify Cycles GPU configuration and compare a render from the submitted camera with B124_Spiral_Ornament_Christmas_Tree.png. Do not require an unstated submission directory.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Low-Poly Cat With Photo Texture",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1zZwjzvEi9",
+    "id": "BV1zZwjzvEi9"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 45, "SURF": 45, "PIPE": 10},
+  "weighting_note": "The source centers on primitive-based character modeling and photo texture painting. Geometry and surface work receive equal weight, with geometry split across head, torso and paws, tail, and faceted integrity; surface work distinguishes UV usability, editable image mapping, facial alignment, and remaining fur coverage. Ten points cover portable scene delivery and reproducible rendered output. Incidental camera and light existence receive no separate credit.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. Character Silhouette",
+      "criterion": "The broad angular head, flared cheeks, narrow chin, and two pointed ears establish the reference character's face silhouette.",
+      "scoring_rule": {
+        "PASS": "An editable three-dimensional head is wider than the torso and has a broad forehead, angular lower-cheek flare, narrower chin, and two upright triangular ears balanced around the facial centerline.",
+        "PARTIAL": "An editable three-dimensional head and two discernible pointed ears are present, but at least one PASS condition is unmet.",
+        "FAIL": "No editable three-dimensional head is present, or fewer than two pointed ears are discernible. A face image on a plane does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_textured_character.png", "image/02_character_geometry.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection and neutral-material views",
+        "procedure": "Identify the character in the submitted scene, inspect its evaluated meshes with a neutral material from front and oblique views, and compare head width, cheek breaks, chin, ear form, and balance to the public references. Confirm the form has depth independently of the photo texture.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Character Silhouette",
+      "criterion": "The narrow upright torso, short neck, notched base, and raised paired paws form a coherent body.",
+      "scoring_rule": {
+        "PASS": "A slender vertical torso sits below a short neck, has two pointed lower corners separated by a shallow central notch, and carries two small matched faceted paws in front of its upper region with clear separation from the chest silhouette.",
+        "PARTIAL": "A three-dimensional torso below the head and two discernible front paws are present, but at least one PASS condition is unmet.",
+        "FAIL": "The three-dimensional torso is absent or fewer than two front paws are discernible."
+      },
+      "evidence_refs": ["image/02_character_geometry.png"],
+      "verification": {
+        "method": "Evaluated geometry and front/oblique inspection",
+        "procedure": "Inspect the torso and paws from the front and an oblique angle without texture. Check the neck transition, vertical proportions, lower notch, paw placement, and whether the paired forms remain visible in front of the chest.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Character Silhouette",
+      "criterion": "A thick bent tail extends backward from the lower rear torso and turns upward to a broad pointed end.",
+      "scoring_rule": {
+        "PASS": "The tail visibly connects to the lower rear torso, extends backward, turns upward through an angular bend, has a broad pointed end, and retains thickness from side and top views.",
+        "PARTIAL": "A three-dimensional tail connected to the torso and extending behind it is present, but at least one PASS condition is unmet.",
+        "FAIL": "No connected three-dimensional tail extends behind the torso; a disconnected decoration or flat image is insufficient."
+      },
+      "evidence_refs": ["image/03_tail_profile.png"],
+      "verification": {
+        "method": "Side/top evaluated geometry inspection",
+        "procedure": "View the evaluated character from the side and top, inspect the tail root and cross-section, and compare the backward extension, upward bend, and terminal wedge silhouette to the profile reference. A joined object is not required when the visible connection is coherent.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Low-Poly Geometry",
+      "criterion": "The complete mesh character retains large planar facets, real depth, and clean visible surfaces.",
+      "scoring_rule": {
+        "PASS": "The head, ears, torso, paired paws, and tail all retain readable broad planar facets and real depth; their visible surfaces show no open holes, doubled surfaces, flipped faces, or distracting intersections.",
+        "PARTIAL": "The head and torso are three-dimensional meshes with readable broad planar facets and substantially clean visible surfaces, but at least one PASS condition is unmet.",
+        "FAIL": "The head or torso is absent or effectively flat, or they do not both have readable broad planar facets and substantially clean visible surfaces. Missing parts cannot establish the minimum or earn full clean-surface credit."
+      },
+      "evidence_refs": ["image/02_character_geometry.png", "image/03_tail_profile.png"],
+      "verification": {
+        "method": "Mesh inspection and controlled neutral renders",
+        "procedure": "Inspect evaluated meshes and neutral-material front, side, back, and oblique views. Check planar changes in silhouette and shading, three-dimensional cross-sections, open exterior boundaries, duplicate visible faces, normal orientation, and unintended intersections. Judge form, not polygon totals or modifier names.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "3. UV Layout And Paint Surface",
+      "criterion": "The character has a usable atlas layout with independent, nondegenerate mappings for its surfaces.",
+      "scoring_rule": {
+        "PASS": "All character surfaces have nonzero-area UV faces inside the texture area without unintended overlap, with independent editable regions for head, ears, body, paws, and tail and enough facial space to preserve the eyes and muzzle.",
+        "PARTIAL": "The front head and torso are present and have usable nondegenerate UV mapping, but at least one PASS condition is unmet.",
+        "FAIL": "The front head or torso is absent or lacks usable nondegenerate UV mapping."
+      },
+      "evidence_refs": ["image/04_painted_atlas.png"],
+      "verification": {
+        "method": "UV data inspection and checker probe",
+        "procedure": "Inspect actual face UV coordinates, UV triangle areas, atlas bounds, and unintended overlapping face triangles. In a temporary copy apply a checker to assess collapsed or stretched facial regions, and inspect whether each named part has a separately editable atlas region. Do not infer overlap from island bounding boxes alone.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "3. UV Layout And Paint Surface",
+      "criterion": "An editable painted color-image atlas actually drives the character surface and stays registered to its geometry.",
+      "scoring_rule": {
+        "PASS": "The complete character is present, and a readable editable color-image atlas drives the actual base color of every character part, contains transferred photo content and repairs, remains registered while the view rotates and the template is hidden, and a temporary atlas paint edit appears on the corresponding model surface.",
+        "PARTIAL": "A readable editable color-image atlas visibly drives the head and torso and responds to a temporary image edit, but at least one PASS condition is unmet.",
+        "FAIL": "No readable editable color-image atlas visibly drives both head and torso, or a temporary edit has no corresponding surface effect. A viewport overlay, unused image node, or flat background photo is insufficient."
+      },
+      "evidence_refs": ["image/01_textured_character.png", "image/04_painted_atlas.png"],
+      "verification": {
+        "method": "Material tracing and reversible image-edit probe",
+        "procedure": "Trace the material actually assigned to the character faces to its color atlas. In a temporary scene copy hide photo templates, rotate the view, paint a small contrasting mark in a known mapped atlas region, and confirm the corresponding surface changes in a controlled render. Restore the copy after the probe. No specific node chain is required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "4. Photo-Based Face And Fur",
+      "criterion": "The front head carries one well-aligned recognizable face transferred from the supplied photo.",
+      "scoring_rule": {
+        "PASS": "Both eyes sit on the upper front head; the nose and mouth are near its centerline; the pale muzzle and central blaze are surrounded by the supplied photo's darker eye and cheek fur; proportions remain natural and recognizable, with no duplicated facial features on the sides or back.",
+        "PARTIAL": "The supplied photo's two eyes, nose, and muzzle are recognizable together on the front head, but at least one PASS condition is unmet.",
+        "FAIL": "The supplied photo's two eyes, nose, and muzzle are not recognizable together on the front head, or the face comes from a replacement image or invented artwork."
+      },
+      "evidence_refs": ["image/01_textured_character.png", "image/04_painted_atlas.png"],
+      "verification": {
+        "method": "Controlled color views and source comparison",
+        "procedure": "Compare the submitted front-head texture to the supplied input crop and the public finished-face reference under neutral lighting. Inspect eyes, central blaze, muzzle, nose, and cheek patches at useful magnification, then rotate to the sides and back to check for repeated features. Allow source-resolution softness without demanding invented detail.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. Photo-Based Face And Fur",
+      "criterion": "Compatible fur colors cover the remaining character surfaces with a pale chest and paws and repaired projection boundaries.",
+      "scoring_rule": {
+        "PASS": "The ears, head sides and back, body, both paws, and tail are covered with compatible gray-brown and pale fur colors; the chest and paws are predominantly pale; there are no blank material patches, photo-background fragments, or obvious UV seam lines on these surfaces, and the planar appearance remains readable.",
+        "PARTIAL": "The existing torso and both existing paws have intentional fur colors, and fur color is present beyond the front face, but at least one PASS condition is unmet.",
+        "FAIL": "The torso or either paw is absent or lacks intentional fur coloring, or no fur color extends beyond the front face. Empty or missing surfaces cannot establish the minimum or earn full finish credit."
+      },
+      "evidence_refs": ["image/01_textured_character.png", "image/04_painted_atlas.png"],
+      "verification": {
+        "method": "Full-surface material inspection",
+        "procedure": "Inspect controlled front, side, back, and oblique views of the actual material, concentrating on surfaces outside the facial-feature region. Distinguish intentional pale fur from unpainted fallback color, and inspect UV boundaries and projection edges for discontinuities or gray-wall/foreground fragments from the input photo. Evaluate facial alignment only in SURF-03.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The submitted Blender project is editable and preserves its texture appearance after reopening without the author's filesystem.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens in Blender 5.1.2 with editable character meshes, UVs, painted atlas, materials, camera, and lights, and packed image dependencies preserve the appearance after reopening in a clean location.",
+        "PARTIAL": "submission.blend opens with editable character geometry and a usable photo texture, but at least one PASS condition is unmet.",
+        "FAIL": "submission.blend is absent or cannot open, or it lacks editable character geometry or a usable photo texture."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean-location reopen and dependency inspection",
+        "procedure": "Copy the submitted blend to an isolated location without access to author-specific asset paths, reopen it in Blender 5.1.2, and inspect editability, packed image data, and visible appearance. Confirm that the painted atlas remains available rather than relying on an unsaved session buffer.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The build script reproduces the asset and the named PNG is a render of the submitted scene with the required presentation.",
+      "scoring_rule": {
+        "PASS": "build.py successfully constructs and saves an equivalent scene from a fresh file using the supplied input, including texture construction and Cycles GPU render setup; the named PNG is rendered from the submitted scene and shows the full character in the slightly angled front view required by Final Presentation, with legible eyes and a visible tail.",
+        "PARTIAL": "At least one of the following works: build.py reconstructs a textured three-dimensional character from a fresh file, or the correctly named PNG is an authentic render of the submitted scene; however, at least one PASS condition is unmet.",
+        "FAIL": "Neither the build script reconstructs a textured three-dimensional character from a fresh file nor the correctly named PNG is an authentic render of the submitted scene. A source frame, viewport screenshot, or replacement image cannot satisfy the PNG condition."
+      },
+      "evidence_refs": ["image/01_textured_character.png", "image/03_tail_profile.png"],
+      "verification": {
+        "method": "Fresh-scene rebuild and render provenance comparison",
+        "procedure": "In the future evaluation environment, run build.py from a fresh Blender 5.1.2 scene with only the supplied input available, inspect the saved asset and render configuration, and render the submitted scene for comparison with B89_Low_Poly_Cat_With_Photo_Texture.png. Inspect framing, both eyes, complete silhouette, and tail visibility as specified in section 5. Do not award source-image substitution as rendered delivery.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

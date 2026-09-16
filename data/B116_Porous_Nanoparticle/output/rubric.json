@@ -1,0 +1,160 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Porous Nanoparticle",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1jSQZBdEfQ",
+    "id": "BV1jSQZBdEfQ"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 75, "PROC": 15, "PIPE": 10},
+  "weighting_note": "This is a geometry task: 75 points assess separate aspects of envelope, pore coverage, aperture shape, shell continuity, hollow wall construction, and geometric finish. The retained thickness relationship earns 15 PROC points only through a functional geometry probe. Ten PIPE points cover the saved rebuild and actual-scene render. Decorative material styling is not a separate capability requirement.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Spherical Form",
+      "criterion": "The complete particle has a coherent, nearly spherical outer envelope.",
+      "scoring_rule": {
+        "PASS": "A recognizable complete porous particle exists with a round envelope in front, side, and top views; its shortest dimension is at least 90% of its longest, and no broad flat region, pointed pole, or large dent disrupts the envelope.",
+        "PARTIAL": "A recognizable complete porous particle with a round overall envelope exists, but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable complete porous particle with a round overall envelope exists; a flat sheet, open bowl, or disconnected arrangement alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_porous_shell.png"],
+      "verification": {
+        "method": "Evaluated geometry measurement and orthographic inspection",
+        "procedure": "Open submission.blend, identify the particle's evaluated geometry, and measure its dimensions in its principal particle axes. Inspect front, side, and top orthographic views of the outer envelope. Exclude camera, lights, and presentation geometry. Record the shortest-to-longest dimension ratio and any broad form defects.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Pore Layout and Shape",
+      "criterion": "Distinct pores form a dense, broadly regular pattern over the entire sphere.",
+      "scoring_rule": {
+        "PASS": "Multiple distinct pore passages occupy opposing hemispheres, and the complete particle has at least 100 passages with centers in all eight octants, broadly comparable spacing, and no large unperforated region beyond occasional small solid sites.",
+        "PARTIAL": "Multiple distinct pore passages occupy opposing hemispheres, but one or more PASS conditions are unmet.",
+        "FAIL": "Multiple distinct pore passages do not occupy opposing hemispheres; purely painted spots, surface dimples, or pores confined to one local patch do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_porous_shell.png", "image/02_pore_distribution.png"],
+      "verification": {
+        "method": "Evaluated aperture census and spherical coverage inspection",
+        "procedure": "Inspect the evaluated shell with temporary sectional and external views to identify real passages into the cavity. Count each passage once at its outer mouth, not once per rim or inner mouth. Locate passage centers relative to the particle center and check octant occupancy. Rotate the particle to compare spacing, back coverage, and pole coverage. This row assesses count and placement; score local mouth shape in GEO-03.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Pore Layout and Shape",
+      "criterion": "Existing pore mouths have consistent rounded shapes and clear separation.",
+      "scoring_rule": {
+        "PASS": "Multiple actual through-pores have separate, rounded mouths with visible shell bridges; most mouths are round or softly rounded polygons, their typical diameter is about 5-9% of the outer diameter, and neighboring mouths remain separated without pinched or merged gaps.",
+        "PARTIAL": "Multiple actual through-pores have separate, rounded mouths with visible shell bridges, but one or more PASS conditions are unmet.",
+        "FAIL": "There are not multiple actual through-pores with separate, rounded mouths and visible shell bridges; sharp tears, merged openings, or painted circles alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_porous_shell.png", "image/03_pore_walls.png"],
+      "verification": {
+        "method": "Local aperture geometry measurement and inspection",
+        "procedure": "Sample actual pore mouths from front, back, and pole regions. View each approximately along its local radial direction, measure representative mouth diameters relative to particle diameter, and inspect the outline and bridge separation. Evaluate the quality of existing pore mouths here; reduced pore count or regional absence is assessed in GEO-02 rather than automatically failing this row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Connected Hollow Shell",
+      "criterion": "The shell forms one continuous structural body around the particle.",
+      "scoring_rule": {
+        "PASS": "A connected shell web extends around opposing hemispheres and links multiple pores; the complete particle forms one connected shell without detached fragments, accidental tears, loose geometry, or intersecting duplicate skins.",
+        "PARTIAL": "A connected shell web extends around opposing hemispheres and links multiple pores, but one or more PASS conditions are unmet.",
+        "FAIL": "No connected shell web extends around opposing hemispheres and links multiple pores; isolated rings, floating fragments, or an unrelated intact object do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_porous_shell.png", "image/02_pore_distribution.png"],
+      "verification": {
+        "method": "Evaluated connectivity analysis and sectional inspection",
+        "procedure": "Extract the evaluated particle geometry and analyze geometric connectivity, accounting for coincident seams only when the result is actually joined. Inspect all sides and temporary sections for loose fragments, unintended breaks, overlaps, and duplicate skins. Distinguish intentional pore passages from tears. Assess connectivity here; wall depth and shared cavity construction belong to GEO-05.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Connected Hollow Shell",
+      "criterion": "The shell has substantial uniform thickness, complete pore walls, and a shared empty interior.",
+      "scoring_rule": {
+        "PASS": "A shared empty cavity and nonzero shell thickness are present, with multiple complete pore walls connecting exterior to interior; the shell thickness is broadly uniform at about 3-5% of the outer diameter, every pore has a complete surrounding wall, and inner, outer, and pore-wall surfaces form a closed solid material volume with open pore passages.",
+        "PARTIAL": "A shared empty cavity and nonzero shell thickness are present, with multiple complete pore walls connecting exterior to interior, but one or more PASS conditions are unmet.",
+        "FAIL": "The result lacks a shared empty cavity, nonzero shell thickness, or multiple complete pore walls connecting exterior to interior; a zero-thickness sheet, solid dimpled ball, or collection of sealed recesses does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_porous_shell.png", "image/03_pore_walls.png"],
+      "verification": {
+        "method": "Cross-section, thickness sampling, and solid-volume inspection",
+        "procedure": "Inspect temporary cross-sections through several particle directions and sample exterior-to-interior wall depth between pores. Normalize thickness by the outer diameter. Check that the cavity is empty, pore side walls connect both skins, and no caps close the passages. Inspect edge-face incidence or an equivalent solid-volume representation for unintended open material boundaries. Do not require open boundary loops on an already thickened solid shell.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Geometry Finish and Presentation",
+      "criterion": "The existing shell and pore walls have smooth geometry and coherent normals.",
+      "scoring_rule": {
+        "PASS": "Substantial exterior, interior, and pore-wall surfaces exist and show coherent shading; the main silhouette and most openings read as smooth curves without broad faceting, black normal artifacts, or visible shading seams across those surfaces.",
+        "PARTIAL": "Substantial exterior, interior, and pore-wall surfaces exist and show coherent shading, but one or more PASS conditions are unmet.",
+        "FAIL": "Substantial exterior, interior, and pore-wall surfaces are absent or fail to show coherent shading; missing surfaces cannot establish the minimum by having no visible defects."
+      },
+      "evidence_refs": ["image/01_porous_shell.png", "image/03_pore_walls.png"],
+      "verification": {
+        "method": "Controlled gray-material renders and normal inspection",
+        "procedure": "On a temporary inspection copy, use a neutral opaque material and broad directional lighting. Inspect exterior, interior, silhouette, and pore-wall regions from several angles and check evaluated normals where artifacts occur. Separate local shading defects from the global form, pore layout, and shell-continuity issues assessed elsewhere. Restore the submitted scene after inspection.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Editable Wall Thickness",
+      "criterion": "One editable thickness control propagates coherently through the shell and all pore walls.",
+      "scoring_rule": {
+        "PASS": "An accessible thickness control causes measurable coherent changes to both shell depth and multiple pore walls; it is clearly labeled and works at 75% and 125% of the saved value while keeping the shell connected, all pores open, and the outer silhouette and pore-center layout essentially unchanged. The submitted scene stores the intended final thickness.",
+        "PARTIAL": "An accessible thickness control causes measurable coherent changes to both shell depth and multiple pore walls, but one or more PASS conditions are unmet.",
+        "FAIL": "No accessible thickness control causes measurable coherent changes to both shell depth and multiple pore walls; an unused parameter, a detached modifier, or uniform object scaling does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_porous_shell.png", "image/03_pore_walls.png"],
+      "verification": {
+        "method": "Non-destructive functional parameter probe",
+        "procedure": "In a temporary copy of submission.blend, find the public thickness control and record its saved value. Evaluate the particle at 75%, 100%, and 125% of that value. Measure wall depth and inspect pore walls, connectivity, passage openness, outer silhouette, and pore-center positions. Confirm that the geometry responds rather than accepting modifier or node presence alone, then restore the saved value.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The scene is reproducibly saved and accompanied by a readable render of that actual scene.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with an editable porous particle, and build.py recreates the particle from an empty scene and explicitly saves a new submission.blend that reopens successfully; the rebuilt file also preserves the complete scene and working thickness control, and B116_Porous_Nanoparticle.png is a Cycles GPU render of the submitted scene with the whole particle, small framing margin, contrasting background, and readable pore depth.",
+        "PARTIAL": "submission.blend opens with an editable porous particle, and build.py recreates the particle from an empty scene and explicitly saves a new submission.blend that reopens successfully, but one or more PASS conditions are unmet.",
+        "FAIL": "submission.blend does not open with an editable porous particle, or build.py does not recreate the particle from an empty scene and save a new submission.blend that reopens successfully. An unsaved in-memory rebuild does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_porous_shell.png"],
+      "verification": {
+        "method": "Clean rebuild, saved-file reopening, and render provenance comparison",
+        "procedure": "Open the submitted blend and inspect the required files. Run build.py with Blender 5.1.2 from an empty scene in an isolated test workspace without supplying the original blend as an input. Locate the new submission.blend saved by the script, without imposing an output directory that the public task does not specify. Reopen that newly saved file in a separate process and compare the evaluated particle, editable thickness relationship, and render setup. Inspect the delivered PNG and compare it with a fresh render of the actual submitted scene for geometry, framing, and pore-depth readability. Check the saved Cycles GPU render configuration. This is a specified future procedure, not an executed compatibility claim.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

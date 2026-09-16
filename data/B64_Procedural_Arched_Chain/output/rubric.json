@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Arched Chain",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=Mzu3MbT_jPE",
+    "id": "Mzu3MbT_jPE"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 55, "PROC": 35, "PIPE": 10},
+  "weighting_note": "Geometry receives 55 points for the link silhouette, tube quality, alternating orientation, physical threading, and overall arch. Procedural relationships receive 35 points for shared shape edits, live count changes, and independent path deformation. Pipeline delivery receives 10 points. The source teaches gray geometry rather than material authoring or animation, so those capabilities are not added.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Link Form",
+      "criterion": "The undeformed source link has the required closed stadium silhouette, open center, and outer length and width.",
+      "scoring_rule": {
+        "PASS": "The source is one closed loop with a clear center opening, two straight parallel sides, and rounded ends; its outer length-to-width ratio is within 10 percent of 1.25, at any overall scale.",
+        "PARTIAL": "A complete elongated loop with a clear opening exists, but at least one PASS condition is unmet, including the side shape, end shape, symmetry, or dimensional targets.",
+        "FAIL": "No complete elongated loop with a clear central opening exists; a circular ring, open hook, solid plate, or absent source is below the minimum."
+      },
+      "evidence_refs": ["image/02_link_form.png"],
+      "verification": {
+        "method": "Evaluated geometry measurement and orthographic inspection",
+        "procedure": "In a temporary copy of the submitted scene, set count to one and bypass the path bend. Inspect the complete source from its normal direction, measure the ratio of its outer long and short extents, and inspect the two sides and rounded ends. Restore the original control values afterward.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Link Form",
+      "criterion": "The existing link surface is a continuous, uniformly thick, deliberately faceted tube.",
+      "scoring_rule": {
+        "PASS": "The complete undeformed link has a round faceted cross-section and a tube diameter within 10 percent of 0.23 times the link's outer width throughout; the surface has no breaks, doubled layers, spikes, or unintended shading seams, and repeated copies retain that undeformed tube form.",
+        "PARTIAL": "At least one complete link has a continuous tube with discernible thickness throughout, but at least one PASS condition is unmet, such as uneven thickness, an overly smooth profile, inconsistent copies, or localized surface defects.",
+        "FAIL": "No complete link has a continuous tube with discernible thickness throughout; a bare outline, open surface strip, or missing link cannot establish the minimum."
+      },
+      "evidence_refs": ["image/02_link_form.png", "image/04_straight_run.png"],
+      "verification": {
+        "method": "Evaluated surface inspection and section measurements",
+        "procedure": "Bypass the path bend and inspect an isolated link from several directions under neutral lighting. Measure cross-sections on both straight sides and both rounded ends. Check evaluated surfaces and normals for gaps, coincident duplicate layers, spikes, and unintended discontinuities. Compare an interior copy and an end copy without treating expected path deformation as a thickness defect.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Interlocking Run",
+      "criterion": "Successive links alternate between perpendicular planes throughout the straight run.",
+      "scoring_rule": {
+        "PASS": "A straight run of at least three links exists, and every neighboring pair alternates about the lengthwise axis, with fitted link-plane angles within 5 degrees of a right angle; there is no local reversal or coplanar neighboring pair.",
+        "PARTIAL": "At least one consecutive three-link segment alternates between two distinct transverse planes, but at least one PASS condition is unmet anywhere in the run.",
+        "FAIL": "No consecutive three-link segment demonstrates an alternating orientation pattern; an absent run or coplanar sequence is below the minimum."
+      },
+      "evidence_refs": ["image/03_interlocking_pair.png", "image/04_straight_run.png"],
+      "verification": {
+        "method": "Straight-run geometry and orientation inspection",
+        "procedure": "Temporarily bypass path bending. Identify each evaluated link by spatial order and fit a plane to its centerline or symmetric tube midpoints. Inspect consecutive plane angles and the axis of alternation. Use this undeformed state for angle measurements because the final bend can make individual links non-planar.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Interlocking Run",
+      "criterion": "The saved run is physically threaded, with neighboring tubes clear of one another.",
+      "scoring_rule": {
+        "PASS": "A saved run of at least three links exists, and every neighboring pair passes through the other's opening, with clearance or surface contact and no solid tube penetrating another tube; this remains true throughout any bent regions.",
+        "PARTIAL": "At least one consecutive three-link segment in the saved run is genuinely threaded with no tube penetration within that segment, but at least one PASS condition fails elsewhere.",
+        "FAIL": "No consecutive three-link segment in the saved run is threaded without tube penetration; adjacent but unlinked rings, tubes fused through one another, or an absent run are below the minimum."
+      },
+      "evidence_refs": ["image/01_arched_chain.png", "image/03_interlocking_pair.png"],
+      "verification": {
+        "method": "Evaluated neighboring-surface inspection with controlled close views",
+        "procedure": "Inspect the saved arch from multiple directions, isolating adjacent pairs at the ends, arms, and peak. Confirm that each loop passes through its neighbor's opening and inspect their evaluated surfaces or cross-sections for actual solid overlap. Distinguish image overlap and surface contact from volume penetration. Assess threading here, rather than scoring the straight-run angle again.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Arched Shape",
+      "criterion": "The visible chain follows a smooth, slightly asymmetric arch with a central high region and two descending outward arms.",
+      "scoring_rule": {
+        "PASS": "One connected visible run has a rounded highest region near its middle, two descending outward arms, a slight end-height difference and sideways sweep, and no abrupt corner or twisted bundle; the editing guide is not visible as an extra tube.",
+        "PARTIAL": "A connected visible run has one raised interior region with recognizable arms descending on both sides, but at least one PASS condition is unmet, including proportion, peak placement, smoothness, asymmetry, or visible guide geometry.",
+        "FAIL": "There is no raised interior region with recognizable descending arms on both sides; a straight row, sagging center, disconnected fragments, or unrecognizable bundle is below the minimum."
+      },
+      "evidence_refs": ["image/01_arched_chain.png"],
+      "verification": {
+        "method": "Whole-asset multiview inspection",
+        "procedure": "Inspect the actual saved geometry and controlled three-quarter, side, and overhead views. Trace the chain's center route to verify the central high region, two descending arms, gentle lateral sweep, and slight asymmetry. Accept mirrored orientation and straight extensions beyond the guide ends. Do not penalize individual pair penetrations again in this silhouette row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Shared Link Source",
+      "criterion": "A shared editable outline and separate tube-thickness input drive every repeated link.",
+      "scoring_rule": {
+        "PASS": "A single editable closed source outline remains in the scene and drives a run of at least three links; modifying its shape updates all generated links, and modifying tube thickness updates all links without altering their count.",
+        "PARTIAL": "At least one of a shared outline edit or a shared thickness edit updates every link in an existing run of at least three links, but at least one PASS condition is unmet.",
+        "FAIL": "Neither a shared outline edit nor a shared thickness edit updates every link in a run of at least three links; independent baked copies or an absent common source are below the minimum."
+      },
+      "evidence_refs": ["image/02_link_form.png", "image/04_straight_run.png"],
+      "verification": {
+        "method": "Non-destructive shared-source functional probes",
+        "procedure": "In a temporary scene copy, bypass the bend and modestly lengthen one straight portion of the common outline. Check that the corresponding shape change reaches every copy. Restore it, then reduce thickness slightly and confirm that every evaluated tube changes while the link count is unchanged. Inspect data dependencies when identifying the common source; do not award points solely for a modifier or node name.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Live Length Control",
+      "criterion": "One live integer control generates the requested number of consistently repeated links and supports source and straight-run inspection.",
+      "scoring_rule": {
+        "PASS": "The saved control and evaluated chain contain twenty links; changing the same control to sixteen, twenty-four, and one produces those exact counts from the source, preserves spacing and alternating orientation for the multi-link states, and the straight repeated run can be inspected non-destructively.",
+        "PARTIAL": "One live control changes the evaluated number of source-derived links and at least one resulting state contains three or more consistently repeated links, but at least one PASS condition is unmet.",
+        "FAIL": "No live control changes the evaluated number of source-derived links into a consistently repeated run of at least three links; a count label with no evaluated effect or baked duplicates alone is below the minimum."
+      },
+      "evidence_refs": ["image/04_straight_run.png"],
+      "verification": {
+        "method": "Count-control evaluation and source-isolation probe",
+        "procedure": "Record the saved count and independently count evaluated link components or instances. In a temporary copy, test requested counts sixteen, twenty-four, and one, updating the dependency graph each time. Inspect generated count, spacing, orientation, and access to the straight run. Restore twenty and the saved bend. Do not substitute total vertex count or the mere existence of an array for counting actual links.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Path",
+      "criterion": "An independent Bezier guide actively reshapes the complete repeated chain while preserving count.",
+      "scoring_rule": {
+        "PASS": "A separate open editable Bezier guide drives a run of at least three links and has adjustable ends and an apex control; raising the apex raises the central run, moving an end laterally reshapes its arm, changing count preserves the guide, and guide edits preserve count without rebuilding the scene or editing individual links. Bypassing the bend reveals the straight run.",
+        "PARTIAL": "Editing a separate guide changes the evaluated route of an existing run of at least three links without rebuilding the scene, but at least one PASS condition is unmet.",
+        "FAIL": "Editing a separate guide does not change the evaluated route of a run of at least three links without rebuilding; a decorative guide beside baked geometry is below the minimum."
+      },
+      "evidence_refs": ["image/01_arched_chain.png", "image/04_straight_run.png"],
+      "verification": {
+        "method": "Guide-dependency and control-independence probes",
+        "procedure": "In a temporary copy, raise the apex control moderately with its handles and observe the central links; restore it, then move one end sideways with its handles and observe that arm. Verify unchanged evaluated count after each edit. Change count and verify that the guide geometry remains unchanged. Bypass the bend to inspect the straight run, then restore the saved state. Inspect live evaluated behavior instead of requiring a particular modifier stack.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable Blender file and genuine scene-rendered PNG are usable and correspond to one another.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens in Blender 5.1.2 with the editable chain and final Cycles GPU setup, and B64_Procedural_Arched_Chain.png is a valid PNG at least 1280 pixels wide rendered from that scene, showing the complete chain clearly in three-quarter view.",
+        "PARTIAL": "submission.blend opens with inspectable chain geometry, but at least one PASS condition is unmet, including missing or inadequate PNG delivery, unclear framing, mismatched scene state, render settings, or required editability.",
+        "FAIL": "submission.blend is missing, unreadable, or contains no inspectable chain geometry; an image alone cannot meet the minimum."
+      },
+      "evidence_refs": ["image/01_arched_chain.png"],
+      "verification": {
+        "method": "File-open, image-decode, and render correspondence inspection",
+        "procedure": "Open the delivered blend in Blender 5.1.2, inspect its render engine and device configuration, and decode the named PNG to check dimensions. Compare the PNG with the actual scene camera, geometry, and neutral surface presentation; use a controlled scene render if correspondence is uncertain. Inspect the shared source and controls in the file rather than inferring editability from the image.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The portable build script recreates the submitted editable asset and its required files.",
+      "scoring_rule": {
+        "PASS": "build.py runs from an empty Blender 5.1.2 scene with portable paths, recreates the chain and its shared-source, count, and path behavior, saves submission.blend, and renders B64_Procedural_Arched_Chain.png.",
+        "PARTIAL": "build.py runs far enough to create an inspectable chain with at least one live procedural relationship, but at least one PASS condition is unmet, including incomplete controls, save/render failures, or nonportable output handling.",
+        "FAIL": "build.py is missing, cannot create an inspectable chain, or creates only baked geometry without any live procedural relationship."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Isolated reconstruction run and artifact comparison",
+        "procedure": "In a disposable directory with Blender 5.1.2 and an available GPU, run the delivered script from an empty scene. Inspect its output paths and generated files, open the rebuilt blend, and perform representative source, count, and path edits. Compare the reconstructed geometry and render with the submitted scene. This future validation run is specified only; no solution script is executed during task authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

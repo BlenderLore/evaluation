@@ -1,0 +1,174 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "可编辑的程序化藤蔓",
+  "source_video": "https://www.youtube.com/watch?v=A0MD_pB7LQ0",
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 26, "PROC": 56, "SURF": 8, "PIPE": 10},
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "1. 连续的曲线茎",
+      "criterion": "连续管状茎沿轻微 S 形路径延伸，默认直径为 0.5%L 至 1.5%L，弯曲处没有扭结或塌陷。",
+      "scoring_rule": {
+        "PASS": "同时满足连续管状、不分叉且轻微 S 形、直径范围与弯曲质量三个条件。两端封口与否均接受。",
+        "PARTIAL": "茎是连续管状实体，但路径形态或默认直径/弯曲质量中有一个条件未满足。",
+        "FAIL": "茎缺失、无体积、断开、由彼此独立短棒拼接，或连续实体之外的两个条件均未满足。"
+      },
+      "evidence_refs": ["image/vine_overview.jpg"],
+      "verification": {
+        "method": "code_and_visual",
+        "procedure": "在提交文件的临时副本中识别驱动曲线并测弧长 L；隔离求值后的茎几何，从俯视和两个侧视方向检查轮廓、连续性及异常折叠。沿弧长 10%、30%、50%、70%、90% 位置测截面直径，检查典型尺寸及粗细一致性。不要从节点存在、Curve Circle 分辨率或对象名称推出形态正确。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 14,
+      "requirement_section": "2. 具有曲面的叶片原型",
+      "criterion": "叶片原型具有近方形轮廓、横向浅杯和纵向柔和弯曲，尺寸比例符合题面，曲面连续。",
+      "scoring_rule": {
+        "PASS": "轮廓与尺寸、横向浅杯、纵向弯曲与完整表面三个条件全部满足。",
+        "PARTIAL": "三个条件中恰有两个满足，且仍为可辨认的薄叶片曲面。",
+        "FAIL": "满足少于两个条件，或使用立方体、球体等非薄叶片形状。"
+      },
+      "evidence_refs": ["image/leaf_shape.jpg"],
+      "verification": {
+        "method": "code_and_visual",
+        "procedure": "隔离实际参与生成的叶片原型及至少三片不同尺寸的求值叶片，从正面与两侧检查连续曲面。以原型的根部到远端作为长度方向，测宽长比和默认典型叶长与 L 的比例；通过侧视轮廓确认横向两侧高于中部、纵向也有弯曲。允许任意拓扑、修改器或直接建模，不按 Simple Deform 类型或顶点数评分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 12,
+      "requirement_section": "3. 沿茎分布的叶片",
+      "criterion": "默认至少 12 片叶片，茎的三个弧长区段均有叶片，至少 90% 根部附着于茎表面一个默认茎半径的邻域内。",
+      "scoring_rule": {
+        "PASS": "数量、三个区段覆盖、根部附着比例三项全部满足。",
+        "PARTIAL": "三项中恰有两项满足，且叶片不是全部堆叠在同一点。",
+        "FAIL": "满足少于两项，或所有叶片堆叠在同一点。"
+      },
+      "evidence_refs": ["image/vine_overview.jpg"],
+      "verification": {
+        "method": "code_and_visual",
+        "procedure": "从依赖图实例或实际生成几何中枚举可见叶片，排除未参与展示的原型；记录根部与茎表面的最近距离，并投影到驱动曲线弧长，以 0–1/3、1/3–2/3、2/3–1 分组。对实例与已实现几何均接受同样结果。VLM/人工复核重叠叶片与根部，计数不能只读场景对象数量。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 14,
+      "requirement_section": "1. 连续的曲线茎；4. 可复用的形态控制",
+      "criterion": "Geometry Nodes 资产响应驱动曲线和叶片原型编辑，并可恢复相同状态。",
+      "scoring_rule": {
+        "PASS": "曲线位移后茎与叶片共同更新、原型边缘编辑传播到生成叶片、恢复输入后结果可复现，三项全部满足。",
+        "PARTIAL": "三项中恰有两项满足，且存在实际驱动最终几何的 Geometry Nodes 关系。",
+        "FAIL": "满足少于两项，未使用 Geometry Nodes 驱动资产，或变化只能通过重新执行构建脚本完成。"
+      },
+      "evidence_refs": ["image/vine_overview.jpg", "image/leaf_shape.jpg"],
+      "verification": {
+        "method": "code_with_visual_confirmation",
+        "procedure": "按文件内说明识别真实驱动对象。在临时副本中将一个曲线控制点沿原曲线平面法线移动 0.1L，更新依赖图，检查茎路径和附着叶片；随后恢复。再将原型一个边缘作小幅可辨变形，确认所有实例采用变形后的叶片；恢复并重新打开文件，比较固定输入下的叶片位置、形状和数量。仅检查节点组存在或读取静态截图不成立。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "4. 可复用的形态控制：茎半径",
+      "criterion": "半径控件在默认值的一半和两倍下，实际茎半径按比例变化，路径保持且叶片继续附着。",
+      "scoring_rule": {
+        "PASS": "两个非默认档位均符合目标半径 20% 相对误差以内，且路径不变、叶片仍附着。",
+        "PARTIAL": "仅一个非默认档位满足全部要求，或两个档位半径均正确但至少一个档位出现叶片附着失效。",
+        "FAIL": "半径无有效响应、仅改变整个物体缩放而同时改变路径，或两档半径均不满足。"
+      },
+      "evidence_refs": ["image/vine_overview.jpg"],
+      "verification": {
+        "method": "code_and_visual",
+        "procedure": "记录默认中心线及五处截面半径。在同一临时副本中分别设置半径控件为默认值的 0.5 倍和 2 倍，每次从默认状态开始，重新求值并测相同弧长位置。比较半径比而非控件名字或计算节点数值；复查叶片根部到新茎的距离。允许表面积变化带来叶片数变化。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-04",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "4. 可复用的形态控制：叶片密度",
+      "criterion": "密度为零时仅保留完整茎，密度加倍时叶片数至少增加 50%，茎形态不受影响。",
+      "scoring_rule": {
+        "PASS": "零密度和双倍密度两个状态全部符合要求。",
+        "PARTIAL": "两个状态中恰有一个符合全部要求。",
+        "FAIL": "两个状态均不满足，或控件只重命名/显示数量而没有改变实际生成叶片。"
+      },
+      "evidence_refs": ["image/vine_overview.jpg"],
+      "verification": {
+        "method": "code_with_visual_confirmation",
+        "procedure": "固定曲线、半径和随机输入，计数默认 N0。独立设密度为 0、2 倍默认值，检查求值叶片数量分别为 0、至少 1.5N0；比较茎的中心线和半径。不能将隐藏原型算入叶片数，也不能用调整视口显示比例冒充实际数量变化。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-05",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "3. 沿茎分布的叶片；4. 可复用的形态控制：叶片尺寸",
+      "criterion": "叶片默认具有多种朝向和至少 1.2 倍的尺寸范围；尺寸控件可使平均线性尺寸变化至少 20%，同时保持数量、茎形态和尺寸差异。",
+      "scoring_rule": {
+        "PASS": "默认朝向/尺寸变化和低高两档尺寸功能两组条件全部满足。",
+        "PARTIAL": "恰有一组条件全部满足。",
+        "FAIL": "两组条件均不满足，或通过将叶片压成细线实现尺寸变化。"
+      },
+      "evidence_refs": ["image/vine_overview.jpg"],
+      "verification": {
+        "method": "code_and_visual",
+        "procedure": "枚举叶片的局部主方向及尺寸，视觉确认至少三种可辨朝向，比较最长与最短叶片的线性尺寸比。按文件内说明测试尺寸低、高档，固定其他控件，取所有可见叶片长度的平均值并比较至少 20% 的差异，同时确认数量与茎形态相同，尺寸差异保留。允许调整最小尺寸或整体尺寸，不要求特定 Random Value 节点或随机种子数值。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 8,
+      "requirement_section": "5. 茎与叶片的材质区分",
+      "criterion": "实际产物中茎为深棕色、叶片为不透明的中性浅灰或白色，材料分配保持部件区分。",
+      "scoring_rule": {
+        "PASS": "茎色、叶片色及不透明性、部件材质区分三个条件全部满足。",
+        "PARTIAL": "三个条件中恰有两个满足。",
+        "FAIL": "满足少于两个条件，或仅以视口选择色/对象线框色伪装所需材料。"
+      },
+      "evidence_refs": ["image/stem_material.jpg"],
+      "verification": {
+        "method": "artifact_render_and_visual",
+        "procedure": "在临时副本中使用中性照明和固定色彩管理查看实际材质，分别隔离茎与叶片并检查着色结果，随后检查组合产物。核对求值后的材质分配，不能仅以 Material 名称、材质槽存在或原截图中不易辨认的颜色判断。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "4. 可复用的形态控制；6. 交付内容",
+      "criterion": "文件可重新打开、所需资源完整，控件说明可用，build.py 可在空场景重建同一功能资产。",
+      "scoring_rule": {
+        "PASS": "submission.blend 可打开且默认状态完整、控件说明齐全、build.py 独立重建并保存资产，三项全部满足。",
+        "PARTIAL": "submission.blend 可打开且默认状态完整，但控件说明或脚本重建中恰有一项不满足。",
+        "FAIL": "无法打开完整资产，或控件说明与脚本重建两项均不满足。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "code_and_manual",
+        "procedure": "在隔离临时目录中使用 Blender 5.1.2 打开提交，核查可编辑默认状态及文件内说明；禁用网络并按脚本顶部方法从空场景运行 build.py，确认不依赖原提交文件、未交付绝对路径或外部资产，保存后重开。比较生成资产的结构与公开功能，不要求二进制文件哈希相同，不另奖励渲染背景或灯光。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

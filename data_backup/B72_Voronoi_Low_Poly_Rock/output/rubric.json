@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Voronoi Low Poly Rock",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=UM-O-69Zmx0",
+    "id": "UM-O-69Zmx0"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 80, "PROC": 10, "PIPE": 10},
+  "weighting_note": "This is a single untextured modeling asset. Geometry receives 80 points divided among volume, broad relief, facet structure, real low-poly data, closure, cleanup, and normals. The causal cellular field-to-mesh relationship receives 10 procedural points. Delivery and reproducibility receive 10 points. No points are assigned to unused texture settings, incidental names, a modifier's presence, or an external quality score.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Boulder Form",
+      "criterion": "The rock has a compact boulder volume with substantial bulk in all three dimensions.",
+      "scoring_rule": {
+        "PASS": "A recognizable rock body is roughly equant or only moderately elongated, with substantial depth, width, and height. It reads as a compact boulder from front, side, and top views.",
+        "PARTIAL": "A recognizable volumetric boulder body exists, but one or more PASS conditions are unmet, such as excessive elongation or flattening that still leaves substantial rock-like bulk.",
+        "FAIL": "No recognizable volumetric boulder body exists, or the subject is predominantly a thin sheet, narrow shard, disconnected scattering, or degenerate mesh."
+      },
+      "evidence_refs": ["image/01_finished_rock.png", "image/02_broad_rock_form.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Identify the submitted rock independently of object names. Inspect its evaluated mesh and orthographic front, side, and top views at a common scale. Compare the three-dimensional bulk and overall proportions with the references; do not impose a world-unit size.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Boulder Form",
+      "criterion": "The broad relief is asymmetric, with unequal angular bulges and shallow recesses around the body.",
+      "scoring_rule": {
+        "PASS": "The outline, shoulder heights, and broad surface relief are visibly asymmetric across front, side, and top views. A few broad bulges and shallow recesses are distributed around the body, without thin spikes, deep branching cuts, a regular sphere, or six intact cube faces.",
+        "PARTIAL": "The existing rock has at least one clear broad geometric bulge and one geometric recess that create visible asymmetry, and is not dominated by thin spikes or deep branching cuts, but not all PASS conditions are met, including uneven coverage or residual primitive-like regions.",
+        "FAIL": "The minimum pair of broad geometric bulge and recess is absent, the apparent relief is only shading or color, or the body is dominated by thin spikes or deep branching cuts."
+      },
+      "evidence_refs": ["image/01_finished_rock.png", "image/02_broad_rock_form.png"],
+      "verification": {
+        "method": "controlled_gray_render_and_geometry_inspection",
+        "procedure": "Inspect the evaluated surface with a neutral override material from front, side, top, and opposite-side views. Verify that unequal shoulders, bulges, and recesses are actual geometry and extend around the body. Assess local relief here separately from the global proportions in GEO-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Facets and Density",
+      "criterion": "Large irregular planes of varied size meet at angular boundaries and define the visible surface.",
+      "scoring_rule": {
+        "PASS": "Broad planar facets with varied size and orientation define the rock around its surface. Angular boundaries and smaller transition faces support the form, and the result is clearly low-poly rather than uniformly smooth or regularly tessellated.",
+        "PARTIAL": "Several adjacent broad geometric planes define a substantive region of the existing rock, but not all PASS conditions are met, such as repetitive facet sizes, locally rounded regions, or weak variation in plane orientation.",
+        "FAIL": "No substantive region contains several adjacent broad geometric planes, or the faceted appearance exists only in a texture, bump map, or painted image."
+      },
+      "evidence_refs": ["image/01_finished_rock.png", "image/03_cleanup_detail.png"],
+      "verification": {
+        "method": "mesh_planes_and_manual_inspection",
+        "procedure": "Inspect the actual mesh and a neutral-lit turn-around set of views. Compare face planes and their junctions, allowing triangles, quads, and n-gons equally. Judge the organization of the planes here; inspect redundant vertex clutter separately in GEO-06.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Facets and Density",
+      "criterion": "The visible completed rock is represented by directly editable low-poly mesh data within a 300-vertex budget.",
+      "scoring_rule": {
+        "PASS": "The completed rock has no more than 300 directly editable mesh vertices, and that mesh carries the finished contour and major facets visible in the scene. Evaluated rendering does not substitute an unrelated or much denser representation.",
+        "PARTIAL": "A directly editable faceted rock mesh carries the finished contour and major planes, but not all PASS conditions are met, such as exceeding 300 vertices or a limited mismatch between editable and evaluated geometry.",
+        "FAIL": "No directly editable faceted rock mesh carries the finished contour and major planes, or only a primitive proxy, image, dense smooth substitute, or procedural output without an editable final mesh is delivered."
+      },
+      "evidence_refs": ["image/01_finished_rock.png", "image/03_cleanup_detail.png"],
+      "verification": {
+        "method": "base_and_evaluated_mesh_inspection",
+        "procedure": "Count vertices in the final editable rock data, excluding the optional presentation ground. Compare its positions and visible form with the evaluated object used in rendering. Test a vertex selection in a disposable copy to establish direct editability; do not infer completion merely from an empty modifier stack.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Mesh Integrity",
+      "criterion": "The rock is one connected closed shell with enclosed volume and complete top, side, and underside surfaces.",
+      "scoring_rule": {
+        "PASS": "The rock forms one connected closed shell with enclosed volume. All edges have two incident faces, and there are no holes, internal duplicate faces, loose fragments, or self-intersections.",
+        "PARTIAL": "A connected core rock shell includes top, side, and underside surfaces and encloses a recognizable body, but not all PASS conditions are met because of localized holes, duplicate faces, extra fragments, or intersections.",
+        "FAIL": "No connected core shell with top, side, and underside surfaces exists, the result is substantially open or fragmented, or its geometry is degenerate and has no volume."
+      },
+      "evidence_refs": ["image/01_finished_rock.png"],
+      "verification": {
+        "method": "topology_and_intersection_inspection",
+        "procedure": "On the rock mesh, inspect connected components, edge-face incidence, duplicate faces, enclosed volume, and triangle intersections with adjacent-face contacts excluded. Examine the underside and any flagged region manually. Ignore separate presentation support geometry.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Facets and Density",
+      "criterion": "The broad planes are free of redundant vertex clusters, tiny triangle fans, degenerate faces, and unhelpful slivers.",
+      "scoring_rule": {
+        "PASS": "Across the existing rock, broad planes remain clean and uninterrupted, with no tight redundant vertex clusters, tiny triangle fans, degenerate faces, or long narrow slivers that add no useful shape. Facet boundaries and contour-defining vertices remain intact.",
+        "PARTIAL": "Several adjacent broad planes in a substantive region are clean and retain their shape-defining boundaries, and redundant clusters or tiny fans do not dominate the surface, but one or more PASS conditions fail elsewhere on the rock.",
+        "FAIL": "No substantive region of several adjacent broad planes is clean, redundant clusters or tiny fans dominate the surface, or removing clutter has destroyed the major facet boundaries. An absent or smooth dense surface cannot establish the minimum."
+      },
+      "evidence_refs": ["image/03_cleanup_detail.png", "image/01_finished_rock.png"],
+      "verification": {
+        "method": "wireframe_and_face_quality_inspection",
+        "procedure": "Inspect wireframe overlays across the top, sides, and underside. Use face area, edge length, and aspect ratio to locate suspicious regions, then determine whether small or narrow faces carry useful form. Compare unwanted clusters with the marked source detail without requiring the same dissolved vertices or a particular polygon type.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Mesh Integrity",
+      "criterion": "Consistent normals and shading preserve readable angular planes without inverted patches or unintended seams.",
+      "scoring_rule": {
+        "PASS": "The existing rock surfaces have consistent normals and readable angular planes under neutral lighting, with no inverted patches, accidental seams across one plane, or smoothing that hides the facets.",
+        "PARTIAL": "Several adjacent core facets shade consistently and remain readable, and normal or shading defects do not dominate the body, but not all PASS conditions are met on the remaining existing surfaces.",
+        "FAIL": "No substantive group of adjacent core facets shades consistently, normals or shading defects dominate the body, or no actual faceted rock surface exists."
+      },
+      "evidence_refs": ["image/01_finished_rock.png"],
+      "verification": {
+        "method": "normals_and_controlled_lighting_inspection",
+        "procedure": "Inspect normal orientation and view the existing rock under a neutral material with lighting from several directions. Separate normal and smoothing artifacts from intended angular face boundaries. Do not infer good normals from a missing or hidden surface.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Procedural Construction",
+      "criterion": "The reproducible construction uses a spatial cellular or Voronoi field to shape actual rock geometry across the body.",
+      "scoring_rule": {
+        "PASS": "The submitted construction contains a traceable cellular or Voronoi field-to-mesh relationship that causally displaces geometry across the body and determines its broad relief. Rebuilding preserves that relationship in the completed mesh.",
+        "PARTIAL": "A traceable spatial cellular or Voronoi field genuinely displaces some of the submitted rock geometry, but not all PASS conditions are met, such as influence limited to an isolated region or an incomplete relationship in the rebuild.",
+        "FAIL": "There is no traceable cellular field-to-rock geometry relationship, the field only changes surface shading, the field or modifier is unused, or the rock is supplied only as unrelated fixed geometry."
+      },
+      "evidence_refs": ["image/02_broad_rock_form.png"],
+      "verification": {
+        "method": "code_inspection_and_disposable_rebuild_probe",
+        "procedure": "Inspect build.py to trace the spatial cellular field into mesh position changes, allowing equivalent native implementations. In a disposable copy, neutralize the field contribution and rebuild, then compare geometry with the unmodified rebuild to confirm causal coverage across the rock. This is an evaluator-side code probe; no live modifier or user-facing control is assumed or required. Assess causal geometry here, not the final relief quality already scored in GEO-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "submission.blend and build.py provide an openable asset and a self-contained reproducible construction.",
+      "scoring_rule": {
+        "PASS": "Both named files are present. The blend opens with the completed asset and render setup, and build.py runs from a clean Blender 5.1.2 scene without external assets to reproduce the submitted geometry, save the blend, and create the render setup.",
+        "PARTIAL": "An openable submission.blend contains an inspectable completed rock, but one or more PASS conditions fail, such as missing build.py, a rebuild error, or a mismatch in the reproduced scene.",
+        "FAIL": "submission.blend is absent, cannot open, or contains no inspectable completed rock."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact_open_and_rebuild",
+        "procedure": "Open submission.blend in Blender 5.1.2 and run build.py from a clean scene in a disposable directory. Compare the resulting rock geometry and render setup with the submission. Check required file names and resolve dependencies. This future procedure does not imply compatibility has been tested during task authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named PNG is a legible static render of the actual submitted rock using the public presentation requirements.",
+      "scoring_rule": {
+        "PASS": "B72_Voronoi_Low_Poly_Rock.png is a valid static Cycles GPU render of the actual submitted scene. It shows the complete neutral-gray rock in an unobstructed three-quarter view with visible top and side planes, comfortable margins, a restrained background, and legible facets.",
+        "PARTIAL": "A valid PNG rendered from the submitted scene clearly shows a substantive portion of the completed rock, but one or more PASS conditions fail, such as filename, framing, lighting, surface neutrality, or required render configuration.",
+        "FAIL": "No valid scene-derived PNG clearly shows a substantive portion of the completed rock, or the image is a source still, viewport screenshot, external replacement, or render of a different asset."
+      },
+      "evidence_refs": ["image/01_finished_rock.png"],
+      "verification": {
+        "method": "image_decode_and_scene_render_comparison",
+        "procedure": "Decode the PNG, inspect its framing and plane readability against Presentation, and compare it with a controlled render from submission.blend. Inspect the scene's Cycles GPU configuration and the build script's render path. Use the source reference for shape context only; it is not a substitute for a scene-derived submission render.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

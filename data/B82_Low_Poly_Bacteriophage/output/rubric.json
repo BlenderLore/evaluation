@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Low Poly Bacteriophage",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV15vjF6TE9L",
+    "id": "BV15vjF6TE9L"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 85, "PROC": 10, "PIPE": 5},
+  "weighting_note": "This source is predominantly primitive-based geometric modeling. Geometry receives 85 points spread across seven independent structural outcomes and surface-normal finish. Ten points assess actual editable geometric repetition, and five assess reproducible delivery. No material, lighting, simulation, or animation capability is invented from the gray modeling demonstration.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Head and Layered Collar",
+      "criterion": "The upper shell has an elongated faceted middle, central pointed top, and tapered lower end terminating in a small flat connection surface.",
+      "scoring_rule": {
+        "PASS": "A head above the collar is taller than wide and wider than the tail, with a central pointed top, narrow flat lower connection, and alternating triangular facets clearly visible around its broad middle.",
+        "PARTIAL": "A three-dimensional head above the tail has a broad middle and at least one visibly tapered end, but any PASS condition is unmet.",
+        "FAIL": "There is no three-dimensional head above the tail with both a broad middle and at least one tapered end; a plain untapered cylinder, sphere, or flat image does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_bacteriophage.png", "image/02_head_and_collar.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_multiview_inspection",
+        "procedure": "Inspect the submitted evaluated head in front, side, and oblique views. Compare its height and width, inspect both end profiles, and use a neutral controlled view to confirm actual triangular changes of surface orientation around the middle rather than a painted facet pattern.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Head and Layered Collar",
+      "criterion": "A short neck and distinct stacked collar plates of different diameters connect the head to the central tail axis.",
+      "scoring_rule": {
+        "PASS": "The head connects through a short neck and stacked plates with visibly different diameters, including a broad lower collar. The layers have readable thickness, remain distinguishable, and align with the head and tail axis.",
+        "PARTIAL": "At least one solid collar or neck component bridges the head and tail region, but any PASS condition is unmet.",
+        "FAIL": "No solid collar or neck component bridges the head and tail region. A detached plate or a surface marking alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_head_and_collar.png", "image/03_segmented_tail.png"],
+      "verification": {
+        "method": "evaluated_geometry_inspection",
+        "procedure": "Inspect front and side close-ups of the head-to-tail junction. Identify the neck and plate silhouettes, compare diameters and thicknesses, and examine their centers and attachment surfaces relative to the head and tail axis.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Tail Core and Repeated Sheath",
+      "criterion": "A slender continuous central rod connects the collar to the base through the segmented sheath.",
+      "scoring_rule": {
+        "PASS": "A slender rod runs on the main axis from collar to base, passes through the whole sheath, and is visible in the gaps between plates without breaks.",
+        "PARTIAL": "A three-dimensional central rod occupies a substantial part of the segmented tail and is visible through some plate gaps, but any PASS condition is unmet.",
+        "FAIL": "No three-dimensional central rod occupies a substantial part of the segmented tail and remains visible through some plate gaps; isolated stubs or a solid sheath with no distinguishable core do not meet the minimum."
+      },
+      "evidence_refs": ["image/03_segmented_tail.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_section_inspection",
+        "procedure": "Inspect the core in oblique views, then temporarily isolate it or inspect a section of the evaluated tail in a disposable copy. Trace its continuity from collar to base and confirm that its exposed sections correspond to the plate gaps.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Tail Core and Repeated Sheath",
+      "criterion": "Thin matching circular plates form a dense, regular, visibly separated sheath around the core.",
+      "scoring_rule": {
+        "PASS": "A long stack of matching thin horizontal circular plates is centered on the core with even open gaps. It reads as dense segmentation along a tail that is longer and substantially narrower than the head.",
+        "PARTIAL": "Several separated horizontal plates form a recognizable stack around the core, but any PASS condition is unmet.",
+        "FAIL": "There is no recognizable stack of several separated horizontal plates around the core; a solid ribless rod, texture-only stripes, or isolated plates do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_bacteriophage.png", "image/03_segmented_tail.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_proportion_inspection",
+        "procedure": "Inspect the saved evaluated tail in front and oblique views. Compare representative plate diameters, orientations, thicknesses, and gaps along the stack. Compare sheath length and width with the head. Assess the saved geometric result here, independently of how it was generated.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Tail Core and Repeated Sheath",
+      "criterion": "The sheath responds to editable repeat-count and axial-spacing controls while preserving common plate shape and collar anchoring.",
+      "scoring_rule": {
+        "PASS": "Both count and spacing controls function. Count edits add or remove matching plates along the common axis; spacing edits redistribute them without changing individual shape. The collar end stays fixed during both edits, and restoring the controls restores the saved sheath.",
+        "PARTIAL": "At least one of the two controls produces a predictable change to the repeated sheath geometry, but any PASS condition is unmet.",
+        "FAIL": "Neither control produces a predictable change to repeated sheath geometry. Unused controls, a modifier that does not affect the sheath, or only manually independent plates do not meet the minimum."
+      },
+      "evidence_refs": ["image/03_segmented_tail.png"],
+      "verification": {
+        "method": "non_destructive_functional_probe",
+        "procedure": "In a disposable copy, locate the documented or inspectable sheath count and spacing controls. Change count by a small nonzero amount and compare evaluated repeated units; restore it, then change spacing modestly. Compare each plate shape, centers, and the collar-end position before and after. Restore all values and confirm restoration. Equivalent procedural implementations are accepted; modifier presence alone earns no credit.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Notched Tail Base",
+      "criterion": "A broad low polygon base joins the tail through a narrower upper step and carries open circumferential V-shaped lower-rim notches with real thickness.",
+      "scoring_rule": {
+        "PASS": "A base wider than the tail is attached at its lower end, has a narrower central upper step, and displays repeated V-shaped lower-rim notches around its circumference. Oblique views reveal solid rim thickness and open notch boundaries.",
+        "PARTIAL": "A solid base wider than the tail is present at the tail's lower end and has either a narrower upper step or a V-shaped lower-rim notch, but any PASS condition is unmet.",
+        "FAIL": "No solid base wider than the tail at its lower end has either a narrower upper step or a V-shaped lower-rim notch. A plain unshaped block, detached decoration, or image-only outline does not meet the minimum."
+      },
+      "evidence_refs": ["image/04_notched_base.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_underside_inspection",
+        "procedure": "Inspect the base from front, oblique, underside, and opposite-side views. Confirm its connection, width hierarchy, upper step, and repeated notch silhouette. Inspect the actual rim cross-section to distinguish solid thickness from a single-sided surface or shading trick.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Radial Supports and Legs",
+      "criterion": "Matching short bent supports attach around the collar and slope outward beside the upper tail.",
+      "scoring_rule": {
+        "PASS": "Slender matching supports attach at their roots in several directions around the collar. Each has a short root and a longer downward-outward segment with a visible bend, staying distinct from the lower legs and clear of the upper tail.",
+        "PARTIAL": "Multiple slender supports are attached near the collar and extend outward beside the upper tail in more than one direction, but any PASS condition is unmet.",
+        "FAIL": "There are no multiple attached collar supports extending outward beside the upper tail in more than one direction. A single support, detached rods, or the lower legs alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_head_and_collar.png"],
+      "verification": {
+        "method": "multiview_attachment_and_shape_inspection",
+        "procedure": "Inspect the collar obliquely and along the main axis. Trace support roots to the collar, compare their bent profiles and cross-sections, and rotate the view to confirm distribution in several directions and clearance from the upper tail.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Radial Supports and Legs",
+      "criterion": "Long matching angular legs radiate from the lower base with raised knees, descending outer segments, and thin downward tips.",
+      "scoring_rule": {
+        "PASS": "Matching narrow rectangular rod legs attach around the base and spread much wider than the head. Each has a short root, two long segments meeting at a raised knee, and a short thinner downward tip. The radial arrangement reads from above and obliquely, stays distinct from the collar supports, and avoids passing through the tail.",
+        "PARTIAL": "Multiple long legs attach near the lower base, spread outward in more than one direction, and show a pronounced bend, but any PASS condition is unmet.",
+        "FAIL": "There are no multiple attached long legs spreading from the lower base in more than one direction with pronounced bends. Straight spokes, detached legs, or a single bent leg do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_bacteriophage.png", "image/05_bent_leg.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_radial_layout_inspection",
+        "procedure": "Inspect the whole lower assembly from above and at several oblique angles. Trace representative legs from base to tip and inspect the remaining legs for matching segment structure. Compare total leg span with head width and check base attachments and clearance from the tail.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-08",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Geometry Finish and Presentation",
+      "criterion": "The existing geometry has coherent visible normals and intentional flat or cylindrical shading without accidental coplanar overlap artifacts.",
+      "scoring_rule": {
+        "PASS": "The head, tail, base, and appendages are present and shade coherently: deliberate head facets and crisp rod edges remain readable, circular sides are consistent, and visible surfaces show no accidental dark patches, reversed faces, or coplanar overlap artifacts.",
+        "PARTIAL": "An existing faceted head and a substantial existing tail or bent-appendage assembly provide readable three-dimensional surfaces over most of their visible area, but any PASS condition is unmet. A missing minor component does not itself force FAIL.",
+        "FAIL": "The minimum existing surfaces are absent, or the existing head and tail or appendage surfaces are dominated by reversed faces, dark artifacts, or coplanar overlap so that their three-dimensional form is not reliably readable."
+      },
+      "evidence_refs": ["image/02_head_and_collar.png", "image/04_notched_base.png", "image/05_bent_leg.png"],
+      "verification": {
+        "method": "controlled_neutral_shading_inspection",
+        "procedure": "Use neutral controlled lighting on a disposable copy and inspect visible surface normals from several angles. Assess shading and coplanar artifacts on substantive existing surfaces only. Do not deduct here for component shape, spacing, attachment, or coverage defects already assessed in structural rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, scene-building script, and correctly named actual-scene PNG are delivered and reproducible.",
+      "scoring_rule": {
+        "PASS": "All three named deliverables are present. The blend opens with editable model data and functional sheath controls. Running build.py from an empty scene recreates the scene and saves submission.blend beside it; reopening that result confirms the recreated model and controls. The named PNG is rendered from the submitted scene's saved camera using Cycles GPU and clearly frames the whole model.",
+        "PARTIAL": "submission.blend opens and contains editable three-dimensional bacteriophage geometry, but any PASS condition is unmet.",
+        "FAIL": "submission.blend is absent, cannot be opened, or contains no editable three-dimensional bacteriophage geometry. A render or script alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_bacteriophage.png"],
+      "verification": {
+        "method": "future_clean_build_reopen_and_render_comparison",
+        "procedure": "Check the three exact filenames in Deliverables. Open submission.blend in Blender 5.1.2 and inspect editable geometry and render settings. Run build.py in a separate empty scene and isolated output directory, then reopen its saved submission.blend and compare the model and sheath controls with the original submission. Render its saved camera and compare with B82_Low_Poly_Bacteriophage.png to establish scene provenance and full framing. This procedure is specified for future evaluation and has not been executed during task authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

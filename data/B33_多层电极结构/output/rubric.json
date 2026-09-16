@@ -1,0 +1,176 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "多层电极结构",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV159TD69Ecd",
+    "id": "BV159TD69Ecd"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "暂定内容权重，尚未校准。视频主体是静态几何制作，因此 GEO 占 90 分，分散到层叠、极耳、重复凸片、导线、芯层和边缘质量九项；独立编辑及可移植重建为 PIPE 10 分。灰模圆角和芯层几何起伏不虚列为 SURF，使用镜像、置换或曲线也不单独构成 PROC。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 层叠主体",
+      "criterion": "两块平行薄板形成竖直矩形夹层，尺寸相同且对应边对齐。",
+      "scoring_rule": {
+        "PASS": "两块外板均存在且高度略大于宽度，板厚小于中央夹层厚度，板面平行，外轮廓相同且全部对应边错位不超过板宽的 5%。",
+        "PARTIAL": "未达到 PASS，但两块外板均存在、可辨认为夹层两侧的薄板；存在比例、平行或对齐问题。",
+        "FAIL": "不足两块可辨认的外侧薄板，或未形成两侧夹层布局。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/04_core.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_views",
+        "procedure": "从提交资产识别两外板并读取求值后几何，建立板面局部坐标；在正交正面和侧面比较轮廓、相对厚度、法向与对应边偏移。通过法向和轮廓核实薄板，而非统计对象数量。芯层粗糙度不在本项重复判断。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 双极耳",
+      "criterion": "两片薄极耳分别连接对应外板，并呈上宽下收的对称轮廓。",
+      "scoring_rule": {
+        "PASS": "两片极耳均为片状、上段直边较宽、下段收窄并平顺接板；顶端高度差不超过板宽 5%，轮廓对应，极耳间隔可辨。",
+        "PARTIAL": "未达到 PASS，但至少一片完整极耳与对应板体相接且具有上宽下收轮廓；另一片缺失或连接、轮廓、对齐存在问题。",
+        "FAIL": "没有至少一片与对应板体相接、具有上宽下收轮廓的完整极耳。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/03_traces.png", "image/04_core.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_views",
+        "procedure": "在正面、侧面和斜视图检查两极耳的投影轮廓、薄片体积和间隔；测量顶部高差，检查下端到对应外板的接触关系。允许相接独立组件，不强制单一拓扑或镜像修改器。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 15,
+      "requirement_section": "3. 矩形单元与边框",
+      "criterion": "两侧板面各有均匀的 4×4 矩形单元布局，外围边框连续。",
+      "scoring_rule": {
+        "PASS": "两侧各有完整 4×4 布局，单元尺寸和各方向间距偏差均在 10% 内，单元均位于连续外边框内。",
+        "PARTIAL": "未达到 PASS，但至少一侧存在可辨认的多行多列矩形单元，且完整保留至少 8 个预期单元；其余有缺失、行列错误、不均匀或边框中断。",
+        "FAIL": "两侧均没有保留至少 8 个完整单元的多行多列矩形布局。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/02_tiles.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_views",
+        "procedure": "分别面对两外板，以单元轮廓中心聚类行列，检查每侧 16 个预期位置、尺寸、相邻间距和外围连续余量。对每方向分别使用中位尺寸与间距计算偏差；不依靠对象、实例或顶点数量。凸片的立体性由 GEO-04 单独判断。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 10,
+      "requirement_section": "3. 矩形单元与边框",
+      "criterion": "矩形单元是贴合板面的真实薄凸片，有侧壁、厚度和凸出高度。",
+      "scoring_rule": {
+        "PASS": "两侧已有的全部矩形单元均有真实侧壁与正凸出高度，贴合外板且彼此分离；每侧至少存在一个可检查的矩形单元。",
+        "PARTIAL": "未达到 PASS，但至少一个矩形单元具备上述完整实体凸片特征；其余单元或另一侧存在平面化、凹陷、悬浮、埋入或相互粘连。",
+        "FAIL": "没有任何矩形单元同时具备真实厚度、正凸出高度和与外板相接的特征。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/02_tiles.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_section_probe",
+        "procedure": "关闭材质颜色干扰，在求值后几何中沿板法线检查每个已有矩形单元的顶面、侧壁和底部接触位置，并从斜视或截面确认凸出方向。缺少单元数量只由 GEO-03 计分；本项检验已有单元的实体形式，空组件不得得分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05", "capability": "GEO", "points": 10,
+      "requirement_section": "4. 极耳细导线",
+      "criterion": "两片极耳各有数量一致的平行细导线，上段均匀，下段内收并延至板缘。",
+      "scoring_rule": {
+        "PASS": "两侧各至少 5 根导线且数量一致，上部直段近似平行、间距偏差不超过 10%，下段随收窄轮廓内收并延伸至对应板体上缘。",
+        "PARTIAL": "未达到 PASS，但至少一片极耳上存在 3 根或以上具有上部纵向段与下部收拢段的导线路径。",
+        "FAIL": "没有一片极耳具备至少 3 根含纵向段和下部收拢段的导线路径。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/03_traces.png"],
+      "verification": {
+        "method": "geometry_path_analysis_and_manual_views",
+        "procedure": "面向各极耳识别导线路径，核对两侧数量，在上部直段共同高度处比较间距，并追踪路径至下部收拢段和对应板缘。曲线控制点或网格边线本身不证明可渲染导线，体积与连续性另由 GEO-06 检查。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06", "capability": "GEO", "points": 10,
+      "requirement_section": "4. 极耳细导线",
+      "criterion": "细导线有真实近圆截面、平顺转折与连续可见路径。",
+      "scoring_rule": {
+        "PASS": "两侧已有导线全部具备真实近圆截面，转折平顺且整段连续可见，彼此分离，无明显断点、交叉粘连或大段埋入；每侧至少有一根可检查的导线。",
+        "PARTIAL": "未达到 PASS，但至少一根导线全程有实体厚度且连续；其余条件可有问题，例如截面、转折、贴面关系、相互分离或另一侧导线不完整。",
+        "FAIL": "没有一根全程具备实体厚度与连续路径的导线，或全部只是平面纹理及不可渲染边线。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/03_traces.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_cross_section_probe",
+        "procedure": "在求值后几何中对每根已有导线抽查直段与弯段截面，并连续追踪其表面；从侧面检查导线相对极耳表面的位置，从近景检查圆滑转折、间隔与断点。本项不重复判断导线数量或间距规则。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 层叠主体",
+      "criterion": "中央芯层为连续的近矩形体块，正确夹在两外板之间。",
+      "scoring_rule": {
+        "PASS": "芯层体积连续，高宽与板体对应，位于两板之间，侧面和顶部可见；没有大面积穿出外板，外板与芯层层次可分。",
+        "PARTIAL": "未达到 PASS，但存在连续芯层体块且主要位于两外板之间；有尺寸不匹配、明显悬空间隙、局部穿出或暴露不足。",
+        "FAIL": "没有连续芯层体块，芯层由分散颗粒代替，或主要体积不在两外板之间。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/04_core.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_views",
+        "procedure": "独立显示芯层检查连续体积，再恢复两板，在侧面和顶部观察芯层位置、相对高宽及穿出范围；几何相邻组件合成连续体积可接受，不以单一对象或连通分量数量强制实现。粗糙起伏由 GEO-08 单独判断。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-08", "capability": "GEO", "points": 10,
+      "requirement_section": "5. 粗糙芯层与边缘质量",
+      "criterion": "芯层露出的顶部和侧面具有细密、非规则且圆钝的真实几何起伏。",
+      "scoring_rule": {
+        "PASS": "芯层顶部和露出侧面均有连续分布的非规则圆钝起伏，几何轮廓与表面均受影响，整体仍是近矩形体块，没有主导形态的巨大尖峰。",
+        "PARTIAL": "未达到 PASS，但芯层至少一个完整露出面具备真实、非规则几何起伏；其他面光滑，或起伏过稀、过大、过尖。",
+        "FAIL": "缺少可检查的芯层，或没有一个完整露出面具有真实几何起伏，仅靠着色表现粗糙。"
+      },
+      "evidence_refs": ["image/04_core.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_neutral_shading_views",
+        "procedure": "用中性着色观察芯层顶部与侧面，再关闭材质凹凸影响并检查求值后顶点和轮廓起伏，确认不规则圆钝尺度与参考一致。无需检查置换、细分或噪声节点名称，也不要求真实贯穿孔洞。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-09", "capability": "GEO", "points": 5,
+      "requirement_section": "5. 粗糙芯层与边缘质量",
+      "criterion": "板体、极耳与凸片有适度圆角，硬表面结构无明显几何和着色缺陷。",
+      "scoring_rule": {
+        "PASS": "板体、极耳、凸片三类已有结构均有窄而平顺的边缘圆角，保持薄片及矩形轮廓，正常近景无明显破面、尖刺、闪烁或破损阴影；三类均有可检查组件。",
+        "PARTIAL": "未达到 PASS，但至少两类结构同时具备可辨认主体轮廓与可辨认圆角；其余可能仍有硬边、过宽圆角或表面缺陷。",
+        "FAIL": "不足两类结构同时具备可辨认主体轮廓与可辨认圆角。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/02_tiles.png", "image/04_core.png"],
+      "verification": {
+        "method": "manual_multi_view_surface_inspection",
+        "procedure": "在中性照明下以整体及正常近景旋转观察板体、极耳与凸片的外缘和表面；对疑似闪烁或阴影缺陷核对求值后几何。只评已有硬表面组件的圆角与质量，导线连续性和有意粗糙芯层不在此重复计分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 10,
+      "requirement_section": "6. 独立编辑与重建",
+      "criterion": "四类结构可独立编辑，且脚本可在无网络、无原机器路径的干净场景重建。",
+      "scoring_rule": {
+        "PASS": "四类结构均能独立选择、隐藏和编辑；芯层粗糙度与凸片厚度的独立修改不误改其他类。build.py 在依赖闭合条件下重建同样结构及重复数量，并生成可编辑工程。",
+        "PARTIAL": "未达到 PASS，但独立编辑测试与可移植重建测试中至少一项完整通过。",
+        "FAIL": "独立编辑测试和可移植重建测试均未完整通过，或缺少对应可检查交付。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "functional_edit_and_clean_rebuild_probe",
+        "procedure": "在副本上分别选择、隐藏四类结构，修改芯层粗糙起伏与凸片厚度并比较其他类几何是否意外变化。另在干净 Blender 5.1.2 环境断网执行 build.py，核查只使用随交付或内嵌依赖，并比较重建结构类别、每侧 4×4 布局和导线数量；本阶段仅规定流程，未实现或执行验证器。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Phospholipid Bilayer",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1teduBjEYS",
+    "id": "BV1teduBjEYS"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 40, "PROC": 45, "SCN": 5, "PIPE": 10},
+  "weighting_note": "The task is primarily a geometric model and a reusable distribution system. Geometry receives 40 points for molecular form, bilayer structure, chain forms, and finish. Procedural behavior receives 45 points for independent, observable relationships. Presentation receives 5 points and saved-scene reproducibility receives 10. Color is illustrative in the source and receives no material points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. Phospholipid Units",
+      "criterion": "The molecular form has a round head and two separated, slender curved tails with the required relative proportions.",
+      "scoring_rule": {
+        "PASS": "The evaluated phospholipids have spherical heads and two separate slender tubular tails emerging from the same side, with gentle opposing bends and tail length comparable to head diameter.",
+        "PARTIAL": "A recognizable round head with at least one substantial attached tubular tail is present in the repeated molecular geometry, but one or more PASS conditions are unmet.",
+        "FAIL": "The repeated geometry lacks a recognizable round head with at least one substantial attached tubular tail; isolated source shapes that are not used in the membrane do not meet this minimum."
+      },
+      "evidence_refs": ["image/02_phospholipid_unit.png", "image/03_source_shapes.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_close_view",
+        "procedure": "Open the saved scene and inspect representative evaluated molecules from the center and exposed edges. Isolate an instance or inspect its master with its evaluated transforms to distinguish the two tails, their attachments, proportions, and overall bends. Confirm this geometry is used in the membrane rather than only stored off camera. End finishing and surface smoothness are assessed in GEO-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Undulating Bilayer Sheet",
+      "criterion": "Dense opposing phospholipid layers form a coherent undulating rectangular membrane with an exposed interior tail region.",
+      "scoring_rule": {
+        "PASS": "Many closely spaced rows cover both dimensions of a broad rectangular patch. Corresponding upper and lower head layers face outward, tails face inward, both layers follow broad smooth undulations with consistent thickness, and exposed edges reveal the tails without an opaque support surface or large gaps and merged head masses.",
+        "PARTIAL": "Two identifiable outward head layers and an inward tail region form a coherent patch extending in both planar dimensions, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no coherent two-dimensional patch with two identifiable outward head layers and an inward tail region; a single layer, isolated opposing pair, or one-dimensional row is below the minimum."
+      },
+      "evidence_refs": ["image/01_bilayer_overview.png", "image/04_editable_sheet.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_multiview_inspection",
+        "procedure": "Inspect the evaluated membrane from above, below, and two side directions. Check planar coverage, opposite head placement, inward tails, the relationship between both undulating surfaces, and thickness at crests and troughs. Use a neutral controlled view to inspect the exposed edges for support-plane obstruction, large missing regions, and severe head overlap.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Two Surface Chain Families",
+      "criterion": "The membrane includes sparse simple wave chains and longer compound helical chains with visible shape and size differences.",
+      "scoring_rule": {
+        "PASS": "Multiple examples of both chain families appear on the upper surface: a slender elongated wave and a longer bending stem followed by a helical section of approximately two turns. Their sizes and turns vary, and their combined population is visibly much smaller than the phospholipid population so most heads remain readable.",
+        "PARTIAL": "Multiple substantial tubular projections on the upper surface clearly demonstrate at least one of the two specified chain families, but one or more PASS conditions are unmet.",
+        "FAIL": "The upper surface lacks multiple substantial projections recognizable as either specified chain family; unused masters, isolated fragments, or only one projection do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_bilayer_overview.png", "image/03_source_shapes.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "Inspect the actual chain populations in the evaluated scene, then isolate one representative of each family to inspect the wave, stem, and helical form. Compare their density and height variation with the molecular field in an overhead and oblique view. Attachment behavior is assessed separately in PROC-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "5. Geometry Finish and Presentation",
+      "criterion": "The existing molecular and chain surfaces have smooth silhouettes and clean tubular construction.",
+      "scoring_rule": {
+        "PASS": "A substantive head-and-tail molecular core and both chain families are present. Their head silhouettes are smooth, surface shading is smooth, tube thickness is fairly consistent, and the heads, tails, and chains have no obvious faceting, collapsed tube sections, accidental kinks, open tube ends, or visible construction seams.",
+        "PARTIAL": "A substantive head-and-tail molecular core is present and some of its actual heads and tails demonstrate smooth finish, but one or more PASS conditions are unmet, including an absent chain family or defects on existing surfaces.",
+        "FAIL": "No substantive head-and-tail molecular core exists, or none of its actual head-and-tail surfaces demonstrate smooth finish. Missing surfaces alone cannot demonstrate finishing quality."
+      },
+      "evidence_refs": ["image/02_phospholipid_unit.png", "image/03_source_shapes.png"],
+      "verification": {
+        "method": "neutral_shading_and_silhouette_inspection",
+        "procedure": "Inspect the evaluated existing head, tail, and chain geometry in a neutral close render or solid view at a useful inspection scale. Rotate the view to reveal silhouettes, tube ends, stem-to-helix transitions, and shading seams. Score construction finish here; missing forms and incorrect molecular proportions are assessed in their structural rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "4. Editable Procedural Relationships",
+      "criterion": "The procedural sheet responds coherently to changes in undulation and molecular spacing or density.",
+      "scoring_rule": {
+        "PASS": "Accessible controls independently change the membrane undulation and molecular spacing or density. Modest changes regenerate the repeated geometry while preserving a populated two-dimensional sheet, corresponding opposing layers, and consistent membrane thickness without individual copy edits.",
+        "PARTIAL": "At least one accessible control materially changes the repeated bilayer's undulation or molecular distribution while retaining two opposing layers, but one or more PASS conditions are unmet.",
+        "FAIL": "No accessible control materially changes either relationship while retaining two opposing layers. A frozen collection of copies or a disconnected control is below the minimum."
+      },
+      "evidence_refs": ["image/04_editable_sheet.png"],
+      "verification": {
+        "method": "controlled_parameter_probe",
+        "procedure": "In a disposable copy of the reopened scene, record the evaluated molecular distribution and surface profile. Make a modest nonzero change to the undulation control, evaluate the result, then restore it and modestly change spacing or density. Confirm that each control causes its intended geometry change, both layers remain populated and corresponding, and the result updates through the generator. Restore the baseline afterward; chain attachment is checked in PROC-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "4. Editable Procedural Relationships",
+      "criterion": "Edits to the molecular and chain masters propagate to the appropriate repeated geometry.",
+      "scoring_rule": {
+        "PASS": "A modest molecular master edit updates repeated molecules in both outer layers. A modest edit to either chain master updates that family while preserving the other family's geometry. All three relationships remain editable in the saved scene without individually remaking copies.",
+        "PARTIAL": "Editing the molecular master updates repeated molecules in at least one outer layer without individual copy edits, but one or more PASS conditions are unmet.",
+        "FAIL": "Editing the molecular master does not update repeated molecular geometry in either outer layer, or no accessible molecular master relationship exists. Stored but unused masters are below the minimum."
+      },
+      "evidence_refs": ["image/03_source_shapes.png", "image/04_editable_sheet.png"],
+      "verification": {
+        "method": "master_geometry_propagation_probe",
+        "procedure": "In a disposable scene copy, make a reversible, visible change to a tail bend on the molecular master and reevaluate or invoke the provided generator. Inspect molecules in both layers. Restore it, then change a bend or coil on each chain master in turn. Compare the affected and unaffected families to establish real propagation rather than master-object existence.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "4. Editable Procedural Relationships",
+      "criterion": "Both chain populations have independent effective distribution controls and reproducible variation.",
+      "scoring_rule": {
+        "PASS": "Each chain family has an effective independent population control and controllable size variation. Reducing either population preserves the other family and the phospholipids. Distribution randomness is editable, and restoring the same settings and seed restores the same positions, orientations, and scales.",
+        "PARTIAL": "At least one chain family has an effective population or size-variation control that changes its evaluated result, but one or more PASS conditions are unmet.",
+        "FAIL": "Neither chain family has an effective population or size-variation control, or no actual chain population exists for a control to affect."
+      },
+      "evidence_refs": ["image/01_bilayer_overview.png", "image/04_editable_sheet.png"],
+      "verification": {
+        "method": "independent_distribution_and_repeatability_probe",
+        "procedure": "Record each chain family's evaluated transforms and the molecular field. Reduce one family's population, evaluate, restore, and repeat for the other family. Exercise each size-variation control. Change the distribution seed, then restore the original settings and seed; compare evaluated transforms within floating-point evaluation precision. Confirm unrelated populations remain intact during independent population changes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-04",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "4. Editable Procedural Relationships",
+      "criterion": "The chain populations maintain surface attachment and outward growth as the membrane undulates.",
+      "scoring_rule": {
+        "PASS": "Both chain families emerge from the upper head layer without visible floating gaps and grow outward relative to the local surface. They retain this relationship after a modest undulation change, with only small base embedding and no long exposed stems crossing the full membrane thickness.",
+        "PARTIAL": "At least one chain family has multiple bases attached to the upper layer and outward-projecting chains in both the saved state and a modestly changed undulation state, but one or more PASS conditions are unmet.",
+        "FAIL": "No chain family demonstrates multiple attached, outward-projecting chains in both states, or the membrane cannot be reevaluated with a changed undulation. Merely floating chains above a fixed sheet are below the minimum."
+      },
+      "evidence_refs": ["image/01_bilayer_overview.png", "image/04_editable_sheet.png"],
+      "verification": {
+        "method": "deformation_attachment_probe",
+        "procedure": "In the saved state and a disposable state with modestly changed undulation, inspect representative chain bases at crests, troughs, and sloped regions for both families. Compare each base with the evaluated upper head layer and the chain's overall growth direction with the local outward surface direction. Use side and close oblique views to distinguish a seated or slightly embedded base from a floating gap or a stem crossing the membrane.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "5. Geometry Finish and Presentation",
+      "criterion": "The final camera presents the entire membrane and its layer structure clearly.",
+      "scoring_rule": {
+        "PASS": "The saved camera frames the complete sheet in a clear three-quarter view, showing the upper surface, two head layers along an exposed edge, inner tails, and both chain families. Lighting and background separate the forms, and master shapes or unrelated construction objects are absent from the camera image.",
+        "PARTIAL": "A render through the saved camera clearly shows a recognizable bilayer sheet, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no usable saved-camera view showing a recognizable bilayer sheet, including a blank image, completely obscured subject, or framing that prevents recognizing the bilayer."
+      },
+      "evidence_refs": ["image/01_bilayer_overview.png"],
+      "verification": {
+        "method": "saved_camera_controlled_render",
+        "procedure": "Render through the camera saved in the submitted scene and inspect its composition, full border coverage, layer visibility, background separation, and absence of source masters. Compare the framing goals with the overview reference; do not require its exact colors or background. This row measures presentation, not delivery-file existence.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The deliverables include a reproducible scene build that saves a reopenable submission and a PNG rendered from the submitted scene.",
+      "scoring_rule": {
+        "PASS": "submission.blend, build.py, and B102_Procedural_Phospholipid_Bilayer.png are delivered. Running build.py from an empty Blender scene recreates the complete scene and saves submission.blend. The resulting file reopens with geometry, procedural relationships, materials, and camera intact, and the delivered PNG is rendered from the actual submitted scene.",
+        "PARTIAL": "The delivered submission.blend reopens and contains a substantive bilayer asset, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no readable saved submission.blend containing a substantive bilayer asset. An unsaved in-memory build, script alone, image alone, or empty saved file is below the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "fresh_build_saved_file_reopen_and_render_comparison",
+        "procedure": "Check the three named files. Open the delivered blend, then run build.py in a clean Blender 5.1.2 process and isolated working copy starting from an empty scene. Confirm the script writes submission.blend to disk. Close that process and reopen that newly saved file in another process; inspect the evaluated geometry and retained controls, materials, and camera. Render the actual saved scene and compare composition and asset content with the delivered PNG. Use a disposable directory so verification does not overwrite the submitted originals.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

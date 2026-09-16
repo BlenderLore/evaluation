@@ -1,0 +1,133 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "可调整的相机环绕系统",
+  "source_video": {"url": "https://www.youtube.com/watch?v=A62Exb4Hheg", "id": "A62Exb4Hheg"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"ANM": 35, "RIG": 30, "SCN": 30, "PIPE": 5},
+  "weighting_note": "暂定权重，尚未校准。ANM35考察实际圆周运动、周期与连续速度；RIG30考察改周期、半径和瞄准点后的真实响应；SCN30考察持续取景、透明背景和承影合成；PIPE5考察重建与重放。内置Suzanne仅为测试主体，不单列GEO或SURF分数。默认运动与修改后的控制响应分别取证，避免按对象名称、层级或关键帧存在与否计分。",
+  "rubric": [
+    {
+      "id": "ANM-01", "capability": "ANM", "points": 15,
+      "requirement_section": "2. 水平圆形轨迹",
+      "criterion": "相机实际围绕静止主体做水平圆周运动，轨迹围绕主体且半径与高度稳定。",
+      "scoring_rule": {
+        "PASS": "相机有真实环绕位移，主体、地面和照明静止；环绕轴偏移不超过0.1H，半径偏差不超过2%，高度变化不超过0.02H，镜头始终在地面上方。",
+        "PARTIAL": "相机确实围绕主体移动且镜头在地面上方，但一个或多个公开的中心、半径、高度或静止参照条件未满足；仍可辨认主要的水平环绕轨迹。",
+        "FAIL": "无有效相机环绕位移，或以转动主体/整幅图像代替环绕，或轨迹不能辨认为围绕主体的水平圆周，或镜头进入地面。"
+      },
+      "evidence_refs": ["image/02_orbit_plan.png"],
+      "verification": {"method": "evaluated_scene_sampling", "procedure": "在提交文件副本中识别活动相机、主体、地面与照明。逐帧求值1..101，记录世界矩阵；以主体默认包围盒高度H归一化。拟合相机XY圆周，检查环绕轴距主体中心投影、各半径与平均值、Z极差和主体/地面/光源矩阵稳定性。仅检查轨迹形状与参照物，不在本项判断周期或速度。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "ANM-02", "capability": "ANM", "points": 10,
+      "requirement_section": "3. 周期与连续播放",
+      "criterion": "默认24fps播放1..100，100帧对应一整圈，101帧回到1帧相机姿态。",
+      "scoring_rule": {
+        "PASS": "默认帧率24fps、步长1、范围1..100；相机在1..101累计完成一整圈且101与1姿态相同，按任意顺序跳帧仍得到一致状态。",
+        "PARTIAL": "可重放的环绕动画存在，但默认帧率/范围/步长、100帧周期或随机跳帧一致性中至少一项不符；不满足PASS。",
+        "FAIL": "不存在可重放的环绕动画，或帧变化不产生有效运动，或仅有外部视频而无法在场景中求值。"
+      },
+      "evidence_refs": ["image/01_orbit_alpha.png", "image/04_orbit_shadow.png"],
+      "verification": {"method": "timeline_and_evaluated_cycle", "procedure": "读取场景范围、fps/fps_base与frame_step。求值1..101的相机世界矩阵并展开绕轴方位角，确认累计一周。用0.01H位置及0.5度朝向数值裕量比较101与1；再以76、1、51、26、101的顺序求值，与顺序求值结果比较。不要求1和100姿态相等，逐步匀速单独记入ANM-03。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "ANM-03", "capability": "ANM", "points": 10,
+      "requirement_section": "3. 周期与连续播放",
+      "criterion": "相机位移保持同向匀速，没有停顿、倒退或路径突跳；100帧周期下的正常一步为3.6度。",
+      "scoring_rule": {
+        "PASS": "连续采样始终保持同方向，各角增量相对实际平均角增量的偏差不超过10%，无停顿或路径突跳；当100帧周期满足时，包括100到下一轮1的衔接均是正常一步。",
+        "PARTIAL": "相机有可播放的连续环绕位移，但至少一个间隔相对平均速度的偏差超过10%，或存在局部停顿、倒退或路径突跳；不满足PASS。",
+        "FAIL": "相机没有连续环绕运动，主要状态靠离散跳切切换，或无法形成可判断速度的时序。"
+      },
+      "evidence_refs": ["image/01_orbit_alpha.png", "image/04_orbit_shadow.png"],
+      "verification": {"method": "evaluated_motion_and_playback", "procedure": "逐帧求值1..101，用展开后的绕轴角计算各步增量并检查方向及相对平均值的±10%波动。若100帧周期成立，平均值应为3.6度，并检查100到下一轮1等于正常步长。若唯一问题是周期不是100帧或默认范围不匹配，只在ANM-02处理，该项仍独立判断连续时间求值的速度稳定性。方向取景和滚转归SCN-01；不以线性插值或循环标志存在作为证据。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "RIG-01", "capability": "RIG", "points": 10,
+      "requirement_section": "4. 可编辑的运动与瞄准",
+      "criterion": "修改周期可整体重定时，200帧周期具有原来一半的运动速度。",
+      "scoring_rule": {
+        "PASS": "场景中有可辨认的周期设置；从100改为200并调整播放范围后，轨迹与起点保持、速度减半、201帧回到1帧，无需逐帧修改或重跑构建脚本，且可恢复默认值。",
+        "PARTIAL": "存在可修改的周期设置且能真实改变运动速度，但轨迹/起点保持、减半比例、200帧闭合或恢复默认中的至少一项不符；不满足PASS。",
+        "FAIL": "没有可用的周期设置，设置与实际运动无关，或只能逐帧重做或重新运行构建脚本才能改变周期。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "functional_retiming_probe", "procedure": "根据场景内说明在副本中修改周期100到200。比较默认f与修改后1+2*(f-1)的相机位置与方向，在0.01H及0.5度数值裕量内应相等；检查201与1、平均角速度减半和默认值恢复。判定实际求值响应，不限制曲线、关键帧、驱动或约束类型。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "RIG-02", "capability": "RIG", "points": 10,
+      "requirement_section": "4. 可编辑的运动与瞄准",
+      "criterion": "修改半径可整体扩大轨道，同时保持高度、周期和瞄准关系。",
+      "scoring_rule": {
+        "PASS": "从默认状态将半径改为1.25R后，相对同一环绕轴各处半径均与目标相差不超过2%，高度变化不超过0.02H；周期和主体位置不变，光轴仍对准瞄准点，且可恢复。",
+        "PARTIAL": "半径设置确实改变整条轨道的尺度，但比例、高度、中心、周期、主体稳定或瞄准保持中至少一项未满足；不满足PASS。",
+        "FAIL": "没有可用的半径设置，修改无效，只改变部分帧，或以缩放主体/改变焦距代替相机轨道半径变化。"
+      },
+      "evidence_refs": ["image/02_orbit_plan.png"],
+      "verification": {"method": "functional_radius_probe", "procedure": "从默认副本将场景内半径设置改为1.25倍。比较1..101逐帧相机XY位置相对原环绕轴的径向量、Z位置、主体矩阵、周期和光轴目标偏差；不得仅检查控件数值。恢复默认后比较轨迹。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "RIG-03", "capability": "RIG", "points": 10,
+      "requirement_section": "4. 可编辑的运动与瞄准",
+      "criterion": "抬高瞄准点可改变整圈取景方向，而不改变相机路径和主体位置。",
+      "scoring_rule": {
+        "PASS": "从默认状态抬高瞄准点0.25H后，所有采样处光轴与新目标方向偏差不超过2度；相机位置变化不超过0.01H，主体位置和周期不变，且可恢复。",
+        "PARTIAL": "瞄准位置设置真实改变相机朝向，但部分方位没有正确跟踪，或路径、主体、周期受到影响，或恢复失败；不满足PASS。",
+        "FAIL": "没有可用的瞄准位置设置，改变设置不影响相机朝向，或只能逐帧修改相机才能对准新位置。"
+      },
+      "evidence_refs": ["image/03_front_framing.png"],
+      "verification": {"method": "functional_aim_probe", "procedure": "从默认副本把声明的瞄准点沿Z抬高0.25H，逐帧求值1..101。通过相机世界矩阵的光轴方向与相机到新目标的向量计算夹角；同时比较原路径位置、主体矩阵、周期和复位结果。目标可以是对象、参数或其他可编辑空间表示。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-01", "capability": "SCN", "points": 10,
+      "requirement_section": "1. 主体与默认取景",
+      "criterion": "主体落地，默认正面取景且整圈居中、完整、无明显滚转，光照使头部特征可读。",
+      "scoring_rule": {
+        "PASS": "主体呈参考的后仰落地姿态，第1帧为正面或近正面；整圈光轴偏差≤2度、滚转≤3度，主体完整且各边留白≥5%，投影中心在中央三分之一、高度为画面25%至65%；正面或近正面视角下耳眼鼻可辨认，侧后方自然自遮挡不算缺陷。",
+        "PARTIAL": "主体存在且至少在主要观察角度可辨认，但姿态/接触、初始视角、光轴、滚转、画面位置、占比、留白或光照可读性中有条件不符；不满足PASS且未达到FAIL。",
+        "FAIL": "主体缺失，或在半数及以上采样画面中不可辨认/主要部分在画外，或没有可用活动相机画面。"
+      },
+      "evidence_refs": ["image/01_orbit_alpha.png", "image/03_front_framing.png", "image/04_orbit_shadow.png"],
+      "verification": {"method": "camera_projection_and_visual_review", "procedure": "在默认状态检查相机1..100的光轴、滚转和主体投影包围框；逐帧投影确定留白/占比，并渲染1、13、26、38、51、63、76、88帧人工或VLM复核落地姿态和取景。耳眼鼻的照明可读性只在正面或近正面视角检查，侧后方自然自遮挡不算缺陷。缺失主体不得凭空框获得构图分。本项不因默认模型拓扑、材质金属度或细分层数打分。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-02", "capability": "SCN", "points": 10,
+      "requirement_section": "5. 透明背景与接触阴影",
+      "criterion": "输出具有真实Alpha，世界与地面底色透明且主体正常保留。",
+      "scoring_rule": {
+        "PASS": "Cycles GPU RGBA输出中主体正常可见，远离主体及阴影处Alpha≤0.01；无不透明世界、地面矩形、辅助物或绘制的棋盘格，并能叠加于浅色及深色背景而无明显边缘光晕。",
+        "PARTIAL": "输出具备非空的真实透明区域且主体可见，但部分背景/地面/辅助物残留、边缘光晕、Alpha阈值或输出设置有不符；不满足PASS。",
+        "FAIL": "输出没有有效Alpha，背景整体不透明，使用画出的棋盘格代替透明，或主体被一并抠除/无法获得可用RGBA输出。"
+      },
+      "evidence_refs": ["image/01_orbit_alpha.png", "image/04_orbit_shadow.png"],
+      "verification": {"method": "rgba_render_and_compositing_review", "procedure": "在可用GPU环境从提交场景渲染1、26、51、76帧RGBA，检查实际引擎/设备设置与Alpha像素。排除主体和阴影区域后测量空背景Alpha，并分别合成到浅灰与深灰背景复核矩形底色、辅助物和边缘；不以Film Transparent或Shadow Catcher开关的存在代替结果。本项只计背景透明与主体保留，阴影质量归SCN-03。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-03", "capability": "SCN", "points": 10,
+      "requirement_section": "5. 透明背景与接触阴影",
+      "criterion": "接触阴影实际存在，并随相机环绕保持固定场景中的承影关系。",
+      "scoring_rule": {
+        "PASS": "各观察角度均有与主体接触位置相连、边缘自然过渡的阴影；其世界空间方向与固定光照一致，未消失、脱离或被承影面边界截断，浅深背景合成时均保留阴影作用。",
+        "PARTIAL": "至少部分角度存在可辨认的真实接触阴影，但连接、边缘、跨视角稳定、完整范围或合成保留中有一项以上不符；不满足PASS。",
+        "FAIL": "没有可辨认的接触阴影，或只有与场景无关的固定图案/屏幕贴片。"
+      },
+      "evidence_refs": ["image/01_orbit_alpha.png", "image/04_orbit_shadow.png"],
+      "verification": {"method": "multi_view_shadow_render_review", "procedure": "使用与SCN-02相同的1、26、51、76帧RGBA及合成结果，检查接触连接、边缘和截断。结合场景主体/光源/承影表面的世界位置，确认阴影随视角变化而保持固定空间关系；必要时在副本临时关闭主光对比，排除无关贴片。若仅空背景不透明，仍用原渲染判断阴影本身，不在本项重复扣背景Alpha分；仅当阴影自身的合成贡献被抠除时影响本项。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "6. 交付与重放",
+      "criterion": "交付可重建、可迁移，并在重开后保留默认播放与参数编辑入口。",
+      "scoring_rule": {
+        "PASS": "submission.blend和build.py齐全；脚本在目标环境可生成保存资产，资源闭合，含运行说明及周期/半径/瞄准设置和复位说明；重开后默认设置、活动相机、播放与RGBA渲染入口可用。",
+        "PARTIAL": "提交场景可重开并复现主要内容，但脚本重建、依赖闭合、运行/控制说明、默认状态或复位入口至少一项不完整；不满足PASS。",
+        "FAIL": "无法重开或重现主要内容，或关键依赖缺失导致场景不可用，或仅提交图片/视频而无可编辑场景。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "clean_environment_rebuild_and_reopen", "procedure": "将交付包复制到不同目录，在Blender5.1.2按脚本头部说明构建；在另一进程重开生成文件，检查依赖路径、活动相机、默认参数及控制/复位说明。实际运动、编辑与合成质量只在对应行判定，本项测可迁移重建和重开后的入口完整性。文件可打开本身是基础条件，不单独给分。", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

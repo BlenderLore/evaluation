@@ -1,0 +1,145 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Iridescent Star Ripple Material",
+  "source_video": {"url": "https://www.bilibili.com/video/BV1cbZFB2E9h", "id": "BV1cbZFB2E9h"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"SURF": 65, "ANM": 15, "SCN": 10, "PIPE": 10},
+  "weighting_note": "The task centers on independently controllable material layers, so SURF receives 65 points across color, ripples, fine sparkles, outline stars, regional masking, and rim emission. ANM evaluates new material motion only. SCN evaluates the combined image treatment. Supplied geometry, rig, and walk action earn no creation credit. PIPE is limited to reproducibility and delivery.",
+  "rubric": [
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 15,
+      "requirement_section": "Body Color and Ripples",
+      "criterion": "The character's body and wings carry an editable blue-violet iridescent field with lighter cyan or mint and darker blue regions.",
+      "scoring_rule": {
+        "PASS": "The field covers the head, torso, and wings; light and dark color regions read coherently across the curved forms; soft surface highlights retain the character's volume; and the color field can be edited without rebuilding the ripple or star layers.",
+        "PARTIAL": "An editable multicolored blue-violet field is visibly used on the torso, but one or more PASS conditions are unmet.",
+        "FAIL": "No editable multicolored blue-violet field is visibly used on the torso, including a flat replacement color or a field shown only in external imagery."
+      },
+      "evidence_refs": ["image/02_surface_layers.png"],
+      "verification": {"method": "Material inspection and controlled render", "procedure": "Inspect the assigned body and wing materials, render the first frame with the submitted camera, and temporarily mute the star and ripple contributions. Confirm the underlying color field and its coverage, then vary its color controls and restore them. Judge this row only on the underlying field and surface response.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 10,
+      "requirement_section": "Body Color and Ripples",
+      "criterion": "Broad soft diagonal ripple bands wrap across the body with pastel color accents and visible darker intervals.",
+      "scoring_rule": {
+        "PASS": "Broad diagonal bands bend across the curved body, have softly blended edges and pale cyan, mint, pink, or near-white accents, retain darker intervals, and have placement editable separately from the color field.",
+        "PARTIAL": "At least one broad diagonal light band is visibly integrated with the body surface, but one or more PASS conditions are unmet.",
+        "FAIL": "No broad diagonal light band is integrated with the body surface, or the apparent band is only an external overlay or detached object."
+      },
+      "evidence_refs": ["image/02_surface_layers.png", "image/03_alternate_state.png"],
+      "verification": {"method": "Controlled material variation", "procedure": "Render representative frames and inspect the torso curvature and intervals between bands. Change only the ripple placement control in a duplicate scene, confirm that the bands move while the base color setup remains independently editable, then restore the state. Exclude animation smoothness from this row.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-03", "capability": "SURF", "points": 10,
+      "requirement_section": "Stars and Regional Colors",
+      "criterion": "Fine light points and larger filled diamond-like sparkles form two distinct surface-detail scales.",
+      "scoring_rule": {
+        "PASS": "Dense fine light points and less frequent larger filled diamond-like sparkles are both legible across the body and wings, have visibly distinct scales, and remain editable without replacing the underlying body color or ripple field.",
+        "PARTIAL": "At least one of the two specified sparkle scales is visibly present as editable surface detail on the torso, but one or more PASS conditions are unmet.",
+        "FAIL": "Neither specified sparkle scale is visibly present as editable surface detail on the torso, or sparkles exist only as detached particles or external imagery."
+      },
+      "evidence_refs": ["image/02_surface_layers.png"],
+      "verification": {"method": "Close render and material contribution inspection", "procedure": "Inspect a close render before the compositor glow. Isolate the fine-point and filled-sparkle contributions and verify both their relative scales and actual assignment to the character. Inspect edits to their density or scale while preserving the body and ripple setup. Do not score outline stars here.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-04", "capability": "SURF", "points": 10,
+      "requirement_section": "Stars and Regional Colors",
+      "criterion": "The supplied star mask creates larger rounded outline-star motifs that conform to the character surface.",
+      "scoring_rule": {
+        "PASS": "The supplied mask contributes visible rounded outline stars on the body or wings; the stars preserve smooth continuous borders and open centers, have no opaque rectangular background, and remain editable independently of the other surface layers.",
+        "PARTIAL": "The supplied mask contributes at least one recognizable outlined star to the character surface, but one or more PASS conditions are unmet.",
+        "FAIL": "The supplied mask contributes no recognizable outlined star to the character surface, including missing, filled-only, detached, or externally composited substitutes."
+      },
+      "evidence_refs": ["image/02_surface_layers.png", "image/03_alternate_state.png"],
+      "verification": {"method": "Image dependency and rendered mask inspection", "procedure": "Trace the supplied or identically packed star mask to its visible material contribution, compare its image bytes with the input, and render the star region before glow. Inspect outline continuity, open centers, and mask-background transparency. Change and restore only the outline-star placement control.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-05", "capability": "SURF", "points": 10,
+      "requirement_section": "Stars and Regional Colors",
+      "criterion": "The new surface effects respect the bill, eyes, eyebrows, tongue, and foot color regions.",
+      "scoring_rule": {
+        "PASS": "The applied body and wing effects remain separated from the orange-red bill and tongue, coral feet, light eye whites, and dark pupils and eyebrows throughout the clip; the boundaries are clean and remain editable.",
+        "PARTIAL": "A new iridescent body effect is present and at least the bill and eyes remain recognizably separated by editable material regions or masks, but one or more PASS conditions are unmet.",
+        "FAIL": "No new iridescent body effect is present, or either the bill or eyes lacks recognizable editable separation from the effect."
+      },
+      "evidence_refs": ["image/02_surface_layers.png", "image/01_final_material.png"],
+      "verification": {"method": "Regional material inspection and timeline samples", "procedure": "Compare the character's region assignments with the starter, inspect boundary close-ups, and render frames 1, 38, 75, 113, and 150. Temporarily mute glow to distinguish material leakage from compositing. Award points for integration of the new effects, not the unchanged starter colors alone.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-06", "capability": "SURF", "points": 10,
+      "requirement_section": "Emissive Rim",
+      "criterion": "A surface-attached colored emission rim follows the visible character silhouette.",
+      "scoring_rule": {
+        "PASS": "A narrow predominantly cyan-white rim follows the visible head, torso, and wing edges with mint, pink, or violet variation; it preserves the silhouette and leaves interior body colors and stars distinguishable before compositor glow.",
+        "PARTIAL": "Surface-attached luminous edging is visible along part of the head or torso silhouette before compositor glow, but one or more PASS conditions are unmet.",
+        "FAIL": "No surface-attached luminous edging is visible on the head or torso before compositor glow, including a glow-only outline or an external image substitute."
+      },
+      "evidence_refs": ["image/01_final_material.png", "image/03_alternate_state.png"],
+      "verification": {"method": "Emission contribution inspection", "procedure": "Disable compositor effects in a duplicate scene and inspect the rim's material contribution in rendered output. Confirm attachment to the character silhouette, narrowness, color variation, and retained interior detail. Judge post-processing spread only in SCN-01.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "ANM-01", "capability": "ANM", "points": 10,
+      "requirement_section": "Material Animation",
+      "criterion": "The color field and diagonal ripples flow smoothly over a stable character during the declared five-second timeline.",
+      "scoring_rule": {
+        "PASS": "Across frames 1-150 at 30 fps, both the color distribution and ripple positions change continuously on a stable character under a fixed camera; the initial blue-violet state and visibly changed final pastel distribution are present; and revisiting a frame reproduces its material state.",
+        "PARTIAL": "At least the color distribution or the ripple field visibly changes on the surface independently of camera or character motion and replays deterministically, but one or more PASS conditions are unmet.",
+        "FAIL": "Neither layer changes on the surface independently of camera or character motion, or the surface state cannot be reproduced when returning to the same frame."
+      },
+      "evidence_refs": ["image/02_surface_layers.png", "image/03_alternate_state.png", "image/01_final_material.png"],
+      "verification": {"method": "Timeline playback and repeated-frame render", "procedure": "Inspect animation over the full declared range and render frames 1, 38, 75, 113, and 150 with constant camera and pose. Track a body-surface location to distinguish field motion from object motion. Render frame 75 again after visiting frame 150 and compare its state. Judge material color and ripple motion only; no loop closure is required.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "ANM-02", "capability": "ANM", "points": 5,
+      "requirement_section": "Material Animation",
+      "criterion": "Outline stars move across the body while the sparkle layer changes over time without detachment or popping.",
+      "scoring_rule": {
+        "PASS": "The larger outline stars visibly change surface position and the sparkle pattern or intensity changes during the clip; their motion is continuous, surface-conforming, and free of abrupt popping or rectangular texture boundaries.",
+        "PARTIAL": "At least one visible outline-star position or sparkle pattern or intensity changes over time independently of character and camera motion, but one or more PASS conditions are unmet.",
+        "FAIL": "No visible star-layer position, pattern, or intensity changes independently of character and camera motion."
+      },
+      "evidence_refs": ["image/03_alternate_state.png", "image/01_final_material.png"],
+      "verification": {"method": "Full timeline motion inspection", "procedure": "Play the rendered timeline and inspect surface stars on the head, torso, and wings. Track outline-star centers relative to nearby geometry and compare sparkle appearance at multiple times. This row evaluates temporal behavior only; the static motif and mask quality are evaluated in SURF-03 and SURF-04.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-01", "capability": "SCN", "points": 10,
+      "requirement_section": "Presentation",
+      "criterion": "The final image presents the complete character with controlled glow, starburst highlights, and subtle colored edge separation against black.",
+      "scoring_rule": {
+        "PASS": "The fixed front three-quarter view contains the full character and luminous rim against black; soft glow, short starburst highlights, and subtle colored edge separation are visible; exposure retains the face, body colors, and all three star scales without closing outline-star centers.",
+        "PARTIAL": "A camera render presents the character against a dark background and visibly applies glow or starburst treatment to an actual luminous scene element, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no camera-rendered character against a dark background, or no visible glow or starburst treatment is applied to an actual luminous scene element."
+      },
+      "evidence_refs": ["image/01_final_material.png", "image/03_alternate_state.png"],
+      "verification": {"method": "Final render and compositor comparison", "procedure": "Compare raw scene renders with the final composited output at an early and late frame. Inspect framing, black background, highlight spread, starburst shape, edge color separation, and retained detail. Missing surface layers cannot receive readability credit through their absence.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable submission and build script reproduce the task from the supplied inputs in Blender 5.1.2.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with required resources resolved, and build.py rebuilds the completed scene from the supplied starter and images, sets the declared timeline, and saves a corresponding editable submission.blend in Blender 5.1.2.",
+        "PARTIAL": "submission.blend opens as an editable character scene with required surface resources resolved, but one or more PASS conditions are unmet.",
+        "FAIL": "submission.blend is absent, cannot open as an editable character scene, or lacks required surface resources."
+      },
+      "evidence_refs": [],
+      "verification": {"method": "Fresh-process artifact and build probe", "procedure": "Open the submitted project in Blender 5.1.2 with only the delivered inputs available. In a separate temporary directory, run build.py against those inputs and confirm a newly saved editable scene, declared timeline, and corresponding render content. Do not execute any code during rubric authoring.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-02", "capability": "PIPE", "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named MP4 contains the complete declared timeline rendered from the submitted scene.",
+      "scoring_rule": {
+        "PASS": "B54_Iridescent_Star_Ripple_Material_dynamic.mp4 decodes at a minimum of 1280 x 720, contains frames 1-150 at 30 fps, and corresponds to actual camera renders of the submitted scene throughout, without source footage or viewport replacements.",
+        "PARTIAL": "A decodable MP4 of the submitted scene contains visible material animation, but one or more PASS conditions are unmet.",
+        "FAIL": "No decodable MP4 of the submitted scene with visible material animation is provided, or the media substitutes source footage, viewport captures, or external imagery."
+      },
+      "evidence_refs": [],
+      "verification": {"method": "Media metadata and scene correspondence check", "procedure": "Inspect the MP4 filename, dimensions, fps, and decoded frame count. Compare sampled decoded frames with fresh camera renders at their matching scene frames and confirm the sequence covers the declared range. Evaluate file correspondence and completeness here, not the material's visual quality.", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Spiked Rod",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1uwNj6yE2N",
+    "id": "BV1uwNj6yE2N"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 55, "PROC": 35, "PIPE": 10},
+  "weighting_note": "This is a gray geometry and reusable distribution task. Geometry scores the visible rod silhouette, shell, nodules, cap, and evaluated waviness. Procedural points score density behavior, local outward orientation, and propagation of source edits. Neutral presentation serves inspection and does not introduce an unsupported material or lighting specialty.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Overall Rod Form",
+      "criterion": "The visible assembly forms one straight elongated cylinder with continuous proportions.",
+      "scoring_rule": {
+        "PASS": "The assembly has a straight horizontal axis, a circular underlying cross-section, a body length at least four times its core diameter, and a continuous cylindrical envelope along its length.",
+        "PARTIAL": "A single elongated rod with a recognizable cylindrical envelope exists, but one or more PASS conditions are not met.",
+        "FAIL": "There is no single elongated assembly with a recognizable cylindrical envelope."
+      },
+      "evidence_refs": ["image/01_rod_coverage.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect the evaluated assembly in side and axial views. Measure body length and core diameter, excluding protrusions. Confirm the resulting silhouette is straight, circular in cross-section, and continuous; a hidden support primitive alone is insufficient.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "2. Reusable Tapered Unit",
+      "criterion": "The retained source contains an editable slender shell with an open broad base and rounded narrow end.",
+      "scoring_rule": {
+        "PASS": "An editable source shell has a slender continuous taper, an open circular broad base with a readable inner surface, a softly rounded narrow end, and a clean rim and silhouette.",
+        "PARTIAL": "An editable source with a recognizable broad-to-narrow taper exists, but one or more PASS conditions are not met.",
+        "FAIL": "No editable source with a recognizable broad-to-narrow taper exists."
+      },
+      "evidence_refs": ["image/02_source_unit.png"],
+      "verification": {
+        "method": "source_geometry_inspection",
+        "procedure": "Isolate the source in a copy of the scene. Inspect its side silhouette and open-base view, using mesh inspection or a temporary section view to confirm the opening and inner surface. Evaluate the rim and narrow end independently of the distribution.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Spherical Detail Layer",
+      "criterion": "Smaller spherical nodules attach to the source and remain a readable secondary detail scale on the rod.",
+      "scoring_rule": {
+        "PASS": "Several near-spherical nodules of visibly different sizes meet the shell at different heights and on more than one side, and these smaller details remain recognizable in the repeated coating.",
+        "PARTIAL": "At least one recognizable near-spherical nodule is attached to the source and appears in the coating, but one or more PASS conditions are not met.",
+        "FAIL": "No recognizable near-spherical nodule is both attached to the source and present in the coating."
+      },
+      "evidence_refs": ["image/01_rod_coverage.png", "image/02_source_unit.png"],
+      "verification": {
+        "method": "source_and_evaluated_geometry_inspection",
+        "procedure": "Orbit the isolated source and compare the relative size, height, and side placement of its nodules. Inspect close views of the evaluated coating to confirm those nodules remain visibly smaller than the tapered protrusions and are not merely loose scene objects.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "4. Procedural Surface Coverage",
+      "criterion": "An editable density control generates a dense but readable cylindrical coating.",
+      "scoring_rule": {
+        "PASS": "The default distribution densely covers the circumference and full rod length while individual protrusions remain discernible. Halving its density control visibly reduces repetitions while preserving the cylindrical distribution.",
+        "PARTIAL": "A functioning density control changes repetitions distributed along a substantial portion of the rod surface, but one or more PASS conditions are not met.",
+        "FAIL": "No functioning density control changes repetitions across a substantial portion of the rod surface."
+      },
+      "evidence_refs": ["image/01_rod_coverage.png"],
+      "verification": {
+        "method": "controlled_parameter_probe",
+        "procedure": "Inspect default evaluated coverage from several sides. In a scene copy, halve the retained density control, reevaluate or invoke the documented generator, and compare repeated geometry before and after. Confirm fewer units and retained cylindrical coverage, then restore the original state.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "4. Procedural Surface Coverage",
+      "criterion": "Local orientation follows the rod surface and retained variation controls its irregular lean.",
+      "scoring_rule": {
+        "PASS": "Tips point predominantly outward around the circumference with restrained irregular leaning. Modestly changing the orientation-variation control changes local lean while keeping the coating predominantly outward-facing.",
+        "PARTIAL": "A functioning orientation-variation control changes the lean of surface-distributed protrusions, but one or more PASS conditions are not met.",
+        "FAIL": "No functioning orientation-variation control changes the lean of surface-distributed protrusions."
+      },
+      "evidence_refs": ["image/01_rod_coverage.png"],
+      "verification": {
+        "method": "orientation_function_probe",
+        "procedure": "Inspect protrusions on top, bottom, and both sides of the evaluated rod to compare their directions with the local radial direction. In a scene copy, modestly change orientation variation and compare poses of protrusions without changing the source. Confirm the changed lean still follows the curved carrier rather than one global axis.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "4. Procedural Surface Coverage",
+      "criterion": "Source geometry edits propagate through the repeated composite units.",
+      "scoring_rule": {
+        "PASS": "Changing the size of one retained source nodule updates its corresponding detail throughout the coating while preserving the other source details and the rod distribution.",
+        "PARTIAL": "Changing source geometry updates corresponding geometry in multiple coating units, but one or more PASS conditions are not met.",
+        "FAIL": "Changing source geometry does not update corresponding geometry in multiple coating units."
+      },
+      "evidence_refs": ["image/01_rod_coverage.png", "image/02_source_unit.png"],
+      "verification": {
+        "method": "source_edit_propagation_probe",
+        "procedure": "In a copy of the submitted scene, enlarge one source nodule and reevaluate the distribution. Compare matching nodules at separated locations along and around the rod. Check that the edited detail changes consistently while unrelated details and the distribution remain intact, then restore the source.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "5. End Cap and Geometric Finish",
+      "criterion": "A shallow circular cap cleanly terminates one end of the coated rod.",
+      "scoring_rule": {
+        "PASS": "One end has a shallow circular cap aligned with the rod axis, with a planar face, softly rounded perimeter, and a continuous meeting with the coated body without a visible separation.",
+        "PARTIAL": "A recognizable circular cap terminates one rod end, but one or more PASS conditions are not met.",
+        "FAIL": "No recognizable circular cap terminates a rod end."
+      },
+      "evidence_refs": ["image/03_end_cap.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_controlled_view",
+        "procedure": "Inspect the capped end in axial and oblique views. Compare its center and normal with the rod axis, inspect the rounded rim and planar face, and look for gaps or detached placement where it meets the coating.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "5. End Cap and Geometric Finish",
+      "criterion": "The tapered surfaces carry restrained rounded waviness in evaluated geometry.",
+      "scoring_rule": {
+        "PASS": "Rounded geometric undulations are visible on the tapered surfaces while their overall taper, open base, and spherical details remain recognizable, with no large spikes, tears, or angular shading bands.",
+        "PARTIAL": "Recognizable tapered protrusions have visible geometric undulations, but one or more PASS conditions are not met.",
+        "FAIL": "Recognizable tapered protrusions with visible geometric undulations are absent, including results that use only a flat color or shading effect for this waviness."
+      },
+      "evidence_refs": ["image/04_surface_finish.png"],
+      "verification": {
+        "method": "evaluated_surface_inspection",
+        "procedure": "Inspect the evaluated source geometry under neutral grazing light and in a silhouette or mesh view. Confirm the waviness changes the actual surface, then inspect repeated units to ensure the same finish is present and remains subtle enough to preserve the larger forms.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene and portable construction script are supplied and recreate the asset.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the retained source and functioning distribution, and build.py recreates the submitted scene and final render setup in Blender 5.1.2 from a clean scene without missing external assets or machine-specific paths.",
+        "PARTIAL": "submission.blend opens with a recognizable editable rod and build.py contains a scene-construction attempt, but one or more PASS conditions are not met.",
+        "FAIL": "submission.blend does not open with a recognizable editable rod, or build.py is absent or contains no scene-construction attempt."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact_open_and_script_rebuild",
+        "procedure": "Open submission.blend in Blender 5.1.2 and inspect retained editing data. Read build.py and run it in a separate clean scene. Compare the resulting rod, source relationships, and render setup with the submission and check for unresolved paths or missing dependencies.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "6. Presentation",
+      "criterion": "The required PNG is a clear inspection render of the submitted scene.",
+      "scoring_rule": {
+        "PASS": "B58_Procedural_Spiked_Rod.png is rendered from the submitted scene with Cycles GPU and shows the complete rod and capped end in a clear oblique view, with neutral gray appearance, readable detail, no cropping, and construction sources outside the camera view.",
+        "PARTIAL": "The required PNG is a render from the submitted scene showing a recognizable rod, but one or more PASS conditions are not met.",
+        "FAIL": "The required PNG is missing, does not show a recognizable rod, or is a source image, viewport screenshot, or external replacement instead of a render from the submitted scene."
+      },
+      "evidence_refs": ["image/01_rod_coverage.png", "image/03_end_cap.png"],
+      "verification": {
+        "method": "render_provenance_and_manual_inspection",
+        "procedure": "Inspect the PNG and the saved camera, geometry, engine, and GPU settings. Render a verification image from the submitted scene and compare its content and framing to the supplied PNG. Assess complete visibility and detail readability against the public presentation requirements.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

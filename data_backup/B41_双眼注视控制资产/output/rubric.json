@@ -1,0 +1,174 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "双眼注视控制资产",
+  "source_video": "https://www.youtube.com/watch?v=G49zjQMjHtA",
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 12, "SURF": 8, "RIG": 72, "PIPE": 8},
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "1. 对称且可辨方向的眼睛",
+      "criterion": "两只完整平滑的球形眼睛尺寸相同，中心等高并关于 X=0 对称，半径为中心距 D 的 0.25 至 0.35 倍，彼此不相交。",
+      "scoring_rule": {
+        "PASS": "球体完整平滑、对称等大且中心对齐、尺寸比例与不相交三个条件全部满足。",
+        "PARTIAL": "恰有两个条件满足，且确实存在两只可辨认的眼球。",
+        "FAIL": "满足少于两个条件，或只存在一只眼球/平面眼睛图案。"
+      },
+      "evidence_refs": ["image/eyes_front.jpg"],
+      "verification": {
+        "method": "code_and_visual",
+        "procedure": "识别实际球形眼白几何，分别拟合中心和半径并计算 D；从正面、背面和侧面检查完整性、球形与接触情况。检查最终求值几何而非对象数量或 UV Sphere 类型；允许眼球、虹膜、瞳孔采用多个对象组成。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 8,
+      "requirement_section": "1. 对称且可辨方向的眼睛",
+      "criterion": "双眼都有可见浅色眼白、彩色虹膜和更暗瞳孔；眼背面不重复正面标记，标记附着于实际眼球。",
+      "scoring_rule": {
+        "PASS": "两眼均满足可辨眼白/虹膜/瞳孔、单一正面标记、标记附着三个条件。",
+        "PARTIAL": "未达到 PASS，但至少一只眼正面存在实际附着并随眼球转动的可见虹膜/瞳孔标记；可存在另一只眼缺失、颜色层次不足或背面重复标记等缺陷。",
+        "FAIL": "两眼正面均没有实际附着并随眼球转动的可见虹膜/瞳孔标记，包括仅使用独立于眼球的静态面向相机图片的情况。"
+      },
+      "evidence_refs": ["image/eyes_front.jpg"],
+      "verification": {
+        "method": "artifact_render_and_visual",
+        "procedure": "对提交资产在中性照明下查看正、背和侧面；关闭骨骼覆盖、控制器显示和选择高亮，确认看到的是实际材质或几何。观察控制改变前后标记与眼白是否一起转动。材料名称包含 Eye 或仅给两个对象赋同一个材质均不能证明通过。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-01",
+      "capability": "RIG",
+      "points": 10,
+      "requirement_section": "2. 静止状态与控制接口",
+      "criterion": "交付状态双眼朝 -Y 且偏差不超过 5 度，两个目标分别在对应眼球正前方 D 至 2D 处，四种控制用途存在并可恢复默认状态。",
+      "scoring_rule": {
+        "PASS": "静止视线、目标位置关系、可辨控制用途与恢复默认三个条件全部满足。",
+        "PARTIAL": "恰有两个条件满足。",
+        "FAIL": "满足少于两个条件，或根本没有可操作的实时控制结构。"
+      },
+      "evidence_refs": ["image/eyes_front.jpg"],
+      "verification": {
+        "method": "code_and_manual",
+        "procedure": "依据文件内说明定位真实控制与目标，验证其空间关系；以眼球中心到表面瞳孔中心的方向测静止视线，并与可视结果交叉核对。扰动控制后按提供方法恢复，确认恢复的是产物的默认位置和视线。允许非零内部通道、辅助骨骼或不同名称，不要求恰好六根骨骼。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-02",
+      "capability": "RIG",
+      "points": 20,
+      "requirement_section": "3. 双眼共同注视",
+      "criterion": "共同控制器在四个指定偏移下带动双眼真实朝各自目标转动，视线角误差不超过 5 度。",
+      "scoring_rule": {
+        "PASS": "+X、-X、+Z、-Z 四次 0.5D 偏移中，每次两眼均满足角误差要求，且两个目标保留相互偏移。",
+        "PARTIAL": "恰有两次或三次偏移满足双眼与目标关系要求。",
+        "FAIL": "少于两次偏移满足要求，或只有骨骼转动而眼球表面不转动。"
+      },
+      "evidence_refs": ["image/gaze_together.jpg"],
+      "verification": {
+        "method": "behavioral_code_and_visual",
+        "procedure": "在提交文件的临时副本中独立进行四次公开偏移，每次恢复默认并刷新依赖图。测每只眼睛的实际瞳孔方向与眼球中心到其对应目标的夹角，记录目标间偏移和前后视图。若方向用辅助数据表达，须先核对其确实与可见瞳孔一致。不能只检查 Track 约束、骨骼旋转值或控制器是否存在。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-03",
+      "capability": "RIG",
+      "points": 8,
+      "requirement_section": "4. 单眼独立注视",
+      "criterion": "人物左眼目标沿 +X 和 +Z 独立移动 0.5D 时，左眼正确注视，右眼视线变化不超过 2 度。",
+      "scoring_rule": {
+        "PASS": "两次偏移均使左眼角误差不超过 5 度，右眼变化不超过 2 度。",
+        "PARTIAL": "恰有一次偏移满足两眼要求。",
+        "FAIL": "两次均不满足，或移动左眼目标只控制了右眼。"
+      },
+      "evidence_refs": ["image/gaze_independent.jpg"],
+      "verification": {
+        "method": "behavioral_code_and_visual",
+        "procedure": "按人物左右约定定位 +X 侧左眼及其实际目标。固定共同控制和右眼目标，分别执行题面两次偏移，每次从默认开始。测左眼的目标夹角和右眼相对默认的瞳孔方向变化，并用关闭骨骼覆盖的视图核验。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-04",
+      "capability": "RIG",
+      "points": 8,
+      "requirement_section": "4. 单眼独立注视",
+      "criterion": "人物右眼目标沿 +X 和 +Z 独立移动 0.5D 时，右眼正确注视，左眼视线变化不超过 2 度。",
+      "scoring_rule": {
+        "PASS": "两次偏移均使右眼角误差不超过 5 度，左眼变化不超过 2 度。",
+        "PARTIAL": "恰有一次偏移满足两眼要求。",
+        "FAIL": "两次均不满足，或移动右眼目标只控制了左眼。"
+      },
+      "evidence_refs": ["image/gaze_independent.jpg"],
+      "verification": {
+        "method": "behavioral_code_and_visual",
+        "procedure": "按人物左右约定定位 -X 侧右眼及其实际目标。固定共同控制和左眼目标，分别执行题面两次偏移，每次从默认开始。测右眼的目标夹角和左眼相对默认的瞳孔方向变化，并用关闭骨骼覆盖的视图核验。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-05",
+      "capability": "RIG",
+      "points": 14,
+      "requirement_section": "5. 稳定转轴与头部跟随",
+      "criterion": "共同与单眼控制改变时，两眼均围绕自身中心作刚性转动，中心漂移不超过 0.01D、半径变化不超过 2%。",
+      "scoring_rule": {
+        "PASS": "第 3、4 节八次控制偏移全部满足：该次受控眼球实际发生转动，两眼均保持中心和形状容差。",
+        "PARTIAL": "八次偏移中有一次至七次满足上述稳定性条件。",
+        "FAIL": "八次偏移均不满足上述稳定性条件，包括受控眼球完全不转动的情况。"
+      },
+      "evidence_refs": ["image/gaze_together.jpg", "image/gaze_independent.jpg"],
+      "verification": {
+        "method": "code_and_visual",
+        "procedure": "复用共同四次及左右各两次行为试验，逐次拟合求值眼白的球心和半径，比较默认值；检查球面残差或对应表面距离排除拉扯。无响应眼球不能因中心不变获得本项。允许骨骼父子、刚性权重、约束或等价驱动，不以 parent_type 或是否存在 Armature modifier 判分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-06",
+      "capability": "RIG",
+      "points": 12,
+      "requirement_section": "5. 稳定转轴与头部跟随",
+      "criterion": "头部三种公开变换都带动眼球、共同控制与单眼目标，保持头部局部关系，并在变换后继续支持注视操作。",
+      "scoring_rule": {
+        "PASS": "平移、绕 Z 旋转 30 度、绕局部 X 俯仰 15 度三种状态均正确跟随；每种状态下再作共同与单眼控制仍满足题面角误差。",
+        "PARTIAL": "恰有一种或两种头部变换满足完整要求，或三种均整体跟随但变换后的注视控制存在失效。",
+        "FAIL": "三种均不能使完整系统跟随，或眼球与目标无法保持相对头部的关系。"
+      },
+      "evidence_refs": ["image/head_follow.jpg"],
+      "verification": {
+        "method": "behavioral_code_and_visual",
+        "procedure": "在临时副本中分别执行题面三种头部变换，每次从默认起点开始；用头部变换的逆矩阵比较双眼中心、共同控制、左右目标的局部空间关系。再按头部坐标系执行共同 +X 0.5D、左目标 +Z 0.5D、右目标 +Z 0.5D，分别恢复，复核视线误差和独立性。要求真实产物随动，不能由名字或父子层级推断。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 8,
+      "requirement_section": "2. 静止状态与控制接口；6. 交付内容",
+      "criterion": "可编辑的提交文件和独立构建脚本资源完整，控制说明可用，重开与从空场景重建后功能仍成立。",
+      "scoring_rule": {
+        "PASS": "submission.blend 可打开且默认绑定完整、控制说明和恢复方式齐全、build.py 独立重建并保存资产，三项全部满足。",
+        "PARTIAL": "submission.blend 可打开且默认绑定完整，但控制说明或脚本重建中恰有一项不满足。",
+        "FAIL": "无法打开完整可编辑资产，或说明与脚本重建两项均不满足。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "code_and_manual",
+        "procedure": "用 Blender 5.1.2 在隔离临时目录打开提交，检查默认状态、打包资源与内部控制说明。禁用网络，按脚本顶部方式由空场景运行 build.py，检查未读取原 submission.blend 或未交付路径，保存并重开；做一次共同控制与一次单眼控制冒烟检查。骨骼数量、对象名称和文件二进制哈希无须与视频相同。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

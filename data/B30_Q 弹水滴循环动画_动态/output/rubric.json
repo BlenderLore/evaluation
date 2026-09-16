@@ -1,0 +1,192 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Q 弹水滴循环动画",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1eP4y167xi",
+    "id": "BV1eP4y167xi"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 20, "ANM": 50, "SURF": 15, "SCN": 10, "PIPE": 5},
+  "weighting_note": "暂定分配，尚未校准。动画占50分，分别检查轨迹、接触事件、弹性形变、实际循环和背景漂移；几何20分检查独立形体与连接表面，材质15分检查透射折射及高光，场景10分检查层次与关键动作可读性，交付5分检查重建和回放。五类能力均有实际成品依据，不要求流体、粒子或力场模拟，因此不设SIM。不同条目分别判断事件发生、事件中的形变、连接处几何和光学表现，不重复按节点或对象存在计分。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 悬浮水滴组与连续表面",
+      "criterion": "分离时存在一大两小的三颗主体，具有圆润、封闭的三维形体并与背景小滴区分。",
+      "scoring_rule": {
+        "PASS": "三颗主体齐全，一颗明显最大、两颗较小；分离形体均圆润封闭，尺寸层级可辨。",
+        "PARTIAL": "至少两颗有效的圆润三维主体存在，但第三颗缺失、大小层级不清或其中一颗的基础形体有明显局部缺陷；不满足PASS。",
+        "FAIL": "不足两颗有效的圆润三维主体，或以平面圆片、空心轮廓代替主体。"
+      },
+      "evidence_refs": ["image/02_separated.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "在说明标出的分离帧及端点求值几何，隔离背景后从展示视角及侧视角检查三维体积、封闭轮廓和大小层级；不得按对象或融球元素数量替代形体判断。连接处的问题归GEO-02。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 悬浮水滴组与连续表面",
+      "criterion": "接触及断开阶段形成圆滑液桥和封闭分离表面，无硬缝、相交内壁、尖刺或平切断口。",
+      "scoring_rule": {
+        "PASS": "两颗小滴各自接触事件中的液桥、共同外轮廓和分离后表面都连续圆滑，无可见连接缺陷。",
+        "PARTIAL": "至少一个真实液桥及封闭分离结果成立，但另一个事件缺少连接，或局部桥颈存在可见硬折、残留交叉面、尖刺或断口；不满足PASS。",
+        "FAIL": "没有真实连续液桥，接触仅为独立球相交或遮挡，或所有连接都破损到不能形成连贯外形。"
+      },
+      "evidence_refs": ["image/03_bridge.png", "image/01_overview.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_closeup_review",
+        "procedure": "逐帧检查说明中的两个接触帧段，对桥颈建立和断开的相邻帧查看求值后几何与中性材质近景；必要时检查截面以排除两个相交闭壳。此项只看连接几何质量，事件是否按序发生由ANM-02判断。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-01", "capability": "ANM", "points": 10,
+      "requirement_section": "2. 追碰与融合分离",
+      "criterion": "主滴具有弧线、转向和缓急变化的二维漂浮运动，两颗小滴均有独立相对运动。",
+      "scoring_rule": {
+        "PASS": "固定镜头下主滴横纵位移、弧线、转向和速度变化均可辨，两颗小滴都改变与主滴的相对位置，段内无瞬移或高频抖动。",
+        "PARTIAL": "不符合FAIL，主体确实发生可追踪的场景内位移，但至少一项PASS条件未满足，例如主滴只有直线或匀速运动、小滴独立运动不足或段内局部抖动。",
+        "FAIL": "主体基本静止、仅靠镜头移动产生运动，或主要运动由跳位和闪现构成。"
+      },
+      "evidence_refs": ["image/02_separated.png", "image/04_stretch.png"],
+      "verification": {
+        "method": "evaluated_motion_sampling_and_playback",
+        "procedure": "逐帧采样主体求值后的世界位置或可辨轮廓位置，并核对相机固定；绘制或审阅帧序列确认二维路径、转向、速度变化与小滴相对运动。观看30fps播放检查段内连续性；循环接缝单独归ANM-04。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-02", "capability": "ANM", "points": 10,
+      "requirement_section": "2. 追碰与融合分离",
+      "criterion": "两颗小滴各至少完成一次与主滴的分开、接近、连接融合、再次分离事件，接触时机可读。",
+      "scoring_rule": {
+        "PASS": "两颗小滴各至少有一次完整事件，主要接触在主滴减速或转向附近，正常速度可分辨阶段，并恢复三颗主体分开的状态。",
+        "PARTIAL": "至少一颗小滴有完整事件，但另一颗未完成，或完整事件存在阶段过短、时机不协调的问题；不满足PASS。",
+        "FAIL": "两颗小滴均无完整接触再分离事件，或只有穿过、长时间粘连、整体消失等替代行为。"
+      },
+      "evidence_refs": ["image/02_separated.png", "image/03_bridge.png", "image/04_stretch.png"],
+      "verification": {
+        "method": "event_sequence_review",
+        "procedure": "依据文件内的事件说明，在30fps播放中跟踪每颗小滴，并逐帧确认间隔、液桥、共同外轮廓和再次分开的先后关系；接触附近比较主滴运动方向与速度。判定事件顺序与时机，不以关键帧数量计分，桥颈的表面质量归GEO-02。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-03", "capability": "ANM", "points": 15,
+      "requirement_section": "3. 挤压、拉伸与回弹",
+      "criterion": "接触带来方向明确的挤压与侧向鼓起，离开时拉长并恢复圆润，主滴也参与形变。",
+      "scoring_rule": {
+        "PASS": "两颗小滴的事件都具有同步的挤压、沿离开方向拉长及恢复过程，主滴至少参与一次；形变连续且无突然的视觉体积暴涨或消失。",
+        "PARTIAL": "不符合FAIL，至少一个事件有接触相关的非均匀弹性形变，但至少一项PASS条件未满足，例如另一事件缺失、阶段不全、主滴无响应、方向时机不合或视觉体积突变。",
+        "FAIL": "没有可辨的接触相关非均匀形变，仅有位置变化、融合产生的鼓包，或整体等比缩放。"
+      },
+      "evidence_refs": ["image/04_stretch.png", "image/03_bridge.png"],
+      "verification": {
+        "method": "evaluated_deformation_sequence_review",
+        "procedure": "围绕两次事件采集接触前、压缩、拉开、恢复的连续帧，在中性材质下比较参与水滴沿运动方向与横向的轮廓变化，确认主滴响应。检查求值后的形体，不能仅凭缩放曲线、形态键或变形器存在判定。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-04", "capability": "ANM", "points": 10,
+      "requirement_section": "5. 循环与回放",
+      "criterion": "180帧周期、播放1至180帧、30fps；实际求值的第181与1帧相合，主体与背景在接缝自然衔接。",
+      "scoring_rule": {
+        "PASS": "周期、范围与fps正确，第1和181帧均为分离近球形；三颗中心差均不超过0.02D且各向尺寸差均不超过5%，180至下一轮1为正常一步，主体、形变和背景无明显跳变或停顿。",
+        "PARTIAL": "存在完整可播放序列，返回起点仍为同一三滴场景，但范围、fps或至少一个对照帧状态、数值容差、接缝连续性条件未满足；不满足PASS。",
+        "FAIL": "没有可播放的完整主体动画序列，或返回起点造成主体整体重置到无关画面、长时间空场等无法辨认循环的结果。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "evaluated_endpoint_comparison_and_loop_playback",
+        "procedure": "读取范围与fps，求值第1和181帧，以第1帧分离主滴直径定义D；逐颗比较中心和三轴外形尺寸。连续播放两轮，并查看176至180后接1至5的帧序列，180至下一轮1应为正常一帧进展；比较完整求值结果而非基础关键值，以覆盖噪波、驱动、缓存和背景。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-05", "capability": "ANM", "points": 5,
+      "requirement_section": "4. 透明材质与空间层次",
+      "criterion": "背景小滴从首帧即存在并在整个片段缓慢、非整齐地漂移。",
+      "scoring_rule": {
+        "PASS": "第1帧已有背景小滴，全片持续可见且具有缓慢、不同步的漂移，不形成整齐统一的直线流。",
+        "PARTIAL": "不符合FAIL，存在可持续辨认的背景小滴，但至少一项PASS条件未满足，例如首帧空缺、部分帧段缺失、基本静止、漂移过快或整齐同步运动。",
+        "FAIL": "没有背景小滴，或全部背景小滴都只闪现或瞬间甩出画面，无法持续追踪。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/04_stretch.png"],
+      "verification": {
+        "method": "background_motion_playback_review",
+        "procedure": "在首帧及全片均匀采样，并观察正常速度播放，跟踪多个背景小滴的缓慢位移和方向差异；不要求粒子系统、湍流力场或特定数量。空间层次归SCN-01，循环接缝归ANM-04。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 10,
+      "requirement_section": "4. 透明材质与空间层次",
+      "criterion": "三颗主体具有清澈透射和可辨折射，融合区域保持一致的水滴质感。",
+      "scoring_rule": {
+        "PASS": "三颗主体及融合区域均能透见环境色并显示曲面折射，轮廓可辨、质感近乎无色且一致。",
+        "PARTIAL": "至少一颗主体具有真实透射，但至少一项PASS条件未满足，例如折射不清、色调过重、轮廓难辨或主体与连接区域不一致、混浊、发黑。",
+        "FAIL": "没有主体具有真实透射，全部不透明或仅以低Alpha淡化轮廓代替水滴体积。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/04_stretch.png"],
+      "verification": {
+        "method": "material_use_inspection_and_render_review",
+        "procedure": "检查实际作用于求值主体表面的材质输出，并以Cycles GPU查看分离和融合帧的渲染；确认环境色透射及曲面造成的背景变化。材质节点存在、未连接的Glass节点或高透射数值本身不构成通过证据。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 5,
+      "requirement_section": "4. 透明材质与空间层次",
+      "criterion": "主体具有平滑且不过曝的高光，反射随曲面形变自然变化。",
+      "scoring_rule": {
+        "PASS": "三颗主体均有平滑可辨高光，亮部保留轮廓层次；连续帧的反射随形变变化并保持统一表面观感。",
+        "PARTIAL": "至少一颗主体有有效高光，但其他主体缺少相应表现、部分过曝，或连续帧中反射明显不协调；不满足PASS。",
+        "FAIL": "主体缺失，或所有主体都没有可辨曲面高光，或使用固定画面白点替代反射。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/04_stretch.png"],
+      "verification": {
+        "method": "rendered_surface_sequence_review",
+        "procedure": "在相同照明与相机下检查分离、压缩、拉伸帧的渲染，比较高光位置、形状和亮部层次；确认高光由主体表面响应形成。本项不再评价透明程度，几何破面归GEO。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01", "capability": "SCN", "points": 10,
+      "requirement_section": "4. 透明材质与空间层次",
+      "criterion": "柔和冷绿至暖黄背景与远近小滴形成层次，固定镜头完整且清楚地展示主体动作。",
+      "scoring_rule": {
+        "PASS": "背景有柔和冷暖过渡，细小水滴的大小及远近有层次；主体全程完整入画、保持清晰且不被背景长时间遮住，关键接触可读。",
+        "PARTIAL": "主体动作仍可辨认，但冷暖背景、大小远近层次至少一项不足，或局部裁切、失焦、遮挡削弱动作展示；不满足PASS。",
+        "FAIL": "主体或相机展示缺失，或主体多数时间出画、失焦、被遮挡到无法辨认接触动作。"
+      },
+      "evidence_refs": ["image/01_overview.png"],
+      "verification": {
+        "method": "camera_sequence_composition_review",
+        "procedure": "使用交付相机查看全片缩略序列并重点检查两个接触帧段，判断完整入画、焦点、遮挡、背景色域及远近关系；不按灯光、相机或背景对象的存在计分。背景是否移动由ANM-05判断。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "6. 交付内容",
+      "criterion": "脚本可离线重建完整可编辑场景，资源闭合且重开、拖帧和重放结果一致。",
+      "scoring_rule": {
+        "PASS": "提交齐全；按说明在空场景运行脚本能生成完整资产，资源无绝对路径或网络依赖，动画和材质可编辑；重开、拖帧及重复播放一致，事件帧段说明明确。",
+        "PARTIAL": "至少能离线重建或独立重放完整资产，但脚本重建、资源闭合、可编辑性、事件说明或重放一致性至少一项不完整；不满足PASS。",
+        "FAIL": "既不能用脚本重建，也没有可独立重放的完整资产，或只有静态截图、视频及依赖制作机器的失效场景。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "clean_environment_rebuild_and_replay_probe",
+        "procedure": "在独立目录按脚本说明用Blender5.1.2重建，离线核对资源与缓存；重开文件，检查可编辑数据及事件说明，分别从头播放和直接跳至事件帧，比较求值结果。只奖励重建与重放能力，不因文件能打开单独给分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

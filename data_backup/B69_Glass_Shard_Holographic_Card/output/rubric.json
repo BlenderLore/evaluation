@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Glass-Shard Holographic Card",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1313c6DEn2",
+    "id": "BV1313c6DEn2"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 10, "SURF": 70, "SCN": 15, "PIPE": 5},
+  "weighting_note": "The central task is a view-dependent foil shader, so SURF receives 70 points divided among six independent outcomes: artwork mapping, shard structure, fine variation, directional response, color separation, and border behavior. Simple card geometry earns 10 points; final-image glare and framing earn 15; reproducible delivery earns 5. Shader textures are SURF, not geometric PROC. No animation or rigging is required.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Card and Printed Artwork",
+      "criterion": "A flat portrait card has a continuous, smoothly rounded perimeter and proportions suitable for the entire input composition.",
+      "scoring_rule": {
+        "PASS": "A renderable flat portrait card exists; its evaluated perimeter is continuous and non-self-intersecting, all corners are smoothly rounded, and its proportions preserve the complete input composition without cutting important artwork.",
+        "PARTIAL": "A renderable flat portrait card with a connected outline exists, but one or more PASS conditions are unmet, including square or uneven corners, incorrect proportions, or local perimeter defects.",
+        "FAIL": "No renderable flat portrait card with a connected outline exists. A picture displayed only as a non-renderable reference or disconnected floating fragments does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_holographic_card.png", "image/02_printed_card.png"],
+      "verification": {
+        "method": "Evaluated geometry and controlled silhouette inspection",
+        "procedure": "Inspect the evaluated front surface and perimeter in the submitted blend. Render a neutral silhouette and front view to check continuity, flatness, portrait proportions, and the shape of each corner; compare the extent of the image composition against the input. Do not infer rounded corners from vertex count or a modifier name.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "1. Card and Printed Artwork",
+      "criterion": "The supplied image is used as the upright, complete printed face with a reflective foil finish.",
+      "scoring_rule": {
+        "PASS": "The supplied bitmap actually drives the rendered front, preserving its complete upright composition without tiling, mirroring, or appreciable stretch; the figure, emblem, information area, and printed border retain the available input detail, and the printed surface has a reflective foil finish.",
+        "PARTIAL": "The supplied image visibly contributes the recognizable figure and information area to the card front, but one or more PASS conditions are unmet, such as incorrect mapping, cropping, loss of available contrast, or an absent reflective finish.",
+        "FAIL": "The supplied image does not visibly contribute both the recognizable figure and information area to the rendered card front. An unused image datablock, substituted artwork, or source screenshot used as the entire final result does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_printed_card.png", "image/04_colored_shards.png"],
+      "verification": {
+        "method": "Material use inspection and diagnostic front render",
+        "procedure": "Trace the provided image through the actual assigned surface and inspect a duplicate of the scene with decorative foil intensity reduced. Compare its front render with front_artwork.png for orientation, extent and distortion. Move a test reflection light in the duplicate to confirm reflective response on the printed surface. Judge detail relative to the provided bitmap, not hypothetical high-resolution text.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "2. Shard Surface",
+      "criterion": "The card has varied angular shard patches with visible gaps and effective editable density or coverage.",
+      "scoring_rule": {
+        "PASS": "Multiple separated irregular polygonal patches, including elongated forms and varied sizes, are visibly confined to the card surface; gaps preserve the underlying print, and adjusting the exposed density or coverage control visibly changes their distribution or occupied area.",
+        "PARTIAL": "Multiple separated foil patches with at least some angular boundaries visibly occupy the card surface and leave some printed artwork exposed, but one or more PASS conditions are unmet, such as overly regular shapes, little size variation, or an ineffective density or coverage control.",
+        "FAIL": "There are no multiple separated foil patches with angular boundaries on the card surface and exposed artwork between them. A uniform overlay, only circular glints, or loose fragments floating away from the card does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_shard_shapes.png", "image/04_colored_shards.png"],
+      "verification": {
+        "method": "Surface isolation render and control probe",
+        "procedure": "In a duplicate scene, inspect the surface effect without glare and with neutral foil color if necessary. Compare the patch boundaries and size variation with the source shape reference. Change the density or coverage control and rerender at the same view, confirming an actual change on the card while the printed image remains in place. Inspect side views for surface confinement.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "2. Shard Surface",
+      "criterion": "Fine granular variation adds a second scale of surface detail without deforming the card silhouette.",
+      "scoring_rule": {
+        "PASS": "Fine granular variation is visible within the foil response or its transition edges, substantially smaller than the large shard forms; it remains stable at a fixed view and does not displace the card silhouette.",
+        "PARTIAL": "Fine variation is visibly present in the applied foil response or transition edges, but one or more PASS conditions are unmet, such as weak scale separation, unstable noise, or unintended silhouette displacement.",
+        "FAIL": "No fine variation is visible in the applied foil response or transition edges. Render sampling noise, image compression, or an unused texture does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_holographic_card.png", "image/05_foil_border.png"],
+      "verification": {
+        "method": "Controlled close renders and surface inspection",
+        "procedure": "Render a close region containing an active shard and a transition edge with glare disabled and sufficient sampling to separate material variation from noise. Repeat at the same view and compare with a duplicate in which the fine-detail contribution is disabled. Check that the outline is unchanged and that the detail scale is finer than the large shards.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "3. Viewing-Angle Response",
+      "criterion": "A stable, direction-dependent bright zone moves across the card and changes the active shard response.",
+      "scoring_rule": {
+        "PASS": "With the card, lights, exposure, and material settings fixed, near-frontal and approximately 25-degree left and right views show a diagonal bright zone activating selected shards; the oblique views place it in visibly different card regions, intermediate views transition smoothly, a repeated fixed view is stable, and sweep width and foil intensity controls both affect the response.",
+        "PARTIAL": "Changing only the viewing direction visibly changes which card regions have active foil highlights, but one or more PASS conditions are unmet, such as a poorly defined sweep, abrupt transitions, instability, or an ineffective width or intensity control.",
+        "FAIL": "Changing only the viewing direction does not visibly change the active foil regions on the card. Whole-image exposure changes, a fixed painted pattern, or time-driven changes with no viewing-direction response do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_holographic_card.png", "image/04_colored_shards.png"],
+      "verification": {
+        "method": "Fixed-light camera-angle render probe",
+        "procedure": "On a duplicate of the submitted scene, keep the card, lights, exposure, timeline position, and material settings fixed. Aim cameras at its center from near-front and approximately 25 degrees left and right at equal distance, plus intermediate views. Compare highlight locations in card-local image coordinates, not screen coordinates. Repeat one view to test stability, then independently vary width and intensity controls and confirm their effects.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-05",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "3. Viewing-Angle Response",
+      "criterion": "Active foil shards have distinct cool, pink or violet, and green or yellow colors while artwork remains recognizable.",
+      "scoring_rule": {
+        "PASS": "Across the prescribed views, active shards show cyan or blue, pink or violet, and green or yellow hues as distinct localized colors; they do not merge into a uniform white sheet, and the figure and information area remain recognizable through the overall treatment.",
+        "PARTIAL": "At least two distinct hue families visibly occur on active foil shards and some printed artwork remains recognizable, but one or more PASS conditions are unmet, including a missing hue family, weak color separation, or excessive masking of the figure or information area.",
+        "FAIL": "Fewer than two hue families are visible on active foil shards, or no printed artwork remains recognizable. Colors supplied only by the unmodified input image do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_holographic_card.png", "image/04_colored_shards.png"],
+      "verification": {
+        "method": "Controlled material render comparison",
+        "procedure": "Inspect renders from the viewing-angle probe, first without compositor glare and then with the final presentation. Identify colors specifically on active foil regions by comparing with the provided artwork and a reduced-foil duplicate. Assess the required hue families and print recognition; attribute washout caused solely by compositing to the glare row rather than this material-color row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-06",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. Independent Foil Border",
+      "criterion": "A continuous narrow rim has fine directional foil detail and independent controls.",
+      "scoring_rule": {
+        "PASS": "A narrow continuous foil rim follows the rounded outline, is visibly denser and more directionally organized than the central shards, catches colored highlights, preserves the print composition, and supports independent texture-density and brightness changes without altering the central artwork or shard pattern.",
+        "PARTIAL": "An applied foil effect distinct from the printed border is visible along a substantial part of the card perimeter, but one or more PASS conditions are unmet, including breaks, excessive width, insufficient texture distinction, or dependent controls.",
+        "FAIL": "No applied foil effect distinct from the printed border is visible along a substantial part of the card perimeter. The image's existing border alone or a material slot with no visible contribution does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_holographic_card.png", "image/05_foil_border.png"],
+      "verification": {
+        "method": "Border close render and independent material control probe",
+        "procedure": "Inspect the perimeter in the evaluated scene and a close render, distinguishing the additional foil effect from the input bitmap's printed outline. In a duplicate, vary rim texture density and brightness separately; compare with unchanged center renders to confirm effective independence. Check border continuity and the contrast between fine rim detail and broad center shards.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "5. Final Presentation",
+      "criterion": "Rendered highlights produce localized star-shaped glare and soft glow without washing out the card.",
+      "scoring_rule": {
+        "PASS": "The actual scene render or compositing setup produces both star-shaped glare and soft glow localized to strong highlights, while dark areas, the recognizable figure, and the information area remain preserved.",
+        "PARTIAL": "At least one genuine highlight-driven star-glare or soft-glow effect is visible in the scene render and some card content remains recognizable, but one or more PASS conditions are unmet, including a missing glare component or excessive spread.",
+        "FAIL": "No genuine highlight-driven glare or glow is visible, or its spread leaves no card content recognizable. Painted stars and externally overlaid replacement images do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_holographic_card.png"],
+      "verification": {
+        "method": "Final render and compositing contribution comparison",
+        "procedure": "Render the submitted scene and compare the final output with a duplicate bypassing its glare or glow contribution. Confirm that star and halo features originate at scene highlights and respond when a highlight is reduced. Inspect the dark image regions and print recognition. Score only the presentation effect here, not material hue separation already tested under SURF-05.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-02",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "5. Final Presentation",
+      "criterion": "The final composition presents the whole card and its material response clearly against a dark background.",
+      "scoring_rule": {
+        "PASS": "The final slightly oblique composition shows the entire card against a dark, quiet background, leaves surrounding room for its perimeter and glare, and makes the rounded outline, print, colored shards, and fine rim visible together.",
+        "PARTIAL": "A rendered card is identifiable as the main subject and most of its face is visible, but one or more PASS conditions are unmet, including clipping, unsuitable view, distracting background, or insufficient surrounding space.",
+        "FAIL": "No rendered card is identifiable as the main subject with most of its face visible. An empty render or a composition showing only an isolated detail does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_holographic_card.png"],
+      "verification": {
+        "method": "Final-camera render inspection",
+        "procedure": "Inspect a render from the saved final camera and compare its framing with the delivered PNG. Check subject extent, background distraction, perimeter and glare clearance, and simultaneous visibility of the specified card regions. The existence of a camera or lights alone earns no credit.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable packed scene, reproducible build script, and scene-rendered PNG are delivered under the specified names.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens in Blender 5.1.2 with the supplied artwork packed, editable effective scene controls, and Cycles GPU configured; build.py reconstructs and saves the scene from the provided input and renders B69_Glass_Shard_Holographic_Card.png; the delivered PNG matches a render of the submitted scene.",
+        "PARTIAL": "submission.blend opens with a renderable card and its supplied artwork available, but one or more PASS conditions are unmet, including an unpacked resource, incomplete or nonreproducible script, missing or mismatched PNG, or incorrect render configuration.",
+        "FAIL": "submission.blend is absent or cannot open with a renderable card and its supplied artwork available. A rendered picture alone or an unrecoverably missing essential image does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Artifact reopening, clean rebuild, and render comparison",
+        "procedure": "In the future evaluation environment, open submission.blend in Blender 5.1.2, inspect packed resources and Cycles GPU configuration, and render the saved camera. Inspect build.py before executing it in a clean directory containing only the supplied input and compare its scene and output with the submission. Confirm the exact requested filenames and that the PNG is produced by the actual scene. This procedure is specified only and has not been executed during task authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

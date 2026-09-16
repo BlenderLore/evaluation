@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Peach With Water Droplets",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1bU9NBYE4T",
+    "id": "BV1bU9NBYE4T"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 45, "SURF": 40, "SCN": 5, "PIPE": 10},
+  "weighting_note": "Geometry receives 45 points for the fruit volume, modeled crown and seam, bead shapes, and curved-surface contact. Surface work receives 40 points for the skin color field, microrelief, water optics, and effective material controls. Presentation receives 5 points and saved-scene delivery and rebuilding receive 10. The source bakes the droplet arrangement into geometry for a static result, so no procedural distribution, animation, rig, or physical simulation is required.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. Peach Body",
+      "criterion": "The peach has a full, continuous three-dimensional fruit body with a smooth rounded silhouette.",
+      "scoring_rule": {
+        "PASS": "A connected volumetric fruit body with a broad curved middle exists; it is closed, approximately as tall as wide, has substantial depth, rounded shoulders and a gently narrowing lower region, and shows a smooth silhouette and large-surface shading without unintended holes or sharp faceting.",
+        "PARTIAL": "A connected volumetric fruit body with a broad curved middle exists, but one or more PASS conditions are unmet.",
+        "FAIL": "No connected volumetric fruit body with a broad curved middle exists; a flat depiction, empty scene, or disconnected fragments alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_peach_with_water_droplets.png", "image/02_droplet_geometry.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_neutral_shading_inspection",
+        "procedure": "Open the saved submission, isolate the evaluated peach geometry, and inspect front, side, and three-quarter views with neutral shading. Inspect its connected volume, closed boundaries, relative proportions, lower taper, silhouette continuity, and large-surface normals. Assess the crown and seam design separately under GEO-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Peach Body",
+      "criterion": "A modeled crown depression flows into a recessed vertical seam that defines two lobes.",
+      "scoring_rule": {
+        "PASS": "The existing volumetric peach has a geometric inward recess in its crown or side; it includes both a localized crown depression and a continuous recessed seam descending toward the base, with softly bulging lobes on either side and no separation into detached halves.",
+        "PARTIAL": "The existing volumetric peach has a geometric inward recess in its crown or side, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no volumetric peach with a geometric inward recess in its crown or side. A painted line or shading-only indentation cannot establish this minimum."
+      },
+      "evidence_refs": ["image/01_peach_with_water_droplets.png", "image/02_droplet_geometry.png"],
+      "verification": {
+        "method": "evaluated_geometry_profile_inspection",
+        "procedure": "Temporarily hide droplets and inspect the evaluated fruit in neutral shading from above and from the seam side. Rotate the view and inspect surface profiles to distinguish actual inward geometry from color or bump effects. Follow the seam from the crown toward the lower body and inspect the two continuous lobes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Surface Droplets",
+      "criterion": "Water beads use smooth convex cap geometry with varied rounded, oval, and gently merged shapes.",
+      "scoring_rule": {
+        "PASS": "Multiple raised volumetric beads associated with the peach exist and have convex caps; the bead set has smooth surfaces, flatter contact regions, variation between round and oval forms, and some gently elongated or merged shapes, with beads small relative to the fruit.",
+        "PARTIAL": "Multiple raised volumetric beads associated with the peach exist and have convex caps, but one or more PASS conditions are unmet.",
+        "FAIL": "Multiple raised volumetric beads associated with the peach and having convex caps do not exist. Flat dots, texture highlights, or an isolated unused droplet source are insufficient."
+      },
+      "evidence_refs": ["image/02_droplet_geometry.png"],
+      "verification": {
+        "method": "isolated_bead_geometry_inspection",
+        "procedure": "Inspect the evaluated bead geometry in neutral shading, including representative small, large, rounded, and elongated beads. Use a local side view to inspect the cap and flatter base, and inspect geometry access in the saved file to confirm that the visible beads remain editable. Judge surface seating and coverage under GEO-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Surface Droplets",
+      "criterion": "An irregular bead arrangement follows the peach surface while leaving its skin and seam readable.",
+      "scoring_rule": {
+        "PASS": "Multiple beads rest against an existing curved peach region; the arrangement extends across the crown, broad front flank, and lateral sides with varied sizes and spacing, clear skin gaps, no obvious floating beads or detached source, and a readable main seam.",
+        "PARTIAL": "Multiple beads rest against an existing curved peach region, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no existing curved peach region with multiple beads resting against it. Detached beads, a floating surrounding cloud, or texture-only marks do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_peach_with_water_droplets.png", "image/02_droplet_geometry.png"],
+      "verification": {
+        "method": "surface_contact_and_distribution_inspection",
+        "procedure": "Rotate the saved asset in neutral shading to inspect crown, front, and side coverage. Inspect representative local bead-to-skin sections or nearest surface distances to identify visible gaps and excessive burial. Judge spacing, size variation, skin exposure, and seam visibility across the whole arrangement; do not require a particular scattering mechanism.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "3. Peach Skin",
+      "criterion": "The skin carries an irregular warm blush-to-yellow color field with finer mottling.",
+      "scoring_rule": {
+        "PASS": "A substantial curved peach region has visible warm red or pink and pale peach or yellow material coloration; the complete skin shows coral-red and pink upper blush blending broadly and irregularly toward lighter lower areas, finer mottling, and continuous color coverage across the lobes and seam without flat stripe bands.",
+        "PARTIAL": "A substantial curved peach region has visible warm red or pink and pale peach or yellow material coloration, but one or more PASS conditions are unmet.",
+        "FAIL": "No substantial curved peach region visibly carries both warm red or pink and pale peach or yellow material coloration. An unused material, flat reference image, or one uniform body color is insufficient."
+      },
+      "evidence_refs": ["image/01_peach_with_water_droplets.png"],
+      "verification": {
+        "method": "used_material_and_color_field_inspection",
+        "procedure": "Inspect the material actually used on the peach and render or preview it under neutral broad lighting. Rotate the fruit to assess upper-to-lower color organization, irregular transitions, fine mottling, and coverage continuity. Inspect color separately from microrelief so the same defect is not scored twice.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "3. Peach Skin",
+      "criterion": "Fine shallow relief and restrained rough highlights produce a soft peach-skin response.",
+      "scoring_rule": {
+        "PASS": "A substantial curved peach region visibly demonstrates fine shallow material relief and a nonmetallic skin response; the skin broadly maintains soft, mostly matte highlights and restrained microdetail without coarse lumps, deep cracks, or a glossy plastic appearance, including over the seam and lobes.",
+        "PARTIAL": "A substantial curved peach region visibly demonstrates fine shallow material relief and a nonmetallic skin response, but one or more PASS conditions are unmet.",
+        "FAIL": "No substantial curved peach region visibly demonstrates both fine shallow material relief and a nonmetallic skin response. Unused texture nodes or color mottling alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_peach_with_water_droplets.png"],
+      "verification": {
+        "method": "controlled_surface_response_inspection",
+        "procedure": "Inspect the actual peach material in close controlled previews with a broad light and then a grazing light. If needed, temporarily use a neutral base color while retaining its relief and roughness to separate microrelief from painted color. Check feature scale relative to the fruit, shallow relief, and restrained highlight spread on existing curved surfaces.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. Water Material",
+      "criterion": "The modeled beads transmit peach color and show water-like reflection and refraction.",
+      "scoring_rule": {
+        "PASS": "Multiple modeled beads on the peach visibly transmit the skin color through their caps; the bead material is clear and nonmetallic, produces localized refraction and small reflective highlights, and remains distinct from the matte skin without opaque white or solid dark bead interiors dominating the result.",
+        "PARTIAL": "Multiple modeled beads on the peach visibly transmit the skin color through their caps, but one or more PASS conditions are unmet.",
+        "FAIL": "Multiple modeled beads on the peach do not visibly transmit skin color through their caps. Opaque glossy spheres, painted glints, or an unused transparent material are insufficient."
+      },
+      "evidence_refs": ["image/01_peach_with_water_droplets.png"],
+      "verification": {
+        "method": "actual_material_and_controlled_optical_inspection",
+        "procedure": "Inspect the shader actually assigned to the evaluated visible beads. Make controlled close views of beads on differently colored skin regions with lighting that reveals highlights. Confirm transmitted skin color, local refractive distortion, and reflective cap highlights; compare with the adjacent skin. The exact shader-node recipe and numerical IOR are not acceptance conditions.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "5. Editable Surface Controls",
+      "criterion": "Saved material parameters effectively control palette, transition placement or spread, detail scale, and relief strength.",
+      "scoring_rule": {
+        "PASS": "An existing curved peach region is affected by at least one saved material parameter; the saved scene also exposes effective parameters for all four requested properties, each visibly changes its intended property on the peach without changing the main fruit geometry, and the saved defaults retain the requested reference-like appearance.",
+        "PARTIAL": "An existing curved peach region is affected by at least one saved material parameter, but one or more PASS conditions are unmet.",
+        "FAIL": "No saved material parameter visibly affects an existing curved peach region. Unused controls and values available only in build.py do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_peach_with_water_droplets.png"],
+      "verification": {
+        "method": "reversible_material_parameter_probes",
+        "procedure": "In a temporary copy of the saved submission, identify the used skin parameters and record their defaults. Change palette, transition position or spread, detail scale, and relief strength one at a time using clear nondegenerate alternatives; compare controlled previews and confirm the main peach geometry is unchanged. Restore defaults after each probe. Built-in shader parameters qualify without a custom interface.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "6. Presentation",
+      "criterion": "The saved camera and illumination make the complete peach, seam, and water beads legible in a quiet close view.",
+      "scoring_rule": {
+        "PASS": "The saved camera view visibly presents a substantial peach body and multiple beads; it frames the complete fruit with comfortable margins from a three-quarter angle showing crown, descending seam, front and side beads, and uses a quiet background and soft warm illumination that preserves light skin tones, form shading, and useful highlight contrast without visible construction objects.",
+        "PARTIAL": "The saved camera view visibly presents a substantial peach body and multiple beads, but one or more PASS conditions are unmet.",
+        "FAIL": "The saved camera view does not visibly present a substantial peach body and multiple beads. Camera or light existence alone is insufficient."
+      },
+      "evidence_refs": ["image/01_peach_with_water_droplets.png"],
+      "verification": {
+        "method": "saved_camera_render_inspection",
+        "procedure": "Inspect a render from the saved camera and compare it with the submitted PNG. Judge framing, visible fruit regions, background restraint, light direction and softness, preservation of pale tones, and highlight contrast. Distinguish presentation defects from the inherent material behavior assessed under SURF rows; no particular light count or world asset is required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The requested editable scene, rebuild script, and genuine scene render are delivered and reproducible from the script's saved result.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with an editable volumetric peach and associated modeled beads; all three named deliverables are present, the PNG comes from that saved scene, and running build.py from an empty Blender 5.1.2 file recreates and saves submission.blend whose reopened geometry, materials, controls, camera, and render settings reproduce the delivered result without missing external assets.",
+        "PARTIAL": "submission.blend opens with an editable volumetric peach and associated modeled beads, but one or more PASS conditions are unmet.",
+        "FAIL": "submission.blend is missing, cannot be opened, or does not contain an editable volumetric peach with associated modeled beads. A script that only creates an unsaved in-memory scene cannot establish this minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "deliverable_integrity_and_fresh_process_saved_scene_rebuild",
+        "procedure": "Check submission.blend, build.py, and B130_Peach_With_Water_Droplets.png. Open the blend in Blender 5.1.2 and inspect editability, asset resolution, and Cycles GPU settings. In a temporary working location, execute build.py from an empty Blender file, confirm that it writes submission.blend, then close that process and reopen the written file in a fresh process. Compare evaluated peach and bead geometry, used materials, effective controls, saved camera, lighting, and render settings with the delivered scene. Render that reopened file and compare content with the delivered PNG; do not accept source-image or viewport-image substitution. No particular submission directory is required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

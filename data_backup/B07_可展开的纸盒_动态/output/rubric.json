@@ -1,0 +1,176 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "可展开的纸盒",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=gQPXVidP3UI",
+    "id": "gQPXVidP3UI"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 25, "ANM": 40, "RIG": 15, "SURF": 15, "PIPE": 5},
+  "weighting_note": "暂定分配：折叠端点、刚性铰接与时间连续性是主要结果，合计 ANM40；展开网和薄纸几何 GEO25；独立控制与盒盖跟随 RIG15；内外和切边配色 SURF15；离线重建和重开保持 PIPE5。四项实际制作能力加一个轻量交付项，未把普通修改器存在记为 PROC，未把关键帧折叠记为 SIM。权重尚未经样本校准。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 15,
+      "requirement_section": "1. 六面展开网与薄纸结构",
+      "criterion": "六块等大正方形按底面四周四壁、一壁外接盒盖形成 3L × 4L 长臂十字展开网，五条折线和面板连接关系明确。",
+      "scoring_rule": {
+        "PASS": "六块面板及连接布局全部正确，边长与整体轮廓在公开的 2% 容差内，五条折线可辨。",
+        "PARTIAL": "未达到 PASS，但存在完整六块面板与正确长臂十字连接布局；仅尺寸比例、局部方正程度或折线可辨性不满足。",
+        "FAIL": "缺少面板，长臂十字连接布局错误，或仅有彼此无铰接关系的独立面片。"
+      },
+      "evidence_refs": ["image/02_net.jpg"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual",
+        "procedure": "在临时副本中使用提交的展开状态识别六块实际面板，以底面边长确定 L，在顶视图核对面板邻接图及五条折线。逐面拟合四边形并测边长和展开轮廓；额外细分不改变面板身份，多个对象只要存在真实可用铰接关系即可。此项不重复计分平面状态出现在哪一帧，也不读取原始顶点数或名称判分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 六面展开网与薄纸结构",
+      "criterion": "六块面板具有 0.003L 至 0.01L 的真实薄层厚度和封闭切边，面板表面、轮廓及折线干净。",
+      "scoring_rule": {
+        "PASS": "六块面板均有合规厚度与封闭切边，且无缺面、重复重叠表面、尖刺或破洞。",
+        "PARTIAL": "未达到 PASS，但至少四块实际面板具有非零薄层厚度；其余问题限于厚度超出区间、局部边缘未封闭或局部表面缺陷。",
+        "FAIL": "不足四块实际面板具有非零薄层厚度，或主要结构是实心厚块，或大范围缺面、破洞使薄纸结构不能辨认。"
+      },
+      "evidence_refs": ["image/01_closed.jpg", "image/03_folding.jpg"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual",
+        "procedure": "查看展开和中间姿态的求值网格，在远离折线的位置沿面板法线采样内外表面距离并归一化为厚度/L。斜视和近距离检查真实切边封闭情况，排除背面剔除或渲染描边造成的假厚度；检查表面重叠、缺口和尖刺。不要求 Solidify 或特定修改器顺序；本项仅计几何厚度和静态完整性，运动拉伸归 ANM-02。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-01", "capability": "ANM", "points": 15,
+      "requirement_section": "2. 两端状态与播放",
+      "criterion": "在 1–250 帧、24 fps 的动画中，第 1 帧为水平展开，第 250 帧为四壁垂直且盒盖闭合的立方纸盒。",
+      "scoring_rule": {
+        "PASS": "实际折叠随时间改变；第 1 帧平面偏差、第 250 帧壁盖角度、立方尺寸和自由边闭合均满足公开容差，且帧范围和帧率正确。",
+        "PARTIAL": "未达到 PASS，但至少三面侧壁随时间从展开方向折向立起，且第 250 帧可辨认盒状体；存在端点平面、单壁或盖板闭合、尺寸接缝或时间设置偏差。",
+        "FAIL": "不足三面侧壁随时间发生由展开向立起的折叠，或第 250 帧不能辨认盒状体；仅静态平面或静态立方体亦属 FAIL。"
+      },
+      "evidence_refs": ["image/01_closed.jpg", "image/02_net.jpg"],
+      "verification": {
+        "method": "evaluated_animation_geometry_and_visual",
+        "procedure": "从提交场景读取帧范围与 fps/fps_base，分别求值第 1、250 帧。以面板中面而非厚度外壳测平面偏差，以底面及各面法线测折角，以局部坐标测闭合包围尺寸，并测四壁自由边和盖板自由边的相互距离。关闭控制器覆盖观察盒状体与互穿。对比对应面板姿态确认实际时间变化，不能由包围盒相同、动作存在或关键帧数推断闭合。此项负责端点，ANM-02/03只检查中途形变和运动质量。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-02", "capability": "ANM", "points": 15,
+      "requirement_section": "3. 折叠过程与稳定性",
+      "criterion": "运动面板作刚性转动，五条铰接边持续贴合，底面在整个折叠过程中保持位置和朝向。",
+      "scoring_rule": {
+        "PASS": "五块可动面板均实际转动且保持边长变化不超过 1%、平面残差不超过 0.003L；五条铰接边间距不超过 0.01L；底面位移不超过 0.005L、朝向变化不超过 2 度。",
+        "PARTIAL": "未达到 PASS，但至少三块面板实际转动并满足刚性与其铰接边贴合要求；其余面板或底面存在漂移、拉伸、弯曲或连接缺陷。",
+        "FAIL": "不足三块实际运动面板满足刚性及连接要求，包括完全不动、靠整体缩放或大范围拉伸变成盒状的情况。"
+      },
+      "evidence_refs": ["image/03_folding.jpg"],
+      "verification": {
+        "method": "sampled_geometry_and_visual",
+        "procedure": "在第 1、63、125、188、250 帧求值同一组面板，在出现问题的区段加密采样。用每面内部采样点和边界拟合刚体变换，比较边长、平面残差与五条连接边的对应点距离；比较底面中心及法线。确认面板确实相对底面转动才给刚性运动信用。本项检查已连接折线的连续性，不重复计 ANM-01 的最终自由边闭合。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-03", "capability": "ANM", "points": 10,
+      "requirement_section": "3. 折叠过程与稳定性",
+      "criterion": "五处局部折角连续朝闭合推进，第 125 帧均为 20 至 70 度，逐帧角度变化不超过 5 度、回退不超过 2 度，运动中无闪跳或明显互穿。",
+      "scoring_rule": {
+        "PASS": "五处折叠均满足中间角度和逐帧变化限制，过程可见且无闪跳、翻面、面板消失或明显互穿。",
+        "PARTIAL": "未达到 PASS，但至少三处折叠满足中间角度和逐帧限制，且整体存在连续可辨认的折叠过程；缺陷发生在另外的折叠或局部区段。",
+        "FAIL": "不足三处折叠满足中间角度和逐帧限制，或只有端点切换，或过程无法持续辨认。"
+      },
+      "evidence_refs": ["image/03_folding.jpg"],
+      "verification": {
+        "method": "per_frame_geometry_and_visual",
+        "procedure": "求值 1–250 每个整数帧，以实际相邻面板法线和铰轴计算局部有向折角；盒盖折角相对带盖侧壁计算。比较第 125 帧角度、相邻帧差与最大回退。正向和反向抽查视口重放，检查非相邻面板的明显互穿与可见性切换；区分细微厚度接触和面板大面积穿越。允许任何关键帧布局、缓动和旋转模式，不检查原教程四元数原始分量。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-01", "capability": "RIG", "points": 10,
+      "requirement_section": "4. 可编辑折叠控制",
+      "criterion": "四面侧壁均有可辨认、可单独调节并可恢复的实时折叠控制，单壁折到 45 度时底面和其他三壁不被连带折动。",
+      "scoring_rule": {
+        "PASS": "按文件说明暂停和恢复动画可用；四次独立单壁试验均达到 45 度 ± 2 度，底面与其他三壁局部折角变化均不超过 2 度。",
+        "PARTIAL": "未达到 PASS，但四次独立试验中恰有两次或三次满足单壁角度及隔离要求；或者四次均满足但恢复动画说明或功能失效。",
+        "FAIL": "少于两次独立试验满足要求，或没有实际可用的局部控制，只能重跑脚本或改写网格得到不同姿态。"
+      },
+      "evidence_refs": ["image/02_net.jpg", "image/03_folding.jpg"],
+      "verification": {
+        "method": "manual_functional_probe_and_geometry",
+        "procedure": "在临时副本按提交说明暂停动画并恢复平面控制状态。逐壁从独立平面起点将对应控制调整到 45 度，刷新依赖图后测可见面板相对底面的实际角度和其他三壁变化，再恢复动画确认时间轴仍驱动资产。带盖侧壁试验允许盒盖随其运动。记录控制的真实作用而非名称、骨骼数、父子层级或空属性存在；具体盒盖局部控制在 RIG-02 单独验证。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-02", "capability": "RIG", "points": 5,
+      "requirement_section": "4. 可编辑折叠控制",
+      "criterion": "盒盖继承相连侧壁的运动，同时保持可独立调节的局部折角。",
+      "scoring_rule": {
+        "PASS": "带盖侧壁为 45 度时，盒盖局部 0 度与侧壁共面；将盒盖局部改为 45 度 ± 2 度后，侧壁变化不超过 2 度且连接间距不超过 0.01L；两种状态全部满足。",
+        "PARTIAL": "盒盖存在并可实际运动，两种公开控制状态中恰有一种满足该状态的角度及连接要求。",
+        "FAIL": "盒盖缺失、静止或不可独立操作，或两种公开状态均不满足。"
+      },
+      "evidence_refs": ["image/02_net.jpg", "image/03_folding.jpg"],
+      "verification": {
+        "method": "manual_functional_probe_and_geometry",
+        "procedure": "复用临时副本的控制说明，固定带盖侧壁为 45 度，分别将盒盖设为相对侧壁 0 度和 45 度。测实际面板法线、侧壁姿态变化与共同连接边位置，并观察盒盖是否连贯跟随。允许骨骼链、父子对象、约束或其他等价结构，不要求连接骨、固定父级名称或固定控制器数。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 10,
+      "requirement_section": "5. 内外颜色与白色切边",
+      "criterion": "六块面板真实表面采用粉红内侧、蓝色外侧分区，材料随折叠保持附着。",
+      "scoring_rule": {
+        "PASS": "六块面板的两侧分区全部正确，展开、中间和闭合观察均保持粉红内侧及蓝色外侧，材质真实附着。",
+        "PARTIAL": "未达到 PASS，但至少三块实际面板的内外配色及随动分区正确；其余面板存在颜色缺失、对调或分区错误。",
+        "FAIL": "不足三块面板具有正确且随动的内外分区，或颜色只来自视口显示色、覆盖图片而非实际材质。"
+      },
+      "evidence_refs": ["image/01_closed.jpg", "image/03_folding.jpg"],
+      "verification": {
+        "method": "artifact_material_preview_and_visual",
+        "procedure": "关闭选择高亮和控制覆盖，在中性照明下以材质预览或渲染查看展开网正反两侧、第 125 帧和第 250 帧；必要时改变观察方向识别每块面板真实内外表面。核对求值材质分配和运动中附着关系。允许可合理辨认的蓝色及粉红色差异，不以槽名称、槽数量、原始 RGB 或 Solidify 偏移数值判分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 5,
+      "requirement_section": "5. 内外颜色与白色切边",
+      "criterion": "实际暴露的薄纸切边呈白色或近白色窄边带，清楚区别于两侧大面，并随纸盒折叠。",
+      "scoring_rule": {
+        "PASS": "全部暴露切边使用白色或近白色窄边材质，边带与实际厚度一致，折叠后仍附着在切边上。",
+        "PARTIAL": "未达到 PASS，但至少一半可见切边长度具有附着于实际边缘的白色窄边，其余切边配色错误、缺失或出现局部过宽。",
+        "FAIL": "白边覆盖不足可见切边长度的一半，或完全依靠选择线、静态描边、宽装饰条表现而非实际切边材质。"
+      },
+      "evidence_refs": ["image/03_folding.jpg"],
+      "verification": {
+        "method": "artifact_material_preview_and_visual",
+        "procedure": "在展开和中间状态放大观察实际暴露切边，使用至少两个斜视方向排除遮挡，确认白色来自边缘表面材质而非视口覆盖或灯光高光。按可见边缘长度估计正确覆盖比例，并比较窄边宽度与该处实际纸厚。GEO-02 负责厚度是否存在，此项只在真实存在的切边上评估颜色分配。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "6. 交付内容",
+      "criterion": "构建脚本可离线从空场景重建并保存完整资产，重开后保留第 1 帧起始状态、动画及控制的可编辑关系。",
+      "scoring_rule": {
+        "PASS": "离线独立重建与保存成功，重开可在第 1 帧开始重放并操作局部控制；两项均满足且依赖闭合。",
+        "PARTIAL": "两项中恰有一项满足：提交文件重开后保持重放与控制，但脚本重建失败；或脚本可重建完整资产，但交付文件未保留正确起始状态或编辑关系。",
+        "FAIL": "独立重建与交付文件重开后的可重放可编辑保持两项均不满足，或没有可检查的完整资产。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "isolated_rebuild_and_reopen",
+        "procedure": "在 Blender 5.1.2 的隔离临时目录禁用网络，按 build.py 头部说明从空场景构建，检查不读取原 submission.blend 或未交付绝对路径，保存再重开。对原提交与重建文件分别跳转第 1、125、250 帧并做一次侧壁控制冒烟探测，确认数据关系可用。这里只判断可重建与持久性，具体形态、运动和控制精度归其他条目；单纯可打开文件不单独得分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

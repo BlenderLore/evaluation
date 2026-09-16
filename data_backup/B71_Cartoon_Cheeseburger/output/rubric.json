@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Cartoon Cheeseburger",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1YnKDzYEYY",
+    "id": "BV1YnKDzYEYY"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 50, "SURF": 45, "PIPE": 5},
+  "weighting_note": "The task combines ingredient modeling and compact assembly with procedural food surfaces. Geometry receives 50 points, independent surface outcomes receive 45, and reproducible scene delivery receives 5. Procedural shaders belong to SURF; the use of cloth as a source modeling technique does not make the static asset a simulation task.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Bun Shapes",
+      "criterion": "The two buns have distinct rounded dome and shallow-disc profiles with clean geometric finish.",
+      "scoring_rule": {
+        "PASS": "Both buns exist with similar broad circular footprints; the upper bun is clearly taller with a rounded crown and softly flattened underside, and the lower bun is a shallow supporting disc. Both exposed silhouettes and surfaces are smoothly rounded without visible faceting or pinching.",
+        "PARTIAL": "At least one substantial bun has a recognizable rounded bread form, but one or more PASS conditions are unmet. A missing second bun, poor relative profiles, or rough finish limits this row to PARTIAL.",
+        "FAIL": "No substantial bun with a recognizable rounded bread form exists; flat images, negligible fragments, and unshaped block substitutes do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_burger.png", "image/02_bun_profiles.png"],
+      "verification": {
+        "method": "Evaluated geometry and neutral-shaded inspection",
+        "procedure": "Inspect the actual bun geometry in front, side, and three-quarter views under a neutral material. Compare their footprints and profiles, then inspect the exposed rims and crown for faceting and pinching. Judge existing bun surfaces independently of missing fillings.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Cheese Slices",
+      "criterion": "Two thin, solid cheese sheets have broad square forms and softly drooping corners.",
+      "scoring_rule": {
+        "PASS": "Both slices have broad roughly square central regions, rounded corners, visible thin solid edges, and projecting portions that bend downward. Their surfaces remain continuous through soft folds without visible tears, self-intersections, or sharp creases.",
+        "PARTIAL": "At least one substantial broad cheese sheet has a projecting portion that bends downward, but one or more PASS conditions are unmet. Missing thickness, a missing second slice, or poor finish may prevent PASS.",
+        "FAIL": "No substantial sheet has both a broad central region and a downward-bending projecting portion. Flat planes, thick blocks, or isolated hanging fragments alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_burger.png", "image/03_layered_geometry.png"],
+      "verification": {
+        "method": "Evaluated geometry and isolated component inspection",
+        "procedure": "Temporarily isolate each cheese component in a duplicate inspection scene. Inspect top, side, and grazing views to confirm its sheet form, thickness, rounded corners, and continuous bends. Use evaluated surfaces rather than a modifier-name or object-count proxy.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Patty Shape",
+      "criterion": "The patty is a substantial flattened round disc with gentle geometric irregularity.",
+      "scoring_rule": {
+        "PASS": "The patty has a broad round footprint close to the bun width, a thickness much smaller than its width, and visible but gentle lumpy variation in its perimeter and exposed side. It remains coherent and has enough thickness to read as a substantial ingredient.",
+        "PARTIAL": "A substantial flattened round patty exists, but one or more PASS conditions are unmet, including a perfectly regular perimeter, weak irregularity, or poor relative proportions.",
+        "FAIL": "No substantial flattened round patty exists. A material stripe, image, negligible sliver, or unrelated solid shape does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_burger.png", "image/03_layered_geometry.png"],
+      "verification": {
+        "method": "Evaluated geometry and silhouette inspection",
+        "procedure": "Inspect the isolated patty in top and side neutral-shaded views, comparing its width to the buns. Verify that irregularity is present in evaluated geometry and remains visible with material bump disabled. Do not use the presence of a displacement modifier as evidence by itself.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Layered Assembly",
+      "criterion": "The five ingredient layers form a compact, readable stack with staggered cheese corners.",
+      "scoring_rule": {
+        "PASS": "All five layers follow the required bottom-to-top order. The buns and patty are centered around a common axis, adjacent layers have convincing contact, and the cheese corners are staggered. Both cheese layers and the patty are distinguishable in a three-quarter view without floating gaps or deep intersections that erase ingredient boundaries.",
+        "PARTIAL": "At least one bun, one cheese sheet, and the patty form a recognizable assembled burger stack with distinguishable ingredient boundaries, but one or more PASS conditions are unmet.",
+        "FAIL": "The scene lacks an assembled stack containing at least one bun, one cheese sheet, and the patty with distinguishable ingredient boundaries. Disconnected ingredients or a merged unreadable mass do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_burger.png", "image/03_layered_geometry.png"],
+      "verification": {
+        "method": "Multi-view assembly inspection",
+        "procedure": "Inspect the complete evaluated model in front, side, and three-quarter views. Trace the ingredient sequence, contact boundaries, common center, and cheese corner offsets. Use the component geometry rows for local shape defects; assess only arrangement and mutual visibility here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Bun Materials",
+      "criterion": "Both buns use editable procedural baked-color transitions that follow their forms.",
+      "scoring_rule": {
+        "PASS": "Both buns show soft pale-golden to toasted orange-brown transitions without abrupt bands or seams. The upper bun has a pale lower edge and warmer crown; the lower bun has a coherent baked distribution across its rounded form. Procedural material inputs edit the distribution without rebuilding geometry.",
+        "PARTIAL": "At least one substantial bun visibly uses a procedural transition between pale golden and warmer toasted colors, but one or more PASS conditions are unmet.",
+        "FAIL": "No substantial bun visibly uses a procedural baked-color transition. Uniform colors, disconnected unused shader nodes, or a replacement image alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_burger.png"],
+      "verification": {
+        "method": "Assigned-material inspection and reversible material probe",
+        "procedure": "Render the buns under neutral lighting and inspect the materials actually assigned to their surfaces. In a temporary copy, adjust the procedural baked-color distribution and confirm that the surface colors respond while geometry stays unchanged; restore the original values. Judge the visible color distribution separately from microtexture.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Bun Materials",
+      "criterion": "The buns have fine procedural bread grain and soft sheen with editable texture scale and strength.",
+      "scoring_rule": {
+        "PASS": "Both buns have fine, subtle procedural grain visible in highlights while their broad forms read as smooth. Both have a soft sheen. Material controls change the grain scale and strength without rebuilding geometry.",
+        "PARTIAL": "At least one substantial bun visibly carries fine procedural surface texture, but one or more PASS conditions are unmet, such as overly coarse grain, excessive gloss, incomplete coverage, or ineffective controls.",
+        "FAIL": "No substantial bun visibly carries fine procedural surface texture. A smooth shader, coarse geometric lumps alone, render noise, or unused texture nodes do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_burger.png"],
+      "verification": {
+        "method": "Controlled close-up renders and reversible texture probe",
+        "procedure": "Inspect close-up Cycles renders of existing bun surfaces under a broad light. Compare a temporary copy with texture strength reduced to zero and with scale changed, verifying coherent material-driven texture changes and restored original values. Distinguish stable grain from sampling noise and do not infer texture quality from missing surfaces.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Filling Materials",
+      "criterion": "Both cheese slices have consistent opaque warm yellow surfaces with smooth glossy highlights.",
+      "scoring_rule": {
+        "PASS": "Both cheese slices visibly use a consistent warm yellow opaque surface with smooth glossy highlights following their curves. The cheese remains visually distinct from the buns and patty.",
+        "PARTIAL": "At least one substantial cheese sheet visibly uses a warm yellow opaque material, but one or more PASS conditions are unmet, including dull highlights, inconsistent coverage, or a missing second slice.",
+        "FAIL": "No substantial cheese sheet visibly uses a warm yellow opaque material. An unused yellow material or yellow decoration on another ingredient does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_burger.png"],
+      "verification": {
+        "method": "Assigned-material and controlled render inspection",
+        "procedure": "Inspect each existing cheese sheet's actual assigned material and a controlled render with a broad light. Confirm warm yellow color, opacity, consistent coverage, and smooth curved highlights. Assess surface response independently of the sheet geometry row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Filling Materials",
+      "criterion": "The patty has editable procedural reddish-brown variation and stronger fine texture with a rougher surface response than cheese.",
+      "scoring_rule": {
+        "PASS": "The actual patty surface shows irregular dark reddish-brown procedural color variation and fine uneven texture, distinct from its larger geometric lumps. Its texture is stronger and its highlights broader and less polished than the cheese. The color variation and texture scale and strength are editable within the material.",
+        "PARTIAL": "A substantial patty has a dark reddish-brown material with visible procedural color variation or visible procedural fine surface texture, but one or more PASS conditions are unmet.",
+        "FAIL": "No substantial patty has a dark reddish-brown material with either visible procedural color variation or visible procedural fine surface texture. Uniform brown alone, unused nodes, or geometric lumps alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_burger.png"],
+      "verification": {
+        "method": "Controlled material renders and reversible functional probes",
+        "procedure": "Inspect the material assigned to the patty and render it under the same broad light as the cheese. In a temporary copy, vary the color distribution and surface texture scale and strength to confirm effective procedural changes, then restore them. Check that fine texture is material-driven and distinct from the neutral-shaded geometric irregularity.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, reproducible build script, and correctly named scene render form a complete delivery.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens in Blender 5.1.2 with the editable scene and working materials. build.py reproduces the scene from an empty scene without external assets, saves the blend, and renders B71_Cartoon_Cheeseburger.png with Cycles GPU. The delivered PNG matches the actual scene and clearly shows the full burger from a three-quarter view with readable surfaces and no obstructing props or clipped geometry.",
+        "PARTIAL": "An inspectable submission.blend contains editable burger geometry and assigned materials, but one or more PASS conditions are unmet, including missing or ineffective script, render delivery, or presentation.",
+        "FAIL": "No inspectable submission.blend contains editable burger geometry with assigned materials. A render-only or image-only submission does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_burger.png"],
+      "verification": {
+        "method": "Future file inspection, clean build, and render comparison",
+        "procedure": "In the future artifact evaluation environment, open submission.blend in Blender 5.1.2, inspect editability and external dependencies, then run build.py from an empty scene in a temporary directory with a supported Cycles GPU. Confirm that it saves the requested files and compare the delivered PNG with a fresh scene render. Inspect full-object framing and image readability. This procedure is specified only and has not been run during task authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

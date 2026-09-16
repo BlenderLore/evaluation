@@ -1,0 +1,226 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Woven Bread Basket",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1dpXqYTEGt",
+    "id": "BV1dpXqYTEGt"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 60,
+    "SURF": 25,
+    "SCN": 5,
+    "PIPE": 10
+  },
+  "weighting_note": "Geometry receives 60 points because the source outcome depends on vessel form, an open interlaced wall, twisted rim, rounded loaves, and real score recesses. Surface appearance receives 25 points across crust, scored interiors, and basket. Arrangement receives 5 points, and reproducible saved delivery receives 10. Applied or native geometry is acceptable, so modifier presence and mesh density do not receive procedural credit.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Basket Body",
+      "criterion": "The basket is a tapered vessel with an open interior and a supporting base.",
+      "scoring_rule": {
+        "PASS": "The basket has a broad circular opening, gently tapering sides, a narrower rounded base, similar-order height and opening width, and an interior cavity deep enough to contain the loaf bases. A bottom supports the contents.",
+        "PARTIAL": "The following minimum is met, but one or more PASS conditions are not met: There is a three-dimensional basket-sized vessel with a recognizable open mouth and recessed interior, even if taper, base support, proportions, or rounding remain incomplete.",
+        "FAIL": "The following minimum is not met: There is a three-dimensional basket-sized vessel with a recognizable open mouth and recessed interior, even if taper, base support, proportions, or rounding remain incomplete."
+      },
+      "evidence_refs": [
+        "image/02_woven_body_and_rim.png"
+      ],
+      "verification": {
+        "method": "Future artifact inspection and controlled evaluation",
+        "procedure": "In a duplicate of the saved file, hide the loaves and orbit above, beside, and below the basket. Inspect the evaluated surface and a temporary section view to establish the actual cavity and bottom. Compare overall proportions with the empty-basket reference. Do not use object names or polygon count as evidence.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 20,
+      "requirement_section": "2. Weave and Rope Rim",
+      "criterion": "The basket wall is an open three-dimensional diagonal weave.",
+      "scoring_rule": {
+        "PASS": "Two diagonal strand directions form a continuous lattice around the wall. Crossings visibly alternate over and under, diamond-shaped gaps stay open, and the rounded strands keep coherent thickness and continuity without a conspicuous closure seam.",
+        "PARTIAL": "The following minimum is met, but one or more PASS conditions are not met: A substantial wall region contains real strands in both diagonal directions, visible openings, and repeated crossings with observable depth. A printed pattern, a flat texture, or an opaque shell without open lattice geometry does not meet this minimum.",
+        "FAIL": "The following minimum is not met: A substantial wall region contains real strands in both diagonal directions, visible openings, and repeated crossings with observable depth. A printed pattern, a flat texture, or an opaque shell without open lattice geometry does not meet this minimum."
+      },
+      "evidence_refs": [
+        "image/02_woven_body_and_rim.png"
+      ],
+      "verification": {
+        "method": "Future artifact inspection and controlled evaluation",
+        "procedure": "Hide the loaves and rim in a duplicate file, inspect evaluated geometry from outside and inside, and trace several neighboring strand paths through successive crossings. Orbit the full circumference for a closure seam. Use a neutral clay view to distinguish geometry from shader patterning. Assess wall strands only; rim relief is checked separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Weave and Rope Rim",
+      "criterion": "A closed twisted rope rim finishes the basket opening.",
+      "scoring_rule": {
+        "PASS": "A separately editable thick rope loop follows the entire opening, has repeated geometric twist or interlacing with smooth relief, and meets the wall closely without an obvious gap, abrupt join, or dangling ends.",
+        "PARTIAL": "The following minimum is met, but one or more PASS conditions are not met: A distinct three-dimensional rim follows most of the opening and shows repeated geometric twist or interlacing over a visible arc. A plain smooth torus without rope relief does not meet this minimum.",
+        "FAIL": "The following minimum is not met: A distinct three-dimensional rim follows most of the opening and shows repeated geometric twist or interlacing over a visible arc. A plain smooth torus without rope relief does not meet this minimum."
+      },
+      "evidence_refs": [
+        "image/02_woven_body_and_rim.png"
+      ],
+      "verification": {
+        "method": "Future artifact inspection and controlled evaluation",
+        "procedure": "Orbit and inspect the saved rim in clay shading. Temporarily isolate it and inspect its full closed path and repeated relief, then restore the wall and check the fit from above and the side. Confirm that the rim can be edited independently without altering the wall geometry.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Scored Loaves",
+      "criterion": "Three editable loaves have rounded elongated bread forms.",
+      "scoring_rule": {
+        "PASS": "All three separately editable loaves have elongated rounded bodies, full middles, slightly narrowed rounded ends, and smooth continuous surfaces without box corners or collapsed tips.",
+        "PARTIAL": "The following minimum is met, but one or more PASS conditions are not met: At least two identifiable elongated loaf bodies have rounded cross-sections and closed ends. Existing loaf bodies establish this minimum even if a third loaf, independent editing, or finish is incomplete.",
+        "FAIL": "The following minimum is not met: At least two identifiable elongated loaf bodies have rounded cross-sections and closed ends. Existing loaf bodies establish this minimum even if a third loaf, independent editing, or finish is incomplete."
+      },
+      "evidence_refs": [
+        "image/01_bread_basket.png"
+      ],
+      "verification": {
+        "method": "Future artifact inspection and controlled evaluation",
+        "procedure": "Temporarily isolate each loaf in a duplicate file and examine evaluated geometry in front, side, and end views with neutral shading. Test selecting and editing one loaf independently. Evaluate overall body shape here; recessed score geometry is checked in GEO-05.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Scored Loaves",
+      "criterion": "The loaves contain geometric recessed score cuts with intact underlying bodies.",
+      "scoring_rule": {
+        "PASS": "Each of the three loaves contains three broad shallow score cuts, spaced along its outward face and angled slightly across its length. All cuts have rounded recessed interiors and gently raised lips, while the loaf remains intact underneath.",
+        "PARTIAL": "The following minimum is met, but one or more PASS conditions are not met: At least two actual recessed score cuts on an existing loaf have visible depth and intact supporting geometry beneath them. Painted stripes, floating patches, or holes through the loaf do not meet this minimum.",
+        "FAIL": "The following minimum is not met: At least two actual recessed score cuts on an existing loaf have visible depth and intact supporting geometry beneath them. Painted stripes, floating patches, or holes through the loaf do not meet this minimum."
+      },
+      "evidence_refs": [
+        "image/03_recessed_loaf_scores.png"
+      ],
+      "verification": {
+        "method": "Future artifact inspection and controlled evaluation",
+        "procedure": "Move isolated copies of the loaves clear of the basket so lower scores are visible. Inspect with neutral clay shading and close side views; use a temporary geometric section through representative cuts to distinguish recesses from texture and to confirm intact loaf thickness. Count actual scored regions on every loaf.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "4. Materials",
+      "criterion": "The loaf crust combines warm baked color variation with subtle surface grain.",
+      "scoring_rule": {
+        "PASS": "At least one loaf body exists, and all existing loaves show smooth variation between pale golden and richer orange toasted regions, fine low-amplitude irregular texture, and soft nonmetallic opaque crust highlights. The material keeps both color variation and texture editable, and their scale preserves the rounded bread shape.",
+        "PARTIAL": "The following minimum is met, but one or more PASS conditions are not met: At least one existing loaf body has a visibly warm golden-to-orange color variation and an opaque nonmetallic surface. A missing loaf cannot demonstrate a material quality; existing core bread surfaces establish the minimum even if grain, editable control, consistency, or finish is incomplete.",
+        "FAIL": "The following minimum is not met: At least one existing loaf body has a visibly warm golden-to-orange color variation and an opaque nonmetallic surface. A missing loaf cannot demonstrate a material quality; existing core bread surfaces establish the minimum even if grain, editable control, consistency, or finish is incomplete."
+      },
+      "evidence_refs": [
+        "image/01_bread_basket.png"
+      ],
+      "verification": {
+        "method": "Future artifact inspection and controlled evaluation",
+        "procedure": "Render close crops of the existing loaves under neutral broad lighting. Inspect the used material and temporarily vary its toasted color and grain amount to verify both affect those surfaces. Restore the values afterward. Compare color regions and surface relief rather than exact source node types or construction values. Exclude scored-interior color from this row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "4. Materials",
+      "criterion": "Score interiors carry a localized lighter warm surface treatment.",
+      "scoring_rule": {
+        "PASS": "At least two real recessed cuts exist on a loaf. The recessed interiors on all existing scored loaves show lighter warm golden-orange coloration against toasted surroundings, with clean localization and readable contrast under neutral lighting independent of cast shadows.",
+        "PARTIAL": "The following minimum is met, but one or more PASS conditions are not met: At least two real recessed cuts on an existing loaf have a warm surface treatment that visibly differs from surrounding crust under neutral illumination. An unused material, lighting-only contrast, or a colored patch without a geometric recess does not meet this minimum.",
+        "FAIL": "The following minimum is not met: At least two real recessed cuts on an existing loaf have a warm surface treatment that visibly differs from surrounding crust under neutral illumination. An unused material, lighting-only contrast, or a colored patch without a geometric recess does not meet this minimum."
+      },
+      "evidence_refs": [
+        "image/01_bread_basket.png",
+        "image/03_recessed_loaf_scores.png"
+      ],
+      "verification": {
+        "method": "Future artifact inspection and controlled evaluation",
+        "procedure": "Use neutral front lighting on isolated existing scored loaves. Inspect the material assignment or shader mask at cut boundaries, then temporarily change the interior color to confirm it affects the recessed regions. Restore it and judge the warm lighter contrast. Do not rescore cut count or depth here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "4. Materials",
+      "criterion": "The basket and rim have a pale opaque finish that reveals their relief.",
+      "scoring_rule": {
+        "PASS": "Both wall and rim use a coherent pale cream-yellow, opaque, nonmetallic finish with gentle highlights that reveal their geometric relief and clearly contrast with the warmer orange bread.",
+        "PARTIAL": "The following minimum is met, but one or more PASS conditions are not met: A substantial existing basket-wall region has a pale warm, opaque, nonmetallic material. Existing wall surfaces establish the minimum even if a rim, consistent finish, or highlight quality is incomplete.",
+        "FAIL": "The following minimum is not met: A substantial existing basket-wall region has a pale warm, opaque, nonmetallic material. Existing wall surfaces establish the minimum even if a rim, consistent finish, or highlight quality is incomplete."
+      },
+      "evidence_refs": [
+        "image/01_bread_basket.png"
+      ],
+      "verification": {
+        "method": "Future artifact inspection and controlled evaluation",
+        "procedure": "Inspect the actual materials used by the wall and rim, then render a crop under neutral broad lighting. Confirm pale warm color and opacity and examine whether highlights preserve crossing relief. Assess the appearance of existing surfaces; do not grant credit from an absent component.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "5. Arrangement and Presentation",
+      "criterion": "The loaves are coherently held in the basket and presented clearly.",
+      "scoring_rule": {
+        "PASS": "Three loaves have their lower ends contained and supported inside the basket, form a small fan with varied lean and tip heights, and retain identifiable upper silhouettes and visible scored faces. No obvious floating or severe intersections occur. An elevated three-quarter final view shows the complete asset and its characteristic details without clipping.",
+        "PARTIAL": "The following minimum is met, but one or more PASS conditions are not met: At least two loaves are visibly placed inside an existing basket and the final camera shows their upper silhouettes and most of the basket. A disconnected display of loaves beside a basket or a crop hiding the assembly does not meet this minimum.",
+        "FAIL": "The following minimum is not met: At least two loaves are visibly placed inside an existing basket and the final camera shows their upper silhouettes and most of the basket. A disconnected display of loaves beside a basket or a crop hiding the assembly does not meet this minimum."
+      },
+      "evidence_refs": [
+        "image/01_bread_basket.png"
+      ],
+      "verification": {
+        "method": "Future artifact inspection and controlled evaluation",
+        "procedure": "Inspect final camera output, then orbit the saved scene and temporarily section the basket to check lower-end containment, support, and intersections. Compare arrangement with the final reference. Judge placement and visibility here, leaving individual missing-part geometry and material quality to their own rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The scene can be reopened, rebuilt, saved, and rendered from the delivered files.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with required resources; build.py recreates the complete scene in a fresh Blender 5.1.2 session and explicitly saves submission.blend; reopening that saved result retains matching geometry, materials, and composition. The named PNG is a finished render from the submitted scene.",
+        "PARTIAL": "The following minimum is met, but one or more PASS conditions are not met: The delivered submission.blend opens as an editable scene containing the basket and at least one loaf. A source image alone, an unsaved in-memory build, or an unreadable blend does not meet this minimum.",
+        "FAIL": "The following minimum is not met: The delivered submission.blend opens as an editable scene containing the basket and at least one loaf. A source image alone, an unsaved in-memory build, or an unreadable blend does not meet this minimum."
+      },
+      "evidence_refs": [
+        "image/01_bread_basket.png"
+      ],
+      "verification": {
+        "method": "Future artifact inspection and controlled evaluation",
+        "procedure": "In an isolated directory, open the supplied submission.blend and check resource resolution. Run build.py from a clean Blender 5.1.2 session with a safe output location, confirm the saved submission.blend exists, and reopen that saved file in a separate Blender process. Compare evaluated geometry, material assignments, and camera composition with the delivered scene. Render from the reopened file and compare with B87_Woven_Bread_Basket.png to establish scene provenance. This future procedure is not executed during task authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

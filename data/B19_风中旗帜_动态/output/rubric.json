@@ -1,0 +1,121 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "风中旗帜",
+  "source_video": {"url": "https://www.youtube.com/watch?v=fX_87v7SA9k", "id": "fX_87v7SA9k"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 25, "SURF": 15, "SIM": 45, "RIG": 10, "PIPE": 5},
+  "weighting_note": "暂定分配，尚未经提交样本校准。SIM 45 分分别检查物理因果、时间形变、固定边界和求解稳定性；GEO 25 分覆盖比例与空间表面质量；SURF 15 分评价真实贴图映射；RIG 10 分专门验证改变旗杆位置后的连接关系；PIPE 5 分验证跨目录回放与重建。采用五个维度是因为源任务同时具有真实动力学和可编辑挂点跟随，并非为凑维度增加内容。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 15,
+      "requirement_section": "1. 旗面与旗杆",
+      "criterion": "平展旗面为连续薄矩形，具有公开的长宽比；细圆杆的长度、直径和上端位置符合公开范围。",
+      "scoring_rule": {
+        "PASS": "旗面与旗杆均存在，旗面薄而连续，长宽比、杆高、杆径、杆顶与上挂点高度差全部符合公开范围。",
+        "PARTIAL": "两者均存在且可辨认，旗面仍为连续薄矩形、杆为细长直杆，但上述四项尺寸或位置条件中至少一项不符合。",
+        "FAIL": "缺少旗面或旗杆，或旗面不是连续薄矩形，或杆不是细长直杆，不能形成旗帜与旗杆的基本结构。"
+      },
+      "evidence_refs": ["image/02_rest.png"],
+      "verification": {"method": "evaluated_geometry_and_visual", "procedure": "在副本中清除缓存并回到第1帧，读取旗面与旗杆的实际世界几何尺寸；按旗面H计算W/H、杆高/H、杆径/H和杆顶高度差/H。使用正面及侧面检查薄片、连续性和圆杆形态；不以对象名称或网格计数作为结论。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 旗面与旗杆",
+      "criterion": "静态空间表面和轮廓具有足够细节，旗面曲折平滑，杆身为平滑圆杆。",
+      "scoring_rule": {
+        "PASS": "旗面与旗杆均存在；在静止和正常变形视图中，旗面轮廓及褶皱无明显粗大折面、锯齿或静态网格断口，圆杆无明显棱柱外观。",
+        "PARTIAL": "两者均存在且形体完整，但其中一者可见局部粗糙折面、锯齿或法线断带，仍可辨为柔软布面和圆杆。",
+        "FAIL": "缺少任一主体，或旗面大范围呈粗网格折板、存在静态断口，或杆身明显为非圆形棱柱。"
+      },
+      "evidence_refs": ["image/01_flying.png", "image/03_wave.png"],
+      "verification": {"method": "visual_and_mesh_inspection", "procedure": "以能看清整面旗帜的正面、三分之四视图及局部放大检查第1、120、180、240帧的曲面和轮廓；可临时使用中性材质确认粗糙是否源于几何。仅评价离散化与表面质量；随时间出现的求解爆炸、穿透由SIM-04处理。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 15,
+      "requirement_section": "2. 随布面变形的图案",
+      "criterion": "提供的彩色旗面贴图覆盖一次且方向正确，并稳定附着于变形布面。",
+      "scoring_rule": {
+        "PASS": "实际布面使用提供的图案，黑色三角靠杆、红上蓝下、分叉带可辨，覆盖完整且不平铺；顺序播放时图案始终附着于布面。",
+        "PARTIAL": "旗面上实际可见提供的图案，但存在方向错误、裁切、重复、局部接缝或随形变滑动中的至少一种问题，图案仍大体可辨。",
+        "FAIL": "没有旗面，或图案未实际显示在布面上，或使用了无关图案、纯色、缺失贴图，或破坏严重到无法辨认提供的图案。"
+      },
+      "evidence_refs": ["image/01_flying.png", "image/02_rest.png", "image/03_wave.png"],
+      "verification": {"method": "material_mapping_and_visual", "procedure": "检查参与表面输出的真实材质及图像数据，确认提供的图案确实驱动布面颜色；在第1、120、180、240帧比较同一布面区域的颜色边界与褶皱，确认图案覆盖次数、方向和附着关系。截图或闲置图片节点不能单独证明完成。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SIM-01", "capability": "SIM", "points": 15,
+      "requirement_section": "3. 可重算的风吹布料",
+      "criterion": "旗面由真实布料动力学求解，风力参数能改变重算后的受力结果。",
+      "scoring_rule": {
+        "PASS": "存在能从初始态重算的布料动力学，风力设置真实参与求解；无风重算至第120帧后，自由半幅平均高度降低至少0.1H或+X展开长度减少至少0.15W。",
+        "PARTIAL": "可确认存在布料动力学且能重算，但风力对照未达到公开差异，或风力控制虽影响结果但没有提供可辨认的设置。",
+        "FAIL": "缺少旗面或真实可重算布料动力学，只有静态形状、刚体摆动、预制形变或不可重新求解的缓存；仅有未参与结果的模拟或风力字段同样不满足。"
+      },
+      "evidence_refs": ["image/01_flying.png", "image/03_wave.png"],
+      "verification": {"method": "physical_causality_probe", "procedure": "读取实际求解路径并分别制作默认有风、关闭风力两个独立副本，清除缓存后逐帧求解1至120。以初始旗面远离杆的半幅为同一材料区域，比较其平均高度和整面旗帜沿+X的展开长度。保留可比相机图像及测量；不得只查Cloth或Wind是否存在。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SIM-02", "capability": "SIM", "points": 10,
+      "requirement_section": "3. 可重算的风吹布料",
+      "criterion": "公开时间范围内由平展初态进入持续的非刚性飘动，并达到向外展开的表现。",
+      "scoring_rule": {
+        "PASS": "范围为1至250帧、24fps，第1帧平展；120、180、240中至少两帧的+X展开长度达到0.6W，且三帧中至少两帧的褶皱或自由端卷曲明显不同，60帧后持续有非刚性运动。",
+        "PARTIAL": "旗面在60帧后存在非刚性运动，但起始态、帧范围、fps或两个观察帧的展开条件至少一项不符合；也包括持续运动但三个观察帧形状过于相近。",
+        "FAIL": "没有旗面，或60帧后保持静止、仅整面刚体摆动，或可播放区间不足以观察60帧后的非刚性运动。"
+      },
+      "evidence_refs": ["image/01_flying.png", "image/02_rest.png", "image/03_wave.png"],
+      "verification": {"method": "sequential_motion_review", "procedure": "顺序求解1至250并按24fps查看动画；记录第1、120、180、240帧实际几何。测量+X展开长度，比较褶皱与自由端相对挂点的变化，排除相机运动或整体刚体旋转造成的假变化。此行只计时间表现，物理来源由SIM-01判定。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SIM-03", "capability": "SIM", "points": 10,
+      "requirement_section": "4. 稳定挂点与连续布面",
+      "criterion": "两个局部挂点稳定连接旗杆，中间布边和自由端保留活动范围。",
+      "scoring_rule": {
+        "PASS": "上下两处挂点均连接旗杆，各固定区域沿高度不超过0.05H，默认播放时漂移均不超过0.02H；中间布边与自由端不被刚性固定。",
+        "PARTIAL": "两个挂点均存在且仍将旗面挂在杆上，但存在超出0.02H的轻微漂移、固定区域过宽、整条靠杆边固定或自由端多余固定中的至少一种问题。",
+        "FAIL": "缺少旗面、旗杆或任一上下挂点，或播放时至少一挂点脱离导致旗面不再由杆上两处位置悬挂。"
+      },
+      "evidence_refs": ["image/01_flying.png", "image/02_rest.png"],
+      "verification": {"method": "constraint_support_and_trajectory", "procedure": "识别实际参与求解的固定区域，而非依赖组名；计算其沿H的范围并逐帧记录挂点相对杆连接位置的轨迹，检查两处之间与自由端是否受到刚性固定。结合实际变形确认绑定范围。默认杆不动时检查本项，移动杆的传播关系留给RIG-01。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SIM-04", "capability": "SIM", "points": 10,
+      "requirement_section": "4. 稳定挂点与连续布面",
+      "criterion": "整个动态区间中布面保持完整，求解不会产生爆炸、撕裂或持续严重自穿透。",
+      "scoring_rule": {
+        "PASS": "旗面存在且在运动中保持完整；全区间没有炸开、尖刺、撕裂或长期互穿打结。允许自然翻卷、局部贴合及靠杆处极小接触穿插。",
+        "PARTIAL": "旗面运动且主体完整，但存在局部短暂尖刺、抖动或自穿透，随后能恢复，未演变为持续重叠或解体。",
+        "FAIL": "缺少旗面或可观察的动态结果，或出现持续的爆炸、明显撕裂、严重互穿打结，使布旗失去完整形态。"
+      },
+      "evidence_refs": ["image/01_flying.png", "image/03_wave.png"],
+      "verification": {"method": "temporal_geometry_and_visual", "procedure": "逐帧检查1至250的连通性、异常伸长及非邻近面接触，结合正面和侧面动画判断是否真正互穿，避免把投影遮挡当作碰撞错误；可疑时检查相邻帧是否恢复。此行只评价随求解出现的动态缺陷，不重复扣静态几何粗糙或挂点漂移。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "RIG-01", "capability": "RIG", "points": 10,
+      "requirement_section": "5. 旗杆带动连接位置",
+      "criterion": "改变旗杆位置会更新两处挂点的位置，重新模拟后布旗仍可自由弯曲。",
+      "scoring_rule": {
+        "PASS": "两项独立平移测试中，两挂点均同量跟随旗杆且误差不超过0.02H；不手动改旗面或重跑构建脚本，清缓存重算后仍从新挂点产生非刚性风吹运动。",
+        "PARTIAL": "至少一项平移测试中两个挂点能随杆更新并保留布面变形，但另一方向失败、误差超限或重算后连接出现偏移。",
+        "FAIL": "没有可编辑旗杆连接，或两项测试均不能使两挂点随杆更新，或必须手动移动旗面/重跑构建脚本，或跟随后旗面只能整面刚性运动。"
+      },
+      "evidence_refs": ["image/02_rest.png"],
+      "verification": {"method": "carrier_translation_probe", "procedure": "从两个原始副本第1帧分别仅移动旗杆+X 0.5W与+Z 0.25H，评估实际挂点位移与误差；清除缓存并顺序求解至120帧，检查两个挂点仍位于杆上新位置且非固定区域可弯曲。接受对象、约束、Hook等任何满足行为的实现，不查特定修改器顺序。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "6. 交付与回放",
+      "criterion": "构建、资源路径和模拟复算构成可携带的交付流程。",
+      "scoring_rule": {
+        "PASS": "submission.blend和build.py齐全；复制到新目录后脚本能生成资产，贴图与依赖正常；文件保存于第1帧，内置说明能指明风力、旗杆、清缓存和顺序重算流程，清缓存后能回放同类型运动。",
+        "PARTIAL": "提交文件能在新目录显示并回放旗帜，但脚本构建、相对依赖、起始帧或内置重算说明至少一项不完整，需要有限人工修正。",
+        "FAIL": "缺少可使用的交付文件，或依赖作者机器路径/不可恢复缓存，或无法从提供内容获得可回放的旗帜资产。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "portable_rebuild_and_replay", "procedure": "将交付内容复制到独立目录，在Blender5.1.2中按脚本说明重建；检查实际资源加载、保存帧和内置说明，再按照说明清缓存并逐帧重算。以能完整复现流程为依据，而非仅以文件可打开计分；物理因果及运动质量在对应SIM行判断。", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

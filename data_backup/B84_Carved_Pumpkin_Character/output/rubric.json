@@ -1,0 +1,148 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Carved Pumpkin Character",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=s3S7GR8Al60",
+    "id": "s3S7GR8Al60"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 70, "PROC": 10, "SURF": 10, "SCN": 5, "PIPE": 5},
+  "weighting_note": "Geometry receives 70 points because the source is primarily a low-poly modeling task with independent shell, carving, stem, body, and face-variation outcomes. Live bilateral geometry contributes 10 points, material assignment 10, presentation 5, and reproducible saved delivery 5. Construction history and incidental object inventories are not scored.",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "Pumpkin Shape",
+      "criterion": "Both pumpkin shells have the broad flattened silhouette, dimples, sixteen alternating lobes and grooves, and deliberate intact facets.",
+      "scoring_rule": {
+        "PASS": "Both heads have shell height about three quarters of width, shallow top and bottom dimples, sixteen raised lobes alternating with sixteen full-height grooves with slight depth variation, and intentional facets with consistent face orientation and intact surfaces.",
+        "PARTIAL": "At least the main head is a recognizable broad, faceted pumpkin with multiple longitudinal lobes and grooves; not all PASS conditions are met. This includes a missing spare head, incorrect lobe count, weak dimples, uniform grooves, or local surface defects.",
+        "FAIL": "There is no recognizable broad main pumpkin with multiple longitudinal lobes and grooves; an ungrooved sphere or flat silhouette does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_carved_head.png"],
+      "verification": {"method": "Evaluated geometry and controlled views", "procedure": "Open the submission, isolate each existing shell, measure its evaluated width and height excluding the stem, and inspect front, top, bottom, and side views. Count lobe/groove pairs around the uncarved rear and top, inspect dimples and depth variation, and use neutral solid shading to inspect the shell facets and normals. Carving shape and rims are assessed in their separate rows.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 15,
+      "requirement_section": "Hollow Shell and Carved Face",
+      "criterion": "The head carvings open into real cavities through thin walls, with intact rear shells and continuous solid rims.",
+      "scoring_rule": {
+        "PASS": "Both heads contain real hollow cavities and continuous walls roughly 3-5% of head width; both eyes and the mouth pass through each front wall. The opening rims and bridges are intact, the rear shells are closed, and no unintended holes, doubled walls, or visible cutters interrupt the cavities.",
+        "PARTIAL": "The main head has a genuine cavity, a wall with measurable thickness, and at least one facial opening that reaches the cavity; not all PASS conditions are met. A missing spare, some blocked openings, inconsistent thickness, or local rim defects fall here.",
+        "FAIL": "The main head lacks a genuine hollow cavity, lacks wall thickness, or has no facial opening through the wall. Painted dark patches and shallow recesses alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_carved_head.png", "image/03_body_detail.png"],
+      "verification": {"method": "Mesh cross-sections and cavity inspection", "procedure": "Inspect evaluated meshes with temporary clipping planes or a duplicate sectioned view. Trace each opening through the front wall, measure representative wall spans relative to shell width, inspect the interior and intact rear, and orbit the rims. Restore the scene after inspection. Assess physical cavity and rim integrity here; eye and mouth silhouettes are assessed separately.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "Hollow Shell and Carved Face",
+      "criterion": "The main head has a balanced pair of pointed slanted eye openings with intentional asymmetry.",
+      "scoring_rule": {
+        "PASS": "Both main-head eyes are pointed slanted openings with outer ends higher than inner ends, a visible difference in width or shape, and a balanced placement above the grin.",
+        "PARTIAL": "At least one main-head eye is a recognizable angular eye opening above the mouth area; not all PASS conditions are met. One absent eye, weak slant, identical shapes, or an unbalanced pair falls here.",
+        "FAIL": "The main head has no recognizable angular eye opening above the mouth area. Surface color marks alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_carved_head.png"],
+      "verification": {"method": "Front-view silhouette inspection", "procedure": "Render or inspect the main head in a front orthographic view with simple lighting. Trace both eye boundaries, compare outer and inner endpoint heights, pointedness, relative shape, and placement. Use the saved mesh to confirm the inspected contours belong to actual openings. Do not reassess wall thickness in this row.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 10,
+      "requirement_section": "Hollow Shell and Carved Face",
+      "criterion": "The main head has a broad upswept grin with a readable jagged tooth pattern.",
+      "scoring_rule": {
+        "PASS": "The main mouth opening spans most of the front, has both corners swept upward, and presents approximately three prominent downward teeth and two upward points, allowing one more or fewer prominent point on each edge. Small secondary notches do not replace or obscure those prominent features.",
+        "PARTIAL": "The main head has a recognizable mouth opening with a jagged edge and at least one prominent tooth or point; not all PASS conditions are met. Wrong tooth layout, weak corner sweep, or insufficient width falls here.",
+        "FAIL": "There is no recognizable jagged mouth opening with at least one prominent tooth or point. A painted mouth or a smooth slot alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_carved_head.png"],
+      "verification": {"method": "Mouth silhouette inspection", "procedure": "Inspect a front orthographic view of the main head and a close view of the mouth boundary. Compare mouth span with head width, count prominent downward teeth and upward points, and check the corner sweep against the reference. Use mesh contours where lighting obscures a point; physical rim defects are assessed by GEO-02.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-05", "capability": "GEO", "points": 10,
+      "requirement_section": "Leaning Stem",
+      "criterion": "Both heads have compact leaning stems with three tapering sections, closed tips, and clean shell attachment.",
+      "scoring_rule": {
+        "PASS": "Both stems rise cleanly from small flattened top areas, show three tapering sections and a gentle sideways lean, end in small closed tips with softened facets, and are approximately one third of their shell's height.",
+        "PARTIAL": "At least the main head has an attached stem that is visibly narrower than the head and has a taper or a sideways lean; not all PASS conditions are met. A missing spare stem, weak section definition, unsuitable length, open tip, or local attachment defect falls here.",
+        "FAIL": "The main head has no attached stem with at least a taper or sideways lean. A detached block or straight untapered cylinder alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_stem_detail.png", "image/01_carved_head.png"],
+      "verification": {"method": "Stem geometry inspection", "procedure": "Inspect evaluated stems from front and side views. Compare section widths, centers, total height, tip closure, and shell attachment. Confirm section changes are geometric rather than painted bands; color is assessed by SURF-01.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-06", "capability": "GEO", "points": 10,
+      "requirement_section": "Body and Live Symmetry",
+      "criterion": "The character has a complete compact angular body with torso, separated tapered legs, forward shoes, short arms, segmented gloves, and a continuous narrow belt region.",
+      "scoring_rule": {
+        "PASS": "The body has a slightly tapered blocky torso, two separated legs with slanted upper sections and narrower ankles, forward-projecting shoes, short outstretched arms, small segmented gloves, and a narrow continuous waist belt region. Proportions match the compact angular character in the reference, with clean limb connections and intact facets.",
+        "PARTIAL": "A usable blocky torso and at least two attached recognizable limbs exist; not all PASS conditions are met. Missing accessories or limbs, weak taper, poor proportions, or local connection defects fall here.",
+        "FAIL": "A usable torso with at least two attached recognizable limbs is absent. Disconnected limb samples or a bare torso do not meet the minimum."
+      },
+      "evidence_refs": ["image/03_body_detail.png"],
+      "verification": {"method": "Body geometry and silhouette inspection", "procedure": "Inspect isolated evaluated body geometry from front, side, and three-quarter views. Identify torso, limb separation and taper, forward shoe projections, glove segments, and waist belt region. Inspect limb attachments and facet orientation. Assess the geometry here; reflected edit response and colors have separate rows.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-07", "capability": "GEO", "points": 5,
+      "requirement_section": "Spare Head",
+      "criterion": "A matching spare carved head has a localized single-eye variation while retaining the same overall character.",
+      "scoring_rule": {
+        "PASS": "A spare carved head matches the main head's size and overall lobe, stem, and facial design; one eye is noticeably narrower or skewed, the other eye remains recognizably related to its counterpart, and the modified rim and cavity remain intact.",
+        "PARTIAL": "A second recognizable carved pumpkin head with at least one real eye opening exists; not all PASS conditions are met. An unvaried duplicate, overly different design, multiple changed eyes, or a damaged varied rim falls here.",
+        "FAIL": "No second recognizable carved pumpkin head with a real eye opening exists. A simple uncarved pumpkin or image substitute does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_carved_head.png"],
+      "verification": {"method": "Aligned head comparison", "procedure": "Temporarily compare both heads from equivalent front views at equal display scale. Inspect overall correspondence and the change localized to one eye, then orbit that rim to check that the variation remains a valid carve. This row assesses the relationship between the two designs, not their scene positions.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PROC-01", "capability": "PROC", "points": 10,
+      "requirement_section": "Body and Live Symmetry",
+      "criterion": "The body preserves live bilateral geometry generation with a joined center seam and accessible source edits.",
+      "scoring_rule": {
+        "PASS": "The saved body is bilaterally symmetric; an accessible source-side edit to either an arm or a leg updates the reflected counterpart across the center plane, while the center seam remains joined without a gap or doubled surface. The relationship is live in the saved scene.",
+        "PARTIAL": "An accessible live source-side edit updates at least one reflected limb region; not all PASS conditions are met. Incomplete limb coverage, an incorrect reflection plane, an imperfect seam, or an asymmetric evaluated result falls here.",
+        "FAIL": "No accessible live source-side edit updates a reflected limb region. Static symmetry, two independent duplicates, or an unapplied but ineffective modifier does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_body_detail.png"],
+      "verification": {"method": "Non-destructive procedural edit probe", "procedure": "On a temporary copy of the saved scene, locate the documented source half or equivalent control. Move a small source arm region, evaluate the result, and compare the opposite side under reflection through the body center plane. Undo, repeat on a leg, and inspect center-seam connectivity and absence of doubled evaluated surfaces. Restore the untouched submission after testing; a modifier's existence alone is insufficient.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 10,
+      "requirement_section": "Materials",
+      "criterion": "Actual scene surfaces use clean orange, muted green, and near-black color regions with readable faceted shading.",
+      "scoring_rule": {
+        "PASS": "Both shell exteriors are warm orange; both stems and the body are muted leaf green; all interiors, gloves, shoes, and waist belt are near-black. Existing boundaries are clean, each region is consistent, and reflection or emission does not obscure the intended flat colors or faceted shading.",
+        "PARTIAL": "The main shell is visibly orange, at least one existing core region among the body or main stem is green, and at least one existing cavity or accessory region is near-black; not all PASS conditions are met. Missing components cannot demonstrate their surface requirements but do not erase the demonstrated colors on existing core surfaces.",
+        "FAIL": "The existing scene does not demonstrate all three minimum color uses: orange on the main shell, green on a body or main stem, and near-black on an actual cavity or accessory region. Unused materials or color patches placed outside the asset do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_carved_head.png", "image/02_stem_detail.png", "image/03_body_detail.png"],
+      "verification": {"method": "Material-use inspection and controlled render", "procedure": "Inspect material assignments on the submitted meshes, then render front and three-quarter views under neutral diffuse lighting. Check each required region, color consistency, boundaries, and cavity darkness. Accept equivalent solid materials or palette sampling; do not require a texture or exact material count. Geometry defects are assessed separately.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-01", "capability": "SCN", "points": 5,
+      "requirement_section": "Scene Presentation",
+      "criterion": "The two-head composition clearly presents the complete character and spare head with the intended spatial relationship.",
+      "scoring_rule": {
+        "PASS": "The main head is centered immediately above the shoulders with a small visible gap and no neck, has the requested oversized proportions, and the spare is to the left and lower with separate silhouettes. The final view shows both complete assets, faces, stems, shoes, gloves, and belt clearly against a quiet background, with lighting that reveals grooves and wall thickness while leaving cavities dark.",
+        "PARTIAL": "The final camera clearly shows a main carved head above a recognizable body; not all PASS conditions are met. A missing or poorly placed spare, cropped accessory, poor head-body spacing, distracting background, or lighting that hides some details falls here.",
+        "FAIL": "The final camera does not clearly show a main carved head above a recognizable body. An isolated head, an obscured character, or unrelated imagery does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_carved_head.png", "image/03_body_detail.png"],
+      "verification": {"method": "Scene spatial inspection and final camera render", "procedure": "Inspect world-space positions, shell-to-shoulder separation, head-to-body proportions, and visible silhouette separation. Render the saved final camera and inspect framing and lighting. Geometry and surface completeness earn their own points in the relevant rows.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, scene-rendered PNG, and script that reconstructs and saves the scene form a reproducible submission.",
+      "scoring_rule": {
+        "PASS": "All three named deliverables are present and usable. Running build.py from an empty Blender 5.1.2 scene recreates the intended scene and saves submission.blend; reopening that saved file preserves the modeled content, actual material use, live symmetry, and final camera. The delivered PNG is rendered from the submitted scene, and the script identifies the editable symmetry source or control.",
+        "PARTIAL": "submission.blend opens and contains an editable scene with a recognizable modeled pumpkin head; not all PASS conditions are met, including a missing or failing script, unsaved rebuild, absent PNG, or incomplete reconstruction.",
+        "FAIL": "submission.blend is absent, cannot be opened, or contains no editable modeled pumpkin head. An image-only or unsaved in-memory result does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {"method": "Clean rebuild, saved-file reopen, and render provenance check", "procedure": "In an isolated temporary directory, inspect the three deliverables, launch Blender 5.1.2 with an empty scene, and execute build.py. Require a newly saved submission.blend. Close that process, reopen the saved file in another Blender process, and inspect its evaluated scene, material assignments, live symmetry behavior, and final camera. Compare a fresh render from the original submitted file with the delivered PNG for scene correspondence. Record execution environment limits instead of claiming a test ran when it did not.", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

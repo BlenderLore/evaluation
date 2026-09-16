@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Hollow Conical Flask",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1EA5T6sEs1",
+    "id": "BV1EA5T6sEs1"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "This is a geometry modeling task. The 90 geometry points distinguish the body profile, neck, circular alignment, shoulder transition, accessible cavity, physical shell, rolled lip, supporting base, and surface finish. Their separate inspections avoid substituting modifier presence for results. The title-card glass and liquid are outside the demonstrated modeling scope. Ten pipeline points cover recreation of a saved scene and the actual scene render.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. Flask Proportions",
+      "criterion": "The main body has the tall, bottom-wide conical flask silhouette.",
+      "scoring_rule": {
+        "PASS": "A surfaced main body with a broad lower region and narrower upper region exists. The overall flask is visibly taller than its maximum width, its widest region is near the bottom, and most of the body narrows steadily toward the neck with long sloping sides rather than a spherical belly.",
+        "PARTIAL": "A surfaced main body with a broad lower region and narrower upper region exists, but one or more PASS conditions are unmet, such as a squat overall proportion, excessive bulging, or an insufficiently sustained taper.",
+        "FAIL": "No surfaced main body with a broad lower region and narrower upper region exists; an isolated neck, flat outline, unshaped cylinder, or unrelated object does not meet this minimum."
+      },
+      "evidence_refs": ["image/01_finished_flask.png", "image/02_body_profile.png"],
+      "verification": {
+        "method": "Evaluated silhouette inspection",
+        "procedure": "Open submission.blend and inspect the evaluated flask in front and side orthographic views. Compare its height and maximum width and trace the main body's outline from the broad lower region to the neck. Use the reference images for relative proportions, without imposing source world-unit dimensions.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Flask Proportions",
+      "criterion": "A distinct narrow, straight neck extends above the tapered body.",
+      "scoring_rule": {
+        "PASS": "A three-dimensional neck extending upward from an existing body is present. It has a distinct straight cylindrical length, its diameter is substantially smaller than the body's maximum diameter, and its length is clearly shorter than the tapered body.",
+        "PARTIAL": "A three-dimensional neck extending upward from an existing body is present, but at least one PASS condition is unmet, including a strongly tapered neck, excessively wide tube, or disproportionate neck length.",
+        "FAIL": "There is no three-dimensional neck extending upward from an existing body. A detached tube or a lip directly on the body without a distinct neck does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_flask.png", "image/02_body_profile.png"],
+      "verification": {
+        "method": "Evaluated profile and cross-section inspection",
+        "procedure": "Inspect the neck in orthographic views and compare several horizontal sections along its length. Check that it forms a straight cylindrical region and compare its width and length with those of the existing body. Judge shoulder blending separately in GEO-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Circular Form and Shoulder",
+      "criterion": "The body and neck have circular cross-sections about one vertical axis.",
+      "scoring_rule": {
+        "PASS": "Existing body and neck surfaces each form closed horizontal outer cross-sections. These sections are circular and centered on the same vertical axis, and horizontal viewing direction does not reveal a flattened side, lean, or offset neck.",
+        "PARTIAL": "Existing body and neck surfaces each form closed horizontal outer cross-sections, but one or more PASS conditions are unmet, such as an elliptical section, asymmetric bulge, tilted body, or shifted neck center.",
+        "FAIL": "The body and neck do not both have surfaced regions with closed horizontal outer cross-sections; absent parts, flat silhouettes, and disconnected strips do not establish the minimum."
+      },
+      "evidence_refs": ["image/01_finished_flask.png", "image/03_open_mouth.png"],
+      "verification": {
+        "method": "Horizontal section and multi-view geometry inspection",
+        "procedure": "On a temporary evaluated copy, inspect horizontal outer sections near the lower body, mid-body, and neck. Compare section centers and radial shape, then orbit around the vertical axis. This check concerns overall circularity and alignment; small radial faceting is assessed in GEO-09.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Circular Form and Shoulder",
+      "criterion": "A continuous rounded shoulder joins the conical body to the straight neck.",
+      "scoring_rule": {
+        "PASS": "A continuous surfaced shoulder connects an existing body to an existing neck. It blends gently between them while retaining the long sloping body and straight neck, without a pinched waist, bulging collar, or sharp stepped transition.",
+        "PARTIAL": "A continuous surfaced shoulder connects an existing body to an existing neck, but one or more PASS conditions are unmet, including an abrupt corner, local pinch, oversoftened blend, or swollen junction.",
+        "FAIL": "No continuous surfaced shoulder connects an existing body to an existing neck. A visible gap, detached parts, or a missing body or neck fails the minimum."
+      },
+      "evidence_refs": ["image/01_finished_flask.png"],
+      "verification": {
+        "method": "Local silhouette inspection",
+        "procedure": "Inspect the evaluated shoulder at close range in front and side views, using a temporary section if its connection is ambiguous. Follow the outline from the body's slope into the neck and distinguish the actual geometric blend from shading alone.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "3. Hollow Vessel",
+      "criterion": "The open mouth provides access through the hollow neck into a full-depth body cavity.",
+      "scoring_rule": {
+        "PASS": "An actual open mouth connects through the hollow neck to an interior space within the body. That cavity widens with the tapered body, reaches the lower body, and occupies most of the body's volume, with no cap across the mouth or neck and no obstructing intermediate diaphragm.",
+        "PARTIAL": "An actual open mouth connects through the hollow neck to an interior space within the body, but at least one PASS condition is unmet, such as a cavity confined to the upper body, excessive constriction, or an intermediate obstruction below the neck.",
+        "FAIL": "There is no actual open path from the mouth through a hollow neck into interior body space. A solid flask, sealed mouth, solid neck, or shallow decorative top recess fails the minimum."
+      },
+      "evidence_refs": ["image/03_open_mouth.png", "image/01_finished_flask.png"],
+      "verification": {
+        "method": "Evaluated cavity section and access inspection",
+        "procedure": "Inspect the mouth from above, then create a temporary longitudinal section of the evaluated vessel in a duplicate scene. Trace connected empty space from the opening through the neck and into the lower body; compare cavity width with outer body width at several heights. Do not infer a cavity from a dark mouth material. Floor and wall integrity are assessed in GEO-06.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Hollow Vessel",
+      "criterion": "Physical inner and outer walls and a thick closed floor form a coherent vessel shell.",
+      "scoring_rule": {
+        "PASS": "Distinct inner and outer body wall surfaces and a floor with distinct upper and lower surfaces exist. They form a coherent shell with positive, visually thin wall thickness around the vessel and positive floor thickness, with connected transitions and no leaks, crossing walls, detached liners, or zero-thickness regions.",
+        "PARTIAL": "Distinct inner and outer body wall surfaces and a floor with distinct upper and lower surfaces exist, but one or more PASS conditions are unmet, such as locally uneven thickness, gaps, crossing surfaces, detached transitions, or an excessively thick shell.",
+        "FAIL": "The minimum of distinct inner and outer body wall surfaces plus a floor with distinct upper and lower surfaces is absent. A zero-thickness sheet, open-bottom tube, or solid body without inner walls fails this check."
+      },
+      "evidence_refs": ["image/03_open_mouth.png", "image/02_body_profile.png"],
+      "verification": {
+        "method": "Shell geometry, connectivity, and thickness inspection",
+        "procedure": "Inspect a temporary evaluated longitudinal section through the neck, shoulder, body, and floor. Confirm distinct inner and outer surfaces and positive separation, then examine shell connectivity and unintended boundary edges or self-intersections. A hollow vessel may be a closed manifold surface even though its cavity opens at the mouth; do not mistake the absence of boundary edges for a sealed mouth. Judge cavity access in GEO-05.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "4. Rolled Mouth",
+      "criterion": "The neck terminates in a connected, modestly outward-projecting rounded lip.",
+      "scoring_rule": {
+        "PASS": "A raised outward-projecting lip is attached to the existing neck. It continues around the full circular mouth, has visible thickness and rounded edges, projects modestly relative to the neck diameter, and joins the neck without gaps or a detached ring.",
+        "PARTIAL": "A raised outward-projecting lip is attached to the existing neck, but one or more PASS conditions are unmet, such as an incomplete circumference, sharp rectangular section, excessive projection, or uneven shape.",
+        "FAIL": "No raised outward-projecting lip is attached to an existing neck. A plain thin tube edge, a painted highlight, or a detached ring does not meet the minimum."
+      },
+      "evidence_refs": ["image/04_rolled_lip.png", "image/03_open_mouth.png"],
+      "verification": {
+        "method": "Rim close-up and section inspection",
+        "procedure": "Inspect the evaluated mouth from above and from a low side angle, then inspect a temporary radial section. Follow the lip around the circumference, compare its projection with the neck diameter, and confirm its rounded physical section and connection. Opening access is scored in GEO-05, not again here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-08",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "5. Base and Surface Finish",
+      "criterion": "The underside provides a stable flat footprint with a rounded lower corner.",
+      "scoring_rule": {
+        "PASS": "An existing body has an underside bearing area. That area is broad and level so the flask can rest vertically on a flat plane, and its transition into the sidewall is rounded without replacing the footprint with a point or spherical foot.",
+        "PARTIAL": "An existing body has an underside bearing area, but at least one PASS condition is unmet, such as a tilted or overly curved bearing region, an excessively sharp lower corner, or an inflated foot.",
+        "FAIL": "No underside bearing area exists on an existing body, or the body terminates only in a point or narrow hanging edge without a supporting footprint."
+      },
+      "evidence_refs": ["image/02_body_profile.png", "image/01_finished_flask.png"],
+      "verification": {
+        "method": "Underside geometry and plane-contact inspection",
+        "procedure": "View the evaluated underside and a longitudinal section. In a temporary inspection scene, place a horizontal plane at the lowest intended supporting level and inspect contact across the footprint and upright orientation. This checks support and corner shape, not the shell's floor thickness already assessed in GEO-06.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-09",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "5. Base and Surface Finish",
+      "criterion": "The existing curved body, shoulder, and neck have smooth silhouettes and coherent shading.",
+      "scoring_rule": {
+        "PASS": "Substantial curved body and neck surfaces exist, joined by a shoulder. Their silhouettes and surface shading are smooth, with no visible radial faceting, dents, pinching, or inverted-normal patches at an inspection scale that makes the whole flask clearly readable.",
+        "PARTIAL": "Substantial curved body and neck surfaces exist, joined by a shoulder, but one or more PASS conditions are unmet, such as visible radial facets, local dents, shading discontinuities, or incorrect normals.",
+        "FAIL": "Substantial curved body and neck surfaces joined by a shoulder are absent. An isolated smooth fragment, a flat image, or a neck alone cannot establish the minimum. Missing lip details alone do not force this row to FAIL when the required core surfaces exist."
+      },
+      "evidence_refs": ["image/01_finished_flask.png"],
+      "verification": {
+        "method": "Neutral shaded inspection and normals check",
+        "procedure": "Inspect the existing evaluated body, shoulder, and neck under neutral clay shading with broad directional illumination, orbiting the asset and checking its silhouette. Inspect face orientation where a dark patch is ambiguous. Do not score lip finish or base shape again in this row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The build script independently recreates the scene and saves a usable submission.blend.",
+      "scoring_rule": {
+        "PASS": "Running build.py from a new Blender scene creates a recognizable flask scene and saves an openable submission.blend. Reopening that saved result reproduces the submitted geometry, materials, and render setup without an existing solution file or unavailable assets.",
+        "PARTIAL": "Without loading an existing solution file or relying on unavailable assets, running build.py from a new Blender scene creates a recognizable flask scene and saves an openable submission.blend, but at least one PASS condition is unmet, such as omitted geometry, differing scene settings, or incomplete reconstruction of the submitted render setup.",
+        "FAIL": "The script does not create a recognizable flask scene and save an openable submission.blend from a new scene, is absent, or depends on an existing solution file or unavailable asset to achieve that minimum. An unsaved in-memory result alone fails."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Independent build and saved-result reopen probe",
+        "procedure": "In a temporary working location, run the submitted build.py with Blender 5.1.2 starting from a new scene and without preloading the submitted blend. Confirm that submission.blend is newly saved, then open that saved file in a fresh Blender process and compare the flask geometry, assigned materials, and render setup with the original submitted scene. Preserve the original deliverables.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The self-contained native scene and requested PNG provide a faithful, readable render of the submitted flask.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with a recognizable editable flask. It is self-contained, includes a Cycles GPU render setup, and is accompanied by B148_Hollow_Conical_Flask.png rendered from that actual scene. The neutral gray flask is fully framed against a plain background in a slightly elevated three-quarter view that reveals the mouth and preserves the tapered silhouette.",
+        "PARTIAL": "submission.blend opens with a recognizable editable flask, but at least one PASS condition is unmet, including a missing or mismatched PNG, poor framing, an obscured mouth, an incomplete render setup, or missing scene dependencies.",
+        "FAIL": "submission.blend is absent, cannot be opened, or does not contain a recognizable editable flask. A render or source screenshot without the native flask geometry fails the minimum."
+      },
+      "evidence_refs": ["image/01_finished_flask.png"],
+      "verification": {
+        "method": "Native-file inspection and render provenance comparison",
+        "procedure": "Open submission.blend, confirm editable geometry and packed or native dependencies, and inspect the saved Cycles GPU setting. Decode the named PNG and compare it with a controlled render of the saved camera and scene to establish provenance. Inspect complete framing, neutral shading, background, and mouth visibility. This is a specified future check; no authoring-phase render is implied.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

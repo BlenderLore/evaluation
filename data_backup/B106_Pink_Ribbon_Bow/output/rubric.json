@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Pink Ribbon Bow",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1SGFPenEKn",
+    "id": "BV1SGFPenEKn"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 70, "PROC": 10, "SURF": 10, "PIPE": 10},
+  "weighting_note": "Geometry receives 70 points because the task chiefly constructs a folded ribbon bow. Those points are separated into wing silhouette, fold relief, band form, tail form, hollow ribbon structure, and surface continuity. Editable bilateral propagation receives 10 points, visible pink material behavior 10, and reproducible saved-scene delivery 10. Modifier presence, object names, and unmodified primitive counts receive no credit.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Wing Loops",
+      "criterion": "The paired wing silhouettes widen from a narrow central gathering into full rounded outer ends.",
+      "scoring_rule": {
+        "PASS": "Both wings are present, extend on opposite sides of the center, narrow substantially inward, and have full outer ends with rounded corners. The upper assembly reads as a wide horizontal bow with a relatively narrow center band.",
+        "PARTIAL": "At least one modeled wing visibly widens from an inner end into a broad outer end, but any PASS condition is unmet, including a missing counterpart or unsuitable proportions.",
+        "FAIL": "No modeled wing has a discernible narrow-to-broad bow-wing silhouette."
+      },
+      "evidence_refs": ["image/01_finished_bow.png", "image/02_wing_folds.png"],
+      "verification": {
+        "method": "Evaluated geometry and front-view inspection",
+        "procedure": "Open the submitted scene and isolate the upper bow assembly. Inspect an orthographic front view and its evaluated silhouette. Compare the two wing outlines, their inner and outer widths, rounded outer corners, and the center band's width relative to the wing spans. Assess shape here, not procedural propagation or shading finish.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Wing Loops",
+      "criterion": "Wing folds are actual three-dimensional relief radiating outward from gathered centers.",
+      "scoring_rule": {
+        "PASS": "Both wings have discernible alternating ridges and valleys extending outward from their gathered inner regions, with fuller outer portions. The relief remains readable in oblique views and is supported by evaluated geometry.",
+        "PARTIAL": "At least one wing has an actual geometric ridge-and-valley fold extending outward from its inner region, but any PASS condition is unmet, including weak gathering, incomplete fold coverage, or a missing counterpart.",
+        "FAIL": "No wing demonstrates the minimum geometric ridge-and-valley fold; painted, lit, or normal-only suggestions on otherwise flat wings do not qualify."
+      },
+      "evidence_refs": ["image/02_wing_folds.png", "image/03_ribbon_depth.png"],
+      "verification": {
+        "method": "Geometry inspection with neutral-material views",
+        "procedure": "Temporarily use a neutral material on a copy of the scene. Inspect each evaluated wing from front and oblique angles and inspect cross-sections through the broad face. Confirm that the observed folds change the surface position and gather toward the inner end. Ignore material highlight quality and polygon smoothness in this row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Center Band and Tails",
+      "criterion": "A compact rounded center band visibly binds the central junction.",
+      "scoring_rule": {
+        "PASS": "A short rounded rectangular band covers the central junction, has a gently curved broad front and rounded corners, and sits at a scale that binds the wings while leaving both wing faces exposed.",
+        "PARTIAL": "A distinct three-dimensional band occupies the central junction and covers some of it, but any PASS condition is unmet, including unsuitable shape, scale, or placement.",
+        "FAIL": "There is no distinct three-dimensional band covering any of the central junction."
+      },
+      "evidence_refs": ["image/01_finished_bow.png", "image/02_wing_folds.png"],
+      "verification": {
+        "method": "Front and oblique geometry inspection",
+        "procedure": "Inspect the central component in front and oblique views. Check its rounded rectangular profile, curved front, position over the wing gathering, and size relative to the exposed wing faces. Evaluate its hollow construction separately under GEO-05.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Center Band and Tails",
+      "criterion": "Two gently curved tails descend from behind the center band and finish in softened notched ends.",
+      "scoring_rule": {
+        "PASS": "Both broad tails emerge behind the lower band without detached root gaps, descend diagonally outward, remain shorter than the full wing span, and leave an opening between their lower portions. Each has gentle curvature and a shallow inward end notch forming two softened points.",
+        "PARTIAL": "At least one modeled broad tail extends downward from the central region and has a discernible inward end notch, but any PASS condition is unmet, including a missing counterpart, root gap, insufficient curvature, or unsuitable end shape.",
+        "FAIL": "No broad modeled tail extends downward from the central region with a discernible inward end notch."
+      },
+      "evidence_refs": ["image/01_finished_bow.png", "image/04_notched_tails.png"],
+      "verification": {
+        "method": "Evaluated silhouette and attachment inspection",
+        "procedure": "Inspect the lower assembly from front, side, and oblique views. Trace each tail from behind the band to its free end, check the outward spread and central opening, and examine the notch geometry and gentle face curvature. Assess root placement here; evaluate material, surface continuity, and symmetry propagation in their separate rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Ribbon Structure and Finish",
+      "criterion": "The bow has hollow ribbon loops and a wrapping center band, with thin but visible ribbon thickness.",
+      "scoring_rule": {
+        "PASS": "Both wings have separated front and back surfaces with inspectable inner openings, and the center band has an inner passage. Exposed wing, band, and tail edges have visible thickness that remains thin relative to their broad faces.",
+        "PARTIAL": "At least one wing has a genuine inner opening between front and back surfaces and visible wall thickness, but any PASS condition is unmet, including incomplete hollow structure or inappropriate thickness elsewhere.",
+        "FAIL": "No wing has both a genuine inner opening between front and back surfaces and visible wall thickness; solid filled lobes and single zero-thickness sheets do not meet this minimum."
+      },
+      "evidence_refs": ["image/03_ribbon_depth.png", "image/04_notched_tails.png"],
+      "verification": {
+        "method": "Oblique views and evaluated cross-sections",
+        "procedure": "On a scene copy, isolate the wings and band and inspect their interior openings from oblique and end views. Use clipping or a non-destructive section view to distinguish hollow ribbon walls from solid lobes. Inspect exposed rim and tail edge cross-sections for nonzero thickness relative to face width. Do not require a particular modifier stack or world-unit thickness.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Ribbon Structure and Finish",
+      "criterion": "The existing core geometry has smooth shading, rounded rims, and clean surface transitions.",
+      "scoring_rule": {
+        "PASS": "The wings, band, and tails are present and show continuous shading, rounded rims, and clean transitions without unintended faceting, shading seams, collapsed strips, or self-intersections. The intended valleys and notches remain legible.",
+        "PARTIAL": "At least one wing and either the band or a tail have readable, substantially smooth broad surfaces, but any PASS condition is unmet, including local finish defects or missing other components.",
+        "FAIL": "The existing geometry does not provide both one wing and one other core component with readable, substantially smooth broad surfaces. Missing surfaces cannot establish this minimum."
+      },
+      "evidence_refs": ["image/01_finished_bow.png", "image/02_wing_folds.png", "image/04_notched_tails.png"],
+      "verification": {
+        "method": "Neutral-material surface inspection",
+        "procedure": "Inspect the evaluated geometry under neutral directional lighting from several angles. Check broad existing wing surfaces and the existing band or tail surfaces for shading continuity, edge rounding, collapsed areas, and self-intersections. This row assesses finish defects on demonstrated surfaces, not the shape completeness or fold depth scored elsewhere.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Symmetry",
+      "criterion": "Edits propagate bilaterally for both the wing pair and the tail pair in the saved scene.",
+      "scoring_rule": {
+        "PASS": "The saved scene maintains both paired wings and paired tails through editable bilateral relationships. A localized source-side shape edit for each pair causes the opposite evaluated counterpart to change as a reflection about the bow center.",
+        "PARTIAL": "At least one of the wing or tail pairs has a working source-side shape edit that propagates as a reflected change to its counterpart, but any PASS condition is unmet.",
+        "FAIL": "Neither pair demonstrates reflected propagation of a source-side shape edit. Static symmetry or inactive procedural components alone do not qualify."
+      },
+      "evidence_refs": ["image/02_wing_folds.png", "image/04_notched_tails.png"],
+      "verification": {
+        "method": "Non-destructive functional geometry probe",
+        "procedure": "Work on a copy of the reopened submission. Locate the authoring geometry or exposed construction controls for a wing and change a small source-side region by an amount visible relative to the wing span. Re-evaluate and confirm a reflected shape change in the opposite wing without separately editing it. Restore the copy and repeat for a tail. Compare geometry around the bow's center plane rather than checking modifier names or enabled axes alone.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "Pink Surface",
+      "criterion": "A consistent pale pink appearance covers the bow's faces and exposed edges.",
+      "scoring_rule": {
+        "PASS": "The wings, band, and tails are present, visibly pale pink, and consistently covered across broad faces and exposed edges, without unintended unassigned or contrasting regions.",
+        "PARTIAL": "At least one wing and either the band or a tail show applied pale pink material on their broad faces, but any PASS condition is unmet, including incomplete coverage, inconsistent parts, or missing other components.",
+        "FAIL": "Applied pale pink appearance is not demonstrated on both one wing and one other core component. A material that exists but is unused does not qualify."
+      },
+      "evidence_refs": ["image/01_finished_bow.png"],
+      "verification": {
+        "method": "Material assignment inspection and controlled color render",
+        "procedure": "Inspect material use on the evaluated wing, band, and tail faces and edges. Render a scene copy under neutral white lighting to confirm that the assigned surfaces read consistently as pale pink, independently of colored lighting. Do not require material names, shared data-block identity, or a particular RGB value.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "Pink Surface",
+      "criterion": "The material produces broad soft reflections while preserving pink midtones and fold shadows.",
+      "scoring_rule": {
+        "PASS": "The applied finish creates broad soft highlights on wing folds and the curved band, preserves pink midtones and readable fold shadows, and avoids both flat unlit behavior and mirror-like reflections that overwhelm the form.",
+        "PARTIAL": "At least one existing folded wing has an applied reflective finish that produces a visible highlight with retained colored midtones and is not fully mirror-dominated under controlled lighting, but any PASS condition is unmet, including unsuitable highlight width or incomplete response on other parts.",
+        "FAIL": "No existing folded wing demonstrates an applied reflective highlight together with retained colored midtones. Missing geometry, unlit color, or fully mirror-dominated appearance does not meet this minimum."
+      },
+      "evidence_refs": ["image/01_finished_bow.png"],
+      "verification": {
+        "method": "Controlled material-response renders",
+        "procedure": "In a copy of the submitted scene, use a broad white area light and a neutral environment, then rotate the light relative to the bow. Inspect the existing wing folds and curved band for moving broad highlights, colored midtones, and readable shadows. Assess material response independently from geometric faceting and from the exact pink hue scored under SURF-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The delivered scene is editable, reproducibly recreated and saved by build.py, and accompanied by its actual scene render.",
+      "scoring_rule": {
+        "PASS": "All three named deliverables are present. The submitted scene opens with modeled bow geometry and editable relationships. Running build.py from an empty Blender 5.1.2 scene recreates the complete scene and saves submission.blend beside the script without external assets or manual input; that newly saved file reopens successfully. The named PNG is a complete front or slightly oblique scene render consistent with the submitted geometry and materials, and the scene uses Cycles GPU settings.",
+        "PARTIAL": "A delivered submission.blend opens and contains modeled bow geometry, with no substituted external image claimed as its render, but any PASS condition is unmet, including failed recreation, failure to save or reopen the recreated scene, missing render, or incomplete deliverables.",
+        "FAIL": "There is no loadable submission.blend containing modeled bow geometry, or the claimed scene render is substituted from external imagery."
+      },
+      "evidence_refs": ["image/01_finished_bow.png"],
+      "verification": {
+        "method": "Clean reconstruction, saved-file reopening, and render provenance check",
+        "procedure": "Inspect the three delivered files and open submission.blend. In a clean temporary directory containing only build.py, launch Blender 5.1.2 with factory startup and execute the script. Verify that it writes submission.blend beside itself, terminate that process, and reopen the newly saved file in a separate Blender process. Inspect the recreated geometry, symmetry relationships, material use, camera, lights, and Cycles GPU settings against the submitted scene. Render the reopened submitted scene and compare composition and content with B106_Pink_Ribbon_Bow.png; inspect any image-plane or compositor dependencies to rule out source-image substitution. This is a future verification procedure, not a claim of execution during authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

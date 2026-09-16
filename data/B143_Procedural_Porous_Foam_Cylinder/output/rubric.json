@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Porous Foam Cylinder",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV13JoeBoECE",
+    "id": "BV13JoeBoECE"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 45, "PROC": 45, "PIPE": 10},
+  "weighting_note": "Geometry and functional procedural behavior receive equal weight. Geometry separates the cylindrical envelope, cavity distribution, interior openness, and existing wall integrity. Procedural rows probe output changes for pore size, clipping limits, and sampling quality, rather than named nodes or their mere presence. Ten points cover saved reconstruction and the actual scene render; no separate material or lighting capability is claimed by this geometry-focused source.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Cylindrical Envelope",
+      "criterion": "The default porous body preserves an upright cylindrical envelope approximately as tall as its diameter.",
+      "scoring_rule": {
+        "PASS": "A nonempty three-dimensional porous body exists; its surviving outer surfaces follow a circular cylinder with parallel end limits, its height is approximately its diameter, and this envelope remains recognizable despite interrupted edges from more than one viewing angle.",
+        "PARTIAL": "A nonempty three-dimensional porous body exists, but one or more PASS conditions are unmet, such as a box-like envelope, strongly unequal height and diameter, or poorly retained cylindrical limits.",
+        "FAIL": "No nonempty three-dimensional porous body exists; an empty result, flat surface, or solid unperforated primitive is below the minimum."
+      },
+      "evidence_refs": ["image/01_foam_cylinder.png"],
+      "verification": {
+        "method": "Evaluated geometry and multi-view inspection",
+        "procedure": "Open submission.blend in Blender 5.1.2 and evaluate the default foam. Inspect front, side, and elevated views and its dimensions. Compare the surviving exterior to a circular cylinder and assess the height-to-diameter proportion without imposing source world units. Ignore the absent outer surface at genuine pore openings.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Porous Structure",
+      "criterion": "Actual concave cavities form an irregular coarse-pore foam pattern across the specimen.",
+      "scoring_rule": {
+        "PASS": "Several distinct cavities with geometric concave walls exist. Cavities with varied sizes and positions populate the sides and top of the default body, read as rounded irregular foam cells, and are separated by substantial walls and bridges rather than a repeated grid of identical drilled holes.",
+        "PARTIAL": "Several distinct cavities with geometric concave walls exist, but one or more PASS conditions are unmet, including sparse coverage, near-identical cavities, an overly regular arrangement, or weak walls between the visible cavities.",
+        "FAIL": "Fewer than several distinct geometric cavities exist, or the apparent cavities are only material marks, a flat image, or surface coloration without concave wall geometry."
+      },
+      "evidence_refs": ["image/01_foam_cylinder.png", "image/02_coarse_pores.png"],
+      "verification": {
+        "method": "Geometry inspection with neutral shading",
+        "procedure": "Inspect the evaluated default mesh with neutral solid shading from side and elevated views. Confirm that visible recesses have concave wall geometry. Compare their distribution, scale variation, curvature, and intervening material with the coarse-pore references. This row assesses the cavity pattern, not internal connectivity.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Porous Structure",
+      "criterion": "Openings reveal connected internal voids and multiple depths of foam geometry.",
+      "scoring_rule": {
+        "PASS": "At least one exterior opening leads into an internal void with geometric inner walls; multiple such openings connect into the body's interior, and views from different sides reveal overlapping layers of walls and cavities across its depth rather than a solid core or a single perforated facade.",
+        "PARTIAL": "At least one exterior opening leads into an internal void with geometric inner walls, but one or more PASS conditions are unmet, such as limited depth, mostly sealed recesses, or openness confined to one small region.",
+        "FAIL": "No exterior opening leads into an internal void with geometric inner walls; surface dimples, texture-only holes, and a flat perforated facade without internal depth are below the minimum."
+      },
+      "evidence_refs": ["image/01_foam_cylinder.png", "image/02_coarse_pores.png"],
+      "verification": {
+        "method": "Interior geometry and controlled visibility inspection",
+        "procedure": "Orbit the evaluated specimen and inspect through openings using neutral shading. On a temporary copy, use clipping or a section view to inspect the interior and distinguish real void connections from surface-only dimples. Confirm inner walls and layered geometry across depth; do not require every cavity to connect to every other cavity.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Porous Structure",
+      "criterion": "The existing foam walls form usable geometry with readable curvature and coherent connections.",
+      "scoring_rule": {
+        "PASS": "A connected wall region surrounds several neighboring cavities. The dominant body remains coherent, with finite-thickness walls and readable cavity curvature, and it has no conspicuous broken sheets, isolated scraps, self-intersecting spikes, or inverted patches. Light faceting consistent with the references is acceptable.",
+        "PARTIAL": "A connected wall region surrounds several neighboring cavities, but one or more PASS conditions are unmet in the existing geometry, including local broken regions, visible scraps, or disruptive surface orientation defects. Missing minor regions alone do not negate sound geometry elsewhere.",
+        "FAIL": "No connected wall region surrounds several neighboring cavities, or the supposed walls consist only of zero-thickness disconnected sheets, isolated fragments, or unusable geometry without that minimum region."
+      },
+      "evidence_refs": ["image/01_foam_cylinder.png", "image/02_coarse_pores.png"],
+      "verification": {
+        "method": "Evaluated mesh and surface orientation inspection",
+        "procedure": "Inspect connected regions and wall thickness on an evaluated mesh copy. Use close views, face orientation, and sections where needed to locate inverted patches, self-intersections, broken sheets, or detached scraps. Assess the substantive existing cavity-wall regions; do not treat the absence of geometry as evidence of clean finish, and do not penalize intentional pores as accidental open defects.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 20,
+      "requirement_section": "Pore Size Control",
+      "criterion": "A retained control regenerates fine and coarse spatial pore structures within the same cylindrical envelope.",
+      "scoring_rule": {
+        "PASS": "A retained editable control produces two valid three-dimensional porous outputs with visibly different cavity sizes. The documented fine setting gives more, smaller cavities, the coarse setting gives fewer, larger cavities throughout the body, and the cylindrical limits stay fixed. The location and working settings are identified in the scene, and the coarse state is saved as default.",
+        "PARTIAL": "A retained editable control produces two valid three-dimensional porous outputs with visibly different cavity sizes, but one or more PASS conditions are unmet, such as changing only one spatial region, drifting bounds, unclear working settings, or saving the fine state as default.",
+        "FAIL": "No retained editable control produces two valid three-dimensional porous outputs with visibly different cavity sizes. An unused control, material-only change, switching visibility between fixed meshes, or scaling the complete object is below the minimum."
+      },
+      "evidence_refs": ["image/02_coarse_pores.png", "image/03_fine_pores.png"],
+      "verification": {
+        "method": "Functional generator probe",
+        "procedure": "Read the in-scene note and identify the active pore-size parameter. On a copy of the scene, evaluate both documented settings while holding boundary controls fixed. Compare cavity size and population from several views and compare evaluated bounds. Inspect the dependency path or code to confirm regeneration of the pore geometry rather than object scaling or selection among prebuilt fixed meshes. Restore the saved default after probing.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Boundary Controls",
+      "criterion": "Independent radius and height controls trim the pore field without stretching surviving cavities.",
+      "scoring_rule": {
+        "PASS": "At least one retained boundary control produces a visibly smaller valid porous output by trimming its field. Both independent controls work at the documented default and smaller settings: radius changes side extent, height changes end extent, and surviving cavities retain spatial size and placement. The controls and working settings are identified in the scene, and the default specimen is retained for delivery.",
+        "PARTIAL": "At least one retained boundary control produces a visibly smaller valid porous output by trimming its field, but one or more PASS conditions are unmet, such as only one control working, coupled radius and height changes, some distortion of surviving cavities, or incomplete control documentation.",
+        "FAIL": "Neither retained boundary control produces a visibly smaller valid porous output by trimming the pore field. Inactive parameters, disappearance of the specimen, and resizing solely by stretching the complete mesh are below the minimum."
+      },
+      "evidence_refs": ["image/01_foam_cylinder.png"],
+      "verification": {
+        "method": "Independent boundary probes on evaluated geometry",
+        "procedure": "Keep pore size fixed and evaluate the documented default, smaller radius, and smaller height separately. Compare outer extents and surviving cavity landmarks within the common retained region. Confirm each control trims the appropriate cylindrical boundary and does not simply transform the full object. Restore defaults. The exact source radius, height, primitive type, and Boolean solver are not requirements.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Sampling Quality",
+      "criterion": "The retained quality control changes curved-wall approximation while preserving the principal foam form.",
+      "scoring_rule": {
+        "PASS": "A retained quality control produces two nonempty porous outputs with different geometric approximation of curved cavity walls. Its documented refined setting improves that approximation while retaining recognizable principal pore arrangement and cylindrical limits; both settings are valid, the control and settings are identified in the scene, and the saved result has clear cavities without conspicuous broken geometry.",
+        "PARTIAL": "A retained quality control produces two nonempty porous outputs with different geometric approximation of curved cavity walls, but one or more PASS conditions are unmet, such as noticeable drift of principal pores, local breakdown, an unclear refinement direction, or missing working-setting documentation.",
+        "FAIL": "No retained quality control produces two nonempty porous outputs with different geometric approximation of curved cavity walls. An unused setting, shading-only change, or extra coplanar faces on an identical surface is below the minimum."
+      },
+      "evidence_refs": ["image/01_foam_cylinder.png", "image/02_coarse_pores.png"],
+      "verification": {
+        "method": "Functional geometric refinement probe",
+        "procedure": "Hold pore size and boundaries fixed and evaluate the two documented quality settings. Compare close views and evaluated cavity-wall geometry, including positions and curvature approximation rather than polygon count alone. Confirm the refined state improves geometric sampling while recognizable major cavities and the cylindrical limits remain. Restore defaults after the probe.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The supplied script reconstructs the scene and saves the inspectable Blender artifact.",
+      "scoring_rule": {
+        "PASS": "The supplied build.py runs from a new scene and writes an openable submission.blend containing a visible three-dimensional foam specimen. The saved file recreates the submitted scene, retained working generator, control note, and render setup without manual preparation or missing external dependencies.",
+        "PARTIAL": "The supplied build.py runs from a new scene and writes an openable submission.blend containing a visible three-dimensional foam specimen, but one or more PASS conditions are unmet, such as incomplete reconstruction of controls, documentation, or render setup.",
+        "FAIL": "The script is missing or cannot write an openable submission.blend containing a visible three-dimensional foam specimen. Producing only an unsaved in-memory scene is below the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean reconstruction and saved-file reopening",
+        "procedure": "In a temporary working location, execute the delivered build.py using Blender 5.1.2 from a new scene. Confirm that it saves submission.blend, close the execution session, and reopen that saved file in a fresh session. Inspect the rebuilt foam, active generator, control note, and render setup and compare them with the delivered scene. This procedure checks the saved artifact, not only the script's in-memory state, and does not require a particular submission directory layout.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The delivered PNG is an actual readable render of the submitted foam specimen.",
+      "scoring_rule": {
+        "PASS": "A readable PNG rendered from the actual submitted foam scene is delivered. It has the requested filename, uses Cycles GPU, shows the complete specimen from an angled view with side, top, and inner cavities readable, and uses simple solid shading and lighting suitable for inspecting the geometry.",
+        "PARTIAL": "A readable PNG rendered from the actual submitted foam scene is delivered, but one or more PASS conditions are unmet, such as a filename mismatch, inadequate framing, weak cavity readability, or an incorrect render engine or device setting.",
+        "FAIL": "No readable PNG rendered from the actual submitted foam scene is delivered. Source frames, viewport screenshots, external replacements, unrelated renders, and blank images are below the minimum."
+      },
+      "evidence_refs": ["image/01_foam_cylinder.png"],
+      "verification": {
+        "method": "Render provenance and presentation inspection",
+        "procedure": "Open the delivered PNG and inspect the submitted scene's active camera, default specimen, and Cycles GPU configuration. Produce a controlled render from the saved scene for comparison of geometry, camera, and visible details. Confirm the PNG is a scene render and satisfies the public filename and view requirements; assess readability without assigning separate material or lighting-design points.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

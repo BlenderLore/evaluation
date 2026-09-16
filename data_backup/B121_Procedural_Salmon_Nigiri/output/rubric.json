@@ -1,0 +1,226 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Salmon Nigiri",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1ZdnuztEcK",
+    "id": "BV1ZdnuztEcK"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 25,
+    "PROC": 15,
+    "SURF": 45,
+    "SCN": 10,
+    "PIPE": 5
+  },
+  "weighting_note": "The task combines modeled food forms with a reusable grain distribution and a substantial procedural shading outcome. Geometry receives 25 points, the actual grain-generation relationship 15, and independently inspectable salmon and rice surface qualities 45. Assembly and image legibility receive 10, and delivery with a saved rebuild receives 5. Static placement is assessed under SCN, not PROC.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Rice Form",
+      "criterion": "A rounded oblong rice body and volumetric, gently tapered grains produce a recognizable rice mound.",
+      "scoring_rule": {
+        "PASS": "A cohesive three-dimensional rice mound with multiple distinguishable solid oval grains exists. The mound is longer than wide and wider than tall; its exposed outline reads as packed rice. The grains have rounded sides, gently tapered ends, and smooth surfaces without prominent spikes or flat flecks.",
+        "PARTIAL": "A cohesive three-dimensional rice mound with multiple distinguishable solid oval grains exists, but its proportions, taper, or geometric finish do not meet the complete requirements. Not all PASS conditions are met.",
+        "FAIL": "No cohesive three-dimensional rice mound with multiple distinguishable solid oval grains exists; a bare support body, isolated grain source, flat flecks, or an unrelated scattering alone is below the minimum."
+      },
+      "evidence_refs": [
+        "image/02_rice_grains.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_neutral_shaded_views",
+        "procedure": "Inspect the evaluated rice envelope from top and side, then view neighboring grains close up with a neutral opaque material. Compare the mound's local length, width, and height; inspect solid volume, end taper, silhouettes, and geometric smoothing. Assess grain shape here, leaving distribution controls to PROC-01 and material response to SURF-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "3. Salmon Slice",
+      "criterion": "The salmon is a thin solid slice with a shallow arch, downturned ends, and smooth continuous surfaces.",
+      "scoring_rule": {
+        "PASS": "A broad thin three-dimensional slice with a visible bend exists. It is elongated, rises gently through its center, and bends downward toward its ends. Its small solid edge thickness, rounded perimeter, smooth top and underside remain consistent, without prominent faceting, tears, or sharp block-like corners.",
+        "PARTIAL": "A broad thin three-dimensional slice with a visible bend exists, but its arch, thickness, end shape, or surface continuity does not meet all requirements. Not all PASS conditions are met.",
+        "FAIL": "No broad thin three-dimensional slice with a visible bend exists. A flat plate, zero-thickness sheet, deep block, or unrelated shape is below the minimum."
+      },
+      "evidence_refs": [
+        "image/01_finished_nigiri.png",
+        "image/03_slice_curvature.png"
+      ],
+      "verification": {
+        "method": "evaluated_mesh_and_multiview_inspection",
+        "procedure": "Isolate the salmon without changing its geometry and inspect the evaluated result in side, top, and three-quarter neutral-shaded views. Verify a raised center, lower ends, a small but real edge thickness, and smooth continuous top and underside. Do not infer quality from modifier names or polygon counts.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "2. Editable Grain Distribution",
+      "criterion": "An editable generation relationship distributes volumetric grains over the rice and responds coherently to source and distribution edits.",
+      "scoring_rule": {
+        "PASS": "A working relationship generates multiple three-dimensional grains on a contiguous region of the rice body, and a distribution control changes the evaluated result. The default result densely covers the exposed mound with modest size and orientation variation and no prominent exposed-support gaps. Editing the shared grain form propagates to the distributed grains; density changes repopulate the surface; the variation control changes placement or orientation while preserving the mound. The reusable support and grain form remain available and no isolated source grain appears in the final image.",
+        "PARTIAL": "A working relationship generates multiple three-dimensional grains on a contiguous region of the rice body, and at least one distribution control changes the evaluated result, but one or more remaining PASS conditions fail. Not all PASS conditions are met.",
+        "FAIL": "There is no working relationship generating multiple three-dimensional grains on a contiguous rice-body region, or no distribution control changes the evaluated result. Painted grains, disconnected unused nodes, a lone source grain, and only frozen hand-placed grains do not meet the minimum."
+      },
+      "evidence_refs": [
+        "image/02_rice_grains.png"
+      ],
+      "verification": {
+        "method": "saved_scene_relationship_and_functional_probes",
+        "procedure": "On a temporary copy of the saved scene, record the default evaluated grains. Make a small edit to the shared grain form, change the exposed density or amount, and change the variation control separately. Evaluate after each edit and verify the stated propagation, repopulation, and variation responses, then restore all values. Inspect default coverage and variation over the exposed mound from multiple views. Accept equivalent working instancing or generator implementations.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "4. Salmon Surface",
+      "criterion": "An applied editable procedural shader produces orange flesh with narrow, wavy, oblique pale fat streaks.",
+      "scoring_rule": {
+        "PASS": "An existing curved salmon-top region visibly carries repeated pale streaks against orange flesh through a connected procedural material. Orange dominates and the narrower cream streaks cross the slice obliquely with gently irregular boundaries, widths, and spacing. The pattern covers the visible top and edges without obvious seams or severe stretching. Changing the meat or fat color and streak spacing or direction changes the applied appearance coherently.",
+        "PARTIAL": "An existing curved salmon-top region visibly carries repeated pale streaks against orange flesh through a connected procedural material, but coverage, pattern character, continuity, or one of the editable responses falls short of PASS. Not all PASS conditions are met.",
+        "FAIL": "No existing curved salmon-top region has repeated pale streaks against orange flesh generated by an applied procedural material. An unused shader, flat single color, isolated stripe, or external image replacement is below the minimum."
+      },
+      "evidence_refs": [
+        "image/01_finished_nigiri.png"
+      ],
+      "verification": {
+        "method": "material_use_inspection_and_controlled_color_renders",
+        "procedure": "Confirm that the salmon's evaluated surface uses the connected procedural shader. Render its top and edge under neutral lighting and inspect the relative orange and cream areas, streak direction, waviness, and continuity. On a copy, perturb the color and streak controls separately to verify their effects, then restore them. Do not require a particular node recipe or exact source color values.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. Salmon Surface",
+      "criterion": "Subtle directional relief and finer cellular or fibrous relief add distinct flesh scales without damaging the slice silhouette.",
+      "scoring_rule": {
+        "PASS": "An existing curved salmon-top region has applied procedural relief that visibly changes its response to grazing light. Both the larger directional relief associated with the streak pattern and a distinctly finer elongated cellular or fibrous scale are present. Each strength is editable, the detail remains subordinate to the fat streaks, and the thin slice silhouette stays intact.",
+        "PARTIAL": "An existing curved salmon-top region has applied procedural relief that visibly changes its response to grazing light, but the second scale, directional character, editable strengths, or restraint does not meet all PASS conditions. Not all PASS conditions are met.",
+        "FAIL": "No existing curved salmon-top region has applied procedural relief that visibly changes its response to light. Color-only markings, unused relief nodes, or fine detail shown only on an isolated test object are below the minimum."
+      },
+      "evidence_refs": [
+        "image/01_finished_nigiri.png"
+      ],
+      "verification": {
+        "method": "grazing_light_detail_renders_and_relief_probes",
+        "procedure": "Render a close crop of the actual salmon under grazing light, keeping camera and lighting fixed. Separately disable and restore the two relief contributions on a temporary copy to confirm their visible effects and distinct scales; vary each strength slightly to verify editability. Inspect the original silhouette and whether the larger streaks remain readable. Judge relief independently of color fidelity and subsurface response.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. Salmon Surface",
+      "criterion": "The salmon shows moist nonmetallic highlights and an editable subsurface contribution while retaining solid flesh colors.",
+      "scoring_rule": {
+        "PASS": "An existing curved salmon surface has a visibly moist nonmetallic highlight response. A connected, editable subsurface contribution also softens light through thin edge regions. Orange and cream remain readable, with neither metallic response, self-emission, nor glass-like transparency dominating the fish.",
+        "PARTIAL": "An existing curved salmon surface has a visibly moist nonmetallic highlight response, but subsurface softness, its editable response, or preservation of the solid flesh appearance falls short of PASS. Not all PASS conditions are met.",
+        "FAIL": "No existing curved salmon surface has a visibly moist nonmetallic highlight response. An absent or unused fish material, dry flat appearance, or a surface whose response is only metallic, emissive, or glass-like is below the minimum."
+      },
+      "evidence_refs": [
+        "image/01_finished_nigiri.png"
+      ],
+      "verification": {
+        "method": "controlled_surface_response_renders",
+        "procedure": "Inspect actual material use and render the fish with a broad light that shows highlights and a lit thin edge. Compare the saved setting with subsurface contribution disabled on a copy, then with a small amount change, to verify connected editable light transport. Restore the scene and inspect retained orange and cream color and solid appearance. Do not reward a numeric shader value alone.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "5. Rice Surface",
+      "criterion": "The distributed rice uses warm off-white shading, restrained sheen, and fine relief that preserves grain identity.",
+      "scoring_rule": {
+        "PASS": "A visible group of neighboring distributed grains on the rice body uses a warm off-white material. Across the visible mound this material produces restrained nonmetallic sheen and fine irregular relief much smaller than a grain, while preserving rounded grain shape and readable separation without crust-like lumps or chalky flat shading.",
+        "PARTIAL": "A visible group of neighboring distributed grains on the rice body uses a warm off-white material, but its coverage, sheen, fine relief, or preservation of grain readability does not satisfy every PASS condition. Not all PASS conditions are met.",
+        "FAIL": "No visible group of neighboring distributed grains on the rice body uses a warm off-white material. A material on an isolated source grain or support surface alone does not meet the minimum."
+      },
+      "evidence_refs": [
+        "image/01_finished_nigiri.png",
+        "image/02_rice_grains.png"
+      ],
+      "verification": {
+        "method": "distributed_material_use_and_close_surface_render",
+        "procedure": "Trace material use to the evaluated grains and render a close view containing neighboring grains on the exposed rice body. Inspect color, sheen, and relative detail scale under broad and grazing lighting. Compare the same existing grains with fine relief disabled on a temporary copy to distinguish shading texture from grain geometry; restore the original material afterward.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "6. Assembly and Presentation",
+      "criterion": "The salmon rests lengthwise on the rice, with slight overhang and enough exposed rice to read as assembled nigiri.",
+      "scoring_rule": {
+        "PASS": "Both a salmon slice and a rice mound exist together with the slice positioned over the mound. The slice follows the mound lengthwise, its central underside rests against the rice, and its curved ends and side edges extend slightly beyond the upper rice silhouette. A substantial band of rice remains visible, without a floating gap or deep penetration hiding most of either component.",
+        "PARTIAL": "Both a salmon slice and a rice mound exist together with the slice positioned over the mound, but contact, alignment, overhang, or exposed-rice balance fails one or more PASS conditions. Not all PASS conditions are met.",
+        "FAIL": "The salmon slice and rice mound do not both exist in a shared over-and-under assembly. Isolated components, components placed side by side, or an image replacement do not meet the minimum."
+      },
+      "evidence_refs": [
+        "image/01_finished_nigiri.png"
+      ],
+      "verification": {
+        "method": "evaluated_scene_spatial_inspection",
+        "procedure": "Inspect the assembled evaluated geometry in side and three-quarter views, using a section or temporary transparent display if necessary to inspect the central contact. Compare local length axes, edge overhang, exposed rice, and any gap or excessive penetration. Evaluate this static spatial relationship without requiring a procedural assembly mechanism.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-02",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "6. Assembly and Presentation",
+      "criterion": "The final scene view makes both components and their key surfaces clearly inspectable.",
+      "scoring_rule": {
+        "PASS": "The saved final view shows recognizable salmon and rice together. Its elevated three-quarter composition keeps the complete nigiri in frame and reveals the salmon top, a long side, a drooping end, and rice beneath. Restrained background and effective lighting expose both fat streaks and individual grains without clipping important regions or losing them in darkness or blown highlights.",
+        "PARTIAL": "The saved final view shows recognizable salmon and rice together, but framing, view direction, background, or light and exposure fails one or more remaining PASS conditions. Not all PASS conditions are met.",
+        "FAIL": "The saved final view does not show recognizable salmon and rice together, or the assembly is absent, entirely outside the view, or visually unreadable."
+      },
+      "evidence_refs": [
+        "image/01_finished_nigiri.png"
+      ],
+      "verification": {
+        "method": "final_camera_render_and_image_comparison",
+        "procedure": "Inspect a Cycles render from the saved final camera and compare it with the delivered PNG. Check full-asset framing, visible top and side surfaces, separation of individual grains, and exposure. Judge image legibility here; assess missing model features or specific material qualities only in their corresponding rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The scene, actual-scene PNG, and rebuild script are delivered, and the script recreates and saves an inspectable submission.blend.",
+      "scoring_rule": {
+        "PASS": "An openable submission.blend containing the modeled nigiri is delivered. The requested PNG is present and was rendered from the submitted scene. build.py runs in a clean Blender 5.1.2 session, recreates the scene without unavailable dependencies or a pre-existing finished scene, and saves submission.blend. Reopening that saved result retains the rice generator, applied procedural materials, assembly, final view, and Cycles GPU configuration.",
+        "PARTIAL": "An openable submission.blend containing the modeled nigiri is delivered, but the PNG, script execution, saved rebuild, self-contained resources, or one of the saved-scene requirements fails a PASS condition. Not all PASS conditions are met.",
+        "FAIL": "No openable submission.blend containing the modeled nigiri is delivered. An image alone, script alone, empty scene, or unsaved in-memory reconstruction does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "fresh_session_rebuild_saved_file_reopen_and_render_provenance",
+        "procedure": "Open the delivered submission.blend and inspect that it contains the nigiri. Run build.py in a separate clean Blender 5.1.2 process with the delivery's available resources, then locate and reopen the submission.blend that the script saved. Inspect the saved evaluated geometry, working distribution, materials, assembly, final camera, and Cycles GPU configuration. Compare a render of the submitted scene with B121_Procedural_Salmon_Nigiri.png. Require the stated filenames but impose no unstated output-directory rule.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

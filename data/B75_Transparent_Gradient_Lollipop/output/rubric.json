@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Transparent Gradient Lollipop",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV181u1zQEKB",
+    "id": "BV181u1zQEKB"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 35, "SURF": 45, "SCN": 10, "PIPE": 10},
+  "weighting_note": "The task balances the distinctive spherical head, equatorial band, and attached stick against transparent gradient shading, edge emission, and procedural flecks. Geometry receives 35 points, surface appearance and functional material controls receive 45, independently adjustable internal lighting and presentation receive 10, and reproducible delivery receives 10. Modifier presence and exact node recipes receive no separate credit.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Candy Form",
+      "criterion": "A substantial, nearly spherical candy head has smoothly rounded upper and lower halves and remains independently editable from the stick.",
+      "scoring_rule": {
+        "PASS": "An editable three-dimensional candy head has a nearly spherical overall form with both rounded halves, substantial depth, and independent editability from the stick.",
+        "PARTIAL": "A recognizable rounded three-dimensional candy head exists, but at least one PASS condition is unmet, such as a distorted half, insufficient depth, or lack of independent editability.",
+        "FAIL": "No recognizable rounded three-dimensional candy head exists; an image plane, flat disk, or unrelated shape does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_lollipops.png", "image/02_candy_form.png"],
+      "verification": {
+        "method": "Evaluated geometry and manual multi-view inspection",
+        "procedure": "Inspect the evaluated head from front, side, and oblique views with a neutral override. Confirm rounded upper and lower volumes, meaningful depth, and that editing or moving the stick does not require editing the head geometry.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Candy Form",
+      "criterion": "The candy has a continuous, shallow raised equatorial band with rounded shoulders and a distinct silhouette.",
+      "scoring_rule": {
+        "PASS": "A broad raised band encircles the full equator, projects modestly beyond the sphere, has rounded shoulders, and remains distinct from both hemispheres.",
+        "PARTIAL": "A recognizable raised band follows the candy's equator, but at least one PASS condition is unmet, such as an interruption, excessive projection, sharp shoulders, or a poorly defined transition.",
+        "FAIL": "There is no recognizable raised equatorial band on the candy. A painted stripe or unrelated detached ring does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_lollipops.png", "image/02_candy_form.png"],
+      "verification": {
+        "method": "Evaluated geometry and silhouette inspection",
+        "procedure": "Orbit the evaluated candy through a full turn under a neutral material. Inspect continuity, projection, and shoulder shape around the complete middle circumference, including the rear side.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Candy Form",
+      "criterion": "A narrow straight cylindrical stick meets the underside of the head with the reference's slender proportions and a finished lower end.",
+      "scoring_rule": {
+        "PASS": "The stick is straight and cylindrical, aligned beneath the head's center, inserted without a visible gap, much narrower than the head, approximately one head diameter in exposed length, and finished at its lower end.",
+        "PARTIAL": "A recognizable narrow elongated stick is positioned beneath the candy, but at least one PASS condition is unmet, such as a gap, offset, poor length proportion, taper, or unfinished end.",
+        "FAIL": "No recognizable narrow elongated stick is positioned beneath the candy; unrelated geometry or a decorative line does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_lollipops.png", "image/02_candy_form.png"],
+      "verification": {
+        "method": "Geometry measurements and manual inspection",
+        "procedure": "Compare stick width and exposed length with the candy-head diameter. Inspect the junction and lower end from front and side views, confirming axial alignment and actual three-dimensional cylindrical geometry.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "1. Candy Form",
+      "criterion": "The evaluated candy and stick have smooth silhouettes and clean shading while retaining the raised band.",
+      "scoring_rule": {
+        "PASS": "The head, band, and stick show smooth silhouettes and shading without accidental holes, sharp ridges, obvious facets, or shading pinches, and smoothing preserves the band.",
+        "PARTIAL": "Both rounded halves of an existing candy head demonstrate broadly smooth surfaces, but at least one PASS condition is unmet. Local finish defects or a missing band or stick may prevent PASS without erasing the demonstrated head finish.",
+        "FAIL": "An existing candy head does not demonstrate broadly smooth surfaces on both rounded halves, or no rounded head exists. Absent geometry cannot establish the minimum."
+      },
+      "evidence_refs": ["image/02_candy_form.png"],
+      "verification": {
+        "method": "Neutral-material silhouette and normal inspection",
+        "procedure": "Inspect evaluated geometry under broad grazing light and a neutral surface override. Check the head poles, band shoulders, stick sides, and stick end for faceting, holes, pinches, and unintended ridges; assess substantive existing head surfaces separately when a minor component is absent.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "2. Transparent Gradient Surface",
+      "criterion": "The candy and band have glossy, light-transmitting depth while the stick is pale and opaque.",
+      "scoring_rule": {
+        "PASS": "The candy and band transmit and refract the scene, retain visible depth, and carry crisp curved reflections; the stick has a pale opaque surface that reads separately.",
+        "PARTIAL": "An existing candy head visibly combines transmission with surface reflections, but at least one PASS condition is unmet, such as weak depth, overly diffuse reflections, incomplete band coverage, or an incorrect or absent stick surface.",
+        "FAIL": "No existing candy head visibly combines transmission with surface reflections. Opaque plastic, a flat alpha cutout, or missing candy geometry does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_lollipops.png"],
+      "verification": {
+        "method": "Material inspection and controlled render",
+        "procedure": "Inspect the assigned materials and render a temporary high-contrast background behind the head using the submitted lighting. Check transmitted and refracted detail, curved specular reflections, band coverage, and the stick's opaque appearance. Remove the temporary background after inspection.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "2. Transparent Gradient Surface",
+      "criterion": "A smooth pale-cyan to deeper-blue or teal gradient spans the candy vertically and continues coherently across the band.",
+      "scoring_rule": {
+        "PASS": "The head visibly transitions smoothly along its vertical extent between pale cyan and deeper blue or teal, with a coherent transition through the band and no hard color seam.",
+        "PARTIAL": "A visible nonuniform cyan-to-blue or teal color transition exists on the candy head, but at least one PASS condition is unmet, such as a hard boundary, unsuitable direction, compressed transition, or discontinuous band.",
+        "FAIL": "The candy head lacks a visible cyan-to-blue or teal color transition; a uniform tint, unrelated palette, or colors visible only in unassigned materials do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_lollipops.png"],
+      "verification": {
+        "method": "Final render and assigned-material inspection",
+        "procedure": "Inspect the final image and the active candy material. Compare upper, middle, and lower regions while excluding isolated highlights and flecks. Inspect the band from several views to confirm that its color belongs to the same spatial gradient.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "3. Edge Glow and Fine Sparkles",
+      "criterion": "Cyan material emission strengthens toward grazing-angle edges and follows the candy surface as the view changes.",
+      "scoring_rule": {
+        "PASS": "A cyan emissive contribution visibly emphasizes grazing-angle edges and the band, shifts coherently with viewing direction, and preserves the readable transparent center.",
+        "PARTIAL": "A cyan emissive edge emphasis exists on the candy material, but at least one PASS condition is unmet, such as poor view response, weak band emphasis, or excessive emission over the center.",
+        "FAIL": "There is no cyan emissive edge emphasis in the active candy material. Reflections alone, uniform emission, or a fixed image-space outline do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_lollipops.png"],
+      "verification": {
+        "method": "Material contribution probe and multi-view renders",
+        "procedure": "Render two oblique views with the same lighting, then disable only the edge-emission contribution in a temporary copy. Confirm that the removed contribution follows grazing-angle surface regions and the band, rather than being an external light reflection or a composited outline.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "3. Edge Glow and Fine Sparkles",
+      "criterion": "An editable procedural material creates separated fine luminous flecks that remain attached to the candy.",
+      "scoring_rule": {
+        "PASS": "Many small irregular luminous flecks are distributed over the candy with clear spaces between them, retain the transparent base appearance, use an editable procedural material pattern, and remain attached when the candy moves.",
+        "PARTIAL": "Multiple separated luminous flecks are visibly produced on the candy by an editable procedural material, but at least one PASS condition is unmet, such as coarse size, regular spacing, poor coverage, excessive opacity, or sliding coordinates.",
+        "FAIL": "The candy lacks multiple separated luminous flecks from an editable procedural material. A uniform glow, an external image overlay, or an unused texture network does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_lollipops.png"],
+      "verification": {
+        "method": "Close render, shader inspection, and transform probe",
+        "procedure": "Inspect a close render for distinct irregular flecks and clear intervening candy. Trace the assigned material's fleck contribution. In a temporary copy, move and rotate the candy and camera together relative to the world, then compare local surface marks to confirm the pattern stays attached.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-05",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "4. Editable Material Controls",
+      "criterion": "Material controls visibly change gradient colors and placement, edge-emission intensity, and fleck scale without damaging the asset.",
+      "scoring_rule": {
+        "PASS": "Accessible controls for both gradient colors, gradient transition position or direction, edge-emission intensity, and fleck scale each produce the corresponding visible change while preserving geometry and the other material features.",
+        "PARTIAL": "At least one accessible candy-material control produces its intended visible change, but one or more PASS conditions are unmet, including missing controls, ineffective controls, or unwanted effects on other features.",
+        "FAIL": "No accessible candy-material control produces its intended visible change; unused nodes or controls disconnected from the active candy material do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_lollipops.png"],
+      "verification": {
+        "method": "Reversible material-control probes",
+        "procedure": "In a temporary copy, change each declared control individually and render a comparison. Confirm the intended color, transition, emission, or fleck-scale change, verify that geometry is unchanged and other material features remain effective, then restore the submitted state.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "5. Lighting and Presentation",
+      "criterion": "Independent scene lighting softly brightens the candy interior, and the final transparent image clearly presents the complete lollipop.",
+      "scoring_rule": {
+        "PASS": "Scene lighting independent of material emission visibly contributes soft interior brightness without a hard hotspot or destructive clipping. The complete lollipop is comfortably framed against transparency and the gradient, glossy curvature, band, edge glow, and flecks remain readable.",
+        "PARTIAL": "Scene lighting independent of material emission visibly brightens an existing candy interior and a usable camera view shows the head and band region, but at least one PASS condition is unmet, such as harsh lighting, cropped stick, opaque background, or poor feature separation.",
+        "FAIL": "There is no demonstrable independent scene-lighting contribution to an existing candy interior, or no usable camera view of the candy head and band region. An unused light object alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_lollipops.png"],
+      "verification": {
+        "method": "Controlled lighting comparison and final-camera inspection",
+        "procedure": "Render the final camera with the internal-illumination contribution enabled and disabled while holding material emission unchanged. Confirm a soft interior brightness difference. Inspect framing, clipping, alpha transparency, and readability of the required candy features in the submitted image and scene render.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, rebuild script, and correctly named RGBA render provide a reproducible submission.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the editable lollipop scene and working materials; build.py rebuilds it from an empty scene and saves the file with working final-camera render settings; B75_Transparent_Gradient_Lollipop.png is an RGBA render from that scene and preserves background transparency.",
+        "PARTIAL": "submission.blend opens with an editable lollipop scene and an active candy material, but at least one PASS condition is unmet, such as a missing script, a failed rebuild, an incorrectly named render, missing alpha, or a render that does not reproduce the scene.",
+        "FAIL": "No submission.blend opens with an editable lollipop scene and active candy material. Images or a script alone do not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Future file-open, rebuild, and render reproduction checks",
+        "procedure": "Open submission.blend in Blender 5.1.2 and inspect the native scene. Run build.py in a separate empty scene, reopen its saved file, and render the configured final camera with Cycles GPU. Compare geometry, materials, lighting, framing, and PNG alpha with the submitted image. This authoring package does not execute these checks.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

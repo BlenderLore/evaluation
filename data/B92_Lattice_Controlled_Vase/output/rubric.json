@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Lattice-Controlled Vase",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=ZCL9YI-nqcg",
+    "id": "ZCL9YI-nqcg"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 60, "RIG": 30, "PIPE": 10},
+  "weighting_note": "Geometry receives 60 points across profile, roundness, vessel closure, editable topology, and surface finish. The central manual lattice reshaping behavior receives 30 RIG points. Smooth gray-model shading belongs to GEO; material design, procedural generation, animation, and simulation are not independent source outcomes. Reproducible saved delivery and scene-derived rendering receive 10 PIPE points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Vase Profile",
+      "criterion": "The evaluated profile has the reference's elongated proportions, small foot, low rounded belly, long taper, narrow neck, and outward-flared mouth.",
+      "scoring_rule": {
+        "PASS": "The complete silhouette is upright and roughly one and a half widest diameters tall; the widest belly is in the lower half, the small foot expands into it, and a long shoulder taper reaches a narrow neck with a distinct flared mouth above it. The foot and rim are substantially narrower than the belly and the rim is wider than the neck.",
+        "PARTIAL": "A connected body has a recognizable lower belly and narrower upper neck, but one or more PASS conditions are unmet, including an absent minor endpoint feature or visibly inaccurate proportions.",
+        "FAIL": "There is no connected body with a recognizable lower belly and narrower upper neck, including a cylinder, cone, unrecognizable fragment, or missing vase."
+      },
+      "evidence_refs": ["image/01_finished_vase.png", "image/02_front_profile.png"],
+      "verification": {
+        "method": "Evaluated geometry and orthographic visual inspection",
+        "procedure": "Open the saved scene with deformation and smoothing active. Isolate the vase in front and side orthographic views and measure its height and widest diameter in object-axis coordinates. Compare the profile sequence and the relative widths and heights against the public references; assess proportion rather than source world-unit coordinates.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Circular Sections and Opening",
+      "criterion": "The vase has centered circular horizontal sections and matching front and side profiles.",
+      "scoring_rule": {
+        "PASS": "The existing complete foot, belly, neck, and rim have circular sections centered on one upright axis, and the front and side outlines agree without obvious ellipticity, squared corners, or lateral skew.",
+        "PARTIAL": "Both the belly and neck exist as closed section loops centered near a shared axis, but at least one PASS condition is unmet; noticeable ovality, uneven radii, skew, or a missing endpoint region may remain.",
+        "FAIL": "The belly and neck do not both exist as closed section loops near a shared axis, or gross collapse or displacement prevents a meaningful round-vessel comparison."
+      },
+      "evidence_refs": ["image/02_front_profile.png", "image/03_circular_section.png"],
+      "verification": {
+        "method": "Evaluated section sampling and top-view inspection",
+        "procedure": "Sample horizontal intersections through the evaluated foot, widest belly, narrow neck, and rim. Compare radial distances around each section to its fitted center, then compare the centers and front/side silhouettes. Inspect the actual section outlines rather than using equal X and Y bounding-box extents alone as proof of circularity.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Circular Sections and Opening",
+      "criterion": "An open mouth leads into the body and the connected floor closes the bottom.",
+      "scoring_rule": {
+        "PASS": "The mouth is one uninterrupted open ring leading into the vessel, the floor fully closes the bottom and is connected to the wall, and there are no unintended extra openings. A thin single-surface shell is acceptable.",
+        "PARTIAL": "The body has a recognizable open mouth and a connected floor covering most of the bottom, but one or more PASS conditions are unmet, such as a local break, small unintended hole, or partial obstruction.",
+        "FAIL": "The mouth is sealed or absent, there is no connected floor covering most of the bottom, or the floor is a detached visual substitute."
+      },
+      "evidence_refs": ["image/01_finished_vase.png", "image/03_circular_section.png", "image/05_quad_floor.png"],
+      "verification": {
+        "method": "Topology inspection and interior views",
+        "procedure": "Inspect boundary loops and face connectivity on the submitted vase. View into the mouth and from below, temporarily using a clipping section if needed, to confirm that the opening reaches the interior and the floor joins the sidewall. Check connectivity independently of the floor's quad layout, which is assessed separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Deformation Substrate",
+      "criterion": "The editable control mesh has a regular divided sidewall and connected grid-like quad floor suitable for regional deformation.",
+      "scoring_rule": {
+        "PASS": "The editable sidewall has a regular quad layout with horizontal divisions distributed through the lower body, shoulder, and neck regions, and the complete floor has a connected grid-like quad patch. The topology supports the demonstrated curved profile without relying on a dense sculpted or remeshed substitute.",
+        "PARTIAL": "A substantive editable sidewall has horizontal divisions spanning both lower and upper body regions and predominantly quad faces, but one or more PASS conditions are unmet, including irregular spacing, a defective floor patch, or unnecessarily dense topology.",
+        "FAIL": "There is no substantive editable sidewall divided across both lower and upper regions, or the only substrate is a dense sculpted/remeshed form with no usable regular wall layout."
+      },
+      "evidence_refs": ["image/04_cylinder_substrate.png", "image/05_quad_floor.png"],
+      "verification": {
+        "method": "Base-mesh topology inspection",
+        "procedure": "Inspect the body mesh before deformation and smoothing, tracing circumferential edge loops and the floor's face adjacency. Confirm divisions across the height and a grid-like floor, including the boundary junction. Do not require the source's exact vertex census, loop count, grid rotation, or construction history. The return to a cylindrical rest shape is assessed under RIG-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Smooth Finish",
+      "criterion": "The evaluated vase has clean continuous surfaces and smoothly finished transitions.",
+      "scoring_rule": {
+        "PASS": "The complete vase has smooth belly and shoulder shading without facet bands, unintended creases, doubled surfaces, inverted patches, or local pinching. The neck, rim, foot, and even floor are cleanly finished, including the wall-floor transition.",
+        "PARTIAL": "Substantive connected belly and shoulder surfaces exist and mostly read as smooth continuous surfaces, but one or more PASS conditions are unmet on the existing surfaces or a minor endpoint region is missing.",
+        "FAIL": "Substantive connected belly and shoulder surfaces are absent, or widespread faceting, inversion, overlap, or pinching prevents them from reading as mostly smooth continuous surfaces."
+      },
+      "evidence_refs": ["image/01_finished_vase.png", "image/02_front_profile.png"],
+      "verification": {
+        "method": "Controlled neutral renders and geometry inspection",
+        "procedure": "Inspect the evaluated body under broad neutral lighting from front, side, and elevated views, then inspect the floor and wall junction in a clipped interior view. Check normals and overlapping faces where shading reveals defects. Separate local finish defects from the overall shape, circularity, and missing-opening checks.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-01",
+      "capability": "RIG",
+      "points": 15,
+      "requirement_section": "Live Shape Controls",
+      "criterion": "The lattice carries the vase profile non-destructively and the smoothing stage remains live after deformation.",
+      "scoring_rule": {
+        "PASS": "A live separate Blender lattice drives the body throughout its height. Bypassing deformation returns it to a straight cylindrical substrate; restoring deformation restores the submitted profile. Bypassing smoothing alone exposes the shaped control mesh, and restoring smoothing restores the final surface without changing the base mesh.",
+        "PARTIAL": "A separate live Blender lattice produces a visible shape change in a substantive portion of the vase, but one or more PASS conditions are unmet, such as a partly baked profile, incomplete influence, or non-reversible smoothing.",
+        "FAIL": "No separate live Blender lattice visibly deforms a substantive portion of the vase, including an applied or disconnected cage, a purely decorative cage, or an entirely baked shape."
+      },
+      "evidence_refs": ["image/01_finished_vase.png", "image/02_front_profile.png", "image/04_cylinder_substrate.png"],
+      "verification": {
+        "method": "Non-destructive evaluation-state probe",
+        "procedure": "In a temporary copy of the saved file, record base vertex positions and the evaluated profile. Bypass smoothing to inspect the shaped control mesh, then bypass lattice deformation to inspect the straight cylindrical substrate. Restore deformation and smoothing in sequence and confirm recovery of the submitted profile and unchanged base positions. Inspect the working binding only as support for these evaluated results.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-02",
+      "capability": "RIG",
+      "points": 15,
+      "requirement_section": "Live Shape Controls",
+      "criterion": "Four horizontal cage levels provide useful regional width controls and upper height controls.",
+      "scoring_rule": {
+        "PASS": "The foot, belly, neck, and rim each have a working horizontal cage control level: a modest centered width adjustment changes the corresponding region while the other regions remain a recognizable vase. Modest neck and rim height edits also work. Symmetric edits preserve round sections, connected opening and floor, and freedom from tears or self-intersections; restoring the controls restores the original state.",
+        "PARTIAL": "At least two distinct horizontal levels independently produce regional width changes on the vase and can be restored, but one or more PASS conditions are unmet for the four-region controls, upper height edits, or deformation quality.",
+        "FAIL": "Fewer than two distinct horizontal levels independently produce restorable regional width changes, including controls that only transform the whole object, disconnected controls, or a static cage."
+      },
+      "evidence_refs": ["image/02_front_profile.png", "image/03_circular_section.png"],
+      "verification": {
+        "method": "Regional shape-control functional probes",
+        "procedure": "In a temporary copy, identify control levels by affected regions, not names. For each level, apply a small symmetric radial enlargement and reduction, record the local evaluated profile change, and restore its saved coordinates. Then move the neck and rim levels slightly along the upright axis, one at a time. Inspect correspondence, other-region stability, section roundness, surface connectivity, and intersections after each probe; restore all values at the end.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The submitted script recreates and saves a reopenable scene matching the delivered editable asset.",
+      "scoring_rule": {
+        "PASS": "Both submission.blend and build.py are present. Running build.py from an empty scene in Blender 5.1.2 recreates the asset and saves submission.blend; a fresh Blender process reopens that saved result with the vase, live controls, smoothing, and render setup intact and materially matching the delivered scene, without unavailable dependencies.",
+        "PARTIAL": "The delivered submission.blend opens and build.py runs without a pre-existing solution file or unavailable dependencies far enough to save a reopenable scene containing a recognizable vase, but one or more PASS conditions are unmet.",
+        "FAIL": "The delivered blend cannot be opened, the script is absent or cannot save a reopenable vase scene, or the rebuild depends on a pre-existing solution file or unavailable asset. Rebuilding only an unsaved in-memory scene fails."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean rebuild and saved-file reopening",
+        "procedure": "Preserve the original delivery and run build.py from an empty scene in a clean temporary directory using Blender 5.1.2. Confirm that it creates submission.blend on disk. Close that process, start a fresh Blender process, reopen the generated submission.blend, and compare its profile, base mesh, working lattice controls, live smoothing, and render setup with the original delivered file. Evaluate the saved result rather than the script's in-memory scene.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The requested PNG is a Cycles GPU render of the submitted scene and clearly presents the complete final vase.",
+      "scoring_rule": {
+        "PASS": "B92_Lattice_Controlled_Vase.png is a valid PNG rendered from the submitted scene using Cycles GPU. It shows the complete smooth vase and visible open mouth from a slightly elevated three-quarter view, without cage wires or construction overlays, and agrees with the saved asset.",
+        "PARTIAL": "A valid scene-derived PNG visibly presents the vase and is consistent with the submitted geometry, but one or more PASS conditions are unmet, such as filename, engine configuration, clipping, unclear opening, or construction overlays.",
+        "FAIL": "No valid scene-derived PNG visibly presents the vase, or the image is a source frame, viewport screenshot, external replacement, or otherwise inconsistent with the submitted geometry."
+      },
+      "evidence_refs": ["image/01_finished_vase.png"],
+      "verification": {
+        "method": "Image decoding and scene-to-render comparison",
+        "procedure": "Decode the delivered PNG, inspect the saved render engine and GPU configuration, and render the saved camera in a future verification environment. Compare silhouette, mouth, lighting relationships, and geometry with the delivered PNG, allowing sampling noise. Verify whole-object framing and absence of visible construction overlays; the source reference is guidance for form, not a permissible replacement image.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

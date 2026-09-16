@@ -1,0 +1,173 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "金属球驱动的水体方块波纹",
+  "source_video": {"url": "https://www.bilibili.com/video/BV1Zj7C6wE9K", "id": "BV1Zj7C6wE9K"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 10, "ANM": 25, "SIM": 35, "SURF": 25, "PIPE": 5},
+  "weighting_note": "暂定内容权重，未经评分校准。实际波浪响应占35分，接触路径与连续运动占25分，水和金属材质占25分，必要形体占10分，重放与依赖闭合占5分。本题同时包含独立形体、物体动画、可重算波浪模拟、材质和缓存重放，保留五种真实能力；不以修改器存在虚设PROC，也不因有相机灯光设SCN。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 水体与金属球形态",
+      "criterion": "交付包含封闭的近立方体水体和完整平滑的球体，初始比例符合公开要求。",
+      "scoring_rule": {
+        "PASS": "两种主体均存在；水体有体积且初始名义三轴边长比不超过1.15；球体为正球形且直径为0.30L至0.55L；初始主体没有意外开口或缺失部分，动画中水体保持方块主体轮廓、球体保持球形和尺寸。",
+        "PARTIAL": "水体方块与球体均可辨认，但比例、球体平滑度、初始局部完整性或动画形体保持至少一项不满足PASS，尚未破坏两种主体的识别。",
+        "FAIL": "任一主体缺失，水体只是单张平面，或缺损/形态偏差已使水体方块或球体无法辨认。"
+      },
+      "evidence_refs": ["image/01.png", "image/02.png"],
+      "verification": {
+        "method": "代码测量求值几何并结合正交视图人工/VLM检查",
+        "procedure": "在工程副本第1帧检查实际参与模拟和显示的主体，读取初始名义体积边界、测量三轴比例及球体直径/L，并从三个正交方向检查体积、闭合和缺损；再在60、120、180、240帧确认水体仍为方块主体、球体球形和尺寸保持。不能以对象名称、网格顶点数量或某种细分修改器证明形态。本行判主体形体，波面局部连续性由SIM-01判断，不重复判传播或材质。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-01", "capability": "ANM", "points": 15,
+      "requirement_section": "2. 连续的表面游走",
+      "criterion": "球体由水体下部一侧出发，经侧面上升并越过顶面，最终返回下部起点附近。",
+      "scoring_rule": {
+        "PASS": "实际求值路径包含下部出发、侧面上升、越过顶面和返回下部，且第240帧与第1帧的球心距离不超过0.10L。",
+        "PARTIAL": "球体存在且至少经过两个相距0.25L的接触位置，但路径阶段或终点回归条件未全部满足PASS。",
+        "FAIL": "球体缺失、没有实际位置变化，或没有两个相距0.25L的接触位置。"
+      },
+      "evidence_refs": ["image/01.png", "image/02.png"],
+      "verification": {
+        "method": "代码记录求值轨迹并结合全程预览",
+        "procedure": "依次求值1–240帧，记录球心相对水体的位置，按真实接触区域判断下部、侧面、顶面阶段；测量首末球心距离。通过视角切换确认遮挡后的路径，不能用五组关键帧或位置曲线存在替代实际运动。这里只判断路径覆盖与回归，不重复判断平滑度或波浪响应。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-02", "capability": "ANM", "points": 10,
+      "requirement_section": "2. 连续的表面游走",
+      "criterion": "球体在固定水体上连续接触运动，避免瞬移、长期悬空或仅在内部穿行。",
+      "scoring_rule": {
+        "PASS": "实际运动同时满足三项：相邻帧球心位移不超过0.10L；至少90%的帧与求值水面接触或间隙不超过0.03L，且不是仅在内部穿行；水体整体位置和朝向固定。",
+        "PARTIAL": "球体和水体均存在且球体实际移动，三项条件中满足一项或两项。",
+        "FAIL": "任一主体缺失、球体静止，或三项条件均不满足。"
+      },
+      "evidence_refs": ["image/01.png", "image/02.png"],
+      "verification": {
+        "method": "代码逐帧距离/接触采样和人工/VLM检查",
+        "procedure": "从第1帧顺序求值至240帧，测量相邻球心位移，利用求值水面与球体边界的距离或相交关系统计接触帧比例；实体视图确认球体并非完全藏在体积内移动。跟踪水体的整体坐标系或稳定主体区域，区分整体位移和局部波面形变。只判断运动连续性和锚定，不把波纹幅度计入此行。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SIM-01", "capability": "SIM", "points": 15,
+      "requirement_section": "3. 可重算的波浪响应",
+      "criterion": "侧面和顶面的球体接触均引起局部、连续的真实水面几何形变。",
+      "scoring_rule": {
+        "PASS": "侧面和顶面两类接触区都出现与球体位置对应的凹陷、隆起或波峰，实体视图下可辨认，波面连续且没有明显折面、裂缝或失控尖刺。",
+        "PARTIAL": "至少一类接触区存在可辨认的真实几何响应，但另一类缺失，或已有响应被明显的折面、裂缝、尖刺损害。",
+        "FAIL": "无水体或球体，或两类接触均无真实几何响应；只改变贴图、法线、高光或整体物体变换也归此档。"
+      },
+      "evidence_refs": ["image/01.png", "image/03.png"],
+      "verification": {
+        "method": "求值几何比较与中性材质动态观察",
+        "procedure": "从第1帧顺序计算模拟，在球体接触侧面及顶面的时段分别比较局部表面与初始表面的位置差，并用固定中性材质/实体视图近看波形是否随接触区产生。原拓扑与求值拓扑不同时使用表面采样，不能只查Canvas、Brush或Waves属性。网格密度无固定要求。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SIM-02", "capability": "SIM", "points": 10,
+      "requirement_section": "3. 可重算的波浪响应",
+      "criterion": "波纹在球体离开后继续变化，并传播到接触区域以外。",
+      "scoring_rule": {
+        "PASS": "真实波形同时满足两项：离开某个接触区域后继续变化至少12帧；从该接触区域向外传播至少一个球体半径。不是固定凹坑跟随球体，也不是整块水体同步起伏。",
+        "PARTIAL": "已有真实局部波形，持续变化和向外传播两项中仅有一项达到公开要求。",
+        "FAIL": "缺少真实局部波形，或两项均未达到；只随球平移的固定凹坑和全体同步起伏归此档。"
+      },
+      "evidence_refs": ["image/01.png", "image/03.png"],
+      "verification": {
+        "method": "代码跟踪局部波面时序并结合连续帧观察",
+        "procedure": "选取侧面或顶面上一处球体会离开的实际接触区，记录离开前后及至少12个后续帧的求值表面；观察同一空间区域的波峰/波谷是否继续变化，并测量扰动扩展至接触区之外的距离。以固定视角或表面位移可视化排除高光移动造成的错觉。此行只判时间延续和传播，局部形变有无由SIM-01判断。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SIM-03", "capability": "SIM", "points": 10,
+      "requirement_section": "3. 可重算的波浪响应",
+      "criterion": "可编辑模拟在重新计算时实际响应球体接触关系的改变。",
+      "scoring_rule": {
+        "PASS": "两次功能检查均成立：移离球体并清缓存重算后原路径不再产生新波纹；恢复接触路径并重算后相应波纹再次出现。",
+        "PARTIAL": "有可重算的模拟关系，两次功能检查中仅一次成立。",
+        "FAIL": "无可编辑、可重算的模拟关系，或两次功能检查均不成立。仅有固定烘焙形状、与球体无关的噪声动画或未参与输出的模拟结构不算完成。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "工程副本上的非破坏性功能探测",
+        "procedure": "保留原交付。在副本中按工程说明将球体全部移离水体而不改变水体和照明，从干净初始状态重算1–240帧，观察原路径的新波纹是否消失；恢复原接触路径再次清缓存重算，确认局部响应恢复。检查的是实际求值结果，不是隐藏球体的渲染可见性或修改器名称。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 10,
+      "requirement_section": "4. 透明水体与金属反射",
+      "criterion": "实际水体呈蓝/青蓝色且具有可辨认体积厚度的透射和折射。",
+      "scoring_rule": {
+        "PASS": "水体实际使用的材质同时满足蓝/青蓝色和体积透射折射，能透见另一侧表面、棱边或背景，并产生局部折射扭曲。",
+        "PARTIAL": "水体存在，蓝/青蓝色与体积透射折射两项中仅一项成立。",
+        "FAIL": "水体缺失或两项均不成立；没有折射证据的Alpha淡化不能满足透射折射这一项。"
+      },
+      "evidence_refs": ["image/01.png", "image/02.png", "image/03.png"],
+      "verification": {
+        "method": "实际材质连接检查和Cycles GPU渲染观察",
+        "procedure": "追踪实际水体表面使用的材质到输出端，并在固定三分之四视角检查颜色、透见关系和厚度造成的折射。必要时在副本水体后放置中性明暗参照，以区分真实透射与Alpha淡化。允许等价着色实现，不要求特定BSDF数值。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 10,
+      "requirement_section": "4. 透明水体与金属反射",
+      "criterion": "光亮水面的高光及折射图案随实际波形变化，能表现波峰波谷。",
+      "scoring_rule": {
+        "PASS": "已有水体和真实动态波形；波面具有可辨认的连续光亮反射，且固定相机/灯光下高光和折射图案均随波形变化。",
+        "PARTIAL": "已有水体和真实动态波形，未满足PASS，但高光、折射图案中至少一种能随波形清楚变化。",
+        "FAIL": "水体或真实动态波形缺失，或高光和折射变化均不可辨认。静态画面贴片或仅由移动照明造成的变化归此档。"
+      },
+      "evidence_refs": ["image/01.png", "image/03.png"],
+      "verification": {
+        "method": "固定观察条件的多帧渲染比较",
+        "procedure": "在提交场景固定相机和照明，选择波纹明显的两个或更多时刻渲染；结合相同帧的中性几何视图确认反射和折射变化附着于真实波面。可用副本中的大面积反射参照辅助辨认。此行不重复评波浪传播距离、蓝色或透明度，只判材质对已有动态几何的光学表达。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03", "capability": "SURF", "points": 5,
+      "requirement_section": "4. 透明水体与金属反射",
+      "criterion": "球体呈银色、可辨认环境反射的光亮金属外观。",
+      "scoring_rule": {
+        "PASS": "球体存在并实际使用金属材质，呈中性银色，能清楚辨认环境或灯光反射。",
+        "PARTIAL": "球体有可辨认金属反射，但颜色明显偏离中性银色，或表面过粗糙而无法清楚辨认反射形状。",
+        "FAIL": "球体缺失、无可辨认金属反射，或外观为白色漫反射/透明球。"
+      },
+      "evidence_refs": ["image/01.png", "image/02.png"],
+      "verification": {
+        "method": "实际材料连接和球体可见帧的渲染检查",
+        "procedure": "在球体不被水体完全遮挡的帧检查其实际材质输出和渲染外观，确认银色金属的反射来自球体表面，而不是未赋给对象的材质或球后背景。允许不同着色节点和粗糙度数值达到目标外观。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "5. 交付与重放",
+      "criterion": "交付能脱离原机路径重放完整动画，并能按build.py从空场景重建。",
+      "scoring_rule": {
+        "PASS": "移至新目录后，按工程说明能从第1帧以24fps顺序重放或重算完整1–240帧，且build.py可从空场景生成并保存包含同等功能的工程；所需资源与缓存依赖完整。",
+        "PARTIAL": "可移目录重放和从build.py重建两项中仅一项成功；成功的部分不依赖未提供资源。",
+        "FAIL": "两项均失败，或成功仅依赖原机绝对路径、未提供文件或联网资源。仅能打开静态.blend不计分。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "独立目录重放与空场景重建流程核验",
+        "procedure": "将所有提交文件复制到新的工作目录，按内置说明重放或从初始状态计算1–240帧；核验24fps、说明、相对资源路径和缓存可再生性。另在Blender5.1.2空场景按脚本说明运行build.py，确认生成并保存的工程保留同等可编辑关系。此行只评流程与依赖闭合，功能探测的波浪因果关系由SIM-03单独评。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

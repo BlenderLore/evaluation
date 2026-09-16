@@ -1,0 +1,157 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "手持相机推进镜头",
+  "source_video": {"url": "https://www.youtube.com/watch?v=Ik8PLqm220k", "id": "Ik8PLqm220k"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"SCN": 35, "ANM": 55, "PIPE": 10},
+  "weighting_note": "暂定权重。镜头功能以实际推进、节奏、克制晃动及可调动画为核心，ANM 55；空间参照、端点景别和全程可见性为 SCN 35；独立重建与一致重播为 PIPE 10。Suzanne 与平面为简单示范场景，不另设复杂建模、材质或灯光存在性分数。权重尚未通过真实提交样本校准。",
+  "rubric": [
+    {
+      "id": "SCN-01", "capability": "SCN", "points": 10,
+      "requirement_section": "1. 静止主体与空间参照",
+      "criterion": "可辨认的正面 Suzanne 与下方不相交的水平地面组成简单场景，地面在两个端点均提供清晰的下部区域及远侧边缘；二者世界状态在全片保持不变。",
+      "scoring_rule": {
+        "PASS": "主体与地面均存在且可辨认，同时满足不相交、两个端点地面参照清晰、全片世界状态不变三项条件。",
+        "PARTIAL": "主体与地面均存在且可辨认，上述三项条件恰有一项或两项满足。",
+        "FAIL": "缺少主体或地面，或上述三项条件均不满足。"
+      },
+      "evidence_refs": ["image/01_final.jpg"],
+      "verification": {
+        "method": "evaluated_scene_and_visual",
+        "procedure": "从活动相机检查帧 1 和 250 的主体与地面关系，并从场景侧面确认水平地面未穿入 Suzanne；以实际求值几何或表面采样比较全片世界位置、方向和形状。允许小间隙及等价对象组织，不以 Suzanne 的顶点数、对象名称、灯光数量或地面绝对米数判定。此项仅检查场景参照关系，画框裁切另由 SCN-03 检查。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-02", "capability": "SCN", "points": 15,
+      "requirement_section": "2. 起止构图与全程可见性",
+      "criterion": "16:9 画框内起止景别符合公开投影高度范围、1.4 至 1.8 倍的放大关系和端点中心偏移限制。",
+      "scoring_rule": {
+        "PASS": "16:9 画幅正确，且起始高度 40% 至 55%、结束高度 65% 至 85%、高度比 1.4 至 1.8、两端中心偏移各不超过 8% 四项全部满足。",
+        "PARTIAL": "存在可辨认主体与活动相机；未达到 PASS，但四项端点构图条件中至少两项满足。",
+        "FAIL": "不存在可辨认主体或活动相机，或四项端点构图条件中少于两项满足。"
+      },
+      "evidence_refs": ["image/02_opening.jpg", "image/03_closing.jpg"],
+      "verification": {
+        "method": "camera_projection_and_visual",
+        "procedure": "保持交付默认晃动开启，求值帧 1 和 250，按相机投影计算整个主体的二维包围框高度和中心，结合相机图像核验。采用未被画框截断的完整投影包围框，避免把裁切后的高度当作主体大小；本项不重复评判裁切。按实际像素宽高比检查 16:9，不固定输出分辨率或焦距数值。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-03", "capability": "SCN", "points": 10,
+      "requirement_section": "2. 起止构图与全程可见性",
+      "criterion": "默认镜头全程完整保留主体，四周至少 3% 画幅边距，面部与双耳可辨认且未被地面、裁剪或模糊遮蔽。",
+      "scoring_rule": {
+        "PASS": "1 至 250 帧全部保持整体在框内、四周至少 3% 边距和正面主体可辨认。",
+        "PARTIAL": "未达到 PASS，但至少 225 帧满足上述完整条件，且没有连续 24 帧主体面部不可辨认。",
+        "FAIL": "少于 225 帧满足完整条件，或出现连续 24 帧面部不可辨认，或缺少实际活动相机视图。"
+      },
+      "evidence_refs": ["image/01_final.jpg", "image/02_opening.jpg", "image/03_closing.jpg"],
+      "verification": {
+        "method": "per_frame_projection_and_visual_playback",
+        "procedure": "逐帧采样实际求值相机与主体投影，计算完整包围框到四边的最小边距；对边距最小帧、端点及中间帧检查相机视图，并连续播放核对主体遮挡、侧后方转向和模糊。不能只检查两张静帧或相机朝向约束。只在本项扣除画框、地面遮挡、裁剪及可辨认性问题。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-01", "capability": "ANM", "points": 15,
+      "requirement_section": "3. 有目的且连续的推进",
+      "criterion": "关闭晃动时，相机以固定光学设置真实推进，在 1 至 250 帧持续接近主体，结束距离为开始的 0.55 至 0.75 倍。",
+      "scoring_rule": {
+        "PASS": "存在真实相机平移，且结束距离比例、全区间持续接近、固定焦距与传感器三项均满足。",
+        "PARTIAL": "存在真实相机平移，上述三项条件恰有一项或两项满足。",
+        "FAIL": "没有相机实际推进，仅靠变焦、主体缩放或主体移动改变景别，或三项条件均不满足。"
+      },
+      "evidence_refs": ["image/02_opening.jpg", "image/03_closing.jpg"],
+      "verification": {
+        "method": "evaluated_animation_sampling",
+        "procedure": "在临时副本中按文件说明关闭晃动，逐帧及区间内子帧求值相机世界矩阵和主体中心，计算 D(t)/D0 并检查距离趋势；检查实际焦距和传感器是否恒定。微小浮点误差不视为倒退。区分相机、主体和光学参数各自的贡献，不由关键帧个数或 Noise 修改器存在推断结果。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-02", "capability": "ANM", "points": 10,
+      "requirement_section": "3. 有目的且连续的推进",
+      "criterion": "基础推进缓入缓出，相机位置与朝向连续，开启晃动后仍保留同一条可辨认的推进。",
+      "scoring_rule": {
+        "PASS": "存在推进，公开首尾速度比较均成立，且基础与默认完整运动均无切镜、瞬移或单帧角度翻转。",
+        "PARTIAL": "存在连续推进，但首尾两个速度比较恰有一个或两个不成立；或两个速度比较成立但有一处局部突变。",
+        "FAIL": "没有推进；或有多处突变；或有突变且首尾速度比较中至少一个不成立。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "temporal_sampling_and_playback",
+        "procedure": "复用关闭晃动的距离曲线，分别以相等时间单位计算帧 1-25、226-250、101-150 的平均接近速度，检查两个端段均慢于中段。对位置和旋转的相邻帧及子帧差值检查明显不连续，分别播放关闭和开启晃动状态。角差用旋转表示无关的方法处理，不因欧拉角跨越 360 度误判。不得仅由 Bezier、Auto Clamped 标记给予节奏分数。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-03", "capability": "ANM", "points": 10,
+      "requirement_section": "4. 克制且不规则的手持晃动",
+      "criterion": "实际位置与朝向晃动均存在，最大位置偏差为 0.003H 至 0.03H，最大朝向角差为 0.1 至 1 度。",
+      "scoring_rule": {
+        "PASS": "平移与转角晃动均存在，且各自最大偏差都在公开范围内。",
+        "PARTIAL": "恰有一种晃动的最大偏差在公开范围内，另一种缺失或超出范围。",
+        "FAIL": "两种晃动的最大偏差都不在公开范围内，包括均缺失的情况。"
+      },
+      "evidence_refs": ["image/01_final.jpg"],
+      "verification": {
+        "method": "paired_evaluated_camera_sampling",
+        "procedure": "以相同帧和子帧采样默认开启、全部强度为零的实际相机世界矩阵，计算位置差范数与旋转相对角，按静止主体高度 H 归一化。取整个镜头峰值并观看相机图像确认幅度观感；不得把 Strength 字段值直接当成实际偏差，不检查指定 Noise 数量、单位米数或随机种子。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-04", "capability": "ANM", "points": 10,
+      "requirement_section": "4. 克制且不规则的手持晃动",
+      "criterion": "手持偏移连续、不规则且方向不同步；位移与转角各有多个变化方向，整段无连续 24 帧恒定偏移，也不呈现完全重复短周期或高频震颤。",
+      "scoring_rule": {
+        "PASS": "位移和转角均非零，且多方向不同比例变化、持续且平滑、无明显完全重复短周期或高频震颤三项全部成立。",
+        "PARTIAL": "未达到 PASS，位移或转角至少一种非零，且三项条件至少一项成立。",
+        "FAIL": "两类晃动均不存在，或三项条件均不成立。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "residual_motion_analysis_and_playback",
+        "procedure": "从默认矩阵与无晃动矩阵提取残差序列，以固定坐标系比较各方向曲线，检查位移和转角是否各自超出一条恒定比例的方向。逐帧检查连续恒定段，比较序列的重复片段，配合 24 fps 连续播放判别生硬随机跳动、高频震颤和短循环。允许不同曲线偶尔同时过零或偶尔同向，不以 Offset/Phase 是否不同替代求值运动。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-05", "capability": "ANM", "points": 10,
+      "requirement_section": "5. 可继续调整的镜头",
+      "criterion": "基础推进与晃动可独立编辑，强度归零、分别放大平移或旋转、降低晃动速度及恢复默认均能在现有场景实时生效。",
+      "scoring_rule": {
+        "PASS": "四组功能试验全部通过：归零保留推进；分别乘 1.5 只改变对应晃动幅度；减慢晃动但保持推进时长；按说明恢复默认。",
+        "PARTIAL": "四组功能试验恰有两组或三组通过。",
+        "FAIL": "少于两组试验通过，或所谓控制仅为未连接的属性，或所有调整都必须重新生成场景。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "functional_edit_probes",
+        "procedure": "在临时副本按内部说明定位控制。依次从默认开始执行题面四组试验，以实际相机残差曲线核验幅度、时序、基础路径和 250 帧时长。乘 1.5 试验要求对应残差增大且另一类保持不变，不额外要求放大后的构图仍满足默认边距。基础运动可由现有关键帧或等价结构直接调整；无需专门面板或固定对象名。记录恢复后的矩阵与默认一致性。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 10,
+      "requirement_section": "6. 交付与复现",
+      "criterion": "交付镜头资源自包含，脚本能独立重建，并在 Blender 5.1.2 中以指定时间和默认状态一致重播及随机跳帧。",
+      "scoring_rule": {
+        "PASS": "两项均满足：无网络与外部路径依赖的脚本重建后保留镜头功能；重开后保持默认相机、晃动、1-250 帧及 24 fps，重复播放与乱序跳帧结果一致。",
+        "PARTIAL": "两项恰有一项满足，且提交中存在可编辑的实际镜头。",
+        "FAIL": "两项均不满足，或仅提供视频、截图而没有可编辑镜头。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "isolated_rebuild_and_replay",
+        "procedure": "未来在 Blender 5.1.2 的临时目录禁用联网，按 build.py 顶部说明由空场景重建，确认不读取未交付文件或原 submission.blend。重开保存结果，检查 GPU Compute/Cycles 设置及播放参数，按 1、125、250、60、125 的次序跳帧，再播放两次，比较同帧实际相机矩阵和场景状态；抽查推进与一组强度控制。文件可打开只是检查前提，不单独奖励分数。此处仅规定未来验证流程，未宣称已运行。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

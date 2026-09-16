@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Square Strawberry Cream Layer Cake",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1GsTszZEbo",
+    "id": "BV1GsTszZEbo"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 36, "SURF": 52, "SCN": 6, "PIPE": 6},
+  "weighting_note": "Geometry and materials receive 88 points because the source teaches a modeled dessert and its procedural surfaces. Cake form, piping, layer layout, crumb, cream, and fruit appearance are assessed separately. The supporting strawberry garnish has only 6 geometry points. Presentation and reproducible delivery have a limited combined weight of 12 points. Editable material responses are SURF, not geometric procedural generation.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Cake Body and Layer Layout",
+      "criterion": "The cake has a compact square body with broad flat faces, a level top, softly rounded corners, and a smooth firm silhouette.",
+      "scoring_rule": {
+        "PASS": "An editable cake volume has a square footprint and compact nearly cubic proportions, broad flat sides, a level top, and consistently rounded perimeter edges and vertical corners without conspicuous faceting or collapsed regions.",
+        "PARTIAL": "An editable cake volume with a broad top and side faces exists, but one or more PASS conditions are unmet, including proportion, corner, flatness, or smoothness defects.",
+        "FAIL": "No editable cake volume with a broad top and side faces exists; an image plane or an unrecognizable collection of fragments does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_cake_overview.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_neutral_material_inspection",
+        "procedure": "Open the submission and isolate the cake body in a temporary copy. Inspect evaluated geometry from top, front, side, and three-quarter views using a neutral material. Confirm physical volume, broad face regions, corner rounding, proportions, and silhouette continuity; do not require a particular modifier or object count.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "Cream Piping",
+      "criterion": "Two three-dimensional shell-like cream decorations have plump folded forms and rest on the cake top.",
+      "scoring_rule": {
+        "PASS": "Both decorations have a plump shell-like body, several readable lengthwise folds with rounded ridges and valleys, and a narrowed end. They use slightly different orientations behind and beside the strawberry and contact the top coating without obvious floating or destructive intersection.",
+        "PARTIAL": "At least one three-dimensional cream decoration has a plump body and readable modeled folds, but one or more PASS conditions are unmet, including a missing second decoration or weak form, placement, or contact.",
+        "FAIL": "No three-dimensional cream decoration with a plump body and readable modeled folds exists. Plain spheres, flat silhouettes, or texture-only folds do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_top_decoration.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_contact_inspection",
+        "procedure": "Inspect the evaluated piping under neutral shading from the final view and two oblique angles. Check that folds are geometry, inspect both profiles and narrowed ends, and examine their contact with the cake top. Assess missing piping only in this row and its relevant material row, not as a separate assembly penalty.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 6,
+      "requirement_section": "Strawberry and Filling Geometry",
+      "criterion": "The whole strawberry is an editable rounded tapered form with distributed seed relief.",
+      "scoring_rule": {
+        "PASS": "A prominent whole strawberry rests on the cake top with a smooth rounded tapered body, shallow seed recesses, and small seeds seated in those recesses. The detail is distributed over the visible body and has real relief in oblique views.",
+        "PARTIAL": "An editable rounded tapered strawberry body with physical volume is present, but one or more PASS conditions are unmet, including missing, sparse, floating, or flat seed detail, rough body form, or weak placement.",
+        "FAIL": "No editable rounded tapered strawberry body with physical volume is present. A flat image, unrelated primitive, or seeds without a fruit body does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_top_decoration.png", "image/04_seeded_strawberry_geometry.png"],
+      "verification": {
+        "method": "evaluated_geometry_close_inspection",
+        "procedure": "Isolate the whole berry and inspect its evaluated surface from front and grazing angles under neutral shading. Confirm the tapered body and visible seed/recess depth. Inspect contact in the assembled scene. Native meshes, instances, displacement, or equivalent editable geometry may produce the relief; no exact prepared mesh is required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 8,
+      "requirement_section": "Strawberry and Filling Geometry",
+      "criterion": "Irregular elongated fruit pieces are embedded in the central cream filling across the visible side faces.",
+      "scoring_rule": {
+        "PASS": "Multiple thin fruit pieces appear on each of the two side faces shown in the final view. Their elongated rounded forms vary modestly in size and angle, and their exposed surfaces sit within the central cream band without visible detachment or major intersections through the sponge.",
+        "PARTIAL": "At least one three-dimensional elongated fruit piece is embedded in the central filling, but one or more PASS conditions are unmet, including insufficient face coverage, overly regular shapes, poor thickness, or uneven embedding.",
+        "FAIL": "No three-dimensional elongated fruit piece is embedded in the central filling. Flat painted marks or detached decorations do not meet the minimum."
+      },
+      "evidence_refs": ["image/03_layer_and_filling_detail.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_spatial_inspection",
+        "procedure": "Inspect both camera-facing side faces, then hide the cake body temporarily to identify the editable filling geometry. Restore the cake and inspect the interface between fruit and cream. Check elongated rounded profiles, thickness, variation, and distribution without relying on object names or separate-object counts.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 12,
+      "requirement_section": "Cake Body and Layer Layout",
+      "criterion": "The material appearance clearly separates two yellow sponge bands, a broad white central filling, and a thin white top coating.",
+      "scoring_rule": {
+        "PASS": "The cake shows the required bottom-to-top sequence of sponge, central cream, sponge, and thinner white coating. Bands continue around the body with approximately horizontal, mildly varied boundaries, and both sponge bands remain distinct from the central filling.",
+        "PARTIAL": "The cake visibly separates at least one yellow sponge region from one white cream region, but one or more PASS conditions are unmet, including an incorrect sequence, missing band, uneven continuity, or overly distorted boundary.",
+        "FAIL": "The cake does not visibly separate a yellow sponge region from a white cream region, or the required cake body is absent."
+      },
+      "evidence_refs": ["image/01_cake_overview.png", "image/03_layer_and_filling_detail.png"],
+      "verification": {
+        "method": "material_assignment_and_controlled_render_inspection",
+        "procedure": "Inspect actual materials on the submitted cake and render or view it under neutral illumination from all four sides and above. Follow the band sequence around corners and assess thickness relationships and boundary direction. Accept equivalent shader or material-assignment implementations that preserve editable surface control.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 14,
+      "requirement_section": "Material Appearance",
+      "criterion": "Yellow sponge has fine irregular porous crumb and subtle color variation, contrasting with smoother cream.",
+      "scoring_rule": {
+        "PASS": "Both existing sponge bands show fine irregular pits and yellow variation that read as cake crumb. The texture remains small relative to the cake, avoids coarse rocky relief or a regular grid, and contrasts with the smoother filling and top coating while preserving the broad silhouette.",
+        "PARTIAL": "At least one existing yellow sponge region has visible irregular crumb texture, but one or more PASS conditions are unmet, including missing coverage, unsuitable scale, excessive relief, repetition, or weak contrast with cream.",
+        "FAIL": "No existing yellow sponge region has visible irregular crumb texture. Flat color alone or an absent sponge region does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_layer_and_filling_detail.png"],
+      "verification": {
+        "method": "material_use_and_surface_detail_render_inspection",
+        "procedure": "Inspect the actual sponge material on both bands in the full render and a close crop rendered from the scene under soft grazing light. Confirm fine-scale irregular color and normal or displacement variation, then compare with the adjacent cream. Inspect live material connections to exclude disconnected decorative texture nodes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 8,
+      "requirement_section": "Material Appearance",
+      "criterion": "Both piped decorations use consistent warm-white cream with restrained fine texture and soft highlights.",
+      "scoring_rule": {
+        "PASS": "Both existing piped decorations have consistent warm-white nonmetallic cream appearance, gentle color variation, very fine surface texture, and broad soft highlights that preserve fold readability.",
+        "PARTIAL": "At least one existing piped decoration has a warm-white nonmetallic cream appearance, but one or more PASS conditions are unmet, including a missing second decoration, inconsistent appearance, flat color, excessive bump, or harsh highlights.",
+        "FAIL": "No existing piped decoration has a warm-white nonmetallic cream appearance. Missing piping cannot receive material credit."
+      },
+      "evidence_refs": ["image/02_top_decoration.png"],
+      "verification": {
+        "method": "assigned_material_and_controlled_lighting_inspection",
+        "procedure": "Inspect the materials actually assigned to both piping forms and view their close-up appearance under the submitted and a neutral soft light setup. Check warm-white variation, texture scale, nonmetallic response, consistent appearance, and readable broad fold highlights; do not re-score fold geometry here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Material Appearance",
+      "criterion": "The glossy whole strawberry and softer red-pink filling flesh have distinct convincing fruit surfaces.",
+      "scoring_rule": {
+        "PASS": "The existing whole strawberry has rich red skin, glossy highlights, and pale yellow seeds. Existing filling pieces have softer red-to-pink flesh with lighter internal streaks, irregular color variation, and subtle relief. Both remain clearly distinct from sponge and cream.",
+        "PARTIAL": "At least one existing whole strawberry or filling piece has a visibly red fruit material, but one or more PASS conditions are unmet, including an absent fruit type, missing seed color, flat flesh color, unsuitable gloss, or weak streaks and relief.",
+        "FAIL": "No existing whole strawberry or filling piece has a visibly red fruit material. Missing fruit cannot receive material credit."
+      },
+      "evidence_refs": ["image/02_top_decoration.png", "image/03_layer_and_filling_detail.png"],
+      "verification": {
+        "method": "fruit_material_and_close_render_inspection",
+        "procedure": "Inspect assigned fruit materials and render close views of the whole berry and side filling using soft neutral light. Compare skin gloss and seed color with the softer internal flesh streaks and relief. Confirm the observed effects come from materials used by the submitted fruit geometry.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-05",
+      "capability": "SURF",
+      "points": 8,
+      "requirement_section": "Editable Surface Controls",
+      "criterion": "Editable procedural inputs change layer proportions, sponge crumb scale, and fruit-pulp variation scale, and cream edits remain consistent across the pair.",
+      "scoring_rule": {
+        "PASS": "All three specified surface inputs produce their intended visible change while retaining recognizable unrelated features. A cream appearance edit updates both piped decorations consistently, and the saved scene retains the reference appearance with editable three-dimensional components.",
+        "PARTIAL": "At least one of the three specified surface inputs causes its intended visible change on editable cake or fruit geometry, but one or more PASS conditions are unmet, including ineffective remaining inputs, destructive coupling, inconsistent cream updates, or an unrestored saved appearance.",
+        "FAIL": "None of the three specified surface inputs causes its intended visible change on editable geometry. Static baked pictures, disconnected inputs, and labels without effective response do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_cake_overview.png", "image/03_layer_and_filling_detail.png"],
+      "verification": {
+        "method": "non_destructive_material_parameter_probes",
+        "procedure": "In a temporary copy, identify the controls or native material inputs for layer proportions, crumb scale, and pulp variation scale. Change one at a time by a modest amount within its usable range and compare controlled renders before and after. Confirm the intended response and stability of other features, restoring each value between probes. Make a small cream color edit and confirm both piping forms update. Do not require custom UI, exact node types, or named controls.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 6,
+      "requirement_section": "Presentation",
+      "criterion": "The final view clearly reveals the assembled cake from above and two sides with useful soft lighting and contact shadows.",
+      "scoring_rule": {
+        "PASS": "The final view shows the entire cake and top decorations in a three-quarter composition with the top and two side faces readable. Soft lighting reveals existing surface detail, preserves white and red tonal detail, and provides natural contact shadows against an unobtrusive background.",
+        "PARTIAL": "A camera view shows a recognizable assembled cake and at least one side face, but one or more PASS conditions are unmet, including cropping, weak top or second-face visibility, distracting background, clipped tonal detail, or poor lighting and shadows.",
+        "FAIL": "No camera view shows a recognizable assembled cake and at least one side face. A reference image or unrelated scene does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_cake_overview.png"],
+      "verification": {
+        "method": "final_camera_render_visual_inspection",
+        "procedure": "Render the saved final camera from the submitted scene and inspect framing, visible faces, background, lighting, tonal detail, and contact shadows. Evaluate camera and light effectiveness on existing components; do not duplicate geometry or surface penalties solely because a component is missing.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 6,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, reproducible build script, and correctly named scene-derived PNG are delivered.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the editable cake and final camera/materials, build.py rebuilds and saves the scene from an empty Blender 5.1.2 file without external assets, Cycles GPU rendering is configured, and B63_Square_Strawberry_Cream_Layer_Cake.png is rendered from that scene and matches the submitted result.",
+        "PARTIAL": "submission.blend opens with an editable cake, but one or more PASS conditions are unmet, including missing or ineffective build code, incorrect render configuration, missing or misnamed PNG, or disagreement between the build, scene, and image.",
+        "FAIL": "submission.blend is missing, cannot open, or contains no editable cake. Image-only submissions do not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact_open_rebuild_and_render_provenance_check",
+        "procedure": "In an isolated temporary directory, open submission.blend and inspect editability and Cycles GPU configuration. Review and execute build.py in Blender 5.1.2 from an empty file, check that it saves the expected blend and PNG without external assets, and compare a fresh render with the submitted PNG. Confirm it is a scene render rather than a copied source image. This procedure is specified for future submission review and has not been run during authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

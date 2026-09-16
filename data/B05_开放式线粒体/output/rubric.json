@@ -1,0 +1,192 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "开放式线粒体",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV17P5T69EWq",
+    "id": "BV17P5T69EWq"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "暂定内容权重，未经过评分校准。该案例是静态灰模，GEO90分拆为七个形态关系检查及两个曲面/边缘质量检查，每项10分；独立编辑与无外部依赖重建各5分。没有材质设计要求，几何圆顺和法线质量统一归GEO，不为能力配额虚增SURF。整体能力覆盖由选题组合平衡，窄任务内部通过独立细项平衡。不把修改器存在归为PROC，也不新增灯光或动画要求。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 长椭圆开放外壳",
+      "criterion": "外壳具有长椭圆或胶囊状俯视轮廓，长宽比1.8至4，且两端圆钝。",
+      "scoring_rule": {
+        "PASS": "存在可识别外壳，长宽比在1.8至4内，且两端圆钝、长侧边连续自然。",
+        "PARTIAL": "存在可识别外壳，但长宽比范围与圆钝自然轮廓两项中仅满足一项。",
+        "FAIL": "缺少可识别外壳，或比例与圆钝自然轮廓两项均不满足。"
+      },
+      "evidence_refs": ["image/01_overview.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "在副本中隐藏内部嵴，依据壳口平面建立与世界朝向无关的俯视坐标，测量求值后外壳投影沿主长轴及垂直短轴的包围尺寸比。用俯视和斜视判断两端是否圆钝、长侧边是否连续自然，不以对象包围盒的固定XYZ或对象名称识别模型。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 长椭圆开放外壳",
+      "criterion": "外壳顶部敞开、底面连续，侧壁围成有深度的碗状内腔。",
+      "scoring_rule": {
+        "PASS": "可识别外壳满足三项：整个内腔顶部无盖；底面连续且没有额外破洞；侧壁与两端弯起形成明确腔体深度。",
+        "PARTIAL": "可识别外壳满足上述三项中的一项或两项。",
+        "FAIL": "缺少可识别外壳，或三项均不满足。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/03_low_side.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "隐藏内部嵴，从上方、侧面和下方检查外壳求值几何；必要时在副本上使用剖切或射线检查确认内部为空、底面连续、侧壁向上围合。区分开放碗腔与具有实体壁厚的闭合网格，不把拓扑边界边数直接当作顶部开口的证据。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 真实壁厚与连续环口",
+      "criterion": "外壳具备真实内外层厚度、闭合环口侧面和基本一致的轻薄壁宽。",
+      "scoring_rule": {
+        "PASS": "存在可识别外壳，内外两层表面形成连续非零厚度，环口侧面完整连接内外层，且环口宽度基本一致并保留宽阔内腔。",
+        "PARTIAL": "存在可识别外壳，上述真实厚度、连续环口、基本一致轻薄壁宽三项仅满足一项或两项。",
+        "FAIL": "缺少可识别外壳，或上述三项均不满足。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/02_end_detail.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "在外壳两端及两条长侧边选择多个截面，检查求值几何的内外表面和连接侧面，比较局部壁宽与腔体宽度。沿环口绕行检查是否断开、零厚度或由悬浮线条伪造；不检查指定实体化数值或修改器名称。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 10,
+      "requirement_section": "3. 连续折返的内部嵴",
+      "criterion": "内部嵴壁体沿路径连续，且首尾连通形成完整的一周。",
+      "scoring_rule": {
+        "PASS": "存在内部嵴，能够沿主体壁体连续追踪一周，没有开放端点、断裂或靠视觉重叠掩盖的断接。",
+        "PARTIAL": "存在沿主要路径连续的内部嵴，但首尾未连接，或仅一处局部断接使其不能完整追踪一周。",
+        "FAIL": "缺少内部嵴，或主要由多个互不连接的短隔板构成，或有多处断接无法识别单条连续路径。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/02_end_detail.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "隐藏外壳，在俯视与斜视中沿内部嵴壁体逐段追踪；以求值后的实际连接和局部截面区分一条首尾相接的带状壁体与多个相邻但不相连的隔板。不要仅以对象数或全模型连通分量数代替路径连续性判断。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05", "capability": "GEO", "points": 10,
+      "requirement_section": "3. 连续折返的内部嵴",
+      "criterion": "内部嵴至少六处回转，长轴两侧均有向中部伸入的褶皱，并呈长短错落的排列。",
+      "scoring_rule": {
+        "PASS": "存在内部嵴，并满足三项：至少六处可辨的U形或弧形回转；长轴两侧都有向中部伸入的褶皱；回转长度、宽度和间距有可见变化。",
+        "PARTIAL": "存在内部嵴，三项中满足一项或两项。",
+        "FAIL": "缺少内部嵴，或三项均不满足，例如仅为光滑内环或简单隔板。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/02_end_detail.png"],
+      "verification": {
+        "method": "visual_review_of_evaluated_geometry",
+        "procedure": "在隐藏外壳的俯视和整体斜视下，沿薄壁路径标出方向明显折回的弧形转弯，逐一计数但不把同一个回转的两侧重复计数。判断回转是否分布在长轴两侧并向中部伸入，再比较其跨度、宽度及相邻间距；不要求与参考图逐点一致。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06", "capability": "GEO", "points": 10,
+      "requirement_section": "4. 薄壁高度与内外关系",
+      "criterion": "内部嵴形成有真实厚度的竖直薄壁，壁高连续，主体厚高比不超过15%。",
+      "scoring_rule": {
+        "PASS": "存在内部嵴，具备明显竖向侧面和真实非零厚度；除回转过渡处外壁厚不大于壁高15%；沿路径壁高连续且上缘大致位于壳口高度附近。",
+        "PARTIAL": "存在内部嵴，上述立体壁面、薄壁比例、连续高度与壳口关系三项仅满足一项或两项。",
+        "FAIL": "缺少内部嵴，或三项均不满足。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/03_low_side.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "从斜视确认薄壁而非圆管或平面线条，在两端及中部选择远离回转的多个截面，按局部壁面法向测厚、按壳口法向测壁高并计算比值。沿上缘检查壁高连续性及其相对壳口高度；整体统一缩放不改变结论。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07", "capability": "GEO", "points": 10,
+      "requirement_section": "4. 薄壁高度与内外关系",
+      "criterion": "内部嵴被外壳包围并覆盖大部分腔长，内部通道清楚，且不穿出外壳外表面。",
+      "scoring_rule": {
+        "PASS": "外壳与内部嵴均存在，满足三项：嵴位于开口轮廓以内并覆盖大部分腔长；四周大部分区域及相邻回转之间有可辨通道且无相互穿插；嵴不穿出壳体外表面。",
+        "PARTIAL": "两部分均存在，上述三项仅满足一项或两项。",
+        "FAIL": "任一主体缺失，或三项均不满足。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/02_end_detail.png", "image/03_low_side.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "以实际壳口轮廓检查嵴的俯视包围关系，不能只比较矩形包围盒；观察嵴的覆盖长度与可辨空隙。使用侧视、底视以及求值三角面相交检查定位穿出外壳和内部自相交，允许嵴下缘与内底局部贴合或嵌入；在副本内临时隐藏和剖切复核遮挡区域。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-08", "capability": "GEO", "points": 10,
+      "requirement_section": "5. 曲面与边缘质量",
+      "criterion": "外壳侧面、底面和环口在正常观察距离下平顺且没有可见表面缺陷。",
+      "scoring_rule": {
+        "PASS": "存在外壳，侧面和底面视觉连续平滑，环口清晰，正常整体与近景无明显逐面明暗断裂、尖刺、夹痕、闪烁或破损阴影。",
+        "PARTIAL": "存在外壳，主体曲面可读，但上述缺陷只集中在局部，或局部环口被过度平滑。",
+        "FAIL": "外壳缺失，或缺陷广泛分布使主体曲面或环口难以清楚辨认。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/03_low_side.png"],
+      "verification": {
+        "method": "visual_review_of_artifact_surface",
+        "procedure": "在统一的中性灰实体着色下旋转模型，用整体、端部近景及低侧视检查实际表面连续性。必要时切换法线显示查明阴影问题，但不以平滑标记比例、材质存在或单张提交截图直接给分。此项评价可见表面质量，不重复评价壁厚或腔体存在。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-09", "capability": "GEO", "points": 10,
+      "requirement_section": "5. 曲面与边缘质量",
+      "criterion": "内部嵴的壁面、回转和上缘圆顺，保持薄壁边缘清晰。",
+      "scoring_rule": {
+        "PASS": "存在内部嵴，壁面和回转视觉圆顺，上缘清晰，整体与正常近景无明显逐面明暗断裂、尖刺、夹痕、闪烁或破损阴影。",
+        "PARTIAL": "存在内部嵴且主要壁面可读，但缺陷仅集中于少数回转或上缘局部，或局部边缘过度平滑。",
+        "FAIL": "内部嵴缺失，或缺陷广泛分布使薄壁壁面和上缘难以清楚辨认。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/02_end_detail.png"],
+      "verification": {
+        "method": "visual_review_of_artifact_surface",
+        "procedure": "在中性灰实体着色下隐藏外壳，观察内部嵴两侧及多个回转的正常近景，再恢复整体确认上缘可读。评价求值后表面的可见品质，不检查指定细分级别或修改器顺序；折返数量、连续性和间距分别归相应GEO项。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "6. 独立编辑与重建",
+      "criterion": "外壳与内部嵴可以独立隐藏、选择并局部编辑。",
+      "scoring_rule": {
+        "PASS": "两部分均存在，可分别选择和隐藏，并且对一部分的局部几何或专用参数编辑不改变另一部分。",
+        "PARTIAL": "两部分均存在，独立选择隐藏与互不影响的局部编辑两项仅满足一项。",
+        "FAIL": "任一主体缺失，或两项均不满足。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact_editability_probe",
+        "procedure": "在工程副本中依次选择并隐藏两部分，记录另一部分可见性；分别进行小幅局部几何编辑或修改其专用参数，比较另一部分求值几何是否变化，然后撤销。以可编辑行为判断，不以对象数恰好为二或特定名称判断。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02", "capability": "PIPE", "points": 5,
+      "requirement_section": "输入与交付",
+      "criterion": "build.py能在空场景中重建提交的两类主体，依赖完整且可移植。",
+      "scoring_rule": {
+        "PASS": "从空场景运行build.py可生成与submission.blend相同的外壳和内部嵴主要形态，且不存在绝对路径、联网下载或未打包资产依赖。",
+        "PARTIAL": "脚本可生成可识别的外壳与内部嵴，但主要形态与提交工程有明显差异，或必须手工修复一个外部依赖才能完成重建。",
+        "FAIL": "脚本缺失、无法生成两类可识别主体，或无法按交付内容完成重建。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "clean_rebuild_and_dependency_review",
+        "procedure": "将交付文件复制到不同目录，在Blender5.1.2空场景中执行build.py，检查依赖引用并与submission.blend中的主体求值几何和主要比例对照。本阶段仅规定验证流程，不实现或运行该验证器；文件是否能打开本身不是加分项。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

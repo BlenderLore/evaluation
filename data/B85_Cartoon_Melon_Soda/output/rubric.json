@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Cartoon Melon Soda",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1JrPpztEBp",
+    "id": "BV1JrPpztEBp"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 40, "SURF": 45, "SCN": 5, "PIPE": 10},
+  "weighting_note": "Geometry and material appearance are the independent core skills of this static stylized drink. The 40 geometry points cover the vessel, liquid volume, garnish, and interior details; the 45 surface points cover translucent glass, luminous green soda, garnish color, and editable stripes. Material gradients are SURF, not geometric procedural work. Presentation receives 5 points and reproducible saved artifacts receive 10 points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Goblet and Liquid Volume",
+      "criterion": "The goblet has a shaped open bowl, finite walls, a seamless narrow stem, and a broad low foot.",
+      "scoring_rule": {
+        "PASS": "The bowl has a rounded broad lower region, narrowed waist, and slightly flared open rim with readable inner wall thickness. It joins a centered slender stem and broad low circular foot without visible gaps or abrupt seams; the bowl bottom is closed and the curved exterior is smooth.",
+        "PARTIAL": "A recognizable open bowl supported by a stem and foot is present, but one or more PASS conditions are unmet.",
+        "FAIL": "The minimum recognizable open bowl with supporting stem and foot is absent."
+      },
+      "evidence_refs": ["image/01_melon_soda.png", "image/02_goblet_form.png", "image/03_liquid_volume.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Open the submitted file and isolate the goblet. Inspect front and three-quarter solid views for its silhouette and joins, then inspect the rim from above and use a section or temporary clipping view to confirm finite walls and a closed bowl bottom. Judge evaluated surfaces without requiring a particular topology or modifier stack.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Goblet and Liquid Volume",
+      "criterion": "A separate closed liquid volume fits within the bowl and has a level top below the rim.",
+      "scoring_rule": {
+        "PASS": "A separately editable, closed liquid volume follows the bowl interior, has a level top just below the rim, and shows no protrusion through the shell, large side gaps, or coincident-surface flicker.",
+        "PARTIAL": "A distinct three-dimensional liquid volume occupies the bowl interior, but one or more PASS conditions are unmet.",
+        "FAIL": "No distinct three-dimensional liquid volume occupies the bowl interior; a colored shell or flat image alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_liquid_volume.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_spatial_inspection",
+        "procedure": "Temporarily hide the goblet in a copy of the submitted file to inspect the liquid enclosure and top. Restore the shell and inspect front, side, and top views or cross-sections for containment, fill height, side fit, and interfering surfaces.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Garnish and Interior Details",
+      "criterion": "The scoop, shaped cherry with curved stem, and diagonal straight straw form a readable editable garnish assembly.",
+      "scoring_rule": {
+        "PASS": "A smooth large scoop sits with roughly half its height above the rim. Beside it is a smaller slightly flattened cherry with a shallow top depression and a thin curved stem emerging from it. A straight thin straw enters the drink behind the garnish and rises diagonally. These parts are individually editable, visually distinct, smoothly finished, and free of unintended gaps at their intended contacts.",
+        "PARTIAL": "A large rounded scoop and a smaller cherry with an attached curved stem are recognizable at the glass mouth, but one or more PASS conditions are unmet.",
+        "FAIL": "The minimum recognizable scoop and cherry with attached curved stem at the glass mouth is absent."
+      },
+      "evidence_refs": ["image/01_melon_soda.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect the submitted garnish in the final camera and orbit around it in solid view. Confirm the relative sizes, insertion depths, cherry depression, stem attachment and curvature, straw straightness, clean curved silhouettes, and independent editability of the parts. Surface color is assessed separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Garnish and Interior Details",
+      "criterion": "Rounded cubic ice and smaller spherical bubbles are distinct geometry distributed inside the drink.",
+      "scoring_rule": {
+        "PASS": "Multiple ice pieces retain flat faces and smooth rounded corners, while multiple smaller bubbles are spherical and vary in size. The ice has varied rotations, both types remain inside the liquid, and their spacing leaves readable green-liquid gaps without merging the details into one mass.",
+        "PARTIAL": "At least one recognizable rounded cubic ice piece and one smaller spherical bubble exist inside the drink, but one or more PASS conditions are unmet.",
+        "FAIL": "The minimum interior rounded cubic ice piece and smaller spherical bubble are not both present as geometry."
+      },
+      "evidence_refs": ["image/04_ice_and_bubbles.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_spatial_inspection",
+        "procedure": "In a copy of the submission, hide or make the shell and liquid transparent to inspect the actual ice and bubble surfaces. Orbit to verify shape, size variation, rotations, and containment. Restore the materials and inspect their spacing from the final camera; do not infer geometry solely from painted or composited spots.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Luminous Glass and Soda",
+      "criterion": "The pale luminous goblet remains glass-like and translucent while its rim, sides, stem, and foot stay legible.",
+      "scoring_rule": {
+        "PASS": "The existing bowl, stem, and foot use a coherent pale yellow-green luminous finish. The bowl is translucent enough to reveal the drink and its contents, with a bright readable rim and side boundary that remains distinct from the green liquid.",
+        "PARTIAL": "The existing bowl surface has both a pale light-colored appearance and visible translucency, but one or more PASS conditions are unmet. Missing stem or foot surfaces cannot demonstrate their finish for PASS.",
+        "FAIL": "No existing bowl surface demonstrates both the pale light-colored appearance and visible translucency required by the minimum."
+      },
+      "evidence_refs": ["image/01_melon_soda.png", "image/04_ice_and_bubbles.png"],
+      "verification": {
+        "method": "controlled_render_and_material_inspection",
+        "procedure": "Render the submitted camera and inspect the actual goblet material assignments. If transparency is ambiguous, place a temporary contrasting probe behind the bowl in a copy and render again to test transmission. Evaluate pale color, luminous boundary, and surface coherence on the existing goblet parts without requiring exact shader nodes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Luminous Glass and Soda",
+      "criterion": "The soda has an editable luminous vertical green gradient, and interior accents remain brighter through it.",
+      "scoring_rule": {
+        "PASS": "The liquid transitions visibly from light mint near the top to more saturated green near the bottom, with a bright softly luminous appearance. Existing ice and bubble surfaces form pale luminous accents that remain readable through it. Shell and liquid colors are independently editable, and editing the gradient position or spread changes the height transition without rebuilding geometry.",
+        "PARTIAL": "An existing liquid surface has a visible vertical variation between lighter and more saturated green, but one or more PASS conditions are unmet. Absent ice or bubble surfaces cannot establish their luminous-accent finish for PASS.",
+        "FAIL": "No existing liquid surface demonstrates the minimum visible vertical variation between lighter and more saturated green."
+      },
+      "evidence_refs": ["image/01_melon_soda.png", "image/04_ice_and_bubbles.png"],
+      "verification": {
+        "method": "controlled_render_and_material_functional_probe",
+        "procedure": "Render the final camera and inspect the actual liquid, ice, and bubble materials. In a copy, change the liquid color and then its gradient position or spread through the submitted editable controls; render before and after to confirm the intended change while shell color stays unchanged. Restore the original values after the probe.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Garnish Colors and Straw Stripes",
+      "criterion": "Yellow scoop shading, orange-red cherry shading, a localized editable highlight, and a darker stem produce the garnish palette.",
+      "scoring_rule": {
+        "PASS": "The scoop is opaque with a pale-yellow-to-warm-yellow gradient, the cherry has an orange-red body and compact bright surface highlight, and its stem is darker red. Scoop and cherry colors are independently editable, and the cherry highlight can change size or placement independently while remaining localized to its surface.",
+        "PARTIAL": "Existing scoop and cherry surfaces are visibly differentiated as yellow and orange-red respectively, but one or more PASS conditions are unmet. Missing highlight or stem surfaces cannot establish their corresponding finish for PASS.",
+        "FAIL": "The minimum existing yellow scoop and orange-red cherry surface differentiation is absent."
+      },
+      "evidence_refs": ["image/01_melon_soda.png"],
+      "verification": {
+        "method": "controlled_render_and_material_functional_probe",
+        "procedure": "Inspect the rendered garnish and its material assignments. In a copy, change the scoop color and confirm the cherry remains unchanged; separately adjust the cherry highlight size or placement and render to confirm a localized surface change. Check that the stem remains darker and that the scoop is opaque.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Garnish Colors and Straw Stripes",
+      "criterion": "The straw carries continuous crisp red-and-white diagonal bands with editable colors, spacing, and slant.",
+      "scoring_rule": {
+        "PASS": "Alternating crisp red and white diagonal bands repeat over the visible shaft and continue around its cylindrical surface without a disruptive seam. Material controls independently permit color changes, repeat-spacing changes, and stripe-slant changes, with those controls affecting the visible straw.",
+        "PARTIAL": "An existing straw surface shows a repeating alternation of red and white bands, but one or more PASS conditions are unmet.",
+        "FAIL": "No existing straw surface demonstrates the minimum repeating alternation of red and white bands."
+      },
+      "evidence_refs": ["image/01_melon_soda.png"],
+      "verification": {
+        "method": "controlled_render_and_material_functional_probe",
+        "procedure": "Render the straw closely from the submitted camera and an alternate angle. In a copy, alter each submitted stripe control in turn: one color, spacing, and slant. Confirm visible changes on the straw surface and continuity around the cylinder, then restore the values. Equivalent editable material implementations are acceptable.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "Presentation",
+      "criterion": "The camera, background, and lighting present the whole drink clearly while revealing the rim, garnish, and interior.",
+      "scoring_rule": {
+        "PASS": "The complete drink from straw tip to foot has comfortable margins in a near-front view with enough elevation to read the rim and liquid level. Cherry, straw, scoop, and interior details remain legible, with a clean neutral or transparent background, soft illumination, and no interface overlays or shape-erasing highlight clipping.",
+        "PARTIAL": "The rendered composition shows a recognizable assembled drink with its main bowl and garnish visible, but one or more PASS conditions are unmet.",
+        "FAIL": "The rendered composition does not meet the minimum recognizable assembled drink with visible main bowl and garnish."
+      },
+      "evidence_refs": ["image/01_melon_soda.png"],
+      "verification": {
+        "method": "submitted_camera_render_and_manual_inspection",
+        "procedure": "Render the submitted camera and compare the whole-image framing and visibility with the reference's subject arrangement. Check margins, camera elevation, separation of top details, clean background, and highlight retention. Score presentation defects here; do not penalize material color or geometric shape defects again under this row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable saved scene, recreating script, and named scene render are complete and reproducible in Blender 5.1.2.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the complete editable scene and available dependencies. build.py runs from an empty scene, recreates the complete scene, and explicitly saves a submission.blend beside it that reopens independently with the intended camera and Cycles GPU settings. The delivered B85_Cartoon_Melon_Soda.png is at least 1024 pixels on its longer edge and is a render of the actual submitted scene consistent with a fresh render from the rebuilt saved file.",
+        "PARTIAL": "The submitted blend opens with an editable goblet, liquid, and garnish scene, and build.py recreates that core scene and saves a reopenable blend, but one or more PASS conditions are unmet.",
+        "FAIL": "Either the submitted blend cannot open with the editable goblet, liquid, and garnish core scene, or build.py does not recreate that core scene and save a reopenable blend. An unsaved in-memory result does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "clean_rebuild_saved_file_reopen_and_render_comparison",
+        "procedure": "Use an isolated temporary directory and Blender 5.1.2. Open the submitted blend to inspect dependency resolution and editability. Then run build.py from an empty scene with the same script-relative output location, close that process, and reopen the newly saved submission.blend in a separate process. Check camera and Cycles GPU settings and render from that reopened saved file. Compare the fresh result with the delivered PNG for scene content and composition, allowing normal render noise; verify the PNG filename and dimensions. Do not accept a render produced only from unsaved in-memory state.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

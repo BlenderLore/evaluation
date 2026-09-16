@@ -1,0 +1,145 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Pixel Art Monkey Head",
+  "source_video": {"url": "https://www.youtube.com/watch?v=vjys2eNZNnE", "id": "vjys2eNZNnE"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 10, "SURF": 20, "SCN": 60, "PIPE": 10},
+  "weighting_note": "The central task is render-based pixel-art treatment, so scene composition, illumination, line rendering, image processing, and live render behavior receive 60 points. The native subject needs only 10 geometry points; actual material regions receive 20 and reproducible delivery receives 10. Image-space palette reduction is SCN here, while the model's material colors are SURF. There is no procedural geometry, rig, simulation, or timeline requirement.",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 5,
+      "requirement_section": "Head Geometry",
+      "criterion": "Editable Suzanne geometry preserves the native subject's characteristic form and proportions.",
+      "scoring_rule": {
+        "PASS": "The editable three-dimensional head has the native Suzanne proportions, broad forehead, recessed paired eye sockets, elongated projecting muzzle, large side ears, and angular low-polygon silhouette.",
+        "PARTIAL": "An editable three-dimensional Suzanne-like head with a recognizable forehead, eye region, and projecting muzzle is present, but at least one PASS condition is not met, such as altered proportions, an absent ear, or excessive rounding of the silhouette.",
+        "FAIL": "The minimum recognizable editable head with forehead, eye region, and projecting muzzle is absent, including a flat image substitute."
+      },
+      "evidence_refs": ["image/02_smooth_base.png"],
+      "verification": {"method": "evaluated_geometry_and_manual_inspection", "procedure": "Inspect the submitted mesh and evaluate it from front, side, and oblique views with image processing bypassed. Confirm three-dimensional depth, characteristic feature relationships, and the angular silhouette without requiring mesh element counts or object names.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 5,
+      "requirement_section": "Head Geometry",
+      "criterion": "Surface normals produce smooth shading while retaining the angular geometric silhouette.",
+      "scoring_rule": {
+        "PASS": "A substantial forehead-or-cheek region and the muzzle are present. All existing forehead, cheek, muzzle, and ear surfaces show smooth normal transitions without broad flat-shaded facets or shading tears, while silhouette corners remain visibly angular. Missing minor geometry is assessed by GEO-01 rather than treated as a normal defect here.",
+        "PARTIAL": "Both a substantial forehead-or-cheek region and the muzzle visibly demonstrate smooth normal transitions, but at least one PASS condition is not met on the existing surfaces.",
+        "FAIL": "Smooth normal transitions are not demonstrated on both a substantial forehead-or-cheek region and the muzzle, or those core surfaces are absent."
+      },
+      "evidence_refs": ["image/02_smooth_base.png"],
+      "verification": {"method": "controlled_base_render_and_normals_inspection", "procedure": "In a copy, bypass image processing and temporarily suppress line rendering. Inspect a neutral lit view and evaluated normals on the existing head surfaces. Separate intended silhouette corners from broad flat face shading; do not require a particular modifier or shading operator.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 10,
+      "requirement_section": "Material Regions",
+      "criterion": "The model carries an editable warm-brown opaque nonmetallic body surface.",
+      "scoring_rule": {
+        "PASS": "A substantial cheek region and the muzzle are present. All existing exposed head surfaces outside the eye treatment use a warm tan-brown opaque nonmetallic appearance with restrained soft sheen, and the body color can be changed independently of both eye color roles.",
+        "PARTIAL": "A warm-brown surface is actually applied across both a substantial cheek region and the muzzle, but at least one PASS condition is not met, including inconsistent coverage, an unsuitable sheen, or inseparable color roles.",
+        "FAIL": "Warm brown is not actually applied across both a substantial cheek region and the muzzle, or either core surface is absent."
+      },
+      "evidence_refs": ["image/02_smooth_base.png"],
+      "verification": {"method": "material_use_inspection_and_controlled_render", "procedure": "Inspect the materials actually used by evaluated head surfaces and render with the pixel-art treatment bypassed. In a disposable copy, alter the body color and verify that its model-surface assignment changes while the eye material roles remain separate. Judge palette quantization only in SCN-05.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 10,
+      "requirement_section": "Material Regions",
+      "criterion": "Both eyes carry independently editable pale rings enclosing near-black pupils on their actual surfaces.",
+      "scoring_rule": {
+        "PASS": "Both eyes have near-black central pupils enclosed by pale white-to-gray rings, assigned to the eye surfaces and distinct from the brown face; pupil and ring colors are independently editable.",
+        "PARTIAL": "At least one actual eye surface has a recognizable dark pupil enclosed by a pale ring, but at least one PASS condition is not met, such as an incomplete second eye, stray visible assignments, or coupled color controls.",
+        "FAIL": "Neither actual eye surface has a recognizable dark pupil enclosed by a pale ring, including eyes present only in an external image substitute."
+      },
+      "evidence_refs": ["image/02_smooth_base.png", "image/03_pixel_detail.png"],
+      "verification": {"method": "surface_assignment_and_render_inspection", "procedure": "Inspect the evaluated eye surfaces in a close view with processing bypassed, then in the final render. Change ring and pupil colors separately in a copy to confirm actual material use. Assess visible assignment roles rather than face counts, slot order, or datablock names.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-01", "capability": "SCN", "points": 10,
+      "requirement_section": "View and Lighting",
+      "criterion": "The square portrait matches the specified oblique view, subject occupancy, and uncluttered gray setting.",
+      "scoring_rule": {
+        "PASS": "The square image shows both eyes with the nearer one larger, the muzzle directed lower left, and the prominent ear to the right. The entire visible silhouette has clear margins, occupies roughly three quarters of the width, and is surrounded only by a uniform dark-gray background.",
+        "PARTIAL": "A camera-rendered head is recognizable in a portrait with both the eye region and muzzle visible, but at least one PASS condition is not met, including view direction, square framing, occupancy, margins, or background.",
+        "FAIL": "There is no camera-rendered portrait in which both the eye region and muzzle are visible and the head is recognizable."
+      },
+      "evidence_refs": ["image/01_pixel_art_head.png", "image/02_smooth_base.png"],
+      "verification": {"method": "camera_render_and_spatial_inspection", "procedure": "Render the saved active view. Compare head orientation, relative eye size, projected silhouette bounds, clear margins, and background against the public requirements and references. Do not compare world coordinates, camera names, or focal length values.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-02", "capability": "SCN", "points": 10,
+      "requirement_section": "View and Lighting",
+      "criterion": "Broad front-and-above illumination reveals the head's volume before image processing.",
+      "scoring_rule": {
+        "PASS": "The unprocessed view reveals forehead, cheek, muzzle, and existing ear forms through broad gradual light transitions, retains darker eye sockets and side regions, and avoids harsh spotlight patches or blown-out feature regions.",
+        "PARTIAL": "Both the cheek and muzzle have enough illumination and tonal variation to read as three-dimensional forms, but at least one PASS condition is not met on the existing head surfaces.",
+        "FAIL": "The cheek and muzzle do not both read as illuminated three-dimensional forms, including absent core surfaces, a black silhouette, or uniformly clipped featureless lighting."
+      },
+      "evidence_refs": ["image/02_smooth_base.png"],
+      "verification": {"method": "controlled_base_render", "procedure": "Render the scene with pixel-art processing bypassed and inspect broad light transitions on the cheek and muzzle, socket shadows, side shading, and highlight clipping. Evaluate illumination independently of whether the body hue matches; no light count, position, size, or wattage is prescribed.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-03", "capability": "SCN", "points": 10,
+      "requirement_section": "Pixel Art Finish",
+      "criterion": "Black line rendering forms a connected silhouette contour and selective interior feature lines.",
+      "scoring_rule": {
+        "PASS": "The final render has a connected stepped black contour around the visible head and ear silhouette, with selective readable lines at the brow, eye sockets, muzzle, and existing ear folds; lines survive pixelation without fragmenting into isolated dots or obscuring the features.",
+        "PARTIAL": "A connected black contour is visible around both the outer brow and an outer muzzle edge, with at least one readable interior feature line, but at least one PASS condition is not met.",
+        "FAIL": "The minimum connected brow-and-muzzle contour plus one readable interior line is not present, including only scattered dots, no black lines, or lines that entirely obscure the face."
+      },
+      "evidence_refs": ["image/01_pixel_art_head.png", "image/03_pixel_detail.png"],
+      "verification": {"method": "rendered_linework_inspection", "procedure": "Inspect the final scene render at native size and enlarged with nearest-neighbor display. Trace the visible silhouette and inspect internal brow, eye, muzzle, and ear lines. Confirm linework exists in a render with pixel-art processing bypassed; accept equivalent scene-derived line-rendering implementations.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-04", "capability": "SCN", "points": 15,
+      "requirement_section": "Pixel Art Finish",
+      "criterion": "The final image has equal, crisp, uniformly colored square cells at the requested relative scale.",
+      "scoring_rule": {
+        "PASS": "The head, eye boundaries, linework, and background boundaries align to one regular grid of equal square color cells around one percent of the full image width. Cells have uniform interiors and hard edges; processing preserves the base framing and square aspect without blur or distortion.",
+        "PARTIAL": "Both the cheek and a muzzle boundary visibly resolve into repeated flat-color cells, but at least one PASS condition is not met, including cell shape, scale, grid consistency, hard edges, or framing preservation.",
+        "FAIL": "Repeated flat-color cells are not visibly demonstrated on both the cheek and a muzzle boundary, including a smooth image, a blurred image without clear cells, or missing core regions."
+      },
+      "evidence_refs": ["image/01_pixel_art_head.png", "image/03_pixel_detail.png"],
+      "verification": {"method": "native_resolution_image_sampling", "procedure": "Inspect a fresh scene render at native resolution and nearest-neighbor enlargement. Sample multiple cheek, muzzle-boundary, and line-edge areas to compare horizontal and vertical cell extents, uniform cell interiors, and common grid alignment. Compare base and processed projected bounds to detect image stretching or reframing. Do not require particular compositor node types or scale values.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-05", "capability": "SCN", "points": 10,
+      "requirement_section": "Pixel Art Finish",
+      "criterion": "Image processing produces a limited warm shaded palette with clear tonal separation.",
+      "scoring_rule": {
+        "PASS": "Neighboring image cells form distinct flat shading bands across the face and side of the head, with a warm tan-and-brown identity, darker brown shadow masses, pale eye rings, near-black pupils and lines, and sufficient contrast to separate the facial planes and background.",
+        "PARTIAL": "The processed cheek and a side-or-muzzle region both show visible tonal banding with at least distinguishable light and dark regions, but at least one PASS condition is not met, including palette character, contrast, or feature separation.",
+        "FAIL": "Visible tonal banding with distinguishable light and dark regions is not demonstrated on both the cheek and a side-or-muzzle region, including no quantization, featureless clipping, or absent core surfaces."
+      },
+      "evidence_refs": ["image/01_pixel_art_head.png", "image/03_pixel_detail.png"],
+      "verification": {"method": "processed_and_palette_bypass_render_comparison", "procedure": "Compare the final processed render against a copy with only palette reduction bypassed. Inspect clusters of neighboring cells on the cheek and shadow side for reduced tonal levels and readable bands. Judge the resulting image-space palette here; material assignment and base reflectance are assessed in SURF rows.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-06", "capability": "SCN", "points": 5,
+      "requirement_section": "Live Compositing",
+      "criterion": "The pixel-art treatment stays live, independently adjustable, and responsive to the actual scene.",
+      "scoring_rule": {
+        "PASS": "Bypassing the pixel-art treatment restores a smooth outlined base render; bypassing only palette reduction retains the grid and lines with more gradual color variation between cells. Pixel size, palette reduction, and contrast each respond independently, and a body-color change and slight head rotation both update the processed render and corresponding linework. The saved state has all treatment active.",
+        "PARTIAL": "The saved Blender setup actually processes its own current scene render, a body-color change visibly propagates into the processed output, and at least one pixel-art effect can be bypassed with a visible result, but at least one PASS condition is not met.",
+        "FAIL": "The setup does not process its own current scene render with a propagating body-color change and at least one visibly bypassable pixel-art effect, including a baked image substitute."
+      },
+      "evidence_refs": ["image/01_pixel_art_head.png", "image/02_smooth_base.png"],
+      "verification": {"method": "functional_scene_and_compositing_probe", "procedure": "Use a disposable copy. Render the saved state, bypass the full pixel-art treatment, and bypass palette reduction alone. Then independently vary pixel size, palette reduction, and contrast. Restore the saved values, alter the body material, and rotate the head slightly in separate trials. Render each trial and verify source dependence and the stated effects, restoring the submitted state afterward. Node names, counts, and layout are irrelevant.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, rebuild script, and named PNG form a self-contained reproducible delivery.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with an editable scene and complete treatment active in Blender 5.1.2 using EEVEE GPU. build.py recreates the scene and render setup from a clean file and saves submission.blend without external assets. B80_Pixel_Art_Monkey_Head.png is a 1080 by 1080 actual render of that submitted state, and all three required files are present and usable.",
+        "PARTIAL": "submission.blend opens with an inspectable editable head scene, but at least one PASS condition is not met, including a missing companion file, rebuild failure, wrong output dimensions, or a delivered PNG inconsistent with a fresh scene render.",
+        "FAIL": "submission.blend is missing, cannot open, or does not contain an inspectable editable head scene."
+      },
+      "evidence_refs": [],
+      "verification": {"method": "future_delivery_open_rebuild_and_render_check", "procedure": "In the future evaluation environment, open submission.blend in Blender 5.1.2, inspect its saved engine and active treatment, then run build.py from a clean file in a separate temporary directory and reopen the submission.blend it saves. Confirm no missing external assets and compare a fresh render from the submitted scene with the named PNG, including 1080-square dimensions. This is a specified future procedure; no Blender runtime check was performed during authoring.", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

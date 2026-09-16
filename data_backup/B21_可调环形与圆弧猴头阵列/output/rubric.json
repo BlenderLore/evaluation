@@ -1,0 +1,133 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "可调环形与圆弧猴头阵列",
+  "source_video": {"url": "https://www.bilibili.com/video/BV1q5411L7qc", "id": "BV1q5411L7qc"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 40, "PROC": 50, "PIPE": 10},
+  "weighting_note": "暂定内容权重。GEO40分别检查单元形状、朝向、完整圆环与交付圆弧；PROC50检查半径、数量、覆盖范围和原型编辑传播的真实行为；PIPE10检查实体对象交接及可迁移重建。原视频的静态灰模与交互参数变化不构成SURF、ANM或SIM，未按修改器存在、命名或历史操作计分。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 猴头形状与朝向",
+      "criterion": "阵列单元保持可识别且完整的Suzanne形状与一致比例。",
+      "scoring_rule": {
+        "PASS": "生成源完整状态与实体化圆弧均存在，且全部单元均能辨认双耳、眼窝、额头和口鼻，比例一致，无明显破损或压扁。",
+        "PARTIAL": "不满足PASS，但两份资产合计至少一半的可见单元具备完整可识别的Suzanne形状，其余存在变形、缺损或比例不一致。",
+        "FAIL": "没有可检查单元，或两份资产合计不足一半的可见单元具备完整可识别的Suzanne形状。"
+      },
+      "evidence_refs": ["image/01_ring.png", "image/03_realized.png"],
+      "verification": {"method": "VLM/manual evaluated-geometry inspection", "procedure": "在文件副本中分别显示100%覆盖生成源和实体化圆弧，以斜俯视和单体近景检查实际求值网格。统计能辨认各特征且比例完整的单元，不以固定顶点数判断Suzanne，不把选择轮廓当材质。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 猴头形状与朝向",
+      "criterion": "猴头随圆周位置转向，直立且面朝圆心。",
+      "scoring_rule": {
+        "PASS": "生成源完整状态与实体化圆弧均存在，且两份资产各至少90%的单元满足向上方向和平面法线夹角不超过10度、面部前向与向心方向夹角不超过10度。",
+        "PARTIAL": "不满足PASS，但至少一份可检查资产中至少50%的单元同时满足上述两个朝向条件。",
+        "FAIL": "不满足PASS或PARTIAL，包括无可检查单元或所有资产的合格朝向比例均低于50%。"
+      },
+      "evidence_refs": ["image/01_ring.png", "image/02_arc.png"],
+      "verification": {"method": "geometry direction measurement with visual confirmation", "procedure": "从原型面部和头顶部识别前向、向上方向，经各单元实际求值变换得到世界方向；对拟合阵列平面和圆心计算角度。用视口确认面部特征，避免把任意对象局部轴当作真实朝向。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 完整圆环",
+      "criterion": "完整状态构成共面、共圆、等角间距且没有重叠接缝的闭合圆环。",
+      "scoring_rule": {
+        "PASS": "100%覆盖下至少3个单元的对应定位点半径与高度误差均不超过半径2%，全部循环角间距偏差不超过平均值10%，默认单元留有间隔、中心为空且无首尾重复重叠。",
+        "PARTIAL": "不满足PASS，但至少3个单元形成半径与高度误差均不超过半径2%的完整环状分布；角间距、接缝、单元间隔或中央多余单元中存在问题。",
+        "FAIL": "不满足PASS或PARTIAL，包括不足3个单元、无法恢复完整环，或定位点不共圆共面。"
+      },
+      "evidence_refs": ["image/01_ring.png"],
+      "verification": {"method": "evaluated geometry measurement and top-view inspection", "procedure": "临时将源覆盖设为100%，以原型对应固定点求各副本的位置，拟合圆心与平面，测半径残差、高度残差及包括闭合接缝的循环角间距；顶视检查中心和单元间隔。拒绝任意移动原点形成的测量代理。数量是否遵从控件仅在PROC-02检查。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 10,
+      "requirement_section": "3. 连续的部分圆弧",
+      "criterion": "默认实体化产物是生成源50%覆盖状态对应的一段连续圆弧。",
+      "scoring_rule": {
+        "PASS": "存在至少3个实体猴头形成唯一连续圆弧，可见数量与0.5N0相差不超过1，保持完整环的半径和角间距，只有一个大开口；各单元与源50%状态一一对应，位置误差不超过2%R0、旋转误差不超过10度，无封口连接条。",
+        "PARTIAL": "不满足PASS，但至少3个实体猴头形成一段开放的共圆圆弧，存在数量、间距、与源对应关系或封口连接条方面的问题。",
+        "FAIL": "不满足PASS或PARTIAL，包括没有实体化圆弧、少于3个单元、闭合整圈、分成多段或非圆形散布。"
+      },
+      "evidence_refs": ["image/02_arc.png", "image/03_realized.png"],
+      "verification": {"method": "realized geometry correspondence and visual inspection", "procedure": "分别显示已交付实体圆弧和源50%求值结果，以对应定位点排序，比较位置、旋转、半径、内部角间距和最大开口；检查单元组成一段且无额外封口。此行仅检查交付形态，覆盖控制各档行为在PROC-03另检。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PROC-01", "capability": "PROC", "points": 15,
+      "requirement_section": "4. 可编辑的生成源",
+      "criterion": "半径控制独立改变阵列半径，保留圆心、平面、数量和单元尺寸。",
+      "scoring_rule": {
+        "PASS": "0.8R0和1.2R0两次探测均自动更新，测得半径距目标不超过5%，圆心、平面、数量和单元尺寸保持不变；恢复默认后恢复原分布。",
+        "PARTIAL": "不满足PASS，但至少一次探测使实际半径朝目标方向改变且无需逐个编辑或重跑构建脚本。",
+        "FAIL": "两次探测均不能通过文件内控制改变实际半径，或只缩放单体、只改标签、需逐个调整或重跑构建脚本。"
+      },
+      "evidence_refs": ["image/01_ring.png", "image/02_arc.png"],
+      "verification": {"method": "functional parameter probe", "procedure": "记录源默认求值定位点、数量、单体包围尺寸与平面；保持其他控制不变，将半径依次设为0.8R0、1.2R0，再恢复。量取实际半径而非读取参数值，并核对保留量；数值不变采用浮点测量容差。只在临时副本执行。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PROC-02", "capability": "PROC", "points": 10,
+      "requirement_section": "4. 可编辑的生成源",
+      "criterion": "整数数量控制更新整圈单元数量并保持完整均匀覆盖。",
+      "scoring_rule": {
+        "PASS": "默认N0在12至24之间，控制支持8至24整数；100%覆盖时设为8、20分别得到准确数量，整圈均匀，半径和单体尺寸形状不变，恢复默认后恢复原分布。",
+        "PARTIAL": "不满足PASS，但8或20至少一档得到正确数量且覆盖完整圆环，无需逐个增删或重跑构建脚本。",
+        "FAIL": "8和20两档均无法得到对应完整阵列，或只有无功能控制、需逐个增删或重跑构建脚本。"
+      },
+      "evidence_refs": ["image/01_ring.png"],
+      "verification": {"method": "functional count probe", "procedure": "在源完整状态读取控件支持范围，分别设置8和20，统计实际求值单元并测循环角间距、半径和单体尺寸；恢复N0。计数依据求值实例或可识别重复单元，不按对象总数或修改器步数替代实际结果。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PROC-03", "capability": "PROC", "points": 15,
+      "requirement_section": "4. 可编辑的生成源",
+      "criterion": "覆盖控制以固定起点保留整圈的连续区段，从空阵列恢复到完整圆环。",
+      "scoring_rule": {
+        "PASS": "0%为空，25%、50%、75%、100%各档数量距比例乘N0不超过1；部分档均为固定起点的连续区段，已有保留单元的变换不变，仅末端增减；100%恢复完整，往返恢复结果一致。",
+        "PARTIAL": "不满足PASS，但至少两个非零覆盖档能自动产生不同数量的连续圆弧或整圈。",
+        "FAIL": "不满足PASS或PARTIAL，包括不可调、只切换展示截图、只改尺寸、产生散点区段，或需逐个增删及重跑构建脚本。"
+      },
+      "evidence_refs": ["image/01_ring.png", "image/02_arc.png"],
+      "verification": {"method": "multi-state functional probe", "procedure": "固定N0、R0和原型，按0%、25%、50%、75%、100%、50%求值；对实际定位点集合做匹配，检查数量、集合连续性、固定起点、存续单元的位置尺寸旋转及往返一致性。允许归一化控制、角度控制或有说明的时间映射，不要求Build修改器或动画播放。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PROC-04", "capability": "PROC", "points": 10,
+      "requirement_section": "4. 可编辑的生成源",
+      "criterion": "可编辑猴头原型的形状修改传播到所有生成单元。",
+      "scoring_rule": {
+        "PASS": "对源猴头一侧耳朵作可辨认的小修改后，所有生成单元自动出现对应变化，位置数量不变；恢复原型后恢复形状。",
+        "PARTIAL": "不满足PASS，但至少一半生成单元自动出现对应变化，或全部变化但恢复失败、位置数量发生非预期变化。",
+        "FAIL": "没有可编辑原型，或不足一半生成单元产生对应变化，或必须逐个改动及重跑构建脚本。"
+      },
+      "evidence_refs": ["image/01_ring.png"],
+      "verification": {"method": "source-edit propagation probe", "procedure": "在临时文件副本中定位源猴头，一侧耳朵边缘作小幅形变；观察全部求值单元的同一局部区域并核对变换与数量，再撤销形变。实际共享引用或等效生成均可，原型对象存在但未驱动结果不得分。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "5. 可独立操作的实体化圆弧",
+      "criterion": "实体化圆弧可逐个对象独立操作，且与可编辑生成源分别查看。",
+      "scoring_rule": {
+        "PASS": "全部实体圆弧猴头为独立可选对象；对两个不同对象分别作变换探测，其他对象不受影响；隐藏源后圆弧保留，源仍可另外查看和编辑，默认只显示一份圆弧。",
+        "PARTIAL": "不满足PASS，但至少两个圆弧猴头可作为真实对象独立选择和变换；源保留、独立显示或默认重复显示方面有缺陷。",
+        "FAIL": "可独立选择和变换的真实圆弧猴头少于两个，或只有无法单独操作的实例、合并网格岛。"
+      },
+      "evidence_refs": ["image/03_realized.png"],
+      "verification": {"method": "editable artifact handoff probe", "procedure": "在临时副本中隐藏生成源，确认真实圆弧仍在；抽取两个不同猴头分别移动、旋转并恢复，检查其他对象世界变换未改变；核对全部圆弧单元可分别选中。允许共享网格数据，不要求解除所有父子关系或复制独立网格数据。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-02", "capability": "PIPE", "points": 5,
+      "requirement_section": "6. 交付与重建",
+      "criterion": "构建脚本与依赖闭合，文件内说明能定位资产和控制。",
+      "scoring_rule": {
+        "PASS": "build.py按其说明在空场景重建并保存两份资产、原型和功能控制，无机器专属路径、网络或额外插件依赖；文件内说明完整，保存默认状态正确。",
+        "PARTIAL": "不满足PASS，但脚本可运行并生成至少一份可用阵列；缺少部分资产、控制、默认状态或文件内说明。",
+        "FAIL": "缺少可运行构建脚本、需要未提供依赖，或重建后没有可用阵列。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "clean rebuild and dependency inspection", "procedure": "后续验收在Blender5.1.2的隔离空场景按脚本说明执行，检查生成源、原型、实体圆弧和控件可用，并检查资源路径与内部说明。只奖励重建及可迁移交付，不再次按形态质量计分；当前仅规定验证程序，未运行Blender。", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

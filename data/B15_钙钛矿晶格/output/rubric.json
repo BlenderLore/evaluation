@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "钙钛矿晶格",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1kWjw6pEbm",
+    "id": "BV1kWjw6pEbm"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 60, "PROC": 30, "PIPE": 10},
+  "weighting_note": "暂定内容权重，尚未校准。GEO 60 分覆盖八面体形状、共顶点排列、球杆连接和内部占位；PROC 30 分只覆盖原有周期编辑与原型尺寸传播，允许等效实现；PIPE 10 分覆盖可移植重建。参考为灰模，穿透视图不构成透明材质要求，因此不设 SURF 或 SCN。",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "八面体与三维排列",
+      "criterion": "单元具有上下尖点、四个腰部角点和八个三角外表面区域，保持双四棱锥形体。",
+      "scoring_rule": {
+        "PASS": "存在完整单元，已存在的单元均保持双四棱锥轮廓及完整三角面片，不以线框代替面片。",
+        "PARTIAL": "不满足 PASS，但至少一个单元可识别为双四棱锥，存在局部缺面、偏心尖点或形体畸变。",
+        "FAIL": "没有可识别的双四棱锥单元，或只有球杆而没有单元面片。"
+      },
+      "evidence_refs": ["image/01_lattice.png", "image/02_octahedra.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_multiview_review",
+        "procedure": "在工程副本中分离观察面片并取得包含实例变换的求值几何，按外形识别单元而不按对象名称或源顶点数识别。检查代表单元的上下尖点、四角腰部与三角外表面区域，再环绕查看其余已存在单元。等效细分、共享对象和额外内部面不因拓扑计数不同而失败。单元总数单独由 GEO-02 判断。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "八面体与三维排列",
+      "criterion": "默认八个单元形成三轴各两份的同向共顶点排列，前后层次与中央空隙成立。",
+      "scoring_rule": {
+        "PASS": "默认存在八个同形同尺寸单元，中心形成三个正交方向各两层的规则排列，所有应相接角点误差不超过 0.03L，且没有大面积单元重叠。",
+        "PARTIAL": "不满足 PASS，但至少四个同向单元已构成两个方向的规则排列；包括缺少第三方向、部分缺单元或部分相接位置超过容差。",
+        "FAIL": "连两个方向各两份的规则排列也未形成，或单元大面积混叠到无法辨认重复关系。"
+      },
+      "evidence_refs": ["image/01_lattice.png", "image/02_octahedra.png"],
+      "verification": {
+        "method": "evaluated_spatial_measurement_and_multiview_review",
+        "procedure": "对求值几何中的八面体形体拟合单元中心与局部主轴，容许整体旋转与缩放。检查中心分层、三条周期方向和同尺寸关系；以单元最大跨度 L 测量相邻角点距离。通过三个正交方向及斜视确认真实纵深、共顶点而非共面重叠。对象数量、Array 数量不作为证据。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "边杆与顶点球",
+      "criterion": "八面体边缘由连续圆截面细杆表现，连接两端顶点球且不增加错误对角杆。",
+      "scoring_rule": {
+        "PASS": "已存在单元的全部边缘均有连续圆截面杆，端部进入顶点球，杆直径不超过顶点球直径一半，且不存在无关的穿面或穿空位对角杆。",
+        "PARTIAL": "不满足 PASS，但至少一半应有边缘有可辨认的实体杆；局部存在漏杆、断口、错误对角杆、截面或粗细问题。",
+        "FAIL": "实体杆覆盖不足一半应有边缘，只有无厚度线段，或没有可识别单元可建立边缘对应关系。"
+      },
+      "evidence_refs": ["image/01_lattice.png"],
+      "verification": {
+        "method": "evaluated_connectivity_and_closeup_review",
+        "procedure": "依据可识别八面体的几何角点建立预期边集合，检查求值杆件中心线是否覆盖对应直线段并进入两端球体。测量代表截面直径并与顶点球直径比较；从正交、斜视及隐藏面片的视图检查未被遮挡的断口和额外对角杆。允许曲线求值、圆柱实例或网格组合，不要求布尔连通。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 8,
+      "requirement_section": "边杆与顶点球",
+      "criterion": "每个单元角点有等尺寸球形接头，共享角点外观为单个球且球与球之间留有间距。",
+      "scoring_rule": {
+        "PASS": "所有已存在单元的角点都有尺寸一致的球形标记，球心与角点对齐，共享角点无分叉接头，邻接球体未挤成连续团块。",
+        "PARTIAL": "不满足 PASS，但至少一半唯一角点有可识别球形标记；存在局部漏球、尺寸不一、偏心或重复错位的接头。",
+        "FAIL": "球形标记覆盖不足一半唯一角点，或没有可识别单元及其角点。"
+      },
+      "evidence_refs": ["image/01_lattice.png"],
+      "verification": {
+        "method": "evaluated_site_measurement_and_visual_review",
+        "procedure": "从求值结果识别球形接头并合并位置等价的共享角点，比较球心与几何角点位置以及球形包络尺寸。检查接头的外观单一性和相邻球间空隙。允许重合实例与共享网格，不用对象名、UV Sphere 节点或独立对象数判定。内部球不计作顶点球。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 14,
+      "requirement_section": "内部球体占位",
+      "criterion": "中央空位的大球与八个八面体中心的小球构成两个正确的内部占位层次。",
+      "scoring_rule": {
+        "PASS": "默认中央空位有且仅有一颗完整大球，八个单元中心各有一颗同尺寸完整小球；两类球心误差均不超过 0.05L，大球直径至少为小球的 1.5 倍，球面未明显穿出各自容纳区域。",
+        "PARTIAL": "不满足 PASS，但存在正确位于中央空位的大球，或至少四个单元中心具有正确的小球；包括另一类缺失、剩余小球缺失或错位、尺度层次不足等情况。",
+        "FAIL": "中央大球占位不成立，且正确位于单元中心的小球不足四颗；或所有所谓内部球只是顶点球、平面圆片。"
+      },
+      "evidence_refs": ["image/01_lattice.png", "image/03_internal_site.png"],
+      "verification": {
+        "method": "evaluated_occupancy_measurement_and_xray_review",
+        "procedure": "在副本中隐藏面片或使用穿透显示，依据八个单元中心定位中央空位及各八面体中心，测量求值球形包络的球心、直径与 L。通过至少两个正交方向及斜视排除仅投影对齐、实际前后错位的情况。完整球、实例球及合并网格中的球形部分等效，不要求两类球分成指定数量的对象，不推断化学元素或真实晶体参数。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 6,
+      "requirement_section": "几何质量与检查视图",
+      "criterion": "球杆表面圆滑且无破损阴影，八面体三角区域和尖点保持清楚。",
+      "scoring_rule": {
+        "PASS": "面片、杆件、顶点球及两类内部球均存在；正常近景下球杆圆滑，八面体轮廓清楚，无明显尖刺、破损法线、重叠闪烁或局部破面。",
+        "PARTIAL": "不满足 PASS，但上述五类中至少三类存在且整体可辨，质量问题仅局部出现，或缺失的类别使完整质量无法确认。",
+        "FAIL": "上述类别少于三类，或大量棱面、尖刺、错误法线和破面严重损害结构辨识。"
+      },
+      "evidence_refs": ["image/01_lattice.png", "image/03_internal_site.png"],
+      "verification": {
+        "method": "artifact_multiview_closeup_review",
+        "procedure": "以中性灰实体显示在整体及单元近景下观察，旋转视角检查球杆轮廓、阴影和闪烁；隐藏遮挡面片后确认内部球自身表面。合理的球杆相交不作为缺陷，灰模光滑度归几何质量，不要求透明或着色材质。不以存在平滑节点或修改器作为完成证据。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 12,
+      "requirement_section": "可编辑的周期与尺寸",
+      "criterion": "三条周期方向分别增加一次重复时，八面体面片、边杆与顶点球按同一周期扩展。",
+      "scoring_rule": {
+        "PASS": "分别测试三个方向从 2 改为 3，其他方向为 2，三次均得到十二个完整单元，面片、杆件、顶点球同步生成并延续相接关系，恢复后得到默认结构。",
+        "PARTIAL": "不满足 PASS，但至少一个方向的数量修改能实际生成新增单元；存在其他方向无效、部分几何未传播、接触关系失配或恢复不完整。",
+        "FAIL": "没有任何方向能通过已有重复结构增加单元，或只能整体缩放、逐个手工复制摆放。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "functional_parameter_probe",
+        "procedure": "读取 build.py 注明的编辑入口，在工程副本中记录基线，依次独立执行 X、Y、Z 方向 2→3 的数量测试，每次评估输出后恢复。根据单元中心分层和实体几何确认十二个结果及新增面片、边杆、顶点球，不读取固定节点、修改器或对象计数作为结果。此行不判断新增内部小球，另由 PROC-03 检查。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "可编辑的周期与尺寸",
+      "criterion": "顶点球半径和杆半径可独立统一修改，尺寸改变不会移动中心线或影响面片和内部球。",
+      "scoring_rule": {
+        "PASS": "顶点球半径增大 25% 与杆半径减小 25% 两项测试均在所有相应部件生效；球心、杆中心线、面片、内部球及周期位置保持不变，且可恢复默认尺寸。",
+        "PARTIAL": "不满足 PASS，但至少一项尺寸测试能统一影响对应部件；另一项无效，或有局部未传播、意外连带变化或恢复问题。",
+        "FAIL": "两项尺寸测试都不能统一改变实际几何，只改变显示或断开的参数，或只能整体缩放场景。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "functional_parameter_probe_and_geometry_comparison",
+        "procedure": "在副本中分别记录默认求值球形包络和杆截面，执行公开的半径乘数 1.25 与 0.75，测量对应尺寸变化并比较前后球心、中心线、面片与内部球位置。容许合理网格离散误差，禁止用节点默认值变化代替几何测量。测试后恢复原值并对照基线。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 8,
+      "requirement_section": "可编辑的周期与尺寸",
+      "criterion": "内部小球重复关系能覆盖扩展后的单元中心，不依赖逐球手动重排。",
+      "scoring_rule": {
+        "PASS": "对三个方向分别进行 2→3 的主体扩展，并通过联动或另行修改小球重复计数后，十二个单元中心均得到正确小球；中央大球保留原空位，恢复默认后小球回到八颗。",
+        "PARTIAL": "不满足 PASS，但至少一个方向能按周期生成新增内部小球；其他方向无效、球与新增单元错位或恢复失败。",
+        "FAIL": "没有可工作的内部小球周期扩展，或新增球必须逐个手动移动到目标位置。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "functional_repeat_and_occupancy_probe",
+        "procedure": "复用 PROC-01 的三组扩展状态，允许为内部小球单独调整相同方向计数；检查求值小球球心是否落在十二个单元中心的 0.05L 容差内。观察中央大球保持原空位且无额外复制；恢复后确认默认八个小球。不得因没有统一总控制器而扣分，也不以三个 Array 的存在替代占位结果。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "输入与交付",
+      "criterion": "交付文件可脱离作者路径重建默认晶格，并保留公开的编辑入口。",
+      "scoring_rule": {
+        "PASS": "在独立临时目录中使用 Blender 5.1.2 从默认场景运行 build.py，无需人工修补或网络下载即可重建与 submission.blend 相符的默认结构；依赖闭合，脚本注明的编辑入口可定位。",
+        "PARTIAL": "不满足 PASS，但 build.py 可执行并生成主要晶格，缺少部分部件、恢复状态或编辑入口说明；或存在可由随附资源解决的路径问题。",
+        "FAIL": "缺少可执行的重建脚本，脚本依赖未提供资源或原作者环境而无法生成主要晶格，或仅载入未随附的成品文件。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "isolated_rebuild_and_dependency_audit",
+        "procedure": "将交付内容复制到新的临时目录，在目标版本中从默认场景执行 build.py。检查访问的依赖是否随包提供且路径可移植，比较重建结果与提交工程的默认几何占位及可定位参数。工程可打开是评估前提，不单独奖励；重复和尺寸功能由 PROC 行评分，此行只判断重建闭合及入口可定位性。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

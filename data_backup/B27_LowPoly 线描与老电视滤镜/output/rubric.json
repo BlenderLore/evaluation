@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "LowPoly 线描与老电视滤镜",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1FYXWBYESn",
+    "id": "BV1FYXWBYESn"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"SCN": 90, "PIPE": 10},
+  "weighting_note": "暂定权重，尚未校准。本任务本质上是图像合成与风格化成像，因此 SCN 占90分，内部拆成8项独立效果与功能检查，单项10至15分。源场景的角色建模和照片材质不是本教程制作目标，不为其强造 GEO 或 SURF 分数；可选扫描线动画也不计 ANM。PIPE 仅衡量重建、可搬移渲染和可比较的输出状态。",
+  "rubric": [
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 15,
+      "requirement_section": "1. 随模型变化的轮廓描线",
+      "criterion": "主要外轮廓具有贴合角状模型边界的描线，并能跟随当前三维场景变化。",
+      "scoring_rule": {
+        "PASS": "主体主要外边界和角状转折清楚可读，描线无大段脱离、实心填堵或外形丢失；轻微改变观察角度后描线跟随新的可见边界。",
+        "PARTIAL": "未满足 PASS，但当前渲染中存在沿至少一段真实主体外边界的描线；其余边界有明显缺失、偏离、填堵，或不能随观察角度更新。",
+        "FAIL": "不满足 PASS 或 PARTIAL；没有沿真实主体边界形成的描线，或仅以成品图片替代场景结果。"
+      },
+      "evidence_refs": ["image/01_final.png", "image/02_outline.png"],
+      "verification": {
+        "method": "artifact_render_and_view_change_probe",
+        "procedure": "在交付文件的仅线描状态渲染默认相机，并在副本中轻微改变相机绕主体的观察角度后重新渲染。人工或 VLM 对照无滤镜渲染中的真实轮廓检查贴合、转角和主要外形连续性。检查最终输出是否来自当前场景；不以边缘检测节点的存在或名称证明结果。此项不评价内部结构线或线条深浅纹理。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-02",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "1. 随模型变化的轮廓描线",
+      "criterion": "内部描线与明显面转折和部件交界相对应，避免把平面纹理和光照全部变成碎线。",
+      "scoring_rule": {
+        "PASS": "演示主体中可见的明显面转折或部件交界产生结构描线，内部大面积平坦色块仍干净可读，没有密集纹理碎线。",
+        "PARTIAL": "未满足 PASS，但至少一处真实内部结构边界有描线；其他明显结构遗漏，或平坦区域出现显著的无关碎线。",
+        "FAIL": "不满足 PASS 或 PARTIAL；没有对应真实内部结构的描线，或场景未提供可观察的内部面转折或部件交界。"
+      },
+      "evidence_refs": ["image/02_outline.png", "image/01_final.png"],
+      "verification": {
+        "method": "artifact_geometry_and_render_comparison",
+        "procedure": "对照演示物的评估几何、原始渲染与仅线描渲染，挑选可见的面转折、部件交界和平坦色块检查线条对应关系。纹理细节多寡由提交场景决定，不要求复刻角色。人工或 VLM 判断结构可读性；此项只评价主体内部线条，不重复评价外轮廓。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-03",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "2. 略带斑驳的线条质感",
+      "criterion": "描线内部有沿长度方向分布的不规则深浅变化，且变化局限在线条附近。",
+      "scoring_rule": {
+        "PASS": "多处描线上能看到不规则深浅变化，变化仍集中于描线范围，没有在无关背景和平坦表面铺满噪点，也没有因此抹掉主要外形的一整段。",
+        "PARTIAL": "未满足 PASS，但描线存在可辨的不规则深浅变化；变化过强导致较长边线消失，或显著泄漏为表面、背景噪点。",
+        "FAIL": "不满足 PASS 或 PARTIAL；描线不存在，或只有均匀纯色线条、规则条纹或全屏噪点而没有所需线内变化。"
+      },
+      "evidence_refs": ["image/02_outline.png"],
+      "verification": {
+        "method": "artifact_outline_closeup_inspection",
+        "procedure": "在仅线描状态渲染并查看多个角度不同的轮廓局部，对照原始渲染排除主体纹理、照明和抗锯齿造成的假变化。人工或 VLM 检查线内深浅的不规则性和空间范围；必要时比较处理开关前后像素。不要求特定噪波算法、维度或节点。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-04",
+      "capability": "SCN",
+      "points": 15,
+      "requirement_section": "3. 彩色错位与色散",
+      "criterion": "高反差边缘同时呈现窄幅彩色通道错位与轻微空间色散，仍构成同一个可读主体。",
+      "scoring_rule": {
+        "PASS": "能辨认方向一致的窄幅彩色错位，以及不同画面位置的轻微彩边扩展差异；各色边仍围绕同一个主体，主要形状和色块可辨。",
+        "PARTIAL": "未满足 PASS，但当前场景输出具有彩色通道错位或空间色散中的至少一种；另一种缺失，或强度过大使局部产生明显分离副本、可读性下降。",
+        "FAIL": "不满足 PASS 或 PARTIAL；没有所需彩色边缘效果，或只有不随当前场景更新的彩色成品覆盖图。"
+      },
+      "evidence_refs": ["image/01_final.png", "image/03_scanlines.png"],
+      "verification": {
+        "method": "artifact_color_edge_comparison",
+        "procedure": "对照仅线描与完整滤镜渲染，查看至少一处主体外边界和一处内部高反差边界；比较画面中心与较外侧位置的彩边位移、宽度及形状。必要时单独旁路相应处理或比较通道边缘。人工或 VLM 判断错位、扩展与主体可读性，不限定 RGB 拆合、镜头畸变等具体实现。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-05",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "4. 水平扫描线与像素质感",
+      "criterion": "细密水平扫描线按屏幕方向规律跨越主体和背景，强度保留图像内容。",
+      "scoring_rule": {
+        "PASS": "横向平行细条纹在主体和背景均可辨，规律分布且不随模型表面弯曲，没有大面积黑带掩盖主体。",
+        "PARTIAL": "未满足 PASS，但当前输出存在可辨的重复扫描条纹；其方向、覆盖范围或明暗强度至少一项不符合要求。",
+        "FAIL": "不满足 PASS 或 PARTIAL；没有扫描条纹，或只有不可辨认图像内容的全黑、全白或无规则噪点。"
+      },
+      "evidence_refs": ["image/03_scanlines.png", "image/01_final.png"],
+      "verification": {
+        "method": "artifact_screen_space_scanline_inspection",
+        "procedure": "在完整滤镜渲染的主体和背景分别查看局部，检查条纹方向、周期和连续覆盖。可沿竖直像素列比较周期亮度变化，并结合人工或 VLM 判断是否为细条纹以及是否遮蔽主体。此项只评价默认条纹外观，密度调节功能由独立行评价。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-06",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "4. 水平扫描线与像素质感",
+      "criterion": "最终画面具有轻度离散像素块或阶梯质感，并保留主体结构和彩色边缘。",
+      "scoring_rule": {
+        "PASS": "实际输出尺寸的局部放大中存在可辨的离散像素块或阶梯，主要外轮廓、面转折和彩边仍可识别，效果并非只有均匀模糊。",
+        "PARTIAL": "未满足 PASS，但存在可辨的离散像素质感；粒度过大使部分重要结构或彩边难以辨认。",
+        "FAIL": "不满足 PASS 或 PARTIAL；不存在离散像素质感，只有普通抗锯齿、均匀模糊，或无法识别任何主体内容。"
+      },
+      "evidence_refs": ["image/01_final.png"],
+      "verification": {
+        "method": "artifact_native_resolution_pixel_inspection",
+        "procedure": "渲染保存相机的实际输出分辨率，使用最近邻放大观察主体转角和色块交界，并与原始渲染及旁路像素处理的结果比较，排除 JPEG 压缩、截图缩放或图像查看器造成的伪像素块。检查块状采样实际来自交付处理。不要求固定像素尺寸或特定 Pixelate 节点。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-07",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "5. 原图保留与可调节性",
+      "criterion": "描线和滤镜叠加后仍保留原图的主要材质色块、纹理和大范围明暗关系。",
+      "scoring_rule": {
+        "PASS": "对照原始渲染，主要材质色块、已有纹理和大范围明暗仍可对应辨认；描线未以不透明底色覆盖整幅图，主体完整可见且与背景可区分。",
+        "PARTIAL": "未满足 PASS，但最终输出仍保留部分原始材质与明暗内容；其余内容被不透明填色、错误混合或严重曝光破坏，或主体明显出框。",
+        "FAIL": "不满足 PASS 或 PARTIAL；没有保留可辨的原图内容，或结果仅为轮廓遮罩、色块填屏、预制成品图。"
+      },
+      "evidence_refs": ["image/01_final.png", "image/02_outline.png"],
+      "verification": {
+        "method": "artifact_original_and_processed_render_comparison",
+        "procedure": "使用同一相机、模型、材质和照明，比较原始、仅线描及完整滤镜输出。人工或 VLM 逐一对应主体的主要色块、已有纹理和大范围明暗，确认描线作为透明叠加效果保留底图。只评混合与底图保留，不重复扣除各滤镜自己的外观缺陷。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-08",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "5. 原图保留与可调节性",
+      "criterion": "公开说明的描线粗细与扫描线密度调节项能实际改变输出并恢复默认效果。",
+      "scoring_rule": {
+        "PASS": "两个调节项均有可定位说明及低、高、默认值；较粗档使典型线宽明显增大，较密档使同一画幅的横线明显增多，模型、材质与相机不变，恢复默认值后两种效果均恢复。",
+        "PARTIAL": "未满足 PASS，但两个调节项中至少一个可定位且能实际产生正确方向的输出变化；另一个无效或缺失，或说明、独立性、恢复性不完整。",
+        "FAIL": "不满足 PASS 或 PARTIAL；两个调节项均无法定位或均不影响实际输出，仅存在标签、无连接参数或需替换成品图才能变化。"
+      },
+      "evidence_refs": ["image/02_outline.png", "image/03_scanlines.png"],
+      "verification": {
+        "method": "artifact_parameter_output_probe",
+        "procedure": "在交付文件副本中按内部说明分别渲染线宽低档、高档、恢复默认，以及扫描线密度低档、高档、恢复默认。对同一边缘测量典型线宽，对固定竖向取样区域计数横线，并检查模型、材质及相机保持不变。比较恢复后的默认输出；不以节点或输入插口的存在代替功能测试。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "6. 交付内容",
+      "criterion": "脚本可重建场景和处理，依赖可搬移，文件支持三种观察状态并直接渲染默认完整效果。",
+      "scoring_rule": {
+        "PASS": "build.py 可在 Blender 5.1.2 空场景中重建并保存当前演示与可编辑处理；搬移后无需联网或作者绝对路径即可通过 Cycles GPU 重现默认完整滤镜，且原始、仅线描、完整滤镜状态均可切换。",
+        "PARTIAL": "未满足 PASS，但空场景脚本重建、搬移后完整渲染、三种状态对照这三类流程中至少一类可实际完成；其余流程有缺失或依赖问题。",
+        "FAIL": "不满足 PASS 或 PARTIAL；三类流程均不能实际完成，或提交只包含结果图片而无可编辑场景与处理。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "isolated_rebuild_and_portable_render_replay",
+        "procedure": "在隔离目录中复制提交文件，按 build.py 开头说明在 Blender 5.1.2 空场景运行，检查产生的场景、材质和处理。断开作者专有路径后用提供 GPU 的环境渲染保存相机，核对默认状态并切换三种观察状态重新渲染。确认输出随当前场景产生且处理可编辑；此处仅规定未来验证，当前文档阶段未运行 Blender、GPU 或自动评分器。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

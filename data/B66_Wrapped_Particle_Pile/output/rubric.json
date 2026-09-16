@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Wrapped Particle Pile",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1UNNj6rEKx",
+    "id": "BV1UNNj6rEKx"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 45, "PROC": 20, "SCN": 15, "SURF": 10, "PIPE": 10},
+  "weighting_note": "The modeled particle, cluster, and slab receive 45 points across five distinct geometry checks. Reusable source relationships and functional scatter controls receive 20 points because procedural repetition is central. Spatial packing and presentation receive 15 points, the demonstrated palette and material separation receive 10, and reproducible delivery receives 10. The source is a static scatter demonstration, so no animation or physical simulation is required.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Wrapped Particle",
+      "criterion": "The particle body is a rounded solid with dense shallow geometric relief and continuous shading.",
+      "scoring_rule": {
+        "PASS": "The source body is broadly spherical, with dense shallow irregular geometric relief across its exposed surface, a rounded continuous silhouette, and no conspicuous facets, long spikes, or torn areas.",
+        "PARTIAL": "A recognizable rounded three-dimensional body has fine geometric relief on a substantial exposed region, but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable rounded three-dimensional body exists, or fine geometric relief is absent from any substantial exposed region; shader-only roughness does not meet this minimum."
+      },
+      "evidence_refs": ["image/02_rough_body.png", "image/03_wrapped_particle.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection and controlled close-up views",
+        "procedure": "In a temporary copy of submission.blend, isolate a source body and inspect its evaluated surface from front, side, and oblique views under a neutral material override. Inspect the evaluated mesh or displaced surface at grazing angles to distinguish geometric relief from shading-only detail. Assess relief coverage, silhouette, holes, spikes, and shading continuity on the existing body.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Wrapped Particle",
+      "criterion": "Open round tubes wrap the body in multiple directions with smooth paths and close surface relationships.",
+      "scoring_rule": {
+        "PASS": "Multiple slender round tubes follow different sides and directions of the body, have comparable thickness and continuous bends, retain separated visible tips, and remain close to the surface for most of their length without large floating loops or long buried sections.",
+        "PARTIAL": "At least one actual open round tube follows a substantial arc close to an existing body, but one or more PASS conditions are unmet.",
+        "FAIL": "No actual open round tube follows a substantial arc close to an existing body; painted lines, closed rings alone, or detached tube fragments do not meet this minimum."
+      },
+      "evidence_refs": ["image/03_wrapped_particle.png", "image/04_particle_cluster.png"],
+      "verification": {
+        "method": "Evaluated tube geometry and multi-view inspection",
+        "procedure": "Isolate a source particle in a temporary copy. Orbit around it and inspect tube cross-sections, open tips, curvature, and spacing from the body using evaluated geometry and close views. Temporarily hide the body to distinguish open paths from closed rings, then restore it to judge contact and penetration. Do not infer success from curve-object counts.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "1. Wrapped Particle",
+      "criterion": "Small smooth spheres attach at several locations around the particle.",
+      "scoring_rule": {
+        "PASS": "Several visibly smaller smooth spherical details occupy different locations around the source body, remain individually spherical, and contact or shallowly overlap the body or a wrap without floating.",
+        "PARTIAL": "At least one clearly smaller spherical detail visibly contacts an existing body or wrap, but one or more PASS conditions are unmet.",
+        "FAIL": "No clearly smaller spherical detail visibly contacts an existing body or wrap; wholly floating spheres do not meet the minimum."
+      },
+      "evidence_refs": ["image/03_wrapped_particle.png"],
+      "verification": {
+        "method": "Multi-view geometry and contact inspection",
+        "procedure": "Inspect the source particle from opposing views and check the evaluated small-sphere geometry near the body and wraps. Confirm distinct locations, relative size, smooth form, and actual contact in depth. Small spheres need not coincide with tube endpoints.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Reusable Cluster",
+      "criterion": "The source arranges recognizable wrapped particles into a compact three-dimensional cluster with varied orientations.",
+      "scoring_rule": {
+        "PASS": "A small group of recognizable wrapped particles forms a compact cluster with depth offsets and different orientations. Neighbors touch or overlap slightly, and the component bodies remain readable without detached members or shape-erasing intersections. Particle-level relief, tube finish, and small-sphere details are assessed in their own geometry rows.",
+        "PARTIAL": "The retained source contains at least two adjacent recognizable bodies with wrapping geometry, but one or more PASS conditions are unmet.",
+        "FAIL": "The retained source lacks at least two adjacent recognizable bodies with wrapping geometry; a single particle or unrelated loose objects do not meet the minimum."
+      },
+      "evidence_refs": ["image/04_particle_cluster.png"],
+      "verification": {
+        "method": "Source isolation and evaluated spatial inspection",
+        "procedure": "Isolate the actual source used by the scatter and inspect orthogonal and oblique views of its evaluated geometry. Compare particle-center depth, wrap orientations, contact regions, and individual body silhouettes. Judge the cluster itself without using pile density to substitute for a complete source.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Rounded Support",
+      "criterion": "The support is a shallow near-square solid slab with a flat top and rounded perimeter.",
+      "scoring_rule": {
+        "PASS": "The support is a shallow solid slab with a near-square footprint, flat upper face, visibly rounded plan-view corners, softened perimeter edges, clear thickness, and smooth unwarped sides.",
+        "PARTIAL": "A coherent solid slab with a substantially flat upper face supports the scene, but one or more PASS conditions are unmet.",
+        "FAIL": "No coherent solid slab with a substantially flat upper face exists; a zero-thickness plane alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_colored_pile.png", "image/05_scattered_pile.png"],
+      "verification": {
+        "method": "Evaluated support geometry inspection",
+        "procedure": "Temporarily hide the pile in a copy of the submission and inspect the support from top, side, and oblique views. Check actual thickness and closed side geometry, footprint, corner rounding, top planarity, and edge shading. Restore the pile after inspection.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "4. Editable Scatter",
+      "criterion": "The scatter preserves a functional dependency on the editable source cluster.",
+      "scoring_rule": {
+        "PASS": "The pile is generated from the retained editable source cluster, and a visible source-feature edit propagates consistently throughout all generated copies after reevaluation without manually replacing copies.",
+        "PARTIAL": "A visible source-feature edit propagates to multiple generated copies after reevaluation, but one or more PASS conditions are unmet, such as stale or independently frozen copies elsewhere.",
+        "FAIL": "No retained source-feature edit propagates to multiple generated copies; an inert source object or manually duplicated fixed pile does not meet the minimum."
+      },
+      "evidence_refs": ["image/04_particle_cluster.png", "image/05_scattered_pile.png"],
+      "verification": {
+        "method": "Non-destructive source-edit functional probe",
+        "procedure": "Work in a temporary copy of the submission. Identify the source through its actual geometry dependency. Make a conspicuous reversible edit to one source wrap or attached sphere, reevaluate the generator, and compare generated geometry in separated regions of the pile. Confirm that the edited feature appears consistently throughout the copies, then undo the edit. Object links or modifier existence alone do not establish propagation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "4. Editable Scatter",
+      "criterion": "Quantity or density, random seed, and orientation variation controls change the evaluated scatter predictably.",
+      "scoring_rule": {
+        "PASS": "All three requested controls function: reduced quantity or density reduces population; a changed seed changes layout and restoring it restores the same layout; zero orientation variation aligns cluster orientations and restored variation produces mixed orientations. The controls are identifiable and require no manual replacement of copies.",
+        "PARTIAL": "At least one requested control performs its complete stated behavior on the evaluated scatter, but one or more PASS conditions are unmet.",
+        "FAIL": "None of the requested controls performs its complete stated behavior on the evaluated scatter; labels and unused parameters do not meet the minimum."
+      },
+      "evidence_refs": ["image/05_scattered_pile.png"],
+      "verification": {
+        "method": "Controlled generator perturbation and restoration",
+        "procedure": "In a temporary copy, record baseline controls and evaluated instance transforms or equivalent component placements. Reduce quantity or density substantially, such as to half its saved value, and confirm fewer generated components. Restore it, change the seed, and compare placement; restore the seed and confirm baseline placement returns. Then set orientation variation to zero and compare cluster orientations before restoring the saved value. Reevaluate as required and inspect actual results rather than parameter names.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "5. Pile Arrangement",
+      "criterion": "The saved scatter forms a dense supported pile with irregular height, varied directions, and a readable support border.",
+      "scoring_rule": {
+        "PASS": "Many recognizable particles cover most of the slab top while leaving a visible support border. Mixed orientations and height changes break up rows and regular silhouettes. The pile appears supported, with neighbor contact where stacked, no large floating clusters, extensive burial, major central voids, substantial unsupported overhang, or particles along the slab sides and underside.",
+        "PARTIAL": "A recognizable group of wrapped particles occupies a substantial connected region on the slab top and reads as a pile, but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable group of wrapped particles occupies a substantial connected region on the slab top, or the arrangement does not read as a pile."
+      },
+      "evidence_refs": ["image/01_colored_pile.png", "image/05_scattered_pile.png"],
+      "verification": {
+        "method": "Whole-scene spatial and contact inspection",
+        "procedure": "Inspect the saved evaluated pile from top, front, side, and underside views. Compare its footprint with the slab, identify exposed borders and central voids, and inspect support and neighbor contacts in depth. Use a neutral overview render if occlusion makes the geometry hard to read. Assess current spatial arrangement independently of whether its controls work.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "6. Surface Finish and Presentation",
+      "criterion": "The actual surfaces carry the demonstrated warm, cool, and dark material distinctions.",
+      "scoring_rule": {
+        "PASS": "Existing body, wrap, small-sphere, and slab surfaces consistently use warm yellow or golden-orange, pale blue or cyan, dark charcoal, and light cool-gray appearances respectively. Bodies read rougher than the smoother wraps, and small spheres read gently glossy, with these distinctions visible from other views.",
+        "PARTIAL": "Substantial existing body and wrap surfaces have an actual warm-body versus cool-wrap material contrast, but one or more PASS conditions are unmet. Missing small spheres or a missing slab prevent PASS but do not erase this demonstrated core contrast.",
+        "FAIL": "Substantial existing body and wrap surfaces are absent, or they lack an actual warm-body versus cool-wrap material contrast; a reference-image overlay alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_colored_pile.png"],
+      "verification": {
+        "method": "Assigned-material inspection and alternate-view renders",
+        "procedure": "Inspect materials assigned to evaluated body, wrap, small-sphere, and slab surfaces. Render an isolated source particle and a slab detail under controlled neutral illumination, then view the source particle from another angle. Confirm that color and finish distinctions belong to those surfaces. Inspect surface appearance without rescoring geometric relief density from GEO-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-02",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "6. Surface Finish and Presentation",
+      "criterion": "The saved camera and lighting present the entire asset clearly from an elevated oblique view.",
+      "scoring_rule": {
+        "PASS": "The camera includes the entire pile and slab with a small margin from an elevated oblique angle. Wrapping paths, small spheres, rounded corners, and front-side thickness remain inspectable against a simple background, without obscuring highlights, interface elements, captions, or stray source copies.",
+        "PARTIAL": "The saved camera gives a useful readable view of both the pile and its slab, but one or more PASS conditions are unmet.",
+        "FAIL": "The saved camera does not give a useful readable view of both the pile and its slab."
+      },
+      "evidence_refs": ["image/01_colored_pile.png", "image/05_scattered_pile.png"],
+      "verification": {
+        "method": "Saved-camera render inspection",
+        "procedure": "Render the saved camera from submission.blend and inspect framing, viewing angle, visible detail, clipping, highlight loss, background, and unintended source copies. Compare the result with the submitted PNG for scene consistency. Judge the camera's presentation separately from the pile's spatial packing.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, reproducible build script, and required PNG form a usable self-contained submission.",
+      "scoring_rule": {
+        "PASS": "All three named deliverables are present and usable: submission.blend opens in Blender 5.1.2 with the editable scene and scatter; build.py rebuilds it from the empty starting scene without unavailable assets and saves submission.blend; B66_Wrapped_Particle_Pile.png is a Cycles GPU scene render with a longest edge of at least 1600 pixels, consistent with the submitted scene.",
+        "PARTIAL": "submission.blend opens with the modeled pile and slab, and at least one of build.py or the named PNG is usable, but one or more PASS conditions are unmet.",
+        "FAIL": "submission.blend is missing, cannot be opened, or lacks the modeled pile and slab, or neither build.py nor the named PNG is usable."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Fresh-environment artifact and rebuild checks",
+        "procedure": "In an isolated directory, open submission.blend with Blender 5.1.2 and inspect missing dependencies and the saved Cycles GPU render setup. Run build.py from the declared empty starting scene and inspect the rebuilt source, scatter controls, and scene. Decode the named PNG, check its dimensions, and compare it with a fresh render of the submitted scene to reject screenshot or reference substitution. These future checks are specified only; no Blender execution occurred during task authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

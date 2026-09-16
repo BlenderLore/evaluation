@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Fused Ring Ball and Stick Molecule",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV11WEr6kEdL",
+    "id": "BV11WEr6kEdL"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "This is a geometry assembly task. Its 90 geometry points are distributed across atom proportions, rod form, fused-ring topology, peripheral branching, terminal layout, bond multiplicity, physical connections, and geometric finish. Smooth gray-model shading belongs to GEO. The source does not establish a material-design, procedural-generator, rigging, animation, or simulation task. Editability and reproducible delivery receive the remaining 10 points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Atom and Bond Shapes",
+      "criterion": "Atom geometry is spherical and retains the visible size distinction between larger backbone or group-center atoms and smaller tip atoms.",
+      "scoring_rule": {
+        "PASS": "At least six visible atom spheres, including larger backbone or group-center spheres and smaller terminal spheres, are present. All required atom positions use round solid spheres, the larger size family is consistent, and every three-tip group end and the far-right terminal are visibly smaller than their adjacent larger atom.",
+        "PARTIAL": "At least six visible three-dimensional atom spheres are present, including a larger backbone or group-center sphere and a distinctly smaller terminal sphere, but any PASS condition is unmet. Missing atoms, inconsistent size families, or distorted additional atoms are examples.",
+        "FAIL": "Fewer than six visible three-dimensional atom spheres exist, or the existing geometry does not demonstrate both a larger structural atom and a distinctly smaller terminal atom. Flat circular images and empty placeholders do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_molecule.png", "image/02_branch_depth.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection and controlled views",
+        "procedure": "Open the submitted blend, isolate its atom geometry, and inspect it from the main and oblique directions. Compare evaluated bounding dimensions and silhouettes within each size family, then inspect the terminal-to-adjacent-center size relationships. Inspect geometry rather than relying on primitive or object names.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Atom and Bond Shapes",
+      "criterion": "Bonds have a consistent slender cylindrical form with an exposed length between atom surfaces.",
+      "scoring_rule": {
+        "PASS": "At least three exposed bonds demonstrate straight solid cylindrical form. Every required bond has that form, a consistent slender thickness clearly narrower than the smaller atom spheres, and visible length between its endpoint atoms.",
+        "PARTIAL": "At least three exposed bonds demonstrate straight solid cylindrical form, are clearly narrower than adjacent atom spheres, and have visible length between them, but any PASS condition is unmet. Missing rods, uneven thickness, or bulky additional rods are examples.",
+        "FAIL": "Fewer than three exposed bonds demonstrate the minimum cylindrical and slender form, or the purported bonds are only flat lines, image content, or fully hidden inside atom geometry."
+      },
+      "evidence_refs": ["image/01_complete_molecule.png", "image/02_branch_depth.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection",
+        "procedure": "Inspect cross-sections and side silhouettes of the evaluated bond geometry in a neutral solid view. Compare rod diameters across the molecule and against the smaller atoms, and confirm that the visible rod spans extend between atom surfaces. Connectivity errors are scored separately from rod form.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Fused Ring Backbone",
+      "criterion": "The central layout contains a six-atom left ring fused to a five-atom right ring through one shared edge.",
+      "scoring_rule": {
+        "PASS": "The main-view layout contains recognizable closed five- and six-atom rings with visible interior openings. The backbone includes exactly nine distinct backbone atoms and the two shared central atoms with their common edge. The left opening is a broader six-sided shape and the right opening a smaller five-sided shape; both are unobstructed and the backbone is approximately planar.",
+        "PARTIAL": "The main-view layout contains at least one recognizable closed ring of five or six atom positions with a visible interior opening, but any PASS condition is unmet. A missing second ring, incorrect sharing, or substantial layout distortion are examples.",
+        "FAIL": "The main-view layout has no recognizable closed five- or six-atom ring with a visible interior opening. Loose chains, two disconnected arcs, and ring shapes without visible atom positions do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_molecule.png"],
+      "verification": {
+        "method": "Atom-layout tracing and evaluated geometry inspection",
+        "procedure": "From a view normal to the backbone plane, trace atom positions and the intended connection layout, treating a parallel double rod as one topological edge. Confirm ring sizes, nine distinct backbone atoms, shared edge, and open interiors. Check an oblique view for approximate backbone planarity. Reserve small endpoint contact defects for GEO-07 so this row assesses the topology and arrangement.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Peripheral Groups",
+      "criterion": "Three peripheral groups each have a center, three smaller outward tips, and a connection toward the specified backbone position.",
+      "scoring_rule": {
+        "PASS": "All three groups are present at the upper-left and bottom positions of the six-atom ring and upper outer position of the five-atom ring. Each has a large center, three separate smaller tips, three outward rods, and one inward rod toward its backbone atom. The fans are readable, spatially spread, and distinct from one another.",
+        "PARTIAL": "At least one recognizable peripheral group has its center, all three separate tip atoms, three outward rods, and an inward rod directed toward the backbone, but any PASS condition is unmet. Missing other groups, incorrect attachment positions, or congested fans are examples.",
+        "FAIL": "No peripheral group contains the complete minimum center, three-tip layout, three outward rods, and inward connection layout. A lone center, a two-tip branch, or a template without an inward rod directed toward a backbone atom does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_molecule.png", "image/02_branch_depth.png"],
+      "verification": {
+        "method": "Main and oblique artifact inspection",
+        "procedure": "Locate each peripheral center relative to the backbone and trace its four intended connections. Inspect the complete assembly and isolate each fan in an oblique view to distinguish its three tips and depth. Evaluate branch completeness and placement here; evaluate physical rod-end contact in GEO-07.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Peripheral Groups",
+      "criterion": "The molecule has the upward, lower-left diagonal, and far-right single-atom terminal extensions.",
+      "scoring_rule": {
+        "PASS": "All three additional terminal atoms are present at the specified ring positions: a larger upper terminal above the six-atom ring, a larger diagonal terminal outside its lower-left corner, and a smaller terminal outside the rightmost five-atom-ring atom. Each has a visible bond layout back to its intended ring atom.",
+        "PARTIAL": "At least one of the three specified terminal positions has its terminal atom and a visible bond layout toward its intended ring atom, but any PASS condition is unmet. Missing terminals or incorrect placement of other terminals are examples.",
+        "FAIL": "None of the three specified terminal positions contains both a terminal atom and a visible bond layout toward its intended ring atom. Three-tip-group atoms cannot substitute for these extensions."
+      },
+      "evidence_refs": ["image/01_complete_molecule.png"],
+      "verification": {
+        "method": "Reference-aligned artifact inspection",
+        "procedure": "Orient the saved molecule to match the overall reference and inspect the three terminal extensions separately from the fan groups. Confirm their attachment locations and relative atom sizes. Bond multiplicity and physical contact are checked in GEO-06 and GEO-07.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Bond Order and Connections",
+      "criterion": "Single and double bonds are distinguishable, with double bonds at the four specified locations.",
+      "scoring_rule": {
+        "PASS": "At least one distinguishable single-rod connection is present. All four specified locations use two visibly separate parallel rods directed between the same pair of atoms: the shared ring edge, the lower-right five-atom-ring edge, the upward terminal, and the lower-left diagonal terminal. Every other required connection uses a single rod, and each double pair has readable spacing along its exposed length.",
+        "PARTIAL": "At least one specified double-bond location has two visibly separate parallel rods directed between the same pair of atoms, and at least one other connection is a distinguishable single rod, but any PASS condition is unmet. Missing double pairs, wrong multiplicity elsewhere, or unreadable spacing in additional pairs are examples.",
+        "FAIL": "There is no specified double-bond location with a separate parallel pair directed between the same two atoms, or no distinguishable single-bond connection exists. Arbitrary nearby parallel rods do not qualify as a double bond."
+      },
+      "evidence_refs": ["image/01_complete_molecule.png", "image/03_ring_bonds.png"],
+      "verification": {
+        "method": "Endpoint-pair and rod-axis inspection",
+        "procedure": "Trace each of the four public double-bond locations in evaluated geometry. Compare the two rod axes, their separation, and their intended endpoint atom pair. Inspect remaining graph edges for a single rod. This row evaluates multiplicity and pair geometry, leaving exact endpoint penetration to GEO-07.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Bond Order and Connections",
+      "criterion": "The rods physically meet their intended atoms and form one clean connected assembly in three dimensions.",
+      "scoring_rule": {
+        "PASS": "An existing core assembly of at least five atoms is physically connected by rods entering their intended spheres, and at least half of the existing structural rods meet both intended atoms. The complete required assembly is present, and every rod enters both intended atom surfaces with no visible endpoint gap or protrusion beyond the far surface. Double-pair ends are contained in the same endpoint spheres. No floating templates, accidental cross-links, unrelated-atom penetrations, or blocked ring openings remain.",
+        "PARTIAL": "An existing core assembly of at least five atoms is physically connected by rods whose ends enter their intended spheres, and at least half of the existing structural rods meet both intended atoms, but any PASS condition is unmet. Local endpoint gaps, stray templates, missing components, or accidental intersections are examples.",
+        "FAIL": "No existing core assembly of at least five atoms has physical rod-to-atom connections, or fewer than half of the existing structural rods meet both intended atoms. Connections visible only through projection do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_molecule.png", "image/02_branch_depth.png"],
+      "verification": {
+        "method": "Evaluated endpoint containment and multi-view inspection",
+        "procedure": "Inspect the evaluated endpoints of each structural rod relative to its intended atom surfaces, using oblique and side views or geometric containment checks. Confirm that projection overlap represents actual contact and trace the connected assembly. Inspect exposed rod spans for unrelated-atom penetration and cross-links. Count geometric contact defects here rather than repeating them in topology or finish checks.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-08",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Finish and Editability",
+      "criterion": "Existing atom and rod surfaces demonstrate rounded silhouettes and clean continuous shading.",
+      "scoring_rule": {
+        "PASS": "At least five existing atom spheres and three existing rods demonstrate rounded silhouettes and continuous side shading. All required atom and rod surfaces are present and free of conspicuous faceting, holes, inverted faces, duplicate surface flicker, or broken sections.",
+        "PARTIAL": "At least five existing atom spheres and three existing rods demonstrate rounded silhouettes and continuous side shading without major holes or broken sections on those minimum surfaces, but any PASS condition is unmet. Missing peripheral components or finish defects on additional surfaces can prevent PASS without invalidating the demonstrated minimum.",
+        "FAIL": "Fewer than five existing atom spheres and three existing rods demonstrate the stated minimum geometric finish. Missing or invisible surfaces cannot establish smoothness, and pervasive faceting or broken surfaces below this minimum fails."
+      },
+      "evidence_refs": ["image/01_complete_molecule.png", "image/02_branch_depth.png"],
+      "verification": {
+        "method": "Controlled neutral-shader renders and mesh inspection",
+        "procedure": "Inspect the submitted geometry under a neutral override with lighting that reveals silhouettes, normals, and cylinder sides, including close oblique views. Check evaluated faces for holes, inverted normals, and duplicated coincident surfaces where visible artifacts occur. Judge actual shading and silhouettes rather than a smooth-shading flag alone. Rod-to-sphere contact defects belong to GEO-07.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Finish and Editability",
+      "criterion": "Atoms, bonds, and local three-tip groups remain accessible as editable geometry.",
+      "scoring_rule": {
+        "PASS": "The saved asset contains editable three-dimensional geometry with at least one atom and one bond independently accessible. All individual atoms and bonds can be selected independently through objects, mesh islands, or an equivalent representation, and each of the three complete three-tip groups can be selected as a local set and moved together without changing its internal arrangement.",
+        "PARTIAL": "The saved asset contains editable three-dimensional geometry with at least one atom and one bond independently accessible, but any PASS condition is unmet. An inaccessible remaining component or a fan that cannot be isolated as a local set are examples.",
+        "FAIL": "The asset lacks editable three-dimensional geometry, or no atom and bond are independently accessible. A raster reference, flattened proxy, or inseparable representation without accessible parts does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_branch_depth.png"],
+      "verification": {
+        "method": "Non-destructive editability probe",
+        "procedure": "Open a disposable copy of submission.blend. Select an atom and a rod separately, then identify and select each available fan's center, three tips, and internal rods. Translate the selected fan as a set and confirm unchanged internal relative positions; undo afterward. Do not require particular names, object counts, joining operations, or a rig.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The submitted files open, rebuild into a saved blend, and include a verifiable render of the submitted scene.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the editable molecule. build.py runs from an empty Blender scene without missing resources, recreates the scene, and saves submission.blend; reopening that saved result confirms the molecule, editable components, and render setup. The correctly named PNG is at least 1200 pixels on its longer side, was rendered from the submitted scene, and clearly frames the complete molecule with the required connections readable using the specified Cycles GPU configuration.",
+        "PARTIAL": "submission.blend opens and contains an inspectable editable molecule, but any PASS condition is unmet. Missing or failing build.py, failure to save its recreated scene, a missing or mismatched PNG, inadequate framing, or an incorrect render configuration are examples.",
+        "FAIL": "submission.blend is missing, cannot be opened, or contains no inspectable editable molecule. A script, image, or in-memory build alone cannot establish the minimum."
+      },
+      "evidence_refs": ["image/01_complete_molecule.png"],
+      "verification": {
+        "method": "Artifact integrity, isolated rebuild, saved-file reopen, and controlled render comparison",
+        "procedure": "Check the three exact deliverable names and decode the PNG. Open the submitted blend, then run build.py in a clean Blender 5.1.2 process and disposable directory. Confirm it creates submission.blend on disk and reopen that saved file to inspect its geometry, editability, camera, and Cycles GPU render configuration. Render from the original submitted scene and compare content and framing with the delivered PNG to establish actual-scene provenance. This is a future procedure; no Blender execution or compatibility testing was performed during task authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

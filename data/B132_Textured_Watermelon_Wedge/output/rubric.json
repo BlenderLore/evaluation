@@ -1,0 +1,133 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Textured Watermelon Wedge",
+  "source_video": {"url": "https://www.bilibili.com/video/BV1gEugzWEyc", "id": "BV1gEugzWEyc"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 45, "SURF": 40, "SCN": 5, "PIPE": 10},
+  "weighting_note": "The task centers on the modeled wedge and seeds and on distinct flesh, rind, and skin materials. Geometry receives 45 points and surfaces 40 with separate checks for shape, placement, color regions, skin pattern, flesh response, and material edits. Presentation receives 5 points for view readability. Rebuilding and the saved deliverables receive 10 points. No geometric generator, rig, simulation, or animation is required.",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 15,
+      "requirement_section": "Wedge Form",
+      "criterion": "The body is a volumetric triangular watermelon slice with a curved lower edge and slender depth.",
+      "scoring_rule": {
+        "PASS": "A substantial body exists with a triangular cut-face silhouette, nonzero depth, and a curved lower edge. It has a broad cut face, a gently rounded tip, thickness clearly smaller than height and base width, relatively flat cut faces, and a rounded outer base.",
+        "PARTIAL": "A substantial body with a triangular cut-face silhouette, nonzero depth, and a curved lower edge exists, but at least one other PASS condition is unmet.",
+        "FAIL": "No substantial body combines a triangular cut-face silhouette, nonzero depth, and a curved lower edge; a flat image, plane, unrelated primitive, or fragments alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_watermelon_wedge.png", "image/02_curved_wedge_geometry.png"],
+      "verification": {"method": "evaluated_geometry_and_multiview_inspection", "procedure": "Open submission.blend and inspect the evaluated body from front, side, and underside with neutral materials. Compare its silhouette, relative thickness, broad faces, and outer-base curvature with the references. Measure relative extents only as support for the visible proportions; do not require particular object names or topology.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "Wedge Form",
+      "criterion": "The existing wedge body has a continuous surface and smoothly finished perimeter without visible geometric or shading defects.",
+      "scoring_rule": {
+        "PASS": "A substantial volumetric wedge body with a broad face and a curved perimeter region exists. Its front, side, and underside read as a continuous solid, its perimeter is smoothly softened, and no visible holes, intersecting shell fragments, faceted contour breaks, or pinched shading disrupt the body.",
+        "PARTIAL": "A substantial volumetric wedge body with a broad face and a curved perimeter region exists, but at least one other PASS condition is unmet.",
+        "FAIL": "There is no substantial volumetric wedge body with both a broad face and a curved perimeter region on which continuity and edge finish can be assessed."
+      },
+      "evidence_refs": ["image/02_curved_wedge_geometry.png"],
+      "verification": {"method": "neutral_surface_geometry_inspection", "procedure": "Inspect the evaluated body in neutral solid shading and a temporary neutral-material render with texture relief disabled. Orbit across the perimeter, base, and side. Judge continuous geometry and normal shading independently of the material texture and independently of missing seeds.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "Seeds",
+      "criterion": "Visible seeds are editable flattened three-dimensional forms with elongated bodies and tapered ends.",
+      "scoring_rule": {
+        "PASS": "At least one visible seed attached to the flesh is actual editable geometry with nonzero thickness and an elongated silhouette. All displayed seeds have a small flattened volume, rounded body, tapered end, and smoothly finished edges.",
+        "PARTIAL": "At least one visible seed attached to the flesh is actual editable geometry with nonzero thickness and an elongated silhouette, but at least one other PASS condition is unmet.",
+        "FAIL": "No visible seed attached to the flesh is editable geometry with both nonzero thickness and an elongated silhouette; texture-only marks and unused source seeds do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_watermelon_wedge.png"],
+      "verification": {"method": "seed_geometry_inspection", "procedure": "Inspect seeds that actually appear on the submitted flesh. Use a close side view and evaluated geometry to distinguish flattened volumes from painted marks or zero-thickness faces. Check taper, thickness, and edge finish without requiring a particular primitive, modifier, or number of source objects.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 10,
+      "requirement_section": "Seeds",
+      "criterion": "The seeds form a spaced group on the red flesh and maintain credible surface contact.",
+      "scoring_rule": {
+        "PASS": "At least two visibly separated seeds are positioned against the red flesh in different areas of the cut face. The complete group occupies central and off-center areas with irregular spacing and slight angle variation, remains inside the red region, leaves the pale rind clear, and has visible seed bodies with no obvious floating gaps.",
+        "PARTIAL": "At least two visibly separated seeds are positioned against the red flesh in different areas of the cut face, but at least one other PASS condition is unmet.",
+        "FAIL": "Fewer than two visibly separated seeds are positioned against the red flesh in different areas; an unused seed cluster, overlapping pile, or wholly detached group does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_watermelon_wedge.png"],
+      "verification": {"method": "evaluated_spatial_relationship_inspection", "procedure": "Inspect the visible cut face frontally for spacing and placement, then from a shallow side angle for contact. Check that seeds sit against or partly embed in the flesh and do not intrude into the pale band. Assess placement separately from seed shape and material quality.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 15,
+      "requirement_section": "Color Regions",
+      "criterion": "Assigned materials establish the red flesh, pale inner-rind band, green outer skin, and dark visible seeds.",
+      "scoring_rule": {
+        "PASS": "An existing wedge displays red flesh and a distinct pale or green lower region. The complete result has red flesh covering most broad cut faces, a continuous subordinate pale band following the curved lower edge, green skin wrapping the outer base, a gently irregular and softly blended flesh-to-rind boundary, and dark brown to nearly black visible seeds. The regions remain readable with no loose color patches crossing into the wrong region.",
+        "PARTIAL": "An existing wedge displays red flesh and a distinct pale or green lower region, but at least one other PASS condition is unmet. Missing seeds or one incomplete color region can prevent PASS without erasing evidence from the existing core surfaces.",
+        "FAIL": "No existing wedge displays both red flesh and a distinct pale or green lower region; unused materials or a uniformly colored body do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_watermelon_wedge.png", "image/03_rind_and_flesh.png"],
+      "verification": {"method": "assigned_surface_and_render_inspection", "procedure": "Inspect actual material use on the evaluated wedge and seeds under neutral lighting. Follow the lower boundary on the visible cut face and around the outer base. Assess coverage, color separation, and continuity without requiring separate layer meshes or a material count.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 10,
+      "requirement_section": "Surface Character",
+      "criterion": "The green outer skin has irregular green markings confined to the skin region.",
+      "scoring_rule": {
+        "PASS": "A substantial green skin region exists on the wedge's curved outer base and visibly carries a pattern. Its light and dark green markings vary irregularly in shape and size, stay confined to the green skin, and leave the adjacent pale band lighter and visually quieter.",
+        "PARTIAL": "A substantial green skin region exists on the wedge's curved outer base and visibly carries a pattern, but at least one other PASS condition is unmet.",
+        "FAIL": "No substantial green skin region on the curved outer base carries a visible pattern; an unpatterned green area or an unused patterned material does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_rind_and_flesh.png"],
+      "verification": {"method": "controlled_skin_surface_inspection", "procedure": "Render or inspect a close view of the actual curved green skin under neutral soft lighting. Check the distribution, irregularity, and confinement of its light and dark green markings, including the boundary with the pale band. Do not infer success from shader-node existence.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-03", "capability": "SURF", "points": 10,
+      "requirement_section": "Surface Character",
+      "criterion": "The flesh has a moist textured response distinct from the rind and smooth dark seeds.",
+      "scoring_rule": {
+        "PASS": "An existing broad red flesh region visibly demonstrates surface relief and highlight response. It combines fine irregular grain with broader shallow variation, retains readable red color and the wedge silhouette, and appears moist under soft highlights. The existing rind remains visually distinct, and visible dark seeds have smooth surfaces with small readable highlights.",
+        "PARTIAL": "An existing broad red flesh region visibly demonstrates surface relief and highlight response, but at least one other PASS condition is unmet. Missing rind or seeds prevents PASS while the existing flesh can still establish this minimum.",
+        "FAIL": "No existing broad red flesh region visibly demonstrates both surface relief and highlight response; a flat color alone or an unused texture does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_watermelon_wedge.png"],
+      "verification": {"method": "controlled_material_response_inspection", "procedure": "Inspect a close render of the actual flesh with broad soft illumination and a shallow viewing angle, then compare the rind and visible seeds. Confirm fine and broader shallow variation and a moist highlight response. Judge material relief separately from the neutral-body geometric finish scored under Wedge Form.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-04", "capability": "SURF", "points": 5,
+      "requirement_section": "Material Editability",
+      "criterion": "Material edits affect their intended regions without unwanted changes to adjacent surfaces or geometry.",
+      "scoring_rule": {
+        "PASS": "The submitted wedge has an effective editable flesh-color control and at least one other effective surface adjustment. Flesh color, pale-rind color, skin-pattern appearance, flesh relief, and seed color are editable. A flesh-color change leaves rind and seeds unchanged; a skin-pattern scale or contrast change affects only the outer skin; a flesh-relief change leaves the rind boundary and seed geometry intact.",
+        "PARTIAL": "The submitted wedge has an effective editable flesh-color control and at least one other effective surface adjustment, but at least one other PASS condition is unmet.",
+        "FAIL": "The submitted wedge lacks either an effective editable flesh-color control or any other effective surface adjustment; controls that do not affect displayed surfaces do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_watermelon_wedge.png", "image/03_rind_and_flesh.png"],
+      "verification": {"method": "non_destructive_material_function_probe", "procedure": "On a temporary copy of submission.blend, locate the material inputs or equivalent editable controls actually used by each region. Change flesh color, then skin-pattern scale or contrast, then flesh relief in separate reversible probes. Inspect controlled before/after views for intended effects and unintended changes. Confirm pale-rind and seed colors can also be edited. Restore the original state after each probe.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-01", "capability": "SCN", "points": 5,
+      "requirement_section": "Presentation",
+      "criterion": "The final view clearly presents the complete seeded wedge, layered base, volume, and surface differences.",
+      "scoring_rule": {
+        "PASS": "The intended camera view shows a recognizable wedge with readable red flesh and its lower boundary. The entire required wedge is unobstructed and unclipped, a broad seeded cut face and pale band and green base are visible, a side reveals thickness, and soft lighting with a simple background allows the surface differences to be inspected at the delivered image size.",
+        "PARTIAL": "The intended camera view shows a recognizable wedge with readable red flesh and its lower boundary, but at least one other PASS condition is unmet.",
+        "FAIL": "The intended camera view does not show a recognizable wedge with readable red flesh and its lower boundary; camera or light objects alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_watermelon_wedge.png"],
+      "verification": {"method": "actual_scene_camera_render_review", "procedure": "Render a preview from the saved scene's intended camera and compare it with the delivered PNG. Inspect framing, occlusion, visible thickness, background simplicity, and whether lighting reveals the required regions and texture at the delivered resolution. Do not score camera or light counts.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, reproducible saving script, and actual-scene PNG form a usable submission.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens and contains an editable watermelon wedge, and build.py exists as a Blender Python scene-building script. Running it in a fresh Blender 5.1.2 session recreates the scene from the stated starting conditions and saves submission.blend without relying on a preexisting submission or undeclared local assets. Reopening that saved result confirms the geometry, assigned materials, and intended Cycles GPU render setup. B132_Textured_Watermelon_Wedge.png is present and is rendered from the submitted scene's intended camera.",
+        "PARTIAL": "submission.blend opens and contains an editable watermelon wedge, and build.py exists as a Blender Python scene-building script, but at least one other PASS condition is unmet.",
+        "FAIL": "Either submission.blend does not open with an editable watermelon wedge or build.py is absent or is not a Blender Python scene-building script."
+      },
+      "evidence_refs": [],
+      "verification": {"method": "fresh_session_rebuild_saved_result_and_render_consistency", "procedure": "Inspect the three named deliverables. In an isolated working directory, run build.py in a fresh Blender 5.1.2 session with the declared empty input and no preexisting submission.blend. Check that the script writes submission.blend; close the session and reopen the saved file to inspect its editable content and rendering configuration. Compare a render from the reopened saved scene with the delivered PNG. A successful unsaved in-memory rebuild does not satisfy saving or reopening checks. This is a future verification specification, not an authoring-phase Blender run.", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

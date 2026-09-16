@@ -1,0 +1,133 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Golden Cream Wafer",
+  "source_video": {"url": "https://www.bilibili.com/video/BV11ADZBPEmp", "id": "BV11ADZBPEmp"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 30, "PROC": 10, "SURF": 45, "SCN": 5, "PIPE": 10},
+  "weighting_note": "The wafer's identity depends on independent layered form, crumb-scale silhouette, a repeated filling relationship, and three distinct surface qualities. Surface work receives 45 points because the lattice, baked grain, baked color relationships, and cream appearance are central. The lattice is assessed as visible surface relief without assuming true shader geometry displacement. Presentation receives only 5 points, and delivery is capped at 10.",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "1. Layered Wafer Geometry",
+      "criterion": "A low, near-square wafer body has matching thin outer sheets with orderly flat faces and subtly rounded corners.",
+      "scoring_rule": {
+        "PASS": "An actual low, broad wafer body exists, with a near-square footprint, matching top and bottom sheets, flat major faces, and subtle rounding that preserves its pressed-biscuit profile.",
+        "PARTIAL": "An actual low, broad wafer body exists, but one or more PASS conditions are unmet, such as an overly rectangular footprint, a missing lower outer sheet, uneven rounding, or an inflated profile.",
+        "FAIL": "No actual low, broad wafer body exists; isolated detail sources, a single flat plane without a body, and unrelated objects do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_golden_wafer.png", "image/02_layer_structure.png"],
+      "verification": {"method": "Evaluated geometry and orthographic inspection", "procedure": "Open submission.blend, isolate the wafer, and inspect its evaluated top, side, and oblique views using a neutral solid display. Check footprint proportions, overall thickness, outer-sheet correspondence, face flatness, and edge rounding without using object counts as proxies.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "1. Layered Wafer Geometry",
+      "criterion": "Three continuous cream layers produce four parallel baked bands around the visible sides.",
+      "scoring_rule": {
+        "PASS": "At least one cream layer is actually sandwiched between baked regions, and the full wafer has three continuous cream layers separating four visible baked bands, with regular spacing, aligned footprints, complete corners, and no visible open gaps, flickering overlaps, or truncated strips.",
+        "PARTIAL": "At least one cream layer is actually sandwiched between baked regions, but one or more PASS conditions are unmet, including incomplete repetition, irregular spacing, or local discontinuities.",
+        "FAIL": "There is no actual cream layer sandwiched between baked regions. Color stripes on an otherwise undivided exterior, loose unattached strips, and an empty layered arrangement do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_golden_wafer.png", "image/02_layer_structure.png"],
+      "verification": {"method": "Evaluated surface and side-view inspection", "procedure": "Inspect all four sides and an oblique corner in the evaluated scene. Temporarily isolate the filling to confirm it has thickness and reaches the sides. Verify three filling sheets and the resulting four exposed baked bands. A continuous baked core covered by filling sheets is allowed; intentional internal overlap is not penalized when exterior boundaries are clean.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "2. Crisp Edge Character",
+      "criterion": "Baked edges have fine crumb-like silhouette variation while cream edges have gentler rounded undulations.",
+      "scoring_rule": {
+        "PASS": "An existing baked edge region has actual fine silhouette variation and an existing cream edge region has rounded undulation; these qualities extend coherently across the wafer, preserve its square outline, distinguish the coarse core from orderly outer sheets, and avoid large spikes, torn corners, conspicuous facets, or dominant shading breaks.",
+        "PARTIAL": "An existing baked edge region has actual fine silhouette variation and an existing cream edge region has rounded undulation, but one or more PASS conditions are unmet. Local defects, limited coverage, or a missing portion do not erase demonstrated edge character on the existing regions.",
+        "FAIL": "Either the baked-edge silhouette variation or the rounded cream-edge undulation is absent from actual existing geometry, or the only variation consists of gross distortion rather than the required edge character. Shading-only roughness on straight silhouettes does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_golden_wafer.png", "image/02_layer_structure.png"],
+      "verification": {"method": "Neutral silhouette and close geometry inspection", "procedure": "Use neutral solid shading and side silhouettes on the existing baked and cream regions. Inspect enough edge length to distinguish small crumb variation from isolated spikes, then examine corners and smoothing. Assess geometry here; do not reuse the surface-grain result as proof of silhouette variation.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PROC-01", "capability": "PROC", "points": 10,
+      "requirement_section": "3. Editable Filling Repetition",
+      "criterion": "The filling layers share an editable shape definition and coherent vertical-spacing control.",
+      "scoring_rule": {
+        "PASS": "At least two evaluated filling layers respond to a shared shape edit or shared spacing edit, and all three saved filling layers respond coherently to both: a source-shape edit propagates to every layer, while one spacing setting changes vertical intervals without lateral drift or individual footprint changes. The original three-layer state can be restored.",
+        "PARTIAL": "At least two evaluated filling layers respond to a shared shape edit or shared spacing edit, but one or more PASS conditions are unmet, including a missing layer, incomplete propagation, absent spacing control, drift, or failure to restore the original state.",
+        "FAIL": "Fewer than two evaluated filling layers respond to either kind of shared edit. Independent static copies, unused generators, and controls that change labels without changing evaluated layers do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_layer_structure.png"],
+      "verification": {"method": "Reversible artifact-side functional probes", "procedure": "In a temporary copy of submission.blend, locate the actual shared filling definition and spacing setting. Make a small footprint or local source-shape edit and confirm propagation across the evaluated filling layers. Restore it, then make a small vertical-spacing edit and compare layer intervals, horizontal centers, and footprints. Restore the saved state. Any equivalent working relationship is allowed; modifier names are not evidence of success.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 15,
+      "requirement_section": "4. Wafer and Cream Surfaces",
+      "criterion": "The top wafer has a coherent diagonal lattice that visibly reads as shallow pressed relief.",
+      "scoring_rule": {
+        "PASS": "An existing top wafer carries a recognizable field of repeated enclosed cells with visible relief response; the field covers most of the top with approximately square cells, diagonal orientation, connected narrow ridges, lower interiors, and slight natural variation without loss of regularity.",
+        "PARTIAL": "An existing top wafer carries a recognizable field of repeated enclosed cells with visible relief response, but one or more PASS conditions are unmet, such as limited coverage, inconsistent cell proportions, weak ridge continuity, excessive distortion, or an incorrect orientation.",
+        "FAIL": "No existing top wafer carries a recognizable repeated field with visible relief response. Flat color-only linework, a random crack pattern, isolated cells, and an unused lattice material do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_golden_wafer.png", "image/03_lattice_detail.png"],
+      "verification": {"method": "Actual material inspection and controlled lighting views", "procedure": "Inspect the submitted top surface and its assigned material. Render or inspect close views under two oblique light directions to confirm ridge-and-interior shading changes consistent with shallow relief. Compare cell shape, coverage, direction, and continuity with the references. Bump, normal, displacement, modeled relief, and combinations are acceptable; true geometry displacement is not required.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 10,
+      "requirement_section": "4. Wafer and Cream Surfaces",
+      "criterion": "The baked surfaces show fine granular texture and broad soft highlights at a scale below the lattice.",
+      "scoring_rule": {
+        "PASS": "A substantive existing baked surface region has visible fine granular variation and broad soft highlights; these qualities are coherent across the existing outer and inner baked surfaces, the grain remains smaller and subtler than the lattice, and it does not obscure the lattice boundaries.",
+        "PARTIAL": "A substantive existing baked surface region has visible fine granular variation and broad soft highlights, but one or more PASS conditions are unmet, such as inconsistent coverage, excessive grain amplitude, or interference with the lattice. Missing parts cannot demonstrate quality, but do not automatically invalidate the demonstrated region.",
+        "FAIL": "No substantive existing baked surface region demonstrates both fine granular variation and broad soft highlights. A uniformly smooth plastic surface, isolated unused material sample, or coarse noise without fine baked grain does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_golden_wafer.png", "image/03_lattice_detail.png"],
+      "verification": {"method": "Close rendered surface inspection", "procedure": "Inspect the actual assigned baked materials in close and whole-wafer renders under broad neutral light. Compare grain scale with the lattice spacing and check highlight breadth. Judge the fine baked surface treatment independently from the lattice field and geometric edge contours.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-03", "capability": "SURF", "points": 10,
+      "requirement_section": "4. Wafer and Cream Surfaces",
+      "criterion": "Warm golden-orange outer sheets and a related lighter inner baked tone create a coherent baked-color relationship.",
+      "scoring_rule": {
+        "PASS": "An existing baked region visibly uses a warm golden material, and the outer sheets and exposed inner body have the required related color relationship: golden-orange outer surfaces and a slightly lighter inner baked tone, with editable materials correctly assigned across their visible regions.",
+        "PARTIAL": "An existing baked region visibly uses a warm golden material, but one or more PASS conditions are unmet, including missing tonal differentiation, inconsistent assignments, incomplete material editability, or a missing baked component.",
+        "FAIL": "No existing baked region visibly uses a warm golden material. Gray defaults, a wholly dark chocolate variant, unused color materials, and color supplied only by an external image replacement do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_golden_wafer.png"],
+      "verification": {"method": "Neutral-light color comparison and assignment inspection", "procedure": "Inspect the actual outer and inner baked surfaces under the same neutral illumination and view transform. Confirm their warm related colors and relative lightness, then inspect the applied editable material data. Evaluate this relationship independently from cream color and surface-grain quality.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-04", "capability": "SURF", "points": 10,
+      "requirement_section": "4. Wafer and Cream Surfaces",
+      "criterion": "The cream bands share a pale warm material with subtle fine variation and softer surface character than the baked sides.",
+      "scoring_rule": {
+        "PASS": "At least one existing cream band visibly carries a pale warm material with fine surface variation; all three bands share that editable material appearance, remain clearly lighter than the baked body, and show soft highlights and a smoother character than the crumb-like baked sides.",
+        "PARTIAL": "At least one existing cream band visibly carries a pale warm material with fine surface variation, but one or more PASS conditions are unmet, such as inconsistent appearance across bands, insufficient contrast, harsh highlights, overly coarse variation, or missing cream bands.",
+        "FAIL": "No existing cream band visibly carries both a pale warm material and fine surface variation. Unused materials, missing cream geometry, and a completely flat default surface do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_golden_wafer.png"],
+      "verification": {"method": "Actual cream material and rendered band inspection", "procedure": "Inspect all existing cream bands at close range under neutral lighting. Confirm that a pale warm material is actually assigned and editable, compare its fine surface variation and highlights with the baked sides, and check appearance consistency across the three required bands.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SCN-01", "capability": "SCN", "points": 5,
+      "requirement_section": "5. Presentation",
+      "criterion": "The final image clearly presents the whole wafer, top relief, and two layered sides under readable lighting.",
+      "scoring_rule": {
+        "PASS": "The submitted scene presents a recognizable wafer with both its top and layered side surfaces visible, and the final still fully frames the single wafer from an oblique overhead view with two adjacent sides, a simple background, readable relief, separated cream bands, and neither clipped pale highlights nor buried baked edges.",
+        "PARTIAL": "The submitted scene presents a recognizable wafer with both its top and layered side surfaces visible, but one or more PASS conditions are unmet, such as a cropped corner, only one visible side, weak relief lighting, excessive background distraction, or poor exposure.",
+        "FAIL": "The scene does not present a recognizable wafer with both its top and layered side surfaces visible. An empty frame, a hidden wafer, or a view showing only an uninformative face does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_golden_wafer.png"],
+      "verification": {"method": "Submitted camera render inspection", "procedure": "Inspect the final PNG and the active camera view in submission.blend. Check full framing, the oblique overhead angle, visible side relationships, background simplicity, relief readability, and exposure. Camera or light existence alone earns no credit.", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable saved scene, recreating build script, and authentic final PNG form a usable submission.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens and contains a recognizable layered wafer, and all listed deliverables are usable: build.py recreates the scene from an empty scene and saves submission.blend; that generated saved file reopens with the required editable repetition and materials; B129_Golden_Cream_Wafer.png is rendered from the actual submitted scene with the requested Cycles GPU settings.",
+        "PARTIAL": "submission.blend opens and contains a recognizable layered wafer, but one or more PASS conditions are unmet, such as a missing or failing script, a script that does not save the result, lost editability in the generated saved file, a missing or mismatched PNG, or incorrect render settings.",
+        "FAIL": "submission.blend is absent, cannot be opened, or contains no recognizable layered wafer. A script alone, an image alone, and an unsaved in-memory reconstruction do not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {"method": "Saved-file validation and independent rebuild", "procedure": "Open the submitted submission.blend and inspect the expected scene. In a clean temporary working location, execute build.py in Blender 5.1.2 from an empty scene, locate the submission.blend it saves, close the process, and reopen that saved file in a fresh process. Inspect the wafer, materials, repetition behavior, camera, and Cycles GPU settings in the reopened result. Decode the named PNG and compare it with a controlled render of the submitted scene to check provenance. Do not impose a submission output directory that the task does not specify.", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

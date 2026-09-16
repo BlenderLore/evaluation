@@ -1,0 +1,209 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Pearl Shell and Strand",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1W5gP61E3G",
+    "id": "BV1W5gP61E3G"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 50,
+    "PROC": 20,
+    "SURF": 20,
+    "PIPE": 10
+  },
+  "weighting_note": "Geometry receives 50 points across shell form, thickness/finish, arrangement, main pearl, and strand layout. The central editable curve/source relationship receives 20. Independent shell and pearl material outcomes receive 20, and delivery is capped at 10. Modifier existence and arbitrary mesh counts receive no credit.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Fluted Shell Surfaces",
+      "criterion": "Fan-shaped bowl surfaces with radiating flutes and scalloped edges.",
+      "scoring_rule": {
+        "PASS": "Both shells narrow toward the hinge, widen to a rounded scalloped front edge, carry radiating raised ribs and recessed channels, and form shallow bowls rather than flat fans.",
+        "PARTIAL": "At least one recognizable fan-shaped shell has geometric radial ribs but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable fan-shaped shell with geometric radial ribs exists."
+      },
+      "evidence_refs": [
+        "image/01_pearl_shell.png",
+        "image/02_shell_ribs.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect evaluated front, top, and side views with neutral shading. Follow ribs from the hinge toward the rim and inspect side sections to confirm shallow bowl curvature rather than flat or painted rib patterns.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Fluted Shell Surfaces",
+      "criterion": "Thin, rounded, intact shell surfaces.",
+      "scoring_rule": {
+        "PASS": "Both shells have visibly thin geometric edges, smooth curved silhouettes and rounded rib transitions without self-intersections, accidental holes, or faceting.",
+        "PARTIAL": "At least one shell has visible geometric edge thickness and inspectable curved surfaces but one or more PASS conditions are unmet.",
+        "FAIL": "No shell has visible geometric edge thickness and inspectable curved surfaces."
+      },
+      "evidence_refs": [
+        "image/01_pearl_shell.png",
+        "image/02_shell_ribs.png"
+      ],
+      "verification": {
+        "method": "evaluated_section_and_neutral_shading_inspection",
+        "procedure": "Inspect front-edge sections and underside geometry for thickness and integrity. Use neutral close-up views to check normals, smooth transitions, and faceting separately from fan shape.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Open Shell Pair and Main Pearl",
+      "criterion": "Two shells create a coherent rear hinge and open front.",
+      "scoring_rule": {
+        "PASS": "Two similarly shaped shells form an open pair with close narrow rear hinge regions, a lower supporting shell, and a raised upper shell; the front is generously open and both shells remain visible without broad interpenetration.",
+        "PARTIAL": "Two distinguishable shells are arranged one above the other with a visible opening but one or more PASS conditions are unmet.",
+        "FAIL": "Fewer than two distinguishable shells are arranged one above the other with a visible opening."
+      },
+      "evidence_refs": [
+        "image/01_pearl_shell.png"
+      ],
+      "verification": {
+        "method": "evaluated_spatial_inspection",
+        "procedure": "Inspect front, side, and rear views. Check hinge-region proximity, front separation, lower/upper orientation, and any broad intersections between shell surfaces.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Open Shell Pair and Main Pearl",
+      "criterion": "Rounded main pearl is supported inside the shell opening.",
+      "scoring_rule": {
+        "PASS": "One smooth rounded main pearl sits slightly forward within the lower shell, appears supported by it, and remains clear of the upper shell without floating or protruding through either shell.",
+        "PARTIAL": "A recognizable rounded main pearl sits in the opening of an existing shell pair but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable rounded main pearl sits in the opening of an existing shell pair."
+      },
+      "evidence_refs": [
+        "image/01_pearl_shell.png",
+        "image/03_bead_strand.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_contact_inspection",
+        "procedure": "Inspect the pearl from front and side and examine its closest contact with the lower shell in a section view. Distinguish supported contact from visible gaps or deep penetration.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Pearl Strand",
+      "criterion": "Continuous rounded bead strand with an inner bend and outer loop.",
+      "scoring_rule": {
+        "PASS": "One strand of similarly sized round beads curves around the main pearl, bends within the lower shell and loops outside it, with smooth direction changes and consistent close spacing, no large gaps or severe overlaps, and no visible tunnelling through shell or main pearl.",
+        "PARTIAL": "A recognizable strand of small round beads is present near the shell but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable strand of small round beads is present near the shell."
+      },
+      "evidence_refs": [
+        "image/01_pearl_shell.png",
+        "image/03_bead_strand.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Trace the full evaluated strand in front, top, and oblique views. Inspect representative straight sections and tight bends for bead shape and spacing, then inspect intersections with the shell and main pearl.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 20,
+      "requirement_section": "Editable Strand Generation",
+      "criterion": "Live curve and shared bead source control the repeated strand.",
+      "scoring_rule": {
+        "PASS": "An editable curve controls the strand path and a single editable bead source controls repeated geometry; a local curve edit changes the corresponding strand region, and a bead-source edit propagates consistently across the strand. The saved configuration keeps rounded beads closely spaced.",
+        "PARTIAL": "At least one editable source relationship visibly updates a repeated portion of the bead strand but one or more PASS conditions are unmet.",
+        "FAIL": "No editable source relationship visibly updates a repeated portion of the strand; a baked or independently positioned static strand fails."
+      },
+      "evidence_refs": [
+        "image/03_bead_strand.png"
+      ],
+      "verification": {
+        "method": "functional_curve_and_source_edit_probes",
+        "procedure": "In a disposable copy, move one path control locally by roughly a bead diameter and re-evaluate. Then make a small distinguishable change to the bead source and confirm it appears across the repeated strand. Inspect actual dependence and resulting geometry rather than modifier names; restore the scene.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Shell and Pearl Finish",
+      "criterion": "Milky-white shells with soft reflections and subtle edge transmission.",
+      "scoring_rule": {
+        "PASS": "Both shells consistently use milky-white materials with broad soft reflections and subtle light transmission at thin edges, retain legible ribs, and do not read as clear glass or default unassigned surfaces.",
+        "PARTIAL": "At least one existing shell visibly uses a milky-white material with soft reflections but one or more PASS conditions are unmet.",
+        "FAIL": "No existing shell visibly uses a milky-white material with soft reflections."
+      },
+      "evidence_refs": [
+        "image/01_pearl_shell.png"
+      ],
+      "verification": {
+        "method": "material_usage_and_controlled_lighting_render",
+        "procedure": "Inspect actual surface material assignments. Render the shell under broad soft illumination and a mild backlight to assess reflection width, subtle thin-edge transmission, and rib legibility without requiring a specific shader graph.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Shell and Pearl Finish",
+      "criterion": "Main pearl and strand share a brighter silver-white finish.",
+      "scoring_rule": {
+        "PASS": "The main pearl and full strand share a consistent silver-white pearl finish with tight bright rounded highlights, visibly glossier than the existing shells and without unassigned default regions.",
+        "PARTIAL": "An existing main pearl and bead strand both visibly use silver-white reflective surfaces but one or more PASS conditions are unmet.",
+        "FAIL": "The main pearl or strand is missing, or both do not visibly use silver-white reflective surfaces."
+      },
+      "evidence_refs": [
+        "image/01_pearl_shell.png"
+      ],
+      "verification": {
+        "method": "material_usage_and_comparative_render",
+        "procedure": "Inspect main-pearl and evaluated bead material usage. Render pearls and shells under the same broad light to compare highlight width and brightness and confirm consistent pearl treatment throughout the strand.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "Editable scene, reproducible construction script, and actual render.",
+      "scoring_rule": {
+        "PASS": "The named project and script are supplied, build.py recreates the scene from empty in Blender 5.1.2 without external assets, and the named PNG is a Cycles GPU render of that scene with the complete pair and outer loop readable in a front-oblique composition.",
+        "PARTIAL": "submission.blend opens with an editable shell pair and main pearl but one or more PASS conditions are unmet.",
+        "FAIL": "submission.blend is absent, fails to open, or lacks an editable shell pair and main pearl."
+      },
+      "evidence_refs": [
+        "image/01_pearl_shell.png"
+      ],
+      "verification": {
+        "method": "artifact_open_rebuild_and_render_comparison",
+        "procedure": "Open the project in Blender 5.1.2, run build.py in an isolated empty scene, and compare the rebuilt composition and editable relationships. Confirm Cycles GPU settings and reproduce the saved camera render for comparison with the named PNG.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

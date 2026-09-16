@@ -1,0 +1,176 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "可调的发光矩阵阵列",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1jUcwzHE51",
+    "id": "BV1jUcwzHE51"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 30, "PROC": 45, "SURF": 20, "PIPE": 5},
+  "weighting_note": "暂定分配：PROC 45 分检查真实高度响应、原型传播和布局控制；GEO 30 分检查交付状态下的规则阵列、底座实体和承托关系；SURF 20 分检查材质实际发光及最终光晕；PIPE 5 分检查独立重建。无动画或仿真证据，不增加 ANM、SIM；相机和灯光只服务观察，不单设 SCN。权重尚未经样本校准。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 规则的双层方格阵列",
+      "criterion": "默认阵列为密集、近方形的规则直角网格，单元之间可分辨。",
+      "scoring_rule": {
+        "PASS": "两个方向相同且各至少 10 个位置，水平宽长比为 0.9-1.1，行列中心距误差不超过 5%，相邻底座有缝隙且无源对象混入。",
+        "PARTIAL": "存在至少 4 行和 4 列的可辨认二维阵列，但未同时满足 PASS 的数量、比例、规则性或间隙要求。",
+        "FAIL": "不存在至少 4 行和 4 列的可辨认二维阵列，或几何重叠使行列无法识别。"
+      },
+      "evidence_refs": ["image/01_glowing_array.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "从实际求值的底座几何或实例变换提取中心，在世界 XY 投影聚类为行列，测量数量、包围盒比例及相邻中心距；俯视及斜视检查缝隙与阵列外原型是否混入。只评价默认布局，不按节点类型或节点数量给分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 底座和上方模型",
+      "criterion": "底座具有实体侧壁、承托面和四角连续的顶部窄边框或倒角式轮廓。",
+      "scoring_rule": {
+        "PASS": "底座实体完整、顶部可承托模型，窄边框或倒角式轮廓清晰且四角连贯；生成底座均保留该特征。",
+        "PARTIAL": "存在可辨认且能承托模型的方形实体底座，但未完全满足 PASS 的顶部细化、轮廓连续性、表面完整性或全阵列特征一致性要求。",
+        "FAIL": "没有可辨认的方形实体底座，或底座主体破损到无法形成承托体。"
+      },
+      "evidence_refs": ["image/02_base_detail.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "检查原型及阵列前中后各一处实际底座的三维表面，从俯视和斜侧视确认侧壁、顶面、窄轮廓与四角。轮廓须在求值几何中可见，不用顶点数、倒角修改器存在与否或贴图线条替代几何证据。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 底座和上方模型",
+      "criterion": "上方小模型具有完整三维体积并居中坐落在对应底座上。",
+      "scoring_rule": {
+        "PASS": "至少 95% 的阵列位置具有完整、直立、同尺度的小模型，其水平轮廓在承托范围内，中心偏差不超过 0.15B，竖直间隙或嵌入不超过 0.1H。",
+        "PARTIAL": "满足上述完整模型及承托条件的位置占全部阵列位置的 50% 至不足 95%。",
+        "FAIL": "满足条件的位置不足 50%，没有上方模型，或没有可供建立成对关系的底座。"
+      },
+      "evidence_refs": ["image/01_glowing_array.png", "image/02_base_detail.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_review",
+        "procedure": "以默认阵列位置为分母，从真实求值几何测量模型中心、下界及对应承托面的间距，核对比例和朝向。前中后斜侧视检查完整体积、穿插和悬浮。本项只评分默认承托结果；调参后的联动由 PROC-01、PROC-02 检查。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01", "capability": "PROC", "points": 15,
+      "requirement_section": "3. 两类可叠加的高度变化",
+      "criterion": "独立的 X、Y 坡度控制产生规则高度场，并保持成对单元和水平网格。",
+      "scoring_rule": {
+        "PASS": "Geometry Nodes 在噪声为零时满足：双零坡度为平面，单独改变 X/Y 可分别改变对应方向坡度，反号可反转高低，行列高度增量符合 5% 容差，默认高度差至少为 B；全程成对移动且不改变水平位置、原型尺寸和直立朝向。",
+        "PARTIAL": "至少一个坡度参数能在实际输出中产生方向一致的规则升降且成对移动，但未满足 PASS 的全部双轴、反号、平铺、默认值或不变性条件。",
+        "FAIL": "没有能实际改变成对单元高度的规则坡度控制，只有摆好的静态结果，或调节后仅一类成员移动。"
+      },
+      "evidence_refs": ["image/03_regular_height.png"],
+      "verification": {
+        "method": "functional_parameter_probe",
+        "procedure": "在提交文件副本中记录默认坐标和 B，关闭随机起伏，依次求值双零、单独 X 正负、单独 Y 正负及默认状态。按行列中心测量高度增量、水平坐标、上下成员相对变换及模型方向。参数改变后直接求值，不重跑 build.py；仅连接了参数但输出不变不得给分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02", "capability": "PROC", "points": 15,
+      "requirement_section": "3. 两类可叠加的高度变化",
+      "criterion": "随机高度可叠加、归零、调强弱及改变分布，并可稳定复现。",
+      "scoring_rule": {
+        "PASS": "零强度还原规则高度；示例非零值产生至少三档局部偏移且有正有负；增大强度扩大偏移幅度，改变随机参数改变分布，同参重算及重开文件一致；水平网格和成对关系始终保持。",
+        "PARTIAL": "存在可开关的实际局部随机升降，并保持成对关系，但偏移方向、强度响应、分布参数、复现性或水平坐标未全部满足 PASS。",
+        "FAIL": "没有可开关的局部随机升降，变化只是全体平移或规则坡面，或随机变化后上下成员不再成对。"
+      },
+      "evidence_refs": ["image/04_noise_height.png"],
+      "verification": {
+        "method": "functional_parameter_probe",
+        "procedure": "固定坡度与网格，在副本中记录零强度中心高度，再求值文档中的非零示例及两倍强度，比较逐格残差、正负分布和幅度。更换随机参数后比较分布，再恢复参数、重复求值并保存重开验证一致性，同时检查成对相对变换及 XY 坐标。不同噪声算法均可，不检查指定 Noise 节点或 W 数值。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03", "capability": "PROC", "points": 10,
+      "requirement_section": "4. 生成器的可编辑关系",
+      "criterion": "两个原型的编辑独立传播，上方模型可替换并统一调整承托关系。",
+      "scoring_rule": {
+        "PASS": "修改任一原型的局部轮廓均传播至该类所有生成单元，另一类造型保持；替换上方模型原型后可统一调整尺度、朝向与竖直偏移，恢复全阵列承托关系。",
+        "PARTIAL": "至少一个原型的几何编辑可传播至其全部成员，但第二原型传播、两类独立性或替换后统一校正未全部有效。",
+        "FAIL": "两类原型均无法将几何编辑传播至对应全部成员，或所谓原型与实际输出无关。"
+      },
+      "evidence_refs": ["image/02_base_detail.png"],
+      "verification": {
+        "method": "source_edit_and_replacement_probe",
+        "procedure": "在副本中分别修改底座边框一处轮廓、上方模型一处轮廓，直接求值并检查全阵列几何同步及另一类未被替换。将上方原型换成临时自建紧凑网格，用已提供的统一调节项校正；检查实际输出而非对象引用名称。完成后恢复原文件，不把静态承托瑕疵重复作为本项唯一扣分原因；材质传播单独由 SURF-01 检查。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-04", "capability": "PROC", "points": 5,
+      "requirement_section": "4. 生成器的可编辑关系",
+      "criterion": "行列数量和间距控制直接改变完整阵列，保留单元尺寸与高度功能。",
+      "scoring_rule": {
+        "PASS": "行、列各增加 2 可分别新增正确方向的完整成对单元；间距设为 1.25 倍后中心距同比变化且数量、原型尺寸不变，调节后规则和随机高度仍有效。",
+        "PARTIAL": "行列数量或间距中至少一类控制能直接更新完整成对阵列，但未满足 PASS 的全部独立性、精确响应或不变性要求。",
+        "FAIL": "行列数量和间距这两类控制均不能直接更新完整成对阵列。"
+      },
+      "evidence_refs": ["image/01_glowing_array.png"],
+      "verification": {
+        "method": "functional_parameter_probe",
+        "procedure": "根据文件内说明，在副本中分别增加行数和列数 2，检查求值位置及两类几何的配对数，再独立将间距改为 1.25 倍并测量。用一次非零坡度和一次非零随机状态确认功能保留。只数实际生成成员，不以界面参数或 Grid 节点字段存在为证。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 10,
+      "requirement_section": "5. 发光外观",
+      "criterion": "深色非发光底座和暖粉红色自发光模型有真实材质区分。",
+      "scoring_rule": {
+        "PASS": "两类实际表面分别使用深色不透明非发光材质和暖粉红发光材质，默认渲染中明暗明显区分；分别修改两个原型的表面或发光颜色，只改变其对应整组实际表面颜色。",
+        "PARTIAL": "存在上方模型的有效表面发光，但底座区分、色彩、全组材质覆盖或颜色响应未全部满足 PASS。",
+        "FAIL": "上方模型缺失或没有实际参与表面着色的发光，亮色完全依赖外部灯光或后期涂色。"
+      },
+      "evidence_refs": ["image/01_glowing_array.png"],
+      "verification": {
+        "method": "material_usage_probe_and_render_review",
+        "procedure": "检查两类求值几何实际使用的材质及其有效输出。使用中性光照或临时关闭外部灯光核实模型自身发光；在副本中分别修改底座源表面颜色和上方源发光颜色并渲染验证全组响应及两类独立性，恢复默认后检查明暗、色彩和不透明底座。孤立未使用的发光节点不计。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 10,
+      "requirement_section": "5. 发光外观",
+      "criterion": "最终高亮产生柔和光晕，同时保留阵列和模型的可辨认细节。",
+      "scoring_rule": {
+        "PASS": "实际最终渲染在模型高亮轮廓附近有柔和光晕，前中后三段仍能辨认成对单元、底座间隙及模型顶部细节，没有大片冲白。",
+        "PARTIAL": "实际渲染至少能看清一段成对单元，但未同时满足 PASS 的柔和光晕、前中后可辨认程度及细节保留要求。",
+        "FAIL": "没有可供观察的实际成对模型，或高亮覆盖画面使所有区域的成对关系均无法辨认。"
+      },
+      "evidence_refs": ["image/01_glowing_array.png", "image/02_base_detail.png"],
+      "verification": {
+        "method": "final_render_visual_review",
+        "procedure": "使用提交文件的 Cycles GPU 设置和最终图像路径检查整阵列视角，再观察前中后三段。评价高亮附近的真实扩散与细节保留，不按合成器节点、固定 Glare 模式或背景颜色给分；必要时以关闭光晕的对照渲染确认效果确实参与输出。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "6. 交付内容",
+      "criterion": "提交包能在独立环境重建可编辑资产且依赖闭合。",
+      "scoring_rule": {
+        "PASS": "submission.blend 保留生成器和控件说明；build.py 按开头运行方式从空场景生成并保存同等默认资产，所需资源自包含或由脚本生成，换目录后仍可重建和编辑。",
+        "PARTIAL": "submission.blend 中的资产及控件可用，但脚本需修正运行方式、局部默认值或资源路径后才能完成独立重建。",
+        "FAIL": "提交文件内没有可用资产，或构建脚本缺失、无法生成阵列，或关键资源无法取得而阻断重建。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "clean_environment_rebuild_specification",
+        "procedure": "将包复制到新的工作目录，在 Blender 5.1.2 空场景按脚本说明运行；核对实际生成默认阵列、两个原型和控件说明，并验证资源路径不依赖原机器或网络。与提交文件比较默认布局和核心参数行为。文件能够打开本身不是额外得分项。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

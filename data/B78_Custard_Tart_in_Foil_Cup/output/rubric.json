@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Custard Tart in a Foil Cup",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV17Yo5BjECn",
+    "id": "BV17Yo5BjECn"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 40, "SURF": 50, "PIPE": 10},
+  "weighting_note": "Geometry and procedural surface work are the central independent skills in this static asset. Geometry receives 40 points across assembly, pastry layers, foil construction, and finish. Surface appearance and functional material editing receive 50 points. Delivery receives 10 points. Camera and light existence, object counts, and node counts earn no separate credit.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. Tart Proportions and Assembly",
+      "criterion": "A shallow tart has a broad central filling, raised surrounding pastry, and a fitted foil cup with the intended relative proportions.",
+      "scoring_rule": {
+        "PASS": "The tart is clearly wider than tall; custard fills most of the opening below a substantial pastry rim; the rim slightly overhangs the cup; and the parts sit together without visible floating gaps or protruding foil.",
+        "PARTIAL": "The minimum is met: a recognizable shallow tart has a central filling, surrounding rim, and a supporting cup in approximately aligned positions. One or more PASS conditions are unmet, including proportion, height, overhang, or contact defects.",
+        "FAIL": "The minimum is not met: no recognizable shallow tart assembly exists, or the central filling, surrounding rim, or supporting cup is absent or cannot be identified."
+      },
+      "evidence_refs": ["image/01_finished_tart.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect the evaluated asset from top, side, and three-quarter views. Compare overall width and height, filling extent, rim height, and cup fit. Inspect contact regions with a temporary section or hidden-component view; do not infer fit from object counts.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Pastry, Custard, and Foil Geometry",
+      "criterion": "The pastry forms a rounded, organically uneven ring with circumferential geometric layers.",
+      "scoring_rule": {
+        "PASS": "A continuous rounded pastry rim surrounds the filling, has gentle nonuniformity, and carries several readable horizontal geometric ridges around its outer circumference.",
+        "PARTIAL": "The minimum is met: an identifiable surrounding pastry rim has more than one horizontal ridge with evaluated geometric relief. One or more PASS conditions are unmet, including incomplete layering, overly regular shape, weak relief, or discontinuity.",
+        "FAIL": "The minimum is not met: the pastry rim is absent, does not surround the filling, or has no more than one geometric horizontal ridge; texture-only lines do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_tart.png", "image/02_layered_pastry.png"],
+      "verification": {
+        "method": "neutral_material_geometry_inspection",
+        "procedure": "Temporarily inspect the pastry with a neutral material from several side angles and inspect its evaluated mesh or surface. Confirm actual ridged geometry, continuity, rounded cross-section, and gentle silhouette variation independently of color texture.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Pastry, Custard, and Foil Geometry",
+      "criterion": "An independently editable foil cup has a flared lip, repeated flutes, finite wall thickness, and a closed narrower base.",
+      "scoring_rule": {
+        "PASS": "The foil cup is independently editable and has a flared opening with a readable lip, a narrower closed base, finite wall thickness, and repeated vertical or slightly slanted geometric flutes.",
+        "PARTIAL": "The minimum is met: an identifiable cup with a narrower base and repeated geometric flutes surrounds the lower edible body. One or more PASS conditions are unmet, including lip, thickness, closure, or independent editability defects.",
+        "FAIL": "The minimum is not met: the cup is absent, lacks a narrower base, or has no repeated geometric flutes. Shaded stripe patterns alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_tart.png", "image/03_fluted_cup.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_editability_inspection",
+        "procedure": "Isolate the cup, inspect top, side, and underside views, and inspect a section of the wall. Confirm that the flutes have geometric relief, the lip and base exist, and the cup can be selected and edited independently of the edible body. Inspect closure directly without relying on a modifier's existence.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "3. Geometry Finish",
+      "criterion": "Existing core surfaces have coherent shading and intentional curvature without accidental mesh defects.",
+      "scoring_rule": {
+        "PASS": "The pastry, custard, and foil core surfaces are present and smoothly finished with coherent normals. Their intended ridges and unevenness remain visible, and inspection reveals no accidental holes, severe pinching, cracks, self-intersections, or distracting faceting.",
+        "PARTIAL": "The minimum is met: at least one substantial curved core surface of the pastry, custard, or foil is present and predominantly coherently shaded rather than broken. One or more PASS conditions are unmet. A missing component prevents PASS but does not erase demonstrated finish on existing core surfaces.",
+        "FAIL": "The minimum is not met: no substantial curved core surface is available, or every available core surface is dominated by broken normals, severe mesh defects, or unintended faceting."
+      },
+      "evidence_refs": ["image/01_finished_tart.png", "image/02_layered_pastry.png"],
+      "verification": {
+        "method": "neutral_material_and_mesh_inspection",
+        "procedure": "Inspect all existing core surfaces under a neutral material and directional light from multiple angles, including the underside. Inspect normals, open boundaries, and suspicious intersections in evaluated geometry. Score local surface finish here; score relative assembly placement only in GEO-01 and cup feature completeness in GEO-03.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 12,
+      "requirement_section": "4. Baked and Metallic Surfaces",
+      "criterion": "Custard has readable yellow-orange coloration and irregular brown baked patches with soft transitions.",
+      "scoring_rule": {
+        "PASS": "The filling shows yellow to orange custard between irregular dark brown patches with softened orange transitions. Patch size and placement vary naturally; the top is neither uniformly dark nor covered in evenly repeated dots.",
+        "PARTIAL": "The minimum is met: a substantial visible custard surface has both a yellow-orange region and at least one identifiable irregular brown baked region. One or more PASS conditions are unmet, including excessive coverage, abrupt transitions, or an artificial distribution.",
+        "FAIL": "The minimum is not met: the custard surface is absent or lacks either readable yellow-orange coloration or an identifiable irregular brown baked region."
+      },
+      "evidence_refs": ["image/01_finished_tart.png"],
+      "verification": {
+        "method": "material_inspection_and_controlled_render",
+        "procedure": "Inspect the material actually assigned to the custard and render it under neutral soft lighting from above and at an angle. Evaluate the visible baked color pattern independently of roughness and fine relief, which are assessed in SURF-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. Baked and Metallic Surfaces",
+      "criterion": "Custard has a moist glossy response with broad and fine surface variation.",
+      "scoring_rule": {
+        "PASS": "The custard reads as moist and glossy, with highlights visibly responding to both broad soft unevenness and finer surface variation. Relief remains gentle and does not become sharp, rocky, or excessively rough.",
+        "PARTIAL": "The minimum is met: an existing substantial custard surface produces a visible glossy highlight and spatially varying surface response. One or more PASS conditions are unmet, including a missing scale of detail, overly uniform gloss, or excessive relief.",
+        "FAIL": "The minimum is not met: the custard is absent, has no visible glossy response, or shows no spatially varying surface response."
+      },
+      "evidence_refs": ["image/01_finished_tart.png"],
+      "verification": {
+        "method": "controlled_highlight_render",
+        "procedure": "Render the actual custard material with a broad light and then shift the light angle. Inspect moving highlights for broad and fine surface variation and a moist response. Do not award this row solely for yellow or brown coloration.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. Baked and Metallic Surfaces",
+      "criterion": "Pastry has varied golden-brown baking, fine grain, and a drier surface response.",
+      "scoring_rule": {
+        "PASS": "The pastry has warm golden and toasted brown variation, finer surface grain, and a drier, less glossy response than the custard. Texture supports rather than obscures the visible pastry layers.",
+        "PARTIAL": "The minimum is met: a substantial existing pastry area has warm baked coloration and spatial surface variation. One or more PASS conditions are unmet, including insufficient grain, excessive gloss, obscuring noise, or an absent comparison surface.",
+        "FAIL": "The minimum is not met: the pastry surface is absent or lacks warm baked coloration or spatial surface variation."
+      },
+      "evidence_refs": ["image/01_finished_tart.png"],
+      "verification": {
+        "method": "material_and_render_inspection",
+        "procedure": "Inspect the material assigned to the pastry and render a close three-quarter view under soft neutral lighting. Evaluate color variation, grain scale, and reflection response. Compare with the custard when present; assess geometric layering separately in GEO-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. Baked and Metallic Surfaces",
+      "criterion": "The cup material reads as silver-gray crumpled foil with rough reflections and fine wrinkles.",
+      "scoring_rule": {
+        "PASS": "The cup has a clearly silver-gray metallic response, rough reflections, and small irregular wrinkles that suggest thin crumpled foil. It remains distinguishable from the edible regions and does not read as smooth chrome or gray plastic.",
+        "PARTIAL": "The minimum is met: a substantial existing cup surface shows a silver-gray metallic reflection response. One or more PASS conditions are unmet, including absent fine wrinkles, overly smooth reflections, or weak distinction from the food.",
+        "FAIL": "The minimum is not met: the cup surface is absent or does not show a silver-gray metallic reflection response. A uniform diffuse gray surface does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_tart.png"],
+      "verification": {
+        "method": "material_inspection_and_reflection_probe",
+        "procedure": "Inspect the actual cup material and render its response to large bright and dark surroundings or area lights. Verify metallic reflections, their roughness, and fine irregular wrinkle response. Do not use a metallic input value alone as proof of the final appearance.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-05",
+      "capability": "SURF",
+      "points": 8,
+      "requirement_section": "5. Editable Surface Controls",
+      "criterion": "Procedural controls independently change custard browning coverage and the fine relief of pastry and foil.",
+      "scoring_rule": {
+        "PASS": "Understandable procedural controls exist for all three specified properties. Changing each produces a visible change in its intended property while leaving other material regions' color and geometry unaffected; the submitted scene retains the final settings.",
+        "PARTIAL": "The minimum is met: at least one of the three specified properties has an identifiable procedural control that visibly changes the intended property. One or more PASS conditions are unmet, including missing controls, coupled effects, or unclear settings.",
+        "FAIL": "The minimum is not met: none of the three specified properties has a functional, identifiable procedural control. A disconnected node, unused material, or image-only appearance does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_tart.png"],
+      "verification": {
+        "method": "reversible_material_control_probe",
+        "procedure": "In a temporary copy, locate each specified control through the actual assigned materials or documented build settings. Save its original value, change it enough to show an effect, and compare controlled renders. Confirm target-specific behavior, then restore the original value. This is an editability check independent of the saved appearance rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable blend and build script reproduce a self-contained tart scene.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the editable final asset and no missing dependencies, and build.py rebuilds the corresponding scene from empty in Blender 5.1.2 and saves the blend and required render with Cycles GPU configured.",
+        "PARTIAL": "The minimum is met: submission.blend opens and contains an editable recognizable tart asset. One or more PASS conditions are unmet, including an absent or unsuccessful build script, missing dependencies, mismatched rebuilt content, or incomplete output generation.",
+        "FAIL": "The minimum is not met: submission.blend is absent, unreadable, or lacks an editable recognizable tart asset."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "future_open_and_clean_build_probe",
+        "procedure": "Open the submitted blend in Blender 5.1.2 and inspect asset editability and dependency resolution. Run build.py in a separate empty work directory with Blender, inspect generated outputs, and compare geometry, materials, and presentation with the submitted scene. Record environment failures separately from script failures.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "6. Final Presentation",
+      "criterion": "The named PNG is an actual scene render with a complete, inspectable three-quarter view.",
+      "scoring_rule": {
+        "PASS": "B78_Custard_Tart_in_Foil_Cup.png is rendered from the submitted scene and shows the whole tart with margin in an elevated three-quarter view. Custard, pastry layers, and a substantial cup area are visible, with lighting that reveals their distinct responses against a simple background.",
+        "PARTIAL": "The minimum is met: the named PNG is a genuine render of the submitted scene and shows a recognizable tart with at least the custard top and part of the outer side visible. One or more PASS conditions are unmet, including cropping, poor visibility, or weak lighting.",
+        "FAIL": "The minimum is not met: the named PNG is absent, unreadable, unrelated to the submitted scene, a source image or viewport screenshot, or fails to show both a recognizable custard top and part of the tart's outer side."
+      },
+      "evidence_refs": ["image/01_finished_tart.png"],
+      "verification": {
+        "method": "render_provenance_and_manual_inspection",
+        "procedure": "Decode the PNG and compare it with a render of the submitted scene's active camera. Verify that it is a scene render rather than a substituted reference. Inspect framing and visibility of the top, layered side, and cup; judge the material appearances themselves in the SURF rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

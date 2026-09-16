@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Rocking Glass Wave Display",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1SXVB6tEHN",
+    "id": "BV1SXVB6tEHN"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 30, "PROC": 10, "ANM": 20, "SURF": 25, "SCN": 5, "PIPE": 10},
+  "weighting_note": "The central result combines a constructed enclosure and water volume, a live geometric wave system, and coordinated motion. Geometry receives 30 points, procedural control 10, animation 20, distinct material behavior 25, presentation 5, and saved reproducible delivery 10. The wave generator is assessed as editable procedural geometry, not as a physical fluid simulation. Static mesh continuity, temporal containment, material appearance, and camera framing are assessed separately.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Glass Enclosure and Metal Frame",
+      "criterion": "A cube-shaped rigid enclosure has planar walls and a base with actual thickness, and a clear region above the water.",
+      "scoring_rule": {
+        "PASS": "The minimum is met, and the enclosure has approximately equal width, depth, and height, planar walls and a base with nonzero physical thickness, clean corners, and an unobstructed upper region above the water. Its geometry is box-shaped rather than wave-deformed.",
+        "PARTIAL": "The minimum is met but one or more PASS conditions are unmet. The minimum is a recognizable three-dimensional box enclosure with a base and at least two adjoining wall surfaces; examples include missing thickness, an incomplete wall, distorted proportions, or defective corner geometry.",
+        "FAIL": "The minimum is not met: no recognizable box enclosure exists, or the result consists only of a flat panel, disconnected outlines, or material effects without wall and base geometry."
+      },
+      "evidence_refs": ["image/01_display.png", "image/02_frame.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_neutral_inspection",
+        "procedure": "Open the submitted scene and inspect the evaluated enclosure in isolation at frame 1. Temporarily use neutral shading and a section or transparent inspection view to identify inner and outer wall surfaces, the base, corner joins, and headspace. Compare the principal side lengths in enclosure-local coordinates and inspect the geometry independently of its glass shader. Assess rigid movement separately under ANM-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Glass Enclosure and Metal Frame",
+      "criterion": "The enclosure is reinforced by a connected edge frame with front and adjacent-side diagonal braces and finished strut geometry.",
+      "scoring_rule": {
+        "PASS": "The minimum is met, and metal struts surround the box edges with a front diagonal brace and an adjacent-side diagonal brace. They have narrow, readable profiles, softened edges, and tidy connected joints without blocking most of the glass and water.",
+        "PARTIAL": "The minimum is met but one or more PASS conditions are unmet. The minimum is a volumetric strut frame outlining at least two adjoining sides of the enclosure; examples include a missing brace, unfinished sharp edges, poorly joined corners, or overly thick struts. Existing substantive struts must be present to establish this minimum.",
+        "FAIL": "The minimum is not met: no three-dimensional strut frame outlines two adjoining sides, or the apparent frame is only a texture, isolated line, or unrelated outline."
+      },
+      "evidence_refs": ["image/01_display.png", "image/02_frame.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_detail_views",
+        "procedure": "Inspect the evaluated frame at a stationary frame with neutral shading, using front, side, and three-quarter views. Confirm solid strut cross sections, surrounding edge structure, the two diagonal bracing directions, and visible softened edge transitions. Magnify corner joins to check that substantive existing struts are finished; do not infer quality from absent parts or require a particular modifier stack.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Water Volume",
+      "criterion": "The water has a connected lower volume and a geometrically detailed, smooth wave surface.",
+      "scoring_rule": {
+        "PASS": "The minimum is met, and the upright water fill occupies roughly the lower half to two-thirds of the enclosure. Continuous sides and a bottom join the top, which has broad crests, troughs, and finer ripples. The evaluated geometry has smooth silhouettes and no visible holes, faceting, spikes, or collapsed regions, while remaining distinct from the glass.",
+        "PARTIAL": "The minimum is met but one or more PASS conditions are unmet. The minimum is a recognizable lower water volume joined to a visibly nonplanar geometric top; examples include coarse ripples, defective local continuity, poor fill proportion, or visible faceting on existing water surfaces.",
+        "FAIL": "The minimum is not met: the water is absent, consists only of a flat or displaced sheet without a lower volume, has a planar top with only a shader pattern, or lacks a connection between its top and lower body."
+      },
+      "evidence_refs": ["image/01_display.png", "image/03_water_volume.png"],
+      "verification": {
+        "method": "evaluated_mesh_and_neutral_render",
+        "procedure": "Inspect the evaluated water independently of emission and transparency at frame 1, then temporarily set the enclosure to an upright pose in a disposable scene copy. Examine top, side, bottom, and grazing views for actual relief, continuous volume, local surface defects, and fill proportion. Restore the scene. This check concerns the static shape; failures arising only while the enclosure moves belong to ANM-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "3. Editable Wave System",
+      "criterion": "Wave height and phase controls regenerate the visible water-top geometry through a live procedural relationship.",
+      "scoring_rule": {
+        "PASS": "The minimum is met, and separate height and phase or time controls work at fixed frames. Zero height flattens the top while preserving the lower volume; a phase change rearranges crests and troughs without moving the enclosure. Both controls regenerate the visible water when the enclosure is tilted as well as upright.",
+        "PARTIAL": "The minimum is met but one or more PASS conditions are unmet. The minimum is that at least one height or phase control, edited at a fixed frame, regenerates the visible water-top geometry while preserving a lower water volume. A control that affects only an unused driver does not establish the minimum.",
+        "FAIL": "The minimum is not met: the visible water has no functioning editable geometric wave control, controls affect only shading or an unused object, or their only effective change is a rigid transform of a frozen water shape."
+      },
+      "evidence_refs": ["image/03_water_volume.png", "image/04_tilt.png"],
+      "verification": {
+        "method": "controlled_functional_probe",
+        "procedure": "In a disposable copy, hold frame 1 fixed and record the evaluated water mesh and enclosure transforms. Adjust the offered height control to zero and restore it; then alter phase without advancing the timeline. Reevaluate and compare the actual visible water vertices and lower volume. Repeat the control edits at frame 75 and in an upright enclosure pose. Confirm the control affects the rendered water, not merely a hidden driver. Restore all changes after inspection.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-01",
+      "capability": "ANM",
+      "points": 10,
+      "requirement_section": "4. Animation and Containment",
+      "criterion": "The rigid glass and metal assembly rocks smoothly around a fixed central horizontal axis over the declared timeline.",
+      "scoring_rule": {
+        "PASS": "The minimum is met, and frames 1, 75, and 150 show approximately -30, +30, and -30 degree tilt within the public 5 degree tolerance. The scene uses frames 1-150 at 30 fps, passes smoothly between these poses about a fixed central horizontal axis, and preserves glass-panel and frame alignment without deforming the assembly.",
+        "PARTIAL": "The minimum is met but one or more PASS conditions are unmet. The minimum is a glass enclosure and substantive surrounding frame that share visibly changing tilt, reverse direction, and return toward their starting side. Examples include incorrect endpoint angles, timing, speed discontinuities, center drift, or local loss of alignment. A missing minor brace alone does not invalidate otherwise demonstrable motion of the existing assembly.",
+        "FAIL": "The minimum is not met: no shared glass-and-frame rocking motion is present, the assembly stays static, only the camera moves, or the motion never reverses and returns toward its starting side."
+      },
+      "evidence_refs": ["image/01_display.png", "image/04_tilt.png"],
+      "verification": {
+        "method": "timeline_and_transform_inspection",
+        "procedure": "Inspect scene timing and evaluate the assembly at frames 1, 38, 75, 112, and 150. Measure orientation relative to its upright box axes, compare its center in world space, and inspect intermediate frames or playback for smooth reversals. Track corresponding glass and frame locations to confirm their rigid relationship. The submitted video should display the same poses, with its encoding and provenance assessed under PIPE-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-02",
+      "capability": "ANM",
+      "points": 10,
+      "requirement_section": "4. Animation and Containment",
+      "criterion": "The wave geometry evolves continuously and remains contained as the enclosure tilts.",
+      "scoring_rule": {
+        "PASS": "The minimum is met, and crests and troughs continue to evolve throughout frames 1-150. The mean water surface stays approximately level relative to world up, with its boundary adapting to the tilted walls and no conspicuous wall gaps, protrusions, detached regions, or visible driver geometry. Replay from frame 1 reproduces the motion. The final wave shape need not equal the initial shape.",
+        "PARTIAL": "The minimum is met but one or more PASS conditions are unmet. The minimum is a water body present inside the enclosure at multiple sampled frames whose visible top undergoes a nonrigid shape change over time. Examples include waves that freeze over part of the clip, discontinuous phase changes, a surface that tilts rigidly with the box, or temporal containment defects.",
+        "FAIL": "The minimum is not met: water is absent from the enclosure at the sampled motion states, the top is static throughout, only shader appearance changes, or a frozen water shape merely follows rigid enclosure transforms."
+      },
+      "evidence_refs": ["image/01_display.png", "image/04_tilt.png"],
+      "verification": {
+        "method": "evaluated_motion_and_boundary_inspection",
+        "procedure": "Compare evaluated water-top geometry at frames 1, 38, 75, 112, and 150 after accounting for rigid enclosure transforms. Inspect playback and intermediate frames for moving crests, continuity, the mean water level relative to world up, and changing contact with tilted walls. Inspect side views to find transient gaps or protrusions. Return to frame 1 and repeat playback to confirm deterministic replay; do not demand a seamless wave loop or a physical fluid solver.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "5. Glass, Metal, and Water",
+      "criterion": "The actual enclosure panels read as clear reflective and refractive glass while revealing the water.",
+      "scoring_rule": {
+        "PASS": "The minimum is met, and substantive front and side glass surfaces visibly transmit the water while retaining reflective highlights, edge definition, and refraction. The glass is clear rather than opaque, excessively dark, or milky.",
+        "PARTIAL": "The minimum is met but one or more PASS conditions are unmet. The minimum is a glass material actually used on at least one substantive enclosure panel that visibly transmits the internal water and exhibits a reflective or refractive cue. A missing minor panel prevents complete enclosure coverage but does not erase demonstrable quality on existing core panels.",
+        "FAIL": "The minimum is not met: glass panels or internal water are absent, all substantive panels are opaque, the apparent transparency is simply missing geometry, or the claimed glass material is unused."
+      },
+      "evidence_refs": ["image/01_display.png", "image/04_tilt.png"],
+      "verification": {
+        "method": "actual_material_use_and_controlled_render",
+        "procedure": "Confirm the enclosure's visible panels use the inspected materials. Render front and three-quarter views in the submitted lighting, then use a neutral reflected light or checker background in a disposable copy if needed to distinguish transmission, reflection, and refraction. Judge the behavior on existing substantive panel surfaces rather than requiring specific shader node types or numerical IOR values.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "5. Glass, Metal, and Water",
+      "criterion": "The frame's actual surface reads as reflective silver metal, distinct from the glass.",
+      "scoring_rule": {
+        "PASS": "The minimum is met, and the existing edge struts and diagonal braces consistently read as silver metal with reflective highlights along their softened edges, clearly distinct from the transparent enclosure.",
+        "PARTIAL": "The minimum is met but one or more PASS conditions are unmet. The minimum is a metallic reflective response on substantive existing frame struts. Examples include inconsistent assignments, plastic-looking areas, or a tint inconsistent with silver; missing minor braces alone do not erase the response demonstrated on core struts.",
+        "FAIL": "The minimum is not met: substantive frame struts are absent, their surfaces are entirely diffuse or transparent, or a suitable metal material exists only as an unused datablock."
+      },
+      "evidence_refs": ["image/01_display.png", "image/02_frame.png"],
+      "verification": {
+        "method": "material_assignment_and_reflection_inspection",
+        "procedure": "Check materials actually assigned to evaluated frame surfaces. Inspect the final lighting and a controlled neutral area-light render for reflective metal response on the struts and braces. Assess material behavior independently of the geometric bevel quality scored under GEO-02; a named metallic material or an isolated unused node is insufficient.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "5. Glass, Metal, and Water",
+      "criterion": "The water combines a luminous cyan appearance, transmission, and readable surface variation.",
+      "scoring_rule": {
+        "PASS": "The minimum is met, and the actual water material combines cyan or turquoise color, transmission, and visible self-emission. Crests, darker troughs, and reflective or refractive variation remain legible through the material instead of becoming a uniformly bright block.",
+        "PARTIAL": "The minimum is met but one or more PASS conditions are unmet. The minimum is a substantive water body with a cyan or turquoise material that visibly demonstrates at least one of transmission or self-emission. Examples include absent emission, insufficient transmission, washed-out detail, or inconsistent material coverage.",
+        "FAIL": "The minimum is not met: substantive water geometry is absent, the water is neither cyan nor turquoise, it demonstrates neither transmission nor self-emission, or the effect comes only from unused materials or an external image replacement."
+      },
+      "evidence_refs": ["image/01_display.png", "image/04_tilt.png"],
+      "verification": {
+        "method": "actual_shader_use_and_controlled_render",
+        "procedure": "Trace the material actually shading the water and inspect its rendered contribution. In a disposable copy, suppress external illumination to confirm the water's own emission; restore lighting and use a neutral test background to inspect transmission and surface variation. Compare the final image for cyan color and readable crest/trough contrast. Do not require particular node recipes, emission strengths, or IOR settings.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "6. Camera and Lighting",
+      "criterion": "A stable three-quarter composition shows the complete moving enclosure against a dark neutral background.",
+      "scoring_rule": {
+        "PASS": "The minimum is met, and the camera stably shows the front, adjacent side, and wave surface together against a black or very dark neutral background throughout the tilt. The whole enclosure remains inside the image with silhouette separation, and no unrelated objects or construction helpers appear.",
+        "PARTIAL": "The minimum is met but one or more PASS conditions are unmet. The minimum is an actual scene camera view that shows a recognizable framed enclosure and visible water together. Examples include clipping at a tilt extreme, a weak viewing angle, an unsuitable background, distracting helper geometry, or unstable framing.",
+        "FAIL": "The minimum is not met: no actual camera view is available, the enclosure or water is outside the image or substantially obscured throughout, or the presentation uses reference imagery instead of scene content."
+      },
+      "evidence_refs": ["image/01_display.png", "image/04_tilt.png"],
+      "verification": {
+        "method": "camera_render_sequence_inspection",
+        "procedure": "Render or inspect camera images at frames 1, 38, 75, 112, and 150 and inspect intermediate framing as the assembly rocks. Check subject bounds, viewing direction, background, silhouette separation, and visible helpers. Assess material transparency and emission under their SURF rows rather than penalizing those same material defects again here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, a script that rebuilds and saves it, and the complete rendered MP4 are delivered consistently.",
+      "scoring_rule": {
+        "PASS": "The minimum is met, and all three named deliverables are present. The original and rebuilt saved submission.blend reopen with the complete geometry, materials, live wave controls, camera, and 1-150 animation at 30 fps. The MP4 contains all 150 frames at 30 fps, spans five seconds, and corresponds to renders of the submitted scene.",
+        "PARTIAL": "The minimum is met but one or more PASS conditions are unmet. The minimum is an opening editable submission.blend containing a recognizable framed glass enclosure and water scene. Examples include an absent or incomplete build script, a script that fails to save a reusable scene, missing resources, a missing or incomplete MP4, or inconsistency between saved and rebuilt content.",
+        "FAIL": "The minimum is not met: submission.blend is absent or cannot open as an editable framed glass-and-water scene. A video alone, images alone, or a script that only builds an unsaved in-memory scene without an opening submitted scene cannot establish the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "isolated_rebuild_reopen_and_video_probe",
+        "procedure": "Check the exact filenames submission.blend, build.py, and B97_Rocking_Glass_Wave_Display_dynamic.mp4. Open the supplied blend and inspect resource availability. Copy build.py into a clean writable test directory, run it in Blender 5.1.2 from an empty file, and verify it creates submission.blend there. Close that process and reopen the newly saved blend in a fresh Blender process; inspect the saved geometry, active materials, camera, wave-control responses, timing, and animation poses against the original. Use a video metadata probe and decoded frame count to confirm 150 frames, 30 fps, and five seconds. Compare decoded MP4 frames with fresh renders from the original submitted scene at representative timeline positions. These checks are specified future procedures and have not been executed during task authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

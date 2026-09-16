@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "像素游戏视差立体画",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1JG9QByEEk",
+    "id": "BV1JG9QByEEk"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"SCN": 30, "SURF": 45, "GEO": 10, "ANM": 10, "PIPE": 5},
+  "weighting_note": "暂定内容权重，未经实测校准。SURF 45 分检验像素透明边缘、扫描线、星点与实际发光外观；SCN 30 分检验界面组织和真实视差；GEO 10 分检验画框实际厚度、开口与内壁连续性；ANM 10 分只检验星点的实际漂移；PIPE 5 分检验素材闭合和可重复重建。本例五项能力均有独立实物证据，不按修改器存在奖励 PROC，也不按灯光对象存在奖励 SCN。",
+  "rubric": [
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 15,
+      "requirement_section": "1. 完整的复古游戏界面",
+      "criterion": "双角色、对应状态栏、底部对话框和四个按钮在窗口内形成完整且可读的界面，默认展示完整取景。",
+      "scoring_rule": {
+        "PASS": "两个角色及脚下区域、两个状态栏、对话框、四按钮和小型标志均可辨；近低远高、状态栏对应和底部界面组织成立，默认相机完整包含画框。",
+        "PARTIAL": "至少两个角色、一个状态栏及底部对话框或按钮组可辨，构成战斗界面，但未达到 PASS，例如个别组件缺失、状态栏对应含混或取景有局部截断。",
+        "FAIL": "未达到 PARTIAL，包括不足两个可辨角色、缺乏战斗界面的基本组织，或主要内容不可辨。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/02_pixel_layers.png"],
+      "verification": {
+        "method": "artifact_render_and_visual_review",
+        "procedure": "从提交工程第 1 帧默认相机及正面方向取得 EEVEE 图像，逐项定位角色、脚下区域、状态栏、底部界面和标志，并检查对应关系与取景。只比较角色类别和界面组织，不要求参考图中的品牌、角色造型或文字；透明边缘质量另由 SURF-01 检查。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-02",
+      "capability": "SCN",
+      "points": 15,
+      "requirement_section": "2. 可观察的分层视差",
+      "criterion": "实际可编辑图层形成至少三个深度层次，左右斜视产生稳定的相对位移和遮挡。",
+      "scoring_rule": {
+        "PASS": "实际几何在至少三个有间隔的深度层次上分布；主要角色、状态栏和底部界面可独立调整；正面与左右约 20 度视图均有角色之间及前景对背景的视差，未见明显层序跳变、共面闪烁或穿插。",
+        "PARTIAL": "存在至少两个实际深度层次且改变视角后有可辨视差，但未达到 PASS，例如深度层次不足、部分主要元素不可独立调整或某斜角出现局部层序问题。",
+        "FAIL": "未达到 PARTIAL，包括整幅界面为单平面、深度仅来自画在纹理里的透视，或没有可辨的实际相对位移。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/03_depth.png"],
+      "verification": {
+        "method": "evaluated_scene_inspection_and_view_probe",
+        "procedure": "固定时间在第 1 帧，按工程说明确定观察正面，检查求值后的几何图层和投影深度。保持观察目标与距离，比较正面及绕竖直轴左右约 20 度的渲染；追踪两个角色与背景上的可识别特征点，确认相对投影位置变化并查看过渡视角有无闪烁。试选并小幅平移一个角色后撤销，验证可独立编辑；不以对象名称或计数代替功能检查。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. 有厚度的开口画框",
+      "criterion": "有实际三维厚度的窗口、背板和内壁围合浅空间，开口及侧向观看保持通畅。",
+      "scoring_rule": {
+        "PASS": "窗口边缘具有实际三维厚度，背板和侧向内壁均可辨并形成连续浅空间；正面敞开，左右约 20 度斜视无明显破口、漂浮框边或整面外墙遮住主要角色。",
+        "PARTIAL": "存在可辨的窗口与背板或内壁，能读出浅空间，但未达到 PASS，例如边缘厚度不明显、局部不连续或一侧有局部遮挡。",
+        "FAIL": "未达到 PARTIAL，包括没有可辨窗口容器、只剩漂浮贴片，或实心前板使空间内容无法观看。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/03_depth.png"],
+      "verification": {
+        "method": "artifact_scene_inspection_and_visual_review",
+        "procedure": "使用 SCN-02 的观察方向检查窗口轮廓、背板和内壁之间的连续空间关系；在场景副本中隐藏内部角色图层以定位容器，检查求值后的框边是否具有实际三维厚度而非仅有贴图阴影，再恢复可见性检查遮挡。依据求值结果验收，不要求五面网格、双份阵列或指定透明节点。此项只评容器及观看通畅，不重复评价图层视差幅度。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "4. 透明像素图层与发光背景",
+      "criterion": "实际使用的像素图像保持轮廓、比例与色块，透明区域无矩形底色和明显边缘污染。",
+      "scoring_rule": {
+        "PASS": "两个角色和现有主要界面图层均有可辨像素轮廓与正确比例；轮廓外透明，无明显矩形底色、白边或大面积破损，斜视也保持完整。",
+        "PARTIAL": "至少一个角色和一个界面图层正确呈现像素图像与透明轮廓，但未达到 PASS，例如部分图层拉伸、白边、像素模糊或局部透明破损。",
+        "FAIL": "未达到 PARTIAL，包括缺少可检查的角色与界面图像、全部为不透明矩形贴图，或主要纹理完全不可辨。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/02_pixel_layers.png"],
+      "verification": {
+        "method": "material_usage_inspection_and_close_view_review",
+        "procedure": "检查实际可渲染图层所使用的图像、UV 和材质，在 EEVEE 中以正面与斜视观察角色及界面边缘近景。必要时在工程副本中更换为中灰背景以检查 Alpha 边缘，随后恢复原背景；不按图像节点数量、透明模式名称或指定接线给分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. 透明像素图层与发光背景",
+      "criterion": "浅绿与近白背景上有细密、连续并贴合空间表面的横向扫描线。",
+      "scoring_rule": {
+        "PASS": "背板及存在的可见内壁上能辨识细密连续的横线，浅绿与近白主色成立；横线方向稳定，不形成明显粗带或大块噪声。",
+        "PARTIAL": "背景上有可辨的横向条纹，但未达到 PASS，例如颜色明显偏离、条纹过粗、局部断裂或可见内壁与背板表现脱节。",
+        "FAIL": "未达到 PARTIAL，包括没有可见背景条纹、仅有竖条，或背景缺失。"
+      },
+      "evidence_refs": ["image/04_background.png"],
+      "verification": {
+        "method": "artifact_render_and_surface_review",
+        "procedure": "在第 1 帧正面与斜视渲染中检查背景的颜色、条纹方向、细密程度和表面贴合关系。可暂时隐藏前景图层观察被遮挡部分；不检查 Wave 纹理、Mapping 参数或固定尺度值。星点与辉光分别由后续条目检查。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. 透明像素图层与发光背景",
+      "criterion": "背景星点具有可辨的星芒、大小变化与疏密间隔，并与扫描线同时可见。",
+      "scoring_rule": {
+        "PASS": "存在可辨的尖角或星芒亮点及较小亮点，大小与间隔有变化，亮点间留有大面积背景，且默认画面中星点和扫描线都可见。",
+        "PARTIAL": "存在可辨的分散亮点，但未达到 PASS，例如亮点全部同形同大、缺少星芒、过密或与扫描线难以同时辨识。",
+        "FAIL": "未达到 PARTIAL，包括没有可辨亮点、背景缺失，或只有均匀白雾而没有独立星点。"
+      },
+      "evidence_refs": ["image/04_background.png"],
+      "verification": {
+        "method": "artifact_render_and_visual_review",
+        "procedure": "在第 1 帧背景局部和默认全景中观察亮点轮廓、大小变化与空隙分布，确认星点实际出现在背景可渲染表面。只评静态星点形态与分布；不按 Voronoi 节点或发光强度值评分，运动另由 ANM-01 检查。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. 透明像素图层与发光背景",
+      "criterion": "发光与辉光集中在背景亮部，保留前景像素颜色和文字，并让画框厚度有明暗层次。",
+      "scoring_rule": {
+        "PASS": "星点或亮线周围有可辨的柔和辉光，主要角色色块、状态栏和按钮文字仍清晰，且框侧有可辨明暗层次。",
+        "PARTIAL": "前景与背景均存在，且有可辨发光表现，但未达到 PASS，例如辉光过弱、局部过曝抹掉细节或框侧明暗不足。",
+        "FAIL": "未达到 PARTIAL，包括缺少可评的前景或发光背景、没有可辨发光表现，或过曝使主要界面无法辨识。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/04_background.png"],
+      "verification": {
+        "method": "final_render_visual_review",
+        "procedure": "以工程保存的 EEVEE 最终输出设置检查完整构图与亮点近景，观察辉光范围、前景颜色保留及画框侧边明暗。允许不同灯光、世界背景和后期实现，不以 Glare 节点、Point Light 或 HDRI 存在作为完成证据。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-01",
+      "capability": "ANM",
+      "points": 10,
+      "requirement_section": "5. 可回放的星点漂移",
+      "criterion": "1 至 120 帧、24 fps 内星点持续平稳漂移，场景其他主要元素和扫描线稳定。",
+      "scoring_rule": {
+        "PASS": "时间范围和帧率符合要求；固定相机回放时星点有可追踪的连续定向位移，首中末状态不同，区间内部无明显停顿、跳变或重置；窗口、角色、界面及扫描线稳定。",
+        "PARTIAL": "固定相机下星点在至少一段时间内有可见连续位移，但未达到 PASS，例如时间设置不同、部分时段停顿或跳变，或本应稳定的元素发生移动。",
+        "FAIL": "未达到 PARTIAL，包括没有星点、星点全程静止、仅相机或整幅画运动，或只有离散闪换而没有一段可见连续漂移。"
+      },
+      "evidence_refs": ["image/04_background.png"],
+      "verification": {
+        "method": "evaluated_timeline_replay_and_motion_probe",
+        "procedure": "固定相机与观察方向，按场景实际时间回放 1 至 120 帧，比较第 1、30、60、90、120 帧并检查中间帧。追踪背景星点和至少一条扫描线、窗口角点、角色轮廓的相对位置，确认运动属于星点且稳定锚点不动；边界进出允许，不检查首尾循环，也不以关键帧或线性插值的存在代替运动。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "提交文件",
+      "criterion": "图像依赖完整打包，build.py 可离线重建同一默认场景及动画。",
+      "scoring_rule": {
+        "PASS": "提交工程使用中的图像全部打包；在独立目录离线运行 build.py 能生成同样的主要构图、图层、材质与星点动画，且工程说明可定位图层和播放范围。",
+        "PARTIAL": "提交工程在独立目录仍可完整显示和回放，但未达到 PASS，例如脚本重建结果有明显差异、脚本不能独立完成重建或工程说明缺失。",
+        "FAIL": "未达到 PARTIAL，包括搬到独立目录后出现必要纹理或其他依赖缺失，导致主要场景或动画无法完整显示。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "dependency_audit_and_clean_rebuild_comparison",
+        "procedure": "在工程副本中检查实际使用图像的打包状态，并将提交文件复制到独立目录，禁用网络后重新打开和回放。另在 Blender 5.1.2 的干净空场景按脚本注明方式运行 build.py，比较生成工程第 1、60、120 帧的主要构图、可编辑图层及星点位置变化；检查未交付路径和插件依赖。文件能否打开是资格前提，不单独给分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Glowing Pumpkin Lantern",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1ED4vzJEiu",
+    "id": "BV1ED4vzJEiu"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 60, "SURF": 25, "SCN": 10, "PIPE": 5},
+  "weighting_note": "Geometry receives 60 points because the source builds the pumpkin volume, lobes, stem, and carved face. Surface work receives 25 points for assigned orange and green surfaces and functional yellow self-emission. Scene presentation receives 10 points for an inspectable final view; no glare effect is inferred from emission alone. Reproducible delivery receives 5 points. Modifier presence, vertex counts, and hidden emitter geometry do not earn geometry points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Lobed Pumpkin Body",
+      "criterion": "The body has the broad, squat volume, depressed top, and gently flattened underside of the requested pumpkin.",
+      "scoring_rule": {
+        "PASS": "An editable volumetric body is wider than it is tall, remains rounded and substantial from front and side, has a central top depression, and has a gently flattened underside.",
+        "PARTIAL": "An editable, rounded three-dimensional pumpkin body is present, but at least one PASS condition is unmet.",
+        "FAIL": "No editable rounded three-dimensional body is present; a flat image, negligible volume, or unrelated base shape does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_lobed_body.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect the submitted body's evaluated mesh in front, side, and top views under a neutral material. Compare width and height, confirm front-to-back volume, and examine the top depression and underside profile without relying on object names or vertex counts.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Lobed Pumpkin Body",
+      "criterion": "Broad lobes and rounded longitudinal grooves form a coherent pumpkin skin around the body.",
+      "scoring_rule": {
+        "PASS": "Broad lobes are separated by deep rounded grooves that continue around the body, converge into the upper depression, and transition coherently toward the underside; the silhouette is scalloped and the lobes read as one skin.",
+        "PARTIAL": "Several adjacent lobes and genuine geometric grooves visibly establish a pumpkin pattern on a substantial part of the body, but at least one PASS condition is unmet.",
+        "FAIL": "The minimum geometric lobe pattern is absent, negligible, or only painted onto an otherwise smooth surface."
+      },
+      "evidence_refs": ["image/02_lobed_body.png", "image/03_bent_stem.png"],
+      "verification": {
+        "method": "evaluated_geometry_orbit",
+        "procedure": "Orbit the evaluated body in neutral shading through front, rear, top, and side views. Inspect silhouette changes and groove depth, including the upper and lower transitions. Confirm that texture shading alone is not creating the apparent grooves.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Bent Stem",
+      "criterion": "A short tapered, ridged stem bends from a well-seated base in the top depression.",
+      "scoring_rule": {
+        "PASS": "A separately editable stem is short relative to the body, has a broader base and narrower closed tip, shows a clear lean or gentle bend and longitudinal ridges, and meets the top depression without a visible gap.",
+        "PARTIAL": "A modeled stem of subordinate scale is visibly attached at the pumpkin top, but at least one PASS condition is unmet.",
+        "FAIL": "No modeled stem of subordinate scale is attached at the pumpkin top; a floating piece or unrelated decoration does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_bent_stem.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_editability_inspection",
+        "procedure": "Inspect the stem without its colored material from front and side, then orbit its base and tip. Verify the taper, lean, ridges, closed tip, and contact with the top depression. Check that the stem can be edited independently of the body.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "4. Recessed Expression and Geometry Finish",
+      "criterion": "The front face has the balanced stern eye shapes and much smaller central mouth shown in the references.",
+      "scoring_rule": {
+        "PASS": "Two similarly sized eyes flank the front center with rounded lower edges and sloping upper edges that produce the requested stern expression. A much smaller rounded, slightly notched mouth sits centrally below them, with clear skin separating all features and a balanced arrangement.",
+        "PARTIAL": "Two distinct modeled eye shapes visibly establish a face on the pumpkin front, but at least one PASS condition is unmet.",
+        "FAIL": "Two distinct modeled eye shapes do not establish a front face, including absent eyes or an expression represented only by a flat image."
+      },
+      "evidence_refs": ["image/04_recessed_expression.png", "image/01_illuminated_face.png"],
+      "verification": {
+        "method": "neutral_front_view_manual_inspection",
+        "procedure": "Inspect a frontal neutral-shaded view with emission disabled. Compare the eye contours, relative eye sizes, mouth contour and scale, facial spacing, and overall expression with the reference crops. This row assesses layout and contours; recess depth is assessed separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "4. Recessed Expression and Geometry Finish",
+      "criterion": "The facial regions are actual inward relief with readable rims and sidewalls.",
+      "scoring_rule": {
+        "PASS": "Both eyes and the mouth have visible inward depth with readable rims and sidewalls. Their relief remains legible under neutral gray shading with emission disabled.",
+        "PARTIAL": "At least one eye has actual inward depth with an inspectable rim and sidewall, but at least one PASS condition is unmet.",
+        "FAIL": "No eye has actual inward relief with an inspectable rim and sidewall; flat decals, color-only masks, and raised patches do not meet the minimum."
+      },
+      "evidence_refs": ["image/04_recessed_expression.png", "image/01_illuminated_face.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_section_inspection",
+        "procedure": "Disable emission in a temporary copy and inspect oblique close views of each facial region. Use a section view or hide the backing temporarily to verify rim-to-interior depth and sidewalls. Do not award this row for luminous color alone. Backing coverage and leakage are assessed only in SURF-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "4. Recessed Expression and Geometry Finish",
+      "criterion": "Evaluated surfaces are smoothly finished while preserving intentional lobe and facial boundaries.",
+      "scoring_rule": {
+        "PASS": "The complete body, stem, and facial rims have smooth evaluated surfaces without accidental faceting, tears, spikes, or shading breaks, while the intended grooves and facial boundaries remain clear.",
+        "PARTIAL": "The existing body and at least one actual facial recess demonstrate mostly smooth coherent surfaces with retained intentional boundaries, but at least one PASS condition is unmet. A missing minor part or local defect may prevent PASS without invalidating the demonstrated finish.",
+        "FAIL": "The minimum existing body-and-recess surface demonstration is absent, or pervasive tears, spikes, faceting, or collapsed boundaries prevent a mostly smooth coherent result."
+      },
+      "evidence_refs": ["image/02_lobed_body.png", "image/03_bent_stem.png", "image/04_recessed_expression.png"],
+      "verification": {
+        "method": "controlled_neutral_shading_inspection",
+        "procedure": "Inspect the evaluated body, available stem, and available facial rims under broad neutral lighting at whole-object and close-up scales. Examine highlights and silhouette transitions for accidental defects while confirming that the lobe grooves and facial borders have not been smoothed away. A missing surface cannot demonstrate finish quality.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "5. Color and Emission",
+      "criterion": "The visible pumpkin skin is saturated orange with soft broad highlights, and the stem is distinctly green.",
+      "scoring_rule": {
+        "PASS": "The orange material is assigned across the visible body skin and produces soft broad highlights; the visible stem has a distinct green material, and both colors remain recognizable under neutral illumination.",
+        "PARTIAL": "A substantial existing pumpkin body visibly carries an assigned orange material, but at least one PASS condition is unmet.",
+        "FAIL": "No substantial existing body visibly carries an assigned orange material; an unused orange material or absence of body surfaces does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_illuminated_face.png"],
+      "verification": {
+        "method": "material_assignment_and_controlled_render_inspection",
+        "procedure": "Inspect the actual material assignments on body and stem, then use a temporary neutral-light render with emission disabled to compare their visible colors and highlight response. Evaluate the assigned surfaces rather than unused material datablocks or fixed shader values.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "5. Color and Emission",
+      "criterion": "Functional warm yellow self-emission fills the facial regions through a concealed editable backing.",
+      "scoring_rule": {
+        "PASS": "An independently editable backing uses a functional warm yellow self-emissive material that fills both eyes and the mouth while remaining concealed by the outer skin. No rectangular backing or spill is visible beyond the intended regions. Emission color and strength are independently adjustable, and the face remains self-lit without external illumination but loses that self-lit appearance at zero emission.",
+        "PARTIAL": "At least one eye is visibly filled by actual warm yellow self-emissive material that remains self-lit without external illumination and loses that appearance at zero emission, but at least one PASS condition is unmet.",
+        "FAIL": "No eye meets the functional self-emission minimum; a yellow diffuse patch, external light alone, unused emitter material, or image-space glow alone does not qualify."
+      },
+      "evidence_refs": ["image/01_illuminated_face.png"],
+      "verification": {
+        "method": "material_function_probe_and_controlled_renders",
+        "procedure": "In a temporary copy, disable external lights and World illumination and bypass any optical post-processing. Compare otherwise identical renders with the backing emission enabled and set to zero. Inspect the used shader and confirm editable color and strength, then restore normal illumination and examine whether the backing fills the intended facial regions without visible rectangular edges. This tests surface emission, not compositor glare.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "6. Final Presentation",
+      "criterion": "The final rendered composition clearly presents the complete luminous pumpkin and its geometric details.",
+      "scoring_rule": {
+        "PASS": "The actual scene render shows the complete pumpkin and stem with comfortable margins from a front or modest three-quarter view. Both eyes, mouth, top depression, and stem bend are readable, lighting reveals lobe grooves and facial rims, and a simple background supports the solid orange exterior and yellow interior. The image has no overlays, construction guides, or distracting noise. No particular optical halo is required.",
+        "PARTIAL": "An actual scene render visibly presents the pumpkin body and recognizable face, but at least one PASS condition is unmet.",
+        "FAIL": "No actual scene render visibly presents both the pumpkin body and a recognizable face, including a blank image, severe occlusion, or substituted source screenshot."
+      },
+      "evidence_refs": ["image/01_illuminated_face.png", "image/03_bent_stem.png", "image/04_recessed_expression.png"],
+      "verification": {
+        "method": "submitted_render_and_scene_camera_inspection",
+        "procedure": "Inspect the submitted PNG at normal viewing size and full resolution, then rerender the saved scene camera to confirm that framing, lighting, and background come from the submitted scene. Judge composition, visibility, and image cleanliness here; emission function and backing coverage are assessed only in SURF-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The requested editable project, reproducible build script, and scene-rendered PNG are delivered coherently.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with editable scene data and saved render settings; build.py recreates the complete scene from empty, saves that project, and renders B79_Glowing_Pumpkin_Lantern.png using paths relative to the script; the supplied PNG matches the rebuilt scene.",
+        "PARTIAL": "An opening editable submission.blend and a nonempty build.py intended to construct the scene are supplied, but at least one PASS condition is unmet.",
+        "FAIL": "Either an opening editable submission.blend or a nonempty scene-construction build.py is absent; image-only delivery and a script that only opens a prebuilt solution do not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "fresh_build_and_artifact_consistency_check",
+        "procedure": "Open submission.blend in Blender 5.1.2, inspect saved scene editability and render settings, and run build.py from an empty startup scene in a clean temporary output location. Confirm relative output paths and creation of the named project and PNG. Reopen the newly saved submission.blend and verify its editable scene data and visual agreement with the delivered and rebuilt images. This is a future verification procedure, not a compatibility claim.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

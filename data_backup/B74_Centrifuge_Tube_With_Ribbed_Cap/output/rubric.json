@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Centrifuge Tube With Ribbed Cap",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1GcVP6KEDz",
+    "id": "BV1GcVP6KEDz"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "This is a static modeling task. Ninety points cover independent geometric outcomes: proportions, tapered closure, tube cavity, flange, cap shell, grip relief, assembly fit, and geometric finish. Shells and smoothing are evaluated as geometry rather than modifier presence. No procedural generator, material effect, rig, or animation is required. Ten points cover reproducible native and rendered delivery.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Tube Silhouette",
+      "criterion": "The tube has an upright, circular, straight cylindrical shaft with the requested slender proportions.",
+      "scoring_rule": {
+        "PASS": "The shaft is upright and circular in cross-section, keeps a straight and nearly constant-width profile, and its length is roughly three to four times its outside diameter.",
+        "PARTIAL": "A recognizable straight cylindrical shaft longer than its diameter exists, but at least one PASS condition is not met.",
+        "FAIL": "No recognizable straight cylindrical shaft longer than its diameter exists."
+      },
+      "evidence_refs": ["image/01_assembled_tube.png"],
+      "verification": {
+        "method": "Evaluated geometry measurements and orthographic inspection",
+        "procedure": "Isolate the tube in a temporary inspection copy. Compare two perpendicular side views and cross-sections of the evaluated shaft. Measure shaft length relative to its outside diameter, excluding the flange and tapered bottom, and inspect upright alignment and constancy of the circular section.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Tube Silhouette",
+      "criterion": "A short centered conical bottom closes at a small rounded tip and transitions smoothly into the shaft.",
+      "scoring_rule": {
+        "PASS": "The lower section tapers concentrically, is clearly shorter than the straight shaft, closes at a small rounded tip, and has a softened but still legible shaft-to-cone transition.",
+        "PARTIAL": "An attached lower section visibly narrows from the shaft toward its end, but at least one PASS condition is not met.",
+        "FAIL": "There is no attached lower section that visibly narrows from the shaft toward its end."
+      },
+      "evidence_refs": ["image/01_assembled_tube.png"],
+      "verification": {
+        "method": "Evaluated silhouette and tip inspection",
+        "procedure": "Inspect perpendicular side views and a close view of the evaluated bottom. Compare lower-section radii along the tube axis, confirm concentric narrowing and closure at the tip, and inspect the shape of the terminal rounding and shaft junction.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "2. Hollow Body and Mouth",
+      "criterion": "The tube is an open, thin-walled container with a continuous internal cavity and closed sides and bottom.",
+      "scoring_rule": {
+        "PASS": "The circular mouth is open, a continuous cavity extends into the body, inner and outer walls join at a narrow rim, wall thickness is visibly small relative to body diameter, and the side and bottom have no unintended through-holes.",
+        "PARTIAL": "An open mouth leads into an actual cavity with distinct inner and outer side surfaces over a substantial part of the shaft, but at least one PASS condition is not met.",
+        "FAIL": "The minimum open mouth and actual cavity with distinct inner and outer side surfaces over a substantial part of the shaft are absent; a solid cylinder, shallow decorative mouth recess, or zero-thickness shell does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_open_tube.png"],
+      "verification": {
+        "method": "Interior views and evaluated section inspection",
+        "procedure": "Temporarily lift or hide the cap. Inspect the mouth from above, then section the evaluated tube in an inspection copy to trace the inner wall, outer wall, cavity depth, rim join, and closed bottom. Compare thickness with the body diameter and inspect for unintended holes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Hollow Body and Mouth",
+      "criterion": "A continuous outward flange surrounds the open mouth with a shallow band and clear lower shoulder.",
+      "scoring_rule": {
+        "PASS": "A concentric flange extends visibly beyond the shaft around the complete mouth, forms a shallow cylindrical band with a clear lower shoulder and softly rounded edges, and leaves the central mouth unobstructed.",
+        "PARTIAL": "Recognizable outward rim geometry is attached to the mouth along at least part of its perimeter, but at least one PASS condition is not met.",
+        "FAIL": "No recognizable outward rim geometry is attached to the mouth."
+      },
+      "evidence_refs": ["image/03_mouth_flange.png"],
+      "verification": {
+        "method": "Isolated mouth geometry inspection",
+        "procedure": "Lift the cap in a temporary copy. Orbit the mouth and inspect a side profile and top view of the evaluated geometry. Confirm a complete radial overhang, the shallow band and shoulder, rounded edges, and the unobstructed opening.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Hollow Cap",
+      "criterion": "The cap is a short closed-top shell with an open underside and the visible interior transition.",
+      "scoring_rule": {
+        "PASS": "The cap is wider than the shaft and roughly half as tall as its own diameter, has a broad substantially flat closed top with a rounded perimeter, and has an open underside with real wall thickness, a closed inner roof, a concentric transition, a gently inclined inner wall, and a clear lower opening.",
+        "PARTIAL": "A recognizable cap shell has an open underside, actual wall thickness, and a closed roof over its cavity, but at least one PASS condition is not met.",
+        "FAIL": "The minimum cap shell with open underside, actual wall thickness, and closed roof is absent; a solid cylinder or a ring open through both ends does not meet the minimum."
+      },
+      "evidence_refs": ["image/04_cap_interior.png", "image/05_seated_cap.png"],
+      "verification": {
+        "method": "Exterior, underside, and evaluated section inspection",
+        "procedure": "Isolate the cap and inspect its top, side, and underside. Measure its height relative to outside diameter. Use a temporary section to confirm distinct shell surfaces and trace the closed inner roof through its concentric transition into the inclined inner wall and open lower rim.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "4. Grip Ribs",
+      "criterion": "Dense rounded vertical grip ribs form consistent geometric relief around the full cap circumference.",
+      "scoring_rule": {
+        "PASS": "Dense, evenly spaced geometric ribs cover the full circumference, run parallel to the cap axis along most of its height, remain consistent in width and height, have rounded profiles and ends, and retain visible narrow grooves with defined upper and lower cap edges and a broad readable top disk.",
+        "PARTIAL": "Repeated vertical projections with visible grooves exist as geometry on a substantial portion of the cap sidewall, but at least one PASS condition is not met.",
+        "FAIL": "The minimum repeated vertical geometric projections and grooves on a substantial portion of the cap sidewall are absent; texture-only stripes do not meet the minimum."
+      },
+      "evidence_refs": ["image/05_seated_cap.png"],
+      "verification": {
+        "method": "Full-circumference geometry and controlled shading inspection",
+        "procedure": "Orbit the isolated evaluated cap through its full circumference and inspect its silhouette and sidewall under a simple neutral light. Inspect a horizontal section to distinguish geometric ribs from shading. Compare their spacing, width, height, axis direction, roundness, end profiles, and retained grooves.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "5. Assembly and Finish",
+      "criterion": "The cap seats concentrically over the tube mouth and can be moved independently to reveal the intact container.",
+      "scoring_rule": {
+        "PASS": "The cap is concentric with the upright tube, its cavity accommodates and surrounds the flange without visible hovering or gross intersection, its exterior projects beyond the shaft on every side, and its lower edge forms a compact joint at the mouth. Moving only the cap exposes the intact flange, mouth, and cavity while both components remain editable.",
+        "PARTIAL": "A recognizable tube and cap are positioned together at the tube's upper end as an assembly, but at least one PASS condition is not met.",
+        "FAIL": "A recognizable tube and cap positioned together at the tube's upper end as an assembly are absent."
+      },
+      "evidence_refs": ["image/01_assembled_tube.png", "image/05_seated_cap.png"],
+      "verification": {
+        "method": "Assembly section and independent movement probe",
+        "procedure": "Inspect the saved assembly from front, side, and above, then use a temporary axial section to inspect the cap cavity around the flange. In a duplicate inspection scene, move the cap upward without altering the tube. Confirm independent editable components and that the mouth and flange remain intact; restore the saved seating state afterward.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-08",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "5. Assembly and Finish",
+      "criterion": "Existing core surfaces have clean evaluated geometry and continuous curved shading while deliberate form boundaries remain readable.",
+      "scoring_rule": {
+        "PASS": "The tube and cap both show continuous curved shading and clean silhouettes without unintended faceting, pinching, cracks, self-intersections, or collapsed grooves; the straight shaft, rounded tip, flange shoulder, cap edges, and rib relief remain legible.",
+        "PARTIAL": "At least one existing principal component, either a tube with a substantial shaft surface or a cap with a substantial roof and sidewall, has continuous curved shading over most of its main visible surfaces, but at least one PASS condition is not met. Missing parts cannot establish this minimum.",
+        "FAIL": "Neither existing principal component meets the minimum of substantial core surfaces with continuous curved shading over most of those surfaces."
+      },
+      "evidence_refs": ["image/01_assembled_tube.png", "image/03_mouth_flange.png", "image/05_seated_cap.png"],
+      "verification": {
+        "method": "Controlled neutral renders and evaluated surface inspection",
+        "procedure": "Inspect available tube and cap surfaces in neutral controlled renders and close evaluated geometry views from several angles. Assess shading continuity, silhouette quality, pinches, cracks, and unintended intersections. Score defects in execution here, while feature presence and proportions remain in their dedicated rows; do not infer finish on missing surfaces.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The native scene, rebuild script, and named scene-rendered PNG form a usable reproducible submission.",
+      "scoring_rule": {
+        "PASS": "All three named files are supplied; submission.blend opens with editable scene content and the seated presentation; build.py recreates and saves the scene and renders the named PNG from an empty scene in Blender 5.1.2 without external assets; the PNG is an actual Cycles GPU render of that scene, with the full assembly clearly visible in the requested view and uncluttered setting.",
+        "PARTIAL": "At least one of submission.blend or build.py yields an editable scene containing recognizable task geometry, but at least one PASS condition is not met.",
+        "FAIL": "Neither submission.blend nor build.py yields an editable scene containing recognizable task geometry."
+      },
+      "evidence_refs": ["image/01_assembled_tube.png"],
+      "verification": {
+        "method": "File opening, clean rebuild, and render provenance comparison",
+        "procedure": "Open submission.blend in Blender 5.1.2 and inspect its editable scene and render configuration. Run build.py from an empty scene in a separate output directory on an authorized GPU render environment, checking that no external assets are required. Confirm all required filenames, saved scene, and rendered PNG; compare the rebuilt camera render with the delivered PNG and inspect framing and legibility. This future procedure has not been executed during task authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

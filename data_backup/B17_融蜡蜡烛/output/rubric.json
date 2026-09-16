@@ -1,0 +1,136 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "融蜡蜡烛",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV13v56zQEF1",
+    "id": "BV13v56zQEF1"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 55, "SURF": 35, "PIPE": 10},
+  "weighting_note": "暂定内容权重，未经实测校准。静态造型分为主体底沿、垂蜡、凹顶、烛芯、火焰和表面完整性六项，共55分；真实蜡质、火焰颜色及透亮发光层次共35分；可迁移重建与编辑共10分。细分修改器本身不作为PROC，融蜡外形不作为SIM，辅助灯光不作为SCN。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 柱状蜡体与外扩底沿",
+      "criterion": "直立柱状蜡体带有连续相连、浅而外扩的圆润底沿和可放置的底面。",
+      "scoring_rule": {
+        "PASS": "柱状主体清楚，高度大于中段宽度；浅底沿比中段宽且连续相连，底面能形成支承。",
+        "PARTIAL": "有可辨认的直立柱状主体，但高度未明显大于中段宽度，或底沿缺失、没有外扩、过高、与主体脱离，或底部无法形成支承。",
+        "FAIL": "主体缺失，或整体不能辨认为直立柱状蜡烛。"
+      },
+      "evidence_refs": ["image/01_candle.png"],
+      "verification": {"method": "evaluated_geometry_and_visual_review", "procedure": "检查实际求值几何，隔离蜡体并从正面、侧面和底面观察主体比例及底沿。测量主体高度和中段宽度辅助判断，检查底沿与蜡体连接及底面支承；不以顶点数、对象名称或修改器证明完成。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 15,
+      "requirement_section": "2. 顶部熔蜡与垂蜡",
+      "criterion": "上部蜡层具有至少三处有厚度且长短变化的圆头垂蜡，并自然接入蜡体。",
+      "scoring_rule": {
+        "PASS": "至少三处可辨认的立体垂蜡，长度、宽度和间距具有变化，其中至少一处明显长于另一处；圆头下端及根部衔接自然，无悬浮。",
+        "PARTIAL": "至少一处与蜡体相接的立体垂蜡存在，但不足三处，或长短变化、圆头形态、全部根部衔接中至少一项不满足。",
+        "FAIL": "没有立体垂蜡，或垂蜡仅为颜色图案、与蜡体无关的悬浮装饰。"
+      },
+      "evidence_refs": ["image/01_candle.png"],
+      "verification": {"method": "evaluated_geometry_and_visual_review", "procedure": "在中性灰材质下绕蜡体观察一周，对可识别的垂蜡分支逐一比较长度、宽度及间距；斜侧视确认相对主体的实体厚度、圆头和根部连接。该项只检查垂蜡结构，细小表面瑕疵由GEO-06处理。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 顶部熔蜡与垂蜡",
+      "criterion": "圆润厚顶沿具有起伏或倾斜，中央为有连续底面的浅熔蜡凹面。",
+      "scoring_rule": {
+        "PASS": "顶沿完整且圆润，存在可见高度起伏或倾斜；内部低于周边并有连续底面，构成浅凹顶。",
+        "PARTIAL": "凹面或圆润厚顶沿至少一项明确存在，但缺少另一项，或顶沿过于规则水平，或凹面贯穿、底面不连续。",
+        "FAIL": "主体顶部缺失，或既无可辨认凹面也无圆润厚顶沿。"
+      },
+      "evidence_refs": ["image/01_candle.png", "image/02_top_wick.png"],
+      "verification": {"method": "evaluated_geometry_and_visual_review", "procedure": "从斜上方及顶部观察求值几何，必要时临时隐藏火焰和烛芯。比较中央与周边高度，检查顶沿厚度、起伏和内凹底面的连续性；不能仅用表面明暗判定凹陷。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 5,
+      "requirement_section": "3. 烛芯与偏斜火焰",
+      "criterion": "细短烛芯位于凹面中央附近，连接蜡体与火焰且可被辨认。",
+      "scoring_rule": {
+        "PASS": "细短烛芯可辨认，位于中央附近，根部进入蜡体且上端接触火焰，无明显悬空间隙。",
+        "PARTIAL": "烛芯存在，但过粗、偏离中央、被完全遮蔽或至少一端明显未接触对应组件。",
+        "FAIL": "烛芯缺失或仅有贴图标记。"
+      },
+      "evidence_refs": ["image/02_top_wick.png", "image/01_candle.png"],
+      "verification": {"method": "evaluated_geometry_and_visual_review", "procedure": "在正面和斜侧近景观察烛芯实体；必要时临时隐藏外焰确认其上端接触位置。检查细短比例、相对凹顶位置和两端连续关系，不要求烛芯独立成对象或特定颜色。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-05", "capability": "GEO", "points": 10,
+      "requirement_section": "3. 烛芯与偏斜火焰",
+      "criterion": "火焰比蜡体窄，具有下部饱满、上部收尖并轻微偏斜的三维泪滴形。",
+      "scoring_rule": {
+        "PASS": "火焰处于烛芯上方且明显窄于蜡体，三维下部饱满，上部连续收尖，尖端轻微偏斜。",
+        "PARTIAL": "存在烛芯上方的三维火焰形体，但宽度、下部饱满、收尖或偏斜中至少一项不满足。",
+        "FAIL": "火焰缺失、只有平面剪影，或现有形体不能辨认为火焰。"
+      },
+      "evidence_refs": ["image/01_candle.png", "image/03_flame_surface.png"],
+      "verification": {"method": "evaluated_geometry_and_visual_review", "procedure": "暂用不透明中性材质从两个垂直侧向及斜视观察火焰求值轮廓，确认体积、相对宽度、上下形状和尖端偏移。此项不评估发光、颜色或折射效果。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-06", "capability": "GEO", "points": 5,
+      "requirement_section": "4. 几何表面完整性",
+      "criterion": "已有主要几何在普通近景中保持平顺连续，融蜡细节不因平滑而消失。",
+      "scoring_rule": {
+        "PASS": "蜡体与火焰均存在，已有几何在整体和近景下平顺，无明显非预期棱面、夹痕、尖刺、破洞或闪烁；已有垂蜡和凹顶轮廓仍清晰。",
+        "PARTIAL": "蜡体与火焰均存在，但出现局部表面瑕疵或局部细节被过度平滑，主要形体仍连续可读。",
+        "FAIL": "蜡体或火焰缺失，或明显瑕疵大范围破坏表面连续性。"
+      },
+      "evidence_refs": ["image/01_candle.png", "image/03_flame_surface.png"],
+      "verification": {"method": "visual_review_of_evaluated_surfaces", "procedure": "在中性斜光和灰材质下检查普通整体与近景视图，缓慢改变观察角度检查表面闪烁、法线异常和轮廓锯齿。检查最终求值表面，不要求特定拓扑数量或保留细分修改器；缺失细节的结构扣分归其对应结构项。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 10,
+      "requirement_section": "5. 蜡质与火焰材质",
+      "criterion": "蜡体、底沿与垂蜡呈统一的近白色低饱和蜡质和柔和非金属反射。",
+      "scoring_rule": {
+        "PASS": "蜡体存在且实际材质呈近白低饱和外观，已有底沿与垂蜡材质一致，反射柔和且非金属，起伏能辨认。",
+        "PARTIAL": "蜡体有实际材质，但整体颜色、各区域一致性或柔和非金属反射至少一项不满足。",
+        "FAIL": "蜡体缺失、无实际材质，或材质完全不可见。"
+      },
+      "evidence_refs": ["image/01_candle.png"],
+      "verification": {"method": "material_assignment_and_render_review", "procedure": "检查蜡体实际使用的材质并以中性光观察实际着色结果，区分火焰局部暖光与底色。比较已有蜡体、垂蜡及底沿的颜色和高光宽度，不以材质名称或未分配材质判定。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 10,
+      "requirement_section": "5. 蜡质与火焰材质",
+      "criterion": "火焰呈下黄上橙红的连续纵向颜色过渡，且曝光保留颜色层次。",
+      "scoring_rule": {
+        "PASS": "可见火焰由下部黄色连续过渡到上部橙色、橙红色，方向正确，未因整体过曝丢失层次。",
+        "PARTIAL": "火焰可见且有黄色与橙红色，但过渡方向、连续性或曝光保色至少一项不满足。",
+        "FAIL": "火焰缺失或不可见，或无法同时辨认黄色与橙红色层次。"
+      },
+      "evidence_refs": ["image/03_flame_surface.png", "image/01_candle.png"],
+      "verification": {"method": "material_evaluation_and_render_review", "procedure": "在提交展示条件下观察火焰底部、中部与尖端的实际颜色，检查渐变方向和过曝区域；追踪实际材质输出确认变化施加在火焰上。允许任意等效坐标与着色实现，不要求指定节点链。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-03", "capability": "SURF", "points": 15,
+      "requirement_section": "5. 蜡质与火焰材质",
+      "criterion": "火焰具有实际发光的内部，以及包覆内部、可透见内焰且带高光的外层。",
+      "scoring_rule": {
+        "PASS": "内焰具有实际发光贡献，外部包覆层产生透射和高光，可透见内焰，两层共同形成透亮火焰。",
+        "PARTIAL": "火焰存在，实际内焰发光与外层透亮包覆至少一项成立，但另一项缺失或效果无法辨认。",
+        "FAIL": "火焰缺失，或既无实际发光贡献也无可辨认的透亮包覆效果。"
+      },
+      "evidence_refs": ["image/03_flame_surface.png"],
+      "verification": {"method": "functional_material_probe_and_render_review", "procedure": "检查火焰实际使用的输出着色，并在副本中分别暂时关闭发光贡献和外部透射贡献，对比渲染确认各自生效。以斜向视图检查透亮高光与内部可见性，不以两个对象、玻璃节点存在、固定IOR或固定发光强度代替结果。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 10,
+      "requirement_section": "6. 可重建交付",
+      "criterion": "提交可从干净场景迁移重建已交付内容，且蜡体与火焰几何、材质保持可编辑。",
+      "scoring_rule": {
+        "PASS": "交付移至新目录后，build.py能从干净场景重建submission.blend所含几何、材质与展示设置，依赖完整；蜡体及火焰可进行几何与材质编辑。",
+        "PARTIAL": "脚本能重建主要已提交几何，但材质、展示、依赖迁移或可编辑性至少一项需要局部修复。",
+        "FAIL": "没有可用的重建脚本，脚本无法建立已提交的主要几何，或交付仅为无法编辑的展示图像。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "clean_rebuild_and_editability_probe", "procedure": "把交付复制到新目录，在Blender5.1.2干净场景运行build.py，并将重建结果与其提交blend中的实际内容比较，检查依赖闭合。副本中尝试分别调整蜡体、火焰局部几何及其材质；不以对象或材质数量评分。此项只评价重建一致性与编辑交付，不重复评价原提交是否满足造型目标。", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

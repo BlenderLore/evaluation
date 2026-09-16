@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Spinning 3D Blender Logo",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=salOaA4lnxI",
+    "id": "salOaA4lnxI"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 55, "SURF": 10, "ANM": 25, "PIPE": 10},
+  "weighting_note": "Geometry receives 55 points because silhouette preservation, solid relief, differentiated rims, editable mesh construction, and pivot placement are distinct central outcomes. Materials receive 10 points for the actual three-region color assignment. Animation receives 25 points for the complete turn and its evaluated motion. Delivery and reproducibility receive 10 points. No procedural generator, rig, or simulation is required, and incidental camera or light existence receives no separate capability credit.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Logo Shape",
+      "criterion": "The model preserves the supplied vector silhouette, aligned eye regions, and width-to-height proportions at any overall scale.",
+      "scoring_rule": {
+        "PASS": "The orange silhouette and its three arms match the supplied SVG without visible inflation or distortion; the white band and blue center retain the artwork's alignment and proportions; the band has the correct central opening; the supplied width-to-height proportions are preserved. Overall scale is free.",
+        "PARTIAL": "A recognizable Blender logo with all three regions and an open white band is present, but at least one PASS condition is unmet, such as a distorted arm, shifted eye region, swollen outline, or stretched overall proportions.",
+        "FAIL": "The minimum is not met: the silhouette is not recognizable as the supplied Blender logo, any of the three regions is absent, or the white band lacks its central opening."
+      },
+      "evidence_refs": ["image/01_upright_logo.png"],
+      "verification": {
+        "method": "Evaluated geometry comparison and orthographic inspection",
+        "procedure": "At frame 1, compare a front orthographic projection of the actual mesh with the supplied SVG after normalizing both to a common width. Examine height, arms, outer eye outline, white opening, blue contour, and relative region placement. Do not require an absolute world-space size. Ignore lighting and assess color separately under SURF-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Layered Relief",
+      "criterion": "The body and blue center have matching solid depth, with an approximately half-depth white ring recessed symmetrically within a thin relief.",
+      "scoring_rule": {
+        "PASS": "The orange body and blue center have matching total depths and the ring is about half as deep; their depth midplanes coincide; front and back show the same raised-body, recessed-ring, raised-center relationship; every region has filled faces and sidewalls. Overall thickness is small relative to the logo's face dimensions and matches the thin-relief character of the references.",
+        "PARTIAL": "All three regions have nonzero solid depth and the ring is recessed relative to both the body and blue center, but at least one PASS condition is unmet, including an incorrect relative ring depth, unequal raised depths, excessive overall thickness, or front-to-back asymmetry.",
+        "FAIL": "The minimum is not met: any region is flat or lacks solid depth, or the ring is not recessed relative to both raised regions."
+      },
+      "evidence_refs": ["image/02_layered_relief.png", "image/03_rotated_logo.png"],
+      "verification": {
+        "method": "Relative-depth measurement and front/back section inspection",
+        "procedure": "Identify the three regions from mesh connectivity and actual material assignments. Measure their extents along the artwork normal, comparing body depth with center depth and ring depth with body depth. Compare depth midplanes, then inspect front/back oblique views and an eye section to confirm filled slabs and symmetric relief. Normalize the logo's face dimensions when comparing its overall thickness with the references; do not enforce source-world units. Do not score rim curvature in this row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Rim Geometry and Mesh",
+      "criterion": "The orange and blue rims have small even rounding, contrasted with the square white ring.",
+      "scoring_rule": {
+        "PASS": "The orange outer and eye-facing rims and the blue center's rim have small, even rounded profiles relative to the relief depth, with no local collapse at the arms; the white ring retains square edges. Modest faceting is accepted if the profile is visibly rounded.",
+        "PARTIAL": "Both the orange body and blue center have discernible geometric rim rounding, but at least one PASS condition is unmet, such as uneven or excessive rounding, incomplete rim coverage, localized collapse, or a rounded white ring.",
+        "FAIL": "The minimum is not met: the orange body or blue center is missing or has no discernible geometric rim rounding. A shading-only rounded appearance does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_upright_logo.png", "image/02_layered_relief.png"],
+      "verification": {
+        "method": "Mesh profile inspection and neutral shaded detail views",
+        "procedure": "Inspect cross-sections through the orange outer edge, inner eye edge, projecting arms, and blue rim. Confirm that actual faces form small, even rounded transitions in proportion to the relief depth and compare their appearance with the references. Inspect the white band's corners for square profiles. Evaluate rounding independently from the overall silhouette comparison in GEO-01 and relative-depth measurements in GEO-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Rim Geometry and Mesh",
+      "criterion": "The complete relief is consolidated into editable mesh faces and remains intact without animation.",
+      "scoring_rule": {
+        "PASS": "One editable mesh object contains the three regions, including front/back faces, sidewalls, and rounded profiles as mesh faces. It has no duplicate logo shells, visible cracks, missing visible faces, or shading damage, and disabling animation leaves the complete relief intact. Disconnected regions within the mesh are acceptable.",
+        "PARTIAL": "All three logo regions exist as editable mesh geometry and remain present with animation disabled, but at least one PASS condition is unmet, such as separate mesh objects, live depth generation, duplicate shells, or visible mesh damage.",
+        "FAIL": "The minimum is not met: any region is absent or represented only by a curve, image, or other non-mesh substitute, or the complete logo disappears when animation is disabled."
+      },
+      "evidence_refs": ["image/02_layered_relief.png"],
+      "verification": {
+        "method": "Artifact mesh inspection and animation-disabled probe",
+        "procedure": "Inspect the saved mesh datablocks and distinguish real cap, side, and rim faces from live generated geometry. In a temporary copy, disable animation and verify that all regions remain complete. Inspect front and back for duplicated visible shells, cracks, missing faces, and damaged normals. Hidden contact overlap between the supplied regions alone is not a defect.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Upright Pivot",
+      "criterion": "The starting pose is upright and front-readable, with its vertical rotation axis passing through the eye region.",
+      "scoring_rule": {
+        "PASS": "At frame 1, the artwork is upright and its recognizable front face is presented to the fixed camera. Its effective vertical rotation axis passes through the eye near the blue center. Overall world position is free.",
+        "PARTIAL": "The logo is upright and its effective pivot lies inside the logo, but at least one PASS condition is unmet, such as an initial edge-on or backward presentation or a pivot outside the eye region.",
+        "FAIL": "The minimum is not met: the logo lies flat, lacks a usable pivot, or its pivot lies outside the logo."
+      },
+      "evidence_refs": ["image/01_upright_logo.png"],
+      "verification": {
+        "method": "Upright-pose and pivot-to-eye inspection",
+        "procedure": "Evaluate frame 1 and inspect the artwork's upright posture and front visibility through the render camera. Locate the effective vertical rotation axis from the submitted transform or animation setup and compare its intersection with the artwork plane to the eye region. Accept any world position, overall scale, and equivalent transform representation; do not require a surface-centroid calculation, world-origin alignment, specific Euler values, or object names. Fixed positioning throughout motion is assessed under ANM-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Color and Readability",
+      "criterion": "Opaque orange, blue, and white materials are actually assigned to the corresponding mesh regions on both sides.",
+      "scoring_rule": {
+        "PASS": "All three complete regions carry distinct opaque materials matching the supplied SVG's orange #E87D0D, blue #265787, and white #FFFFFF color identities on both sides. Each remains an untextured color region, with no swapped assignments, image projection, or unrelated texture replacing its fill.",
+        "PARTIAL": "All three geometric regions are present and at least two have distinguishable, appropriately assigned opaque logo colors, but at least one PASS condition is unmet, such as a wrong third color, inconsistent back-face assignment, or unwanted surface pattern.",
+        "FAIL": "The minimum is not met: a region is absent, fewer than two regions have distinguishable appropriately assigned opaque logo colors, or the color logo is only an image projection."
+      },
+      "evidence_refs": ["image/01_upright_logo.png", "image/03_rotated_logo.png"],
+      "verification": {
+        "method": "Material assignment inspection and controlled color render",
+        "procedure": "Inspect polygon material assignments and the actual shader color feeding each region, converting between sRGB and linear representations when needed. Render neutral front and back views in a temporary copy to separate lighting from material identity. Check opacity, correct region assignment, and unwanted texture substitution; do not infer material use from unused material datablocks.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-01",
+      "capability": "ANM",
+      "points": 15,
+      "requirement_section": "Single-Turn Animation",
+      "criterion": "The declared 100-frame, 24-fps clip evaluates one positive full revolution about world Z and returns to its starting pose.",
+      "scoring_rule": {
+        "PASS": "The scene range is exactly 1-100 at 24 fps. From frame 1 to 100, the actual logo turns once in the positive direction about world Z through 360 degrees within 1 degree and returns to the starting pose. The front, side, and back of the same mesh are presented during the turn.",
+        "PARTIAL": "The actual upright logo rotates at least a quarter revolution about world Z within the intended clip, but at least one PASS condition is unmet, such as an incomplete or extra turn, wrong direction, wrong endpoints, frame range, or frame rate.",
+        "FAIL": "The minimum is not met: the logo is static, rotates less than a quarter revolution, rotates about the wrong axis, or the apparent turn is only a camera orbit or image substitution."
+      },
+      "evidence_refs": ["image/01_upright_logo.png", "image/03_rotated_logo.png"],
+      "verification": {
+        "method": "Evaluated animation sampling with unwrapped rotation tracking",
+        "procedure": "Read the scene range and fps, then evaluate frames 1, 25, 50, 75, and 100 and additional samples as needed to unwrap the world-space rotation. Track actual mesh landmarks, confirm a single positive world-Z revolution, and compare the first and last poses. The repeated endpoint is intentional; do not require a 100-unique-pose seamless loop.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-02",
+      "capability": "ANM",
+      "points": 10,
+      "requirement_section": "Single-Turn Animation",
+      "criterion": "Intermediate motion advances uniformly while pivot, size, upright orientation, and camera remain fixed, and replay is deterministic.",
+      "scoring_rule": {
+        "PASS": "The evaluated angle stays within 1 degree of a straight progression between its measured endpoint angles at every sampled frame. There is no easing, hold, reversal, translation, orbital travel, scale change, tilt wobble, or camera movement. The animation is editable, evaluates intermediate poses, and replaying from frame 1 reproduces the same result without accumulation. The total angle is assessed in ANM-01.",
+        "PARTIAL": "The scene contains editable motion with evaluated intermediate logo poses and can replay the clip, but at least one PASS condition is unmet, such as easing, a hold, drifting or orbiting position, wobble, camera movement, or replay inconsistency.",
+        "FAIL": "The minimum is not met: editable intermediate motion is absent, the scene cannot replay the turn, or the apparent motion consists only of static image or geometry substitutions."
+      },
+      "evidence_refs": ["image/03_rotated_logo.png"],
+      "verification": {
+        "method": "Consecutive-frame motion and replay probe",
+        "procedure": "Evaluate every integer frame from 1 through 100 and several subframes. Compare the unwrapped rotation with a straight angular progression between its measured endpoints, allowing at most 1 degree of deviation, and track pivot position, scale, artwork vertical orientation, and camera transforms. Re-evaluate the range after returning to frame 1 and compare the same landmarks. Treat static pivot placement under GEO-05 and total revolution/range under ANM-01; this row assesses evolution and reproducibility.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The Blender scene and portable build script are complete and rebuild the asset using the supplied SVG.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens as an editable Blender 5.1.2 scene saved at frame 1, and build.py resolves the supplied SVG through a portable relative path, rebuilds the scene from empty, and saves the corresponding submission.blend without unavailable dependencies.",
+        "PARTIAL": "An openable editable submission.blend is supplied, but at least one PASS condition is unmet, such as a missing or incomplete build script, nonportable asset path, wrong saved frame, or rebuild failure.",
+        "FAIL": "The minimum is not met: submission.blend is missing, cannot open, or contains no editable logo scene."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "File inspection and clean rebuild procedure",
+        "procedure": "Open submission.blend in Blender 5.1.2 and inspect its saved frame. Inspect build.py for actual use of the supplied SVG and relative asset resolution, then run it in a separate temporary directory containing the required input layout. Verify that it saves a scene corresponding to the submitted geometry, materials, and animation. This is a future verification procedure, not an executed compatibility claim.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named MP4 is a readable render of the submitted scene covering the declared animation.",
+      "scoring_rule": {
+        "PASS": "B56_Spinning_3D_Blender_Logo_dynamic.mp4 is playable, contains frames 1-100 at 24 fps rendered with Cycles GPU from the submitted scene, and shows the complete logo under a fixed camera against a neutral background. Lighting reveals the relief throughout the turn without clipping, overlays, or unrelated visible geometry.",
+        "PARTIAL": "A playable movie rendered from the submitted scene shows the actual logo animation, but at least one PASS condition is unmet, such as a wrong filename, incomplete coverage, wrong rate or render configuration, clipping, poor relief visibility, or unwanted visible scene content.",
+        "FAIL": "The minimum is not met: no playable movie of the submitted scene's actual logo animation is provided, or the movie uses source footage, source images, viewport capture, or an external replacement."
+      },
+      "evidence_refs": ["image/01_upright_logo.png", "image/02_layered_relief.png", "image/03_rotated_logo.png"],
+      "verification": {
+        "method": "Movie metadata and scene-to-render comparison",
+        "procedure": "Inspect the MP4 filename, frame count, fps, and decodability. Compare representative movie frames with controlled camera renders of the submitted scene at the corresponding times, and inspect the saved Cycles GPU configuration. Confirm full-object framing, readable relief, a neutral background, and absence of overlays or unrelated visible geometry. Assess motion correctness in the ANM rows rather than scoring it again here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

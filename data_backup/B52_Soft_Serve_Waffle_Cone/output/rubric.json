@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Soft-Serve Waffle Cone",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1s6Tp6fEby",
+    "id": "BV1s6Tp6fEby"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 30, "PROC": 15, "SURF": 45, "SCN": 5, "PIPE": 5},
+  "weighting_note": "The task is primarily food geometry and surfacing: 30 points cover shell and swirl form, 45 cover waffle mapping and distinct cream and cone surfaces, and 15 test the working geometric swirl controls. Presentation and reproducible delivery receive 5 points each. Image-driven relief is assessed as surface mapping, while only the functional geometric generator receives PROC credit.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Cone Shell",
+      "criterion": "A smooth tapered cone has a thin continuous hollow shell, circular mouth, rounded rim, and closed small tip.",
+      "scoring_rule": {
+        "PASS": "An editable three-dimensional cone steadily narrows to a small closed tip and has a round open mouth, continuous inner and outer walls, a visibly thin rounded rim, and a smooth large-scale silhouette without accidental holes or a swollen tip.",
+        "PARTIAL": "An editable three-dimensional body recognizably tapers from a broad cone mouth to a narrow lower end, but one or more PASS conditions are unmet, including a closed mouth, incomplete inner wall, uneven thickness, or defective tip.",
+        "FAIL": "No editable three-dimensional body recognizably tapers from a broad cone mouth to a narrow lower end; a flat depiction or essentially cylindrical body does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_soft_serve_cone.png", "image/02_waffle_relief.png"],
+      "verification": {
+        "method": "Evaluated geometry and isolated viewport inspection",
+        "procedure": "Open the submitted scene, temporarily hide the cream, and inspect the cone from above, the side, and below. Inspect a section or the evaluated mesh to confirm inner and outer walls and mouth thickness. Judge the smooth base silhouette independently of the intentionally raised waffle pattern. Restore visibility afterward.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Soft-Serve Form",
+      "criterion": "One continuous strand forms approximately three narrowing turns and rests coherently on the cone mouth.",
+      "scoring_rule": {
+        "PASS": "A single continuous thick strand rises through approximately three progressively narrower turns. Its lowest turn covers and rests on the mouth with modest overhang, and the neighboring turns form a connected serving without conspicuous gaps or harsh visible intersections.",
+        "PARTIAL": "A continuous three-dimensional coiled strand visibly rises above the cone, but one or more PASS conditions are unmet, such as poor narrowing, implausible turn spacing, incorrect seating, or visible intersections.",
+        "FAIL": "There is no continuous three-dimensional coiled strand rising above the cone; separate stacked rings, an uncoiled mound, or a flat depiction do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_soft_serve_cone.png", "image/03_fluted_swirl.png"],
+      "verification": {
+        "method": "Evaluated geometry and multi-view shape inspection",
+        "procedure": "Inspect the evaluated cream from front, side, and elevated views. Trace the strand through its turns to establish continuity, narrowing, and turn spacing. Compare the lowest turn with the cone mouth to check contact and overhang. Isolate components where needed to distinguish true continuity from overlapping disconnected rings.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Soft-Serve Form",
+      "criterion": "Rounded longitudinal fluting follows the strand into a smooth tapered curled tip, with both ends resolved.",
+      "scoring_rule": {
+        "PASS": "Several rounded ridges and valleys follow the visible turns continuously. The upper strand narrows smoothly to a slender, slightly leaning curled point with a closed end, the lower end is tucked into the serving, and the surface is smooth between intentional grooves.",
+        "PARTIAL": "The three-dimensional cream strand has recognizable longitudinal fluting along at least one visible turn, but one or more PASS conditions are unmet, including interrupted fluting, sharp ridges, faceting, an abrupt top, or unresolved ends.",
+        "FAIL": "The cream strand is absent or lacks recognizable longitudinal fluting along even one visible turn; material-only stripes do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_soft_serve_cone.png", "image/03_fluted_swirl.png"],
+      "verification": {
+        "method": "Neutral-material geometry inspection",
+        "procedure": "Inspect the evaluated cream with a neutral temporary material under broad light. Follow the longitudinal ridges around several turns and inspect the upper and lower ends. Check that the fluting affects geometry and that neither end is an exposed tube opening. Restore the material after inspection.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Editable Swirl",
+      "criterion": "Working geometric controls independently and reversibly change swirl height and strand thickness while preserving its defining structure.",
+      "scoring_rule": {
+        "PASS": "An editable path and reusable fluted profile, or equivalent geometric controls, drive the visible cream. A small height increase and a separate thickness change each regenerate it predictably, remain independent and reversible, and retain the base at the mouth, continuous turns, and tapered upper end.",
+        "PARTIAL": "At least one working geometric control predictably changes either swirl height or strand thickness in the visible cream, but one or more PASS conditions are unmet, such as missing independent control, drifting base, lost taper, or inability to restore the initial state.",
+        "FAIL": "No working geometric control predictably changes either swirl height or strand thickness in the visible cream; unused helpers or whole-object translation alone do not meet the minimum."
+      },
+      "evidence_refs": ["image/03_fluted_swirl.png"],
+      "verification": {
+        "method": "Functional geometric control probe",
+        "procedure": "In a temporary copy of the scene, identify the live path/profile or equivalent generation controls. Record the initial state, make a small visible height increase, evaluate the cream, then restore it. Separately change strand thickness and restore it. Observe actual mesh changes, base anchoring, continuity, taper, and independence; the existence of control objects alone is insufficient.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Waffle Relief",
+      "criterion": "The supplied texture creates coherent raised diamond relief over the cone with restrained irregularity and a clean wrap.",
+      "scoring_rule": {
+        "PASS": "The supplied waffle texture, or its lossless decoded copy, drives real raised ribs and recessed diamond cells over the exposed cone. Mapping remains coherent around the circumference with gradual tip compression, no obvious broken wrap strip or abrupt scale jump, and restrained irregularity that preserves both the pattern and the shell.",
+        "PARTIAL": "The supplied texture drives recognizable three-dimensional diamond relief over the main front portion of the cone, but one or more PASS conditions are unmet, such as incomplete coverage, a visible seam, uneven scale, excessive displacement, or absent restrained irregularity.",
+        "FAIL": "The supplied texture does not drive recognizable three-dimensional diamond relief over the main front portion of the cone; a flat printed pattern, unrelated texture, or absent cone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_soft_serve_cone.png", "image/02_waffle_relief.png"],
+      "verification": {
+        "method": "Texture provenance, evaluated relief, and controlled-light inspection",
+        "procedure": "Trace the active waffle surface to the supplied AVIF or a decoded equivalent, comparing decoded pixels when conversion was used. Inspect the evaluated or render-displaced surface under grazing light, then rotate around the cone and examine the tip and wrap seam. Temporarily disable only the image-driven relief to confirm that it drives the diamond structure. Restore the original state.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Food Surfaces",
+      "criterion": "The cream has an opaque warm-ivory finish with soft highlights and a smoother response than the cone.",
+      "scoring_rule": {
+        "PASS": "The material actually applied to the cream appears warm ivory and opaque, with broad soft highlights, readable grooves, and a smoother, glossier response than the cone. It does not read as metal or glass.",
+        "PARTIAL": "The visible cream has an applied pale, nonmetallic surface, but one or more PASS conditions are unmet, such as an overly cold color, excessive transparency, harsh highlights, or insufficient contrast with the cone.",
+        "FAIL": "The cream is absent or has no visible pale, nonmetallic applied surface; an unused material does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_soft_serve_cone.png"],
+      "verification": {
+        "method": "Assigned-material and controlled-render inspection",
+        "procedure": "Confirm the cream uses the inspected material, then render or inspect it with broad neutral illumination. Assess warm ivory color, opacity, highlight width, and relative gloss against the cone under the same lighting. Inspect the visible material result rather than particular shader values.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "Food Surfaces",
+      "criterion": "Procedural cream microstructure combines two small scales without obscuring the fluted form.",
+      "scoring_rule": {
+        "PASS": "Procedural variation visibly contributes two distinguishable small scales of gentle irregularity to the cream. A close view reveals the detail, while the full serving remains soft and the fluting is clear, without coarse rocky bumps.",
+        "PARTIAL": "Procedural surface variation visibly affects the cream in a close view, but one or more PASS conditions are unmet, including a single effective scale, excessive strength, or loss of fluting clarity.",
+        "FAIL": "The cream is absent or no procedural surface variation visibly affects it in a close view; disconnected texture nodes do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_soft_serve_cone.png"],
+      "verification": {
+        "method": "Close-up render and procedural contribution probe",
+        "procedure": "Inspect a close render of a broad cream ridge and the full serving. Trace the active procedural surface contribution and temporarily vary or disable each effective scale to establish that both affect the result. Restore the original values. Score microstructure here, independently of the base color and gloss.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Food Surfaces",
+      "criterion": "Procedural golden-orange and toasted-brown variation gives the cone a matte baked appearance at broad and smaller scales.",
+      "scoring_rule": {
+        "PASS": "The applied cone material shows procedural golden-orange and toasted-brown variation, including broad patches that cross several waffle cells and smaller variation within them. Its visible response is matte and baked, without a uniformly painted or metallic appearance.",
+        "PARTIAL": "The visible cone has a warm baked-range material with active procedural color variation, but one or more PASS conditions are unmet, such as weak toasted contrast, only one effective variation scale, or excessive gloss.",
+        "FAIL": "The cone is absent or lacks a visible warm baked-range material with active procedural color variation; a uniform warm color or unused material does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_soft_serve_cone.png"],
+      "verification": {
+        "method": "Assigned-material and scale comparison inspection",
+        "procedure": "Inspect the applied cone material under neutral broad lighting in a whole-cone view and a close view spanning several cells. Trace the active procedural color inputs and vary their scale or temporarily disable them to confirm broad and smaller contributions. Judge color variation independently of waffle relief and fine normal detail, then restore the original state.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-05",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "Food Surfaces",
+      "criterion": "Procedural fine grain adds baked surface detail at a smaller scale than the diamond cells.",
+      "scoring_rule": {
+        "PASS": "Procedural fine pits or grain visibly affect the cone at a much smaller scale than the waffle cells, remain distinct from the diamond relief, and preserve a clearly legible lattice.",
+        "PARTIAL": "Procedural pits or grain visibly affect the cone, but one or more PASS conditions are unmet, such as oversized detail, excessive roughening, or weak separation from the waffle cells.",
+        "FAIL": "The cone is absent or no procedural pits or grain visibly affect it; waffle ribs alone or unused texture nodes do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_soft_serve_cone.png", "image/02_waffle_relief.png"],
+      "verification": {
+        "method": "Close-up surface inspection and contribution probe",
+        "procedure": "Inspect a rendered cone region containing several cells. Temporarily disable the fine procedural surface contribution while retaining the diamond relief and compare the result, then restore it. Confirm that the grain is a separate active scale and does not replace or overwhelm the waffle structure.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "Presentation",
+      "criterion": "The actual-scene portrait render clearly presents the complete serving and its material detail.",
+      "scoring_rule": {
+        "PASS": "The submitted PNG is rendered from the submitted scene and presents the full cone and curled tip with comfortable margins, a plain contrasting background, and lighting that reveals relief, grooves, and distinct surface responses without blown highlights, obscuring shadows, or distracting objects.",
+        "PARTIAL": "A PNG rendered from the submitted scene makes both cone and cream recognizable, but one or more PASS conditions are unmet, such as clipping, poor margins, distracting content, or lighting that hides detail.",
+        "FAIL": "There is no actual-scene rendered PNG in which both cone and cream are recognizable; a viewport screenshot, source frame, or external replacement does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_soft_serve_cone.png"],
+      "verification": {
+        "method": "Render provenance and visual composition review",
+        "procedure": "Compare the submitted PNG with the active camera and a fresh inspection render from the submitted scene. Review full framing, background, exposure, and detail visibility. Evaluate whether the lighting makes the existing geometry and materials readable, without rescoring their construction here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene and rebuild script load their assets reliably and reproduce the completed cone and cream.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the editable scene and working dependencies, and build.py rebuilds the scene from an empty scene using the supplied input and saves submission.blend. Required textures use packed or relative references, no unavailable model or extension is required, and the scene targets Blender 5.1.2 with Cycles GPU configured.",
+        "PARTIAL": "submission.blend opens with editable three-dimensional cone and cream geometry, but one or more PASS conditions are unmet, including an incomplete rebuild script, broken asset reference, unavailable dependency, or incorrect render configuration.",
+        "FAIL": "No submission.blend opens with editable three-dimensional cone and cream geometry; a render-only delivery does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Future clean rebuild and dependency inspection",
+        "procedure": "In a temporary project copy under Blender 5.1.2, open submission.blend and inspect asset paths and render configuration. Run build.py from an empty scene using only the delivered files and supplied input, then reopen its saved blend and confirm the cone, cream, materials, and working geometric controls were reconstructed. Do not score the PNG composition in this row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

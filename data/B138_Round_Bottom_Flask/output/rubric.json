@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Round Bottom Flask",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1y7VP6WEJ1",
+    "id": "BV1y7VP6WEJ1"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "This is a native-geometry vessel exercise. Ninety points assess independent shape, cavity, wall, rim, and geometric finish outcomes. No procedural credit is assigned merely for modifiers, and the optional cover's glass and liquid are not required. Ten points assess the saved rebuild and render delivery.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. Rounded Bulb",
+      "criterion": "A nearly spherical, rotationally balanced bulb terminates in a rounded convex bottom.",
+      "scoring_rule": {
+        "PASS": "A recognizable rounded three-dimensional bulb exists, and it is broad and nearly spherical with circular horizontal sections, a balanced upright axis, and a convex rounded bottom without a broad flat base or sharp point.",
+        "PARTIAL": "A recognizable rounded three-dimensional bulb exists, but one or more PASS conditions are unmet, including an elongated or asymmetric shape, a flattened base, or a pointed lower profile.",
+        "FAIL": "No recognizable rounded three-dimensional bulb exists; a flat silhouette, cylindrical body, or isolated neck does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_flask.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection and orthographic silhouette comparison",
+        "procedure": "Open the submitted blend, isolate the flask on a temporary copy, and inspect its evaluated front and side orthographic silhouettes plus horizontal sections through the bulb. Compare the circularity and lower convex profile with the reference, independently of shading and mouth details.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Neck and Shoulder",
+      "criterion": "A centered, slender upright neck has an extended cylindrical portion above the bulb.",
+      "scoring_rule": {
+        "PASS": "A tubular neck attached above a rounded bulb exists, and its straight portion is longer than its diameter, nearly cylindrical, centered on the bulb axis, and several times narrower than the bulb as illustrated.",
+        "PARTIAL": "A tubular neck attached above a rounded bulb exists, but one or more PASS conditions are unmet, including a short, overly wide, tapered, tilted, or offset neck.",
+        "FAIL": "There is no tubular neck attached above a rounded bulb; a disconnected cylinder or a pointed spout does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_flask.png", "image/02_shoulder_transition.png"],
+      "verification": {
+        "method": "Evaluated geometry and proportion inspection",
+        "procedure": "Inspect front and side views of the evaluated flask. Compare neck width with bulb width, neck straight length with its diameter, and the neck centerline with the bulb axis. Check several sections along the straight portion for a nearly constant circular diameter.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Neck and Shoulder",
+      "criterion": "A continuous shoulder smoothly narrows from the bulb into the straight neck.",
+      "scoring_rule": {
+        "PASS": "A joined shoulder surface encircling the connection between an existing bulb and neck exists, and its profile narrows over a short smooth transition without an abrupt corner, deep groove, or elongated funnel.",
+        "PARTIAL": "A joined shoulder surface encircling the connection between an existing bulb and neck exists, but one or more PASS conditions are unmet, including an abrupt corner, groove, uneven transition, or excessive funnel-like taper.",
+        "FAIL": "No joined shoulder surface encircles the connection between an existing bulb and neck; disconnected, merely intersecting, or partly missing junction surfaces do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_shoulder_transition.png", "image/01_complete_flask.png"],
+      "verification": {
+        "method": "Meridian profile and junction inspection",
+        "procedure": "Inspect evaluated vertical sections through the flask axis in two perpendicular directions. Confirm that the shoulder joins the bulb and neck all around, then evaluate its narrowing profile against the reference. Assess silhouette curvature here; assess polygon or normal shading artifacts only under GEO-07.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "3. Hollow Interior and Walls",
+      "criterion": "The open mouth leads through the neck into a bulb-sized interior cavity.",
+      "scoring_rule": {
+        "PASS": "An open mouth and continuous hollow passage through an existing neck into an interior bulb cavity exist, and the cavity is spacious, follows the bulb profile, and reaches down to the lower bulb rather than stopping near the shoulder.",
+        "PARTIAL": "An open mouth and continuous hollow passage through an existing neck into an interior bulb cavity exist, but one or more PASS conditions are unmet, such as an undersized cavity, a cavity that stops too high, or a constricted passage.",
+        "FAIL": "There is no continuous hollow passage from the mouth through the neck into an interior bulb cavity. A capped mouth, solid neck, shallow top recess, or disconnected interior void is below the minimum."
+      },
+      "evidence_refs": ["image/03_open_neck.png"],
+      "verification": {
+        "method": "Temporary section view and cavity connectivity inspection",
+        "procedure": "Use a non-destructive section display or a cutaway on a temporary evaluated mesh copy. Trace empty space from the mouth through the neck into the bulb and inspect the cavity extent relative to the external bulb. Confirm the cavity with actual geometry rather than dark material or a top-view illusion. Wall enclosure and thickness are assessed separately under GEO-05.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "3. Hollow Interior and Walls",
+      "criterion": "Real thin walls enclose the vessel material continuously, including its closed interior floor.",
+      "scoring_rule": {
+        "PASS": "Distinct inner and outer surfaces with positive separation exist around the neck and bulb sidewall, and the neck, shoulder, bulb, and rounded floor all have thin, broadly even positive wall thickness. The wall material closes continuously at the mouth rim and bottom without tears, duplicate sheets, or self-intersections, leaving the mouth as the cavity's only opening.",
+        "PARTIAL": "Distinct inner and outer surfaces with positive separation exist around the neck and bulb sidewall, but one or more PASS conditions are unmet, including uneven or excessive thickness, a missing floor, wall tears, duplicate sheets, or local intersections.",
+        "FAIL": "Distinct inner and outer surfaces with positive separation do not exist around both the neck and bulb sidewall. A single zero-thickness sheet, solid filled bulb, or thickened mouth alone is below the minimum."
+      },
+      "evidence_refs": ["image/03_open_neck.png", "image/01_complete_flask.png"],
+      "verification": {
+        "method": "Evaluated shell section and topology inspection",
+        "procedure": "Inspect vertical sections through the evaluated vessel and local sections at the neck, shoulder, bulb sidewall, and lower floor. Compare actual inner-to-outer spacing and check connected shell boundaries at the lip and bottom. Inspect boundary edges and intersections on a temporary evaluated copy; confirm any reported defects visually instead of requiring a particular modifier or mesh layout.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "4. Rounded Mouth Lip",
+      "criterion": "A rounded outward annular lip finishes the open neck evenly around its circumference.",
+      "scoring_rule": {
+        "PASS": "A continuous outward-projecting annular lip surrounding an open neck mouth exists, and it is wider than the neck, concentric, level, evenly formed, and compact with a rounded cross-section and softened edges that preserve a distinct overhang.",
+        "PARTIAL": "A continuous outward-projecting annular lip surrounding an open neck mouth exists, but one or more PASS conditions are unmet, including a sharp, oversized, uneven, tilted, or weakly projecting profile.",
+        "FAIL": "No continuous outward-projecting annular lip surrounds an open neck mouth. A plain cut tube, partial lip arc, closed cap, or decorative ring disconnected from the vessel is below the minimum."
+      },
+      "evidence_refs": ["image/04_mouth_lip.png", "image/01_complete_flask.png"],
+      "verification": {
+        "method": "Top view, side view, and lip cross-section inspection",
+        "procedure": "Inspect the actual evaluated mouth from above and at a shallow side angle, then inspect its profile in a temporary section. Confirm annular continuity, overhang, concentricity, levelness, and rounded edge shape against the close reference. Do not infer a lip from shading alone.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "5. Finished Geometry",
+      "criterion": "Editable flask geometry evaluates to smooth silhouettes and consistent geometric shading.",
+      "scoring_rule": {
+        "PASS": "Editable geometry for an existing rounded bulb and connected neck is present and demonstrates inspectable curved surfaces. The bulb, shoulder, neck, and lip are present and evaluate with smooth silhouettes and consistent shading, without visible polygon bands, pinched shading, or inverted patches, while preserving their intended forms.",
+        "PARTIAL": "Editable geometry for an existing rounded bulb and connected neck is present and demonstrates inspectable curved surfaces, but one or more PASS conditions are unmet. The existing core surfaces may show finish defects, or a minor required region may be absent; substantive smooth existing surfaces still establish the minimum.",
+        "FAIL": "Editable geometry for a rounded bulb and connected neck with inspectable curved surfaces is absent. An image substitute, isolated piece, or flat surface cannot establish the minimum."
+      },
+      "evidence_refs": ["image/01_complete_flask.png", "image/04_mouth_lip.png"],
+      "verification": {
+        "method": "Editable data inspection and controlled neutral-shaded inspection",
+        "procedure": "Open the saved scene and confirm editable geometric data or editable generators for the flask. Inspect evaluated silhouettes and neutral-shaded close views of the bulb, neck, shoulder, and lip with broad directional lighting. Attribute visible bands or inverted patches to geometry/normals rather than artistic materials. Score shape proportions and cavity completeness only in their dedicated rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The rebuild script recreates the flask scene and saves an inspectable submission.blend.",
+      "scoring_rule": {
+        "PASS": "Both build.py and an openable submission.blend containing editable flask geometry exist. Running build.py in Blender 5.1.2 from an empty scene without unprovided assets recreates the scene, saves submission.blend, and reopening that saved result confirms the rebuilt flask and render setup, including Cycles GPU configuration.",
+        "PARTIAL": "Both build.py and an openable submission.blend containing editable flask geometry exist, but one or more PASS conditions are unmet, including rebuild failure, reliance on an unprovided asset, an unsaved rebuild, or a mismatch in the reopened saved result.",
+        "FAIL": "Either build.py or an openable submission.blend containing editable flask geometry is absent."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Isolated script execution and saved-file reopening",
+        "procedure": "Check the named files, then run build.py in a temporary working location using Blender 5.1.2 with an empty initial scene. Locate the script's saved submission.blend and reopen it in a fresh Blender process. Compare its editable flask and render setup with the submitted file and check Cycles GPU configuration. A rebuild that exists only in memory does not satisfy PASS; no particular submission directory is required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The named PNG is a clear render of the actual submitted flask scene.",
+      "scoring_rule": {
+        "PASS": "A decodable B138_Round_Bottom_Flask.png showing the submitted flask exists and is corroborated as an actual render of the saved scene. It frames the complete flask in a clearly lit elevated three-quarter view that reveals the mouth opening and rounded bottom.",
+        "PARTIAL": "A decodable B138_Round_Bottom_Flask.png showing the submitted flask exists and is corroborated as an actual render of the saved scene, but one or more PASS framing or visibility conditions are unmet.",
+        "FAIL": "The named decodable PNG is absent, does not show the submitted flask, or cannot be corroborated as a render of the saved scene. A source image, viewport screenshot, or external replacement is below the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "PNG decoding and saved-scene render comparison",
+        "procedure": "Decode the named PNG, inspect its framing, and reproduce a controlled render from the camera and render setup saved in submission.blend. Compare flask shape, camera perspective, and lighting to establish scene correspondence; allow normal sampling differences. Verify that the mouth and bottom remain visible without assessing artistic scene complexity.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

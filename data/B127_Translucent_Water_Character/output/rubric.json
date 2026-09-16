@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Translucent Water Character",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1CdQ1BAE3F",
+    "id": "BV1CdQ1BAE3F"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 55, "SURF": 40, "PIPE": 5},
+  "weighting_note": "The task combines six distinct native geometry outcomes with four material outcomes. Geometry receives 55 points for the body, nested shells, face, crest, bow assembly, and rear strips. Surface work receives 40 points for the outer transparency, live inner water pattern, independent crest transparency, and accessory palette. Modifiers alone receive no procedural-geometry credit. The static backdrop and lighting support inspection; pipeline delivery receives 5 points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. Body Shape and Layers",
+      "criterion": "The native main body has a rounded dome, tapered lower sides, and a soft scalloped lower silhouette.",
+      "scoring_rule": {
+        "PASS": "A native body with substantial three-dimensional depth and a rounded upper region exists. Its upper half is broad and domed, its lower half gently narrows, and the front lower rim has at least three rounded low points separated by shallow notches. The evaluated body surface and silhouette are smoothly curved without prominent faceting or pinched scallops.",
+        "PARTIAL": "A native body with substantial three-dimensional depth and a rounded upper region exists, but one or more PASS conditions are unmet.",
+        "FAIL": "No native body with substantial three-dimensional depth and a rounded upper region exists; a flat card, image-only substitute, or unrelated primitive does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_character_overview.png", "image/02_body_shape.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_gray_view_inspection",
+        "procedure": "Open the submitted blend and inspect the evaluated main body from front, side, and oblique views with a neutral material override. Confirm actual depth, compare the broad upper and narrower lower regions, count front lower low points, and inspect the rim and body curvature. Assess shape and smoothness here; inspect the relationship between the two shells only in GEO-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "1. Body Shape and Layers",
+      "criterion": "Two separately editable body shells form a closely nested inner and outer structure with real wall thickness.",
+      "scoring_rule": {
+        "PASS": "Two distinct, separately editable body-sized shells exist in corresponding positions, with the outer shell larger than the inner. Both follow the domed and scalloped body shape, have nonzero wall thickness at their lower rims, and remain closely nested with a consistent gap and no intersecting or coincident surfaces.",
+        "PARTIAL": "Two distinct, separately editable body-sized shells exist in corresponding positions, with the outer shell larger than the inner, but one or more PASS conditions are unmet.",
+        "FAIL": "The minimum of two distinct, separately editable body-sized shells in corresponding positions, with the outer larger than the inner, is absent. Duplicate coincident surfaces, a lone shell, and material-only layering do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_character_overview.png", "image/02_body_shape.png"],
+      "verification": {
+        "method": "shell_isolation_and_evaluated_cross_section",
+        "procedure": "In a temporary copy, isolate each body shell and inspect the evaluated lower rim and clipped cross sections. Confirm independent geometry editing, positive wall thickness, an enclosing outer surface, and a close gap across top, sides, and rim. Use evaluated geometry rather than modifier names or existence. Do not grade the body silhouette again here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Face Geometry",
+      "criterion": "Two eyes, two raised highlights, two cheek patches, and a curved smile form a balanced native face fitted to the body.",
+      "scoring_rule": {
+        "PASS": "A body-mounted native face containing both eyes and an upward-curving smile exists. All seven required facial elements are present as geometry with visible depth: two oval eyes, a smaller raised highlight on each eye, two oval cheeks below and outside the eyes, and the centered smile. They fit the body curvature, remain distinct, and are balanced left to right.",
+        "PARTIAL": "A body-mounted native face containing both eyes and an upward-curving smile exists, but one or more PASS conditions are unmet.",
+        "FAIL": "A body-mounted native face with both eyes and an upward-curving smile is absent. An image texture or flat image card alone does not establish the required facial geometry."
+      },
+      "evidence_refs": ["image/01_character_overview.png"],
+      "verification": {
+        "method": "native_geometry_and_front_oblique_inspection",
+        "procedure": "Inspect the face in front and close oblique neutral-shaded views and isolate the relevant evaluated geometry. Identify the seven geometric roles, confirm eye and cheek depth, highlight placement, smile curvature, and contact with the curved body. Evaluate shape and placement here; facial color is assessed in SURF-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Crest and Bow",
+      "criterion": "A smoothly joined three-lobed water crest rises from the body with a taller central lobe and shorter outward-leaning side lobes.",
+      "scoring_rule": {
+        "PASS": "A volumetric crest with at least two distinguishable lobes joined at a common base exists at the top of the body. It has exactly three plump teardrop lobes, a tallest central lobe, and two shorter lobes leaning outward. The lobe junctions blend smoothly and the crest has rounded depth rather than a flat cutout profile.",
+        "PARTIAL": "A volumetric crest with at least two distinguishable lobes joined at a common base exists at the top of the body, but one or more PASS conditions are unmet.",
+        "FAIL": "No volumetric crest with at least two distinguishable lobes joined at a common base exists at the top of the body. Disconnected floating beads or a flat cutout do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_character_overview.png", "image/03_crest_shape.png"],
+      "verification": {
+        "method": "crest_isolation_and_multiview_geometry_inspection",
+        "procedure": "Isolate the crest in a temporary copy and inspect evaluated front and side silhouettes plus its base junctions. Confirm three volumetric teardrop lobes, the central-to-side height hierarchy, outward lean, and a visually continuous common base. Check native geometry regardless of whether the author used remeshing, subdivision, or another equivalent construction.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Crest and Bow",
+      "criterion": "A padded two-wing bow, rounded knot, and collar band attach to the crest base without obscuring its tips.",
+      "scoring_rule": {
+        "PASS": "A native bow with two volumetric wings and a central knot exists near the crest base. Both wings narrow toward the rounded knot and flare toward their outer ends with soft padded curvature. A thin collar band surrounds the crest base behind the bow, the assembly attaches naturally to the body top, and all three crest tips remain visible from the front.",
+        "PARTIAL": "A native bow with two volumetric wings and a central knot exists near the crest base, but one or more PASS conditions are unmet.",
+        "FAIL": "No native bow with two volumetric wings and a central knot exists near the crest base. Flat image substitutes or isolated unrelated spheres do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_character_overview.png", "image/04_rear_ribbons.png"],
+      "verification": {
+        "method": "bow_and_collar_geometry_inspection",
+        "procedure": "Inspect the evaluated bow from front, side, and rear, temporarily isolating it and the collar if needed. Verify two padded pinched-to-flared wings, a central rounded knot, an actual band surrounding the crest base, and attachment and visibility relationships. Colors and metallic response are assessed only in SURF-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "4. Rear Ribbon Strips",
+      "criterion": "A matched pair of thin solid ribbon strips follows the rear body curvature from the crest collar to shaped free ends.",
+      "scoring_rule": {
+        "PASS": "At least one native ribbon strip with real thickness extends from near the crest collar down the rear body surface. Two such strips are present, one on each side, following the body curvature with a slight surface offset. Both are broad and thin, end in gently flared free tips with shallow concave cuts, and remain recognizable in a rear or oblique view.",
+        "PARTIAL": "At least one native ribbon strip with real thickness extends from near the crest collar down the rear body surface, but one or more PASS conditions are unmet.",
+        "FAIL": "No native ribbon strip with real thickness extends from near the crest collar down the rear body surface. Painted stripes or unrelated detached plates do not meet the minimum."
+      },
+      "evidence_refs": ["image/04_rear_ribbons.png"],
+      "verification": {
+        "method": "rear_view_and_strip_cross_section_inspection",
+        "procedure": "Inspect the rear and oblique evaluated scene. Isolate the strips to verify thickness, attachment near the collar, paired placement, body-following curvature, slight separation, and the flared concave-cut tips. Inspect appearance here with a neutral override; red material assignment is assessed in SURF-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "5. Water Surfaces",
+      "criterion": "The actual outer shell combines visible transparency with a glasslike response and retains a readable layered character.",
+      "scoring_rule": {
+        "PASS": "An existing body-sized outer shell uses a working transparent material through which the inner body or a test backdrop is visible. The complete scene shows the inner body through the shell, glasslike highlights and refraction reveal its surface and lower rim, the response changes with viewing angle, and the face remains readable.",
+        "PARTIAL": "An existing body-sized outer shell uses a working transparent material through which the inner body or a test backdrop is visible, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no existing body-sized outer shell with working material transparency. Opaque blue surfaces, a missing outer shell, unused shader nodes, and transparency only in a supplied image do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_character_overview.png"],
+      "verification": {
+        "method": "assigned_material_trace_and_controlled_render_comparison",
+        "procedure": "Inspect material assignment and the active shader path on the outer shell. In a temporary copy, compare controlled Cycles renders from front and oblique views under the same lighting; if necessary place a contrasting test backdrop behind the isolated shell to distinguish actual transparency from blue diffuse shading. Confirm glasslike reflection or refraction, visible rim response, and legibility of the complete layered face. Do not require a particular node inventory or numeric IOR.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "5. Water Surfaces",
+      "criterion": "The inner body's cyan-to-icy-blue water patches come from a live procedural material with working pattern-size and palette controls.",
+      "scoring_rule": {
+        "PASS": "An existing inner body displays nonuniform blue water coloration driven by a live procedural material. Broad irregular cyan-blue to pale icy-blue patches cover its curved surface continuously and remain visible through the outer shell. Changing the working pattern-size control changes visible patch sizes without changing the body geometry, and both palette colors can be edited to affect the used material.",
+        "PARTIAL": "An existing inner body displays nonuniform blue water coloration driven by a live procedural material, but one or more PASS conditions are unmet.",
+        "FAIL": "No existing inner body displays nonuniform blue water coloration driven by a live procedural material. A uniform color, baked image-only pattern, disconnected texture graph, or pattern assigned only to an unused object does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_character_overview.png"],
+      "verification": {
+        "method": "assigned_shader_trace_and_material_control_probe",
+        "procedure": "Trace the inner body's active shader inputs to the procedural field and palette. Render the baseline and inspect an oblique view for continuous curved-surface coverage. In a temporary copy, choose two useful values of the public pattern-size control and modify each palette endpoint separately, through the saved material controls or the public build parameters. Confirm patch-size and color changes on the inner body while evaluated body geometry stays unchanged, then restore the baseline. Compare isolated-inner and complete-layer views to confirm that the pattern is visible in use.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "5. Water Surfaces",
+      "criterion": "The crest has a translucent blue water finish with independently adjustable transparency.",
+      "scoring_rule": {
+        "PASS": "At least two existing crest lobes have an actually translucent blue surface. All three lobes carry a matching water finish and remain identifiable within the highlights. The crest's transparency can be changed without changing the body's material response.",
+        "PARTIAL": "At least two existing crest lobes have an actually translucent blue surface, but one or more PASS conditions are unmet.",
+        "FAIL": "Fewer than two existing crest lobes have an actually translucent blue surface. A missing crest, opaque blue crest, or unused translucent material does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_character_overview.png", "image/03_crest_shape.png"],
+      "verification": {
+        "method": "crest_material_render_and_independence_probe",
+        "procedure": "Inspect the assigned crest material and controlled Cycles views to distinguish actual translucency from an opaque blue finish. In a temporary copy, change the crest transparency through its material or public build control, compare the crest and body response, and restore the baseline. Confirm the crest visibly changes while the body materials stay unchanged; verify that all three lobe shapes remain legible in the baseline.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "6. Color and Presentation",
+      "criterion": "The face and ribbon assembly use the contrasting dark, white, pink, red, and metallic-gold palette.",
+      "scoring_rule": {
+        "PASS": "Existing eyes and smile are dark and legible, and at least one existing cheek or bow-wing group has a warm contrasting color. Both eyes and the smile are dark, both raised eye highlights are bright white, both cheeks are pink, the bow wings, collar, and both rear strips are red, and the central knot is warm gold with a visible metallic sheen. These surfaces are sufficiently opaque to contrast with the water body.",
+        "PARTIAL": "Existing eyes and smile are dark and legible, and at least one existing cheek or bow-wing group has a warm contrasting color, but one or more PASS conditions are unmet. Missing minor accessories prevent PASS without erasing demonstrated color work on the existing core face and warm accents.",
+        "FAIL": "The minimum of existing dark, legible eyes and smile plus a warm-colored existing cheek or bow-wing group is absent. A missing face, uniform uncolored character, or unused palette does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_character_overview.png", "image/04_rear_ribbons.png"],
+      "verification": {
+        "method": "used_material_assignment_and_rendered_palette_inspection",
+        "procedure": "Inspect active material assignments and controlled front and rear renders. Compare the specified colors on actual facial and accessory surfaces, and inspect the knot under neutral light for a metallic golden response. Confirm opacity relative to the water layers. Do not require exact roughness, emission strengths, material names, or particular shaders; assess missing component geometry in its own geometry row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable saved scene, reproducible build script, and actual-scene PNG are delivered together.",
+      "scoring_rule": {
+        "PASS": "The submitted submission.blend opens and contains a native character body with a recognizable face. All three named deliverables are present; build.py recreates the scene from an empty Blender scene and saves submission.blend with the geometry, assigned procedural materials, and working controls intact. The PNG is at least 1200 pixels on each side and is a Cycles GPU render of the submitted scene with the complete character visible against a simple cyan or blue background. No unprovided external asset is required.",
+        "PARTIAL": "The submitted submission.blend opens and contains a native character body with a recognizable face, but one or more PASS conditions are unmet.",
+        "FAIL": "The submitted submission.blend does not open or does not contain a native character body with a recognizable face. A render alone or an unsaved in-memory reconstruction does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_character_overview.png"],
+      "verification": {
+        "method": "artifact_reopen_rebuild_and_saved_result_comparison",
+        "procedure": "Open the delivered blend and inspect the PNG's dimensions and framing. Run build.py from an empty Blender 5.1.2 scene in an isolated package copy, inspect the script's configured save location, and reopen the submission.blend that the script actually saved. Compare its geometry, used materials, controls, camera, and render settings with the delivered scene; inspect missing-resource reports. Confirm Cycles GPU configuration and compare a render from the reopened scene with the supplied PNG for subject and material consistency. Do not infer success from an unsaved scene, filenames alone, or exact object names, and do not impose an unadvertised output directory.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

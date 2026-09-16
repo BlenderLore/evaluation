@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Pineapple Bun with Butter",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV15WCgBfEM8",
+    "id": "BV15WCgBfEM8"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 60, "SURF": 30, "PIPE": 10},
+  "weighting_note": "Geometry receives 60 points for the independent upper and lower forms, actual crown grooves, pliable butter geometry, assembly, and visible geometric finish. Surface appearance receives 30 points for bread color, multiscale bread relief, and smooth butter. Delivery and a saved, reopenable rebuild receive 10 points. No credit is based on incidental object, modifier, or node counts.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Bun Halves",
+      "criterion": "The upper bun is a broad, plump dome with rounded shoulders, a curved lower edge, and substantial bread volume.",
+      "scoring_rule": {
+        "PASS": "A recognizable upper bread body is wider than tall, has a plump dome, rounded shoulders and a softly curved lower edge, and reads as a substantial volume.",
+        "PARTIAL": "A recognizable, volumetric domed upper bread body exists, but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable volumetric domed upper bread body exists; a flat image, thin shell, or undifferentiated sphere does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_bun.png", "image/02_crown_geometry.png"],
+      "verification": {
+        "method": "Evaluated geometry and neutral-material inspection",
+        "procedure": "Open the submitted blend and isolate the upper bread geometry. Inspect its evaluated shape from front, side and three-quarter views with a neutral material, checking the width-to-height relationship, dome, shoulders, lower edge and volume independently of the material texture.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "2. Crosshatched Crown",
+      "criterion": "Crossing recessed geometric grooves divide the domed crown into broad, softly rounded diamond-like cushions.",
+      "scoring_rule": {
+        "PASS": "Shallow recessed grooves in two crossing diagonal directions create several broad diamond-like cushions across the central crown; the pattern follows the dome, transitions softly, and fades into surrounding shoulders. It remains recognizable with plain gray shading.",
+        "PARTIAL": "At least one crossing pair of genuinely recessed geometric grooves is recognizable on the upper crown with plain gray shading, but one or more PASS conditions are unmet.",
+        "FAIL": "The crown lacks a recognizable crossing pair of recessed geometric grooves, or the apparent grooves exist only as color or surface-normal shading."
+      },
+      "evidence_refs": ["image/02_crown_geometry.png", "image/01_finished_bun.png"],
+      "verification": {
+        "method": "Evaluated mesh inspection and controlled gray render",
+        "procedure": "Inspect the evaluated crown geometry, including generated or truly displaced geometry. Make a temporary plain-gray view that retains geometric displacement but removes color variation and bump-only or normal-only effects. Examine oblique and elevated views and a representative groove cross-section to confirm recessed geometric channels, crossed layout, broad cushions and rounded transitions.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Bun Halves",
+      "criterion": "The lower bread is a shallow rounded volume with a footprint that supports the larger upper dome.",
+      "scoring_rule": {
+        "PASS": "The lower bread has a similar horizontal footprint to the upper bun, a rounded perimeter and gently curved underside, and is visibly shallower than the dominant upper dome.",
+        "PARTIAL": "A recognizable shallow, volumetric lower bread region exists, but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable shallow, volumetric lower bread region exists; a flat plane or image does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_layered_geometry.png", "image/01_finished_bun.png"],
+      "verification": {
+        "method": "Isolated evaluated geometry inspection",
+        "procedure": "Inspect the lower bread in neutral front, side and underside views. Compare its footprint and height with the upper bread and verify a rounded perimeter and curved underside. Assess the lower form independently of whether the butter is present.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Butter and Assembly",
+      "criterion": "The butter is a thin, thickened square-like slice with rounded corners, soft edges, and a gentle bend.",
+      "scoring_rule": {
+        "PASS": "A recognizable approximately square butter slice has visible thin thickness, rounded corners, soft edges, a gentle bend, and modest edge irregularity while retaining its slice shape.",
+        "PARTIAL": "A recognizable thin, square-like butter slice with actual thickness exists, but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable thin, square-like butter slice with actual thickness exists; a flat plane, image, or bulky block does not meet the minimum."
+      },
+      "evidence_refs": ["image/04_butter_form.png", "image/03_layered_geometry.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection",
+        "procedure": "Isolate the butter geometry in a temporary inspection view and examine its top, edge and underside with neutral shading. Check its thin volume, square-like outline, corner radii, softened edge, bend and restrained irregularity without awarding material properties here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "3. Butter and Assembly",
+      "criterion": "The three food regions form a coherent sandwich with visible projecting butter and believable contact.",
+      "scoring_rule": {
+        "PASS": "Upper bread, butter and lower bread are coherently stacked, with an exposed butter edge and at least one projecting corner. Contact regions avoid floating gaps and excessive burial, and all three regions remain distinguishable.",
+        "PARTIAL": "All three recognizable food regions are arranged in the intended upper-butter-lower order, but one or more PASS conditions are unmet.",
+        "FAIL": "The scene lacks all three recognizable food regions in the intended upper-butter-lower order."
+      },
+      "evidence_refs": ["image/03_layered_geometry.png", "image/01_finished_bun.png"],
+      "verification": {
+        "method": "Multi-angle spatial inspection",
+        "procedure": "Inspect the assembled evaluated model from three-quarter and side views, including its back. Check order, contact or small natural seams, exposed butter edge and corner, and whether intersections bury a required region. This row checks their relationship rather than repeating individual shape checks.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "6. Geometry Quality",
+      "criterion": "The editable bun geometry has continuous, smooth visible surfaces and retains intentional crown recesses.",
+      "scoring_rule": {
+        "PASS": "Both bread halves and the butter are editable 3D geometry with separately assignable surface regions. Visible silhouettes and surfaces are smooth at the final viewing distance, without accidental holes, coarse faceting, sharp pinches or detached fragments; any crown grooves retain clean intentional recesses.",
+        "PARTIAL": "At least one recognizable bread half has an editable, substantially continuous core surface with separately assignable material coverage, but one or more PASS conditions are unmet. A missing secondary part does not erase demonstrated finish on this existing core surface.",
+        "FAIL": "Neither bread half provides a recognizable editable, substantially continuous core surface, or the apparent asset is only image-based."
+      },
+      "evidence_refs": ["image/02_crown_geometry.png", "image/03_layered_geometry.png"],
+      "verification": {
+        "method": "Editable data inspection and neutral-shaded orbit",
+        "procedure": "Verify that food regions are actual editable geometry and allow separate surface assignment. Orbit the evaluated geometry under neutral shading at the final view scale, including the visible undersides and region boundaries. Assess smoothness and surface defects independently of bread texture; missing minor geometry may prevent PASS but must not force FAIL when a stated core surface meets the minimum.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. Bread Surfaces",
+      "criterion": "The bread materials produce a varied golden-orange crown and a related lighter golden lower layer.",
+      "scoring_rule": {
+        "PASS": "The upper bread shows warm golden-orange toast, lighter yellow-gold side areas and natural variation across its crown, while the lower bread is lighter golden-yellow with gentle variation. The crown pattern remains legible, and broad soft highlights support a nonmetallic baked appearance.",
+        "PARTIAL": "At least one existing bread region uses an applied, visibly varied warm baked-color material rather than a flat uniform color, but one or more PASS conditions are unmet.",
+        "FAIL": "No existing bread region demonstrates applied, visibly varied warm baked coloration; absent surfaces, unused materials, flat uniform color or unrelated coloration do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_bun.png"],
+      "verification": {
+        "method": "Material-use inspection and controlled color render",
+        "procedure": "Confirm that the visible bread geometry actually uses the assessed materials. Inspect the supplied render and make a temporary neutral-light color view of both bread regions to assess baked-color variation, upper-to-lower contrast and highlight character without confusing lighting gradients with material variation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "4. Bread Surfaces",
+      "criterion": "The bread has fine irregular relief and restrained broader unevenness that affect shading without obscuring the modeled form.",
+      "scoring_rule": {
+        "PASS": "The upper crust visibly combines fine irregular pores or wrinkles with broader restrained unevenness, and the lower bread has related fine relief. The detail affects surface shading, remains subordinate to the bun silhouette and grooves, and avoids a uniformly polished appearance.",
+        "PARTIAL": "At least one existing bread region demonstrates visible irregular relief affecting surface shading at one meaningful scale, but one or more PASS conditions are unmet.",
+        "FAIL": "No existing bread region demonstrates visible irregular relief affecting surface shading; color-only texture or unused relief nodes do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_bun.png"],
+      "verification": {
+        "method": "Applied surface inspection and controlled grazing-light render",
+        "procedure": "Check actual material or geometric relief on the bread. Render a temporary close view under broad grazing illumination and compare fine and broad variation on the upper crust and fine detail on the lower bread. Where implemented in shaders, temporarily neutralize base color to distinguish relief from color, and compare with relief disabled without changing the submitted file.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "5. Butter Surface",
+      "criterion": "The butter's applied pale-yellow smooth material contrasts with the bread and reveals the slice form.",
+      "scoring_rule": {
+        "PASS": "The exposed butter top, edge and corner consistently use a warm pale-yellow material that is distinct from toasted bread, substantially smoother than the crust, and has soft highlights revealing its thickness and bend.",
+        "PARTIAL": "A recognizable existing butter surface uses an applied pale-yellow material distinct from bread, but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable existing butter surface has an applied pale-yellow material distinct from bread; an absent slice or unused butter material does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_bun.png"],
+      "verification": {
+        "method": "Actual material coverage and controlled render inspection",
+        "procedure": "Inspect material assignment on the visible butter top, edge and projecting corner. Compare its color and surface smoothness with the adjacent bread in the same lighting, and verify that broad highlights reveal the slice instead of looking metallic or crust-textured.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The submission includes an editable scene, a reproducible script that saves a reopenable rebuilt scene, and a genuine rendered PNG of that scene.",
+      "scoring_rule": {
+        "PASS": "All three named deliverables exist. The submitted blend opens with editable food geometry. Running build.py from an empty Blender scene without loading the submitted blend or unprovided assets recreates the scene and saves submission.blend; reopening that newly saved file preserves matching geometry, materials and render settings. The PNG is rendered from the submitted scene using Cycles GPU and clearly frames the complete bun in the requested three-quarter view.",
+        "PARTIAL": "The submitted blend opens with editable, recognizable bun geometry, and either the script independently creates and saves a reopenable bun scene or the named PNG is verifiably rendered from the submitted scene, but one or more PASS conditions are unmet.",
+        "FAIL": "The submitted blend does not open with editable, recognizable bun geometry, or neither a script-created saved and reopenable bun scene nor a verifiable scene-rendered PNG is available."
+      },
+      "evidence_refs": ["image/01_finished_bun.png"],
+      "verification": {
+        "method": "Clean rebuild, saved-file reopening, and render provenance check",
+        "procedure": "Check the three deliverable filenames and open the original submission.blend in Blender 5.1.2. In an isolated output directory, run build.py from an empty scene without allowing it to load the original blend. Confirm that it explicitly writes submission.blend, then close the process and reopen that newly saved file in a fresh Blender process. Compare food geometry, applied materials and render settings with the original submission and check dependency resolution. Render or compare a controlled frame from the saved submitted scene to verify the PNG's provenance, complete three-quarter framing and Cycles GPU settings. Do not treat an unsaved in-memory rebuild as sufficient.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Hollow Octant Particle Shell",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1rguq6YEqL",
+    "id": "BV1rguq6YEqL"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 45, "PROC": 30, "SURF": 5, "SCN": 10, "PIPE": 10},
+  "weighting_note": "The core result is an open spherical particle shell, so 45 points assess its evaluated form, cavity, and bead geometry. The three independent editable generation relationships receive 30 points. The source overview supports a small surface-appearance component, while camera and lighting are assessed separately as scene presentation. Reproduction and actual-scene delivery receive 10 points. No points depend on particular node roles, modifier presence, construction values, or topology counts.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Spherical Form and Octant Opening",
+      "criterion": "The evaluated aggregate retains a spherical envelope with one octant absent and a three-arc boundary consistent with perpendicular center planes.",
+      "scoring_rule": {
+        "PASS": "The envelope is approximately spherical; one octant is absent; the three boundary arcs meet at three corners consistent with three perpendicular center planes; departures from these arcs are limited to bead-scale scalloping.",
+        "PARTIAL": "A recognizably spherical aggregate with a single substantial opening exists, but at least one PASS condition is unmet, such as an opening of the wrong extent, distorted boundary arcs, or an uneven outer envelope.",
+        "FAIL": "There is no recognizably spherical aggregate with a single substantial opening. A closed aggregate, scattered unrelated particles, or a non-spherical arrangement does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_particle_shell_overview.png", "image/02_particle_shell_geometry.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection and orthographic views",
+        "procedure": "In the future submitted file, inspect the evaluated bead centers and shell envelope from three orthogonal directions and an oblique view. Fit a common center and examine whether the absent sector corresponds to one octant bounded by perpendicular planes through that center. Compare the three-arc rim and its corners to the references. Assess envelope and cutout shape here; inspect volume occupancy separately in GEO-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Hollow Interior",
+      "criterion": "The retained aggregate is a single layer of beads around an empty interior, with no solid core, planar cut caps, or continuous opaque backing surface.",
+      "scoring_rule": {
+        "PASS": "Bead centers occupy one spherical layer, the central volume is empty, and there are no planar cap sheets, solid core, large source sphere in the cavity, or continuous opaque backing surface.",
+        "PARTIAL": "A substantial empty central volume and a surrounding bead layer exist, but at least one PASS condition is unmet, such as local extra layers, a residual cap, or visible backing geometry.",
+        "FAIL": "A substantial empty central volume surrounded by a bead layer is absent; a solid or particle-filled volume does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_particle_shell_overview.png", "image/02_particle_shell_geometry.png"],
+      "verification": {
+        "method": "Evaluated cross-section and visibility inspection",
+        "procedure": "On a temporary inspection copy, use sectional views or clipping to inspect the center and shell thickness without changing the saved submission. Check particle-center radial layering and inspect all geometry that can appear in the render for core objects, cap faces, or backing surfaces. Evaluate hollow occupancy independently of the octant boundary accuracy scored in GEO-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Particle Geometry",
+      "criterion": "Smooth, similarly sized round beads densely cover the retained shell and rim while remaining geometrically distinct.",
+      "scoring_rule": {
+        "PASS": "The default beads are smooth and round, have consistent size with diameter approximately 2-5% of the aggregate diameter, and densely cover the retained shell and rim. Small gaps or modest overlaps preserve individual bead shapes; there are no large bare regions, isolated floating particles, stretched default beads, or featureless fused walls.",
+        "PARTIAL": "A coherent shell region made of repeated individually recognizable rounded beads exists, but at least one PASS condition is unmet, including irregular coverage, bead size outside the stated range, local faceting, distortion, or excessive overlap.",
+        "FAIL": "No coherent shell region made of individually recognizable rounded beads exists. A plain continuous shell, isolated handful of beads, or wholly fused featureless mass does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_particle_shell_overview.png", "image/02_particle_shell_geometry.png"],
+      "verification": {
+        "method": "Gray-model close-ups and evaluated dimensional inspection",
+        "procedure": "Inspect the submitted default result with a neutral override from the exterior, rim, and visible interior. Compare representative bead dimensions to the overall aggregate diameter, inspect silhouettes and normals for smooth round form, and check coverage and overlap throughout the existing retained shell. Do not treat missing portions as evidence of a clean finish; do not re-score the intended opening's extent here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Particle Generation",
+      "criterion": "Particle centers remain driven by an editable supporting shell or point layout, including a local geometric edit.",
+      "scoring_rule": {
+        "PASS": "The default shell's generated bead centers derive from the editable supporting layout. A local edit moves the corresponding centers and leaves unrelated regions in place, and restoring the layout restores the initial arrangement.",
+        "PARTIAL": "A supporting-layout edit demonstrably changes the centers of a coherent region of generated beads, but at least one PASS condition is unmet, such as stale regions, unrelated movement, or incomplete restoration.",
+        "FAIL": "No supporting-layout edit produces corresponding movement of a coherent generated bead region. Static placements that require independent per-bead editing do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_particle_shell_geometry.png"],
+      "verification": {
+        "method": "Non-destructive functional geometry probe",
+        "procedure": "In a temporary copy, identify the editable carrier or point layout and record evaluated bead centers. Move a small interior patch of its points outward by a modest amount relative to the shell radius, re-evaluate, and compare affected and remote center positions. Restore the layout and verify that the original arrangement returns. Inspect the actual geometric dependency, not the existence or names of modifiers or nodes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Particle Generation",
+      "criterion": "A reusable bead shape source controls the proportions of the generated bead geometry throughout the shell.",
+      "scoring_rule": {
+        "PASS": "Editing the reusable bead shape source's proportions updates beads throughout the generated shell while preserving their centers and arrangement; restoring the source returns the default rounded result.",
+        "PARTIAL": "A source-shape edit propagates to a coherent region of generated beads, but at least one PASS condition is unmet, such as unresponsive regions, shifted centers, or incomplete restoration.",
+        "FAIL": "There is no reusable source-shape edit that propagates to a coherent region of generated beads. Editing one independent visible bead alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_particle_shell_geometry.png"],
+      "verification": {
+        "method": "Shared-geometry propagation probe",
+        "procedure": "In a temporary copy, record representative bead geometry and centers at the rim, exterior, and inner-facing shell. Modestly elongate the reusable source along one axis, re-evaluate, and check that the change reaches all sampled regions without changing the placement layout. Restore the source and verify recovery of the rounded result. A source object or node's mere presence is insufficient.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Particle Generation",
+      "criterion": "An editable uniform bead-size control changes particle dimensions independently of particle centers and count.",
+      "scoring_rule": {
+        "PASS": "Changing the bead-size control uniformly changes dimensions across the generated shell without moving centers or changing count, and returning the control to its initial value restores the default geometry.",
+        "PARTIAL": "A size control changes dimensions for a coherent region of generated beads, but at least one PASS condition is unmet, such as nonuniform response, changed count or centers, or incomplete restoration.",
+        "FAIL": "No size control changes dimensions of a coherent generated bead region. Scaling the entire aggregate together with its bead centers does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_particle_shell_geometry.png"],
+      "verification": {
+        "method": "Independent particle-scale probe",
+        "procedure": "On a temporary copy, record generated particle count, centers, and representative dimensions. Reduce the provided bead-size setting by approximately one fifth and re-evaluate. Compare size response at separated shell regions and verify unchanged centers and count. Restore the setting and compare with the initial evaluated result.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "Surface Appearance",
+      "criterion": "Actual bead surfaces have a consistent pink-to-magenta, softly glossy appearance, including the visible interior.",
+      "scoring_rule": {
+        "PASS": "The generated beads use a consistent pink-to-magenta surface with soft glossy highlights across exterior and visible interior surfaces, preserving discernible color and shape in highlights and shadows.",
+        "PARTIAL": "A coherent region of actual generated beads has an assigned, visibly colored material, but at least one PASS condition is unmet, such as a different hue, inconsistent assignment, excessive gloss, or lost surface detail.",
+        "FAIL": "No coherent region of actual generated beads has an assigned, visibly colored material. Color supplied only by an external image or by unrelated objects does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_particle_shell_overview.png"],
+      "verification": {
+        "method": "Material assignment inspection and controlled render",
+        "procedure": "Inspect materials used by the evaluated beads and render representative exterior and inner-facing regions under neutral, soft illumination. Confirm that the material itself supplies the pink-to-magenta color and soft gloss. Assess existing bead surfaces; missing geometry cannot establish this row's minimum and is not independently charged as a surface-finish defect.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "Scene Presentation",
+      "criterion": "The final actual-scene image clearly presents the full aggregate, rim, cavity depth, and exterior curvature in an uncluttered oblique composition.",
+      "scoring_rule": {
+        "PASS": "The whole aggregate has space around its silhouette; an oblique view into the opening reveals the rim, far inner shell, and exterior curvature together; contrasting background and lighting separate beads and convey depth; source geometry and helpers are absent from the image.",
+        "PARTIAL": "The actual aggregate is recognizable and most of its silhouette is visible in a usable camera render, but at least one PASS condition is unmet, such as crowding, an unhelpful view, weak depth lighting, or visible helpers.",
+        "FAIL": "There is no usable camera render in which the actual aggregate is recognizable with most of its silhouette visible. A blank image, unrelated image, or severely obscured subject does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_particle_shell_overview.png"],
+      "verification": {
+        "method": "Final camera render inspection",
+        "procedure": "Render the future submitted scene from its saved final camera using the saved composition. Inspect framing, opening visibility, surface separation, background contrast, and helper visibility. Assess camera and lighting effectiveness on the existing asset; use the geometry rows to judge the asset's construction. Compare the delivered PNG to this actual-scene view.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable submission, complete rebuild script, and actual-scene PNG are delivered, and the script saves a result that survives a fresh reopen.",
+      "scoring_rule": {
+        "PASS": "All three named deliverables are present. The submitted blend opens with the editable aggregate. Running build.py from an empty Blender state recreates the complete scene and saves submission.blend, which opens in a fresh process with the same default aggregate, functional particle edits, materials, and final camera. The delivered PNG is verified as rendered from that scene.",
+        "PARTIAL": "The submitted blend opens with an editable aggregate and at least one of these is verified: the script recreates and saves an aggregate that survives a fresh reopen, or the delivered PNG is rendered from the submitted scene. At least one PASS condition is unmet.",
+        "FAIL": "The submitted blend does not open with an editable aggregate, or neither a saved-and-reopened rebuild nor an actual-scene delivered PNG can be verified. An unsaved in-memory rebuild alone does not satisfy the rebuild condition."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean rebuild, saved-file reopen, and render provenance check",
+        "procedure": "In a future Blender 5.1.2 environment, first open the supplied submission.blend. Then run build.py from an empty state in a separate temporary working directory and confirm it writes submission.blend. Close that Blender process, open the newly written file in a fresh process, and compare its default evaluated aggregate, materials, and final camera with the submitted scene. Perform the supporting-layout, source-shape, and size probes on a temporary copy of that reopened file to confirm persistence. Render from the saved final camera and compare with B104_Hollow_Octant_Particle_Shell.png to verify actual-scene provenance. No runtime compatibility or rebuild success is claimed during authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

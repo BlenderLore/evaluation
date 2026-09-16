@@ -1,0 +1,56 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "八分之一剖面球壳：目标验收",
+  "source_video": {"id": "BV1zNdzBmEuq", "url": "https://www.bilibili.com/video/BV1zNdzBmEuq", "duration_seconds": 76.347120},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1.0, "PARTIAL": 0.5, "FAIL": 0.0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "submission_gate": "submission.blend 可打开并包含可检查的三维产物；否则记录提交无效及总分0。build.py缺失或无法重建由PIPE项扣分，不抹去可检查产物的几何得分。相机、灯光及对象名称不影响组件认定。",
+  "weighting_note": "依据形体、空间关系和可编辑性的重要性主观分配，尚未经模型试跑或评分器标定。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 30, "requirement_section": "1. 球形主体与八分之一开口",
+      "criterion": "球形外壳真实缺少一个八分区，三条弧边围成唯一贯穿剖口。",
+      "scoring_rule": {"PASS": "外壳主体保持球形；缺口对应一个由过球心的三正交平面界定的八分区，允许圆角带偏离；开口贯穿壳体且其余区域无额外破洞。三项均满足。", "PARTIAL": "存在真实剖口，但主体球形、八分区范围或其余表面完整性中至少一项不满足；仍能辨认本题的单剖口球壳结构。", "FAIL": "没有真实剖口球壳，或以凹坑、贴图、平面、多个分离碎片代替该结构。"},
+      "evidence_refs": ["image/01_complete.png", "image/02_shell_opening.png"],
+      "verification": {"method": "evaluated_geometry_and_visual", "procedure": "依据实际形状识别外壳而非名称。隐藏内球，检查求值后的几何与多个方位视图；拟合主球面，检查缺口方位能否对应单一球面八分区及三条弧边，确认光线/视线能穿过缺口且其他区域完整。修改器存在或顶点数量不能代替此检查。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 20, "requirement_section": "2. 完整同心内球",
+      "criterion": "内球完整闭合，与外壳同心，开口中的可见表面为凸球面。",
+      "scoring_rule": {"PASS": "隐藏外壳后内球为完整闭合球面；球心偏差不超过0.01R；内球填充剖口且不穿出外轮廓、不留明显悬空间隙。三项均满足。", "PARTIAL": "存在完整内球，但同心关系、填充关系或穿出/间隙控制有缺陷。", "FAIL": "缺少完整内球，或用局部补片/凹面伪装内球。"},
+      "evidence_refs": ["image/01_complete.png"],
+      "verification": {"method": "evaluated_geometry_and_visual", "procedure": "分别隔离两主体，读取求值后的几何，检查内球闭合与球面性；由球面拟合中心和R，测量中心差及包容关系。恢复整体，从开口及侧方观察凸面与壳体层次。不要仅以包围盒大小推断球形。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 20, "requirement_section": "3. 连续厚度与封闭切面",
+      "criterion": "外壳内外表面与开口侧壁形成连续、具有实际厚度的闭合壳体。",
+      "scoring_rule": {"PASS": "内外表面及连续侧壁均存在；剔除圆角过渡带后名义厚度为0.05R至0.15R且基本一致；壳体闭合，无零厚度边或明显自相交。三项均满足。", "PARTIAL": "存在真实厚度，但厚度比例/一致性或局部切面闭合有缺陷，整体壳体仍成立。", "FAIL": "仅有单层零厚度球面，或缺少连续侧壁，使厚壳结构不成立。"},
+      "evidence_refs": ["image/02_shell_opening.png", "image/03_finished_rim.png"],
+      "verification": {"method": "evaluated_geometry", "procedure": "在求值后的壳体上检查边的面邻接与侧壁连通性，并在远离开口圆角的多个位置测量内外表面的距离；比较名义厚度与内球R。辅以隐藏内球的截面观察，排除仅有Solidify节点/修改器而没有有效厚度的提交。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 10, "requirement_section": "4. 圆角与表面质量",
+      "criterion": "开口的三个角均为平顺圆角，同时保持三边剖口结构。",
+      "scoring_rule": {"PASS": "三个角均有连续圆角过渡，没有尖刺或塌陷，三条主体弧边仍可辨。", "PARTIAL": "只有一到两个角过渡合格，或三个角均处理但存在明显夹痕/局部塌陷。", "FAIL": "三个角均未形成圆滑过渡，或过度变形使三边剖口无法辨认。"},
+      "evidence_refs": ["image/01_complete.png", "image/02_shell_opening.png", "image/03_finished_rim.png"],
+      "verification": {"method": "visual_with_geometry_inspection", "procedure": "在三个角分别观察求值几何的轮廓和法线过渡，可旋转光照/视角确认形状。根据角部实际形状判定，不要求存在Bevel修改器，也不要求教程中的宽度或分段数。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-05", "capability": "GEO", "points": 10, "requirement_section": "4. 圆角与表面质量",
+      "criterion": "内外球面与剖口边缘在正常近景下连续平滑，没有明显网格或着色缺陷。",
+      "scoring_rule": {"PASS": "内球、外壳主表面和开口边缘均平滑，无明显锯齿、尖刺、夹痕、重面闪烁或破损阴影。", "PARTIAL": "整体形体已完成，但上述某一区域存在局部可见缺陷。", "FAIL": "大范围分面、破损或重面闪烁妨碍辨认目标形体。"},
+      "evidence_refs": ["image/01_complete.png", "image/03_finished_rim.png"],
+      "verification": {"method": "visual_and_mesh_diagnostics", "procedure": "用中性材质、稳定照明查看整体与近景，并旋转视角排除单视图遮掩；必要时检查重叠面及异常法线。着色平滑开关或高面数仅为辅助证据，不能直接据此通过。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 10, "requirement_section": "输入与交付；5. 独立编辑",
+      "criterion": "A. 内球与外壳能独立选择、隐藏、移动与编辑，互不意外改变；B. build.py 可从空场景重建具有同等几何与编辑能力的模型。",
+      "scoring_rule": {"PASS": "A、B均满足。A要求在提交副本中可分别选择、隐藏和移动两主体，并可对其中一个进行局部几何编辑或专用形状参数修改而不改变另一个。", "PARTIAL": "A、B仅一项满足。", "FAIL": "A、B均不满足。"},
+      "evidence_refs": ["image/01_complete.png", "image/02_shell_opening.png"],
+      "verification": {"method": "artifact_edit_and_rebuild_probe", "procedure": "只在临时副本中识别两主体并依次进行隐藏、平移和局部几何编辑或专用形状参数修改，比较另一主体的求值几何是否保持不变，最后丢弃副本。根据产物提供的有效编辑接口选择网格或参数探针，不强制网格拓扑。另在隔离目录中用Blender5.1.2从空场景运行build.py，重开结果并比较上述模型结构、几何和编辑能力，不要求二进制哈希相同。相机和灯光不属于主体数量限制。", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

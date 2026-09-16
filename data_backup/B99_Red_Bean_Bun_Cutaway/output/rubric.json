@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Red Bean Bun Cutaway",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV124YfzyE1V",
+    "id": "BV124YfzyE1V"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 40, "PROC": 15, "SURF": 40, "PIPE": 5},
+  "weighting_note": "The bun's cutaway geometry and contrasting procedural food surfaces carry equal weight. Sesame placement receives a separate functional procedural check. Five points cover the reproducible saved scene and its rendered delivery; incidental camera or light counts earn no separate credit.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Bun Form",
+      "criterion": "The bread body has a plump rounded-square form, domed crown, flattened underside, and clean smooth silhouette.",
+      "scoring_rule": {
+        "PASS": "The existing bread body shows all the specified form features and smooth visible surfaces without unintended faceting or pinched shading.",
+        "PARTIAL": "A coherent three-dimensional bread body has both a rounded crown and softened side silhouette, but it fails one or more PASS conditions.",
+        "FAIL": "No coherent three-dimensional bread body is present, or the body lacks either a rounded crown or a softened side silhouette."
+      },
+      "evidence_refs": ["image/01_finished_bun.png", "image/03_sesame_distribution.png"],
+      "verification": {
+        "method": "Evaluated geometry and neutral-shaded visual inspection",
+        "procedure": "Open the submitted blend, isolate the bread shell, and inspect evaluated geometry from front, side, top, and underside views. Use a neutral material and grazing light to distinguish the intended dome and base from shading artifacts. Judge the existing shell surface independently of missing minor sesame components.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Shell and Filling",
+      "criterion": "A real side opening exposes the interior through a thick bread shell with a rounded, continuous rim.",
+      "scoring_rule": {
+        "PASS": "The shell has a substantial rounded side opening with a flatter lower edge, visible wall thickness, a continuous lower rim, and a smoothly integrated rounded lip.",
+        "PARTIAL": "A real side opening and visible bread-wall thickness exist along a substantial part of its perimeter, but one or more PASS conditions are unmet.",
+        "FAIL": "The side opening is absent or only painted, or visible bread-wall thickness is absent along most of its perimeter."
+      },
+      "evidence_refs": ["image/02_shell_thickness.png", "image/01_finished_bun.png"],
+      "verification": {
+        "method": "Evaluated shell inspection",
+        "procedure": "Temporarily hide the filling in an inspection copy. Orbit around the shell and inspect the rim in a clipped or wire-overlay view to confirm real thickness and an open cavity. Check the lip contour and continuity in neutral-shaded front and oblique views; do not infer a cavity from a modifier name or vertex count.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Shell and Filling",
+      "criterion": "A separate volumetric filling body fits just inside the shell and has gentle geometric irregularity.",
+      "scoring_rule": {
+        "PASS": "The filling is independently editable, occupies the bun interior, rests just behind the lip, has gentle exposed-surface irregularity, and leaves neither an empty perimeter gap nor visible breakthrough of the outer shell.",
+        "PARTIAL": "An independently editable three-dimensional filling body sits inside the shell and is visible through its opening, but one or more PASS conditions are unmet.",
+        "FAIL": "The filling is absent, is only an image or flat surface, is not independently editable, or does not sit inside the shell with a visible exposed face."
+      },
+      "evidence_refs": ["image/01_finished_bun.png", "image/03_sesame_distribution.png"],
+      "verification": {
+        "method": "Geometry separation and fit inspection",
+        "procedure": "In an inspection copy, isolate and orbit the evaluated filling to confirm volume and surface irregularity without material bump. Restore the shell and inspect the entire opening perimeter from front and oblique angles for gaps, recess depth, and filling breakthrough. Editable disconnected geometry within a shared object is acceptable if the filling can be modified independently.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Sesame Geometry",
+      "criterion": "Sesame grains are flattened, elongated, rounded forms that visibly rest on the bread surface.",
+      "scoring_rule": {
+        "PASS": "The visible grains have flattened elongated bodies, rounded edges, and subtly tapered ends; individual grains remain readable at delivery scale and rest naturally on the crust without conspicuous floating or burial.",
+        "PARTIAL": "Multiple distinct three-dimensional grains have elongated bodies and at least some visibly contact the crust, but one or more PASS conditions are unmet.",
+        "FAIL": "Multiple distinct three-dimensional elongated grains are absent, or none visibly contact the crust."
+      },
+      "evidence_refs": ["image/01_finished_bun.png", "image/03_sesame_distribution.png"],
+      "verification": {
+        "method": "Evaluated instance and close-view inspection",
+        "procedure": "Inspect a representative grain and the evaluated visible scatter in neutral shading. Orbit a close view to check flattened grain volume and crust contact, then inspect the delivered view to confirm readability. Assess grain geometry and contact here; assess placement-region behavior under PROC-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Editable Sesame Scatter",
+      "criterion": "A live procedural scatter produces a sparse crown-centered cluster and responds to density and placement-region edits.",
+      "scoring_rule": {
+        "PASS": "The saved arrangement is a sparse irregular crown cluster with varied grain directions and clear lower walls, opening, and filling. Both density changes and narrowing or widening the placement region regenerate grains on the bread while preserving grain form and scale.",
+        "PARTIAL": "A live procedural scatter places grains on the bread and at least one of the density or placement-region edits visibly regenerates the distribution, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no live procedural grain scatter on the bread, or neither density nor placement-region edits visibly regenerate its distribution. A fixed manually placed cluster does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_sesame_distribution.png", "image/01_finished_bun.png"],
+      "verification": {
+        "method": "Reversible procedural control probe",
+        "procedure": "Record the saved arrangement and controls in an inspection copy. Raise and lower the density through valid values and compare evaluated grain abundance. Restore density, then narrow and widen the allowed crown region and compare the occupied area. Confirm regenerated grains follow the bread surface, retain their form and scale, and that the baseline cluster leaves the specified surfaces clear. Restore the saved values after probing. A node or modifier's existence alone is insufficient.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Procedural Bread Crust",
+      "criterion": "An active procedural color pattern creates a height-aligned toasted crown and paler lower bread.",
+      "scoring_rule": {
+        "PASS": "The existing bread surface transitions smoothly from toasted orange-brown at the crown to pale gold at the lower sides and opening rim, and this variation is driven by active procedural material controls.",
+        "PARTIAL": "The existing bread surface has visible procedural variation between warm baked colors across a substantial area, but one or more PASS conditions are unmet.",
+        "FAIL": "The bread surface is absent, or a substantial area lacks visible procedural variation between warm baked colors."
+      },
+      "evidence_refs": ["image/01_finished_bun.png"],
+      "verification": {
+        "method": "Material-use tracing and controlled render comparison",
+        "procedure": "Trace the actually assigned bread shader to its color output. Render the bread in consistent neutral lighting from the delivery angle and another side. Reversibly adjust a connected color-pattern control to confirm that the observed toasted-to-pale variation is procedural and applied to the bread. Judge its direction and continuity without requiring a particular node recipe.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Procedural Bread Crust",
+      "criterion": "Fine procedural crust grain and soft glossy nonmetallic response preserve the bun's broad shape.",
+      "scoring_rule": {
+        "PASS": "Subtle irregular procedural pores or grain cover the existing bread surface at a scale much smaller than the grains, while soft glossy nonmetallic highlights reveal the broad form and retain readable baked colors.",
+        "PARTIAL": "An existing substantive bread surface shows active procedural fine relief and a nonmetallic appearance, but one or more PASS conditions are unmet.",
+        "FAIL": "A substantive bread surface is absent, active procedural fine relief is absent, or the surface is predominantly metallic."
+      },
+      "evidence_refs": ["image/01_finished_bun.png"],
+      "verification": {
+        "method": "Close material inspection and relief toggle",
+        "procedure": "Render a close view of the existing crust under broad grazing light and the full bun under the saved lighting. In an inspection copy, reduce the connected procedural fine-relief contribution to zero and compare with the baseline. Confirm the detail is real shader behavior, remains finer than the seed geometry, and does not replace the bun's broad silhouette with coarse lumps. Inspect specular response independently of crust hue.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Procedural Red Bean Filling",
+      "criterion": "Procedural brown color variation and multiple scales of surface detail make the exposed filling read as dense bean paste.",
+      "scoring_rule": {
+        "PASS": "The existing exposed filling combines reddish-brown and deep brown with irregular lighter and darker patches, broad uneven relief, and finer granularity. The patterns are active, editable, continuous procedural material effects with a diffuse or restrained nonmetallic response, visibly distinct from the finer crust pores.",
+        "PARTIAL": "A substantive exposed filling surface has active procedural brown color variation and visible procedural relief, but one or more PASS conditions are unmet.",
+        "FAIL": "A substantive exposed filling surface is absent, procedural brown color variation is absent, or visible procedural relief is absent."
+      },
+      "evidence_refs": ["image/01_finished_bun.png"],
+      "verification": {
+        "method": "Assigned-material inspection and controlled detail probes",
+        "procedure": "Inspect the actual filling shader and render its exposed face under soft neutral lighting. Reversibly change connected color and detail controls separately to establish that both visible patterns are procedural. Compare full-object and close views for broad and fine scales, continuity, material roughness, and contrast with the crust. The filling's geometric fit is assessed under GEO-03, not repeated here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "Sesame Geometry",
+      "criterion": "The actual sesame surfaces are solid dark charcoal with restrained nonmetallic highlights.",
+      "scoring_rule": {
+        "PASS": "The visible sesame surfaces are solid dark charcoal, contrast clearly with the golden bread, and have restrained nonmetallic highlights.",
+        "PARTIAL": "Existing visible sesame grains have a dark, nonmetallic surface distinct from the bread, but one or more PASS conditions are unmet.",
+        "FAIL": "Visible sesame grains are absent, or they lack a dark nonmetallic surface distinct from the bread."
+      },
+      "evidence_refs": ["image/01_finished_bun.png"],
+      "verification": {
+        "method": "Actual surface assignment and rendered appearance inspection",
+        "procedure": "Inspect the material evaluated on visible grains, including instance material inheritance. Compare a close controlled render and the saved delivery render to establish dark charcoal color, solid opacity, contrast, and restrained highlights. Do not award credit for an unused material or an off-camera seed prototype.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The submitted scene, reconstruction script, and PNG form a reproducible delivery whose scripted saved result reopens independently.",
+      "scoring_rule": {
+        "PASS": "All three named files are present. The scene opens with editable content and a usable Cycles GPU render setup. From an empty file, build.py recreates and saves submission.blend without external assets or interactive steps; that saved result reopens independently with its controls and materials intact. The PNG comes from the actual scene and clearly frames the complete bun in the specified view.",
+        "PARTIAL": "submission.blend opens with a substantive editable bun and at least one of these is established: build.py recreates, saves, and independently reopens a substantive bun result; or the named PNG is verifiably rendered from the submitted scene. One or more PASS conditions remain unmet.",
+        "FAIL": "submission.blend is missing or cannot open with a substantive editable bun, or neither the script's saved-and-reopened result nor the scene-derived PNG can be established."
+      },
+      "evidence_refs": ["image/01_finished_bun.png"],
+      "verification": {
+        "method": "Isolated rebuild, saved-result reopen, and render provenance check",
+        "procedure": "Inspect the three named files. In a clean temporary directory and fresh Blender 5.1.2 session, execute build.py from an empty file and confirm it writes submission.blend. End that session, open the written file in another fresh session, and inspect the saved geometry, live scatter, materials, camera, lighting, and render settings. Render from both submitted and rebuilt saved scenes under controlled settings to compare asset composition with the delivered PNG. The in-memory scene before saving cannot substitute for this reopen check. Confirm the PNG is a scene render and the full bun, opening rim, crown, and filling are readable.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

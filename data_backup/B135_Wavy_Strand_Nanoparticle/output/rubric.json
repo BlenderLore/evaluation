@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Wavy Strand Nanoparticle",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1D4ud6eEgU",
+    "id": "BV1D4ud6eEgU"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 50, "PROC": 30, "SURF": 10, "PIPE": 10},
+  "weighting_note": "The task centers on a spherical coat of tubular waves. Geometry receives 50 points for core form, strand shape, tube finish, coverage, and surface attachment. The 30 procedural points require changes to the populated coat and deterministic regeneration, never node existence or a static scatter. Ten surface points assess the visible palette and material response from the opening subject reference. Ten pipeline points cover the saved artifact, actual render, and a builder that saves its reconstructed result. No animation or simulation capability is claimed.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Spherical Core",
+      "criterion": "The nanoparticle has a complete, smooth spherical core with coherent three-dimensional volume.",
+      "scoring_rule": {
+        "PASS": "An actual rounded three-dimensional core is present; it forms a complete sphere with smooth outline and shading from different views, without visible faceting, dents, holes, or a flattened side.",
+        "PARTIAL": "An actual rounded three-dimensional core is present, but at least one PASS condition is unmet.",
+        "FAIL": "No actual rounded three-dimensional core is present; an empty host, flat disk, or image-only depiction does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_core_and_strand.png", "image/03_radial_coat.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection and neutral-shading orbit",
+        "procedure": "Open the submitted scene and temporarily isolate the geometry used as the coat's core. Inspect its evaluated bounds, silhouette, and surface from front, side, rear, and elevated views under neutral shading. Confirm real volume and a complete surface, then assess roundness and smoothness. Restore visibility afterward.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Wavy Strand Geometry",
+      "criterion": "The populated coat uses slender strands with an open, gently wavy root-to-tip path and a suitable reach relative to the core.",
+      "scoring_rule": {
+        "PASS": "The actual coat contains multiple three-dimensional strands with a visible sideways bend; their open paths show successive gentle direction changes, remain unbranched, and reach outward by a distance comparable to the core radius while staying much thinner than their length.",
+        "PARTIAL": "The actual coat contains multiple three-dimensional strands with a visible sideways bend, but at least one PASS condition is unmet.",
+        "FAIL": "The actual coat does not contain multiple three-dimensional strands with a visible sideways bend. An unused source, exclusively straight rods, flat marks, or a single standalone strand does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_core_and_strand.png", "image/03_radial_coat.png"],
+      "verification": {
+        "method": "Evaluated strand silhouette inspection",
+        "procedure": "Inspect several evaluated strands from different core regions in a temporary inspection copy. View their paths side-on and compare their outward reach and thickness with the core radius. Judge open wavy form and proportions independently from root spacing and surface polish.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Wavy Strand Geometry",
+      "criterion": "Existing curved coat strands have smooth, continuous tubular surfaces and clean closed ends.",
+      "scoring_rule": {
+        "PASS": "Multiple existing coat strands include curved tubular regions with a readable round cross-section; their curved silhouettes and shading are smooth, their thickness is consistent along each strand, their ends are closed cleanly, and they have no visible sharp kinks, torn surfaces, or collapsed segments.",
+        "PARTIAL": "Multiple existing coat strands include curved tubular regions with a readable round cross-section, but at least one PASS condition is unmet. Missing unrelated regions of the coat alone do not force FAIL for the existing inspected surfaces.",
+        "FAIL": "There are not multiple existing coat strands with curved tubular regions and a readable round cross-section. A flat ribbon, disconnected points, exclusively straight geometry, or an unused source cannot establish this minimum."
+      },
+      "evidence_refs": ["image/01_colored_nanoparticle.png", "image/02_core_and_strand.png"],
+      "verification": {
+        "method": "Close geometry and neutral-shading inspection",
+        "procedure": "Inspect curved middle regions and terminal ends on several actual coat strands at a scale where their cross-sections are readable. Use neutral material overrides and evaluated geometry as needed to identify faceting, torn sections, cap gaps, or collapsed profiles. Do not treat ordinary crossings between otherwise intact strands as surface defects.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Radial Coat",
+      "criterion": "The coat covers the full spherical surface with readable, roughly even distribution.",
+      "scoring_rule": {
+        "PASS": "An existing rounded core carries multiple strands across more than one side; strand roots populate the front, rear, upper, and lower surface with roughly even spacing, without a large bald sector or distinctly crowded patch, and gaps still reveal the core.",
+        "PARTIAL": "An existing rounded core carries multiple strands across more than one side, but at least one PASS condition is unmet.",
+        "FAIL": "An existing rounded core does not carry multiple strands across more than one side. A single cluster, an isolated source, or a population confined to one flat patch does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_colored_nanoparticle.png", "image/03_radial_coat.png"],
+      "verification": {
+        "method": "Multi-view coverage inspection",
+        "procedure": "Orbit the evaluated nanoparticle through front, rear, side, top, and bottom views. Inspect the root distribution, using a temporary translucent or isolated-core view if occlusion hides roots. Compare the occupied surface regions and identify conspicuous empty or overcrowded sectors. Assess core visibility in the default presentation separately from strand path shape.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Radial Coat",
+      "criterion": "Strands attach at the core surface and project outward in locally radial directions with varied roll.",
+      "scoring_rule": {
+        "PASS": "Multiple strands on different sides visibly meet the core and project outward; throughout the coat, roots touch or slightly enter the core, main root-to-tip directions follow the local outward direction, and varied roll preserves an approximately spherical envelope without a common parallel lean.",
+        "PARTIAL": "Multiple strands on different sides visibly meet the core and project outward, but at least one PASS condition is unmet.",
+        "FAIL": "There are not multiple strands on different sides that visibly meet the core and project outward. Detached floating tubes, tangentially laid tubes, or an isolated correctly placed strand do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_colored_nanoparticle.png", "image/03_radial_coat.png"],
+      "verification": {
+        "method": "Root attachment and direction inspection",
+        "procedure": "Inspect roots and main strand directions at separated locations around the actual core. Compare each root-to-tip direction with the outward direction from the core center and check for visible root gaps, deep embedding, or tangential placement. Orbit the model to distinguish intended foreshortening from orientation defects and compare the different wave rolls.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "4. Live Generator",
+      "criterion": "The shared strand source and scale control update the populated coat while preserving attachment.",
+      "scoring_rule": {
+        "PASS": "A reversible edit to the shared source changes multiple visible coat strands; edits to source bends and thickness both propagate, and changing strand scale changes outward reach while preserving root attachment and radial direction, without manual per-strand replacement.",
+        "PARTIAL": "A reversible edit to the shared source changes multiple visible coat strands, but at least one PASS condition is unmet.",
+        "FAIL": "No reversible shared-source edit changes multiple visible coat strands. A disconnected source, frozen duplicates, or source changes visible only on the standalone source do not meet the minimum."
+      },
+      "evidence_refs": ["image/02_core_and_strand.png", "image/03_radial_coat.png"],
+      "verification": {
+        "method": "Shared-source and scale functional probe",
+        "procedure": "In a temporary copy of the saved file, change one visible bend on the shared source, reevaluate, then restore it. Change source thickness and restore it. Next shorten and lengthen strands using the supplied scale control. Compare multiple coat regions after each change and confirm root attachment and direction remain valid. Reopen the submission to verify its default state was not altered. Node or object existence alone is not evidence of function.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "4. Live Generator",
+      "criterion": "Density and minimum-spacing controls recompute a meaningful strand population over the core.",
+      "scoring_rule": {
+        "PASS": "A labeled density or root-spacing control can change an existing multi-strand coat procedurally; lowering density produces a visibly sparser coat, increasing minimum root spacing separates roots and suppresses root clusters, and both controls retain surface-wide coverage, strand form, and radial orientation without manual replacement.",
+        "PARTIAL": "A labeled density or root-spacing control can change an existing multi-strand coat procedurally, but at least one PASS condition is unmet.",
+        "FAIL": "Neither a density nor root-spacing control can procedurally change an existing multi-strand coat. Merely hiding the entire coat, adjusting its material, or editing frozen strands individually does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_radial_coat.png"],
+      "verification": {
+        "method": "Density and root-spacing recomputation probe",
+        "procedure": "Record the default evaluated root distribution. In a temporary copy, lower the labeled density control sufficiently to produce a visibly sparser population, then restore it. Increase the minimum root spacing until the nearest-root separation visibly grows, then restore it. Compare evaluated root positions or controlled neutral views from front and rear after each change. Confirm the effect is actual regeneration over the whole core and that strand form and direction survive. Inspect the restored default state for a populated coat.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 5,
+      "requirement_section": "4. Live Generator",
+      "criterion": "Seed changes produce reproducible variations of the populated radial coat.",
+      "scoring_rule": {
+        "PASS": "A seed change alters the root arrangement or roll of multiple visible coat strands; different strands retain varied roll and radial organization, and restoring the original seed and settings reproduces the original arrangement.",
+        "PARTIAL": "A seed change alters the root arrangement or roll of multiple visible coat strands, but at least one PASS condition is unmet.",
+        "FAIL": "A seed change does not alter the root arrangement or roll of multiple visible coat strands. An unused random parameter, a color-only change, or motion of the whole object does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_radial_coat.png"],
+      "verification": {
+        "method": "Deterministic seed round-trip probe",
+        "procedure": "Record evaluated root positions and strand directions or fixed-camera inspection renders at the saved seed. Change the labeled seed while holding other controls fixed and reevaluate. Confirm a different populated arrangement with varied roll. Restore the original seed and compare geometry or identical-camera views with the recorded default. Perform the probe in a temporary copy and do not infer functionality solely from a random node's presence.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "5. Surface and Presentation",
+      "criterion": "Actual core and strand materials produce the teal, coral, and light-green coated appearance with readable rounded highlights.",
+      "scoring_rule": {
+        "PASS": "An existing core and multiple actual coat strands have materials that visibly distinguish the core from strands; the core is teal, coral and light-green strands are interspersed across several coat regions, and the surfaces appear opaque and nonmetallic with restrained highlights revealing their rounded form.",
+        "PARTIAL": "An existing core and multiple actual coat strands have materials that visibly distinguish the core from strands, but at least one PASS condition is unmet. Missing minor coat regions alone do not force FAIL where these existing surfaces demonstrate the minimum.",
+        "FAIL": "An existing core and multiple actual coat strands do not have materials that visibly distinguish the core from strands. Materials on an unused source, image-only colors, or an entirely unshaded uniform surface do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_colored_nanoparticle.png"],
+      "verification": {
+        "method": "Material-use inspection and controlled rendered comparison",
+        "procedure": "Inspect the materials actually used by evaluated core and strand surfaces, then compare the saved render and a neutral-light test render if lighting obscures material response. Check the teal core and the distribution of both strand color families, opacity, nonmetallic response, and rounded highlights. Do not impose a particular shader node recipe or source tutorial parameter values.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The saved scene and named PNG form an inspectable, consistent default-state delivery.",
+      "scoring_rule": {
+        "PASS": "The supplied submission.blend opens and contains an actual core with a populated strand coat; it retains the editable source and generator, finished default settings, materials, camera, and Cycles GPU configuration, and the named PNG is a render of that same default scene showing the whole nanoparticle with all tips in frame and no detached source or unrelated objects.",
+        "PARTIAL": "The supplied submission.blend opens and contains an actual core with a populated strand coat, but at least one PASS condition is unmet.",
+        "FAIL": "The supplied submission.blend is absent, cannot be opened, or does not contain an actual core with a populated strand coat. A PNG alone cannot establish this minimum."
+      },
+      "evidence_refs": ["image/01_colored_nanoparticle.png", "image/03_radial_coat.png"],
+      "verification": {
+        "method": "Saved-file reopen and render provenance check",
+        "procedure": "Open submission.blend independently and inspect its saved default evaluated scene and render configuration. Locate B135_Wavy_Strand_Nanoparticle.png and confirm it decodes. Render a comparison from the saved camera in the submitted scene and compare geometry arrangement, colors, framing, and visible content to establish that the delivered PNG comes from that scene. Inspect retained source and generator availability without awarding procedural behavior here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The builder recreates the complete nanoparticle scene and saves a usable submission.blend.",
+      "scoring_rule": {
+        "PASS": "build.py can recreate an actual core and populated strand coat from an empty scene and save them as a reopenable submission.blend; its saved result also contains the working source and generator controls, final materials, camera, Cycles GPU setup, and finished default arrangement, with a short usable invocation comment and no missing external dependency.",
+        "PARTIAL": "build.py can recreate an actual core and populated strand coat from an empty scene and save them as a reopenable submission.blend, but at least one PASS condition is unmet.",
+        "FAIL": "build.py is absent, cannot recreate an actual core and populated strand coat from an empty scene, or does not save that result as a reopenable submission.blend. Loading an existing solution file or leaving only an unsaved in-memory scene does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Isolated rebuild followed by saved-result reopen",
+        "procedure": "Inspect the script's usage comment and code, then run it in a temporary clean working location with Blender 5.1.2 starting from an empty scene. Confirm that it constructs the scene rather than loading a prebuilt solution, writes submission.blend, and exits successfully. Open that newly saved file in a fresh Blender process and inspect its evaluated default geometry, materials, camera, render settings, and generator controls. The saved result is the verification target, not the script's transient in-memory state.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

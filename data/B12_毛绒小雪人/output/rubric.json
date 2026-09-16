@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "毛绒小雪人",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV15oqdBGEwh",
+    "id": "BV15oqdBGEwh"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 45, "SURF": 45, "PIPE": 10},
+  "weighting_note": "暂定权重，尚未校准。GEO 45 分覆盖头身、围巾、五官与帽子的实际形体及各自表面质量；SURF 45 分覆盖白色与红色绒毛、真实配色和面部绒毛避让；PIPE 10 分覆盖独立编辑与可迁移重建。静态毛发不构成 SIM，修改器存在性不构成 PROC，渲染引擎选择不单列 SCN。",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "1. 圆润的头身比例",
+      "criterion": "较小扁圆头部位于宽厚饱满身体上方，基本居中并自然衔接；隐藏绒毛后仍有完整、平滑的三维体量。",
+      "scoring_rule": {
+        "PASS": "头、身两种体量均成立，头小身大、居中衔接和柔和轮廓均符合要求，没有明显几何瑕疵。",
+        "PARTIAL": "头身均能辨认，但大小层次、衔接、扁圆轮廓或局部几何质量至少一项明显偏离；仍保留上下双体量雪人结构。",
+        "FAIL": "不满足前两档，包括缺少头或身、无法辨认上下双体量、以平面图像代替主体，或破损严重到不能作为完整形体检查。"
+      },
+      "evidence_refs": ["image/02_shape.png", "image/01_complete.png"],
+      "verification": {
+        "method": "评估几何检查与多视角人工/VLM 复核",
+        "procedure": "在提交工程副本中暂时隐藏纤维覆盖，辨认头部和身体的实际评估几何；从正面、侧面和背面检查相对尺寸、叠放关系、衔接及完整轮廓。利用几何边界和包围盒辅助比较，不依赖对象数量、名称或修改器类型。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 12,
+      "requirement_section": "2. 围巾与偏戴小帽",
+      "criterion": "围巾为贴合颈部的厚环带，并有一条正面偏侧、末端圆钝的短垂片；两部分连接关系清楚且具有真实厚度。",
+      "scoring_rule": {
+        "PASS": "环带绕颈、单条偏侧垂片、厚度与连接关系均成立，边缘平滑，整体贴合身体。",
+        "PARTIAL": "有立体围巾结构，但环绕、垂片、厚度、连接或边缘质量至少一项不完整；仍能辨认环带或垂片中的至少一个主要形体。",
+        "FAIL": "不满足前两档，包括围巾缺失、只有红色涂区、没有可检查的围巾体积，或整体无法辨认。"
+      },
+      "evidence_refs": ["image/02_shape.png", "image/01_complete.png"],
+      "verification": {
+        "method": "评估几何与环绕视图检查",
+        "procedure": "隐藏绒毛并环绕查看颈部，确认围巾在背面也形成环带；检查正面偏侧垂片的实体厚度、圆端及与环带的相接。必要时隔离围巾评估几何，排除材质区域或摄像机朝向平面冒充立体围巾。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 11,
+      "requirement_section": "3. 简洁立体五官",
+      "criterion": "两只小圆眼睛基本对称、大小相近，中央短鼻为朝前突出的圆钝锥形；五官贴合脸部且外形平滑。",
+      "scoring_rule": {
+        "PASS": "两眼与短鼻均完整，眼睛的尺度和分布自然，鼻子从侧面可见收尖长度，接触与平滑度符合要求。",
+        "PARTIAL": "至少存在一类可辨认的立体五官，但有数量不完整、明显不对称、尺度失衡、鼻形不符或局部接触/表面缺陷。",
+        "FAIL": "不满足前两档，包括眼睛和鼻子均缺失、仅有平面图案，或无法辨认任何要求的立体五官。"
+      },
+      "evidence_refs": ["image/02_shape.png", "image/03_face_fur.png"],
+      "verification": {
+        "method": "隐藏绒毛后的正面与侧面几何检查",
+        "procedure": "在工程副本中暂时隐藏面部绒毛，检查两眼的真实形体、相对大小和位置，再从侧面查看鼻子朝前伸出及收尖趋势。此项只评价五官几何，不用黑橙材质或毛发遮挡决定结果。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. 围巾与偏戴小帽",
+      "criterion": "有体积的圆顶帽向头顶一侧倾斜，帽沿贴合头部，帽顶连接小圆绒球；帽体和绒球轮廓圆润。",
+      "scoring_rule": {
+        "PASS": "圆顶帽、偏戴姿态、贴合帽沿和帽顶绒球均完整，连接自然，灰模轮廓平滑。",
+        "PARTIAL": "至少存在可辨认的立体帽体，但倾斜姿态、帽沿贴合、绒球连接或圆润程度至少一项不完整。",
+        "FAIL": "不满足前两档，包括帽体缺失、仅用颜色表示帽子、只有孤立绒球，或帽体无法辨认。"
+      },
+      "evidence_refs": ["image/02_shape.png", "image/01_complete.png"],
+      "verification": {
+        "method": "帽子评估几何与接触关系检查",
+        "procedure": "暂时隐藏帽子和绒球纤维，从正面与侧面检查帽顶收拢形态、偏戴姿态及与头部的接触；查看绒球的球状几何和与帽顶的连接。允许任何等效几何组织方式，不检查是否保留特定实体化或细分修改器。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "4. 分区配色与毛绒质感",
+      "criterion": "头部、身体和帽顶绒球均有细密短绒覆盖，近看有纤维变化，多角度下保留柔软毛边与清楚体量。",
+      "scoring_rule": {
+        "PASS": "三个指定区域均有成立的短绒效果，表面覆盖连续、轮廓柔软，转动视角仍能看到纤维体积，且不掩盖主体体量。",
+        "PARTIAL": "至少一个指定区域具有可检查的立体短绒，但其余区域缺少覆盖，或部分覆盖过稀、过长、僵硬而偏离参考质感。",
+        "FAIL": "不满足前两档，包括三个区域均无成立的立体绒毛，只有平面噪点/模糊处理，或相关部件缺失使绒毛无法检查。"
+      },
+      "evidence_refs": ["image/01_complete.png", "image/03_face_fur.png"],
+      "verification": {
+        "method": "实际材质显示、多角度近景与表面数据联合检查",
+        "procedure": "使用中性照明查看头部、身体和绒球的正面、侧面、背面及轮廓近景；核实实际连接并显示的毛发、曲线、几何或等效表面实现能在不同视角形成纤维体积。此项评估绒毛质感与覆盖，不按粒子系统存在性、数量、长度字段或白色材质名称计分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. 分区配色与毛绒质感",
+      "criterion": "帽体、围巾环带和垂片都有短而蓬松的纤维覆盖，柔软毛边沿各自形状连续分布。",
+      "scoring_rule": {
+        "PASS": "帽体、环带和垂片三个区域均有成立的短绒质感；转动视角后毛边仍连续，各配件形体清晰。",
+        "PARTIAL": "至少一个指定配件区域有成立的立体短绒，但其余区域缺失覆盖，或局部纤维过稀、过长、僵硬而明显偏离参考。",
+        "FAIL": "不满足前两档，包括三个配件区域均无成立的立体绒毛、只有光滑色块或平面噪点，或配件缺失使绒毛无法检查。"
+      },
+      "evidence_refs": ["image/01_complete.png"],
+      "verification": {
+        "method": "配件隔离视图与实际表面检查",
+        "procedure": "在保存的材质状态下分别查看帽体、围巾环带及垂片，并绕颈部检查背面覆盖。近景观察纤维方向变化及轮廓毛边，核对产生这些效果的实际可用表面数据；不以共享材质、共享设置或指定子级数代替可见效果。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. 分区配色与毛绒质感",
+      "criterion": "白色头身和绒球、红色帽体及围巾、黑色眼睛、橙色鼻子均正确对应；绒毛同色，眼睛光滑且略有高光。",
+      "scoring_rule": {
+        "PASS": "四组颜色全部正确作用于指定部位，现有绒毛与覆盖区域同色，黑眼睛具有可见的光滑轻微高光。",
+        "PARTIAL": "至少两组指定部位的实际颜色对应正确，但未达到全部对应、绒毛同色或眼睛质感的要求。",
+        "FAIL": "不满足前两档，包括少于两组指定部位正确着色，或仅创建了未实际作用于模型的色板。"
+      },
+      "evidence_refs": ["image/01_complete.png", "image/03_face_fur.png"],
+      "verification": {
+        "method": "中性照明材质视图与实际分配核对",
+        "procedure": "查看提交场景在中性照明下的实际材质效果，逐组确认白/红/黑/橙作用部位；核对可见几何和绒毛的材质关联，轻微变换视角确认眼睛高光。缺失部位不算该组颜色已正确分配；绒毛缺失由覆盖项评价，此项不重复按缺失数量扣分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "5. 面部可读性与绒毛边界",
+      "criterion": "面部白色绒毛连续而不过度遮挡两眼与鼻子，局部避让自然，无大片裸区或跨越五官的毛团。",
+      "scoring_rule": {
+        "PASS": "面部有实际绒毛且两眼和鼻子均存在；正面与略侧面均清楚可辨，周围毛绒连续，无遮挡毛帘或大片裸区。",
+        "PARTIAL": "面部存在实际绒毛和至少一个可辨认五官，局部避让已形成，但某个五官部分被遮挡、局部露底明显，或未能完整展示两眼与鼻子。",
+        "FAIL": "不满足前两档，包括没有面部绒毛、所有五官均缺失或被遮挡到无法辨认，因而不能证明有效的面部避让。"
+      },
+      "evidence_refs": ["image/03_face_fur.png", "image/01_complete.png"],
+      "verification": {
+        "method": "开启面部绒毛后的成品视图检查",
+        "procedure": "保留最终面部绒毛，在正面与略侧面近景检查眼睛和鼻子的边界及周围毛绒连续性；必要时与临时隐藏绒毛的同视角对照，区分几何不存在和实际纤维遮挡。此项只评价面部覆盖与避让的结果，不要求某种梳理工具、遮罩或粒子编辑记录。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "6. 可编辑结构与复现",
+      "criterion": "可以独立修改围巾颜色，以及帽子与绒球摆放，且不意外改变头身或五官。",
+      "scoring_rule": {
+        "PASS": "在工程副本中，围巾单独改色和帽子连同绒球的独立摆放两项操作都有效，头身与五官保持不变，修改可撤回。",
+        "PARTIAL": "上述两项独立编辑中恰有一项有效；另一项因编辑范围不明确或意外联动而失败。",
+        "FAIL": "上述两项均无法完成，或相关资产不存在，不能证明独立编辑能力。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "非破坏性编辑功能探测",
+        "procedure": "复制工程后将围巾改为易辨认的临时颜色，确认帽子与其余部件颜色不变；恢复后小幅调整帽子及绒球摆放，确认头身、围巾和五官保持原状，再恢复。允许对象、网格选择范围或有效参数，不以对象数量和命名作为证据。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "6. 可编辑结构与复现",
+      "criterion": "build.py 能从空场景重建主要形体、材质和绒毛并保存工程；所需资源可随工程迁移，随机效果稳定。",
+      "scoring_rule": {
+        "PASS": "在 Blender 5.1.2 空场景执行所说明流程能保存工程，并复现主要轮廓、毛绒覆盖、配色和面部可读性；迁移目录后资源可解析，重复重建稳定。",
+        "PARTIAL": "脚本能从空场景生成可辨认的完整雪人主体并保存工程，但材质/绒毛复现、资源迁移或重复稳定性至少一项失败。",
+        "FAIL": "不满足前两档，包括脚本缺失、无法按说明执行，或不能从空场景生成并保存可辨认的雪人主体。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "隔离目录重建与依赖闭包检查",
+        "procedure": "将交付复制到新目录，在 Blender 5.1.2 空场景按脚本说明构建，检查工程保存和外部路径解析；再独立重建一次，比较主要轮廓、颜色分区、绒毛覆盖与面部可读性。仅检查复现过程，不在此重复评价造型的美术准确度；实际需要 GPU 时按任务环境授权规则执行。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

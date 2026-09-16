@@ -1,0 +1,206 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Cheese and Sesame Hot Dog",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1kozcB6EaG",
+    "id": "BV1kozcB6EaG"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 55,
+    "SURF": 30,
+    "SCN": 5,
+    "PIPE": 10
+  },
+  "weighting_note": "The five distinct food forms and their local fit receive 55 points. Bread shading and filling/topping shading receive 30 points because the finished appearance is a substantial part of this static asset. Composition receives 5 and saved reproducibility plus scene-derived delivery receives 10. No procedural geometry, rig, animation, or physical simulation is required merely because the source used curves, particles, or a baked cloth deformation.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Bread and Sausage",
+      "criterion": "A balanced pair of soft elongated bun lobes defines an open central channel.",
+      "scoring_rule": {
+        "PASS": "At least one recognizable volumetric elongated bun lobe exists in the food assembly. Two rounded lobes have aligned long axes, balanced sizes, smooth shoulders and closed rounded ends; together they leave a continuous channel and avoid sharp box-like corners or major mutual penetration.",
+        "PARTIAL": "At least one recognizable volumetric elongated bun lobe exists in the food assembly. At least one other PASS condition is unmet.",
+        "FAIL": "The minimum is not met: At least one recognizable volumetric elongated bun lobe exists in the food assembly."
+      },
+      "evidence_refs": [
+        "image/01_finished_hot_dog.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "Inspect evaluated geometry in top, end, and three-quarter solid views. Identify actual bun surfaces by shape and position, assess both silhouettes and the channel, and distinguish a single object containing two lobes from an incomplete single lobe. Do not use object or vertex counts as a proxy for form.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Bread and Sausage",
+      "criterion": "A rounded sausage nests visibly along the bun channel.",
+      "scoring_rule": {
+        "PASS": "An identifiable solid elongated sausage body exists within the bun assembly. It has a thick rounded cylindrical body, smooth closed ends, a visible upper surface and end caps, and sits centrally between the lobes without a floating gap or extensive obscuring intersections.",
+        "PARTIAL": "An identifiable solid elongated sausage body exists within the bun assembly. At least one other PASS condition is unmet.",
+        "FAIL": "The minimum is not met: An identifiable solid elongated sausage body exists within the bun assembly."
+      },
+      "evidence_refs": [
+        "image/01_finished_hot_dog.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "Inspect the sausage in evaluated solid geometry from the final view and an end view; temporarily hide sauce and cheese to check closed caps and central fit. Judge only sausage form and its relation to the bun here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Draped Cheese",
+      "criterion": "A thin cheese sheet bends into the channel and drapes over the bun shoulders.",
+      "scoring_rule": {
+        "PASS": "An identifiable broad, bent cheese sheet rests across at least one inner bun shoulder. The sheet continues into the channel and across both inner shoulders, retains exposed angular corners and small visible thickness, and has smooth folds without torn surfaces, spikes, or extensive intersections.",
+        "PARTIAL": "An identifiable broad, bent cheese sheet rests across at least one inner bun shoulder. At least one other PASS condition is unmet.",
+        "FAIL": "The minimum is not met: An identifiable broad, bent cheese sheet rests across at least one inner bun shoulder."
+      },
+      "evidence_refs": [
+        "image/01_finished_hot_dog.png",
+        "image/02_sauce_and_cheese_layout.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "Temporarily hide the sausage and sauce in a duplicate inspection scene. Inspect the evaluated cheese sheet from above and from the side to see its bend into the channel, shoulder contact, exposed corners, and edge thickness. Restore visibility afterwards. A flat plane suspended above the bun cannot establish the minimum.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Raised Sauce Strands",
+      "criterion": "Separate raised sauce paths form continuous readable side-to-side bends across the sausage.",
+      "scoring_rule": {
+        "PASS": "At least one volumetric sauce path forms repeated side-to-side bends and rests along the sausage top. Two offset editable three-dimensional paths extend along most of the visible sausage length, have rounded cross-sections and soft terminations, remain closely fitted to the food, and preserve readable loops without detached coils or extensive burial in the sausage.",
+        "PARTIAL": "At least one volumetric sauce path forms repeated side-to-side bends and rests along the sausage top. At least one other PASS condition is unmet.",
+        "FAIL": "The minimum is not met: At least one volumetric sauce path forms repeated side-to-side bends and rests along the sausage top."
+      },
+      "evidence_refs": [
+        "image/02_sauce_and_cheese_layout.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "Inspect evaluated sauce geometry from above and low oblique views, including endpoints and crossing regions. Use a neutral material override to judge path shape separately from sauce colors. Inspect the underlying editable geometry, allowing curves or equivalent geometry. A single isolated dab, painted line, or floating decorative helix does not establish the minimum.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Sesame Seeds",
+      "criterion": "Small volumetric sesame seeds sit naturally across the bread shoulders.",
+      "scoring_rule": {
+        "PASS": "Multiple separated volumetric seeds are attached to an exposed bun shoulder. Seeds are distributed across both lobes with multiple separated seeds on each side, plump tapered-oval shapes, coherent small size, varied orientations and spacing, and enough exposed bread between them; they do not visibly hover or sink completely into the bun.",
+        "PARTIAL": "Multiple separated volumetric seeds are attached to an exposed bun shoulder. At least one other PASS condition is unmet.",
+        "FAIL": "The minimum is not met: Multiple separated volumetric seeds are attached to an exposed bun shoulder."
+      },
+      "evidence_refs": [
+        "image/01_finished_hot_dog.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "Inspect a close-up of both exposed shoulders and evaluated seed geometry. Check the local surface contacts, small tapered shapes, variation, and coverage. A lone seed, an unused source seed, or dots supplied only by a texture do not establish the minimum.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Food Materials",
+      "criterion": "Existing bun surfaces read as gently textured baked bread.",
+      "scoring_rule": {
+        "PASS": "At least one existing bun lobe carries a material that visibly reads as warm baked bread. Both bun lobes use warm golden-brown shading with gentle lighter-to-darker variation and fine surface texture; the shading remains soft and clean without metallic response, rocky relief, or dominant mottling.",
+        "PARTIAL": "At least one existing bun lobe carries a material that visibly reads as warm baked bread. At least one other PASS condition is unmet.",
+        "FAIL": "The minimum is not met: At least one existing bun lobe carries a material that visibly reads as warm baked bread."
+      },
+      "evidence_refs": [
+        "image/01_finished_hot_dog.png"
+      ],
+      "verification": {
+        "method": "controlled_render_and_material_assignment_inspection",
+        "procedure": "Render the existing bun under broad neutral lighting in a temporary inspection copy, with fillings hidden only where needed for surface inspection. Examine color variation, fine shading texture, and highlights on curved areas. Confirm the inspected materials are assigned to those bun surfaces. Do not award surface credit to unused material datablocks or an absent lobe.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Food Materials",
+      "criterion": "The sausage, cheese, sauces, and seeds have distinct food colors and appropriate highlight responses.",
+      "scoring_rule": {
+        "PASS": "An existing sausage and at least one existing topping carry visibly distinguishable food materials. All required food components are present. The sausage is red-brown, cheese is golden-yellow, the two sauces are saturated red and pale-yellow, and the seeds are light and warm-colored; the sausage and sauces have soft glossy highlights, cheese is smooth, seeds have a restrained matte-to-satin response, and all layers remain readable without washed-out color or blown highlights.",
+        "PARTIAL": "An existing sausage and at least one existing topping carry visibly distinguishable food materials. At least one other PASS condition is unmet.",
+        "FAIL": "The minimum is not met: An existing sausage and at least one existing topping carry visibly distinguishable food materials."
+      },
+      "evidence_refs": [
+        "image/01_finished_hot_dog.png"
+      ],
+      "verification": {
+        "method": "controlled_render_and_material_assignment_inspection",
+        "procedure": "Inspect material assignments on the actual sausage, cheese, sauce paths, and seeds, then compare a neutral-light controlled render with the final camera image. Confirm the complete required set exists for PASS. When a topping is missing, assess the minimum using only substantive existing surfaces; its absence alone cannot establish correct shading. Geometric placement is assessed by the GEO rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "Presentation",
+      "criterion": "The camera and soft lighting make the layered food asset inspectable.",
+      "scoring_rule": {
+        "PASS": "The final camera image visibly presents an assembled bun and sausage. The image uses an elevated three-quarter view and uncluttered neutral background, frames the complete existing assembly with open space, avoids camera occlusion of its food layers, and makes existing seeds, sauce loops, and rounded volume readable under soft lighting. Component absence is assessed in the geometry rows.",
+        "PARTIAL": "The final camera image visibly presents an assembled bun and sausage. At least one other PASS condition is unmet.",
+        "FAIL": "The minimum is not met: The final camera image visibly presents an assembled bun and sausage."
+      },
+      "evidence_refs": [
+        "image/01_finished_hot_dog.png"
+      ],
+      "verification": {
+        "method": "final_camera_render_and_visual_inspection",
+        "procedure": "Render the submitted final camera and compare framing and lighting with the supplied PNG. Inspect clipping, occlusion, silhouette separation, food scale within the image, and visibility of the specified layers. Judge the image behavior, not the mere existence or number of cameras and lights.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The saved editable scene, recreating script, and actual-scene PNG form a reproducible submission.",
+      "scoring_rule": {
+        "PASS": "The supplied submission.blend opens with an editable assembled bun and sausage. The submission includes the complete editable scene; build.py runs from a clean scene using its declared invocation, recreates that scene and explicitly saves submission.blend; reopening that saved result preserves the food, materials, camera, lighting and Cycles GPU configuration; B117_Cheese_and_Sesame_Hot_Dog.png is at least 1200 by 1200 pixels and was rendered from the actual submitted scene.",
+        "PARTIAL": "The supplied submission.blend opens with an editable assembled bun and sausage. At least one other PASS condition is unmet.",
+        "FAIL": "The minimum is not met: The supplied submission.blend opens with an editable assembled bun and sausage."
+      },
+      "evidence_refs": [
+        "image/01_finished_hot_dog.png"
+      ],
+      "verification": {
+        "method": "fresh_rebuild_saved_project_reopen_and_render_comparison",
+        "procedure": "First open the supplied submission.blend and inspect editability. Read the invocation comment, execute build.py in an isolated writable location with Blender 5.1.2, and resolve the file location specified by the script without imposing an additional output-directory rule. Verify that a newly saved submission.blend exists, reopen that file in a fresh Blender process, and compare its evaluated food assembly, active materials and final camera with the submitted project. Check Cycles GPU settings and PNG dimensions; render the reopened scene from its final camera and compare with the PNG to detect source-image or external replacements. A rebuild that exists only in memory fails the save condition.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

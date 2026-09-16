@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Parametric Stair Generator",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=vUT22ZfcoFU",
+    "id": "vUT22ZfcoFU"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 30, "PROC": 60, "PIPE": 10},
+  "weighting_note": "The reusable generator is the central outcome. Sixty points assess internal generation and five distinct control relationships, thirty assess the saved geometry, and ten assess reproducible saved delivery. Plain neutral presentation is evidence of geometry rather than a separate material or scene-design capability.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Finished Staircase",
+      "criterion": "The saved asset contains five distinct rectangular tread slabs with level parallel tops and a shared width centerline.",
+      "scoring_rule": {
+        "PASS": "Exactly five distinct tread slabs are present, their top faces are level and parallel in generator-local space, and their centers share the same local Y coordinate.",
+        "PARTIAL": "At least two distinct rectangular tread slabs with identifiable top faces exist, but at least one PASS condition is unmet.",
+        "FAIL": "Fewer than two distinct rectangular tread slabs with identifiable top faces exist."
+      },
+      "evidence_refs": ["image/01_five_tread_flight.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection",
+        "procedure": "Open submission.blend, enumerate evaluated tread instances or components, and transform them into generator-local space. Count distinct slabs and compare their top-face normals and center Y coordinates. Use an orthographic top view to resolve ambiguous overlap. Do not assess their spacing or size ratios in this row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Finished Staircase",
+      "criterion": "The saved tread geometry consists of clean closed boxes with width-to-depth 4 and thickness-to-depth 0.33.",
+      "scoring_rule": {
+        "PASS": "At least two substantive tread slabs exist; every existing tread is a closed rectangular box with flat faces and clean edges, and its width/depth and thickness/depth ratios are within 5% of 4 and 0.33 respectively.",
+        "PARTIAL": "At least one substantive closed slab exists whose width exceeds its depth and whose depth exceeds its thickness, but at least one PASS condition is unmet.",
+        "FAIL": "No substantive closed slab exists whose width exceeds its depth and whose depth exceeds its thickness."
+      },
+      "evidence_refs": ["image/02_tread_proportions.png", "image/03_slab_spacing_detail.png"],
+      "verification": {
+        "method": "Prototype mesh and instance-dimension inspection",
+        "procedure": "Inspect the actual prototype mesh or temporarily realize evaluated copies without saving. Verify closed surfaces and planar faces, measure each existing tread in local axes, and compute width/depth and thickness/depth. Inspect edge and face shading in a neutral close view. Missing treads are assessed in GEO-01 and do not alone make this row FAIL.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Spacing and Origin",
+      "criterion": "The saved flight is anchored at its lowest tread center and has the specified horizontal run, rise, and open gaps.",
+      "scoring_rule": {
+        "PASS": "At least two substantive treads exist. Their lowest center is at the generator-local origin, every consecutive center advances by 1.25D in X and 0.625D in Z, and every adjacent horizontal edge gap is 0.25D, with distances within 5% of their targets. D is the saved tread depth.",
+        "PARTIAL": "At least two substantive treads have positive horizontal and vertical separation, forming a rising flight, but at least one PASS condition is unmet.",
+        "FAIL": "There are not two substantive treads with positive horizontal and vertical separation forming a rising flight."
+      },
+      "evidence_refs": ["image/01_five_tread_flight.png", "image/03_slab_spacing_detail.png"],
+      "verification": {
+        "method": "Local-space geometric measurement",
+        "procedure": "Read the saved depth D, sort tread centers by local X, and measure the first center, consecutive X/Z differences, and adjacent horizontal edge gaps. Compare with the public dimensionless targets. Inspect a side view for crossed or overlapping slabs. Count errors alone belong to GEO-01; assess the measurable spacing of existing treads here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Live Procedural Asset",
+      "criterion": "A live self-contained Geometry Nodes generator produces repeated instances of its internal tread prototype independently of the carrier mesh.",
+      "scoring_rule": {
+        "PASS": "One carrier's live Geometry Nodes generator creates the whole staircase as instances of its internally generated tread prototype. Replacing the carrier's original mesh in a temporary copy leaves the generated staircase unchanged and adds no visible carrier geometry.",
+        "PARTIAL": "A live Geometry Nodes generator creates at least two repeated substantive treads, but at least one PASS condition is unmet, including realized output or dependence on the carrier mesh.",
+        "FAIL": "No live Geometry Nodes generator creates at least two repeated substantive treads; a baked or manually duplicated staircase alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_five_tread_flight.png", "image/02_tread_proportions.png"],
+      "verification": {
+        "method": "Dependency inspection and carrier replacement probe",
+        "procedure": "Inspect the evaluated Geometry Nodes result for repeated prototype instances and trace the prototype's native generation. In a disposable scene copy replace the carrier mesh with an empty mesh, force dependency-graph evaluation, and compare tread dimensions and transforms before and after. Do not require particular node names, types beyond Geometry Nodes, counts, or socket order.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Dimension and Rise Controls",
+      "criterion": "An exposed width control updates every tread's width independently of its other dimensions and position.",
+      "scoring_rule": {
+        "PASS": "With at least two substantive treads present, multiplying the exposed width control by 1.5 multiplies every tread's width by 1.5 within 5%, leaving all centers, depths, thicknesses, and the tread count unchanged.",
+        "PARTIAL": "An exposed width control directly changes the widths of at least two substantive treads in the requested direction, but at least one PASS condition is unmet.",
+        "FAIL": "There is no exposed control that directly changes the widths of at least two substantive treads in the requested direction."
+      },
+      "evidence_refs": ["image/02_tread_proportions.png"],
+      "verification": {
+        "method": "Modifier-input perturbation",
+        "procedure": "On a temporary copy locate the exposed width control by function, record evaluated tread dimensions and centers, set width to 1.5 times its saved value, force evaluation, and compare each result. Confirm the other quantities remain unchanged, then restore the value. A control that only changes an unused node does not count.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Dimension and Rise Controls",
+      "criterion": "An exposed depth control changes tread depth and horizontal distribution together while preserving the other independent dimensions.",
+      "scoring_rule": {
+        "PASS": "With at least two substantive treads present, multiplying depth by 1.5 multiplies every tread's depth and every center's horizontal offset from the first center by 1.5 within 5%, leaving width, thickness, vertical center positions, and count unchanged.",
+        "PARTIAL": "An exposed depth control directly increases the depths of at least two substantive treads, but at least one PASS condition is unmet.",
+        "FAIL": "There is no exposed control that directly increases the depths of at least two substantive treads."
+      },
+      "evidence_refs": ["image/01_five_tread_flight.png", "image/03_slab_spacing_detail.png"],
+      "verification": {
+        "method": "Coupled dimension and position perturbation",
+        "procedure": "Record evaluated dimensions and centers in a temporary copy. Multiply only the exposed depth by 1.5, reevaluate, and compare depth and horizontal center offsets with their saved values. Check width, thickness, center Z coordinates, and count for unintended changes. Restore the value.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-04",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Dimension and Rise Controls",
+      "criterion": "An exposed thickness control changes slab thickness symmetrically about the tread centers without changing the flight's climb.",
+      "scoring_rule": {
+        "PASS": "With at least two substantive treads present, halving the exposed thickness halves every tread's thickness within 5%, leaving all tread centers, depths, widths, and count unchanged.",
+        "PARTIAL": "An exposed thickness control directly reduces the thicknesses of at least two substantive treads, but at least one PASS condition is unmet.",
+        "FAIL": "There is no exposed control that directly reduces the thicknesses of at least two substantive treads."
+      },
+      "evidence_refs": ["image/02_tread_proportions.png", "image/03_slab_spacing_detail.png"],
+      "verification": {
+        "method": "Thickness independence probe",
+        "procedure": "Halve only the exposed thickness in a temporary copy and force evaluation. Compare top and bottom surface offsets around every center and confirm the center positions, width, depth, and count remain unchanged. Restore the original thickness before other probes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-05",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Dimension and Rise Controls",
+      "criterion": "An exposed rise factor changes vertical distribution independently of tread size and horizontal position.",
+      "scoring_rule": {
+        "PASS": "With at least two substantive treads present, multiplying only the rise factor by 1.5 multiplies every center's vertical offset from the first center by 1.5 within 5%, leaving all tread dimensions, horizontal positions, and count unchanged.",
+        "PARTIAL": "An exposed rise control directly increases the vertical separation of at least two substantive treads, but at least one PASS condition is unmet.",
+        "FAIL": "There is no exposed control that directly increases vertical separation between at least two substantive treads."
+      },
+      "evidence_refs": ["image/01_five_tread_flight.png", "image/03_slab_spacing_detail.png"],
+      "verification": {
+        "method": "Rise independence probe",
+        "procedure": "Record evaluated tread centers and dimensions, multiply only the exposed rise factor by 1.5 in a temporary copy, and reevaluate. Compare vertical center offsets and confirm unchanged dimensions, X/Y positions, and count. Restore the saved rise factor.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-06",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Count and Endpoint Behavior",
+      "criterion": "The integer count controls both the number of treads and the correctly rescaled endpoint distribution.",
+      "scoring_rule": {
+        "PASS": "The integer control supports 2 through 20 and produces exactly 2, 11, and 5 treads when set to those values. At every probe, sizes remain unchanged, the first center remains at the local origin, the last center is at (N times depth, 0, N times rise factor), and centers are evenly spaced, with distances within 5% of the public targets.",
+        "PARTIAL": "An exposed count control directly produces at least two different valid tread counts of two or more, but at least one PASS condition is unmet.",
+        "FAIL": "No exposed count control directly produces at least two different valid tread counts of two or more."
+      },
+      "evidence_refs": ["image/01_five_tread_flight.png"],
+      "verification": {
+        "method": "Count sweep with endpoint measurements",
+        "procedure": "Inspect that the exposed count accepts integers across 2 through 20. In a temporary copy set N to 2, then 11, then 5. At each state force evaluation, enumerate the treads, record sizes and centers, and compare the last center and equal intervals against the public N-dependent rule. Verify restoration returns the saved configuration; do not equate the nominal rise factor with adjacent center spacing.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The submitted files provide a reproducible saved Blender scene and a render from that scene.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the saved staircase and live controls. build.py recreates the scene from a new scene and explicitly saves submission.blend; reopening that generated file in a fresh Blender process reproduces the delivered geometry and controls. The correctly named PNG is rendered from the actual scene, shows the entire flight and gaps, and uses the saved three-quarter camera with Cycles GPU settings.",
+        "PARTIAL": "submission.blend opens with a substantive staircase of at least two treads, but at least one PASS condition is unmet.",
+        "FAIL": "submission.blend is absent, cannot be opened, or contains no substantive staircase of at least two treads."
+      },
+      "evidence_refs": ["image/01_five_tread_flight.png"],
+      "verification": {
+        "method": "Fresh-process rebuild, saved-file reopen, and render comparison",
+        "procedure": "In a future Blender 5.1.2 environment, first open the supplied submission.blend. Run build.py from a new scene in an isolated writable directory and confirm it creates submission.blend on disk. Close that process, reopen the newly saved file in a fresh process, and compare evaluated geometry and control responses with the original submission. Inspect the configured render engine, GPU device setting, camera, and output path; produce a controlled render from the reopened scene and compare its visible asset and framing with B88_Parametric_Stair_Generator.png. Successful unsaved in-memory generation is insufficient.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

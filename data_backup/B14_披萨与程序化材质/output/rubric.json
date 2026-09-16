@@ -1,0 +1,121 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "披萨与程序化材质",
+  "source_video": {"url": "https://www.bilibili.com/video/BV1EK8K6tE9u", "id": "BV1EK8K6tE9u"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 30, "PROC": 15, "SURF": 50, "PIPE": 5},
+  "weighting_note": "暂定权重，尚未校准。材质是本例主要目标，按芝士烘烤色、微表面、饼皮和碎料颜色分配50分；几何以切片、下垂和分层三项各10分覆盖。15分用于实际有效的碎料散布与控制，5分用于可迁移重建。渲染引擎设置不单独计为SCN。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 楔形饼身与连续下垂",
+      "criterion": "披萨具有前窄后宽的楔形饼身，以及圆润、厚于饼身并自然连接的后端饼边。",
+      "scoring_rule": {
+        "PASS": "楔形饼身与完整鼓起的后端饼边同时成立，厚薄关系清楚且连接自然。",
+        "PARTIAL": "有体积的披萨切片主体可辨，但楔形比例、饼边体量或连接处至少一项未满足完整要求。",
+        "FAIL": "没有可辨认的披萨切片主体，或仅有参考图片、无体积三角面片及无关几何。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/02_layers.png"],
+      "verification": {"method": "evaluated_geometry_and_visual_review", "procedure": "在提交工程中隔离披萨，检查求值后的实际几何。用顶视与斜侧视观察前后宽度、饼边横向延伸及其与薄饼身的连接；判断实际轮廓而非对象名、物体数或修改器类型。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 楔形饼身与连续下垂",
+      "criterion": "切片中前段真实弯曲，尖端下垂，侧边带轻微不对称波浪，弧度连续且末端圆钝。",
+      "scoring_rule": {
+        "PASS": "局部下垂、两侧不对称起伏及圆润连续轮廓全部可见，无明显折角或尖刺。",
+        "PARTIAL": "有真实局部弯曲或侧边起伏，但下垂不清楚、轮廓过于规则或存在局部生硬折角。",
+        "FAIL": "主体缺失，或披萨保持完全平板形状且只靠整体倾斜表现下垂。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/02_layers.png"],
+      "verification": {"method": "evaluated_geometry_and_visual_review", "procedure": "在物体局部坐标下检查求值网格，排除整体旋转造成的假下垂；从两侧和三分之四视角查看尖端相对相邻中段的下降及侧边波浪。可临时使用灰模材质排除烘烤斑造成的形状错觉。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 饼皮与芝士的分层厚度",
+      "criterion": "芝士与饼皮具有分别可编辑的真实分层和薄层厚度，侧边能看出饼底，接触处无明显几何破坏。",
+      "scoring_rule": {
+        "PASS": "两层分别可编辑且有真实厚度，芝士覆盖位置合理，饼底侧面可辨，层间没有大面积互穿、悬空缝或破面。",
+        "PARTIAL": "两层在几何上可辨，但厚度、分别编辑、覆盖位置或接触质量至少一项不满足完整要求。",
+        "FAIL": "缺少饼底或芝士层，或所谓分层完全由平面颜色表示。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/02_layers.png"],
+      "verification": {"method": "artifact_component_inspection_and_visual_review", "procedure": "分别隐藏或隔离饼皮与芝士组件，验证它们是可编辑的实际几何。查看求值后的侧面、底面及局部截面，确认薄层厚度、芝士在饼边前的终止位置和接触关系；允许等效组件组织，不以两个指定名称的对象作为证据。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 15,
+      "requirement_section": "3. 芝士的程序化烘烤表面",
+      "criterion": "芝士具有程序化生成的浅金黄底色与不规则橙红、红棕烘烤斑，大小有变化、边界自然。",
+      "scoring_rule": {
+        "PASS": "芝士存在，浅色底与大小变化的暖色烘烤斑均可辨，过渡自然且非机械重复；实际使用可编辑程序化颜色。",
+        "PARTIAL": "芝士存在并有烘烤色分布，但配色、斑块形态、过渡或程序化生成至少一项不满足完整要求。",
+        "FAIL": "芝士缺失，或没有可辨认的浅色底与烘烤斑组合；仅有未参与着色的纹理节点不构成完成。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/03_surface.png"],
+      "verification": {"method": "material_output_trace_functional_probe_and_visual_review", "procedure": "以提交材质渲染整体和近景，在不过曝的光照下判断底色、斑块尺度及过渡。追踪实际赋给芝士的颜色输出，在副本中修改其烘烤色或纹理尺度后重新求值，确认可见变化来自有效程序化材质；随后恢复。不得仅统计噪波或颜色渐变节点。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 10,
+      "requirement_section": "3. 芝士的程序化烘烤表面",
+      "criterion": "芝士具有柔和油润高光及较缓、细碎两类表面变化，微表面强弱可独立于颜色调整。",
+      "scoring_rule": {
+        "PASS": "油润高光与两类尺度的细微表面变化均可辨，起伏不过强；有效程序化微表面可独立于烘烤色调整。",
+        "PARTIAL": "芝士存在且有油润高光或可见微表面变化，但尺度层次、克制程度或独立调整能力不满足完整要求。",
+        "FAIL": "芝士缺失，或既无油润表面表现也无有效可见微表面变化。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/03_surface.png"],
+      "verification": {"method": "controlled_lighting_comparison_and_material_probe", "procedure": "保持曝光和观察距离稳定，以侧光或面积光近看芝士，并适度改变光线角度观察高光随微细节变化。在副本中减弱或关闭微表面通路，比较高光细节的变化并确认烘烤色仍保留；判断实际着色效果，不要求固定凹凸节点或强度数值。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-03", "capability": "SURF", "points": 15,
+      "requirement_section": "4. 饼皮与绿色碎料的材质区别",
+      "criterion": "饼皮具有可编辑程序化烘烤色与面包微表面，外观比芝士干爽且材质身份明确。",
+      "scoring_rule": {
+        "PASS": "饼皮存在，浅金黄至棕色的大尺度变化和细微面包凹凸均可辨，较芝士干爽，颜色与细节来自有效的独立程序化材质。",
+        "PARTIAL": "饼皮存在并呈烘烤面包色，但色泽层次、表面细节、与芝士的区别或独立程序化编辑至少一项不满足完整要求。",
+        "FAIL": "饼皮缺失，或饼皮未呈现可辨认的烘烤面包表面。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/03_surface.png"],
+      "verification": {"method": "assigned_material_probe_and_visual_review", "procedure": "检查实际赋给饼皮的材质，从后端饼边近景与薄饼底侧面观察色差、反射和微表面。追踪有效程序化输出，在副本中改变饼皮颜色或凹凸强弱并确认仅饼皮相应变化，随后恢复；不按材质数量或Mapping旋转数值计分。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "SURF-04", "capability": "SURF", "points": 10,
+      "requirement_section": "4. 饼皮与绿色碎料的材质区别",
+      "criterion": "香草碎自身材质呈至少两档绿色变化，并可独立调整而不改变披萨其他部位。",
+      "scoring_rule": {
+        "PASS": "可见碎料中有至少两档来自自身材质的绿色，变化分布于不同碎料，且碎料颜色可独立编辑。",
+        "PARTIAL": "碎料存在且呈绿色，但粒间材质色差不足，或无法独立调整其颜色。",
+        "FAIL": "碎料缺失，或没有绿色碎料表现；白色实例、只有阴影明暗的非绿色碎料及未连接颜色节点均不满足。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/03_surface.png"],
+      "verification": {"method": "instance_material_inspection_and_visual_review", "procedure": "近看多粒实际生成的碎料，以均匀照明或基础色通道排除阴影差异，确认浅深绿色来自材质。改变碎料颜色控制，检查芝士和饼皮不随之改色；允许有效实例随机、属性或等效材质方案。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PROC-01", "capability": "PROC", "points": 15,
+      "requirement_section": "5. 可编辑的表面碎料散布",
+      "criterion": "碎料默认疏散贴合芝士上表面，数量或密度控制能真实改变分布并保持区域限制。",
+      "scoring_rule": {
+        "PASS": "A与B同时成立：A为默认几十粒量级的细小扁平碎料疏散贴合芝士上表面；B为较疏、较密及恢复默认的功能测试成功，区域限制始终有效且披萨形状不变。",
+        "PARTIAL": "A与B中恰好一项成立；例如默认散布合理但控制无效，或控制有效但默认碎料外形、数量感或贴合质量未达要求。",
+        "FAIL": "A与B均不成立，包括碎料缺失且控制不产生有效结果；单独存在节点或空控制不构成完成。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/03_surface.png"],
+      "verification": {"method": "evaluated_scatter_inspection_and_functional_probe", "procedure": "检查求值后的碎料实例或几何，观察尺寸、扁平形状、疏密、方向与芝士接触。按工程说明测试较疏、较密两组设置，记录实际实例数或分离片段数量的变化，确认碎料仍处于芝士上表面，饼底和饼边外侧无散布；恢复默认值比较原结果。不以节点名、节点数或原教程的固定数量计分。", "implementation_status": "specified_not_implemented"}
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "提交文件",
+      "criterion": "build.py能在Blender5.1.2重建完整默认资产，依赖可迁移，随机结果可重复。",
+      "scoring_rule": {
+        "PASS": "在干净工作目录按说明重建成功，无缺失依赖；模型、材质与散布控制保留，重复构建产生相同默认结果。",
+        "PARTIAL": "脚本可以生成主要资产，但依赖定位、完整默认状态或随机复现至少一项需要修正。",
+        "FAIL": "缺少可执行的构建脚本，或按说明无法生成主要披萨资产。"
+      },
+      "evidence_refs": [],
+      "verification": {"method": "clean_environment_rebuild_comparison", "procedure": "在Blender5.1.2隔离目录运行提交的build.py，检查所需文件与路径是否可移植；重新打开输出，并对比几何、材质归属、默认散布和控制。再运行一次比较随机结果。此处仅规定未来验收流程，未实现或执行评分程序。", "implementation_status": "specified_not_implemented"}
+    }
+  ]
+}

@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Three-Direction Nanoparticle Cutaway",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV121unzyEST",
+    "id": "BV121unzyEST"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "This is a native-mesh modeling task. Ninety points assess separate geometric results: the spherical envelope, mouth outline, interior sections, central fillets, outer lip, editable regional structure, mesh integrity, and geometric shading. The high GEO share reflects the actual demonstrated scope; the source's modifier-presence and smooth-face flags are not treated as independent procedural or material capabilities. Ten points cover rebuilding a saved artifact and delivering its usable render.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Spherical Body and Opening",
+      "criterion": "The exterior retains a coherent spherical body around the cutaway.",
+      "scoring_rule": {
+        "PASS": "A volumetric particle with a substantial continuous convex exterior around its back and sides exists; that exterior follows one near-spherical envelope, and its overall dimensions remain comparable in all three directions.",
+        "PARTIAL": "A volumetric particle with a substantial continuous convex exterior around its back and sides exists, but it fails one or more PASS conditions, such as an elongated envelope, uneven curvature, or a locally collapsed spherical contour.",
+        "FAIL": "There is no volumetric particle with a substantial continuous convex exterior around its back and sides; an isolated plane, wire outline, or small detached shell fragment is insufficient."
+      },
+      "evidence_refs": ["image/01_cutaway_form.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection and controlled orthographic views",
+        "procedure": "Open submission.blend, isolate the intended particle, and inspect its evaluated exterior from the back and two side directions. Compare the remaining exterior against one best-fitting sphere and compare its three principal extents. Judge the large-scale envelope here; opening layout, shading, and rim rounding are assessed separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Spherical Body and Opening",
+      "criterion": "The single deep cutaway has the reference's three-arc rounded triangular mouth.",
+      "scoring_rule": {
+        "PASS": "A localized cutaway mouth in a volumetric curved body exists, with at least two connected curved boundary segments; the complete mouth forms one rounded triangular perimeter of three broad arcs and three tips, reaches inward toward the sphere's center, and leaves visible spherical exterior around the opening.",
+        "PARTIAL": "A localized cutaway mouth in a volumetric curved body exists, with at least two connected curved boundary segments, but it fails one or more PASS conditions, such as an incorrect third boundary, an overly shallow recess, or a distorted triangular outline.",
+        "FAIL": "There is no localized cutaway mouth in a volumetric curved body with at least two connected curved boundary segments; an uncut sphere, a flat painted triangle, or a single planar slice is insufficient."
+      },
+      "evidence_refs": ["image/01_cutaway_form.png", "image/03_section_region.png"],
+      "verification": {
+        "method": "Boundary tracing and multi-view geometry inspection",
+        "procedure": "Inspect the opening from an oblique view and rotate the particle to assess depth. Trace the interface between the exterior and the section region, identifying its three curved arcs and three tips. Compare the opening outline and depth with the reference without estimating a removed volume fraction. Do not score the lip's rounding or the interior planes in this row.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Three Interior Sections",
+      "criterion": "Three broad section surfaces form a closed trihedral interior with a central Y-shaped arrangement.",
+      "scoring_rule": {
+        "PASS": "At least two substantial interior section surfaces with different orientations extend from a shared recessed junction to the opening boundary; the full result has three broad sector-shaped surfaces with approximately planar, mutually perpendicular cores, and they close the interior while their intersections form three outward branches from one central junction.",
+        "PARTIAL": "At least two substantial interior section surfaces with different orientations extend from a shared recessed junction to the opening boundary, but the result fails one or more PASS conditions, such as a missing third surface, nonplanar cores, incorrect relative orientations, or an incomplete interior closure.",
+        "FAIL": "Fewer than two substantial differently oriented interior section surfaces extend from a shared recessed junction to the opening boundary; a hollow shell, a single cap, narrow decorative strips, or disconnected planes are insufficient."
+      },
+      "evidence_refs": ["image/01_cutaway_form.png", "image/02_central_transitions.png"],
+      "verification": {
+        "method": "Interior region inspection and plane comparison",
+        "procedure": "Inspect the evaluated cutaway from front and oblique views. Identify each broad section core away from its rounded borders, compare its planarity and relative normal direction with the other cores, and trace its extent from the junction to a mouth arc. Check that these surfaces close the recess and form the intended Y-shaped arrangement. Assess the surface layout here, not the quality of its fillets.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Rounded Transitions",
+      "criterion": "Finite-width fillets soften the three interior branches and their central meeting point.",
+      "scoring_rule": {
+        "PASS": "An actual finite-width curved transition joins two existing substantial section surfaces along at least one branch; all three intended branches have narrow continuous fillets, their center joins smoothly, and their paths reach toward the mouth tips without gaps, overlapping folds, or loss of the broad section cores.",
+        "PARTIAL": "An actual finite-width curved transition joins two existing substantial section surfaces along at least one branch, but the result fails one or more PASS conditions, such as incomplete coverage, a pinched center, variable widths, or excessively broad transitions.",
+        "FAIL": "No actual finite-width curved transition joins two existing substantial section surfaces along a branch; sharp edges, a painted highlight, or disconnected rounded strips are insufficient."
+      },
+      "evidence_refs": ["image/02_central_transitions.png", "image/01_cutaway_form.png"],
+      "verification": {
+        "method": "Evaluated cross-sections and close geometry inspection",
+        "procedure": "Inspect cross-sections through each internal branch away from the central junction, confirming finite-width changes in surface direction. Inspect the center and branch endpoints in close oblique views. Evaluate geometric continuity, width, and freedom from overlap rather than modifier names, edge counts, or highlighted wireframe alone.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Rounded Transitions",
+      "criterion": "A narrow continuous rounded lip joins the section region to the spherical exterior.",
+      "scoring_rule": {
+        "PASS": "A finite-width rounded transition actually joins an existing section surface to the curved exterior along a substantial mouth arc; this lip extends continuously around all three arcs and tips with visually consistent narrow width and remains distinct from the internal branches without becoming a thick raised frame.",
+        "PARTIAL": "A finite-width rounded transition actually joins an existing section surface to the curved exterior along a substantial mouth arc, but it fails one or more PASS conditions, such as incomplete coverage, abrupt width changes, poorly joined tips, or a swollen frame-like profile.",
+        "FAIL": "No finite-width rounded transition joins an existing section surface to the curved exterior along a substantial mouth arc; an entirely sharp rim, detached trim, or a material-only line is insufficient."
+      },
+      "evidence_refs": ["image/01_cutaway_form.png", "image/03_section_region.png"],
+      "verification": {
+        "method": "Perimeter inspection with evaluated cross-sections",
+        "procedure": "Trace the evaluated lip around the opening. Inspect representative cross-sections on each arc and close views at the three tips. Confirm a physical curved join between the section region and exterior, and compare widths along the mouth. Exclude the internal Y-shaped fillets from this assessment.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Editable Surface Structure",
+      "criterion": "The editable section region contains a shared inner boundary and a surrounding connected face band.",
+      "scoring_rule": {
+        "PASS": "At least two existing substantial section surfaces contain central patches and a connected face band extending outward from a shared inner boundary; the complete boundary surrounds the central three-surface group continuously, and its band joins that group to the outer mouth without separate per-face frames, extra recesses, or raised panels.",
+        "PARTIAL": "At least two existing substantial section surfaces contain central patches and a connected face band extending outward from a shared inner boundary, but the result fails one or more PASS conditions, such as an incomplete third region, a broken overall boundary, or an unintended step in the band.",
+        "FAIL": "There are no central patches and outward connected face band sharing an inner boundary across at least two existing substantial section surfaces; arbitrary dense topology, isolated panels, or a painted outline is insufficient."
+      },
+      "evidence_refs": ["image/03_section_region.png"],
+      "verification": {
+        "method": "Editable mesh region tracing",
+        "procedure": "Inspect the saved particle's editable mesh and relevant evaluated structure. Trace the central group's inner boundary across section surfaces and follow the connected band to the outer mouth. Confirm that the band is structurally part of the section region and does not add unwanted depth or raised frames. Do not require an Inset operation history or a particular polygon count.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Editable Surface Structure",
+      "criterion": "The spherical exterior and cutaway are joined as one closed, editable surface with sound mesh integrity.",
+      "scoring_rule": {
+        "PASS": "An editable particle mesh includes the curved exterior connected to at least two substantial interior section surfaces; the complete particle forms one connected closed surface incorporating all three sections and transitions, with no internal duplicate faces, disconnected filler panels, self-intersections, or unintended holes.",
+        "PARTIAL": "An editable particle mesh includes the curved exterior connected to at least two substantial interior section surfaces, but it fails one or more PASS conditions, such as a remaining boundary gap, internal duplicate faces, a local self-intersection, or incomplete joining of the third region.",
+        "FAIL": "No editable particle mesh connects the curved exterior to at least two substantial interior section surfaces; an image substitute, a collection of disconnected panels, or an uneditable external representation is insufficient."
+      },
+      "evidence_refs": ["image/03_section_region.png", "image/01_cutaway_form.png"],
+      "verification": {
+        "method": "Mesh connectivity, manifoldness, and intersection inspection",
+        "procedure": "Inspect the editable mesh and its evaluated result. Follow connectivity between the exterior and section regions, identify unintended open boundary and non-manifold edges, inspect duplicated internal surfaces and self-intersections, and confirm the saved mesh remains editable. Object counts and the presence of a subdivision modifier alone cannot establish this result.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-08",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Editable Surface Structure",
+      "criterion": "Existing curved surfaces and section cores have coherent geometric shading and clean silhouettes.",
+      "scoring_rule": {
+        "PASS": "A substantial curved exterior and at least one actual rounded transition attached to a substantial section surface exist; their existing curved surfaces have clean silhouettes and coherent outward-facing smooth shading without face-by-face lighting or inverted patches, and the existing broad section cores remain visually planar.",
+        "PARTIAL": "A substantial curved exterior and at least one actual rounded transition attached to a substantial section surface exist, but they fail one or more PASS conditions, such as visible faceting, shading discontinuities, inverted patches, or waviness across otherwise planar section cores.",
+        "FAIL": "A substantial curved exterior and an actual rounded transition attached to a substantial section surface do not both exist; an empty scene, isolated flat section, or isolated unused smooth primitive is insufficient."
+      },
+      "evidence_refs": ["image/01_cutaway_form.png"],
+      "verification": {
+        "method": "Normal inspection and neutral controlled lighting",
+        "procedure": "Inspect face orientation and render or view the existing particle under neutral directional lighting. Examine silhouettes and lighting continuity on its curved exterior and existing rounded transitions, plus the visual flatness of section cores. Judge geometric shading here, excluding missing components and the fillet width or coverage already assessed in other rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The script rebuilds the scene and saves an independently reopenable submission.blend.",
+      "scoring_rule": {
+        "PASS": "Both submission.blend and build.py are supplied, the blend opens with an inspectable target particle, and build.py runs from an empty scene to recreate the particle and scene setup without existing solution files or external assets, saves submission.blend, and produces a reopened saved result consistent with the delivered scene.",
+        "PARTIAL": "Both submission.blend and build.py are supplied and the blend opens with an inspectable target particle, but one or more PASS conditions fail, including an incomplete rebuild, an execution error, missing saved output, or a mismatch discovered when reopening the script's saved result.",
+        "FAIL": "Either required file is absent, or submission.blend cannot open with an inspectable target particle."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Isolated script execution and saved-result reopening",
+        "procedure": "In a separate temporary working location, open the delivered blend for a baseline, then run build.py in Blender 5.1.2 from an empty scene. Confirm that the script itself writes submission.blend. Close that process and open the newly saved file in a fresh process; inspect its particle, materials, lighting, camera, and render settings against the baseline. Do not accept an unsaved in-memory reconstruction as a saved result and do not impose a submission directory not specified in the task.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The required still render comes from the submitted scene and presents the complete cutaway clearly.",
+      "scoring_rule": {
+        "PASS": "A decodable B123_Three_Direction_Nanoparticle_Cutaway.png rendered from the actual saved submission.blend is supplied; it shows the complete particle with margins in an oblique view into the opening, uses Cycles GPU settings and a simple opaque neutral appearance, and makes all three interior sections and both transition types readable without unrelated props, text, crushed interior shadows, or clipped highlights.",
+        "PARTIAL": "A decodable B123_Three_Direction_Nanoparticle_Cutaway.png rendered from the actual saved submission.blend is supplied, but it fails one or more PASS conditions, such as clipping the body, obscuring an interior surface, unsuitable framing or lighting, or inconsistent render-engine settings.",
+        "FAIL": "The named PNG is missing or undecodable, or it is a source image, viewport screenshot, external replacement, or other image that cannot be established as a render of the actual saved submission.blend."
+      },
+      "evidence_refs": ["image/01_cutaway_form.png"],
+      "verification": {
+        "method": "Image decoding, scene settings inspection, and render comparison",
+        "procedure": "Decode the named PNG and inspect its framing and visibility using the Presentation section. Inspect the saved scene's render settings and camera, then render a controlled comparison from that saved scene to verify correspondence. Evaluate delivery and readability here rather than awarding the geometry points again. Any future GPU verification must follow the applicable remote-node access rules.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

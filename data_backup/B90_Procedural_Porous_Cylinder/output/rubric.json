@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Porous Cylinder",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1eo3F6WEPL",
+    "id": "BV1eo3F6WEPL"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 50, "PROC": 40, "PIPE": 10},
+  "weighting_note": "Geometry receives 50 points for the distinct envelope, volumetric voids, connected solid matrix, and smooth pore-wall finish. Procedural behavior receives 40 points because editable density generation and independent parameter responses are central to the source. Pipeline checks are limited to 10 points. Neutral presentation supports inspection and does not create an incidental material or lighting category.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Cylindrical Envelope",
+      "criterion": "The main body's evaluated envelope is a short circular cylinder with consistent sides and end boundaries.",
+      "scoring_rule": {
+        "PASS": "The body has a circular top-view envelope, approximately vertical sides, approximately parallel end planes, and height about half its diameter. The full circumference is cylindrical with no rectangular corners or substantial generation-region protrusions; local pore interruptions are allowed.",
+        "PARTIAL": "A recognizable three-dimensional cylindrical body exists, but one or more PASS conditions are unmet, such as unsuitable proportions, a noticeably polygonal boundary, uneven clipping, or local rectangular remnants.",
+        "FAIL": "No recognizable three-dimensional cylindrical body exists; an empty host, flat disc, unconstrained block, or collection with no common cylindrical envelope is below the minimum."
+      },
+      "evidence_refs": ["image/01_porous_cylinder.png", "image/02_side_and_top.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection and orthographic views",
+        "procedure": "Open the submitted file, isolate the rendered body, and evaluate all geometry. Inspect top and two perpendicular side views, compare height to diameter, and orbit around the circumference to distinguish actual circular clipping from a favorable camera angle. Ignore helper objects that do not enter the final body.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Volumetric Pores",
+      "criterion": "Irregular voids are distributed through the body and have real interior depth.",
+      "scoring_rule": {
+        "PASS": "Numerous irregular openings of varied sizes cover the top, bottom, and all sides. The voids continue into the interior as cavities and branching passages, with actual wall depth and without a regular repeated drilled-hole pattern or an otherwise hollow shell.",
+        "PARTIAL": "Multiple genuine three-dimensional voids with wall depth occur on at least two differently oriented surfaces, but one or more PASS conditions are unmet, including limited coverage, weak size variation, mostly shallow cavities, repetitive drilling, or a hollow-shell interior.",
+        "FAIL": "The minimum of multiple real voids on two differently oriented surfaces is absent. Shader-only marks, bumps, a flat cutout, or an otherwise solid body with only one cavity do not qualify."
+      },
+      "evidence_refs": ["image/01_porous_cylinder.png", "image/02_side_and_top.png"],
+      "verification": {
+        "method": "Orbit inspection, evaluated mesh sections, and controlled views",
+        "procedure": "Inspect top, underside, and several side directions with a neutral material. In a temporary copy of the evaluated geometry, examine two perpendicular interior sections to determine whether voids penetrate the volume or occupy only an outer skin. Restore the original file after inspection.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Volumetric Pores",
+      "criterion": "The solid matrix forms a coherent porous sample with substantial connected bridges.",
+      "scoring_rule": {
+        "PASS": "The solid material is predominantly connected through the height and across the body, with substantial bridges between neighboring regions. Small isolated grains may exist, but loose fragments do not dominate and the main structure remains coherent.",
+        "PARTIAL": "At least one substantial connected porous region spans the lower and upper parts of the body, but one or more PASS conditions are unmet, such as large detached regions, many tenuous bridges, or fragmentation across much of the width.",
+        "FAIL": "No substantial connected porous region spans the lower and upper parts; the asset is chiefly loose fragments, disconnected layers, or an empty result. A solid cylinder with no porous region also fails this minimum."
+      },
+      "evidence_refs": ["image/01_porous_cylinder.png", "image/02_side_and_top.png"],
+      "verification": {
+        "method": "Connected-component inspection of evaluated geometry",
+        "procedure": "Inspect the evaluated body's connected solid components and their spatial extents. Use temporary component isolation and sections to confirm real bridges from the lower to upper regions and across the width. Judge substantial connected material rather than object counts or vertex counts, and distinguish small isolated grains from dominant detached masses.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Smooth Geometry",
+      "criterion": "Existing pore walls and boundary surfaces have smooth, resolved geometry without prominent construction defects.",
+      "scoring_rule": {
+        "PASS": "The pore walls have flowing rounded transitions while remaining open. Their silhouettes are sufficiently resolved, the cylindrical boundary is clean, and conspicuous voxel steps, large facets, doubled surfaces, torn sheets, spikes, and unrelated shading discontinuities are absent.",
+        "PARTIAL": "A substantial existing region with several open pores and their surrounding walls demonstrates rounded transitions, but one or more PASS conditions are unmet elsewhere on existing surfaces. Limited missing regions do not by themselves erase the demonstrated finish.",
+        "FAIL": "No substantial existing region with several open pores demonstrates rounded walls, or pervasive blockiness and broken geometry prevent meaningful inspection of that minimum. Missing surfaces or a smooth solid cylinder without pores cannot establish it."
+      },
+      "evidence_refs": ["image/02_side_and_top.png", "image/03_pore_wall_detail.png"],
+      "verification": {
+        "method": "Neutral close-up renders and evaluated mesh inspection",
+        "procedure": "Inspect close views of existing side, top, and interior pore walls using a neutral opaque material and grazing light. Compare silhouette resolution with surface shading to detect smooth normals masking coarse geometry. Check suspicious defects on the evaluated mesh. Assess finish independently of pore distribution and overall envelope errors.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Editable Generator",
+      "criterion": "A live three-dimensional density generator determines the actual solid-and-void mesh.",
+      "scoring_rule": {
+        "PASS": "The saved scene retains an active native procedural geometry system whose three-dimensional density evaluation produces the actual solid-and-void structure. Reevaluation works, and the delivered body is not dependent solely on a frozen mesh or surface shader.",
+        "PARTIAL": "An active three-dimensional procedural density system generates a meaningful porous part of the rendered body, but one or more PASS conditions are unmet, such as a substantial frozen remainder or an incomplete recomputation path.",
+        "FAIL": "No active three-dimensional density system generates a meaningful porous part of the rendered body. An unused node group, a frozen mesh alone, or a surface shader alone is below the minimum."
+      },
+      "evidence_refs": ["image/01_porous_cylinder.png", "image/03_pore_wall_detail.png"],
+      "verification": {
+        "method": "Dependency inspection and procedural reevaluation probe",
+        "procedure": "Trace the active geometry dependencies from the rendered body to the density generation. In a temporary copy, change an upstream spatial input, reevaluate, and inspect whether actual interior mesh geometry changes. Restore the input and confirm the original form returns. Inspect interior sections to exclude a procedural surface-only imitation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Editable Generator",
+      "criterion": "Pore scale and solid/void balance provide independent, useful, reversible geometric variation.",
+      "scoring_rule": {
+        "PASS": "Clearly labeled English controls independently change pore scale and solid/void balance. Modest edits yield visibly coarser or finer pores and more open or denser structures without merely resizing the object; useful porous bodies remain, the envelope is retained, and restoring settings restores the submitted form.",
+        "PARTIAL": "At least one accessible control produces a useful actual change in pore scale or solid/void balance, but one or more PASS conditions are unmet, such as a missing second response, coupled behavior, unclear labels, limited usable variation, or failure to restore the baseline.",
+        "FAIL": "Neither pore scale nor solid/void balance has an accessible control that produces a useful actual geometric variation. Inert controls and whole-object scale changes alone do not qualify."
+      },
+      "evidence_refs": ["image/01_porous_cylinder.png", "image/03_pore_wall_detail.png"],
+      "verification": {
+        "method": "Independent parameter probes with evaluated geometry comparison",
+        "procedure": "Record the baseline settings. Change pore scale modestly in each direction while holding balance and boundary dimensions fixed; compare pore sizes in controlled views. Restore it, then vary solid/void balance while holding the other controls fixed and inspect changes in actual void volume and wall thickness. Restore all settings and compare to the baseline. Judge mesh behavior, not merely parameter labels.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Generator",
+      "criterion": "The cylindrical boundary remains an independently editable constraint on regenerated porous geometry.",
+      "scoring_rule": {
+        "PASS": "Clearly labeled English width and height controls independently regenerate a porous body within the edited cylindrical boundary. Modest changes preserve useful clipping without rectangular remnants, an uncut solid core, or visible helpers; restoring settings restores the baseline.",
+        "PARTIAL": "At least one boundary dimension can be changed through an active constraint that updates the porous body's geometry, but one or more PASS conditions are unmet, including a missing second control, incomplete coverage, clipping artifacts, unclear labels, or unsuccessful restoration.",
+        "FAIL": "No boundary dimension can be changed through an active constraint that updates the porous geometry. An inert helper or whole-object scaling of a frozen result does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_porous_cylinder.png", "image/02_side_and_top.png"],
+      "verification": {
+        "method": "Boundary-dimension functional probes",
+        "procedure": "In a temporary file, keep density settings fixed and modestly reduce and increase cylindrical width, then restore it and repeat for height. Evaluate the result and inspect orthographic views for correct updated clipping and adequate generated coverage. Confirm helpers remain excluded from rendering, then restore and compare the baseline geometry.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The saved project reopens portably and its delivered PNG is a render of the submitted scene.",
+      "scoring_rule": {
+        "PASS": "submission.blend reopens with its generator, editable controls, and render setup intact and without missing dependencies. B90_Procedural_Porous_Cylinder.png is present and is rendered from that actual scene with the requested presentation.",
+        "PARTIAL": "submission.blend reopens with a meaningful porous body and active generator intact, but one or more PASS conditions are unmet, such as an absent or mismatched PNG, a broken presentation setup, or a missing nonessential dependency.",
+        "FAIL": "submission.blend is absent, unreadable, or does not reopen with both a meaningful porous body and its active generator. An image-only submission does not qualify."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Fresh-session project reopen and render provenance check",
+        "procedure": "Open submission.blend in a fresh Blender 5.1.2 session from a temporary delivery directory. Check dependency resolution and inspect the live generator. Confirm the required PNG exists, then render the saved camera and compare geometry, framing, and appearance with the delivered PNG. Confirm the saved scene uses Cycles and GPU rendering settings.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "build.py recreates the complete scene and explicitly saves a usable submission.blend.",
+      "scoring_rule": {
+        "PASS": "build.py runs from an empty Blender scene, recreates the complete porous-cylinder scene with its generator, controls, and presentation, and explicitly saves submission.blend. A separate fresh session reopens that generated file with the required state intact.",
+        "PARTIAL": "build.py recreates a meaningful porous body with an active generator and explicitly saves a readable submission.blend, but one or more PASS conditions are unmet, such as incomplete controls, a missing presentation component, or a material mismatch on reopening.",
+        "FAIL": "The script is missing or cannot recreate and explicitly save a readable submission.blend containing a meaningful porous body and an active generator. Recreating only an unsaved in-memory scene fails."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean rebuild followed by independent saved-file reopen",
+        "procedure": "Copy build.py into an empty temporary directory without the submitted blend or any cached solution. Run it in Blender 5.1.2 from an empty scene. Confirm it writes submission.blend, terminate that session, then open the generated submission.blend in a separate fresh session. Inspect the reopened geometry, active controls, dependency portability, camera, lighting, and render settings against the delivered baseline.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

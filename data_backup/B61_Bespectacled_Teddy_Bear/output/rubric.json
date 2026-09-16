@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Bespectacled Teddy Bear",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1FXga6WEzQ",
+    "id": "BV1FXga6WEzQ"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 55, "PROC": 15, "SURF": 25, "PIPE": 5},
+  "weighting_note": "The main work is recognizable plush character and accessory geometry, weighted at 55 points across five independent forms. Procedural fur receives 15 points for attached strand generation and meaningful controls. Surface appearance and independently adjustable tie patterns receive 25 points. Delivery and reproducibility receive 5 points; incidental scene settings receive no separate capability credit.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. Bear Silhouette",
+      "criterion": "An oversized, rounded teddy head with paired ears and soft ear hollows establishes the character's upper silhouette.",
+      "scoring_rule": {
+        "PASS": "The head is broad and rounded with soft cheeks, a gently flattened chin, and substantial depth; both similarly sized ears sit at the upper outer corners and have shallow soft-edged hollows. The head is wider than the torso and its evaluated surface is smooth.",
+        "PARTIAL": "A substantial rounded head and at least one attached rounded ear are present, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no substantial rounded head with at least one attached rounded ear, or the apparent form exists only in an image rather than editable geometry."
+      },
+      "evidence_refs": ["image/01_finished_bear.png", "image/02_head_and_ears.png"],
+      "verification": {
+        "method": "Evaluated geometry and orthographic inspection",
+        "procedure": "Hide fur temporarily in an inspection copy. Inspect the evaluated head and ears from the front and side, checking head-to-torso width, depth, chin and cheek curvature, paired ear placement, and actual shallow recesses. Restore fur after inspection; do not infer form from object counts or modifier names.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Bear Silhouette",
+      "criterion": "A compact torso, forward feet, and arms alongside the belly form a balanced seated lower body.",
+      "scoring_rule": {
+        "PASS": "A softly squared torso has a full belly and rounded narrowing at its top and bottom. Two short feet project forward, two rounded arms meet the belly sides, and paired parts are balanced about the centerline. Foot-to-torso transitions are smooth, arm attachments have no visible gaps, and the stance reads as low and seated.",
+        "PARTIAL": "A compact torso and at least two recognizable attached limbs form a lower body, but one or more PASS conditions are unmet.",
+        "FAIL": "The result lacks a compact torso with at least two recognizable attached limbs."
+      },
+      "evidence_refs": ["image/01_finished_bear.png", "image/03_glasses_profile.png"],
+      "verification": {
+        "method": "Evaluated geometry and multi-view inspection",
+        "procedure": "Inspect the torso and limbs in front, side, and rear views with fur hidden and then visible. Check seated silhouette, feet projecting forward, bilateral balance, belly contour, and attachment continuity. Judge physical forms rather than whether a remesh or mirror operation was used.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Facial Features",
+      "criterion": "Paired oval eyes, a central projecting muzzle, and a frontmost nose create the teddy's readable face.",
+      "scoring_rule": {
+        "PASS": "Both small oval eyes occupy the lower head on either side of the centered muzzle. The rounded muzzle sits between and below them, projects from the head, and carries a smaller flattened nose at its front upper area. The features can be edited without reshaping the whole head.",
+        "PARTIAL": "At least two of the three facial groups are recognizable as geometry: paired eyes, muzzle, and nose; however, one or more PASS conditions are unmet.",
+        "FAIL": "Fewer than two of the three facial groups are recognizable as geometry, or the face is only a flat image."
+      },
+      "evidence_refs": ["image/04_face_and_tie.png"],
+      "verification": {
+        "method": "Geometry, placement, and editability inspection",
+        "procedure": "Temporarily hide the glasses and fur to inspect front and side views for eye pairing, muzzle centering, and depth order from head to muzzle to nose. Select or isolate the relevant editable geometry to confirm that facial changes do not require reshaping the full head. Assess glasses-caused occlusion only under GEO-04, coat-caused occlusion only under PROC-01, and colors under SURF-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "3. Fitted Glasses",
+      "criterion": "Continuous hollow frames, a bridge, and rearward temples form a fitted pair of rounded rectangular glasses.",
+      "scoring_rule": {
+        "PASS": "Both large rounded rectangular frames have continuous openings, visible rim thickness, and soft edges. A centered bridge joins them above the nose, and two temples extend backward from the outer rims along the head. The glasses fit in front of the face, both eyes remain visible, the bridge clears the nose, and optional lenses do not obscure the features.",
+        "PARTIAL": "Two recognizable hollow frame rims are positioned across the face, but one or more PASS conditions are unmet.",
+        "FAIL": "There are not two recognizable hollow frame rims across the face, or the glasses are only a flat image."
+      },
+      "evidence_refs": ["image/03_glasses_profile.png", "image/04_face_and_tie.png"],
+      "verification": {
+        "method": "Evaluated geometry, isolation, and fit inspection",
+        "procedure": "Isolate the glasses and inspect their front and side silhouettes for real openings, rim depth, bridge continuity, and two rearward temples. Restore the bear and inspect clearances at the eyes, nose, and head sides. Assess glossy material response separately under SURF-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "4. Two-Part Tie",
+      "criterion": "A small knot and longer tapered blade form a dimensional tie fitted to the chest.",
+      "scoring_rule": {
+        "PASS": "The tie has a small knot beneath the muzzle and a longer blade centered on the chest, widening below the knot and tapering to a rounded point. Both have thickness and soft edges, connect coherently, and sit close to the chest with their visible fronts clear of the fur.",
+        "PARTIAL": "A recognizable dimensional tie with a hanging blade is present on the chest, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no recognizable dimensional tie with a hanging blade on the chest."
+      },
+      "evidence_refs": ["image/03_glasses_profile.png", "image/04_face_and_tie.png"],
+      "verification": {
+        "method": "Evaluated geometry and placement inspection",
+        "procedure": "Inspect the knot and blade from the front and side to check relative size, tapered shape, thickness, softened edges, connection, and chest clearance. If fur obscures the tie, temporarily hide it to distinguish misplaced geometry from an overlong coat; score coat-caused occlusion only under PROC-01. Do not require a particular object count; independent stripe adjustments are assessed under SURF-03.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "5. Short Fur",
+      "criterion": "An attached procedural strand system produces the short dense coat and responds to length and density controls.",
+      "scoring_rule": {
+        "PASS": "Attached dense short strands cover the head, ears, torso, arms, and feet, lightly softening their silhouettes while leaving shapes and accessories readable. There are no conspicuous bald patches, detached clumps, or long spikes. Accessible length and density controls respectively change strand reach and population across the covered parts without individual strand editing.",
+        "PARTIAL": "A procedural strand system visibly coats the head and torso, and at least one length or density control produces its intended geometric change, but one or more PASS conditions are unmet.",
+        "FAIL": "There is no procedural strand coat visibly covering both head and torso with at least one working length or density control. A surface texture alone or entirely fixed decorative strands do not meet this minimum."
+      },
+      "evidence_refs": ["image/01_finished_bear.png", "image/04_face_and_tie.png"],
+      "verification": {
+        "method": "Evaluated strands, controlled renders, and functional parameter probes",
+        "procedure": "Inspect actual generated strands and their attachment to the covered surfaces, then examine a close render for short-fur coverage and shape readability. In a temporary copy, increase and decrease length while holding density fixed, then change density while holding length fixed. Compare evaluated strand extent and population across covered parts, using implementation-appropriate geometry inspection and controlled renders. Restore the saved values. Do not award credit for a system name without the observed output and response.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "6. Materials and Presentation",
+      "criterion": "Warm golden-brown bear materials, a pale muzzle, and darker eyes and nose create a coherent plush palette.",
+      "scoring_rule": {
+        "PASS": "The head, ears, torso, arms, feet, and their fur share a consistent warm golden-brown appearance. The existing muzzle is pale cream, and the existing eyes and nose are darker brown, keeping the facial layers distinct in the rendered lighting.",
+        "PARTIAL": "The head and torso visibly use a warm golden-brown material and at least one existing facial group has the required contrasting color, but one or more PASS conditions are unmet.",
+        "FAIL": "The head and torso do not both use a warm golden-brown material, or no existing facial group has the required contrasting color. Missing components cannot receive surface credit through absence."
+      },
+      "evidence_refs": ["image/01_finished_bear.png", "image/04_face_and_tie.png"],
+      "verification": {
+        "method": "Assigned-material inspection and controlled color render",
+        "procedure": "Inspect material assignments on actual bear geometry and generated fur. Render under neutral soft lighting if the final lighting masks the base appearance. Check warm consistency across present body parts and actual pale-muzzle/dark-feature contrast; do not require particular shader nodes or exact color codes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 5,
+      "requirement_section": "6. Materials and Presentation",
+      "criterion": "Near-black glasses show restrained glossy highlights that communicate their rounded surfaces.",
+      "scoring_rule": {
+        "PASS": "The existing rims, bridge, and temples are near-black and show restrained glossy highlights that reveal their rounded surfaces without overwhelming the face.",
+        "PARTIAL": "Both existing frame rims visibly carry a near-black material, but one or more PASS conditions are unmet.",
+        "FAIL": "Two existing frame rims with a near-black material are absent. Missing glasses cannot earn material credit."
+      },
+      "evidence_refs": ["image/01_finished_bear.png", "image/04_face_and_tie.png"],
+      "verification": {
+        "method": "Material-use inspection and highlight render",
+        "procedure": "Confirm the dark material is assigned to the evaluated glasses. Inspect a close render under a broad soft light for readable highlights on the rims, bridge, and temples; vary the light only in an inspection copy if necessary. Judge the material response rather than a fixed roughness value.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "6. Materials and Presentation",
+      "criterion": "Both tie parts display crisp purple-gray diagonal stripes with independent direction and spacing adjustments.",
+      "scoring_rule": {
+        "PASS": "The existing knot and blade each show alternating purple and light-gray diagonal stripes with crisp boundaries and visibly different directions. The pattern is confined to the tie. Stripe direction and spacing can each be adjusted independently on either part without altering the other.",
+        "PARTIAL": "At least one existing tie part has recognizable purple-and-light-gray diagonal stripes produced by an editable material pattern, but one or more PASS conditions are unmet.",
+        "FAIL": "No existing tie part has recognizable purple-and-light-gray diagonal stripes produced by an editable material pattern. A missing tie or a fixed image substitute does not meet this minimum."
+      },
+      "evidence_refs": ["image/04_face_and_tie.png"],
+      "verification": {
+        "method": "Assigned-material inspection, close render, and independent mapping probes",
+        "procedure": "Inspect the applied stripe pattern on both tie parts in a close render. In a temporary copy, change direction and then spacing on the knot, confirm visible changes and an unchanged blade, and repeat with the blade. Restore all settings. Accept equivalent procedural or editable coordinate implementations; do not demand a particular node chain.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, reproducible build script, and genuine final PNG form a usable submission.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens in Blender 5.1.2 with the complete editable scene and saved presentation settings. build.py reproducibly builds the scene from empty and saves submission.blend without missing dependencies. B61_Bespectacled_Teddy_Bear.png is rendered from that submitted scene using the saved camera and materials; Cycles GPU settings and the clear full-character front three-quarter presentation meet the public task.",
+        "PARTIAL": "submission.blend opens with an editable teddy scene and at least one of the required build script or genuine scene-rendered PNG is usable, but one or more PASS conditions are unmet.",
+        "FAIL": "No editable teddy scene opens from submission.blend, or neither a usable build script nor a genuine scene-rendered PNG is supplied."
+      },
+      "evidence_refs": ["image/01_finished_bear.png"],
+      "verification": {
+        "method": "File inspection, isolated script reproduction, and render provenance comparison",
+        "procedure": "Open submission.blend in the target Blender version and inspect saved camera, render engine/device settings, and linked resources. Run build.py from an empty scene in an isolated temporary directory and compare the generated scene's intended forms and materials. Render the submitted scene using its saved camera and compare content with the submitted PNG; confirm all ears and feet are framed and the face, fur, and tie remain legible. No such execution is performed during task authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Blueberry",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1DJU5B1EM6",
+    "id": "BV1DJU5B1EM6"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 40,
+    "SURF": 50,
+    "PIPE": 10
+  },
+  "weighting_note": "Geometry receives 40 points for body, five-lobed crown, closed recess, and surface continuity. Five independent procedural material effects receive 50 SURF points; procedural shading is not labeled PROC. Delivery receives 10. Node counts, internal numeric recipes, and mere subdivision presence earn no separate credit.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Berry Body",
+      "criterion": "Plump broadly round body with gently flattened poles.",
+      "scoring_rule": {
+        "PASS": "The berry is plump and broadly round, with balanced width and depth, gently flattened top and bottom, and a coherent editable body surface.",
+        "PARTIAL": "A recognizable rounded fruit body exists but one or more PASS conditions are unmet.",
+        "FAIL": "No recognizable rounded fruit body exists."
+      },
+      "evidence_refs": [
+        "image/01_blueberry.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Inspect evaluated front, side, and top orthographic views of the body. Compare broad proportions and pole flattening with the reference while ignoring shader detail.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Crown and Recess",
+      "criterion": "Five short raised lobes form an attached fruit crown.",
+      "scoring_rule": {
+        "PASS": "Exactly five distinguishable short raised lobes surround the top, with rounded tips and a slight outward flare; they form a compact crown coherently connected to the fruit body.",
+        "PARTIAL": "At least three distinguishable raised lobes form an attached crown around the top but one or more PASS conditions are unmet.",
+        "FAIL": "Fewer than three distinguishable raised lobes form an attached crown around the top."
+      },
+      "evidence_refs": [
+        "image/01_blueberry.png",
+        "image/02_crown_recess.png"
+      ],
+      "verification": {
+        "method": "evaluated_top_geometry_inspection",
+        "procedure": "Inspect the top and elevated oblique evaluated geometry with a neutral material. Identify individual crown lobes by their local raised geometry and intervening valleys, not by base-mesh vertex counts.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Crown and Recess",
+      "criterion": "A closed bowl-like recess lies below the crown.",
+      "scoring_rule": {
+        "PASS": "The centre lies visibly below its surrounding crown and forms a clear bowl-like depression with a smooth transition into the fruit and a closed bottom.",
+        "PARTIAL": "A geometric depression exists inside the attached crown and ends in a surface but one or more PASS conditions are unmet.",
+        "FAIL": "No geometric depression ending in a surface exists inside the attached crown; a painted dark patch or through-hole fails."
+      },
+      "evidence_refs": [
+        "image/02_crown_recess.png"
+      ],
+      "verification": {
+        "method": "evaluated_section_inspection",
+        "procedure": "Inspect the top and a section through the crown centre. Confirm actual height depression relative to the surrounding crown and a closed bottom; avoid using bottom-pole vertices to infer the top recess.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "Berry Body",
+      "criterion": "Smooth intact body and crown surface finish.",
+      "scoring_rule": {
+        "PASS": "The body and attached crown have smooth curved silhouettes, coherent normals, and no accidental holes, normal discontinuities, or visible polygon faceting.",
+        "PARTIAL": "The rounded body and an attached crown exist as inspectable curved surfaces but one or more PASS conditions are unmet.",
+        "FAIL": "The rounded body or attached crown is missing or lacks inspectable curved surfaces."
+      },
+      "evidence_refs": [
+        "image/01_blueberry.png"
+      ],
+      "verification": {
+        "method": "controlled_neutral_shading_inspection",
+        "procedure": "Inspect a neutral surface override in front, top, and oblique views, including crown close-ups. Assess normal and smoothing quality separately from lobe number, proportions, and recess depth.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Broad Skin Color",
+      "criterion": "Procedural blue-purple mottling with editable palette and scale.",
+      "scoring_rule": {
+        "PASS": "Dark blue, blue-purple, and lighter blue regions form broad soft irregular mottling over the actual berry and crown; palette and broad-pattern scale are editable and the material remains recognizably blueberry-like.",
+        "PARTIAL": "The existing berry visibly uses procedurally varied blue or purple surface color but one or more PASS conditions are unmet.",
+        "FAIL": "The berry is absent or lacks visibly procedural blue or purple surface variation."
+      },
+      "evidence_refs": [
+        "image/01_blueberry.png"
+      ],
+      "verification": {
+        "method": "material_usage_and_color_probe",
+        "procedure": "Inspect actual berry material use, then in a disposable copy modify one palette color and broad-pattern scale independently. Confirm each changes the rendered skin as expected and restore the material.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Broad Skin Color",
+      "criterion": "Distorted band-like variation wraps and blends into the skin.",
+      "scoring_rule": {
+        "PASS": "Subtle distorted band-like variation wraps around the curved berry and blends into broad mottling without obvious straight stripes or abrupt texture seams.",
+        "PARTIAL": "A procedurally generated band-like color component is visible on the existing berry but one or more PASS conditions are unmet.",
+        "FAIL": "No procedurally generated band-like color component is visible on the existing berry."
+      },
+      "evidence_refs": [
+        "image/01_blueberry.png",
+        "image/03_surface_variation.png"
+      ],
+      "verification": {
+        "method": "material_component_and_multiview_render_inspection",
+        "procedure": "Inspect the connected color network and compare controlled views around the fruit. Temporarily vary or isolate the band component in a disposable material copy to establish its contribution, then restore the combined appearance.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Scattered Surface Marks",
+      "criterion": "Two scales of editable irregular skin marks.",
+      "scoring_rule": {
+        "PASS": "The skin has larger sparse darker patches and numerous much finer pale speckles, with naturally varied coverage, subordinate to the broad blue-purple color; scale and coverage are editable and the result is not a uniform repeated dot pattern.",
+        "PARTIAL": "At least one scale of procedurally generated irregular marks is visibly applied to the berry but one or more PASS conditions are unmet.",
+        "FAIL": "No scale of procedurally generated irregular marks is visibly applied to the berry."
+      },
+      "evidence_refs": [
+        "image/01_blueberry.png"
+      ],
+      "verification": {
+        "method": "material_mask_probe_and_closeup_render",
+        "procedure": "Inspect a controlled close-up and the connected material masks. Independently vary coarse and fine mark scale or coverage in a disposable copy and confirm the corresponding rendered contributions; restore the material.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Gloss and Fine Relief",
+      "criterion": "Procedurally varied roughness changes highlight character.",
+      "scoring_rule": {
+        "PASS": "Roughness varies over the actual berry and crown, producing both more concentrated and softer highlights, and remains editable independently from the fine-relief effect.",
+        "PARTIAL": "The existing berry has visible procedural roughness variation but one or more PASS conditions are unmet.",
+        "FAIL": "The berry is absent or has no visible procedural roughness variation."
+      },
+      "evidence_refs": [
+        "image/01_blueberry.png",
+        "image/03_surface_variation.png"
+      ],
+      "verification": {
+        "method": "roughness_probe_and_fixed_light_render",
+        "procedure": "Render under a fixed broad light. In a disposable copy neutralize base-color variation and fine relief to isolate roughness, vary its strength, and confirm localized changes in highlight softness; restore all material settings.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-05",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "Gloss and Fine Relief",
+      "criterion": "Fine editable material relief enhances skin without coarse deformation.",
+      "scoring_rule": {
+        "PASS": "Fine irregular procedural bump or equivalent material relief affects the berry and crown under oblique lighting, remains independently editable, and preserves the broad silhouette without a coarse rocky appearance.",
+        "PARTIAL": "The existing berry has visible procedural material-driven surface relief but one or more PASS conditions are unmet.",
+        "FAIL": "The berry is absent or has no visible procedural material-driven relief."
+      },
+      "evidence_refs": [
+        "image/01_blueberry.png",
+        "image/03_surface_variation.png"
+      ],
+      "verification": {
+        "method": "relief_toggle_and_oblique_light_render",
+        "procedure": "Compare close-up renders with relief enabled and temporarily disabled under fixed oblique lighting. Confirm its connection to evaluated shading and its fine scale, then restore the saved material.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "Editable project, reproducible script, and actual scene render.",
+      "scoring_rule": {
+        "PASS": "The named project and script are supplied; build.py recreates the scene from empty in Blender 5.1.2 without external assets. The named PNG is a Cycles GPU render of that scene from an elevated oblique view that clearly shows the whole berry, crown, recess, and skin.",
+        "PARTIAL": "submission.blend opens with an editable rounded berry and attached crown but one or more PASS conditions are unmet.",
+        "FAIL": "submission.blend is absent, fails to open, or lacks an editable rounded berry and attached crown."
+      },
+      "evidence_refs": [
+        "image/01_blueberry.png"
+      ],
+      "verification": {
+        "method": "artifact_open_rebuild_and_render_comparison",
+        "procedure": "Open the project in Blender 5.1.2 and run build.py in an isolated empty scene. Compare geometry and material behavior, confirm Cycles GPU settings, and reproduce the saved camera render for comparison with the named PNG.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

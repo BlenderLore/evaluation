@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Stylized Bacterium with Three Flagella",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1L39mBfExU",
+    "id": "BV1L39mBfExU"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 60, "PROC": 25, "RIG": 5, "SCN": 5, "PIPE": 5},
+  "weighting_note": "This is primarily a geometric modeling task. Body form and finish, short-strand form, tail arrangement, and tail cross-sections receive separate geometry checks. Surface-based generation and its functional controls receive procedural credit; editable tail paths receive rigging credit. The source does not establish a material-design task or an animation, so neither receives invented points. Presentation and reproducible delivery together account for 10 points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. Curved Capsule Body",
+      "criterion": "The body is a solid elongated capsule with rounded, closed ends and proportions around three body widths in length.",
+      "scoring_rule": {
+        "PASS": "One solid elongated capsule is present, its length is roughly three body widths, and both ends are closed rounded caps blending into the side wall.",
+        "PARTIAL": "An identifiable elongated volumetric body with at least one rounded end is present, but at least one PASS condition is unmet.",
+        "FAIL": "There is no identifiable elongated volumetric body, or neither end is rounded."
+      },
+      "evidence_refs": ["image/02_curved_body.png"],
+      "verification": {
+        "method": "Evaluated geometry and controlled orthographic views",
+        "procedure": "Inspect the body with appendages hidden in side and end views. Compare its length with its transverse width, inspect the closed end surfaces, and check that the body is volumetric rather than a flat image or open shell. Assess cap shape here; surface finish and bending are assessed separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. Curved Capsule Body",
+      "criterion": "The capsule bends gently and continuously and retains a smooth evaluated silhouette and shading.",
+      "scoring_rule": {
+        "PASS": "The continuous capsule has a clearly perceptible gentle bend with substantial middle volume, and the side wall and existing rounded ends show smooth silhouettes and shading without sharp kinks, faceting, or pinched transitions.",
+        "PARTIAL": "A continuous capsule-like body exists with smooth shading over its main side wall, but at least one PASS condition is unmet.",
+        "FAIL": "A continuous capsule-like body is absent, or the main side wall is predominantly faceted or broken."
+      },
+      "evidence_refs": ["image/02_curved_body.png"],
+      "verification": {
+        "method": "Evaluated mesh inspection and neutral-light renders",
+        "procedure": "Hide appendages and orbit the evaluated body. Inspect centerline curvature and side-wall continuity, then use a neutral material and grazing light to distinguish actual faceting or pinching from material effects. A missing minor appendage does not affect this body-only check.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Short Surface Filaments",
+      "criterion": "The short surface covering consists of slender, irregularly curved three-dimensional strands with a readable body underneath.",
+      "scoring_rule": {
+        "PASS": "Most short filaments are shorter than the body width and much shorter than the long tails; their slender three-dimensional paths have visibly varied curvature and direction, and the body remains readable through the covering.",
+        "PARTIAL": "A visible patch of multiple short, slender three-dimensional strands exists along at least one main side region, with some outward projection and some curved paths, but at least one PASS condition is unmet.",
+        "FAIL": "No such side-region patch exists, or the covering consists entirely of straight strands or flat image strokes."
+      },
+      "evidence_refs": ["image/03_surface_filaments.png", "image/01_overall_reference.png"],
+      "verification": {
+        "method": "Evaluated strand geometry and close-up views",
+        "procedure": "Inspect visible strands from oblique and side angles. Compare their typical length with body width, inspect curvature and directional variation, and check that the body remains readable. Judge strand form here; root distribution and generation are assessed under PROC-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "3. Three Long Flagella",
+      "criterion": "Exactly three long, distinguishable flagella emerge from one small end region and follow separate sweeping paths.",
+      "scoring_rule": {
+        "PASS": "Exactly three long flagella meet the body in one small rounded-end region; each has length comparable to the body or longer, follows a continuous sweeping path, and is distinguishable through separated middle sections and differing end directions.",
+        "PARTIAL": "At least two distinct long flagella are attached at the same body end and have readable continuous paths, but at least one PASS condition is unmet.",
+        "FAIL": "Fewer than two distinct long flagella are attached at the same body end with readable continuous paths."
+      },
+      "evidence_refs": ["image/01_overall_reference.png", "image/04_flagella_detail.png"],
+      "verification": {
+        "method": "Geometry inspection and multi-angle tail views",
+        "procedure": "Trace the evaluated long-tail centerlines from their roots to their ends, count the distinct tails, inspect their body contact, and compare their lengths with body length. Orbit to distinguish apparent projected crossings from overlapping duplicate paths. Cross-section finish is assessed separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. Three Long Flagella",
+      "criterion": "The long flagella have fine, round tubular geometry, smooth path transitions, and tapering closed tips.",
+      "scoring_rule": {
+        "PASS": "All three flagella have narrow round cross-sections relative to the body, smooth tubular surfaces without sharp angular breaks, and tips tapering to fine closed ends.",
+        "PARTIAL": "At least two existing flagella form continuous tubes with round cross-sections over most of their lengths, but at least one PASS condition is unmet.",
+        "FAIL": "Fewer than two existing flagella form continuous tubes with round cross-sections over most of their lengths."
+      },
+      "evidence_refs": ["image/04_flagella_detail.png", "image/01_overall_reference.png"],
+      "verification": {
+        "method": "Evaluated cross-section and tip inspection",
+        "procedure": "Isolate the long tails and inspect their evaluated geometry at the middle and tips. Use a neutral close-up render to check tubular shading, path smoothness, narrowing, and end closure. Assess the substantive existing tails for PARTIAL; an absent third tail does not automatically erase their demonstrated finish.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "2. Short Surface Filaments",
+      "criterion": "A surface-based system generates attached short filaments over the sides, both ends, and back of the curved body.",
+      "scoring_rule": {
+        "PASS": "An active surface-based system generates the short filaments with roots meeting the evaluated body and with distributed coverage over the side walls, both rounded ends, and back; strands extend outward rather than floating or remaining buried.",
+        "PARTIAL": "A surface-based system generates multiple attached outward short filaments over at least one main side region, but at least one PASS condition is unmet.",
+        "FAIL": "No surface-based system generates multiple attached outward short filaments over any main side region."
+      },
+      "evidence_refs": ["image/03_surface_filaments.png"],
+      "verification": {
+        "method": "Generator inspection and evaluated root coverage",
+        "procedure": "Inspect the active relationship between body surface and generated filaments, then isolate roots and orbit around the evaluated body, including its hidden side and end regions. Confirm real attachment and spatial coverage from geometry; the mere presence of a modifier, hair system, or node group is insufficient.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "4. Editable Geometry",
+      "criterion": "Independent controls visibly change filament density, overall length, and irregular curvature.",
+      "scoring_rule": {
+        "PASS": "Three independently adjustable properties control coverage density, overall short-filament length, and irregular curvature; changing each produces the corresponding visible update while the body and any existing long flagella retain their shapes.",
+        "PARTIAL": "At least one accessible control visibly changes its intended generated-filament property while preserving the body shape, but at least one PASS condition is unmet.",
+        "FAIL": "No accessible control visibly changes an intended generated-filament property while preserving the body shape."
+      },
+      "evidence_refs": ["image/03_surface_filaments.png"],
+      "verification": {
+        "method": "Non-destructive functional control probes",
+        "procedure": "On a duplicate of the submitted scene, record a baseline and change density, length, and curvature independently to visibly different nondegenerate settings. Compare strand population, lengths, and path bending, and check that the body and existing tails do not change shape. Restore each control before probing the next. Equivalent controls are accepted.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-01",
+      "capability": "RIG",
+      "points": 5,
+      "requirement_section": "4. Editable Geometry",
+      "criterion": "Each flagellum can be locally reshaped independently while retaining a continuous tube.",
+      "scoring_rule": {
+        "PASS": "Each of the three flagella supports a local path adjustment that visibly changes only that flagellum, leaves the body and other flagella unchanged, and retains continuous tubular form.",
+        "PARTIAL": "At least two existing flagella can be locally reshaped independently of each other and the body while retaining continuous tubular form, but at least one PASS condition is unmet.",
+        "FAIL": "Fewer than two existing flagella support that independent local reshaping behavior."
+      },
+      "evidence_refs": ["image/04_flagella_detail.png"],
+      "verification": {
+        "method": "Manual shape-control probes",
+        "procedure": "On a duplicate scene, move an interior path control or equivalent editable region on each long tail separately. Compare the other tails and body against the baseline, and verify that the edited tail remains a continuous tube. Restore the baseline between probes; neither a fixed object count nor a particular curve type is required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "5. Presentation",
+      "criterion": "The camera and scene presentation clearly reveal the complete modeled organism and its slender appendages.",
+      "scoring_rule": {
+        "PASS": "An uncluttered three-quarter composition frames the entire modeled organism, including every present strand and tail tip, and lighting and background contrast make body volume and separate tail paths readable.",
+        "PARTIAL": "The composition clearly shows the body and at least one existing long flagellum against a distinguishable background, but at least one PASS condition is unmet.",
+        "FAIL": "The composition does not clearly show both the body and at least one existing long flagellum against a distinguishable background."
+      },
+      "evidence_refs": ["image/01_overall_reference.png"],
+      "verification": {
+        "method": "Submitted-camera render inspection",
+        "procedure": "Inspect the submitted PNG and, when necessary, a controlled render from the saved camera. Check framing margins, contrast, readable body curvature, and tail separation. Evaluate presentation of existing geometry here; missing components are scored by their geometry rows, and exact reference colors are not required.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, reproducible build script, and actual scene-rendered PNG are delivered with the required names.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the required editable scene; build.py reconstructs it from an empty scene in Blender 5.1.2, saves the blend, and renders B70_Stylized_Bacterium_With_Three_Flagella.png using Cycles GPU; the PNG is a render of that scene.",
+        "PARTIAL": "A loadable blend contains a recognizable bacterium body, and at least one of a functioning reconstruction script or a scene-derived PNG is supplied, but at least one PASS condition is unmet.",
+        "FAIL": "There is no loadable blend containing a recognizable bacterium body, or neither a functioning reconstruction script nor a scene-derived PNG is supplied."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Future file inspection and isolated build execution",
+        "procedure": "Verify the three filenames, open the blend, and inspect script contents. In an isolated Blender 5.1.2 run with an authorized GPU, execute build.py from an empty scene and compare reconstructed geometry and controls with the submission. Confirm Cycles GPU configuration and that the delivered PNG agrees with a camera render of the submitted scene. No implementation or execution of this check has occurred during authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

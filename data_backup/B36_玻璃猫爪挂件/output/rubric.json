@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "玻璃猫爪挂件",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV16ikTBFEDZ",
+    "id": "BV16ikTBFEDZ"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 45, "SURF": 45, "PIPE": 10},
+  "weighting_note": "暂定权重：GEO 45 分覆盖猫爪轮廓、底座实体厚度、中央肉垫和四趾布局；SURF 45 分覆盖固有粉色、透射折射、视角相关反射及光程着色；PIPE 10 分检验重建和依赖闭合。该静态资产没有必要的程序生成机制或合成效果，不因使用修改器、存在灯光而分配 PROC 或 SCN。权重未经实测校准。",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. 花瓣状爪体与圆润厚度",
+      "criterion": "爪体具有参考中的六瓣猫爪正面轮廓与基本对称布局。",
+      "scoring_rule": {
+        "PASS": "存在完整且可识别为猫爪的三维底座；上方两瓣、左右各一瓣及下方两段圆弧齐全；底部中央有浅凹，左右基本对称，各瓣之间平顺衔接。",
+        "PARTIAL": "存在可识别为猫爪底座的三维形体，至少可区分上方或两侧的趾瓣与下方掌部，但未满足全部 PASS 条件；包括瓣形、底凹、对称或衔接中任意一项或多项不足。",
+        "FAIL": "不存在可识别且能区分趾瓣与下方掌部的三维猫爪底座，或仅提交图像、平面轮廓。"
+      },
+      "evidence_refs": ["image/02_paw_geometry.png", "image/01_glass_paw.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_front_silhouette_review",
+        "procedure": "在提交副本中识别爪体的实际求值几何，包括实例和修改器结果；隐藏肉垫，仅为观察爪体轮廓获取无叠加的正面中性实体视图。对照参考定位上方、左右和底部六段外凸轮廓及底部凹口，比较左右布局与转折连续性。不以对象数、顶点数或起始圆环参数证明形状完成。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. 花瓣状爪体与圆润厚度",
+      "criterion": "爪体有相对薄而饱满的实体厚度、圆润侧壁和完整平滑表面。",
+      "scoring_rule": {
+        "PASS": "可识别爪体具有明确的正反面和连接侧壁，厚度明显小于正面宽高，边缘圆润饱满；多视角下无贯穿破洞、明显塌陷、尖刺、刀口或大块棱面。",
+        "PARTIAL": "可识别爪体具有可见的非零三维厚度，且主体仍保持完整体块，但未满足全部 PASS 条件；厚度比例、侧壁圆润度、局部完整性或表面质量任一不足均归此档。",
+        "FAIL": "没有可识别的爪体实体厚度，只有平片或图像，或破坏严重到不再构成完整主体体块。"
+      },
+      "evidence_refs": ["image/03_body_thickness.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_multiview_surface_review",
+        "procedure": "查看求值几何的侧面、背面及两个斜侧面，以宽高厚度测量辅助区分薄片、圆润挂件体块与厚球体。用中性光照观察侧壁和法线连续性；必要时检查疑似破洞的几何边界。只检查爪体的厚度与质量，瓣数和布局由 GEO-01 处理，不用玻璃材质遮蔽几何缺陷。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. 中央肉垫与四枚趾垫",
+      "criterion": "中央肉垫具有上窄下宽、底部略凹的圆润凸起形状，并位于爪体下半部。",
+      "scoring_rule": {
+        "PASS": "爪体下半部有一枚贴合底座的中央肉垫，其体积明显大于单枚趾垫；轮廓上窄下宽、顶部圆钝、底部中央略凹，具有饱满平滑的正面凸起，未超出底座外缘。",
+        "PARTIAL": "存在可识别的中央肉垫三维凸起，位置与底座有明确关联，但未满足全部 PASS 条件；包括轮廓、相对大小、贴合、位置或圆润度的任意不足。",
+        "FAIL": "不存在可识别的中央肉垫三维凸起，或用平面图案、凹洞、与底座无明确关联的散落物体替代。"
+      },
+      "evidence_refs": ["image/02_paw_geometry.png", "image/01_glass_paw.png"],
+      "verification": {
+        "method": "evaluated_pad_geometry_review",
+        "procedure": "在正面实体视图中定位中央肉垫，比较其上宽、下宽、底部凹口、与底座中心及趾垫的相对关系；从斜侧面确认真实凸起和底座贴合。允许独立对象、同网格分区、布尔或其他等效实现；不要求多级精度修改器或雕刻历史。缺失趾垫时不重复按数量扣本项，中央肉垫大小改与参考中的底座占比比较。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. 中央肉垫与四枚趾垫",
+      "criterion": "四枚大小接近的圆润趾垫在爪体上形成两高两低的弧形布局。",
+      "scoring_rule": {
+        "PASS": "恰有四枚可辨的趾垫凸起，大小接近、正面圆形或轻微椭圆形、侧面略扁；两枚较高且两枚分列两侧较低，均贴合爪体，彼此分开并留有可辨底座表面，未超出爪体轮廓。",
+        "PARTIAL": "至少两枚可辨的圆形或椭圆形三维趾垫位于爪体上，且未满足全部 PASS 条件；包括数量、弧形布局、比例、贴合、间隔或圆润度的任意不足。",
+        "FAIL": "爪体上不足两枚可辨的圆形或椭圆形三维趾垫，或仅有平面图案、凹洞或与底座无关联的散落物体。"
+      },
+      "evidence_refs": ["image/02_paw_geometry.png", "image/01_glass_paw.png"],
+      "verification": {
+        "method": "evaluated_instances_and_toe_layout_review",
+        "procedure": "从求值后的正面和斜侧面结果识别实际趾垫凸起，记录数量、中心高低、大小及与底座的贴合关系。实例、合并几何、阵列或手工创建均按可见结果处理；仅存在 count=4 的修改器而没有四枚有效凸起不能通过。不重复评价中央肉垫缺失。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "3. 粉色透光玻璃",
+      "criterion": "猫爪的实际表面保留来自材质的浅粉至较浓粉色。",
+      "scoring_rule": {
+        "PASS": "可识别爪体存在，且爪体与所有实际存在的肉垫表面均呈参考中的浅粉至较浓粉色；换用中性白光后仍保留粉色，未出现明显无关色块或漏赋材质区域。",
+        "PARTIAL": "可识别爪体或其上至少一枚实际肉垫在中性白光下具有来自材质的粉色，但未满足全部 PASS 条件；任意覆盖、色彩关系或一致性不足均归此档。",
+        "FAIL": "没有可识别猫爪表面保留材质自身的粉色，或粉色完全来自彩灯、背景、后期染色或展示图像。"
+      },
+      "evidence_refs": ["image/01_glass_paw.png"],
+      "verification": {
+        "method": "assigned_material_and_neutral_light_probe",
+        "procedure": "检查实际求值几何使用的材质并渲染提交外观，再在副本中换用中性白色照明，关闭整幅图像的色彩染色效果，确认粉色仍存在。逐一观察实际存在的爪体和肉垫表面，不以未赋给资产的材质节点证明完成；部件数量仅在 GEO 中判断，不因缺件在本项重复扣数量分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "3. 粉色透光玻璃",
+      "criterion": "猫爪具有真实透光和曲面折射，能改变透过资产观察到的背景内容。",
+      "scoring_rule": {
+        "PASS": "可识别爪体的实际材质允许透射，且其曲面区域对背后测试图案产生可见偏移、弯曲或放大；实际存在的肉垫也保持相容的玻璃透射表现，无大块不透明替代。",
+        "PARTIAL": "可识别猫爪主体上存在能透过几何观察背景变化的有效透射区域，但未满足全部 PASS 条件；包括缺少有效折射、只在局部生效或部分材料不相容。",
+        "FAIL": "猫爪主体上不存在有效透射区域，或效果仅来自背景贴图、屏幕图像、与实际几何无关的展示层。"
+      },
+      "evidence_refs": ["image/01_glass_paw.png"],
+      "verification": {
+        "method": "artifact_transmission_and_refraction_probe",
+        "procedure": "在副本中保留资产的实际几何与材质，在其后方放置高对比条纹或棋盘测试面并采用中性白光，以 Cycles 获取正面和斜侧面；在相同相机下移开猫爪作背景对照。确认背景亮暗随测试面移动而透过资产变化，同时曲面产生与无资产图不同的光学变形。无折射的透明混合可达到 PARTIAL，但不能仅凭节点名称达到 PASS。只测现存表面的光学效果，部件完整性由 GEO 处理。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. 随视角和光照变化的玻璃层次",
+      "criterion": "光洁表面产生随照明或视角变化的曲面高光，并具有掠射角增强的反射层次。",
+      "scoring_rule": {
+        "PASS": "可识别猫爪表面具有光洁反射，高光随光源或观察方向移动并贴合曲面；在同等照明下，正视清澈区与掠射角较强反射区可区分，反射不完全遮蔽表面层次。",
+        "PARTIAL": "可识别猫爪表面存在随光照或视角变化的真实反射高光，但未满足全部 PASS 条件；光洁度、曲面连续性、角度层次或高光覆盖中的任意不足均归此档。",
+        "FAIL": "没有随照明或视角变化的真实表面反射高光，或仅靠固定白色贴图、独立发光斑点或合成光晕模拟反光。"
+      },
+      "evidence_refs": ["image/01_glass_paw.png"],
+      "verification": {
+        "method": "view_and_light_response_probe",
+        "procedure": "在副本中用宽面积白光或明暗可辨的环境照明观察实际猫爪表面，固定相机移动照明一次，再固定照明改变观察方向一次。比较同一曲面上高光位置与掠射角反射强度，区分材质反射与固定贴图或合成效果。几何棱面本身归 GEO，只有材料反射响应不足计入本项。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-04",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. 随视角和光照变化的玻璃层次",
+      "criterion": "透射粉色随有效光程形成浓淡差异，并保留较薄区域的清澈感。",
+      "scoring_rule": {
+        "PASS": "可识别猫爪的透射区域有稳定浓淡层次：避开反光后，较长光程呈较浓粉色、较短光程较浅且清澈；该关系来自实际材质响应，整体仍保持透光。",
+        "PARTIAL": "可识别猫爪透射区域中存在至少一组由材质产生的粉色浓淡变化，且仍有清澈区域，但未满足全部 PASS 条件；变化与光程对应不稳定、局部浑浊或层次不足均归此档。",
+        "FAIL": "没有可识别猫爪透射区域的有效粉色浓淡层次，或全体浑浊不透，或浓淡完全来自彩灯与固定屏幕染色。"
+      },
+      "evidence_refs": ["image/01_glass_paw.png"],
+      "verification": {
+        "method": "optical_path_color_response_review",
+        "procedure": "在副本中以中性白光和均匀浅色背板观察爪体侧壁、正面及现存肉垫，避开反射高光，比较光程较长和较短的透射区域。必要时将资产实际使用的材质临时施加到不同厚度但相同朝向的封闭测试体，验证其光程着色趋势并区分彩灯、固定图案和吸收效果；测试体只用于验证，不作为提交要求。检查实际参与输出的材质，不要求指定体积节点或密度数值。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "5. 可重建的完整资产",
+      "criterion": "脚本在独立目录从空场景重建一致且可继续编辑的资产，依赖完整并可观察玻璃效果。",
+      "scoring_rule": {
+        "PASS": "build.py 在 Blender 5.1.2 的空场景中可运行，生成与 submission.blend 一致的主要几何、肉垫布局、玻璃材质及展示场景；迁移到另一目录后资源完整，结果可继续编辑并在 Cycles GPU 环境中渲染。",
+        "PARTIAL": "build.py 从空场景至少生成可编辑的三维猫爪主体，但未满足全部 PASS 条件；几何或材质差异、展示不全、缺少部分依赖或迁移后失败等任意不足均归此档。",
+        "FAIL": "未提供可执行重建脚本，或脚本无法从空场景生成可编辑的三维猫爪主体，或只是载入未随附的现成完整资产。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "isolated_rebuild_and_dependency_audit",
+        "procedure": "将 submission.blend、build.py 和随附资源复制到新的临时目录，审查外部路径后，在 Blender 5.1.2 的空场景运行脚本。将重建结果与原提交的中性几何视图及材质视图比较，检查有效相机照明、材质可编辑性与资源解析；在可用 Cycles GPU 环境中验证渲染。打开文件本身仅为检查前提，不单独得分。此阶段仅规定检查，不实际运行 Blender 或实现自动验证器。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

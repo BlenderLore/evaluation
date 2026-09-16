@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Crispy Fried Chicken",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1TpHrzNE4o",
+    "id": "BV1TpHrzNE4o"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 50, "SURF": 35, "SCN": 5, "PIPE": 10},
+  "weighting_note": "Geometry receives 50 points across the two distinct native forms, actual crust relief, and geometric integrity. Surface appearance receives 35 points for the source's central fried-coating material, with color and response to light tested independently. Composition receives 5 points and saved delivery and reconstruction receive 10. Modifier counts, node recipes, procedural geometry controls, and simulation are not outcomes of this static task.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Drumstick Form",
+      "criterion": "A recognizable volumetric drumstick has a rounded meaty end, narrow continuous neck, and short rounded handle.",
+      "scoring_rule": {
+        "PASS": "A volumetric drumstick with a visibly broad meaty end and narrower handle exists; the body has appreciable depth, the neck transition is continuous, the handle is short and rounded, and the form remains recognizable from front and oblique views after coating.",
+        "PARTIAL": "A volumetric drumstick with a visibly broad meaty end and narrower handle exists, but one or more PASS conditions are unmet, such as a pinched neck, weak depth, or poorly proportioned handle.",
+        "FAIL": "No volumetric drumstick with a visibly broad meaty end and narrower handle exists; a flat image, unshaped primitive, or generic lump does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_drumstick_form.png", "image/01_finished_chicken.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_manual_inspection",
+        "procedure": "Open the submitted blend, isolate the drumstick, and inspect evaluated front, side, and oblique views. Inspect its volume and the broad-end-to-neck-to-handle transition. Use a neutral material override only to clarify geometry; assess the final coated form rather than requiring a particular base mesh or modifier.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Nugget Form",
+      "criterion": "An independently positionable nugget has a thick flattened volume, rounded sides, and a mildly asymmetric oval outline.",
+      "scoring_rule": {
+        "PASS": "A separate volumetric nugget with a broad face and visible side depth exists; it is thick and flattened, gently asymmetric and oval, rounded at the sides, independently selectable and positionable, and comparable in width to the drumstick's meaty end.",
+        "PARTIAL": "A separate volumetric nugget with a broad face and visible side depth exists, but one or more PASS conditions are unmet, including weak asymmetry, angular sides, unsuitable proportions, or inability to position it independently.",
+        "FAIL": "No separate volumetric nugget with a broad face and visible side depth exists; a sphere, flat sheet, image, or inseparable extension of the drumstick does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_nugget_form.png", "image/01_finished_chicken.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_transform_probe",
+        "procedure": "Inspect the nugget in front, top, and oblique views and compare its width to the drumstick body. In a temporary copy, select and translate the complete nugget to confirm that it can be positioned independently; restore the scene after the probe. Do not require a particular object count within each complete food piece.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Crust Geometry And Finish",
+      "criterion": "Dense irregular crumbs and recesses produce actual silhouette-changing relief on both food pieces while retaining their overall forms.",
+      "scoring_rule": {
+        "PASS": "At least one recognizable food piece has a continuous curved region with actual crumb relief that changes its silhouette; both required pieces are covered across their visible bodies, sides, and handle where applicable, mix fine grains with larger clustered ridges, have comparable apparent crumb scale, and preserve the underlying forms.",
+        "PARTIAL": "At least one recognizable food piece has a continuous curved region with actual crumb relief that changes its silhouette, but one or more PASS conditions are unmet, such as patchy coverage, single-scale bumps, uneven scale between pieces, or excessive distortion.",
+        "FAIL": "No recognizable food piece has a continuous curved region with actual crumb relief that changes its silhouette. Color-only or normal-only texture, an isolated unused crumb source, and an uncoated flat or smooth food body do not meet the minimum."
+      },
+      "evidence_refs": ["image/04_crust_relief.png", "image/01_finished_chicken.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_controlled_render",
+        "procedure": "Inspect both pieces at close range and in silhouette. Use a temporary neutral shader that preserves any material displacement and a grazing light; inspect several curved regions including the drumstick neck and nugget side. Confirm real profile variation and local occlusion, then compare grain and cluster scale. Accept mesh modeling, displacement, and equivalent geometry techniques without checking modifier or node counts.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Crust Geometry And Finish",
+      "criterion": "Existing food volumes remain closed and their rounded transitions are free of accidental geometric defects.",
+      "scoring_rule": {
+        "PASS": "At least one recognizable food body has an inspectable rounded body-to-side or body-to-neck transition; both required food bodies are closed volumes and their evaluated surfaces have no accidental holes, disconnected coating fragments, long needle-like spikes, or obvious coarse polygon facets.",
+        "PARTIAL": "At least one recognizable food body has an inspectable rounded body-to-side or body-to-neck transition, but one or more PASS conditions are unmet. Substantive existing geometry may demonstrate clean local finish even when another required piece is absent.",
+        "FAIL": "No recognizable food body has an inspectable rounded body-to-side or body-to-neck transition, or all existing food bodies are fragmented or so severely broken that a coherent volume and transition cannot be assessed."
+      },
+      "evidence_refs": ["image/02_drumstick_form.png", "image/03_nugget_form.png", "image/04_crust_relief.png"],
+      "verification": {
+        "method": "geometry_integrity_and_gray_shading_inspection",
+        "procedure": "Inspect complete food bodies from several angles with neutral gray shading and inspect evaluated boundary edges where available. Check continuity, accidental openings, isolated debris, spikes, and coarse faceting. Intentional crumb roughness is not a defect. This check concerns integrity and finish; it does not re-score the amount or scale of relief assessed in GEO-03.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "Fried Coating Material",
+      "criterion": "The assigned coating material produces coherent golden-yellow, warm-orange, and toasted color variation over the curved food surfaces.",
+      "scoring_rule": {
+        "PASS": "At least one recognizable food piece has an assigned warm golden material with visible local color variation on a curved body region; both pieces show coherent golden-yellow and warm-orange variation with some deeper toasted tones, without a single flat color, large regular bands, or abrupt mapping seams under neutral lighting.",
+        "PARTIAL": "At least one recognizable food piece has an assigned warm golden material with visible local color variation on a curved body region, but one or more PASS conditions are unmet, such as poor palette balance, missing coverage on the other piece, repetitive bands, or visible mapping seams.",
+        "FAIL": "No recognizable food piece has an assigned warm golden material with visible local color variation on a curved body region. A flat color, lighting-only coloration, unused material, or texture shown only on an unrelated sample does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_chicken.png"],
+      "verification": {
+        "method": "assigned_material_inspection_and_neutral_lighting_render",
+        "procedure": "Inspect the materials actually assigned to the submitted food geometry. In a temporary copy, illuminate both pieces with a neutral light and inspect broad faces, sides, and neck. Confirm intrinsic warm color variation and seam continuity rather than inferring color from the final lighting or from unused nodes.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 20,
+      "requirement_section": "Fried Coating Material",
+      "criterion": "The coating responds to light as opaque, nonmetallic rough fried food with local variation in sheen and broken highlights.",
+      "scoring_rule": {
+        "PASS": "An assigned coating on at least one recognizable food piece has a substantial curved region showing an opaque nonmetallic rough response and distinguishable local sheen variation; both pieces exhibit predominantly soft highlights broken into small patches with occasional brighter crumb tips, readable recesses, and no dominant wet-glaze, mirror, or featureless-matte appearance.",
+        "PARTIAL": "An assigned coating on at least one recognizable food piece has a substantial curved region showing an opaque nonmetallic rough response and distinguishable local sheen variation, but one or more PASS conditions are unmet, including overly glossy areas, weak recess readability, or inconsistent treatment between pieces.",
+        "FAIL": "No assigned coating on a recognizable food piece has a substantial curved region showing an opaque nonmetallic rough response and distinguishable local sheen variation. An unused shader, entirely mirror-like or transparent coating, and a uniformly featureless matte response do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_finished_chicken.png"],
+      "verification": {
+        "method": "controlled_light_response_render",
+        "procedure": "Using the submitted assigned materials, render temporary close views of a curved drumstick region and a curved nugget region with the same neutral area light at two angles. Inspect highlight width and breakup, opaque nonmetallic response, local sheen differences, and recess readability. Inspect active material inputs as supporting evidence, but do not award credit for unused nodes or demand a specific shader recipe. Do not re-score the geometric relief quantity from GEO-03 or the palette from SURF-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "Two-Piece Presentation",
+      "criterion": "A compact two-piece composition uses depth and framing to keep the drumstick and nugget readable.",
+      "scoring_rule": {
+        "PASS": "Both recognizable food pieces appear together in the saved camera view; the nugget sits in front of an angled drumstick, both fit completely inside the frame, and any overlap preserves the readability of the meaty end, handle, nugget outline, and crust against a simple nondistracting background.",
+        "PARTIAL": "Both recognizable food pieces appear together in the saved camera view, but one or more PASS conditions are unmet, such as excessive overlap, cropping, weak depth, or a distracting background.",
+        "FAIL": "Both recognizable food pieces do not appear together in the saved camera view, or the composition prevents identification of either required piece."
+      },
+      "evidence_refs": ["image/01_finished_chicken.png"],
+      "verification": {
+        "method": "saved_camera_and_spatial_inspection",
+        "procedure": "Render the saved camera and inspect the scene from an oblique viewport angle to confirm the foreground nugget and angled background drumstick relation. Assess framing, overlap, silhouette separation, and background distraction. Mere existence of camera or light objects earns no credit.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The saved editable blend and final PNG contain the actual submitted fried-chicken scene.",
+      "scoring_rule": {
+        "PASS": "A submission.blend opens with editable food geometry and assigned materials; it includes the final render setup, and B145_Crispy_Fried_Chicken.png is a still rendered from that saved scene with enough detail to inspect the crust. The scene targets Blender 5.1.2 with Cycles GPU rendering and resolves its dependencies.",
+        "PARTIAL": "A submission.blend opens with editable food geometry and assigned materials, but one or more PASS conditions are unmet, such as a missing PNG, incomplete render setup, unresolved dependency, wrong engine setting, or mismatch between saved scene and image.",
+        "FAIL": "No submission.blend opens with editable food geometry and assigned materials; a render-only delivery or reference-image substitution does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact_open_and_render_comparison",
+        "procedure": "Open submission.blend in Blender 5.1.2, inspect editable food data, assigned materials, dependencies, and Cycles GPU settings, and render its saved camera. Decode the named PNG and compare it to that saved-scene render. Check the submitted files wherever delivered without imposing an output-directory convention.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The build script reconstructs and saves the complete scene without relying on an existing solution file.",
+      "scoring_rule": {
+        "PASS": "Running build.py from an empty scene creates a newly saved submission.blend containing editable food geometry and assigned materials; reopening that saved result confirms both required pieces, coating, material appearance, composition, and final render setup have been recreated without an existing solution scene or unavailable external assets.",
+        "PARTIAL": "Running build.py from an empty scene reconstructs editable food geometry and assigned materials without loading an existing solution file, and saves them in a new submission.blend, but one or more PASS conditions are unmet, such as an omitted piece, incomplete material or camera setup, or reliance on an unavailable external dependency for part of the scene.",
+        "FAIL": "Running build.py from an empty scene does not reconstruct and save editable food geometry and assigned materials in a new submission.blend without loading an existing solution file. Missing scripts, failed execution, loading an existing solution instead of recreating it, and unsaved in-memory results do not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "isolated_script_rebuild_and_saved_result_reopen",
+        "procedure": "In a clean temporary workspace with no preexisting submission.blend, run build.py in Blender 5.1.2 from an empty scene. Confirm a new submission.blend is written. Open that newly saved file in a separate Blender process and inspect both shapes, actual crust, assigned materials, composition, and render setup; compare its camera render to the submitted saved scene. Do not accept only an in-memory scene or a script that opens the original solution file.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

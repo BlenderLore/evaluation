@@ -1,0 +1,176 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "圆角镂空手提灯与程序化材质",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV17Hd5YnE1T",
+    "id": "BV17Hd5YnE1T"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 60, "SURF": 30, "PIPE": 10},
+  "weighting_note": "暂定权重，尚未校准。五项独立几何结果各 10 至 15 分，共 60 分；程序化棕色外观、参数响应和金属反射各 10 分。编辑与重建各 5 分。修改器存在不计 PROC，材质的程序化功能归 SURF；临时预览环境并非场景目标，不计 SCN。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 15,
+      "requirement_section": "1. 有厚度的圆角灯框",
+      "criterion": "竖向方形灯框在四个立面具有真实贯通开口，框沿和立柱有实体厚度并相连。",
+      "scoring_rule": {
+        "PASS": "可识别的立体灯框高度大于宽度，四面开口均贯通，框沿与立柱相连且具有实体厚度。",
+        "PARTIAL": "存在可识别的立体灯框且至少一个真实开口，但未满足全部 PASS 条件，例如四面贯通、竖向比例、厚度或框体连接不完整。",
+        "FAIL": "不存在可识别的立体灯框，或没有任何真实开口，仅以封闭实心块、贴图或平面图像表示灯框。"
+      },
+      "evidence_refs": ["image/01_finished.png", "image/02_structure.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_multiview_inspection",
+        "procedure": "在提交文件中隔离灯框，检查求值后的真实几何；从四个立面及三分之四视角观察，验证开口射线能穿过对应框面进入灯腔，检查开口侧壁与框体连接。比较灯框本身的竖向和横向包围尺寸，排除提环对比例判断的影响。不得用对象名、顶点数或截图代替开口和厚度检查。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 15,
+      "requirement_section": "2. 四面 X 形撑杆",
+      "criterion": "四个立面各有一组居中交叉、端部落在对应框沿的细长 X 形撑杆，并保留镂空区域。",
+      "scoring_rule": {
+        "PASS": "四面均形成完整 X，端部连接相应框沿，交叉接近各面中央；各面仍能看见清楚的镂空区域，无悬空长杆或穿出外框的长刺。",
+        "PARTIAL": "至少一个立面具有可识别的几何 X，但未满足全部 PASS 条件，例如完整 X 少于四面，或存在端部错位、悬空、交叉偏离或大面积遮堵。",
+        "FAIL": "没有任何立面形成可识别的几何 X，或撑杆只画在表面上。"
+      },
+      "evidence_refs": ["image/02_structure.png", "image/01_finished.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_four_face_views",
+        "procedure": "沿灯框的四个立面逐面检查求值几何，每面识别两条相交的细长构件及四个端部落点；检查构件是否属于该立面并与框沿接触，再从斜视确认真实体积和剩余空隙。融合成一个网格或通过实例生成均可，构件或对象数量本身不证明四面 X。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "3. 分层灯盖与底座",
+      "criterion": "顶部形成扁平台阶与向上收窄的斜盖，底部有低矮底座，各层居中并与灯框衔接。",
+      "scoring_rule": {
+        "PASS": "扁平台阶、收窄斜盖和低矮底座三类结构均可辨认，层次明确、基本居中并与灯框接触。",
+        "PARTIAL": "三类结构中至少一类可辨认，但未满足全部 PASS 条件，例如存在缺失、错位、悬空或层次混成一块。",
+        "FAIL": "三类结构均不存在或无法辨认，仅有普通灯框上下沿。"
+      },
+      "evidence_refs": ["image/01_finished.png", "image/02_structure.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_side_views",
+        "procedure": "在提交文件中从正面、侧面和斜上方检查顶部台阶的水平段、斜盖向内收缩的侧面，以及框体下方独立可辨的底座轮廓；检查它们与灯框的实际接触和相对中心。不得仅用顶部扁平物体数量作替代。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 10,
+      "requirement_section": "4. 圆环提手与连接球",
+      "criterion": "顶盖中央的近球形连接件与竖直、有真实内孔的圆环提手形成合理连接。",
+      "scoring_rule": {
+        "PASS": "连接球与圆环均存在，圆环竖直且内孔贯通；连接球居于盖顶中央并与盖顶和圆环下部接触，整体比例可辨。",
+        "PARTIAL": "连接球或有真实内孔的圆环至少存在一种，但未满足全部 PASS 条件，例如另一种缺失或存在朝向、位置、比例、连接问题。",
+        "FAIL": "既无近球形连接件，也无具有真实内孔的圆环提手。"
+      },
+      "evidence_refs": ["image/01_finished.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_orbit_inspection",
+        "procedure": "绕顶部组件观察提交文件中的几何，检查圆环正面内孔、侧面厚度和竖直姿态；检查连接球的近球形体积及与盖顶、圆环下部的接触。允许相交式连接或融合，不以环体原始段数、对象类型或名称判断。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 有厚度的圆角灯框",
+      "criterion": "已制作的主要几何具有圆润而清楚的轮廓，近景中无明显几何或着色破损。",
+      "scoring_rule": {
+        "PASS": "存在灯框及至少一类附属几何；实际存在的主要几何在正常近景下均保持圆润清楚的轮廓，没有明显尖刺、破洞、重叠闪烁或异常黑斑。",
+        "PARTIAL": "存在灯框及至少一类附属几何，其主要轮廓仍清楚，但未满足全部 PASS 条件，例如局部圆滑不足、夹痕、破洞或着色瑕疵。",
+        "FAIL": "未达到灯框加至少一类附属几何的可检查基础，或实际主要表面广泛破损、塌陷，已无法保持清楚轮廓。"
+      },
+      "evidence_refs": ["image/02_structure.png", "image/01_finished.png"],
+      "verification": {
+        "method": "neutral_shading_visual_inspection",
+        "procedure": "使用中性灰材质覆盖检查实际求值几何，在完整模型视图与框沿、撑杆交叉、盖边和提环近景之间切换，区分参考预览噪声和提交几何缺陷。只评价实际存在的表面质量，不因缺失的某类组件再次扣其存在性分；但完全没有足够几何时不能因未见瑕疵得分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 10,
+      "requirement_section": "5. 棕色纹理与金属反射",
+      "criterion": "灯框、灯盖和底座呈协调棕色并有细微拉长的深浅纹理，撑杆采用相容的棕色表面。",
+      "scoring_rule": {
+        "PASS": "灯框、盖和底座的实际表面均为协调的暖棕至深棕色，并能看到细微拉长纹理；实际撑杆为相容棕色，整体没有以噪点或粗糙结块代替纹理。",
+        "PARTIAL": "实际灯框具有可见棕色材质且仍能辨认棕色灯体目标，但未满足全部 PASS 条件，例如部分指定组件缺失或颜色不协调、纹理缺失、过强或缺少拉长趋势。",
+        "FAIL": "实际灯框不存在或未呈现棕色材质，或所称纹理仅为未收敛预览噪点，无法辨认棕色灯体目标。"
+      },
+      "evidence_refs": ["image/01_finished.png"],
+      "verification": {
+        "method": "assigned_material_and_converged_visual_inspection",
+        "procedure": "检查提交物中材质是否实际分配到对应表面；在中性且有层次的环境下用足够收敛的 Cycles GPU 预览观察灯框、盖、底座及撑杆，比较棕色体系与拉长深浅变化。移动视角确认纹理附着表面，排除采样噪声和颜色未连接到输出的闲置材质。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 10,
+      "requirement_section": "5. 棕色纹理与金属反射",
+      "criterion": "棕色纹理通过有效的程序化材质生成，颜色与疏密编辑均能改变实际输出。",
+      "scoring_rule": {
+        "PASS": "实际使用的程序化材质可追溯到有效输出；纹理疏密约两倍和改变一端棕色的两个独立探测均引起预期表面变化，几何不变。",
+        "PARTIAL": "实际表面确由程序化材质生成，但两个参数探测中只有一个产生预期变化，或另一项无法独立编辑。",
+        "FAIL": "无实际参与输出的程序化纹理，或两个参数探测都不能改变预期表面结果，仅有闲置节点、静态贴图或无效控制。"
+      },
+      "evidence_refs": ["image/01_finished.png"],
+      "verification": {
+        "method": "material_output_trace_and_parameter_probe",
+        "procedure": "在提交文件副本中找到实际棕色表面的材质输出与有效参数。保持几何、相机、照明不变，分别将纹理疏密调至约两倍、改变一端颜色，比较修改前后同一区域的稳定渲染或材质预览，并在每次探测后恢复。接受等效程序化实现，不要求指定节点链。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03", "capability": "SURF", "points": 10,
+      "requirement_section": "5. 棕色纹理与金属反射",
+      "criterion": "连接球和提环实际采用独立金色金属材质，表现出金属反射与较集中高光。",
+      "scoring_rule": {
+        "PASS": "连接球和提环均实际采用独立金色金属材质，在变化视角中表现出反射和较集中高光，并与棕色灯体区分。",
+        "PARTIAL": "两种组件中至少一种实际呈可辨认的金色金属反射，但未满足全部 PASS 条件，例如另一种缺失或材质不符、反射过暗、高光过于分散，或与灯体材质未独立区分。",
+        "FAIL": "两种组件均未呈现有效金色金属反射，包括组件均不存在、仅有黄色漫反射或自发光。"
+      },
+      "evidence_refs": ["image/01_finished.png"],
+      "verification": {
+        "method": "assigned_shader_and_reflection_probe",
+        "procedure": "检查连接球和提环实际分配的着色器及其有效输出；在含明暗区域的中性环境中转动观察视角，确认高光与环境反射随观察关系改变。核实效果来自金属反射而非发光或固定高光贴图。金属节点类型和精确粗糙度数值不作为必要条件。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "6. 局部编辑与重建",
+      "criterion": "灯框、撑杆、盖与底座、连接球与提环可分别定位并作局部编辑。",
+      "scoring_rule": {
+        "PASS": "四类结构均可分别定位和局部编辑，修改任一类不需要重做其余类；独立对象、实例或明确几何分组均可。",
+        "PARTIAL": "四类结构中至少两类可分别定位和局部编辑，但未满足全部 PASS 条件，例如其余类缺失、无法可靠分离或修改时影响其他结构。",
+        "FAIL": "少于两类结构可独立定位并编辑，或交付仅为不可编辑的图片或展示数据。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "artifact_editability_probe",
+        "procedure": "在副本中分别定位四类语义结构，进行可撤销的小幅局部变形或移动并恢复，观察非目标类是否保持原状。实例可通过其源几何或专用参数编辑，不要求固定对象数或命名；截图和目录名称不证明可编辑性。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02", "capability": "PIPE", "points": 5,
+      "requirement_section": "6. 局部编辑与重建",
+      "criterion": "build.py 能在空场景重建提交物，保存结果再次打开后形体和有效材质保持可用，依赖闭合。",
+      "scoring_rule": {
+        "PASS": "脚本在 Blender 5.1.2 空场景中成功重建并保存，重开后主要形体、实际材质分配和有效参数与提交物一致，依赖随交付提供或打包。",
+        "PARTIAL": "脚本能执行并生成可检查的主要灯体，但未满足全部 PASS 条件，例如部分形体、材质参数、保存重开结果或依赖重建不完整。",
+        "FAIL": "脚本缺失、无法从空场景完成主要灯体重建，或关键依赖缺失导致生成物不可检查。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "clean_scene_rebuild_and_reopen",
+        "procedure": "在独立副本目录中使用 Blender 5.1.2 执行 build.py，检查脚本生成的 submission.blend 并重新打开。比较主要语义形体、实际材质分配及有效纹理参数，核查外部资源路径和插件依赖。不因原提交文件能够打开单独给分。该流程为未来执行的验收说明，本阶段未运行 Blender。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

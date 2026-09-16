@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Volumetric Cloud and Falling Stars",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1Nc7C6VEVr",
+    "id": "BV1Nc7C6VEVr"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 20, "PROC": 15, "SURF": 25, "ANM": 25, "SCN": 5, "PIPE": 10},
+  "weighting_note": "The central result combines solid star geometry, a true white cloud volume, luminous surfaces, and evaluated falling motion. PROC measures two actual dependencies: editable shape data driving the cloud and shared star geometry driving the shower. ANM measures descent and reproducible population changes; no physical recompute requirement justifies SIM. SCN covers the final portrait arrangement. Delivery and rebuilding together receive 10 points.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Solid five-point stars",
+      "criterion": "The geometry used by the shower has a readable five-point star silhouette at an appropriate scale.",
+      "scoring_rule": {
+        "PASS": "At least one actual rain star has five distinct outer points and five inward notches, all star geometries used by the shower retain that silhouette in a front inspection view, and their largest projected width remains below one eighth of the visible cloud width.",
+        "PARTIAL": "At least one actual rain star has five distinct outer points and five inward notches, but any remaining PASS condition is unmet, including inconsistent variants, obscured notches, or oversized stars.",
+        "FAIL": "No star actually used by the shower has five distinct outer points and five inward notches. An unused prototype alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_cloud_and_star_rain.png", "image/03_solid_star.png"],
+      "verification": {
+        "method": "Evaluated geometry inspection and scale comparison",
+        "procedure": "Open submission.blend and identify the geometries that produce visible rain stars at developed frames. Evaluate instances and geometry outputs, inspect their broad-face silhouettes, count points and notches, and compare the largest camera-projected star width with the cloud width. Inspect actual generated stars rather than an isolated source object; use neutral inspection shading if emission obscures contours.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Solid five-point stars",
+      "criterion": "The rain stars have closed depth, a raised center, softened edges, and continuous finished surfaces.",
+      "scoring_rule": {
+        "PASS": "At least one actual rain star has a surfaced body with nonzero depth, and every star geometry used by the shower has a closed body, a raised center, softened edges, continuous surfaces, and no open seams or severe shading creases in front, side, and oblique inspection views.",
+        "PARTIAL": "At least one actual rain star has a surfaced body with nonzero depth, but any remaining PASS condition is unmet. Existing substantial surfaces may demonstrate partial quality even if another variant is missing or defective.",
+        "FAIL": "No actual rain star has a surfaced body with nonzero depth. Flat cards, outlines, points, and unused solid prototypes do not meet the minimum."
+      },
+      "evidence_refs": ["image/03_solid_star.png"],
+      "verification": {
+        "method": "Evaluated surface inspection from multiple directions",
+        "procedure": "In a disposable inspection copy, isolate geometry used by visible rain stars and use neutral shading to inspect front, side, and oblique views. Check evaluated surface boundaries and thickness, central relief, edge transitions, and normals. Judge the finished surface itself rather than the existence of a bevel modifier or smooth-shading flag. Do not rescore point count or scale here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "1. Editable cloud form",
+      "criterion": "Editable spatial source data drives the joined, rounded cloud envelope.",
+      "scoring_rule": {
+        "PASS": "A visible cloud exists and a change to its geometric source or equivalent spatial shape control changes its evaluated volume contour. The normal state has at least three joined rounded lobes, a broad raised center, a gently scalloped lower edge, and a wider-than-tall outline. A local lobe edit changes the nearby contour without manually rebuilding unrelated scene contents, and restoring the edit restores the contour.",
+        "PARTIAL": "A visible cloud exists and changing its geometric source or equivalent spatial shape control changes its evaluated volume contour, but any remaining PASS condition is unmet, including an incomplete lobe pattern, nonlocal response, or failure to restore the intended shape.",
+        "FAIL": "No visible cloud volume responds to a change in editable spatial source data. A disconnected source, fixed image, or direct material-color edit does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_cloud_envelope.png", "image/01_cloud_and_star_rain.png"],
+      "verification": {
+        "method": "Reversible cloud shape dependency probe",
+        "procedure": "Identify the submitted cloud and its actual shape dependency. Record its normal evaluated outline. In a disposable copy, enlarge or move a local lobe through the retained source data or equivalent spatial controls and reevaluate, confirming a corresponding local contour change in a controlled view. Restore the source and compare with the baseline. Inspect the normal lobe arrangement separately from the density and light-scattering quality scored by SURF-01.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 5,
+      "requirement_section": "3. Shared star generation",
+      "criterion": "A common geometry edit propagates to the visible generated shower.",
+      "scoring_rule": {
+        "PASS": "At least two actual generated rain stars respond to the same source geometry edit, and the edit updates all generated stars while preserving their animation positions and relative sizes. Restoring the source restores their shape.",
+        "PARTIAL": "At least two actual generated rain stars respond to the same source geometry edit, but any remaining PASS condition is unmet, such as independent variants failing to update or positions changing with the shape edit.",
+        "FAIL": "Fewer than two actual generated rain stars respond to a common source geometry edit. Matching names, duplicated appearances, or an unused source do not meet the minimum."
+      },
+      "evidence_refs": ["image/03_solid_star.png", "image/04_developed_star_rain.png"],
+      "verification": {
+        "method": "Reversible shared geometry probe",
+        "procedure": "At a developed animation frame, record visible stars' transforms and shapes. In a disposable copy, alter one point of the common star source or its equivalent common geometry control. Reevaluate and inspect generated stars throughout the shower for the same normalized shape change, preserving their positions and relative scales. Restore the edit. Follow evaluated dependencies; do not require a particular object name, instancing API, or node layout.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "4. Cloud volume and star emission",
+      "criterion": "A participating white volume produces the cloud's substantial interior and soft irregular boundaries.",
+      "scoring_rule": {
+        "PASS": "An actual three-dimensional participating volume contributes visibly to the rendered cloud. It has a substantial white interior, subtle density variation, soft translucent boundaries, and small edge irregularities, without a hard shell, obvious voxel blocks, or a featureless opaque cutout.",
+        "PARTIAL": "An actual three-dimensional participating volume contributes visibly to the rendered cloud, but any remaining PASS condition is unmet, including excessive thinness, coarse voxels, overly uniform density, dark coloration, or hard-looking edges.",
+        "FAIL": "No three-dimensional participating volume contributes visibly to the rendered cloud. Surface-only geometry, a camera-facing image, or a disconnected volume material does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_cloud_and_star_rain.png"],
+      "verification": {
+        "method": "Actual material-use inspection and controlled volume views",
+        "procedure": "Trace the cloud's active rendering data and actual material use to establish volumetric participation. Inspect controlled front and oblique renders from a disposable copy, retaining the submitted volume settings. Evaluate core density, white scattering appearance, boundary translucency, small irregularities, and voxel visibility. A graph alone is insufficient; the volume must contribute to the visible cloud. Do not rescore its lobe layout or editable source behavior here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "4. Cloud volume and star emission",
+      "criterion": "The falling stars' actual materials produce readable white self-emission.",
+      "scoring_rule": {
+        "PASS": "At least one actual falling star has material-driven self-emission, and all visible falling stars have white self-emission that remains luminous when direct lights are disabled. Their five-point silhouettes remain readable at the delivered exposure without relying on an external glow overlay for brightness.",
+        "PARTIAL": "At least one actual falling star has material-driven self-emission, but any remaining PASS condition is unmet, including dark variants, colored emission, or exposure that merges the star silhouettes into bright blobs.",
+        "FAIL": "No actual falling star has material-driven self-emission. Light reflections, compositor glow alone, an image overlay, or an unused emissive material does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_cloud_and_star_rain.png"],
+      "verification": {
+        "method": "Emission isolation and final-exposure inspection",
+        "procedure": "Inspect materials actually assigned to visible generated stars. In a disposable copy, disable direct scene lights and temporarily bypass glow effects to confirm luminous material output on the stars themselves. Restore the delivered configuration and inspect white appearance and silhouette readability. Accept equivalent emission implementations and do not require the source video's exact strength value.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-01",
+      "capability": "ANM",
+      "points": 15,
+      "requirement_section": "5. Falling motion and replay",
+      "criterion": "Stars descend independently from beneath the stationary cloud with coherent, continuous motion.",
+      "scoring_rule": {
+        "PASS": "At least three actual stars visibly descend across consecutive evaluated frames. At least three each travel downward by one quarter of the cloud width during the clip; stars originate at or immediately below the cloud underside, move primarily downward with at most modest sideways drift, maintain their individual visible sizes, and avoid upward jumps or repeated visible teleporting. The shower is not one rigid translating group, and the cloud and camera stay stationary.",
+        "PARTIAL": "At least three actual stars visibly descend across consecutive evaluated frames, but any remaining PASS condition is unmet, including insufficient travel, a rigidly moving group, misplaced births, changing sizes, or discontinuous paths.",
+        "FAIL": "Fewer than three actual stars visibly descend across consecutive evaluated frames. A static distribution, camera motion alone, or prerecorded footage without evaluated star motion does not meet the minimum."
+      },
+      "evidence_refs": ["image/04_developed_star_rain.png", "image/01_cloud_and_star_rain.png"],
+      "verification": {
+        "method": "Sequential evaluated trajectory inspection",
+        "procedure": "Advance the submitted scene sequentially through its timeline using any included cache or regeneration path. Follow at least three identifiable visible stars from birth over consecutive frames and record world-space or stable camera-space positions relative to cloud width. Inspect additional births and trajectories throughout the shower for independent descent, constant individual scales, and discontinuities. Compare cloud and camera transforms over the clip. Do not infer motion solely from particle settings or award SIM credit.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-02",
+      "capability": "ANM",
+      "points": 10,
+      "requirement_section": "5. Falling motion and replay",
+      "criterion": "The declared clip develops a varied star population and reproduces it on replay.",
+      "scoring_rule": {
+        "PASS": "The editable scene shows at least one star birth or death that changes the visible population between two evaluated frames, and uses frames 1-200 inclusive at 25 fps. Frame 1 has the intact cloud, no more than three new stars near its underside, and an empty lower falling region. Frames 50, 100, 150, and 200 each contain at least 12 distinct falling stars at varied heights, lateral positions, and sizes, with the largest and smallest differing roughly twofold. Births continue through the clip and frame 200 remains active. Resetting to frame 1 and replaying reproduces the same positions, sizes, and populations at corresponding frames using delivered or regenerated data.",
+        "PARTIAL": "The editable scene shows at least one star birth or death that changes the visible population between two evaluated frames, but any remaining PASS condition is unmet, including wrong timing, weak population development, uniform sizes, premature cessation, or inconsistent replay.",
+        "FAIL": "The editable scene does not show any star birth or death changing the visible population between evaluated frames. A fixed set without births or deaths, unusable missing caches, or a video-only effect does not meet the minimum."
+      },
+      "evidence_refs": ["image/04_developed_star_rain.png", "image/01_cloud_and_star_rain.png"],
+      "verification": {
+        "method": "Population sampling and deterministic replay",
+        "procedure": "Check the scene's start, end, and fps. Evaluate in frame order from 1 to 200 and record star counts, positions, scales, and visible extents at frames 1, 50, 100, 150, and 200. Verify staggered births between samples and compare the widest and narrowest visible stars. Reset or reopen the scene and repeat from frame 1 using only delivered data or its supported cache regeneration. Compare corresponding evaluated states, not render-noise pixels. Require no seamless loop or equality of frames 1 and 200.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "6. Final portrait shot",
+      "criterion": "The portrait composition clearly presents the cloud and falling region against blue.",
+      "scoring_rule": {
+        "PASS": "The final camera presents a visible cloud and multiple stars together against a blue background. It uses a portrait image of at least 720 by 1280 pixels, contains the full cloud in the upper portion with room below for descent, separates the cloud silhouette from its background, and keeps developed rain stars individually readable. Light reveals the cloud volume, stars are the brightest accent, and editing aids, emission surfaces, and the separate full-size source star are absent from the shot.",
+        "PARTIAL": "The final camera presents a visible cloud and multiple stars together against a blue background, but any remaining PASS condition is unmet, including cropping, insufficient descent space, poor separation, or visible editing aids.",
+        "FAIL": "The final camera does not present a visible cloud and multiple stars together against a blue background. Camera or light existence alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_cloud_and_star_rain.png"],
+      "verification": {
+        "method": "Final camera composition inspection",
+        "procedure": "Inspect actual camera renders at the developed states and the scene's output dimensions. Evaluate blue environment coverage, complete cloud framing, vertical descent space, background separation, and exclusion of source geometry and editing aids. Inspect visual relationships rather than incidental camera or light types. Star point count, material emission, and trajectory correctness are scored elsewhere.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "build.py recreates the editable scene and saves a usable submission.blend.",
+      "scoring_rule": {
+        "PASS": "build.py runs in Blender 5.1.2 from a new scene and saves a reopenable submission.blend containing a cloud and stars. The saved file reproduces the delivered scene's geometry, materials, shared editing relationships, camera, timeline, and animation using only supplied files or generated native data, including any necessary cache generation.",
+        "PARTIAL": "build.py runs from a new scene and saves a reopenable submission.blend containing a cloud and stars, but any remaining PASS condition is unmet, including incomplete animation, missing relationships, or material differences.",
+        "FAIL": "build.py is missing, cannot run from a new scene, or does not save a reopenable submission.blend containing a cloud and stars. An unsaved in-memory reconstruction does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Future isolated rebuild and saved-artifact comparison",
+        "procedure": "Review build.py, then run it in an isolated fresh Blender 5.1.2 scene with the delivered files available. Locate the submission.blend actually written by the script without imposing an undeclared directory. Close and reopen that saved file and compare its cloud, stars, shared geometry dependencies, materials, camera, and representative animation states with the delivered scene. Verify that any necessary cache is present or regenerated by the supported build path. This procedure is specified only; no authoring-time execution has been performed.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The saved scene and named MP4 are usable, consistent deliverables.",
+      "scoring_rule": {
+        "PASS": "submission.blend reopens with a visible cloud and stars, and B133_Volumetric_Cloud_And_Falling_Stars_dynamic.mp4 is playable and depicts that scene. The saved file has no missing required dependencies and uses Blender 5.1.2 Cycles with GPU rendering configured. The MP4 contains the actual camera render of all 200 frames at 25 fps, agrees with the saved scene's corresponding animation states, and is not replacement footage or a viewport capture.",
+        "PARTIAL": "submission.blend reopens with a visible cloud and stars, and the named MP4 is playable and depicts that scene, but any remaining PASS condition is unmet, including incomplete coverage, mismatched encoding rate, or incorrect render configuration.",
+        "FAIL": "submission.blend does not reopen with a visible cloud and stars, or the named MP4 is absent, unplayable, or does not depict that scene. A source-video copy or unrelated external replacement does not meet the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Saved scene, media metadata, and render correspondence inspection",
+        "procedure": "Open the delivered submission.blend and inspect missing dependencies, render engine, and device configuration. Decode the named MP4 and inspect frame count, fps, and playable duration. Compare its frames corresponding to scene frames 1, 50, 100, 150, and 200 with controlled camera renders of the submitted scene; allow compression and sampling noise. Confirm scene and footage correspondence rather than rewarding filenames alone. Do not impose an output location that the task does not require.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

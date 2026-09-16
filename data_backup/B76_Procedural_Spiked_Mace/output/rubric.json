@@ -1,0 +1,214 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Procedural Spiked Mace",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=qWg0sSTY9hg",
+    "id": "qWg0sSTY9hg"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 55, "PROC": 35, "RIG": 5, "PIPE": 5},
+  "weighting_note": "Geometry receives 55 points across the spherical body, spike shape, shaft, pommel, grip, and surface finish. The source-central face placement, normal following, and shared-source editing receive 35 procedural points. Whole-asset movement receives 5 rigging points and reproducible scene/render delivery receives 5 pipeline points. Default material assignment and incidental scene objects do not earn separate capability credit.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Head Form",
+      "criterion": "A rounded ball retains an editable, balanced 54-face all-quadrilateral distribution cage and remains visible between its spikes.",
+      "scoring_rule": {
+        "PASS": "The rounded ball and editable distribution cage exist; the cage has exactly 54 quadrilateral faces of comparable size distributed around the whole ball without a concentrated polar fan; the evaluated ball is approximately spherical and remains visible between spikes.",
+        "PARTIAL": "A recognizable rounded ball and an editable closed distribution cage both exist, but one or more PASS conditions are unmet, including the baseline face layout, quadrilateral structure, spherical balance, or visibility between spikes.",
+        "FAIL": "There is no recognizable rounded ball, or no editable closed distribution cage. An isolated spike cloud without a ball does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_mace.png", "image/02_head_detail.png"],
+      "verification": {
+        "method": "Geometry inspection and controlled views",
+        "procedure": "In a duplicate of the submission, inspect the identifiable distribution cage and count its faces and polygon sides. Isolate the ball for three orthogonal views to assess spherical balance and face distribution, then restore the spikes and compare the visible body with the reference. Assess the baseline cage here; evaluate per-face procedural behavior separately.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Spike Form",
+      "criterion": "The repeated spikes have the specified slender taper, relative dimensions, small flat tips, and seated non-crossing bases.",
+      "scoring_rule": {
+        "PASS": "The visible spike set consists of nearly circular tapered forms with length approximately 0.7-0.9 R, base radius approximately 0.16-0.23 R, and flat tip width approximately 0.1-0.2 of base width. Their bases meet the ball without floating gaps or exposed base discs, and neighboring spikes do not cross.",
+        "PARTIAL": "The ball carries multiple clearly recognizable tapered spikes with wider bases than tips, but at least one PASS condition concerning shape, relative size, tip form, seating, or crossing is unmet.",
+        "FAIL": "There are no repeated recognizable tapered spikes on the ball, or the protrusions are predominantly untapered rods, flat plates, or amorphous lumps. A source spike alone is insufficient."
+      },
+      "evidence_refs": ["image/02_head_detail.png"],
+      "verification": {
+        "method": "Evaluated geometry measurement and close-up inspection",
+        "procedure": "Measure the ball radius independently of spike tips. Inspect evaluated spikes around the head, measuring representative axial lengths and base/tip widths relative to that radius. Use close-up side and grazing views to inspect tip flats, base seating, and intersections. Do not deduct the baseline number of spikes here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Procedural Head",
+      "criterion": "Spike placement is a live one-per-face relationship that follows face centers and adapts to a denser cage.",
+      "scoring_rule": {
+        "PASS": "Every face of the current cage supplies exactly one centered spike, and changing to a denser all-quadrilateral sphere automatically produces exactly one spike at each new face center without individual copy placement or replacement of a fixed spike list.",
+        "PARTIAL": "A live relationship places multiple spikes from the cage's face geometry, but some faces are skipped or duplicated, centers are wrong, or the denser-cage probe fails a PASS condition.",
+        "FAIL": "No live face-derived placement of multiple spikes can be demonstrated. A fixed array, hand-placed copies, disconnected generator, or plausible static appearance alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_head_detail.png"],
+      "verification": {
+        "method": "Functional geometry probe",
+        "procedure": "In a disposable copy, identify the cage and observe generated placement for its actual face count, independently of whether the baseline has 54 faces. Compare spike anchors with those face centers. Use the provided density control or substitute a denser all-quadrilateral spherical cage in the same input while preserving overall size; re-evaluate and compare new face and spike counts and anchor positions. Restore the original cage. Inspect dependencies as support, not as a substitute for the probe.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Procedural Head",
+      "criterion": "Spike axes follow each corresponding face's outward normal, including after local cage edits.",
+      "scoring_rule": {
+        "PASS": "The generated spike axes follow the outward normals of their supporting faces across the whole head, and a modest asymmetric local cage edit automatically updates affected orientations and positions without manually rotating spikes.",
+        "PARTIAL": "Live orientation changes responding to the cage are demonstrated for multiple spikes in different head regions, but some spikes point incorrectly or the local edit fails any other PASS condition.",
+        "FAIL": "No live orientation response to the cage is demonstrated for multiple spikes, or all spikes retain one shared global direction. Static radial placement alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/02_head_detail.png"],
+      "verification": {
+        "method": "Controlled deformation and vector comparison",
+        "procedure": "For existing generated spikes in several nonparallel head regions, compare their longitudinal axes with the supporting face normals. In a duplicate, perturb a small neighboring group of cage vertices asymmetrically without destroying the closed cage and re-evaluate. Verify that affected spike axes follow the changed normals and anchors follow the changed centers. Restore the cage. Evaluate orientation for existing face-spike pairs, so missing pairs already assessed under placement are not charged again here.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Procedural Head",
+      "criterion": "One accessible spike source controls the repeated shape while remaining hidden from the final image.",
+      "scoring_rule": {
+        "PASS": "An accessible shared source generates every spike. A source shape edit propagates to every existing generated spike while preserving face-based placement; hiding the source from the final image leaves the generated spikes intact.",
+        "PARTIAL": "Editing one source demonstrably changes at least two generated spikes, but some copies fail to update, placement is disturbed, the source is not readily identifiable, or the hidden-source result fails a PASS condition.",
+        "FAIL": "No editable common source can be shown to update at least two generated spikes. Independent finished spike meshes with no shared shape dependency do not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_mace.png", "image/02_head_detail.png"],
+      "verification": {
+        "method": "Shared-source edit probe and render visibility check",
+        "procedure": "Use the scene structure or build.py comments to locate the shared spike source. In a duplicate, shorten its tip region noticeably while leaving its base anchored; verify consistent changes across all existing generated spikes and unchanged face attachments. Confirm that the source is hidden in the final camera render while its instances still evaluate. Undo the edit. This check does not re-score the cage's baseline count.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Handle and Pommel",
+      "criterion": "A slim, gently widening editable shaft forms the long central handle and meets the ball cleanly.",
+      "scoring_rule": {
+        "PASS": "The shaft aligns with the ball center, enters the ball without a visible gap or protruding end, and has an editable profile. Ball-center-to-handle-end distance is approximately 5.5-6.5 R; the upper shaft diameter is roughly one fifth of the ball diameter and widens gently toward the lower end.",
+        "PARTIAL": "An elongated editable shaft extends from the ball and reads as its handle, but at least one PASS condition concerning alignment, attachment, length, thickness, or taper is unmet.",
+        "FAIL": "No elongated shaft attached to the ball reads as a handle, or no editable shaft geometry/profile remains. A detached pole or short stub alone does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_mace.png", "image/03_grip_detail.png"],
+      "verification": {
+        "method": "Evaluated dimensions and profile inspection",
+        "procedure": "Identify the ball radius and shaft axis, then measure center-to-end length and upper shaft diameter in orthogonal views. Inspect the ball junction and gradual shaft taper. Confirm that the shaft profile is accessible for editing without requiring a particular modifier or mesh count. Reserve pommel shape and grip details for their own rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 8,
+      "requirement_section": "Handle and Pommel",
+      "criterion": "The handle terminates in an exposed closed pommel with a rounded, slightly flared butt profile.",
+      "scoring_rule": {
+        "PASS": "A short pommel is visible beyond the grip, has a closed end and smoothly rounded perimeter, and is approximately 1.5-2 times the upper shaft width. Its editable profile reads as the rounded, slightly flared butt of the handle.",
+        "PARTIAL": "A distinct editable terminal enlargement is present at the far end of the shaft, but at least one PASS condition concerning closure, roundness, proportion, or exposure is unmet.",
+        "FAIL": "There is no distinct editable terminal enlargement at the far end of the shaft. A plain uncapped tube or detached ornament does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_grip_detail.png"],
+      "verification": {
+        "method": "Terminal geometry and silhouette inspection",
+        "procedure": "Inspect the terminal end from side and end-on views, including evaluated end closure. Compare its maximum width with the upper shaft and confirm a short exposed portion beyond the grip. Inspect the editable profile rather than a prescribed bevel operation or ring count.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Raised Grip",
+      "criterion": "A single raised fitted sleeve occupies the lower handle, with controlled shoulders meeting the shaft.",
+      "scoring_rule": {
+        "PASS": "One axis-aligned raised sleeve sits nearer the pommel than the head and covers approximately one quarter to one half of the shaft length. Its outer wall is visibly proud of the shaft; both defined shoulders turn inward into clean shaft contact without floating rims or visible gaps. Length, width, and end profiles remain editable.",
+        "PARTIAL": "An editable raised sleeve visibly surrounds part of the shaft, but one or more PASS conditions concerning placement, extent, fit, shoulder definition, or profile control are unmet.",
+        "FAIL": "No editable raised sleeve surrounds the shaft. A painted stripe, an isolated detached ring, or a flush region with no geometric relief does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_grip_detail.png"],
+      "verification": {
+        "method": "Grip section, silhouette, and editability inspection",
+        "procedure": "Measure the sleeve extent relative to the shaft and compare its midpoint with the pommel and head. Inspect both shoulders from side and grazing views, or a temporary cross-section, to verify contact and absence of visible gaps. Inspect the retained geometry or controls for independent editing of the sleeve's dimensions and end profiles; do not require separation history or a specific object count.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 7,
+      "requirement_section": "Finish and Assembly",
+      "criterion": "The evaluated mace has clean rounded body surfaces and stable intentional transitions.",
+      "scoring_rule": {
+        "PASS": "The ball, shaft, grip, pommel, and repeated spikes exist and their visible rounded surfaces are free of unintended faceting, shading seams, or collapsed geometry. Tip flats and grip shoulders remain distinct after smoothing.",
+        "PARTIAL": "Both a substantive ball surface and an elongated shaft surface exist and show continuous readable rounded form over most of each, but any PASS condition is unmet, including finish defects on existing parts or a missing minor component.",
+        "FAIL": "The substantive ball or elongated shaft surface is absent, or either core surface is predominantly collapsed or affected by unintended faceting/shading defects so that readable rounded form is not established. Missing surfaces cannot demonstrate finish."
+      },
+      "evidence_refs": ["image/01_complete_mace.png", "image/02_head_detail.png", "image/03_grip_detail.png"],
+      "verification": {
+        "method": "Neutral-light evaluated surface inspection",
+        "procedure": "Inspect evaluated geometry under neutral lighting from full-asset and close-up views. Check silhouette continuity, normal/shading continuity, and collapsed faces on existing ball, shaft, grip, pommel, and spike surfaces. Assess smoothness here, not dimensions, count, or contact defects already assigned to the component rows. A missing minor component limits full coverage but does not force failure when both existing core surfaces meet the minimum.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-01",
+      "capability": "RIG",
+      "points": 5,
+      "requirement_section": "Finish and Assembly",
+      "criterion": "One assembly control translates and rotates the complete mace without changing internal placement.",
+      "scoring_rule": {
+        "PASS": "One identifiable assembly control translates and rotates all visible mace geometry together; the head, spikes, handle, grip, and pommel retain their relative placement for both transformations.",
+        "PARTIAL": "One control carries the ball and shaft together for at least one of translation or rotation, but any PASS condition is unmet, including a component left behind or distorted internal placement.",
+        "FAIL": "No single control carries the ball and shaft together for either translation or rotation, or either core component is absent. Merely selecting several unrelated objects together does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_complete_mace.png"],
+      "verification": {
+        "method": "Non-destructive assembly transform probe",
+        "procedure": "In a duplicate, translate the documented or evident assembly control away from its initial position and rotate it about two different axes. Compare component-relative transforms and evaluated placement before and after; confirm no visible part remains at its original location or changes its relative scale. Restore the transform. Any hierarchy or equivalent control mechanism is accepted.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The editable scene, reproducible build script, and named scene-rendered PNG form a usable delivery.",
+      "scoring_rule": {
+        "PASS": "submission.blend opens with the submitted asset and its editable dependencies; build.py recreates that saved scene from empty using relative output paths; B76_Procedural_Spiked_Mace.png is a Cycles GPU render from the submitted scene and clearly frames the submitted mace at a useful three-quarter angle.",
+        "PARTIAL": "submission.blend opens with substantive mace geometry and at least one of the build script or named rendered PNG is usable, but any PASS condition is unmet.",
+        "FAIL": "submission.blend is missing, cannot be opened, or contains no substantive mace geometry, or neither the build script nor the named scene-rendered PNG is usable. Source images and viewport screenshots do not qualify as rendered PNG delivery."
+      },
+      "evidence_refs": ["image/01_complete_mace.png"],
+      "verification": {
+        "method": "File, reproducibility, and render provenance checks",
+        "procedure": "Open submission.blend in Blender 5.1.2, inspect its saved render configuration and editable content, and decode the named PNG. In a clean temporary output directory, run build.py from an empty scene, inspect whether the saved asset and dependencies are recreated, and compare a scene render with the submitted PNG for content and camera consistency. Confirm whole-asset framing. Assess delivery usability and reproducibility here, without re-scoring component geometry or the baseline spike count. These are future submission checks; no compatibility execution is claimed during task authoring.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Simulated Tentacle Virus",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=RHvs1c1lz-I",
+    "id": "RHvs1c1lz-I"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 60,
+    "SIM": 30,
+    "PIPE": 10
+  },
+  "weighting_note": "The result is primarily a geometric asset: silhouette, trajectory shape, taper, solid integrity, and finish receive distinct checks. Thirty points preserve the central physics mechanism through recomputation and force-response tests. Ten points cover reproducible delivery. Internal field motion is part of the simulation, not a separate animation deliverable; retained helpers and unused taper profiles receive no independent points.",
+  "rubric": [
+    {
+      "id": "SIM-01",
+      "capability": "SIM",
+      "points": 20,
+      "requirement_section": "Particle Simulation",
+      "criterion": "A time-integrated particle simulation supplies the tentacle centerlines with the specified emission, gravity-free turbulence, rising field, and sideways repulsion.",
+      "scoring_rule": {
+        "PASS": "A working simulation integrates 200 particles over frames 1-200 at 24 fps, emits across a small spherical surface during frames 1-100 with varied lifetimes up to 100 frames, ignores gravity, and uses rising turbulence plus a separate sideways repulsive force. The turbulence center eases upward through frame 100 and continues upward at constant speed afterward. Retained simulated paths supply the final tentacle centerlines.",
+        "PARTIAL": "A working time-integrated particle simulation produces inspectable non-degenerate paths under an active turbulence force, and those paths are used to construct the submitted tentacles. None of the FAIL conditions applies, and at least one PASS condition is not met.",
+        "FAIL": "No working time-integrated particle simulation, no effective turbulent forcing, no inspectable non-degenerate trajectory output, or the submitted tentacles are not derived from that output."
+      },
+      "evidence_refs": [
+        "image/02_particle_paths.png"
+      ],
+      "verification": {
+        "method": "Code inspection and controlled simulation replay",
+        "procedure": "In a copy of the submission, inspect the solver or native physics configuration and identify the retained trajectory data by role. Clear or bypass cached results and recompute. Inspect particle births, lifetimes, sampled positions, velocity updates, and applied forces over frames 1-200; evaluate the turbulence-center motion before and after frame 100. Follow the data used to create several tentacles back to the recomputed paths, allowing smoothing and fusion. A particle-system object or stored settings alone do not establish this result.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SIM-02",
+      "capability": "SIM",
+      "points": 10,
+      "requirement_section": "Particle Simulation",
+      "criterion": "Documented controls support reproducible physical recomputation while the saved final body stays fixed until explicitly rebuilt.",
+      "scoring_rule": {
+        "PASS": "The same settings and seed reproduce the baseline paths. Zero turbulence reduces wandering, zero directional-force strength reduces the corresponding drift, and restoring the controls recovers the baseline. The script documents the seed and both force controls. The saved final body remains unchanged during ordinary timeline changes and helper edits until an explicit rebuild.",
+        "PARTIAL": "Preserved paths are inspectable, and at least one documented force control changes a freshly recomputed set of particle paths. None of the FAIL conditions applies, and at least one PASS condition is not met.",
+        "FAIL": "No inspectable retained paths, no usable physical recompute control, or changes only alter display data without changing freshly simulated trajectories."
+      },
+      "evidence_refs": [
+        "image/02_particle_paths.png"
+      ],
+      "verification": {
+        "method": "Determinism and force-ablation probes",
+        "procedure": "Use disposable copies. Recompute the baseline twice, comparing corresponding sampled centerlines after normalization to emitter scale. Recompute with turbulence zero while holding births, initial velocities, seed and other forces fixed; compare centerline turning and wander. Restore it, then recompute with directional force zero and compare displacement projected away from that force location. Restore the baseline. In the original saved-scene copy, compare evaluated final-body geometry while scrubbing and changing helpers without calling rebuild. Judge the observable behavior, not property or collection names.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Organic Form",
+      "criterion": "A compact tangled core supports a dense three-dimensional field of slender arms with open space and varied lengths.",
+      "scoring_rule": {
+        "PASS": "From multiple sides the asset has a compact tangled center, a dense field of arms spreading around it in three dimensions, and a mixture of short, medium and long arms. The outer region is mostly open space and the center is small relative to the full span, matching the reference character.",
+        "PARTIAL": "A compact central mass and a substantial surrounding field of tentacles are present, with visible open space between some arms. None of the FAIL conditions applies, and at least one PASS condition is not met.",
+        "FAIL": "No compact core with a substantial surrounding tentacle field, or the asset is predominantly a solid blob with negligible open space between arms."
+      },
+      "evidence_refs": [
+        "image/01_finished_body.png"
+      ],
+      "verification": {
+        "method": "Evaluated geometry and multi-view visual inspection",
+        "procedure": "Hide helpers and inspect the evaluated body from three mutually perpendicular directions and a three-quarter view. Compare the distribution of arm lengths, the density of the core relative to full span, front-to-back depth, and open space against the reference. Do not count individual final tips after union or require an exact particle arrangement.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Organic Form",
+      "criterion": "Tentacle paths have organic non-repeating bends and curls with continuous centerline flow.",
+      "scoring_rule": {
+        "PASS": "The existing tentacles vary in bend direction and curvature, combine broad arcs with tighter curls, and flow continuously along their centerlines. Their arrangement is non-repeating and avoids dominance by straight spikes, regular spirals, or mirrored arm patterns.",
+        "PARTIAL": "Several existing arms connected to the central region exhibit visibly curved centerlines with at least some irregularity. None of the FAIL conditions applies, and at least one PASS condition is not met.",
+        "FAIL": "No several core-connected curved arms with irregularity, or the existing arm field consists almost entirely of straight spikes or repeated regular curves."
+      },
+      "evidence_refs": [
+        "image/01_finished_body.png",
+        "image/02_particle_paths.png"
+      ],
+      "verification": {
+        "method": "Centerline and silhouette inspection",
+        "procedure": "Inspect retained centerlines and the corresponding evaluated arms, sampling short and long arms on several sides. Compare directional changes and local curvature. Use geometry or a neutral close render to distinguish a smooth continuous bend from a polyline corner; assess shape irregularity here, leaving flank faceting and normals to GEO-05.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Tapered Tentacles",
+      "criterion": "Round slender tubes retain substantial roots and continuous narrowing to fine pointed tips.",
+      "scoring_rule": {
+        "PASS": "Existing arms have round tubular cross-sections, slender proportions, thickest roots, continuous narrowing, and fine pointed terminal sections. The short arms taper too, and fusion preserves the contrast between roots and delicate tips.",
+        "PARTIAL": "Several existing tentacles have real tubular volume and visibly narrow from their root regions toward their ends. None of the FAIL conditions applies, and at least one PASS condition is not met.",
+        "FAIL": "No several volumetric tentacles with discernible root-to-end narrowing, including a result consisting only of bare curves, flat ribbons, or substantially uniform tubes."
+      },
+      "evidence_refs": [
+        "image/03_tapered_tubes.png",
+        "image/01_finished_body.png"
+      ],
+      "verification": {
+        "method": "Evaluated cross-section sampling and close visual inspection",
+        "procedure": "Sample several core-connected long and short arms in the evaluated mesh. Inspect transverse sections along each arm and close silhouettes from two angles to establish volume, roundness, relative thickness and root-to-tip narrowing. Ignore crossings where a neighboring arm changes the local radius; inspect the free segments and terminal ends.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "Unified Mesh",
+      "criterion": "The visible body is one connected watertight manifold solid with genuinely fused intersections.",
+      "scoring_rule": {
+        "PASS": "All visible body geometry forms one connected watertight manifold mesh with closed tips and outward-facing surfaces. Roots and intersections share a continuous solid. No disconnected fragments, open holes, internal overlapping tube walls, or duplicate sheets remain, and fusion preserves separation between non-touching arms.",
+        "PARTIAL": "A connected fused region joins the central mass to several tentacles through shared mesh surface. None of the FAIL conditions applies, and at least one PASS condition is not met.",
+        "FAIL": "No connected fused region joining a central mass to several tentacles, or the apparent body is only a collection of overlapping independent shells."
+      },
+      "evidence_refs": [
+        "image/01_finished_body.png"
+      ],
+      "verification": {
+        "method": "Mesh connectivity, boundary, and intersection inspection",
+        "procedure": "Evaluate the final visible body and inspect connected components, boundary edges, non-manifold edges, orientation and degenerate faces. Slice representative root clusters and arm crossings in a disposable copy to look for internal walls or separate shells. Confirm that spatially separate arms remain separated and that smoothing has not bridged large gaps. A single object name does not establish a single solid.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Surface Finish",
+      "criterion": "The existing core and tentacle surfaces are smooth and well resolved without remeshing steps or loss of delicate form.",
+      "scoring_rule": {
+        "PASS": "The central region and existing arm flanks have continuous curved silhouettes, round sections, smooth junctions and consistent surface normals. No visible voxel stair-stepping, dominant faceting, or coarse geometric ripples remain, and smoothing preserves fine tips and the center structure.",
+        "PARTIAL": "The existing central region and several volumetric arms have substantive smooth flank areas and remain recognizable as an organic tentacle body. None of the FAIL conditions applies, and at least one PASS condition is not met.",
+        "FAIL": "No substantive central and tentacle surfaces demonstrate the minimum finish, or gross faceting, ruptures, or melted loss of form dominates those surfaces."
+      },
+      "evidence_refs": [
+        "image/01_finished_body.png",
+        "image/03_tapered_tubes.png"
+      ],
+      "verification": {
+        "method": "Neutral shaded render and geometric silhouette inspection",
+        "procedure": "Inspect neutral close renders of the core and several short and long arms under grazing light, then inspect their geometric silhouettes and normals. Confirm that apparent smoothness is supported by the mesh. Missing minor arms cannot demonstrate finish but do not by themselves fail the substantial existing surfaces; do not rescore connectivity defects already assigned to GEO-04 unless they independently cause visible finish damage.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The build script reconstructs and saves a self-contained scene that independently reopens.",
+      "scoring_rule": {
+        "PASS": "Running build.py using its documented command from an empty scene recreates the simulation, retained data, final mesh and render setup, then saves submission.blend. A fresh Blender process reopens that saved file with the body and inspectable baseline simulation data intact and without missing dependencies.",
+        "PARTIAL": "Both submission.blend and a runnable build.py are provided, and running the script from an empty scene saves a nonempty submission.blend containing a reconstructed body that independently reopens. None of the FAIL conditions applies, and at least one PASS condition is not met.",
+        "FAIL": "Missing build.py or submission.blend, the script does not save a reconstructed body to submission.blend, or the resulting saved file cannot independently reopen."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Clean rebuild and saved-file reopen",
+        "procedure": "Run build.py in a clean temporary delivery directory with Blender 5.1.2 and no preloaded scene. Confirm that it writes submission.blend, exit the build process, then start a fresh Blender process and open that exact saved file. Inspect the reconstructed mesh, retained simulation data and render configuration; resolve dependencies from this reopened file. Do not accept an unsaved in-memory reconstruction.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The required PNG is an actual scene render matching the delivered asset.",
+      "scoring_rule": {
+        "PASS": "B96_Simulated_Tentacle_Virus.png is a decodable PNG at least 1200 pixels on its longest side, shows the complete final body, and matches a Cycles GPU render from the independently reopened submission.blend.",
+        "PARTIAL": "A decodable PNG is supplied and can be matched to an actual render of the submitted body. None of the FAIL conditions applies, and at least one PASS condition is not met.",
+        "FAIL": "No decodable PNG showing the submitted body, or the image is a source frame, viewport screenshot, external replacement, or otherwise cannot be reproduced from the submitted scene."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "Image decoding and independent scene render comparison",
+        "procedure": "Decode the PNG and inspect its dimensions. Render the saved camera from the independently reopened submitted scene using its Cycles GPU configuration, then compare the asset geometry, view and lighting with the PNG while allowing sampling noise. Confirm the whole asset is in frame and helpers are absent. Judge delivery and scene-image correspondence here, not artistic lighting quality.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

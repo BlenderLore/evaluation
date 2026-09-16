@@ -1,0 +1,235 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Porous Flake-Coated Nanorod",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1cwdzBDETc",
+    "id": "BV1cwdzBDETc"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {
+    "PASS": 1,
+    "PARTIAL": 0.5,
+    "FAIL": 0
+  },
+  "capability_totals": {
+    "GEO": 40,
+    "PROC": 45,
+    "SCN": 5,
+    "PIPE": 10
+  },
+  "weighting_note": "The source teaches geometric form and an editable procedural plate coating. Geometry receives 40 points across the core, ends, plate shape, and finish; procedural behavior receives 45 across domain coverage, orientation, source-form propagation, and controllable regeneration. Presentation receives 5 and saved-artifact reproducibility 10. No material recipe, animation, simulation, or modifier-count proxy is scored.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Core and End Caps",
+      "criterion": "The underlying core is a straight, continuous cylinder with the requested slender proportions.",
+      "scoring_rule": {
+        "PASS": "A solid continuous core has a straight axis, circular cross-section, consistent central diameter, and length-to-diameter ratio from 8:1 through 14:1.",
+        "PARTIAL": "A connected core extends through the central coated region and is recognizably a straight elongated cylinder, with length greater than diameter. Not all PASS conditions are met.",
+        "FAIL": "No connected elongated cylindrical core extends through the central coated region, or the core length is no greater than its diameter."
+      },
+      "evidence_refs": [
+        "image/01_overall_reference.png",
+        "image/02_flake_structure.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_orthographic_inspection",
+        "procedure": "Open the submitted scene and temporarily hide the generated coating in a duplicate inspection scene. Inspect the evaluated core from side and end views; measure longitudinal extent and central cross-section diameter in the same object space. Inspect continuity along the shaft. End closure and rounding are assessed only in GEO-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Core and End Caps",
+      "criterion": "Both solid core tips have rounded rims and remain shortly exposed beyond the coating.",
+      "scoring_rule": {
+        "PASS": "Both ends are closed circular faces joined to the shaft by smooth rounded rims. Each exposed core tip is shorter than the core diameter and projects beyond the flake layer.",
+        "PARTIAL": "At least one end has a closed circular face and visible rounded rim, with some smooth core exposure beyond the flake layer. Not all PASS conditions are met.",
+        "FAIL": "Neither end has all three minimum features: a closed circular face, a visible rounded rim, and smooth core exposure beyond the coating."
+      },
+      "evidence_refs": [
+        "image/03_rounded_tip.png",
+        "image/01_overall_reference.png",
+        "image/02_flake_structure.png"
+      ],
+      "verification": {
+        "method": "evaluated_geometry_and_close_views",
+        "procedure": "Inspect evaluated end topology and silhouette from both ends, then restore the coating and measure axial exposed lengths relative to the core diameter. Use close shaded views to distinguish curved rims from single sharp corners. Do not infer rounding from vertex counts or modifier presence.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Flake Geometry and Finish",
+      "criterion": "The coating consists of thin rectangular plates with actual thickness.",
+      "scoring_rule": {
+        "PASS": "The coating is composed of rectangular or near-square plates with broad planar faces, straight edges, and thickness visibly smaller than both face dimensions. Many separate flakes remain readable along the shaft.",
+        "PARTIAL": "The existing coating has a recognizable population of rectangular plates with real thickness and at least one face dimension larger than thickness. Not all PASS conditions are met.",
+        "FAIL": "There is no recognizable coating population of rectangular plates with real thickness, or its elements have no face dimension larger than thickness."
+      },
+      "evidence_refs": [
+        "image/03_rounded_tip.png",
+        "image/01_overall_reference.png",
+        "image/02_flake_structure.png"
+      ],
+      "verification": {
+        "method": "evaluated_instance_geometry",
+        "procedure": "Inspect representative evaluated flakes or their evaluated shared source from face and edge views. Compare thickness with width and height and inspect planar faces and straight edges. Check near, middle, and far portions of the coating for consistent element type. Shading finish is assessed in GEO-04.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "Flake Geometry and Finish",
+      "criterion": "Existing core and plate surfaces retain appropriate clean smooth or planar finish.",
+      "scoring_rule": {
+        "PASS": "The core and both rounded rims shade smoothly without conspicuous facets or seams; flake faces remain cleanly planar with legible thickness. There are no distracting broken faces, stray floating pieces, or coplanar duplicates; local coating overlaps and contact are allowed.",
+        "PARTIAL": "A substantive existing core surface and a substantive existing plate population are inspectable and each has some cleanly shaded, intact surfaces. Not all PASS conditions are met.",
+        "FAIL": "Either a substantive core surface or a substantive plate population is absent, or either existing component has no cleanly shaded, intact surface region."
+      },
+      "evidence_refs": [
+        "image/03_rounded_tip.png",
+        "image/01_overall_reference.png",
+        "image/02_flake_structure.png"
+      ],
+      "verification": {
+        "method": "controlled_shaded_inspection",
+        "procedure": "Use a neutral material and broad light in a temporary inspection scene. Inspect core sides, all existing rims, and near/middle/far coating samples in close views. Rotate the light or view to reveal facets and coplanar flicker. Assess the finish of existing substantial parts; missing minor parts prevent PASS where relevant but do not by themselves force FAIL.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "Procedural Surface Distribution",
+      "criterion": "The procedural coating follows the cylindrical side domain and preserves clear smooth tips.",
+      "scoring_rule": {
+        "PASS": "The generator distributes a dense flake layer along the central shaft and around its full circumference without large bare bands, remains centered on the core axis, and leaves both circular end faces free of generated flakes.",
+        "PARTIAL": "An active generator produces flakes attached to the cylindrical side over more than a localized patch, with a recognizable coated longitudinal region. Not all PASS conditions are met.",
+        "FAIL": "No active generator produces a recognizable longitudinal coating attached to the cylindrical side; manually placed or solely baked flakes without a functioning generator do not meet the minimum."
+      },
+      "evidence_refs": [
+        "image/01_overall_reference.png",
+        "image/02_flake_structure.png"
+      ],
+      "verification": {
+        "method": "generator_trace_and_evaluated_distribution",
+        "procedure": "Inspect the active generation relationship and evaluate its output. Rotate the rod through four quarter-turn side views and both end views to inspect side coverage, circumference, axial alignment, and end-face exclusion. Confirm that the evaluated coating comes from the generator, not only from disconnected baked replacements. Random orientation is assessed only in PROC-02.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Procedural Surface Distribution",
+      "criterion": "Generated flake orientation produces an irregular, porous-looking but rod-shaped layer.",
+      "scoring_rule": {
+        "PASS": "Neighboring generated plates have varied rotations around their local outward directions, with irregular overlaps and small visible gaps throughout the layer. They avoid aligned rows or parallel rings, and the coating remains close enough to retain a cylindrical silhouette.",
+        "PARTIAL": "A functioning generator produces a recognizable coating region with multiple visibly different neighboring plate orientations and visible gaps. Not all PASS conditions are met.",
+        "FAIL": "There is no functioning generated coating region with both visibly varied neighboring plate orientations and visible gaps."
+      },
+      "evidence_refs": [
+        "image/01_overall_reference.png",
+        "image/02_flake_structure.png",
+        "image/03_rounded_tip.png"
+      ],
+      "verification": {
+        "method": "generator_and_multiview_inspection",
+        "procedure": "Inspect local plate orientations at separated shaft locations and around the circumference using evaluated instances or geometry. Compare close shaded views with the overall silhouette. Check that variation is generated rather than a single repeated ring. Inspect gaps between plates; do not require holes in the intact core.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Generator",
+      "criterion": "Editing the shared flake source updates the coating's plate form throughout the rod.",
+      "scoring_rule": {
+        "PASS": "Changing the source plate proportions and changing its thickness each update the generated plate population throughout the rod while the core stays unchanged; restoring the source restores the original coating form.",
+        "PARTIAL": "At least one reversible change to source plate proportions or thickness updates generated plates at multiple separated positions without changing the core. Not all PASS conditions are met.",
+        "FAIL": "No reversible source-form edit updates generated plates at multiple separated positions without changing the core."
+      },
+      "evidence_refs": [
+        "image/03_rounded_tip.png"
+      ],
+      "verification": {
+        "method": "reversible_functional_probe",
+        "procedure": "In a copy of the submitted artifact, identify the actual source geometry or shared source parameters. Change one face proportion and then thickness separately, reevaluate the generator, and inspect flakes near both ends and the middle. Compare core geometry before and after. Restore each edit and verify recovery. Accept mesh, node, or retained script-based equivalents.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-04",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "Editable Generator",
+      "criterion": "Density, size, and seed controls change the intended generated properties and reproduce the original state.",
+      "scoring_rule": {
+        "PASS": "Identifiable density, flake-size, and seed controls all work: density changes population or spacing, size changes flake dimensions without changing the core, and seed changes the irregular arrangement. Restoring all original values reproduces the original coating.",
+        "PARTIAL": "At least one identifiable density, flake-size, or seed control produces its stated change and can restore its original result without changing the core. Not all PASS conditions are met.",
+        "FAIL": "No identifiable density, flake-size, or seed control both produces its stated change and restores its original result while preserving the core."
+      },
+      "evidence_refs": [
+        "image/01_overall_reference.png",
+        "image/02_flake_structure.png"
+      ],
+      "verification": {
+        "method": "reversible_parameter_and_reproducibility_probe",
+        "procedure": "Record the original settings and evaluated flake transforms or comparable geometric signatures. Change density, overall flake size, and seed one at a time in a temporary scene, invoking retained regeneration code when needed. Measure population/spacing and dimensions and compare arrangement. Restore the original settings and compare the regenerated signature and controlled views with the initial state.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "Presentation",
+      "criterion": "The final camera view presents the full nanorod and makes its structure readable.",
+      "scoring_rule": {
+        "PASS": "The final render includes the complete rod and both ends with clear margins, an oblique view showing its length and at least one rounded end face, and contrasting background and lighting that reveal flake relief and gaps. No standalone source plate or construction helper appears.",
+        "PARTIAL": "A scene camera renders a recognizable nanorod with readable coating relief and at least one visible end region. Not all PASS conditions are met.",
+        "FAIL": "No scene camera view renders a recognizable nanorod with both readable coating relief and a visible end region."
+      },
+      "evidence_refs": [
+        "image/01_overall_reference.png",
+        "image/02_flake_structure.png"
+      ],
+      "verification": {
+        "method": "scene_camera_render_review",
+        "procedure": "Render the saved scene through its intended camera and compare framing, end visibility, lighting contrast, and helper exclusion with the submitted PNG. Inspect the whole frame and a close crop. Do not award points merely for camera or light object existence, and do not penalize neutral gray instead of pink.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "Deliverables",
+      "criterion": "The saved scene, recreation script, and actual-scene PNG are complete and reproducible.",
+      "scoring_rule": {
+        "PASS": "All three named deliverables are provided. The scene opens, build.py recreates it from a new scene and saves submission.blend, and that saved result reopens with equivalent visible geometry, working generator controls, and render setup. The named PNG is rendered from the submitted scene.",
+        "PARTIAL": "The submitted submission.blend opens with an inspectable nanorod and an editable generator, but at least one other PASS condition is unmet. Not all PASS conditions are met.",
+        "FAIL": "The submitted submission.blend is missing or cannot open with both an inspectable nanorod and an editable generator."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "isolated_build_save_reopen_and_render_check",
+        "procedure": "Inventory the required filenames. Open the supplied submission.blend and inspect its generator. In an isolated temporary directory and a fresh Blender 5.1.2 process, run build.py with no preloaded task scene. Confirm it writes submission.blend, close that process, and reopen the newly saved file in another fresh process. Inspect the regenerated visible geometry and exercise a generator control on that reopened file. Confirm Cycles GPU settings and compare a render from the submitted scene to the required PNG; an unsaved in-memory build is not sufficient.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

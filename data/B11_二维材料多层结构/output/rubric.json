@@ -1,0 +1,173 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "二维材料多层结构",
+  "source_video": {"url": "https://www.bilibili.com/video/BV1UBM96sEzr", "id": "BV1UBM96sEzr"},
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 55, "PROC": 25, "SURF": 15, "PIPE": 5},
+  "weighting_note": "静态球棍、薄板和折形侧壁是主要交付形态，GEO55分分摊到五个独立结果；PROC25分仅奖励真实可操作的二维数量与节距调节，不按修改器存在或对象数量给分；源视频0秒彩色成品支持SURF15分；独立重建与依赖闭包占PIPE5分。平滑轮廓计入GEO，基底及侧壁的装配属于资产几何关系，不另列SCN。权重为内容阶段的暂定分配，未经评分器标定。",
+  "rubric": [
+    {
+      "id": "GEO-01", "capability": "GEO", "points": 15,
+      "requirement_section": "1. 两类立体球棍单元",
+      "criterion": "阵面中同时存在三对近似正交分支的六向单元和一个向上、三个周向分支的四向单元，且球体大小关系正确。",
+      "scoring_rule": {
+        "PASS": "两类单元均在实际阵面中重复出现；六向单元具有六个带端点球的三维分支且中心明显较大；四向单元具有四个带端点球的立体分支且中心不小于端点。",
+        "PARTIAL": "至少一类单元完整符合要求并在阵面中重复出现，但另一类缺失或分支数、立体布局、球体大小关系存在偏差。",
+        "FAIL": "没有任何一类完整符合上述形态并在阵面中重复出现，或主要由平面图案代替立体球棍结构。"
+      },
+      "evidence_refs": ["image/02_units.png", "image/03_lattice.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_multi_view_inspection",
+        "procedure": "在提交副本中求值修改器与实例，按几何形状定位两类重复单元，并从互相垂直方向及斜视方向隔离检查中心球、端点球和杆体。由球心与杆轴关系识别六向/四向分支及立体方向，不按对象数、物体名称、球体原始类型或单张投影视图计数。合并网格和一个原型经Array生成的实例应与分离对象等价识别。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02", "capability": "GEO", "points": 10,
+      "requirement_section": "2. 规则的二维阵面",
+      "criterion": "两类单元以一致节距交错铺成近矩形二维阵面，主中心位置至少六行且每行至少六个。",
+      "scoring_rule": {
+        "PASS": "两个方向都达到六个主重复位置；整体近矩形、行列规整，两类单元在内部交错出现，同类尺度与朝向一致，无随机内部缺口或孤立散件。",
+        "PARTIAL": "存在可辨认的二维重复阵面且不属于FAIL，但未满足PASS的规模、交错位置、行列规则性或内部完整性要求。",
+        "FAIL": "没有可辨认的二维重复阵面，只有单排、散乱分布或大面积重叠成块的几何。"
+      },
+      "evidence_refs": ["image/03_lattice.png", "image/01_overview.png"],
+      "verification": {
+        "method": "evaluated_geometry_pattern_analysis_and_visual",
+        "procedure": "对求值后的中心球位置投影到最佳拟合阵面，识别两组独立重复方向、行列覆盖和同类节距；结合顶视与斜视检查两类单元占据不同交错位置、内部缺口与重复形状一致性。根据实际格点几何计数，不能以对象总数、数组字段值或图像密度代替。此项只评价默认排布，参数反应另由PROC项评价。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03", "capability": "GEO", "points": 10,
+      "requirement_section": "1. 两类立体球棍单元",
+      "criterion": "球棍的细杆具有实体截面并连接所属球体，球杆轮廓平滑且无明显表面缺陷。",
+      "scoring_rule": {
+        "PASS": "两类球棍均存在；杆体粗细均匀且细于端点球，两端接触或少量嵌入所属球体；正常近景下无可见断缝、长刺、分面、破损阴影或重面闪烁。",
+        "PARTIAL": "存在可辨认的实体球棍且不属于FAIL，但未满足PASS的连接、平滑质量或两类球棍完整性要求。",
+        "FAIL": "没有可辨认的实体球棍，或多数杆端悬空、几何严重破损，使球棍关系无法辨认。"
+      },
+      "evidence_refs": ["image/02_units.png", "image/03_lattice.png"],
+      "verification": {
+        "method": "evaluated_geometry_contact_and_neutral_shading_review",
+        "procedure": "从两类单元及阵面边缘、内部抽取代表位置，检查求值杆体横截面和杆端与球面的空间关系；用中性材质与稳定光照查看近景轮廓、法线连续性、重叠面闪烁和异常长刺。节点或平滑开关本身不能证明质量；缺失的球棍不因无可见缺陷而获得通过。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04", "capability": "GEO", "points": 10,
+      "requirement_section": "3. 多层基底与成对侧壁",
+      "criterion": "至少四个真实有厚度的矩形板层组成平整、紧密叠置的基底，顶层承托整个阵面。",
+      "scoring_rule": {
+        "PASS": "正面及侧面能辨认至少四个实际实体板层，板层平直、边缘规整且层叠对齐；顶层覆盖阵面投影，球棍没有埋入板内或穿出底面。",
+        "PARTIAL": "存在至少两个实际实体板层，但不足四层，或平整对齐、阵面覆盖与承托关系存在局部缺陷。",
+        "FAIL": "不足两个实际实体板层，或以单块实体上的条纹或零厚度面替代多层基底。"
+      },
+      "evidence_refs": ["image/01_overview.png", "image/04_geometry.png"],
+      "verification": {
+        "method": "evaluated_geometry_cross_section_inspection",
+        "procedure": "在求值几何中隔离基底，以正侧视和临时截面检查真实厚度、上下层界面、覆盖范围与球棍相对高度。板层可以在同一网格内或由实例生成，不能根据薄物体的包围盒数量推断层数，也不能把材质横条直接认定为层板。此项评价承托形体与接触，材质颜色另计SURF。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05", "capability": "GEO", "points": 10,
+      "requirement_section": "3. 多层基底与成对侧壁",
+      "criterion": "基底两侧各有一条相称的实体折形构件，包含贴合基底的下部、抬高侧壁和向内伸出的顶沿。",
+      "scoring_rule": {
+        "PASS": "两侧构件均具三段折形实体截面，长度、高度相称；侧壁高于阵面、顶沿平直，两侧间保留可见晶格的开口，底部与基底没有悬空断缝。",
+        "PARTIAL": "至少一侧具有抬高侧壁及向内顶沿，但另一侧缺失，或两侧相称性、折形截面、接合与中部开口存在局部问题。",
+        "FAIL": "两侧都缺少可辨认的抬高侧壁及向内顶沿，或仅用平板/色条代替侧向构件。"
+      },
+      "evidence_refs": ["image/04_geometry.png", "image/01_overview.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_end_view_inspection",
+        "procedure": "依据位置与实际截面识别侧向构件，在端视、侧视与斜上视图检查下部、竖壁、向内顶沿、厚度和与基底的接合，比较左右长度及高度并确认中部阵面可见。允许合并或镜像输出；任何位于正负坐标的其他网格、Mirror修改器或对象名称均不能代替构件认定。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01", "capability": "PROC", "points": 15,
+      "requirement_section": "4. 可编辑的二维重复",
+      "criterion": "两类单元的两个平面方向重复数量都可在文件内有效调整，并在恢复参数后返回默认布局。",
+      "scoring_rule": {
+        "PASS": "两类单元各自的两个方向均能通过已标明的重复设置增加一个位置；该方向扩展，既有内部形态、节距及另一方向分布不变，恢复默认值后布局恢复。",
+        "PARTIAL": "至少一类单元的至少一个方向完整通过上述增加及恢复测试，但其余组合未全部通过或缺少清楚的设置说明。",
+        "FAIL": "没有任何一类单元的任何方向能通过文件内数量调节完成增加及恢复；只有静态重复、无效字段或必须重跑构建脚本/逐个移动副本。"
+      },
+      "evidence_refs": ["image/03_lattice.png"],
+      "verification": {
+        "method": "non_destructive_repeat_count_probe",
+        "procedure": "在临时副本按文件内说明定位实际重复入口，记录默认求值格点与单元几何，分别测试两类单元的两个平面方向数量加一；共同控件可一次覆盖对应组合。比较新增边缘格点、既有单元形状、内部节距和另一方向分布，再恢复并比对基线。对象合并、Array或Geometry Nodes均允许，只按求值输出的可逆变化判定；基底随测试自动扩缩不作要求。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02", "capability": "PROC", "points": 10,
+      "requirement_section": "4. 可编辑的二维重复",
+      "criterion": "两类单元的两个平面方向节距可独立改变，同时保持单元形态、数量和另一方向节距。",
+      "scoring_rule": {
+        "PASS": "两类单元的两个方向均能通过已标明的节距入口调到默认值1.2倍，中心格点间距的相应变化在10%相对误差内；单元形状、数量及另一方向节距不变，恢复参数后布局恢复。",
+        "PARTIAL": "至少一类单元的至少一个方向完整通过节距变化及恢复测试，但其余组合未全部通过或缺少清楚的设置说明。",
+        "FAIL": "没有任何一类单元的任何方向能通过该节距及恢复测试，或变化仅靠缩放整个模型而同时改变单元自身形状。"
+      },
+      "evidence_refs": ["image/03_lattice.png"],
+      "verification": {
+        "method": "non_destructive_repeat_pitch_probe",
+        "procedure": "在临时副本读取基线格点、单元形状及数量，分别对两类单元的两个方向调节节距至1.2倍，测量相邻中心格点间距比并对照1.2目标及10%相对误差；确认单元自身尺寸、杆分支、数量和另一方向节距保持。恢复参数后重算并比较基线。将相对或恒定偏移等原生字段视为有效入口，不要求额外自定义界面；不能仅检查字段或修改器存在。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01", "capability": "SURF", "points": 10,
+      "requirement_section": "5. 可区分的材质",
+      "criterion": "球棍阵面以实际材质形成并列的暖红橙与冷蓝紫区域，端点球为更浅的黄白或青白色。",
+      "scoring_rule": {
+        "PASS": "两种并列色区均由实际材质形成，每区都包含两类球棍形态；浅色端点与主中心球清楚区分，细键杆可辨，材质不透明。",
+        "PARTIAL": "至少部分球棍使用实际可见材质，但暖冷分区、各区两类单元、浅色端点或不透明性未全部满足。",
+        "FAIL": "缺少球棍实体或没有可用的球棍材质区分；仅有未赋予几何的材质数据、视口随机色或全体统一灰色。"
+      },
+      "evidence_refs": ["image/01_overview.png"],
+      "verification": {
+        "method": "assigned_material_inspection_and_neutral_lighting_review",
+        "procedure": "在稳定中性照明下查看实际材质模式或Cycles GPU预览，定位左右暖冷区域及每区的两类形态，检查中心球、端点和杆的可读性；沿求值几何核对有效材质赋值和着色输出。允许共享材质配合属性或程序化着色，不能按材质数据块数量或未使用材质判定。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02", "capability": "SURF", "points": 5,
+      "requirement_section": "5. 可区分的材质",
+      "criterion": "基底层具有清楚的色彩或明度层次，成对侧向构件呈可区分的暖金或浅黄色。",
+      "scoring_rule": {
+        "PASS": "实际基底和两侧构件均存在；顶层浅青或近白，相邻下层可区分、底层较深，两侧构件呈暖金或浅黄并与原子区及基底区分；材质不透明且有柔和明暗。",
+        "PARTIAL": "至少一个实际支撑部件组具可用材质，但另一部件组缺失，或层间区分、顶底色调、两侧构件色调与明暗未全部符合。",
+        "FAIL": "基底及侧向构件都缺失，或存在部件但均没有支持目标色彩层次的实际材质。"
+      },
+      "evidence_refs": ["image/01_overview.png"],
+      "verification": {
+        "method": "assigned_material_inspection_and_neutral_lighting_review",
+        "procedure": "在与SURF-01相同的中性照明下观察已识别的真实板层和侧向构件，核对有效材质赋值、可见层间色差、底层深浅和暖色侧构件。此项只评实际存在部件上的材质表现，真实层数由GEO-04评价；单纯增加材质数据块或在单板画条纹不能证明多层形体。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01", "capability": "PIPE", "points": 5,
+      "requirement_section": "6. 交付与重建",
+      "criterion": "build.py 能在空场景重建同等资产，且必要资源可随提交独立使用。",
+      "scoring_rule": {
+        "PASS": "A、B均满足。A：按脚本开头说明在Blender5.1.2空场景运行可保存同等形态、材质和重复编辑能力。B：提交资产所需资源已生成或随文件保存，重开时不依赖作者机器路径或网络。",
+        "PARTIAL": "A、B仅一项满足。",
+        "FAIL": "A、B均不满足。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "isolated_rebuild_and_dependency_audit",
+        "procedure": "将提交复制到隔离目录，核对脚本运行说明及资源引用；在Blender5.1.2空场景运行build.py并重开生成文件，比较球棍阵面、基底、侧壁、材质以及重复编辑入口和功能。移除对作者路径与网络的可用性后检查依赖闭包，不要求二进制哈希相同。仅能打开blend不是额外得分项。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

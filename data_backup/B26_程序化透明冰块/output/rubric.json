@@ -1,0 +1,160 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "程序化透明冰块：目标验收",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV12gKNeAEp4",
+    "id": "BV12gKNeAEp4"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 35, "SURF": 45, "PROC": 15, "PIPE": 5},
+  "weighting_note": "草案权重：清透冰体的透射、折射和细节是主要材质目标，分为三个独立15分项；几何外形、圆角与连续性合计35分。视频明确演示外形参数变化，保留15分功能探测，不按修改器存在评分。重建与依赖闭合占5分。没有液体运动或仿真目标，不计SIM；相机灯光用于观察，不独立计SCN。权重尚未经真实提交校准。",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. 冰块外形与连续表面",
+      "criterion": "A. 冰块具有三轴接近、主要面向可辨的近立方体体态；B. 各面及外轮廓具有宽缓的不规则凹凸，并保留大块面关系。",
+      "scoring_rule": {
+        "PASS": "A、B均满足。",
+        "PARTIAL": "存在有效冰块，A、B仅满足一项；例如规则圆角方块缺少宽缓起伏，或有起伏但整体被拉成长条。",
+        "FAIL": "A、B均不满足，或不存在有效冰块几何。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/02_shape.png"],
+      "verification": {
+        "method": "evaluated_geometry_multiview",
+        "procedure": "在工程副本中识别主要冰块，检查求值后几何的包围盒，并以中性灰材质观察正面、侧面和三分之四视图。用多视图确认近立方体的大块面结构及宽缓不规则起伏。包围盒仅辅助判断，不按原教程绝对尺寸或隐藏比例阈值判分。轮廓改变须来自实际求值几何，贴图明暗不能替代。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. 冰块外形与连续表面",
+      "criterion": "A. 主要边缘与角部具有圆润过渡，仍保留方块辨识度；B. 灰色视图下面与圆角明暗连续，没有明显多边形台阶或异常硬阴影接缝。",
+      "scoring_rule": {
+        "PASS": "A、B均满足。",
+        "PARTIAL": "存在有效冰块，A、B仅满足一项；例如边角圆润但可见明显分面，或明暗平滑但主要棱角仍锐利。",
+        "FAIL": "A、B均不满足，或不存在可检查的主要冰块表面。"
+      },
+      "evidence_refs": ["image/02_shape.png"],
+      "verification": {
+        "method": "neutral_surface_closeup",
+        "procedure": "暂时使用中性灰材质，在冰块顶部、侧边与角部检查求值后的轮廓及光照过渡，旋转观察排除反射纹理误导。检查几何与法线以解释可见台阶、接缝或过度球化；不要求倒角修改器、具体段数或所有基础面具有某个平滑标志。此项只检查几何圆角与着色连续性，不评分材质微纹理。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. 冰块外形与连续表面",
+      "criterion": "A. 冰体外表面闭合，形成有厚度的完整实体；B. 主要表面无穿插、翻面或塌陷。",
+      "scoring_rule": {
+        "PASS": "A、B均满足。",
+        "PARTIAL": "存在可辨认的主要冰体，A、B仅满足一项；例如外壳闭合但有局部自交，或主体连续但存在小范围未闭合区域。",
+        "FAIL": "A、B均不满足，或只有图片、无厚度面片、空环等不能形成冰体的表示。"
+      },
+      "evidence_refs": ["image/02_shape.png"],
+      "verification": {
+        "method": "evaluated_topology_and_surface_review",
+        "procedure": "检查最终求值后的冰体外边界、法线方向、连通性和厚度，结合旋转后的灰模视图复核非流形边或自交候选。允许等效实体表示，不按基础网格对象数判分。透明图中的深色中心不能作为真实开孔证据；应直接检查几何。只在存在实际主体时判断表面缺陷是否缺失。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "2. 清透的冰体与光学厚度",
+      "criterion": "A. 实际冰体材质在有对比的背景前保留清晰可辨的透射区域，呈清透冰体而非不透明白块或金属；B. 中性照明下材质本身接近无色，环境反射色没有被烘焙成浓重固有色。",
+      "scoring_rule": {
+        "PASS": "A、B均满足。",
+        "PARTIAL": "存在实际冰体材质，A、B仅满足一项；例如清透但本身浓重着色，或接近无色但整体不透明。",
+        "FAIL": "A、B均不满足，或没有作用于冰体的实际材质。"
+      },
+      "evidence_refs": ["image/01_overall.png", "image/03_ice_surface.png"],
+      "verification": {
+        "method": "artifact_transmission_render_probe",
+        "procedure": "在副本中保留材质，将冰体置于中性照明和有对比图案的背景前，以Cycles GPU观察正面与斜侧透射区域。核对背景是否通过真实表面着色可见，检查实际生效的材质而非仅寻找玻璃节点。更换中性环境以区分环境反射色和固有色。透明贴图、空洞或没有实体的透明面片不构成A；折射形变强弱另由SURF-02评价。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "2. 清透的冰体与光学厚度",
+      "criterion": "A. 透过冰体的背景随面向、厚度和表面起伏发生可辨的折射偏移或变形，改变视角后对应关系随之变化；B. 边缘及受光面形成清晰反射亮区，能读出体积与表面走势。",
+      "scoring_rule": {
+        "PASS": "A、B均满足。",
+        "PARTIAL": "存在实际冰体材质，A、B仅满足一项；例如能折射但没有清晰反射亮区，或有反射却仅以不透明度混合背景。",
+        "FAIL": "A、B均不满足，或只存在预制图片、固定高光贴片等不随观察条件响应的替代效果。"
+      },
+      "evidence_refs": ["image/01_overall.png"],
+      "verification": {
+        "method": "optical_response_multiview_probe",
+        "procedure": "在副本中使用穿过冰体观察的条纹或色块背景，比较保留冰体与暂时隐藏冰体时的背景位置，再改变观察角度检查折射响应。使用可辨的大面积光源观察主要面与边缘的反射变化。沿实际生效的着色路径确认响应来自冰体材质；不要求Glass BSDF、特定IOR、节点直连或原视频环境。此项评光学方向响应，不重复评分SURF-01的无色和基本透射可见性。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "3. 细碎但克制的冰面质感",
+      "criterion": "A. 冰面存在明显小于大块面凹凸尺度的细小不规则变化，在近景扰动反射或高光；B. 该细节保持克制，通常观察距离仍可辨透明区域和主要面向，不成为均匀磨砂、乳白雾面或严重皱缩。",
+      "scoring_rule": {
+        "PASS": "存在实际细节层，且A、B均满足。",
+        "PARTIAL": "存在实际细节层，A、B仅满足一项；例如细小扰动可见但强度过大，或细节克制但尺度与宽缓几何起伏混同。",
+        "FAIL": "没有实际细节层，或A、B均不满足；完全光滑的玻璃不能因没有过强细节而获得部分分。"
+      },
+      "evidence_refs": ["image/03_ice_surface.png", "image/01_overall.png"],
+      "verification": {
+        "method": "surface_detail_scale_review",
+        "procedure": "在默认材质下比较完整冰块与表面近景，改变光源方向以检查小尺度扰动是否随反射响应。必要时在工程副本中暂时减弱实际细节来源，区分材质微变化、大尺度几何与采样噪声；允许凹凸、位移或等效材质表达，不按Noise或Bump节点存在评分。恢复默认后核对细节是否保留清透亮光感觉，且未主导主体轮廓。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "4. 可调整的大尺度起伏",
+      "criterion": "A. 根据工程说明修改大尺度起伏参数后，现有场景中的求值几何产生可辨的凹凸尺度、位置或分布变化，且恢复默认值能恢复默认形态；B. 默认值与对照值均保留完整近立方体、圆润边缘和有效透明材质，无需逐点修形、替换预制图片或重建整个场景。",
+      "scoring_rule": {
+        "PASS": "存在可用控制，A、B均满足。",
+        "PARTIAL": "存在能实际改变大尺度起伏的控制，A、B仅满足一项；例如能改变并恢复外形，但对照状态发生明显破面或材质丢失，或两状态有效但默认形态不能稳定恢复。",
+        "FAIL": "没有可在现有场景中使用的形状控制，控制不改变求值几何，或A、B均不满足；仅改颜色、整体缩放、刚体位置、切换图片或重建整个场景均为FAIL。"
+      },
+      "evidence_refs": ["image/02_shape.png"],
+      "verification": {
+        "method": "parameter_mutation_and_restore_probe",
+        "procedure": "在工程副本中按内附说明读取控制位置、默认值和对照值，在现有场景内分别更新并记录同视角灰模与材质视图；比较刚体对齐后的几何表面，排除仅物体变换造成的变化。恢复默认设置再次求值，核对形态复原。两个状态各检查完整外形、圆角和材质有效性。接受修改器、纹理、节点或场景内可调用的参数更新函数，不接受清空并重建整个场景；不按数据块名称或堆栈顺序评分。此项只对参数变化的行为计分，默认形态质量由GEO与SURF项评分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "提交文件",
+      "criterion": "A. build.py在干净场景重建同一默认冰块外形、材质和参数行为；B. 提交工程与脚本依赖闭合，资源采用有效相对引用或已打包，不依赖本机绝对路径、网络或未提供插件。",
+      "scoring_rule": {
+        "PASS": "A、B均满足。",
+        "PARTIAL": "有效submission.blend已提供，A、B仅满足一项；例如工程依赖齐全但脚本不能复现，或可在原机器复现但资源路径不具可移植性。",
+        "FAIL": "A、B均不满足，或缺少有效submission.blend；仅能打开文件不构成此项得分。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "clean_rebuild_and_dependency_audit",
+        "procedure": "将提交内容复制到不同路径，在Blender 5.1.2干净场景按脚本说明重建，比较默认灰模、材质响应和形状参数行为与submission.blend。检查材质图像、字体、缓存、外部库等实际依赖是否随交付提供或打包，确认执行无需网络和原作者目录。若使用随机过程，重复重建确认默认结果稳定；不要求像素级相同噪声。该核验流程仅作规范，本阶段不附或执行自动评分代码。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

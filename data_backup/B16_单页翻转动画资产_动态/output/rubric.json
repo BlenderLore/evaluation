@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "单页翻转动画资产",
+  "source_video": {
+    "url": "https://www.youtube.com/watch?v=ijRabIP8GnA",
+    "id": "ijRabIP8GnA"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 25, "ANM": 45, "RIG": 20, "PIPE": 10},
+  "weighting_note": "暂定权重：默认时间行为占45分，单页几何占25分，脱离默认时间线后独立操作翻转和弯曲的功能占20分，可重建及可重放占10分。原素材为无模拟的灰色单页动画；不因使用修改器归入PROC，不因灰模平滑增加SURF，不奖励相机灯光存在。权重尚未通过实际提交校准。",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. 纸页形态",
+      "criterion": "初始资产呈现一张具有规定长宽比的薄矩形纸页。",
+      "scoring_rule": {
+        "PASS": "存在完整可辨的单张薄矩形纸页，初始宽长比W/L在0.76至0.84之间。",
+        "PARTIAL": "未达到PASS，但存在可辨的薄纸页；矩形边界或比例不符合规定。",
+        "FAIL": "不存在可辨的单张薄纸页，或主体是厚实体、书本或多个重叠页面，无法作为本任务纸页评估。"
+      },
+      "evidence_refs": ["image/02_flat_start.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "在第1帧识别实际纸面并取得求值几何，以书脊方向测L、垂直书脊方向测W；从俯视和斜视检查矩形边界与薄片观感。不以对象数量、网格名称或原始顶点数判断单页。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. 纸页形态",
+      "criterion": "实际弯曲纸面的表面与轮廓连续平滑。",
+      "scoring_rule": {
+        "PASS": "中段存在弯曲纸面，斜视和沿书脊方向观察时圆弧及明暗连续，无可见折板、尖刺或几何明暗断带。",
+        "PARTIAL": "未达到PASS，但弯曲纸面总体连贯；局部轮廓可见折线或局部表面有法线接缝。",
+        "FAIL": "无可检查的弯曲纸面，或表面以明显折板、尖刺和大片明暗断裂为主。"
+      },
+      "evidence_refs": ["image/01_mid_turn.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "在第45至55帧选取卷曲最强的状态，检查求值截面和法线，并用中性灰显示从斜视、端视两向观察。检查实际轮廓和纸面，不以细分数量或光滑着色开关代替结果。这里只评价几何平滑度，不重复评价卷曲时序。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "1. 纸页形态",
+      "criterion": "纸面是连贯的完整表面，没有破损或重叠面闪烁。",
+      "scoring_rule": {
+        "PASS": "纸面存在且在平放与弯曲状态均无破洞、撕裂、脱开碎片或重叠面闪烁。",
+        "PARTIAL": "未达到PASS，但主体仍是完整可辨纸面；只存在局部破面、接缝分离或局部重复面。",
+        "FAIL": "缺少纸面，或大范围破损、碎裂、重复面使纸页不再连贯可辨。"
+      },
+      "evidence_refs": ["image/01_mid_turn.png", "image/02_flat_start.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "检查第1、50、100帧的实际求值表面连通性与可见覆盖范围，从正反两面观察破洞、游离碎片及重合面闪烁。允许薄片有外边界，也允许不同网格组成无缝纸面；运动中的自穿插另由ANM-04检查。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-01",
+      "capability": "ANM",
+      "points": 15,
+      "requirement_section": "3. 固定书脊与空间连续性",
+      "criterion": "默认动画围绕固定书脊完成由+X侧到-X侧的一次翻面。",
+      "scoring_rule": {
+        "PASS": "第1至100帧完成一次由+X侧到-X侧的翻面，纸面正反面确实交换；书脊各点在全程相对初始位置漂移不超过0.01W。",
+        "PARTIAL": "未达到PASS，但完成可辨的一次翻面并落在相对侧；存在书脊漂移、沿脊滑动或绕中心转动。",
+        "FAIL": "没有实际翻面，或未从起始侧翻到另一侧，或以换页、隐藏替换等方式伪造翻面。"
+      },
+      "evidence_refs": ["image/02_flat_start.png", "image/01_mid_turn.png", "image/04_flat_end.png"],
+      "verification": {
+        "method": "evaluated_animation_sampling",
+        "procedure": "按默认动画顺序求值第1至100帧，跟踪同一纸面及初始书脊边界点；比较纸面在书脊两侧的位置和一致定向的正反面，测书脊最大位移。不要依靠某个父对象的旋转值或关键帧数判断翻面。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-02",
+      "capability": "ANM",
+      "points": 15,
+      "requirement_section": "2. 默认翻页过程",
+      "criterion": "纸页依次经历早期拱曲、中段最深卷曲和前后平直状态。",
+      "scoring_rule": {
+        "PASS": "纸面形变随时间变化；第15至20帧有清楚拱曲，第45至55帧达到最明显卷曲，第1与100帧纸面距Z=0不超过0.01W。",
+        "PARTIAL": "未达到PASS，但存在可辨的动态卷曲与展开；早期拱曲、中段最深时段或起止落平至少一项不符合。",
+        "FAIL": "纸页始终作为平板旋转、卷曲静止不变，或没有纸页动画可检查。"
+      },
+      "evidence_refs": ["image/03_early_curl.png", "image/01_mid_turn.png", "image/04_flat_end.png"],
+      "verification": {
+        "method": "evaluated_deformation_sampling_and_visual_inspection",
+        "procedure": "求值第1至100帧，去除整体刚体转动后比较纸面宽向截面的弯曲程度与形态序列；检查第15至20帧拱曲、全段最大卷曲的时间窗口及第1、100帧平面偏差。用实际曲率或截面形态验证，不读取某种特定修改器的角度作为完成证明。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-03",
+      "capability": "ANM",
+      "points": 10,
+      "requirement_section": "2. 默认翻页过程",
+      "criterion": "翻页按公开帧范围和速度连续进行，结尾保持静止。",
+      "scoring_rule": {
+        "PASS": "存在翻页运动；帧范围1至115、24fps正确，运动无跳变和无意反向抖动，第101至115帧保持第100帧结束姿态。",
+        "PARTIAL": "未达到PASS，但翻页可以连续辨认；帧范围、帧率、局部运动连续性或结尾保持至少一项不符合。",
+        "FAIL": "没有可辨翻页运动，或大量瞬移、姿态替换使运动过程无法连续跟踪。"
+      },
+      "evidence_refs": ["image/04_flat_end.png"],
+      "verification": {
+        "method": "animation_playback_and_temporal_sampling",
+        "procedure": "读取场景播放范围和fps，以24fps播放实际求值运动并检查相邻帧位移；对可疑跳变补查半帧状态。比较第100至115帧求值纸面是否保持同姿态，容许浮点数值误差。不强制某种插值、通道数量或关键帧位置。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "ANM-04",
+      "capability": "ANM",
+      "points": 5,
+      "requirement_section": "3. 固定书脊与空间连续性",
+      "criterion": "翻页路径保持在初始平面上方，运动中纸面不自穿插。",
+      "scoring_rule": {
+        "PASS": "存在实际翻页运动；全程纸面Z不低于-0.01W，且没有非邻接纸面区域发生自穿插。",
+        "PARTIAL": "未达到PASS，但主体翻页路径清楚；只有短暂局部穿入初始平面或局部自穿插。",
+        "FAIL": "没有实际翻页运动，或纸页长时间穿过初始平面、严重自穿插，无法读作正常翻页。"
+      },
+      "evidence_refs": ["image/03_early_curl.png", "image/01_mid_turn.png"],
+      "verification": {
+        "method": "evaluated_geometry_over_time",
+        "procedure": "顺序求值第1至100帧，记录最低纸面高度，并检测非相邻三角面之间的穿插；相邻拓扑接触不算自交。重点补查第1至20帧和异常区间的半帧，端视确认自由边未扫入初始平面。此项只检查运动路径中的空间冲突。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-01",
+      "capability": "RIG",
+      "points": 10,
+      "requirement_section": "4. 可编辑的翻转与弯曲控制",
+      "criterion": "翻转控制可独立带动已弯曲的整张纸绕书脊转动。",
+      "scoring_rule": {
+        "PASS": "可按内嵌说明定位翻转控制；暂停中段并固定弯曲控制后，向前和向后各调约15度，纸面整体绕固定书脊转动，自身卷曲形状保持不变。",
+        "PARTIAL": "未达到PASS，但有可操作且实际影响纸页的翻转控制；某一方向、书脊稳定性、弯曲形状保持或控制说明不符合。",
+        "FAIL": "没有可独立操作的翻转控制，或操作后纸面不更新，或必须重跑脚本、逐点改网格才能改变姿态。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "independent_control_probe",
+        "procedure": "在提交文件副本中按说明暂停于中段，暂时使用控制覆盖默认动画，保持弯曲设定，分别从同一基准把翻转增加、减少约15度。检查求值纸面确实发生相应绕脊旋转；移除刚体差异后比较纸面形状，并测书脊漂移不超过0.01W。最后恢复基准。不因默认时间线已有动画而直接授分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "RIG-02",
+      "capability": "RIG",
+      "points": 10,
+      "requirement_section": "4. 可编辑的翻转与弯曲控制",
+      "criterion": "弯曲控制可独立改变纸面形态，并能恢复默认动画。",
+      "scoring_rule": {
+        "PASS": "可按内嵌说明定位弯曲控制；固定翻转设定时，平直、适度弯曲和较深弯曲三态均即时生效且书脊固定，翻转设定不被改写；恢复后默认动画正常。",
+        "PARTIAL": "未达到PASS，但弯曲控制能独立产生至少两种可辨曲率；三态范围、书脊稳定性、控制说明或恢复默认功能有缺项。",
+        "FAIL": "没有可独立操作的弯曲控制，或其数值改变不影响纸面，或只能同时改变翻转且不能分离两种作用。"
+      },
+      "evidence_refs": ["image/02_flat_start.png", "image/01_mid_turn.png"],
+      "verification": {
+        "method": "independent_control_probe",
+        "procedure": "在副本中固定翻转设定，按说明分别设置平直、适度和较深弯曲；以实际求值截面确认三态不同，检查书脊漂移不超过0.01W并确认翻转控制未被改写。按说明恢复两类控制后重播默认动画，确认控制关系仍有效。此项不评价默认卷曲发生的帧数。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "5. 交付与重放",
+      "criterion": "资产可以独立重建，并能重新打开后重复播放。",
+      "scoring_rule": {
+        "PASS": "同时满足两项：build.py按脚本说明从空场景独立生成完整资产；submission.blend重新打开后可从第1帧连续播放1至115帧并重播，两次结果一致且无外部缺失依赖。",
+        "PARTIAL": "仅满足两项中的一项：独立重建成功，或保存资产的重新打开与重复播放成功。",
+        "FAIL": "独立重建和重新打开后的重复播放两项均不成立。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "clean_environment_rebuild_and_replay",
+        "procedure": "在干净工作目录依据脚本开头说明运行build.py，检查其生成实际纸页、动画及控制且不依赖联网或本机绝对路径；另在新会话打开提交blend，回到第1帧连续播放至115帧两次并比较求值状态。只评价依赖闭合和重复执行能力，外观与默认运动质量归对应条目。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "Cylindrical Battery Gray Model",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1gTbv64EjA",
+    "id": "BV1gTbv64EjA"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 90, "PIPE": 10},
+  "weighting_note": "The demonstrated task is native hard-surface gray modeling. Geometry receives 90 points, distributed across the can silhouette, two end rims, recessed lid, positive terminal, edge rounding, and surface integrity. No material, lighting, animation, or procedural mechanism is demonstrated strongly enough to justify a separate capability score. Ten pipeline points cover reconstruction, saved-scene consistency, and the required scene render.",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "1. Can Body",
+      "criterion": "The main can has the referenced upright cylindrical proportions and straight wall.",
+      "scoring_rule": {
+        "PASS": "A substantial three-dimensional can body exists with a circular cross-section and a straight main wall. It is upright, about one and a half body diameters tall, has a constant main-wall diameter, and reserves narrow end regions for the rim details.",
+        "PARTIAL": "A substantial three-dimensional can body with a recognizable cylindrical wall exists, but at least one PASS condition is not met, such as a squat or excessively long proportion, visible taper, oval section, tilt, or an interrupted main wall.",
+        "FAIL": "No substantial three-dimensional cylindrical can body exists; a flat image, isolated ring, terminal alone, or non-cylindrical placeholder does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_battery_overview.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_orthographic_inspection",
+        "procedure": "Open the submitted scene, identify the modeled can, and inspect evaluated geometry from front, side, and top views. Compare body height with main-wall diameter while excluding rim projections and terminal height. Inspect circular sections at several heights and the straight side silhouette. Assess global form here; evaluate surface shading separately under GEO-07.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Rolled End Rims",
+      "criterion": "A narrow continuous upper rim encircles and slightly overhangs the can.",
+      "scoring_rule": {
+        "PASS": "An attached curved rim following the upper can circumference exists. It forms a complete concentric ring, projects slightly beyond the straight wall, and keeps a narrow, uniform width and height around the can.",
+        "PARTIAL": "An attached curved rim following the upper can circumference exists, but at least one PASS condition is not met, such as a local gap, uneven thickness, eccentricity, or an oversized flange.",
+        "FAIL": "There is no attached curved upper rim following the can circumference. A detached ring, surface color line, isolated bump, or unchanged cylinder edge is insufficient."
+      },
+      "evidence_refs": ["image/01_battery_overview.png", "image/03_top_structure.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_oblique_inspection",
+        "procedure": "Inspect the upper can edge in top and oblique views and in a temporary axial section. Trace the full circumference and compare its radius and thickness with the adjacent wall. Confirm the projection is geometry attached or fitted to the can. Assess rounding separately under GEO-06.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. Rolled End Rims",
+      "criterion": "A narrow lower rim finishes the base and balances the upper rim.",
+      "scoring_rule": {
+        "PASS": "An attached curved rim following the lower can circumference exists. It forms a complete concentric ring, projects slightly beyond the wall, has uniform width and height, and has visual weight comparable to the upper rim while leaving the main wall uninterrupted.",
+        "PARTIAL": "An attached curved rim following the lower can circumference exists, but at least one PASS condition is not met, including a missing upper rim that prevents comparison, a local gap, unevenness, an oversized foot, or a lower rim much heavier than the upper one.",
+        "FAIL": "There is no attached curved lower rim following the can circumference. A detached ring, painted stripe, isolated bump, or unchanged cylinder edge is insufficient."
+      },
+      "evidence_refs": ["image/01_battery_overview.png", "image/02_lower_rim.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_base_inspection",
+        "procedure": "Orbit around the lower can and inspect an axial section. Trace the lower rim around the body, compare its projection and thickness with the main wall and upper rim, and confirm that it remains a narrow end detail. Evaluate base closure under GEO-07 and edge rounding under GEO-06.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "3. Recessed Top Lid",
+      "criterion": "The top contains a broad shallow recessed lid inside the upper rim.",
+      "scoring_rule": {
+        "PASS": "A broad circular lid physically below a surrounding upper boundary exists. Its shallow recess has a readable short inner wall, the lid is predominantly flat and concentric with the body, and a continuous annular lid area surrounds the terminal.",
+        "PARTIAL": "A broad circular lid physically below a surrounding upper boundary exists, but at least one PASS condition is not met, such as excessive recess depth, an uneven lid, eccentric placement, a broken annular area, or a missing terminal that leaves the final lid arrangement incomplete.",
+        "FAIL": "No broad circular lid below a surrounding upper boundary exists. An open tube, flush cap, painted circle, or recess confined to an isolated tiny detail does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_battery_overview.png", "image/03_top_structure.png"],
+      "verification": {
+        "method": "evaluated_axial_profile_and_elevated_view",
+        "procedure": "Inspect a temporary axial section through the can and a top-oblique view. Compare the lid elevation with the surrounding rim, identify the short inner wall, and trace the uninterrupted lid region around the center. Use geometry to distinguish a physical recess from a shading or texture imitation.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "4. Positive Terminal",
+      "criterion": "A small low terminal rises from the center of the lid with a flat top and slightly tapered side wall.",
+      "scoring_rule": {
+        "PASS": "A three-dimensional raised circular terminal attached to the lid exists. It is centered on the body axis, is low relative to its width, is approximately one fifth of the lid diameter, and has a flat top above a short side wall that narrows slightly upward. A broad lid area remains visible around it.",
+        "PARTIAL": "A three-dimensional raised circular terminal attached to the lid exists, but at least one PASS condition is not met, such as an off-center position, excessive height or width, an incorrect top profile, missing taper, or too little lid remaining around it.",
+        "FAIL": "No three-dimensional raised circular terminal attached to the lid exists. A painted disk, depression, detached object, or an entire raised lid does not meet the minimum."
+      },
+      "evidence_refs": ["image/03_top_structure.png", "image/04_terminal_edge.png"],
+      "verification": {
+        "method": "evaluated_terminal_profile_and_top_view",
+        "procedure": "Inspect the terminal from above and in an axial section. Compare its center with the can axis, its diameter with the lid diameter, and its top and side profile with the reference. Confirm positive height above the lid and actual attachment. Judge the terminal's gross shape here and its rounded edge under GEO-06.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "5. Geometry Finish",
+      "criterion": "Small rounded transitions soften the exposed structural edges without erasing the battery's stepped profile.",
+      "scoring_rule": {
+        "PASS": "The can and at least one rim exist, with a rounded transition along that rim's circumference. Both rims, the lid transition, and the terminal are present and have restrained rounded exposed edges. The rounding preserves the flat lid and terminal top, shallow recess, and distinct structural levels.",
+        "PARTIAL": "The can and at least one rim exist, with a rounded transition along that rim's circumference, but at least one PASS condition is not met. Examples include a missing minor component, an unrounded terminal, uneven rounding, or overly broad rounding that weakens some steps.",
+        "FAIL": "The minimum rounded can-rim edge is absent. A smooth-shaded sharp cylinder, rounding only on an isolated unused object, or a completely melted profile with no recognizable can rim does not meet the minimum."
+      },
+      "evidence_refs": ["image/01_battery_overview.png", "image/02_lower_rim.png", "image/04_terminal_edge.png"],
+      "verification": {
+        "method": "evaluated_cross_sections_and_neutral_highlight_inspection",
+        "procedure": "Inspect evaluated edge profiles at the rims, lid transition, and terminal, then use a neutral material and broad inspection light in a temporary view or render. Confirm actual rounded geometry and narrow highlight transitions. Do not require a particular modifier, segment count, or construction method.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-07",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "5. Geometry Finish",
+      "criterion": "The editable battery has a clean closed exterior with smooth cylindrical shading and planar flat regions.",
+      "scoring_rule": {
+        "PASS": "A substantial can wall and recessed lid exist and demonstrate smooth cylindrical shading and planar lid shading over their main surfaces. Both rims and the terminal are also present; the complete editable exterior is closed, including the flat underside, and has no unintended openings, self-intersections, doubled surfaces, pinching, rippling, or shading seams.",
+        "PARTIAL": "A substantial can wall and recessed lid exist and demonstrate smooth cylindrical shading and planar lid shading over their main surfaces, but at least one PASS condition is not met. Local defects or a missing minor component prevent full completion without erasing the demonstrated quality of the existing core surfaces.",
+        "FAIL": "A substantial can wall and recessed lid with the stated main-surface quality do not both exist. Widespread faceting, rippling, pinching, non-editable image substitutes, or major surface corruption fail the minimum; an absent surface cannot demonstrate clean finish."
+      },
+      "evidence_refs": ["image/01_battery_overview.png", "image/03_top_structure.png"],
+      "verification": {
+        "method": "mesh_integrity_and_controlled_surface_inspection",
+        "procedure": "Inspect the saved editable geometry and orbit a neutral inspection view around the can and under its base. Examine evaluated face orientation, unintended boundary edges, coincident exterior surfaces, and intersections. Use broad light reflections to distinguish smooth main-wall shading from planar lid shading. Deliberate boundaries between fitted components are acceptable if the combined exterior is closed. Score gross missing features in their dedicated rows; this row assesses the demonstrated quality of the stated core surfaces.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The build script reconstructs the submitted scene and saves a usable submission.blend.",
+      "scoring_rule": {
+        "PASS": "The supplied build.py creates and saves an openable submission.blend containing the reconstructed battery. Running it from an empty Blender scene requires no existing solution or unavailable external asset, and reopening the saved result materially reproduces the submitted geometry, camera, and render settings.",
+        "PARTIAL": "The supplied build.py creates and saves an openable submission.blend containing a recognizable reconstructed battery, but at least one PASS condition is not met, such as incomplete reproduction of the submitted scene or a dependency on pre-existing scene content.",
+        "FAIL": "No supplied build.py creates and saves an openable submission.blend containing a recognizable reconstructed battery. A script that only modifies an unsaved in-memory scene fails the minimum."
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "clean_rebuild_and_saved_file_reopen_probe",
+        "procedure": "In a separate temporary verification location, run build.py in Blender 5.1.2 from an empty scene using only the delivered script and allowed inputs. Locate the submission.blend it saves, close the running Blender instance, and reopen that saved file in a new instance. Compare evaluated battery geometry, camera, and render settings with the submitted submission.blend. Do not award saving credit from the original script's in-memory scene alone.",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-02",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "Deliverables",
+      "criterion": "The delivered saved scene and PNG form an inspectable, consistent gray-model submission.",
+      "scoring_rule": {
+        "PASS": "An openable submission.blend containing the battery and a decodable B141_Cylindrical_Battery_Gray_Model.png rendered from that scene both exist. The saved scene uses Cycles with GPU rendering configured, and its PNG satisfies Section 6: the complete opaque gray battery is shown from an elevated three-quarter view with its upper details and both rims readable against a plain contrasting background.",
+        "PARTIAL": "An openable submission.blend containing the battery and a decodable PNG genuinely rendered from that scene both exist, but at least one PASS condition is not met, such as an incorrect filename, unclear framing or illumination, unsuitable surface presentation, or different saved render configuration.",
+        "FAIL": "The openable battery scene and a decodable PNG genuinely rendered from it do not both exist. A source-frame copy, viewport screenshot, unrelated render, or external image replacement fails the minimum."
+      },
+      "evidence_refs": ["image/01_battery_overview.png"],
+      "verification": {
+        "method": "file_decode_saved_settings_and_render_correspondence",
+        "procedure": "Open submission.blend, inspect the saved engine and GPU device configuration, and decode the delivered PNG. Inspect its framing and geometry readability against Section 6. Render the saved camera in a controlled verification environment and compare geometry, viewpoint, illumination, and background with the delivered image to establish scene correspondence, allowing normal sampling variation. This is a delivery check; assess detailed modeling defects in the GEO rows.",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

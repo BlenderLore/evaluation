@@ -1,0 +1,196 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "可编辑编织布片与静态起伏曲面",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1eSDfBDEzA",
+    "id": "BV1eSDfBDEzA"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"GEO": 60, "PROC": 35, "PIPE": 5},
+  "weighting_note": "暂定内容权重，尚未经过评分校准。真实经纬组织、纱线体积及静态起伏属于 GEO，共60分；重复覆盖、共享粗细和整体塑形的实际编辑响应属于 PROC，共35分；可重建且资源完整的交付为 PIPE 5分。视频展示静态晶格塑形，没有动力学、承托碰撞或材质教学证据，因此不计 SIM、ANM、SCN、SURF。",
+  "rubric": [
+    {
+      "id": "GEO-01",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "1. 双向编织与片状覆盖",
+      "criterion": "真实三维纱线构成两组近乎正交、每组至少12根且共同覆盖接近方形区域的布片。",
+      "scoring_rule": {
+        "PASS": "两组均达到12根，方向及重复节奏稳定，共同覆盖接近方形区域，四周端头排列可辨。",
+        "PARTIAL": "存在两组真实纱线和片状交叉覆盖，但未满足PASS，例如条数不足、覆盖明显不齐或重复排布不稳定。",
+        "FAIL": "不存在两组真实纱线的片状覆盖，或仅用贴图、凹凸、零厚度表面表现编织。"
+      },
+      "evidence_refs": ["image/01_woven_surface.png", "image/02_weave_top.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_visual_inspection",
+        "procedure": "在提交文件副本中检查求值后的几何，按纱线路径识别两组实体而非按对象名或对象数计数。结合局部俯视和展平控制的临时状态，核对每组根数、方向、共同覆盖区域与边缘端头。检查任意交叉处的视差和截面，排除仅有贴图的平面。检查后恢复原状态。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-02",
+      "capability": "GEO",
+      "points": 15,
+      "requirement_section": "2. 交替穿插与编织间距",
+      "criterion": "经纬交点具有实际的上下交替，相邻平行纱线的交织相位相反。",
+      "scoring_rule": {
+        "PASS": "在两方向分别追踪的内部纱线中，连续交点上下交替且邻线相位相反，整片交织组织清晰。",
+        "PARTIAL": "至少一个连续区域具有正确上下交替，但其余区域存在固定上下层、相位重复或局部交织错误，未达到PASS。",
+        "FAIL": "没有可确认的连续上下交替区域，主体缺失，或整片只是上下叠放的两层栅格。"
+      },
+      "evidence_refs": ["image/02_weave_top.png", "image/03_interlacing_side.png", "image/04_yarn_detail.png"],
+      "verification": {
+        "method": "evaluated_geometry_and_crossing_trace",
+        "procedure": "在两方向各选择内部相邻的两根纱线，每根追踪至少四个连续交点；结合侧视、局部法向和求值后几何，记录各交点谁在上方。再检查布片中部及四个象限，区分真实路径交替与颜色阴影造成的假交织。此项只评上下拓扑关系，距离或穿模问题留给GEO-04。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-03",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "3. 纱线体积与几何质量",
+      "criterion": "纱线是粗细基本一致、截面近圆且暴露端头封闭的实体。",
+      "scoring_rule": {
+        "PASS": "两组纱线都具有近圆形实体截面，沿程粗细基本一致，四边可见端头均封闭。",
+        "PARTIAL": "存在具有真实厚度的纱线，但未达到PASS，包括截面明显扁平、粗细失衡、未封闭端头或只有部分纱线满足要求。",
+        "FAIL": "主体纱线缺失或不具有实体厚度。"
+      },
+      "evidence_refs": ["image/03_interlacing_side.png", "image/04_yarn_detail.png"],
+      "verification": {
+        "method": "evaluated_cross_section_and_endcap_inspection",
+        "procedure": "对两方向各抽查多根纱线，查看与中心线近乎垂直的局部截面以及四周暴露端部的求值几何。核对圆润截面、沿程代表性直径与封闭端面，不以倒角开关、对象类型或材质明暗代替实体证据。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-04",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "2. 交替穿插与编织间距",
+      "criterion": "织物紧密且纱线连续，内部典型空隙不宽于一根纱线直径，交叉处没有大面积穿透或显著悬空。",
+      "scoring_rule": {
+        "PASS": "布片整体保持所述紧密间距，同一纱线连续，交叉处仅有合理贴合或极小间隙，无明显吞并、断口和悬空。",
+        "PARTIAL": "两组实体纱线可辨且存在完整连续区域，但间隙过宽，或局部断口、悬空、穿透破坏了部分编织质量，未达到PASS。",
+        "FAIL": "主体缺失，或大面积吞并、断裂、分离使可辨的连续编织区域不成立。"
+      },
+      "evidence_refs": ["image/03_interlacing_side.png", "image/04_yarn_detail.png"],
+      "verification": {
+        "method": "evaluated_spacing_continuity_and_visual_inspection",
+        "procedure": "在中部、四个象限及边缘分别观察求值纱线的连续性，并以当地代表性直径比较内部空隙。沿交叉切面或透明检查视图区分接触、空隙和实体穿透，重点检查重复单元续接位置。此项评几何间距与连续性，不重复判定GEO-02的上下顺序。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-05",
+      "capability": "GEO",
+      "points": 10,
+      "requirement_section": "4. 宽缓的静态起伏",
+      "criterion": "交付布片形成跨越多根纱线的宽缓下凹及边角高低变化，整体保持片状曲面。",
+      "scoring_rule": {
+        "PASS": "可见宽缓下凹区、高于它的边角及不完全相同的边缘高度，整体曲率连续并保持片状覆盖。",
+        "PARTIAL": "存在跨多根纱线的整体弯曲，但只有简单单向弯折、缺少明确下凹和边角差异，或部分区域过度挤压，未达到PASS。",
+        "FAIL": "没有可辨的整体弯曲，只有纱线微波浪或刚性旋转，或织物塌缩成团而失去片状形态。"
+      },
+      "evidence_refs": ["image/01_woven_surface.png"],
+      "verification": {
+        "method": "multi_view_macro_shape_inspection",
+        "procedure": "在交付状态关闭控制线叠加，从斜视及两个不同侧向检查整体轮廓。跨越多个编织节奏观察或估计纱线中心面的宏观高度，排除纱线本身上下绕行造成的微起伏，确认宽缓下凹、抬高边角与连续片状形态。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "GEO-06",
+      "capability": "GEO",
+      "points": 5,
+      "requirement_section": "3. 纱线体积与几何质量",
+      "criterion": "现有纱线的侧面与弯曲轮廓在正常近景下平顺，没有明显折线、尖刺、夹痕或破损阴影。",
+      "scoring_rule": {
+        "PASS": "两组主体纱线完整存在，常规近景下轮廓和侧面平顺，无所列明显缺陷。",
+        "PARTIAL": "未满足PASS，但存在可检查的实体纱线且没有普遍严重的几何质量缺陷；包括只有部分主体可检查，或存在局部折线、尖刺、夹痕、重叠闪烁及破损阴影。",
+        "FAIL": "缺少可检查的实体纱线，或上述几何质量缺陷普遍存在并严重破坏主体外观。"
+      },
+      "evidence_refs": ["image/04_yarn_detail.png"],
+      "verification": {
+        "method": "neutral_shading_visual_inspection",
+        "procedure": "使用中性实体显示或中性材质，分别检查布片中央、变形较大区域和端头附近的侧面轮廓与法线表现。端面允许平切且存在合理多边形边界，此项不要求无限细分；不重复扣除已经归入GEO-03的端面缺失或GEO-04的断口与接触问题。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-01",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "5. 可复用生成与整体塑形",
+      "criterion": "共享生成控制能扩展一个方向至少两个编织节奏，并通过全局控制保持双向覆盖。",
+      "scoring_rule": {
+        "PASS": "按文件说明修改共享重复或长度控制后，实际覆盖扩展至少两个节奏，并可用少量全局控制保持完整交织，无须逐根重建。",
+        "PARTIAL": "控制确实改变了重复几何或覆盖长度，但不足两个节奏、只更新一部分纱线，或扩展后覆盖对齐破坏且难以全局修正，未达到PASS。",
+        "FAIL": "控制不改变求值几何，或仅有固定复制结果，需要逐根复制或逐点重建才能扩展。"
+      },
+      "evidence_refs": ["image/02_weave_top.png"],
+      "verification": {
+        "method": "functional_repeat_generation_probe",
+        "procedure": "在提交文件副本中记录原始覆盖与纱线路径，按内置说明增加一个方向的重复数量或长度，允许调整已提供的少量全局对齐控制。重新求值后比较覆盖和完整节奏数，检查新区域是否真实生成双向交织，再恢复原参数；不依据阵列数量或名称判定。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-02",
+      "capability": "PROC",
+      "points": 10,
+      "requirement_section": "5. 可复用生成与整体塑形",
+      "criterion": "共享粗细控制可将两组纱线直径统一减少约10%，保持纱线条数、中心线及整体形态。",
+      "scoring_rule": {
+        "PASS": "减少共享粗细后，两组多处测得的代表性直径均相应减少约10%，条数、中心线和宏观形态保持不变，恢复后回到原粗细。",
+        "PARTIAL": "实际纱线直径发生可控变化，但只影响一组或部分纱线，或同时改变条数、中心线、整体尺度，未达到PASS。",
+        "FAIL": "没有生效的共享粗细控制，变化仅在材质或界面中，或必须逐根编辑才能改变。"
+      },
+      "evidence_refs": ["image/03_interlacing_side.png", "image/04_yarn_detail.png"],
+      "verification": {
+        "method": "functional_thickness_probe",
+        "procedure": "在副本中记录两方向各多处截面直径、中心线和覆盖边界。按说明将共享粗细减少约10%并重新求值，比较测量值以排除整体缩放或材质变化；然后恢复参数，确认两组几何回到原始粗细。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PROC-03",
+      "capability": "PROC",
+      "points": 15,
+      "requirement_section": "5. 可复用生成与整体塑形",
+      "criterion": "少量整体形状控制能让一个边角及相邻区域的两组纱线共同连续变形，并恢复交付状态。",
+      "scoring_rule": {
+        "PASS": "将一个边角区域抬高约短边5%后，两组纱线和相邻区域均连续跟随，片状覆盖及交织保持可读，恢复控制后回到交付形态。",
+        "PARTIAL": "存在实际的局部整体变形响应，但仅影响部分纱线、过渡明显断裂、只能刚性移动局部块，或无法正常恢复，未达到PASS。",
+        "FAIL": "控制不产生几何响应，或只能改变一根纱线、一个重复单元、整片刚性位置，不能塑形边角区域。"
+      },
+      "evidence_refs": ["image/01_woven_surface.png"],
+      "verification": {
+        "method": "functional_macro_deformation_probe",
+        "procedure": "在文件副本中按说明选择一个边角的形状控制，以未变形短边为尺度将该区域抬高约5%。比较求值前后中部、边角和两方向纱线的位移场，确认影响跨越多根纱线、具有相邻区域过渡且非整片刚体运动。撤销或恢复控制后核对原始形态；孤立晶格和未连接参数不算通过。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 5,
+      "requirement_section": "输入与交付",
+      "criterion": "build.py可从空场景重建所交布片及有效编辑结构，交付依赖完整且控制说明可定位。",
+      "scoring_rule": {
+        "PASS": "在独立空场景按交付说明运行build.py后可重建一致的主体、形态和三类有效编辑结构，资源无需原机器绝对路径，内置说明能定位控制与恢复方式。",
+        "PARTIAL": "脚本能重建可辨的织物主体，但形态、某类控制、恢复说明或依赖闭合存在缺漏，未达到PASS。",
+        "FAIL": "脚本缺失、无法运行或不能重建可辨的织物主体，或依赖仅存在于原机器而无法完成重建。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "isolated_rebuild_and_dependency_audit",
+        "procedure": "未来验收时在独立目录和Blender5.1.2空场景执行交付build.py，检查外部资源路径、重建的求值几何、交付形态及控制说明。对三类控制作最小有效响应核查；本项只评重建与可携带性，控制响应质量分别由PROC各项计分，文件能打开本身不单独计分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}

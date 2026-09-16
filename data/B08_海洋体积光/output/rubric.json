@@ -1,0 +1,178 @@
+{
+  "schema_version": "goal-pilot-1.0",
+  "status": "draft_content_review",
+  "title": "海洋体积光：目标验收",
+  "source_video": {
+    "url": "https://www.bilibili.com/video/BV1aVLe6xEMd",
+    "id": "BV1aVLe6xEMd"
+  },
+  "target_blender_version": "5.1.2",
+  "total_points": 100,
+  "status_weights": {"PASS": 1, "PARTIAL": 0.5, "FAIL": 0},
+  "capability_totals": {"SURF": 40, "SCN": 50, "PIPE": 10},
+  "weighting_note": "本题的核心是水下体积光的空间组织及实际散射外观。SCN 50分评价分束、方向、构图与灯光编辑，SURF 40分评价真实介质、蓝色层次与有效材质编辑，PIPE 10分评价重建和依赖闭合。不把体积盒数量记作GEO，也不因纹理节点或静态画面添加PROC、ANM、SIM。分配为内容审阅稿，未经过运行标定。",
+  "rubric": [
+    {
+      "id": "SURF-01",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "1. 蓝色水体与真实体积",
+      "criterion": "水体是实际参与渲染的三维散射介质，可见光束存在于其内部。",
+      "scoring_rule": {
+        "PASS": "介质实际作用于场景，主视图和小幅移动后的检查视图中都能确认光束处于三维水体内；没有以图片、发光条纹平面或不透明盒壳替代主体效果。",
+        "PARTIAL": "存在实际参与渲染的体积散射，但可见效果仅局限于局部，或主要光束仍依赖平面替代，三维水下效果只部分成立。",
+        "FAIL": "没有实际可见的体积散射，或主体效果完全由图片、平面条纹、不透明外壳构成。"
+      },
+      "evidence_refs": ["image/01_light_rays.png", "image/02_light_entry.png"],
+      "verification": {
+        "method": "artifact_volume_inspection_and_render_probe",
+        "procedure": "在提交副本中追踪实际被可见场景使用的介质及其渲染输出，允许不同体积实现。对比原状态、关闭该介质散射状态和小幅移动检查相机后的渲染，确认内部散射对图像有实际贡献且光束具有空间关系。未使用的体积材质或节点存在本身不能通过。检查相机只用于确认空间机制，构图质量另由SCN-04判断。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-02",
+      "capability": "SURF",
+      "points": 10,
+      "requirement_section": "1. 蓝色水体与真实体积",
+      "criterion": "实际水体具有蓝色至青蓝色的色调层次和通透的介质外观。",
+      "scoring_rule": {
+        "PASS": "水体主体可辨；受光区为较亮的青蓝色，非直接受光区为较深蓝色，保留通透的浓淡层次，没有整体发白、漆黑或不透明塑料感。",
+        "PARTIAL": "可辨认蓝色水体，但青蓝与深蓝层次不足，或部分区域明显发白、过暗或过于不透明；仍有可见的水下介质外观。",
+        "FAIL": "水体缺失，或主色及介质外观无法读作蓝色水体，例如主要呈灰烟、白雾、漆黑块或不透明塑料。"
+      },
+      "evidence_refs": ["image/01_light_rays.png"],
+      "verification": {
+        "method": "rendered_material_visual_review",
+        "procedure": "在保存的主相机正式渲染中比较受光与非直接受光区域，结合实际介质材质确认蓝色来自有效场景。按水体色调与透光外观判定，不要求精确十六进制颜色、密度、各向异性或特定色彩变换；光束条数与相机构图不在本项重复计分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SURF-03",
+      "capability": "SURF",
+      "points": 15,
+      "requirement_section": "5. 有效编辑",
+      "criterion": "水体颜色和密度均为有效的可编辑参数，修改后改变真实渲染并可恢复。",
+      "scoring_rule": {
+        "PASS": "A、B均成立：A为颜色编辑改变实际水体色调且可恢复；B为密度编辑改变水体浓淡或透光程度且可恢复。",
+        "PARTIAL": "水体存在，A、B恰有一项成立。",
+        "FAIL": "水体缺失，或A、B均不成立。"
+      },
+      "evidence_refs": ["image/01_light_rays.png"],
+      "verification": {
+        "method": "non_destructive_material_parameter_probe",
+        "procedure": "在临时副本记录有效介质参数与基线图像。分别改变水体色调、降低与提高有效密度，保持相机和灯光一致，渲染对比实际水体变化；每次恢复原值并再次确认效果。允许直接材质输入、节点组参数或等效编辑方式，不要求新增面板。仅有标签、未连接控制或文字说明不计通过。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-01",
+      "capability": "SCN",
+      "points": 15,
+      "requirement_section": "2. 多束光线的形态",
+      "criterion": "主镜头中有至少三束连续光带，相邻光带被较暗水体分隔。",
+      "scoring_rule": {
+        "PASS": "在主镜头中能辨认至少三束连续向下延伸的光带，相邻光带间有明显较暗间隙。",
+        "PARTIAL": "存在水体光束，但仅能分辨一至两束，或虽有至少三处亮带但部分明显断裂成光斑或间隙过弱。",
+        "FAIL": "没有可辨认的水体光束，或只有均匀亮雾、互不相连的散点亮斑，无法识别延伸光带。"
+      },
+      "evidence_refs": ["image/01_light_rays.png", "image/02_light_entry.png"],
+      "verification": {
+        "method": "main_camera_ray_structure_review",
+        "procedure": "以保存的主相机正式渲染为准，在入光区下方至画面中下部追踪亮带与暗间隙，确认至少三束可连续辨认的光带。人工或VLM判断需标注对应亮带位置，不以灯具数、纹理条带数或节点截图推断完成。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-02",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "2. 多束光线的形态",
+      "criterion": "光带具有受扰动的形态变化及柔和边缘，同时保留一致的主方向。",
+      "scoring_rule": {
+        "PASS": "已有光带在宽度、亮度或边缘上有清楚的自然变化，边缘柔和过渡至水体，主要延伸方向保持一致。",
+        "PARTIAL": "已有光带，形态变化、柔和边缘、方向一致这三项中至少一项成立但未全部成立，例如等宽硬边条纹或局部过度扭曲。",
+        "FAIL": "没有可评估光带，或光带的形态变化、柔和边缘和方向一致三项均不成立。"
+      },
+      "evidence_refs": ["image/01_light_rays.png"],
+      "verification": {
+        "method": "light_band_close_view_review",
+        "procedure": "从主渲染中检查若干光带的上、中、下段，比较宽度、亮度及边缘过渡。只判断已存在光带的局部光照形态，不重复统计光带数量。接受任何能产生此结果的方法，不要求Wave Texture、固定畸变值或指定颜色渐变。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-03",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "3. 入光方向与水下空间",
+      "criterion": "光束从上方略倾斜地向下穿入，入光区与延伸长度形成清楚的空间关系。",
+      "scoring_rule": {
+        "PASS": "可见较亮的上方入光区域，光束整体向一侧略倾斜地向下延伸，主要光束可见长度达到主画面高度的一半或更多；有效光源方向与之相符。",
+        "PARTIAL": "存在由上方进入的水体光束，但倾斜方向、入光区可见性、半画面延伸长度或有效光源方向对应关系中至少一项不足。",
+        "FAIL": "没有由上方进入水体的光束关系，或光线主要横穿、向上发散、无可识别来源。"
+      },
+      "evidence_refs": ["image/02_light_entry.png"],
+      "verification": {
+        "method": "spatial_light_direction_and_render_review",
+        "procedure": "检查实际生效的光源与水体位置方向，并在主相机渲染中标出入光区及主要光带的可见起止位置，比较其竖向延伸与画面高度。方向可左右镜像，不要求固定世界坐标或角度。不会因存在名为Sun或Area的对象直接通过。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-04",
+      "capability": "SCN",
+      "points": 10,
+      "requirement_section": "4. 主镜头与照明",
+      "criterion": "正式渲染的主镜头完整呈现水下光束主体，亮暗平衡且没有容器或预览界面痕迹。",
+      "scoring_rule": {
+        "PASS": "已保存可渲染的主相机，光束与暗部均有足够空间，最亮处仍保留分束细节；画面无容器侧边或底边、棋盘格或辅助线，正式渲染保持该照明效果。",
+        "PARTIAL": "存在可渲染的水下光束主镜头，但构图、最亮处细节或画面完整性中至少一项不足，例如局部容器边缘入镜或局部过曝。",
+        "FAIL": "没有可用的主相机水下光束渲染，或效果仅存在于未保存的材质预览环境中，或主要画面被容器边界、界面内容、全黑或过曝覆盖。"
+      },
+      "evidence_refs": ["image/01_light_rays.png", "image/02_light_entry.png"],
+      "verification": {
+        "method": "saved_scene_final_render_review",
+        "procedure": "在Blender 5.1.2中从保存的主相机使用Cycles GPU正式渲染，核对图像构图、曝光细节和边界，确认照明来自可用场景配置。参考图中的视口光标、噪点和体积盒边界不作为成品要求。介质蓝色色相由SURF-02评价，本项只评价镜头和照明呈现。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "SCN-05",
+      "capability": "SCN",
+      "points": 5,
+      "requirement_section": "5. 有效编辑",
+      "criterion": "入光方向以及光束宽度或间距可有效编辑，并作用于实际光带分布。",
+      "scoring_rule": {
+        "PASS": "A、B均成立：A为方向编辑改变实际光束倾斜且可恢复；B为宽度或间距编辑改变实际光带分布、保留多束结构且可恢复。",
+        "PARTIAL": "已有光束，A、B恰有一项成立。",
+        "FAIL": "光束缺失，或A、B均不成立。"
+      },
+      "evidence_refs": ["image/02_light_entry.png"],
+      "verification": {
+        "method": "non_destructive_light_edit_probe",
+        "procedure": "在提交副本记录基线，先对有效入光方向作小幅改变，再单独调整有效光带宽度或间距设置，每次保持相机不变并对比渲染。确认实际光带倾斜和分布变化，恢复设置后回到原效果。不要求某种节点链，灯具变换和纹理参数均可作为有效接口。",
+        "implementation_status": "specified_not_implemented"
+      }
+    },
+    {
+      "id": "PIPE-01",
+      "capability": "PIPE",
+      "points": 10,
+      "requirement_section": "6. 重建与依赖",
+      "criterion": "build.py能重建等效场景，且提交的依赖闭合、路径可移植。",
+      "scoring_rule": {
+        "PASS": "A、B均成立：A为build.py从空场景生成同等水体、灯光、相机、有效编辑设置并保存submission.blend；B为提交在隔离目录中使用随附或打包资源即可正式渲染，无私有路径或缺失资源依赖。",
+        "PARTIAL": "A、B恰有一项成立。",
+        "FAIL": "A、B均不成立。"
+      },
+      "evidence_refs": [],
+      "verification": {
+        "method": "isolated_rebuild_and_dependency_audit",
+        "procedure": "将提交复制到隔离目录，分别核对场景所用资源与解析路径，并用Blender5.1.2从空场景执行build.py。重开生成场景，检查水体、照明、主相机和编辑接口，再用Cycles GPU对比渲染是否保持等效构图与光照。该过程验证重建和可移植性，不重复给视觉质量计分。仅提交文件可打开不构成独立得分。",
+        "implementation_status": "specified_not_implemented"
+      }
+    }
+  ]
+}
