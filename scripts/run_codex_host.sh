@@ -15,7 +15,7 @@ mkdir -p "$CODEX_HOME_DIR"
 cat > "$CODEX_HOME_DIR/config.toml" <<EOF
 model_provider = "cloudrouter"
 model = "$MODEL"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 disable_response_storage = true
 network_access = "enabled"
 

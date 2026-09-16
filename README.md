@@ -164,7 +164,7 @@ export OPENAI_API_KEY=<agent-api-key>
 ```bash
 ./scripts/run_codex.sh \
   -p <harbor-task-path> \
-  --ak reasoning_effort=high
+  --ak reasoning_effort=medium
 ```
 
 如果 Harbor 使用其他 OpenAI-compatible 网关：
