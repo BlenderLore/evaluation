@@ -16,8 +16,9 @@ def main() -> int:
     args = p.parse_args()
     result = evaluate_task(args.task, args.output, submission_dir=args.submission, judge_backend=args.judge)
     evidence_count = len(result.evidence.files) if result.evidence else 0
-    print(f"reward={result.reward:.6f} task_type={result.task_type} evidence={evidence_count} completion={result.metrics['completion']['status']}")
-    return 0 if result.reward >= 0.5 else 1
+    completion = bool(result.metrics["completion"]["status"])
+    print(f"reward={result.reward:.6f} task_type={result.task_type} evidence={evidence_count} completion={completion}")
+    return 0 if completion and not result.errors else 1
 
 
 if __name__ == "__main__":

@@ -121,9 +121,7 @@ run_judge() {
     mkdir -p "$eval_dir"
     eval_status="completed"
     if ! "$PYTHON" -m eval --task "$task" --submission "$submission_dir" --output "$eval_dir" >"$eval_log" 2>&1; then
-      if [[ ! -f "$eval_dir/reward.txt" ]]; then
-        eval_status="failed"
-      fi
+      eval_status="failed"
     fi
     if [[ -f "$eval_dir/reward.txt" ]]; then
       reward="$(tr -d '[:space:]' < "$eval_dir/reward.txt")"
