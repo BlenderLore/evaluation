@@ -10,6 +10,7 @@ JOBS_DIR="${BLENDERLORE_JOBS_DIR:-$ROOT/../blenderlore-jobs}"
 PROFILE="${1:-}"
 shift || true
 TEST_MODE="${BLENDERLORE_TEST:-0}"
+PARALLEL="${BLENDERLORE_PARALLEL:-1}"
 FORWARDED_ARGS=()
 for arg in "$@"; do
   if [[ "$arg" == "--test" ]]; then
@@ -83,32 +84,67 @@ TOTAL="${#TASKS[@]}"
 
 MODE="full"
 [[ "$TEST_MODE" == "1" ]] && MODE="test"
-echo "Running $TOTAL BlenderLore tasks with profile: $PROFILE (mode=$MODE)"
+if ! [[ "$PARALLEL" =~ ^[0-9]+$ ]] || (( PARALLEL < 1 )); then
+  echo "BLENDERLORE_PARALLEL must be a positive integer, got: $PARALLEL" >&2
+  exit 2
+fi
+echo "Running $TOTAL BlenderLore tasks with profile: $PROFILE (mode=$MODE, parallel=$PARALLEL)"
 RUN_ID="$(date -u +%Y%m%dT%H%M%SZ)-$$"
 mkdir -p "$JOBS_DIR"
 MANIFEST="$JOBS_DIR/${RUN_ID}.jsonl"
 printf '{"run_id":"%s","profile":"%s","total_tasks":%d,"started_at":"%s"}\n' "$RUN_ID" "$PROFILE" "$TOTAL" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$MANIFEST"
-failures=0
-for index in "${!TASKS[@]}"; do
+RUN_ROOT="$JOBS_DIR/${RUN_ID}"
+mkdir -p "$RUN_ROOT"
+
+run_task() {
+  local index="$1"
   task="${TASKS[$index]}"
   task_name="$(basename "$task")"
   echo "[$((index + 1))/$TOTAL] $task_name"
   task_status="completed"
   if [[ "${BLENDERLORE_DIRECT:-0}" == "1" ]]; then
-    submission_dir="$JOBS_DIR/${RUN_ID}/${index}/submission"
+    submission_dir="$RUN_ROOT/${index}/submission"
     mkdir -p "$submission_dir"
-    if ! OPENAI_API_KEY="${OPENAI_API_KEY:?}" CODEX_MODEL="${CODEX_MODEL:-gpt-5.6-sol}" "$ROOT/scripts/run_codex_host.sh" "$task" "$submission_dir" >"$JOBS_DIR/${RUN_ID}/${index}/agent.log" 2>&1; then
-      failures=$((failures + 1)); task_status="failed"
+    if ! OPENAI_API_KEY="${OPENAI_API_KEY:?}" CODEX_MODEL="${CODEX_MODEL:-gpt-5.6-sol}" "$ROOT/scripts/run_codex_host.sh" "$task" "$submission_dir" >"$RUN_ROOT/${index}/agent.log" 2>&1; then
+      task_status="failed"
     fi
   else
     harbor_task="${HARBOR_PATHS[$index]}"
     if ! "$RUNNER" -p "$harbor_task" --job-name "blenderlore-${PROFILE}-${RUN_ID}-${index}" "${FORWARDED_ARGS[@]}"; then
-    failures=$((failures + 1))
-    task_status="failed"
-    echo "[$((index + 1))/$TOTAL] FAILED: $task_name" >&2
+      task_status="failed"
+      echo "[$((index + 1))/$TOTAL] FAILED: $task_name" >&2
     fi
   fi
   printf '{"run_id":"%s","index":%d,"task_id":"%s","status":"%s"}\n' "$RUN_ID" "$((index + 1))" "$task_name" "$task_status" >> "$MANIFEST"
+  printf "%s\n" "$task_status" > "$RUN_ROOT/${index}.status"
+  [[ "$task_status" == "completed" ]]
+}
+
+failures=0
+if (( PARALLEL == 1 )); then
+  for index in "${!TASKS[@]}"; do
+    run_task "$index" || true
+  done
+else
+  running=0
+  for index in "${!TASKS[@]}"; do
+    run_task "$index" &
+    running=$((running + 1))
+    if (( running >= PARALLEL )); then
+      wait -n || true
+      running=$((running - 1))
+    fi
+  done
+  while (( running > 0 )); do
+    wait -n || true
+    running=$((running - 1))
+  done
+fi
+
+for index in "${!TASKS[@]}"; do
+  if [[ "$(cat "$RUN_ROOT/${index}.status" 2>/dev/null || echo failed)" != "completed" ]]; then
+    failures=$((failures + 1))
+  fi
 done
 
 echo "Completed $TOTAL tasks; failures=$failures"
