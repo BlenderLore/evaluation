@@ -56,10 +56,15 @@ def score(
         raise RuntimeError("OPENAI_API_KEY is not set")
     content: list[dict] = [{"type": "text", "text": _prompt(task_md, rubric, evidence)}]
     for path in evidence.files:
+        if path.suffix.casefold() not in {".png", ".jpg", ".jpeg", ".webp", ".bmp", ".tif", ".tiff"}:
+            continue
         content.append({"type": "image_url", "image_url": {"url": _image_uri(path)}})
     client_kwargs = {"api_key": api_key}
     if base_url := (SETTINGS.judge_base_url or os.environ.get("OPENAI_BASE_URL")):
-        client_kwargs["base_url"] = base_url
+        # CloudRouter follows the OpenAI Chat Completions layout used by
+        # gpt55_client.py; keep /v1 in the configured base URL.
+        client_kwargs["base_url"] = base_url.rstrip("/")
+    client_kwargs["timeout"] = float(os.environ.get("BLENDERLORE_JUDGE_TIMEOUT", "180"))
     client = OpenAI(**client_kwargs)
     response = client.chat.completions.create(
         model=model,
@@ -69,5 +74,14 @@ def score(
     )
     raw = response.choices[0].message.content or "{}"
     parsed = _decode_response(raw)
-    scores = {str(k): max(0.0, min(1.0, float(v))) for k, v in parsed.get("scores", {}).items()}
-    return scores, {str(k): str(v) for k, v in parsed.get("rationales", {}).items()}, raw
+    parsed_scores = parsed.get("scores")
+    parsed_rationales = parsed.get("rationales")
+    if not isinstance(parsed_scores, dict):
+        criterion_ids = {str(item.get("id")) for item in rubric}
+        direct_items = {str(k): v for k, v in parsed.items() if str(k) in criterion_ids and isinstance(v, dict)}
+        parsed_scores = {k: v.get("score", 0.0) for k, v in direct_items.items()}
+        parsed_rationales = {k: v.get("rationale", "") for k, v in direct_items.items()}
+    if not isinstance(parsed_rationales, dict):
+        parsed_rationales = {}
+    scores = {str(k): max(0.0, min(1.0, float(v))) for k, v in parsed_scores.items()}
+    return scores, {str(k): str(v) for k, v in parsed_rationales.items()}, raw

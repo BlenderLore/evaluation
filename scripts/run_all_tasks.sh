@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Run every BlenderLore task with one selected Harbor agent profile.
 set -Eeuo pipefail
+export DOCKER_BUILDKIT=0
+export COMPOSE_DOCKER_CLI_BUILD=0
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 DATA_DIR="${BLENDERLORE_DATA_DIR:-$ROOT/data}"
@@ -32,6 +34,43 @@ esac
 TASKS=()
 while IFS= read -r task; do TASKS+=("$task"); done < <(find "$DATA_DIR" -mindepth 1 -maxdepth 1 -type d -print | LC_ALL=C sort)
 TOTAL="${#TASKS[@]}"
+
+# BlenderLore source folders contain task assets but not Harbor's wrapper
+# metadata. Materialize lightweight Harbor task directories on demand.
+HARBOR_TASK_ROOT="${BLENDERLORE_HARBOR_TASK_ROOT:-$ROOT/.harbor_tasks}"
+mkdir -p "$HARBOR_TASK_ROOT"
+HARBOR_PATHS=()
+harbor_index=0
+for src in "${TASKS[@]}"; do
+  name="$(basename "$src")"; dst="$HARBOR_TASK_ROOT/task_$(printf '%03d' "$harbor_index")"
+  HARBOR_PATHS+=("$dst")
+  harbor_index=$((harbor_index + 1))
+  mkdir -p "$dst/environment" "$dst/tests" "$dst/solution"
+  cp "$src/output/task.md" "$dst/instruction.md"
+  cp -R "$src/input" "$dst/input" 2>/dev/null || true
+  cat > "$dst/task.toml" <<'EOF'
+schema_version = "1.4"
+[metadata]
+[verifier]
+timeout_sec = 1800.0
+[agent]
+timeout_sec = 1800.0
+[environment]
+build_timeout_sec = 1200.0
+EOF
+  cat > "$dst/environment/Dockerfile" <<'EOF'
+FROM ubuntu:22.04
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y python3 python3-pip ffmpeg git && rm -rf /var/lib/apt/lists/*
+WORKDIR /workspace
+EOF
+  cat > "$dst/tests/test.sh" <<'EOF'
+#!/usr/bin/env bash
+set -e
+mkdir -p /logs/verifier
+echo 0 > /logs/verifier/reward.txt
+EOF
+  chmod +x "$dst/tests/test.sh"
+done
 (( TOTAL > 0 )) || { echo "no task directories found under $DATA_DIR" >&2; exit 1; }
 
 if [[ "$TEST_MODE" == "1" ]]; then
@@ -55,10 +94,19 @@ for index in "${!TASKS[@]}"; do
   task_name="$(basename "$task")"
   echo "[$((index + 1))/$TOTAL] $task_name"
   task_status="completed"
-  if ! "$RUNNER" -p "$task" --job-name "blenderlore-${PROFILE}-${index}" "${FORWARDED_ARGS[@]}"; then
+  if [[ "${BLENDERLORE_DIRECT:-0}" == "1" ]]; then
+    submission_dir="$JOBS_DIR/${RUN_ID}/${index}/submission"
+    mkdir -p "$submission_dir"
+    if ! OPENAI_API_KEY="${OPENAI_API_KEY:?}" CODEX_MODEL="${CODEX_MODEL:-gpt-5.6-sol}" "$ROOT/scripts/run_codex_host.sh" "$task" "$submission_dir" >"$JOBS_DIR/${RUN_ID}/${index}/agent.log" 2>&1; then
+      failures=$((failures + 1)); task_status="failed"
+    fi
+  else
+    harbor_task="${HARBOR_PATHS[$index]}"
+    if ! "$RUNNER" -p "$harbor_task" --job-name "blenderlore-${PROFILE}-${RUN_ID}-${index}" "${FORWARDED_ARGS[@]}"; then
     failures=$((failures + 1))
     task_status="failed"
     echo "[$((index + 1))/$TOTAL] FAILED: $task_name" >&2
+    fi
   fi
   printf '{"run_id":"%s","index":%d,"task_id":"%s","status":"%s"}\n' "$RUN_ID" "$((index + 1))" "$task_name" "$task_status" >> "$MANIFEST"
 done

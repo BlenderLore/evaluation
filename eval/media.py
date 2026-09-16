@@ -36,8 +36,32 @@ from mathutils import Vector
 out = os.environ['BLENDERLORE_VIEW_OUT']
 os.makedirs(out, exist_ok=True)
 scene = bpy.context.scene
-objs = [o for o in scene.objects if o.type in {'MESH','CURVE','SURFACE','META','FONT'} and o.visible_get() and o.name != 'Studio_Floor']
+EXCLUDE_NAME_PARTS = ('floor', 'ground', 'backdrop', 'background', 'studio', 'shadow', 'grid')
+
+def is_subject(o):
+    if o.type not in {'MESH','CURVE','SURFACE','META','FONT'} or not o.visible_get() or o.hide_render:
+        return False
+    name = o.name.casefold()
+    if any(part in name for part in EXCLUDE_NAME_PARTS):
+        return False
+    dims = list(o.dimensions)
+    # Presentation planes often dominate the bounds while being visually incidental.
+    # Drop very large, nearly flat surfaces so the canonical views frame the asset.
+    if max(dims, default=0.0) > 20.0 and min(dims, default=0.0) < 0.05:
+        return False
+    return True
+
+objs = [o for o in scene.objects if is_subject(o)]
+if not objs:
+    objs = [o for o in scene.objects if o.type in {'MESH','CURVE','SURFACE','META','FONT'} and o.visible_get() and not o.hide_render]
 if not objs: raise RuntimeError('submission has no renderable objects')
+subject_names = {o.name for o in objs}
+for o in scene.objects:
+    if o.type in {'MESH','CURVE','SURFACE','META','FONT'} and o.name not in subject_names:
+        name = o.name.casefold(); dims = list(o.dimensions)
+        if any(part in name for part in EXCLUDE_NAME_PARTS) or (max(dims, default=0.0) > 20.0 and min(dims, default=0.0) < 0.05):
+            o.hide_render = True
+bpy.context.view_layer.update()
 corners=[]
 for o in objs:
     for c in o.bound_box:
@@ -48,15 +72,21 @@ center=(lo+hi)/2; extent=max((hi-lo).x,(hi-lo).y,(hi-lo).z,1e-3)
 cam=bpy.data.objects.get('__BlenderLoreEvalCamera') or bpy.data.cameras.new('__BlenderLoreEvalCamera')
 if not hasattr(cam,'data'): cam=bpy.data.objects.new('__BlenderLoreEvalCamera',cam)
 if cam.name not in scene.collection.objects: scene.collection.objects.link(cam)
-cam.data.type='ORTHO'; cam.data.ortho_scale=extent*1.25; cam.data.clip_start=0.001; cam.data.clip_end=max(1000.0, extent*10.0); scene.camera=cam
-scene.render.engine='CYCLES'; scene.cycles.samples=32; scene.cycles.use_denoising=True; scene.render.resolution_x=768; scene.render.resolution_y=768; scene.render.resolution_percentage=100
-if not scene.world: scene.world=bpy.data.worlds.new('EvalWorld')
-scene.world.use_nodes=True; bg=scene.world.node_tree.nodes.get('Background');
-if bg: bg.inputs[0].default_value=(0.8,0.8,0.8,1.0); bg.inputs[1].default_value=1.0
+cam.data.type='ORTHO'; cam.data.ortho_scale=extent*1.35; cam.data.clip_start=0.001; cam.data.clip_end=max(1000.0, extent*10.0); scene.camera=cam
+scene.render.engine='CYCLES'; scene.cycles.samples=32; scene.cycles.use_denoising=True; scene.cycles.device='CPU'
+scene.render.resolution_x=768; scene.render.resolution_y=768; scene.render.resolution_percentage=100
+world = scene.world or bpy.data.worlds.new('EvalWorld'); scene.world = world; world.use_nodes = True
+bg = world.node_tree.nodes.get('Background')
+if bg:
+    bg.inputs[0].default_value = (0.78, 0.78, 0.78, 1.0)
+    bg.inputs[1].default_value = 0.8
+light_data = bpy.data.lights.new('__BlenderLoreEvalKey', 'AREA')
+light = bpy.data.objects.new('__BlenderLoreEvalKey', light_data); scene.collection.objects.link(light)
+light_data.energy = 450.0; light_data.size = max(4.0, extent * 0.8)
 scene.render.image_settings.file_format='PNG'; scene.render.film_transparent=False
 views={'front':((0,-1,0),(0,0,1)),'back':((0,1,0),(0,0,1)),'left':((-1,0,0),(0,0,1)),'right':((1,0,0),(0,0,1)),'top':((0,0,1),(0,1,0)),'bottom':((0,0,-1),(0,-1,0))}
 for name,(direction,up) in views.items():
-    d=Vector(direction); cam.location=center+d*extent*2.5; cam.rotation_euler=d.to_track_quat('-Z','Y').to_euler(); scene.render.filepath=os.path.join(out,name+'.png'); bpy.ops.render.render(write_still=True)
+    d=Vector(direction); cam.location=center+d*extent*2.5; cam.rotation_euler=(-d).to_track_quat('-Z','Y').to_euler(); light.location=center+d*extent*1.5+Vector((0,0,extent*0.25)); scene.render.filepath=os.path.join(out,name+'.png'); bpy.ops.render.render(write_still=True)
 """, encoding='utf-8')
     env = dict(os.environ, BLENDERLORE_VIEW_OUT=str(out_dir))
     try:

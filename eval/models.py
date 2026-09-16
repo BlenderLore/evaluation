@@ -21,6 +21,11 @@ class CriterionScore:
     score: float
     rationale: str = ""
 
+    @property
+    def normalized(self) -> float:
+        """Normalized judge score in the canonical [0, 1] range."""
+        return max(0.0, min(1.0, float(self.score)))
+
 
 @dataclass(frozen=True)
 class EvaluationResult:

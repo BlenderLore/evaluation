@@ -216,6 +216,16 @@ Claude Code/Codex 的凭证只注入 Harbor agent 子进程；Judge 仍读取 `j
 ./scripts/run_kimi_code.sh -p <harbor-task-path>
 ```
 
+## 2026-09-16 五任务运行结果
+
+| 任务 | 类型 | 最终分 | 生成 tokens | Codex 回复块 | 执行命令数 | 生成耗时估计 | 生成结束 UTC | 最终评测耗时 | render | judge |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| B01 骨骼控制的贝塞尔软管 | static | 0.200 | 87,203 | 19 | 25 | ~9m26s | 08:00:45 | 26.692s | 8.676s | 18.016s |
+| B02 金属球水体波纹 | dynamic | 0.850 | 97,493 | 15 | 36 | ~12m17s | 08:13:02 | 30.868s | 0.652s | 30.215s |
+| B03 玻璃蜂蜜罐 | dynamic | 0.725 | 104,492 | 22 | 26 | ~19m25s | 08:32:27 | 41.354s | 0.541s | 40.812s |
+| B04 可伸缩弹簧系统 | dynamic | 0.625 | 106,091 | 19 | 29 | ~17m17s | 08:49:44 | 75.574s | 0.711s | 74.863s |
+| B05 开放式线粒体 | static | 0.800 | 43,130 | 8 | 7 | ~5m08s | 08:54:52 | 90.567s | 55.571s | 34.995s |
+
 分别对应 `gpt-5.6-sol`、`gpt-6-astra`、`claude-fable-5-1` 和 `kimi-k3`。
 其中 Kimi K3 使用 Codex/OpenAI Responses 通道，因为该 Key 被标注为只能用于 Codex；Claude Fable 使用 Claude Code/Anthropic 通道。
 

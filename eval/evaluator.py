@@ -42,7 +42,7 @@ def evaluate_task(
         evidence = (
             collect_video(submission_dir, output_dir)
             if task_type == "dynamic"
-            else collect_six_views(submission_dir)
+            else collect_six_views(submission_dir, output_dir)
         )
         evidence_seconds = time.monotonic() - evidence_started
         judge_started = time.monotonic()

@@ -3,6 +3,7 @@ set -Eeuo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 [ -f .venv/bin/activate ] && source .venv/bin/activate
+[ -f /opt/conda/bin/activate ] && { source /opt/conda/bin/activate blenderlore 2>/dev/null || true; }
 [ -f /opt/blender/blenderlore-env.sh ] && source /opt/blender/blenderlore-env.sh
 [ -f .env ] && { set -a; source .env; set +a; }
 export PYTHONPATH="$ROOT:${PYTHONPATH:-}"
