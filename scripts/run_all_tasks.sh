@@ -7,10 +7,19 @@ export COMPOSE_DOCKER_CLI_BUILD=0
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 DATA_DIR="${BLENDERLORE_DATA_DIR:-$ROOT/data}"
 JOBS_DIR="${BLENDERLORE_JOBS_DIR:-$ROOT/../blenderlore-jobs}"
+if [[ -n "${BLENDERLORE_PYTHON_BIN:-}" ]]; then
+  PYTHON="$BLENDERLORE_PYTHON_BIN"
+elif [[ -x /opt/conda/envs/blenderlore/bin/python ]]; then
+  PYTHON="/opt/conda/envs/blenderlore/bin/python"
+else
+  PYTHON="$(command -v python3 || command -v python)"
+fi
+export PYTHONPATH="$ROOT:${PYTHONPATH:-}"
 PROFILE="${1:-}"
 shift || true
 TEST_MODE="${BLENDERLORE_TEST:-0}"
 PARALLEL="${BLENDERLORE_PARALLEL:-1}"
+AUTO_JUDGE="${BLENDERLORE_AUTO_JUDGE:-1}"
 FORWARDED_ARGS=()
 for arg in "$@"; do
   if [[ "$arg" == "--test" ]]; then
@@ -88,13 +97,43 @@ if ! [[ "$PARALLEL" =~ ^[0-9]+$ ]] || (( PARALLEL < 1 )); then
   echo "BLENDERLORE_PARALLEL must be a positive integer, got: $PARALLEL" >&2
   exit 2
 fi
-echo "Running $TOTAL BlenderLore tasks with profile: $PROFILE (mode=$MODE, parallel=$PARALLEL)"
+if [[ "$AUTO_JUDGE" != "0" && "$AUTO_JUDGE" != "1" ]]; then
+  echo "BLENDERLORE_AUTO_JUDGE must be 0 or 1, got: $AUTO_JUDGE" >&2
+  exit 2
+fi
+echo "Running $TOTAL BlenderLore tasks with profile: $PROFILE (mode=$MODE, parallel=$PARALLEL, auto_judge=$AUTO_JUDGE)"
 RUN_ID="$(date -u +%Y%m%dT%H%M%SZ)-$$"
 mkdir -p "$JOBS_DIR"
 MANIFEST="$JOBS_DIR/${RUN_ID}.jsonl"
 printf '{"run_id":"%s","profile":"%s","total_tasks":%d,"started_at":"%s"}\n' "$RUN_ID" "$PROFILE" "$TOTAL" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$MANIFEST"
 RUN_ROOT="$JOBS_DIR/${RUN_ID}"
 mkdir -p "$RUN_ROOT"
+
+run_judge() {
+  local index="$1"
+  local task="$2"
+  local submission_dir="$3"
+  local eval_dir="$RUN_ROOT/${index}/evaluation"
+  local eval_log="$RUN_ROOT/${index}/judge.log"
+  local reward="null"
+  local eval_status="skipped"
+  if [[ "$AUTO_JUDGE" == "1" ]]; then
+    mkdir -p "$eval_dir"
+    eval_status="completed"
+    if ! "$PYTHON" -m eval --task "$task" --submission "$submission_dir" --output "$eval_dir" >"$eval_log" 2>&1; then
+      if [[ ! -f "$eval_dir/reward.txt" ]]; then
+        eval_status="failed"
+      fi
+    fi
+    if [[ -f "$eval_dir/reward.txt" ]]; then
+      reward="$(tr -d '[:space:]' < "$eval_dir/reward.txt")"
+    fi
+  fi
+  printf '{"run_id":"%s","index":%d,"task_id":"%s","eval_status":"%s","reward":%s}\n' "$RUN_ID" "$((index + 1))" "$(basename "$task")" "$eval_status" "$reward" >> "$MANIFEST"
+  printf "%s\n" "$eval_status" > "$RUN_ROOT/${index}.eval_status"
+  printf "%s\n" "$reward" > "$RUN_ROOT/${index}.reward"
+  [[ "$eval_status" != "failed" ]]
+}
 
 run_task() {
   local index="$1"
@@ -114,6 +153,13 @@ run_task() {
       task_status="failed"
       echo "[$((index + 1))/$TOTAL] FAILED: $task_name" >&2
     fi
+  fi
+  if [[ "$task_status" == "completed" && "${BLENDERLORE_DIRECT:-0}" == "1" ]]; then
+    run_judge "$index" "$task" "$submission_dir" || true
+  else
+    printf "skipped\n" > "$RUN_ROOT/${index}.eval_status"
+    printf "null\n" > "$RUN_ROOT/${index}.reward"
+    printf '{"run_id":"%s","index":%d,"task_id":"%s","eval_status":"skipped","reward":null}\n' "$RUN_ID" "$((index + 1))" "$task_name" >> "$MANIFEST"
   fi
   printf '{"run_id":"%s","index":%d,"task_id":"%s","status":"%s"}\n' "$RUN_ID" "$((index + 1))" "$task_name" "$task_status" >> "$MANIFEST"
   printf "%s\n" "$task_status" > "$RUN_ROOT/${index}.status"
@@ -146,7 +192,15 @@ for index in "${!TASKS[@]}"; do
     failures=$((failures + 1))
   fi
 done
+eval_failures=0
+if [[ "$AUTO_JUDGE" == "1" ]]; then
+  for index in "${!TASKS[@]}"; do
+    if [[ "$(cat "$RUN_ROOT/${index}.eval_status" 2>/dev/null || echo failed)" == "failed" ]]; then
+      eval_failures=$((eval_failures + 1))
+    fi
+  done
+fi
 
-echo "Completed $TOTAL tasks; failures=$failures"
-printf '{"run_id":"%s","completed_tasks":%d,"failures":%d,"finished_at":"%s"}\n' "$RUN_ID" "$TOTAL" "$failures" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$MANIFEST"
-(( failures == 0 ))
+echo "Completed $TOTAL tasks; failures=$failures eval_failures=$eval_failures"
+printf '{"run_id":"%s","completed_tasks":%d,"failures":%d,"eval_failures":%d,"finished_at":"%s"}\n' "$RUN_ID" "$TOTAL" "$failures" "$eval_failures" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$MANIFEST"
+(( failures == 0 && eval_failures == 0 ))

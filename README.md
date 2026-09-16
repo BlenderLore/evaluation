@@ -267,7 +267,27 @@ BLENDERLORE_TEST=1 ./scripts/run_all_tasks.sh codex-sol
 
 不传 `--test` 且未设置 `BLENDERLORE_TEST=1` 时，始终运行完整任务集。
 
-全量运行还会在 jobs 目录生成 JSONL manifest，记录 run id、模型 profile、任务总数、每个任务状态、失败数和时间戳。
+默认每个任务完成生成后会自动运行 Judge。Direct 模式下评估结果写入同一 run 目录的任务子目录：
+
+```text
+<jobs>/<run_id>/<index>/evaluation/reward.txt
+<jobs>/<run_id>/<index>/evaluation/breakdown.json
+<jobs>/<run_id>/<index>/judge.log
+```
+
+如只想生成、不评分，可以关闭自动 Judge：
+
+```bash
+BLENDERLORE_AUTO_JUDGE=0 ./scripts/run_all_tasks.sh codex-sol --test
+```
+
+可以用 `BLENDERLORE_PARALLEL` 并发执行任务；默认值为 `1`，即串行：
+
+```bash
+BLENDERLORE_DIRECT=1 BLENDERLORE_PARALLEL=2 ./scripts/run_all_tasks.sh codex-sol --test
+```
+
+全量运行还会在 jobs 目录生成 JSONL manifest，记录 run id、模型 profile、任务总数、每个任务生成状态、Judge 状态、reward、失败数和时间戳。
 
 ## 6.3 执行指标
 
