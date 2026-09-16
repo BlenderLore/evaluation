@@ -14,6 +14,9 @@ elif [[ -x /opt/conda/envs/blenderlore/bin/python ]]; then
 else
   PYTHON="$(command -v python3 || command -v python)"
 fi
+if [[ -z "${BLENDERLORE_BLENDER_BIN:-}" && -x /opt/blender/blender-5.1.2/blender ]]; then
+  export BLENDERLORE_BLENDER_BIN="/opt/blender/blender-5.1.2/blender"
+fi
 export PYTHONPATH="$ROOT:${PYTHONPATH:-}"
 PROFILE="${1:-}"
 shift || true
